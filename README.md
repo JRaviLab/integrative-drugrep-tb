@@ -1,7 +1,22 @@
 # drugrep_baseline_comparison
 Baseline comparison for drug repurposing project
 ## Databases
-- [LINCS](clue.io) –– drug expression data; access/obtain using [`signatureSearch`](https://github.com/girke-lab/signatureSearch) R package 
+### Drug data
+- [LINCS](clue.io) –– drug expression data; access/obtain using [`signatureSearch`](https://github.com/girke-lab/signatureSearch) R package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data. Since we are extracting control samples only, we will be using LINCS data level 3 which is normalized and inferred. The data could be manually downloaded from [this GEO site](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70138) or using the command line below
+  
+  **[GCTX format](https://clue.io/connectopedia/gctx_format) (metadata)**
+  ```
+  wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE70138&format=file&file=GSE70138%5FBroad%5FLINCS%5FLevel3%5FINF%5Fmlr12k%5Fn345976x12328%5F2017%2D03%2D06%2Egctx%2Egz
+  ```
+  ![GCTx example](https://clue.io/connectopedia/images/gctx_format_images/image_0.png)
+
+  **[GCT format](https://clue.io/connectopedia/gct_format) (expression data)**
+  ```
+  wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE70138&format=file&file=GSE70138%5FBroad%5FLINCS%5FLevel3%5FINF%5Fmlr12k%5Fn78980x22268%5F2015%2D06%2D30%2Egct%2Egz
+  ```
+  ![GCT example](https://clue.io/connectopedia/images/gct_format_images/image_0.png)
+
+### Disease data
 - [GEO](https://www.ncbi.nlm.nih.gov/geo/) –– disease expression data; access/obtain using [`ARCHS4py`](https://github.com/MaayanLab/archs4py) for [RNAseq data](https://maayanlab.cloud/archs4/) and [`refine.bio`](https://www.refine.bio/) for microarray data
 
 ## Steps
