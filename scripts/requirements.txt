@@ -1,0 +1,9 @@
+# run this script to install python dependencies for the project
+# to be modified
+# created date: 09/26/23
+# Kewalin Samart
+
+numpy~=1.24.3
+pandas~=2.0.2
+scipy~=1.10.1
+archs4py~=0.2.6 # to acess and obtain RNAseq expression data
