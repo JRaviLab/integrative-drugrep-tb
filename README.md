@@ -6,13 +6,13 @@ Baseline comparison for drug repurposing project
   
   **[GCTX format](https://clue.io/connectopedia/gctx_format) (metadata)**
   ```
-  wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE70138&format=file&file=GSE70138%5FBroad%5FLINCS%5FLevel3%5FINF%5Fmlr12k%5Fn345976x12328%5F2017%2D03%2D06%2Egctx%2Egz
+  wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_inst_info_2017-03-06.txt.gz
   ```
   ![GCTx example](https://clue.io/connectopedia/images/gctx_format_images/image_0.png)
 
   **[GCT format](https://clue.io/connectopedia/gct_format) (expression data)**
   ```
-  wget https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE70138&format=file&file=GSE70138%5FBroad%5FLINCS%5FLevel3%5FINF%5Fmlr12k%5Fn78980x22268%5F2015%2D06%2D30%2Egct%2Egz
+  wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_Level3_INF_mlr12k_n113012x22268_2015-12-31.gct.gz
   ```
   ![GCT example](https://clue.io/connectopedia/images/gct_format_images/image_0.png)
 
