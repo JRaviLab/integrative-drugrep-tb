@@ -1,16 +1,19 @@
 # drugrep_baseline_comparison
-Baseline comparison for drug repurposing project
+Baseline comparisons for drug repurposing project
 ## Databases
 ### Drug data
-- [LINCS](clue.io) –– drug expression data; access/obtain using [`signatureSearch`](https://github.com/girke-lab/signatureSearch) R package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data. Since we are extracting control samples only, we will be using LINCS data level 3 which is normalized and inferred. The data could be manually downloaded from [this GEO site](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70138) or using the command line below
+- [LINCS](clue.io) –– drug expression data
+  - Access/obtain using [`cmapPy`](https://github.com/cmap/cmapPy)
+  - Python package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data.
+  - Since we are extracting control samples only, we will be using LINCS data level 3 which is normalized and inferred. The data could be manually downloaded from [this GEO site](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70138) or using the command lines below.
   
   **[GCTX format](https://clue.io/connectopedia/gctx_format) (expression data + metadata)**
   ```
-  wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_inst_info_2017-03-06.txt.gz
+  wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_Level3_INF_mlr12k_n345976x12328_2017-03-06.gctx.gz
   ```
   ![GCTx example](https://clue.io/connectopedia/images/gctx_format_images/image_0.png)
 
-  **[GCT format](https://clue.io/connectopedia/gct_format) (expression data; parse(GCTX) ––> GCT object; GCT@mat ––> expression matrix )**
+  **[GCT format](https://clue.io/connectopedia/gct_format) (expression data; parse(GCTx) ––> GCT object; GCT@mat ––> expression matrix )**
   ```
   wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_Level3_INF_mlr12k_n113012x22268_2015-12-31.gct.gz
   ```
@@ -37,10 +40,23 @@ Baseline comparison for drug repurposing project
 
 ## Steps
 1. Getting drug control samples
-   - use `signatureSearch` to look into drug cell line information then record the names of cell lines with cell_type == 'normal'
-   - extract the expression data for the control samples obtained from the previous step i.e., all the available untreated cell line in LINCS and CMAP drug databases
-3. Cleaning up data
-   - make sure to use `Gene ID` i.e., `Ensembl` throughout; using mapping file in the `annotaion` folder
-   - for both disease and drug data, subset the expression data to include only "landmark genes" –– 978 genes total
-   - make sure that the expression data for all the samples have the same order of genes (uniform row names) 
-4. For all pairs of disease- and drug-control samples, calculate correlation starting with pearson, spearman etc. So, in the end, we would have a correlation matrix for each similarity matrix where rows and columns are disease- and drug-control samples (or the other way around). 
+   - Data wrangling: look into the metadata file: `GSE70138_Broad_LINCS_inst_info_2017-03-06.txt` then record the `inst_id` with `pert_type` == 'normal'
+   - Get all the available untreated cell line in LINCS and CMAP drug databases: get drug control samples: use `cmapPy` to extract the expression data of the control samples obtained from the previous step from the gct object (parsed GCTx file: `GSE70138_Broad_LINCS_Level3_INF_mlr12k_n345976x12328_2017-03-06.gctx.gz`).
+2. Cleaning up data
+   - Make sure to use `Gene ID` i.e., `Ensembl` throughout; using mapping file in the `annotaion` folder
+   - For both disease and drug data, subset the expression data to include only "landmark genes" –– 978 genes total
+   - Make sure that the expression data for all the samples have the same order of genes (uniform row names)
+3. Data exploration
+   - Record size of intersecting genes for each pairwise of disease-drug control samples (could be a heatmap...).
+   - Plot a histrogram of the overlapping sizes of gene sets (x-axis: intersecting size, y-axis: counts; should look very left skewed meaning the genes in most of the sample pairs highly overlap). 
+4. Result format
+   - Correlation matrices: For all pairs of disease- and drug-control samples, calculate correlation matrics starting with Pearson, Spearman, and Rank Bias Overlap (RBO). So, in the end, we would have a correlation matrix for each similarity matrix where rows and columns are disease- and drug-control samples (or the other way around).
+
+*Note*:
+   - Pearson and Spearman assign an equal weight to all genes.
+   - RBO allows us to assign higher weights to those are highy expressed (ranked at the top of the list) and lower weights to those with low expression values i.e., noises.
+   - In our analysis, there is no a specific cutoff for correlation to say that a correlation value is meaningful since we are working with quite big lists with ~1000 genes meaning that it's unlikely to have a very high correlation close to one (or it could be..). In practice, a correlation of 0.7 or 0.5 could probably be meaningful too if they happen to be higher than the resulting average correlation.
+5. Result interpretation
+   - Normalize the correlation matrices where both row and column vectors are taken into account (mathematical explaination will be discussed later), so that we can compare the correlation across all pairs.
+   - We should be able to see some clusters of sample pairs with high correlation that are originally coming from (biologically/morphologically) same/similar tissues and cell lines.
+   - For each disease control sample (on the row), sort the drug control samples by their correlation values (column sorting).
