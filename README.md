@@ -4,17 +4,33 @@ Baseline comparison for drug repurposing project
 ### Drug data
 - [LINCS](clue.io) –– drug expression data; access/obtain using [`signatureSearch`](https://github.com/girke-lab/signatureSearch) R package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data. Since we are extracting control samples only, we will be using LINCS data level 3 which is normalized and inferred. The data could be manually downloaded from [this GEO site](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70138) or using the command line below
   
-  **[GCTX format](https://clue.io/connectopedia/gctx_format) (metadata)**
+  **[GCTX format](https://clue.io/connectopedia/gctx_format) (expression data + metadata)**
   ```
   wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_inst_info_2017-03-06.txt.gz
   ```
   ![GCTx example](https://clue.io/connectopedia/images/gctx_format_images/image_0.png)
 
-  **[GCT format](https://clue.io/connectopedia/gct_format) (expression data)**
+  **[GCT format](https://clue.io/connectopedia/gct_format) (expression data; parse(GCTX) ––> GCT object; GCT@mat ––> expression matrix )**
   ```
   wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_Level3_INF_mlr12k_n113012x22268_2015-12-31.gct.gz
   ```
   ![GCT example](https://clue.io/connectopedia/images/gct_format_images/image_0.png)
+
+  **LINCS data level 3 metadata**
+
+  Here we get `inst_id` corresponding to `pert_type` == "ctl_vehicle" (control samples)
+  ```
+  wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE70nnn/GSE70138/suppl/GSE70138_Broad_LINCS_inst_info_2017-03-06.txt.gz
+  ```
+
+  Example data:
+  ```
+  inst_id	                      cell_id	  det_plate	               det_well	  pert_mfc_id	  pert_dose	  pert_dose_unit	pert_id	  pert_iname	pert_type	  pert_time	pert_time_unit
+  LJP005_A375_24H_X1_B19:A03	  A375	    LJP005_A375_24H_X1_B19	 A03	      DMSO	        -666.0	    -666	          DMSO	    DMSO	      ctl_vehicle	24.0      h
+  LPROT001_A375_6H_X1_B20:B03	  A375	    LPROT001_A375_6H_X1_B20	 B03	      DMSO	        -666.0	    -666	          DMSO	    DMSO	      ctl_vehicle	6.0       h
+  LPROT001_A375_6H_X1_B20:B05	  A375	    LPROT001_A375_6H_X1_B20	 B05	      DMSO	        -666.0	    -666	          DMSO	    DMSO	      ctl_vehicle	6.0       h
+  LPROT002_A375_6H_X1_B22:B03	  A375	    LPROT002_A375_6H_X1_B22	 B03	      DMSO	        -666.0	    -666	          DMSO	    DMSO	      ctl_vehicle	6.0       h
+  ```
 
 ### Disease data
 - [GEO](https://www.ncbi.nlm.nih.gov/geo/) –– disease expression data; access/obtain using [`ARCHS4py`](https://github.com/MaayanLab/archs4py) for [RNAseq data](https://maayanlab.cloud/archs4/) and [`refine.bio`](https://www.refine.bio/) for microarray data
