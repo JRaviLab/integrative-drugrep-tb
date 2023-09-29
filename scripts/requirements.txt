@@ -1,9 +1,11 @@
 # run this script to install python dependencies for the project
 # to be modified
 # created date: 09/26/23
+# last modify: 09/29/23
 # Kewalin Samart
 
 numpy~=1.24.3
 pandas~=2.0.2
-scipy~=1.10.1
+scipy~=1.5.4
+cmapPy~=4.0.1 # to access drug data level 3 (normalized expression from LINCS)
 archs4py~=0.2.6 # to acess and obtain RNAseq expression data
