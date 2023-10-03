@@ -3,8 +3,7 @@ Baseline comparisons for drug repurposing project
 ## Databases
 ### Drug data
 - [LINCS](clue.io) –– drug expression data
-  - Access/obtain using [`cmapPy`](https://github.com/cmap/cmapPy)
-  - Python package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data.
+  - Access/obtain using [`cmapPy`](https://github.com/cmap/cmapPy) Python package; [descriptive details](https://clue.io/connectopedia/guide_to_geo_l1000_data) on LINCS data.
   - Since we are extracting control samples only, we will be using LINCS data level 3 which is normalized and inferred. The data could be manually downloaded from [this GEO site](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE70138) or using the command lines below.
   
   **[GCTX format](https://clue.io/connectopedia/gctx_format) (expression data + metadata)**
@@ -43,9 +42,8 @@ Baseline comparisons for drug repurposing project
    - Data wrangling: look into the metadata file: `GSE70138_Broad_LINCS_inst_info_2017-03-06.txt` then record the `inst_id` with `pert_type` == 'normal'
    - Get all the available untreated cell line in LINCS and CMAP drug databases: get drug control samples: use `cmapPy` to extract the expression data of the control samples obtained from the previous step from the gct object (parsed GCTx file: `GSE70138_Broad_LINCS_Level3_INF_mlr12k_n345976x12328_2017-03-06.gctx.gz`).
 2. Cleaning up data
-   - Make sure to use `Gene ID` i.e., `Ensembl` throughout; using mapping file in the `annotaion` folder
+   - Make sure to use `Gene ID` i.e., `Entrezid` throughout; using mapping file in the `annotaion` folder
    - For both disease and drug data, subset the expression data to include only "landmark genes" –– 978 genes total
-   - Make sure that the expression data for all the samples have the same order of genes (uniform row names)
 3. Data exploration
    - Record size of intersecting genes for each pairwise of disease-drug control samples (could be a heatmap...).
    - Plot a histrogram of the overlapping sizes of gene sets (x-axis: intersecting size, y-axis: counts; should look very left skewed meaning the genes in most of the sample pairs highly overlap). 
