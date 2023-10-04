@@ -1,11 +1,12 @@
 # script to extract expression data of all untreated samples in LINCS data
 # created date: 09/29/23
-# last modified: 10/03/23
+# last modified: 10/04/23
 # Kewalin Samart
 
 from cmapPy.pandasGEXpress import parse
 import pandas as pd
 import numpy as np
+import shelve
 
 # read in metadata 
 lincs_level3_meta = pd.read_csv("../data/database/GSE70138_Broad_LINCS_inst_info_2017-03-06.txt",sep="\t")
@@ -27,6 +28,16 @@ level3_control_expdata_lm = level3_control_expdata.loc[landmark_genes]
 # write out the dataframe of control samples for drug data
 level3_control_expdata_lm.to_csv('../data/expression/drug_data/level3_control_expdata_lm.tsv', sep='\t', index=True)
 
+print(level3_control_expdata_lm.columns)
+print(level3_control_expdata_lm.index)
+
+# saving row (genes; entrezid) and column (sample ids) names 
+with shelve.open('../data/expression/drug_data/level3_drugdata_rows_cols_info') as shelveFile:
+    shelveFile['sample_ids'] = level3_control_expdata_lm.columns # 19258 samples
+    shelveFile['genes'] = level3_control_expdata_lm.index # 978 landmark genes
+    shelveFile.close()
+
 # numpy array --> condense to small file 
 np_level3_control_expdata_lm = level3_control_expdata_lm.to_numpy()
+
 np.save('../data/expression/drug_data/level3_control_expdata_lm.npy', np_level3_control_expdata_lm, allow_pickle=True, fix_imports=True)
