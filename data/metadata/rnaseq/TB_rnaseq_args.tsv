@@ -1,6 +1,6 @@
 gseid	meta_path	exprmat_path	condition_colname	inf_keywords	control_keywords	file_name
 GSE148171	/data/metadata/metadata_GSE148171.tsv	/data/expression_matrices/GSE148171.tsv	title	Tuberculosis	Healthy	MTB_control
-GSE157657	/data/metadata/metadata_GSE157657.tsv	/data/expression_matrices/GSE157657.tsv	subgroup.ch1	PTB Culture Positive	Control	PTB_control
+GSE157657	/data/metadata/metadata_GSE157657.tsv	/data/expression_matrices/GSE157657.tsv	subgroup:ch1	PTB Culture Positive	Control	PTB_control
 GSE112482	/data/metadata/metadata_GSE112482.tsv	/data/expression_matrices/GSE112482.tsv	title	ILC1_Mtb	ILC1_uninf	MTBilc1_control
 GSE112482	/data/metadata/metadata_GSE112482.tsv	/data/expression_matrices/GSE112482.tsv	title	ILC2_Mtb	ILC2_uninf	MTBilc2_control
 GSE112482	/data/metadata/metadata_GSE112482.tsv	/data/expression_matrices/GSE112482.tsv	title	ILC3neg_Mtb	ILC3neg_uninf	MTBilc3neg_control
