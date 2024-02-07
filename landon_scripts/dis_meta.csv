@@ -1,0 +1,220 @@
+dis_sample,type,exp,cell_line
+GSM435908,microarray,GSE17477,"Human THP-1, untreated"
+GSM435907,microarray,GSE17477,"Human THP-1, untreated"
+GSM435905,microarray,GSE17477,"Human THP-1, untreated"
+GSM435906,microarray,GSE17477,"Human THP-1, untreated"
+GSM3746004,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM3746007,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM3746011,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM3001092,rnaseq,GSE110564,primary human lymphatic endothelial cell
+GSM3745998,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM3746000,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM3746002,rnaseq,GSE129270,Purified cord blood CD34+ cells
+GSM4147993,microarray,GSE139871,Human monocyte
+GSM3071001,rnaseq,GSE112482,Lung
+GSM4147991,microarray,GSE139871,Human monocyte
+GSM3071009,rnaseq,GSE112482,Lung
+GSM3071061,rnaseq,GSE112483,Lung
+GSM1647013,rnaseq,GSE67427,monocyte-derived macrophages
+GSM1647073,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3001094,rnaseq,GSE110564,primary human lymphatic endothelial cell
+GSM4148002,microarray,GSE139871,Human monocyte
+GSM3071057,rnaseq,GSE112482,Lung
+GSM4147995,microarray,GSE139871,Human monocyte
+GSM3071071,rnaseq,GSE112483,Lung
+GSM3001093,rnaseq,GSE110564,primary human lymphatic endothelial cell
+GSM4147992,microarray,GSE139871,Human monocyte
+GSM4148000,microarray,GSE139871,Human monocyte
+GSM3071003,rnaseq,GSE112482,Lung
+GSM3070999,rnaseq,GSE112482,Lung
+GSM1647038,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071045,rnaseq,GSE112482,Lung
+GSM4147990,microarray,GSE139871,Human monocyte
+GSM3071033,rnaseq,GSE112482,Lung
+GSM3071059,rnaseq,GSE112482,Lung
+GSM1646957,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071015,rnaseq,GSE112482,Lung
+GSM3071005,rnaseq,GSE112482,Lung
+GSM4147994,microarray,GSE139871,Human monocyte
+GSM3071131,rnaseq,GSE112483,Lung
+GSM1647058,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071079,rnaseq,GSE112483,Lung
+GSM1647064,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071025,rnaseq,GSE112482,Lung
+GSM3071047,rnaseq,GSE112482,Lung
+GSM4147998,microarray,GSE139871,Human monocyte
+GSM3070975,rnaseq,GSE112482,Lung
+GSM3071137,rnaseq,GSE112483,Lung
+GSM3071041,rnaseq,GSE112482,Lung
+GSM3071023,rnaseq,GSE112482,Lung
+GSM3071029,rnaseq,GSE112482,Lung
+GSM1646961,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071037,rnaseq,GSE112482,Lung
+GSM3071017,rnaseq,GSE112482,Lung
+GSM4147997,microarray,GSE139871,Human monocyte
+GSM3070965,rnaseq,GSE112482,Lung
+GSM4147996,microarray,GSE139871,Human monocyte
+GSM1327542,microarray,GSE54992,PBMC from HC
+GSM3071027,rnaseq,GSE112482,Lung
+GSM4148003,microarray,GSE139871,Human monocyte
+GSM1647024,rnaseq,GSE67427,monocyte-derived macrophages
+GSM1327546,microarray,GSE54992,PBMC from HC
+GSM3071097,rnaseq,GSE112483,Lung
+GSM3070987,rnaseq,GSE112482,Lung
+GSM3071069,rnaseq,GSE112483,Lung
+GSM4147999,microarray,GSE139871,Human monocyte
+GSM3071043,rnaseq,GSE112482,Lung
+GSM1647012,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071051,rnaseq,GSE112482,Lung
+GSM3071039,rnaseq,GSE112482,Lung
+GSM3071055,rnaseq,GSE112482,Lung
+GSM4148001,microarray,GSE139871,Human monocyte
+GSM3071065,rnaseq,GSE112483,Lung
+GSM3071053,rnaseq,GSE112482,Lung
+GSM1647083,rnaseq,GSE67427,monocyte-derived macrophages
+GSM1327549,microarray,GSE54992,PBMC from HC
+GSM3071111,rnaseq,GSE112483,Lung
+GSM3070971,rnaseq,GSE112482,Lung
+GSM3070983,rnaseq,GSE112482,Lung
+GSM1327541,microarray,GSE54992,PBMC from HC
+GSM3071007,rnaseq,GSE112482,Lung
+GSM409139,microarray,GSE16250,PBMCs cultured for 24H before RNA extraction
+GSM3071123,rnaseq,GSE112483,Lung
+GSM3071035,rnaseq,GSE112482,Lung
+GSM3070973,rnaseq,GSE112482,Lung
+GSM1327544,microarray,GSE54992,PBMC from HC
+GSM1647052,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3070967,rnaseq,GSE112482,Lung
+GSM3070997,rnaseq,GSE112482,Lung
+GSM3071133,rnaseq,GSE112483,Lung
+GSM3071081,rnaseq,GSE112483,Lung
+GSM3071149,rnaseq,GSE112483,Lung
+GSM3071049,rnaseq,GSE112482,Lung
+GSM3071085,rnaseq,GSE112483,Lung
+GSM3071073,rnaseq,GSE112483,Lung
+GSM1647049,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3070989,rnaseq,GSE112482,Lung
+GSM3071087,rnaseq,GSE112483,Lung
+GSM1647025,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071021,rnaseq,GSE112482,Lung
+GSM3071141,rnaseq,GSE112483,Lung
+GSM1327550,microarray,GSE54992,PBMC from HC
+GSM3071011,rnaseq,GSE112482,Lung
+GSM3071031,rnaseq,GSE112482,Lung
+GSM3071145,rnaseq,GSE112483,Lung
+GSM3071083,rnaseq,GSE112483,Lung
+GSM1647087,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071091,rnaseq,GSE112483,Lung
+GSM3071151,rnaseq,GSE112483,Lung
+GSM3071103,rnaseq,GSE112483,Lung
+GSM3071139,rnaseq,GSE112483,Lung
+GSM1647066,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071143,rnaseq,GSE112483,Lung
+GSM409138,microarray,GSE16250,PBMCs cultured for 24H before RNA extraction
+GSM3070969,rnaseq,GSE112482,Lung
+GSM3071093,rnaseq,GSE112483,Lung
+GSM3071121,rnaseq,GSE112483,Lung
+GSM3071147,rnaseq,GSE112483,Lung
+GSM3071099,rnaseq,GSE112483,Lung
+GSM1647037,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3071125,rnaseq,GSE112483,Lung
+GSM3071105,rnaseq,GSE112483,Lung
+GSM3071127,rnaseq,GSE112483,Lung
+GSM1646980,rnaseq,GSE67427,monocyte-derived macrophages
+GSM5952187,rnaseq,GSE198557,PBMCs isolated from Healthy individuals
+GSM4455464,rnaseq,GSE148171,PBMCs isolated from Healthy individuals
+GSM3071013,rnaseq,GSE112482,Lung
+GSM5952188,rnaseq,GSE198557,PBMCs isolated from Healthy individuals
+GSM4455465,rnaseq,GSE148171,PBMCs isolated from Healthy individuals
+GSM3071019,rnaseq,GSE112482,Lung
+GSM3070981,rnaseq,GSE112482,Lung
+GSM3071107,rnaseq,GSE112483,Lung
+GSM3071075,rnaseq,GSE112483,Lung
+GSM3071129,rnaseq,GSE112483,Lung
+GSM3071095,rnaseq,GSE112483,Lung
+GSM3070993,rnaseq,GSE112482,Lung
+GSM3071115,rnaseq,GSE112483,Lung
+GSM4772941,rnaseq,GSE157657,Blood
+GSM3071117,rnaseq,GSE112483,Lung
+GSM1646975,rnaseq,GSE67427,monocyte-derived macrophages
+GSM3070995,rnaseq,GSE112482,Lung
+GSM3071109,rnaseq,GSE112483,Lung
+GSM3071063,rnaseq,GSE112483,Lung
+GSM4772937,rnaseq,GSE157657,Blood
+GSM3071067,rnaseq,GSE112483,Lung
+GSM3070985,rnaseq,GSE112482,Lung
+GSM3070991,rnaseq,GSE112482,Lung
+GSM4772913,rnaseq,GSE157657,Blood
+GSM4772940,rnaseq,GSE157657,Blood
+GSM4772939,rnaseq,GSE157657,Blood
+GSM4772926,rnaseq,GSE157657,Blood
+GSM4772914,rnaseq,GSE157657,Blood
+GSM4772916,rnaseq,GSE157657,Blood
+GSM4772942,rnaseq,GSE157657,Blood
+GSM3071119,rnaseq,GSE112483,Lung
+GSM4772925,rnaseq,GSE157657,Blood
+GSM4772911,rnaseq,GSE157657,Blood
+GSM4772905,rnaseq,GSE157657,Blood
+GSM4772924,rnaseq,GSE157657,Blood
+GSM4772921,rnaseq,GSE157657,Blood
+GSM4772912,rnaseq,GSE157657,Blood
+GSM4772908,rnaseq,GSE157657,Blood
+GSM4772933,rnaseq,GSE157657,Blood
+GSM4772918,rnaseq,GSE157657,Blood
+GSM4772907,rnaseq,GSE157657,Blood
+GSM4772932,rnaseq,GSE157657,Blood
+GSM4772936,rnaseq,GSE157657,Blood
+GSM4772927,rnaseq,GSE157657,Blood
+GSM4772906,rnaseq,GSE157657,Blood
+GSM4772929,rnaseq,GSE157657,Blood
+GSM4772917,rnaseq,GSE157657,Blood
+GSM4772920,rnaseq,GSE157657,Blood
+GSM2226808,rnaseq,GSE84076,Whole blood
+GSM4772934,rnaseq,GSE157657,Blood
+GSM4772922,rnaseq,GSE157657,Blood
+GSM4772935,rnaseq,GSE157657,Blood
+GSM4772938,rnaseq,GSE157657,Blood
+GSM4772928,rnaseq,GSE157657,Blood
+GSM4772919,rnaseq,GSE157657,Blood
+GSM4772909,rnaseq,GSE157657,Blood
+GSM4772931,rnaseq,GSE157657,Blood
+GSM4772915,rnaseq,GSE157657,Blood
+GSM3070979,rnaseq,GSE112482,Lung
+GSM4772910,rnaseq,GSE157657,Blood
+GSM4772930,rnaseq,GSE157657,Blood
+GSM2226825,rnaseq,GSE84076,Whole blood
+GSM409137,microarray,GSE16250,PBMCs cultured for 24H before RNA extraction
+GSM4772923,rnaseq,GSE157657,Blood
+GSM5952191,rnaseq,GSE198557,PBMCs isolated from Healthy individuals
+GSM2226832,rnaseq,GSE84076,Whole blood
+GSM2226829,rnaseq,GSE84076,Whole blood
+GSM4455463,rnaseq,GSE148171,PBMCs isolated from Healthy individuals
+GSM5952189,rnaseq,GSE198557,PBMCs isolated from Healthy individuals
+GSM4455466,rnaseq,GSE148171,PBMCs isolated from Healthy individuals
+GSM3070977,rnaseq,GSE112482,Lung
+GSM484644,microarray,GSE19444,Whole Blood from healthy control
+GSM484603,microarray,GSE19444,Whole Blood from healthy control
+GSM484450,microarray,GSE19491,Whole Blood from healthy control
+GSM484604,microarray,GSE19444,Whole Blood from healthy control
+GSM484647,microarray,GSE19444,Whole Blood from healthy control
+GSM484457,microarray,GSE19491,Whole Blood from healthy control
+GSM484634,microarray,GSE19444,Whole Blood from healthy control
+GSM484454,microarray,GSE19491,Whole Blood from healthy control
+GSM484453,microarray,GSE19491,Whole Blood from healthy control
+GSM484375,microarray,GSE19435,Whole blood from healthy control
+GSM484379,microarray,GSE19435,Whole blood from healthy control
+GSM484613,microarray,GSE19444,Whole Blood from healthy control
+GSM484612,microarray,GSE19444,Whole Blood from healthy control
+GSM484462,microarray,GSE19491,Whole Blood from healthy control
+GSM484479,microarray,GSE19491,Whole Blood from healthy control
+GSM484370,microarray,GSE19435,Whole blood from healthy control
+GSM484378,microarray,GSE19435,Whole blood from healthy control
+GSM484372,microarray,GSE19435,Whole blood from healthy control
+GSM484622,microarray,GSE19444,Whole Blood from healthy control
+GSM484369,microarray,GSE19435,Whole blood from healthy control
+GSM484377,microarray,GSE19435,Whole blood from healthy control
+GSM484374,microarray,GSE19435,Whole blood from healthy control
+GSM5952190,rnaseq,GSE198557,PBMCs isolated from Healthy individuals
+GSM484373,microarray,GSE19435,Whole blood from healthy control
+GSM484477,microarray,GSE19491,Whole Blood from healthy control
+GSM484371,microarray,GSE19435,Whole blood from healthy control
