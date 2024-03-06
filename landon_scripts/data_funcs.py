@@ -90,14 +90,21 @@ def read_dis_data(landmark_genes, control_samples=get_disease_controls()):
         dis_exp = dis_exp.loc[np.isin(dis_exp['GeneID'], landmark_genes)] # subset for landmark genes
         dis_exp = dis_exp.loc[:, np.isin(dis_exp.columns.values, np.append(control_samples, 'GeneID'))] # subset for control samples
         return dis_exp
-    dis_data = pd.DataFrame({"GeneID": landmark_genes})
-    for dir in ['../data/expression/microarray/', '../data/expression/rnaseq/']: # Iterate over directories
-        for file_name in os.listdir(dir):
-            dis_data = dis_data.merge(disease_prep(dir+file_name, dir[-2]=='y'), how='left', on='GeneID')
-    dis_data = dis_data.set_index('GeneID').astype(float)
-    dis_data.columns.name = "Disease Samples"
-    dis_data = dis_data.T.drop_duplicates().T
-    return dis_data
+    rnaseq_dis_data = pd.DataFrame({"GeneID": landmark_genes})
+    #for dir in ['../data/expression/microarray/', '../data/expression/rnaseq/']: # Iterate over directories   
+    for file_name in os.listdir('../data/expression/rnaseq/'):
+        rnaseq_dis_data = rnaseq_dis_data.merge(disease_prep('../data/expression/rnaseq/'+file_name, ma=False), how='left', on='GeneID')
+    rnaseq_dis_data = rnaseq_dis_data.set_index('GeneID').astype(float)
+    rnaseq_dis_data.columns.name = "Disease Samples"
+    rnaseq_dis_data = rnaseq_dis_data.T.drop_duplicates().T
+    
+    marray_dis_data = pd.DataFrame({"GeneID": landmark_genes})
+    for file_name in os.listdir('../data/expression/microarray/'):
+        marray_dis_data = marray_dis_data.merge(disease_prep('../data/expression/microarray/'+file_name, ma=True), how='left', on='GeneID')
+    marray_dis_data = marray_dis_data.set_index('GeneID').astype(float)
+    marray_dis_data.columns.name = "Disease Samples"
+    marray_dis_data = marray_dis_data.T.drop_duplicates().T
+    return rnaseq_dis_data, marray_dis_data
 
 def get_dis_meta(dis_sample, label):
     dis_meta = pd.read_csv('dis_meta.csv', sep=',', header=0)

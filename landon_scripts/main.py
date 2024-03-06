@@ -1,4 +1,4 @@
-import data_funcs
+import landon_scripts.data_funcs_old as data_funcs_old
 import correlation_funcs as cf
 import pandas as pd
 import time
@@ -6,8 +6,8 @@ import time
 start = time.time()
 
 # Dataframes: [gene, sample]
-drug_data, landmark_genes = data_funcs.read_drug_data()
-dis_data = data_funcs.read_dis_data(landmark_genes)
+drug_data, landmark_genes = data_funcs_old.read_drug_data()
+dis_data = data_funcs_old.read_dis_data(landmark_genes)
 
 # 3D array: [drug, dis, corr]
 arr_3d = cf.get_correlations(drug_data, dis_data, 
