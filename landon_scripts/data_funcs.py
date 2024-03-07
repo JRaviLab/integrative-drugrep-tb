@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-def read_drug_data():
+def read_drug_data(quantile_normalize=True):
     drug_data = pd.read_csv('../data/expression/drug_data/level3_control_expdata_lm.tsv', delimiter='\t')
     drug_data.set_index('rid', inplace=True)
     landmark_genes = drug_data.index
@@ -42,6 +42,24 @@ def read_drug_data():
 
     drug_data = pd.concat(cols_to_concat, axis=1)
     drug_data.columns = col_names
+
+    if quantile_normalize:
+        # https://github.com/ShawnLYU/Quantile_Normalize/blob/master/quantile_norm.py
+        def quantileNormalize(df_input):
+            df = df_input.copy()
+            #compute rank
+            dic = {}
+            for col in df:
+                dic.update({col : sorted(df[col])})
+            sorted_df = pd.DataFrame(dic)
+            rank = sorted_df.mean(axis = 1).tolist()
+            #sort
+            for col in df:
+                t = np.searchsorted(np.sort(df[col]), df[col])
+                df[col] = [rank[i] for i in t]
+            return df
+        
+        drug_data = quantileNormalize(drug_data)
 
     return drug_data, landmark_genes
 
