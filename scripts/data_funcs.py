@@ -2,8 +2,11 @@ import pandas as pd
 import numpy as np
 import os
 
-def read_drug_data(quantile_normalize=True):
-    drug_data = pd.read_csv('data/expression/drug_data/level3_control_expdata_lm.tsv', delimiter='\t')
+def read_drug_data(quantile_normalize=True, groupby_cell_line=True):
+    try:
+        drug_data = pd.read_csv('data/expression/drug_data/level3_control_expdata_lm.tsv', delimiter='\t')
+    except:
+        drug_data = pd.read_csv('../data/expression/drug_data/level3_control_expdata_lm.tsv', delimiter='\t')
     drug_data.set_index('rid', inplace=True)
     landmark_genes = drug_data.index
     drug_samples = drug_data.columns
@@ -42,6 +45,15 @@ def read_drug_data(quantile_normalize=True):
 
     drug_data = pd.concat(cols_to_concat, axis=1)
     drug_data.columns = col_names
+
+    if groupby_cell_line:
+        # group drug samples by cell line -> drug_data_cell
+        cell_lines = list(set([x.split('_')[1] for x in drug_data.columns]))
+        drug_data_cell = pd.DataFrame(index=drug_data.index, columns=cell_lines)
+        for cell_line in cell_lines:
+            cell_line_columns = [x for x in drug_data.columns if cell_line in x]
+            drug_data_cell[cell_line] = drug_data[cell_line_columns].mean(axis=1)
+        drug_data = drug_data_cell
 
     if quantile_normalize:
         # https://github.com/ShawnLYU/Quantile_Normalize/blob/master/quantile_norm.py

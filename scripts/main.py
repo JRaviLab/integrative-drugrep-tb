@@ -55,12 +55,6 @@ def main(p=False, s=False, r=False, l=False):
         corr_matrices = [pd.DataFrame(arr_3d[:,:,i].T, index=drug_data.columns, 
                                     columns=dis_data.columns) 
                         for i in range(arr_3d.shape[2])]
-
-        # if len(corr_matrices) == 1:
-        #     output = corr_matrices[0]
-        # else:
-        #     # Dataframe: [drug, dis]
-        #     output = cf.avg_rank([cf.cell_line_ranks(mat) for mat in corr_matrices])
         
         for i, mat in enumerate(corr_matrices):
             mat.to_csv(f'{filename}{types[i][0]}.csv')
