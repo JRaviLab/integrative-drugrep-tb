@@ -1,0 +1,265 @@
+# functions for aggregating multiple gene signatures
+# created date: 09/22/23
+# last modified: 08/02/24
+# Kewalin Samart
+
+jaccard_score <- function(data1, data2){
+  #' @description This functions calculate jaccard similarity score between different two set of data
+  #' @reference jaccard function: https://www.statology.org/jaccard-similarity-in-r/
+  #' @param data1 set of data no.1; a vector of data1
+  #' @param data2 set of data no.2; a vector of data2
+  #' @return jaccard jaccard similarity score
+  #' @author Kewalin Samart
+
+  intersection <- length(intersect(data1, data2))
+  union <- length(data1) + length(data2) - intersection
+  jaccard <- intersection/union
+
+  return(jaccard)
+}
+
+compute_membership_matrix <- function(metadata_path, data_path, bg_source, output_dir, prefix_output, extra_arg="", save_rds=TRUE){
+    #' @description Given a set of signatures and source name for background genes, this function compyte a membership matrix based on the set of background genes of choice
+    #' @param metadata_path metadata of the input signatures
+    #' @param data_path path to signature data e.g., "/data/scratch/samartk/data/uniformly_processed/microarray/signatures/"
+    #' @param bg_source name of the source for background genes to use: "LINCS", "KEGG", "GO", "input data"
+    #' @param output_dir path to the output directory
+    #' @param extra_arg extra argument; optional if "LINCS" is specified for bg_source; could be one of the options below or a combination of them as a single string with comma:
+    #' (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference" for examples: "landmark" or "landmark,inffered,best inferred"
+    #' if "input data" is specified for bg_source, this arg could be one of the followings: "up", "dn", "full", and "" (by default)
+    #' @param prefix_output
+    #' @param save_rds
+    #' @returns final_sigval resulting gene membership matrix
+    #' @author Kewalin Samart
+
+    # importing libraries
+    require(tidyverse)
+    require(dplyr)
+    require(readr)
+
+    # importing essential functions
+    source("./scripts/00_background_genes_PA_functions.R")
+
+    # get background genes across datasets
+    bg_genes <- get_bg_genes(bg_source=bg_source,metadata_path=metadata_path, data_path=data_path, extra_arg=extra_arg)
+    bg_genes_df <- as.data.frame(bg_genes)
+    colnames(bg_genes_df)[1] <- "GeneID"
+
+    print(paste0("Number of background genes: ",length(bg_genes)))
+
+    data_to_run <- read_tsv(metadata_path)
+
+    for(i in 1:nrow(data_to_run)){
+        # set full variables
+        accession_no <- data_to_run$accession_no[i]
+        file_name <- data_to_run$file_name[i]
+
+        print(paste0("iteration ",i))
+        print(paste0("reading in up and dn genes: ",accession_no, " ",file_name))
+
+        if("platform" %in% colnames(data_to_run)){
+          platform <- data_to_run$platform[i]
+          if(extra_arg != ""){
+            signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",extra_arg,".tsv")
+          }else{
+            signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
+          }
+
+        }else{
+          if(extra_arg != ""){
+            signature_filename <- paste0(accession_no, "_",file_name,"_",extra_arg,".tsv")
+          }else{
+            signature_filename <- paste0(accession_no, "_",file_name,".tsv")
+          }
+        }
+
+        # ----------------------------------------------------------------------------------
+        signature_path <- paste0(data_path,"/",signature_filename)
+
+        print(signature_path)
+        print(file.exists(signature_path))
+        if(file.exists(signature_path)){
+          gene_signature <- read.delim(signature_path, sep="\t")
+        }else{
+          next
+        }
+
+        clean_gene_signature <- gene_signature[!duplicated(gene_signature$GeneID),]
+
+        # compute membership vectors with DE vals
+        to_merge_logFC <- clean_gene_signature[c("GeneID","log2FoldChange")]
+
+        sigval_replaced <- merge(bg_genes_df,to_merge_logFC,by = "GeneID",all.x = TRUE)
+        sigval_replaced[is.na(sigval_replaced)] <- 0
+        colnames(sigval_replaced)[2] <- paste0(accession_no,"_",file_name)
+
+        if(i == 1){
+            old_sigval <- sigval_replaced
+        }else{
+            # merge dataframes
+            new_sigval <- merge(old_sigval, sigval_replaced, by = "GeneID")
+
+            old_sigval <- new_sigval
+
+            print(paste0("Gene Membership matrix with DE values 's dimension: ",dim(old_sigval)))
+        }
+    }
+    final_sigval <- new_sigval
+    col_names <- colnames(final_sigval)
+    final_sigval <- final_sigval[, c("GeneID", col_names[!col_names == "GeneID"])]
+
+    if(save_rds){
+      saveRDS(final_sigval, file = paste0(output_dir,"/",prefix_output,"_membership_mat_.rds"))
+      write_tsv(final_sigval, file = paste0(output_dir,"/",prefix_output,"_membership_mat.tsv"))
+      print(paste0("The computed Gene Membership matrix", paste0(prefix_output,"_membership_mat.rds")," was saved at ",output_dir))
+    }
+
+    return(final_sigval)
+}
+
+compute_jaccard_matrix <- function(metadata_path,data_path,output_dir,output_prefix,extra_arg="",save_rds=TRUE){
+  #' @description This function computes a jaccard similarity matrix of a given set of signatures
+  #' @param data_to_run metadata of the input signatures
+  #' @param data_path e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
+  #' @param output_dir e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
+  #' @param extra_arg a tag string describing output file e.g., "full_none" (set to "" by default)
+  #'
+  #' @returns mat resulting jaccard similarity matrix
+  #' @author Kewalin Samart
+  require(readr)
+
+  # get data_to_run df
+  data_to_run <- read_tsv(metadata_path)
+
+  # initialize empty vectors for storage
+  vec = c()
+  name_vec = c()
+
+  n = 0
+  # loop to get gene sets for each dataset
+  for(i in 1:(nrow(data_to_run))){
+
+    # get accession no. and file name for reading in gene signatures
+    accession_no <- data_to_run$accession_no[i]
+    file_name <- data_to_run$file_name[i]
+
+    # read in gene signature and get list of GeneIDs
+    if("platform" %in% colnames(data_to_run)){
+      platform <- data_to_run$platform[i]
+      if(extra_arg != ""){
+        signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",extra_arg,".tsv")
+      }else{
+        signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
+      }
+    }else{
+      if(extra_arg != ""){
+        signature_filename <- paste0(accession_no, "_",file_name,"_",extra_arg,".tsv")
+      }else{
+        signature_filename <- paste0(accession_no, "_",file_name,".tsv")
+      }
+    }
+
+    signature_path <- paste0(data_path,"/",signature_filename)
+
+    if(file.exists(signature_path)){
+      gene_signature <- read.delim(signature_path, sep="\t")
+      clean_gene_signature <- gene_signature[!duplicated(gene_signature$GeneID),]
+      GeneIDs <- clean_gene_signature$GeneID
+
+      n = n + 1
+      # append vector of genes to the big vector
+      vec[[n]] <- GeneIDs
+      # create proper name for each gene list
+      name = paste0(accession_no,"_",file_name)
+      # append names to the vectors of names
+      name_vec[[n]] <- name
+    }else{
+      next
+    }
+  }
+
+  # name the vectors
+  names(vec) <- name_vec
+  # reorder the vectors of genes by names
+  vec <- vec[order(names(vec))]
+  # construct matrix
+  mat <- matrix(data = NA, nrow = length(vec), ncol = length(vec))
+
+  # assign col/row names
+  colnames(mat) <- names(vec)
+  rownames(mat) <- names(vec)
+
+  # compute Jaccard score matrix
+  for (r in 1:length(vec)) {
+    for (c in 1:length(vec)) {
+      if (c == r) {
+        mat[r,c] = 1
+      } else if (c > r) {
+        mat[r,c] = jaccard_score(vec[[r]], vec[[c]])
+      } else {
+        mat[r,c] = jaccard_score(vec[[r]], vec[[c]])
+      }
+    }
+  }
+  # add a column of signature names
+  mat <- as.data.frame(mat)
+  mat$names <- names(vec)
+  mat <- mat[, c("names", names(vec))]
+  mat[is.na(mat)] <- 0
+
+  if(save_rds){
+    saveRDS(mat, file = paste0(output_dir,"/",output_prefix,"_jaccard_mat.rds"))
+    write_tsv(mat, file = paste0(output_dir,"/",output_prefix,"_jaccard_mat.tsv"))
+    print(paste0("The computed Jaccard matrix ", paste0(output_prefix,"_jaccard_mat.rds") ," was saved at ",output_dir))
+  }
+
+  return(mat)
+}
+
+aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, output_prefix, threshold=0.4, save_rds='yes'){
+    #' @description Given a gene membership and a jaccard similarity matrix computed from a set of signatures, this function compute an aggregated signature.
+    #' @param gene_membership_matrix gene membership matrix returned by compute_membership_matrix(...)
+    #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
+    #' @param output_dir path to the output directory
+    #' @param extra_arg a tag string describing output file e.g., "full_none" (set to "" by default)
+    #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
+    #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
+    #' @author Kewalin Samart
+
+    # read in gene membership matrix
+    gene_membership_df <- gene_membership_matrix
+    # set row names to GeneID
+    row.names(gene_membership_df) <- gene_membership_df$GeneID
+    gene_membership_df$GeneID <- NULL
+    # reorder columns
+    gene_membership_df <- gene_membership_df[,order(colnames(gene_membership_df))]
+    gene_membership_mat <- as.matrix(gene_membership_df)
+
+    # read in jaccard matrices
+    jaccard_df <- jaccard_matrix
+    # set row names to GeneID
+    row.names(jaccard_df) <- jaccard_df$names
+    jaccard_df$names <- NULL
+    # reorder columns
+    jaccard_df <- jaccard_df[,order(colnames(jaccard_df))]
+    jaccard_mat <- as.matrix(jaccard_df)
+
+    # compute average jaccard scores across signatures
+    ## specified disease
+    jaccard_mean_vec <- rowMeans(jaccard_mat)
+
+    ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
+    aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec/sum(jaccard_mean_vec)))
+    colnames(aggregated_gene_sig)[1] <- "aggregated_GeneScores"
+    aggregated_gene_sig$GeneID <- row.names(gene_membership_df)
+
+    selected_genes_df <- aggregated_gene_sig[abs(aggregated_gene_sig$aggregated_GeneScores) > threshold,]
+
+    if(save_rds){
+      saveRDS(selected_genes_df, file = paste0(output_dir,"/",output_prefix,"_aggregated_signature.rds"))
+      write_tsv(selected_genes_df, file = paste0(output_dir,"/",output_prefix,"_aggregated_signature.tsv"))
+      print(paste0("The final aggregated signature was saved at ",output_prefix))
+    }
+
+    return(selected_genes_df)
+}
