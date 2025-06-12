@@ -1,0 +1,38 @@
+# Compute aggregated signatures
+# Created date: 06/12/25
+# Author: Kewalin Samart
+
+```{r load libraries and sort scripts}
+library(readr)
+source("../scripts/00_background_genes_PA_functions.R")
+source("../scripts/01_signature_aggregation_functions.R")
+```
+
+```{r initialize arguments}
+metadata_path = "../data/TB_microarray_args.tsv"
+data_path = "../data/microarray_TBsignatures"
+direction = "up"
+bg_source = "LINCS" # L1000 genes
+extra_arg= "landmark"
+output_dir = "../data/aggregated_signatures"
+threshold <- NULL # aggregated gene score cutoff; 0.4 by default
+if(is.null(threshold)){
+    threshold <- 0.4
+}
+```
+
+```{r compute membership matrix}
+compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_source = bg_source, 
+                          output_dir = output_dir, extra_arg = extra_arg, save_result=TRUE)
+
+```
+
+```{r compute jaccard matrix}
+compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                       direction = direction, output_dir = output_dir, 
+                       extra_arg=NULL, save_result=TRUE) ## debugging: Error in order(names(vec)) : argument 1 is not a vector
+
+```
+
+

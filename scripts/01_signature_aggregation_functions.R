@@ -1,6 +1,6 @@
 # functions for aggregating multiple gene signatures
 # created date: 09/22/23
-# last modified: 08/02/24
+# last modified: 06/12/25
 # Kewalin Samart
 
 jaccard_score <- function(data1, data2){
@@ -18,27 +18,24 @@ jaccard_score <- function(data1, data2){
   return(jaccard)
 }
 
-compute_membership_matrix <- function(metadata_path, data_path, bg_source, output_dir, prefix_output, extra_arg="", save_rds=TRUE){
+compute_membership_matrix <- function(metadata_path, data_path, direction, bg_source, output_dir, extra_arg=NULL, save_result=TRUE){
     #' @description Given a set of signatures and source name for background genes, this function compyte a membership matrix based on the set of background genes of choice
     #' @param metadata_path metadata of the input signatures
-    #' @param data_path path to signature data e.g., "/data/scratch/samartk/data/uniformly_processed/microarray/signatures/"
+    #' @param data_path path to signature data e.g., "../data/microarray_TBsignatures"
+    #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
     #' @param bg_source name of the source for background genes to use: "LINCS", "KEGG", "GO", "input data"
     #' @param output_dir path to the output directory
     #' @param extra_arg extra argument; optional if "LINCS" is specified for bg_source; could be one of the options below or a combination of them as a single string with comma:
-    #' (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference" for examples: "landmark" or "landmark,inffered,best inferred"
+    #' (i) "landmark" (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference" for examples: "landmark" or "landmark, inferred, best inferred"
     #' if "input data" is specified for bg_source, this arg could be one of the followings: "up", "dn", "full", and "" (by default)
-    #' @param prefix_output
-    #' @param save_rds
+    #' @param save_result a boolean indicating user's preference whether to automatically save the result
     #' @returns final_sigval resulting gene membership matrix
     #' @author Kewalin Samart
 
-    # importing libraries
+    # import libraries
     require(tidyverse)
     require(dplyr)
     require(readr)
-
-    # importing essential functions
-    source("./scripts/00_background_genes_PA_functions.R")
 
     # get background genes across datasets
     bg_genes <- get_bg_genes(bg_source=bg_source,metadata_path=metadata_path, data_path=data_path, extra_arg=extra_arg)
@@ -50,82 +47,87 @@ compute_membership_matrix <- function(metadata_path, data_path, bg_source, outpu
     data_to_run <- read_tsv(metadata_path)
 
     for(i in 1:nrow(data_to_run)){
-        # set full variables
-        accession_no <- data_to_run$accession_no[i]
-        file_name <- data_to_run$file_name[i]
+      # set full variables
+      accession_no <- data_to_run$accession_no[i]
+      file_name <- data_to_run$file_name[i]
 
-        print(paste0("iteration ",i))
-        print(paste0("reading in up and dn genes: ",accession_no, " ",file_name))
+      print(paste0("iteration ",i))
+      print(paste0("reading in up and dn genes: ",accession_no, " ",file_name))
 
-        if("platform" %in% colnames(data_to_run)){
-          platform <- data_to_run$platform[i]
-          if(extra_arg != ""){
-            signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",extra_arg,".tsv")
-          }else{
-            signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
-          }
-
+      if("platform" %in% colnames(data_to_run)){
+        platform <- data_to_run$platform[i]
+        if(!is.null(extra_arg)){
+          signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",direction,"_",extra_arg,".tsv")
         }else{
-          if(extra_arg != ""){
-            signature_filename <- paste0(accession_no, "_",file_name,"_",extra_arg,".tsv")
-          }else{
-            signature_filename <- paste0(accession_no, "_",file_name,".tsv")
-          }
+          signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
         }
 
-        # ----------------------------------------------------------------------------------
-        signature_path <- paste0(data_path,"/",signature_filename)
-
-        print(signature_path)
-        print(file.exists(signature_path))
-        if(file.exists(signature_path)){
-          gene_signature <- read.delim(signature_path, sep="\t")
+      }else{
+        if(!is.null(extra_arg)){
+          signature_filename <- paste0(accession_no, "_",file_name,"_",direction,"_",extra_arg,".tsv")
         }else{
-          next
+          signature_filename <- paste0(accession_no, "_",file_name,".tsv")
         }
+      }
 
-        clean_gene_signature <- gene_signature[!duplicated(gene_signature$GeneID),]
+      # ----------------------------------------------------------------------------------
+      signature_path <- paste0(data_path,"/",direction,"/",signature_filename)
 
-        # compute membership vectors with DE vals
-        to_merge_logFC <- clean_gene_signature[c("GeneID","log2FoldChange")]
+      print(signature_path)
+      print(file.exists(signature_path))
+      if(file.exists(signature_path)){
+        gene_signature <- read.delim(signature_path, sep="\t")
+      }else{
+        next
+      }
 
-        sigval_replaced <- merge(bg_genes_df,to_merge_logFC,by = "GeneID",all.x = TRUE)
-        sigval_replaced[is.na(sigval_replaced)] <- 0
-        colnames(sigval_replaced)[2] <- paste0(accession_no,"_",file_name)
+      clean_gene_signature <- gene_signature[!duplicated(gene_signature$GeneID),]
 
-        if(i == 1){
-            old_sigval <- sigval_replaced
-        }else{
-            # merge dataframes
-            new_sigval <- merge(old_sigval, sigval_replaced, by = "GeneID")
+      # compute membership vectors with DE vals
+      to_merge_logFC <- clean_gene_signature[c("GeneID","log2FoldChange")]
 
-            old_sigval <- new_sigval
+      sigval_replaced <- merge(bg_genes_df,to_merge_logFC,by = "GeneID",all.x = TRUE)
+      sigval_replaced[is.na(sigval_replaced)] <- 0
+      colnames(sigval_replaced)[2] <- paste0(accession_no,"_",file_name)
 
-            print(paste0("Gene Membership matrix with DE values 's dimension: ",dim(old_sigval)))
-        }
+      if(i == 1){
+        old_sigval <- sigval_replaced
+      }else{
+        # merge dataframes
+        new_sigval <- merge(old_sigval, sigval_replaced, by = "GeneID")
+        old_sigval <- new_sigval
+        print(paste0("Gene Membership matrix with DE values 's dimension: ",dim(old_sigval)))
+      }
     }
     final_sigval <- new_sigval
     col_names <- colnames(final_sigval)
     final_sigval <- final_sigval[, c("GeneID", col_names[!col_names == "GeneID"])]
 
-    if(save_rds){
-      saveRDS(final_sigval, file = paste0(output_dir,"/",prefix_output,"_membership_mat_.rds"))
-      write_tsv(final_sigval, file = paste0(output_dir,"/",prefix_output,"_membership_mat.tsv"))
-      print(paste0("The computed Gene Membership matrix", paste0(prefix_output,"_membership_mat.rds")," was saved at ",output_dir))
+    if (!dir.exists(output_dir)) {
+      dir.create(output_dir, recursive = TRUE)
+    }
+
+    if(save_result){
+      saveRDS(final_sigval, file = paste0(output_dir,"/",direction,"_membership_mat_.rds"))
+      write_tsv(final_sigval, file = paste0(output_dir,"/",direction,"_membership_mat.tsv"))
+      print(paste0("The computed Gene Membership matrix", paste0(direction,"_membership_mat.rds")," was saved at ",output_dir))
     }
 
     return(final_sigval)
 }
 
-compute_jaccard_matrix <- function(metadata_path,data_path,output_dir,output_prefix,extra_arg="",save_rds=TRUE){
+compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_dir, extra_arg=NULL, save_result=TRUE){
   #' @description This function computes a jaccard similarity matrix of a given set of signatures
   #' @param data_to_run metadata of the input signatures
   #' @param data_path e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
+  #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
   #' @param output_dir e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
   #' @param extra_arg a tag string describing output file e.g., "full_none" (set to "" by default)
   #'
   #' @returns mat resulting jaccard similarity matrix
   #' @author Kewalin Samart
+
+  # load libraries
   require(readr)
 
   # get data_to_run df
@@ -146,14 +148,14 @@ compute_jaccard_matrix <- function(metadata_path,data_path,output_dir,output_pre
     # read in gene signature and get list of GeneIDs
     if("platform" %in% colnames(data_to_run)){
       platform <- data_to_run$platform[i]
-      if(extra_arg != ""){
-        signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",extra_arg,".tsv")
+      if(!is.null(extra_arg)){
+        signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",direction,"_",extra_arg,".tsv")
       }else{
         signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
       }
     }else{
-      if(extra_arg != ""){
-        signature_filename <- paste0(accession_no, "_",file_name,"_",extra_arg,".tsv")
+      if(!is.null(extra_arg)){
+        signature_filename <- paste0(accession_no, "_",file_name,"_", direction, "_", extra_arg,".tsv")
       }else{
         signature_filename <- paste0(accession_no, "_",file_name,".tsv")
       }
@@ -207,10 +209,10 @@ compute_jaccard_matrix <- function(metadata_path,data_path,output_dir,output_pre
   mat <- mat[, c("names", names(vec))]
   mat[is.na(mat)] <- 0
 
-  if(save_rds){
-    saveRDS(mat, file = paste0(output_dir,"/",output_prefix,"_jaccard_mat.rds"))
-    write_tsv(mat, file = paste0(output_dir,"/",output_prefix,"_jaccard_mat.tsv"))
-    print(paste0("The computed Jaccard matrix ", paste0(output_prefix,"_jaccard_mat.rds") ," was saved at ",output_dir))
+  if(save_result){
+    saveRDS(mat, file = paste0(output_dir,"/", direction,"_jaccard_mat.rds"))
+    write_tsv(mat, file = paste0(output_dir,"/", direction,"_jaccard_mat.tsv"))
+    print(paste0("The computed Jaccard matrix ", paste0(direction,"_jaccard_mat.rds") ," was saved at ",output_dir))
   }
 
   return(mat)

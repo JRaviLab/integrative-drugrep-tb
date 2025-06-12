@@ -35,7 +35,7 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   #' @returns bg_lincs_genes a character vector of the selected LINCS GeneID
   #' @author Kewalin Samart
 
-  lincs_genes <- read.delim("./data/metadata/LINCSGeneSpaceSub.txt", sep="\t")
+  lincs_genes <- read.delim("../data/metadata/LINCSGeneSpaceSub.txt", sep="\t")
 
   if(GeneType=="reference"){ # all genes in LINCS
     selected_lincs_genes <- lincs_genes$`Entrez.ID`
