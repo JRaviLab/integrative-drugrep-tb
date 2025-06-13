@@ -5,8 +5,8 @@
 ```{r load libraries and sort scripts}
 library(readr)
 library(here)
-source("../scripts/00_background_genes_PA_functions.R")
-source("../scripts/01_signature_aggregation_functions.R")
+source(here("scripts/00_background_genes_PA_functions.R"))
+source(here("scripts/01_signature_aggregation_functions.R"))
 ```
 
 ```{r initialize arguments}
