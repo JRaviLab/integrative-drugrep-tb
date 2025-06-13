@@ -1,6 +1,6 @@
 # functions for aggregating multiple gene signatures
 # created date: 09/22/23
-# last modified: 06/12/25
+# last modified: 06/13/25
 # Kewalin Samart
 
 jaccard_score <- function(data1, data2){
@@ -161,7 +161,7 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
       }
     }
 
-    signature_path <- paste0(data_path,"/",signature_filename)
+    signature_path <- paste0(data_path,"/",direction,"/",signature_filename)
 
     if(file.exists(signature_path)){
       gene_signature <- read.delim(signature_path, sep="\t")
@@ -218,12 +218,12 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
   return(mat)
 }
 
-aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, output_prefix, threshold=0.4, save_rds='yes'){
+aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold=0.4, save_result=TRUE){
     #' @description Given a gene membership and a jaccard similarity matrix computed from a set of signatures, this function compute an aggregated signature.
     #' @param gene_membership_matrix gene membership matrix returned by compute_membership_matrix(...)
     #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
     #' @param output_dir path to the output directory
-    #' @param extra_arg a tag string describing output file e.g., "full_none" (set to "" by default)
+    #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
     #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
     #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
     #' @author Kewalin Samart
@@ -257,10 +257,10 @@ aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_
 
     selected_genes_df <- aggregated_gene_sig[abs(aggregated_gene_sig$aggregated_GeneScores) > threshold,]
 
-    if(save_rds){
-      saveRDS(selected_genes_df, file = paste0(output_dir,"/",output_prefix,"_aggregated_signature.rds"))
-      write_tsv(selected_genes_df, file = paste0(output_dir,"/",output_prefix,"_aggregated_signature.tsv"))
-      print(paste0("The final aggregated signature was saved at ",output_prefix))
+    if(save_result){
+      saveRDS(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.rds"))
+      write_tsv(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.tsv"))
+      print(paste0("The final aggregated signature was saved at ", output_dir))
     }
 
     return(selected_genes_df)
