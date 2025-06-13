@@ -3,6 +3,8 @@
 # last modified: 06/13/25
 # Kewalin Samart
 
+source(here("scripts/00_background_genes_PA_functions.R"))
+
 jaccard_score <- function(data1, data2){
   #' @description This functions calculate jaccard similarity score between different two set of data
   #' @reference jaccard function: https://www.statology.org/jaccard-similarity-in-r/
