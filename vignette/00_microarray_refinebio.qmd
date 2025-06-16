@@ -1,0 +1,33 @@
+### Check TB microarray datasets in refine.bio
+
+```{r retrieve experiment information}
+library(refinebioc)
+system.time({
+  experiments <- refinebioc::get_experiment_catalog()
+})
+```
+
+#### All v1 microarray datasets are in refine.bio
+```{r v1 microarray datasets}
+library(tidyverse)
+v1_marray_datasets = c("E-MEXP-3521", "GSE139871", "GSE16250", "GSE17477", "GSE19435",
+                       "GSE19439", "GSE19444", "GSE19491", "GSE29536", "GSE34151", "GSE54992")
+v1_marray_datasets[!(v1_marray_datasets %in% experiments$accession_code)] 
+```
+```{r}
+# all microarray? YES
+View(experiments[experiments$accession_code %in% v1_marray_datasets,])
+```
+
+```{r look for more TB datasets}
+library(readr)
+library(here)
+# Case-insensitive search for "tuberculosis" in experiment titles
+tb_experiments <- experiments %>%
+  filter(str_detect(tolower(title), "tuberculosis")) %>%
+  filter(organism_names == "HOMO_SAPIENS") %>%
+  filter(num_downloadable_samples != 0) %>%
+  filter(technology == "MICROARRAY")
+
+write_tsv(tb_experiments, file=here("data/metadata/refinebio_tb_datasets.tsv"))
+```
