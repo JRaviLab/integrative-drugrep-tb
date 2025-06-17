@@ -2,7 +2,20 @@
 # Created date: 06/13/25
 # Author: Kewalin Samart
 
-```{r }
+```{r sourcing functions}
+library(here)
+source(here("scripts/01_signature_landmark_prep_functions.R"))
+```
 
+```{r getting L1000 genes}
+L1000genes = getL1000() 
+head(L1000genes)
+```
 
+```{r reading in a signature and clean it up}
+GSE139871_GPL10558_signature = read_tsv(here("data/microarray_TBsignatures/up/GSE139871_GPL10558_MTB_control_up_landmark.tsv"), show_col_types = FALSE)
+prepare_signature(signature = GSE139871_GPL10558_signature,
+                  L1000 = FALSE)
+prepare_signature(signature = GSE139871_GPL10558_signature,
+                  L1000 = TRUE)
 ```

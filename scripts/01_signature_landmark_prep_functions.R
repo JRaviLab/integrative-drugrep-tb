@@ -1,14 +1,14 @@
 # functions to filter genes with L1000 genes
-# created date: 06/17/21
-# latest modified: 04/09/24
+# latest modified: 06/16/24
 # Kewalin Samart
 
 # load the needed libraries
 library(readr)
 library(tidyverse)
 library(dplyr)
+library(here)
 
-getL1000 <- function(LINCSGenes_path = "./data/metadata/LINCSGeneSpaceSub.txt"){
+getL1000 <- function(LINCSGenes_path = here("data/metadata/LINCSGeneSpaceSub.txt")){
   #' @description gets L1000 genes for filtering signatures
   #' @source: http://amp.pharm.mssm.edu/l1000fwd/download_page
   #' @param LINCSGenes_path path to file containing all the LINCS genes including landmarks, best inferred, and inferred
@@ -18,8 +18,8 @@ getL1000 <- function(LINCSGenes_path = "./data/metadata/LINCSGeneSpaceSub.txt"){
   # read in L1000 gene file
   LINCSGenes <- read.delim(LINCSGenes_path, sep='\t')
   # get L1000 gene list
-  L1000_genes <- LINCSGenes[,LINCSGenes$Type == 'landmark']
-  L1000_gene_entrezid <- as.list(L1000_genes$`Entrez ID`)
+  L1000_genes <- LINCSGenes[LINCSGenes$Type == 'landmark',]
+  L1000_gene_entrezid <- as.list(L1000_genes$`Entrez.ID`)
 
   return(L1000_gene_entrezid)
 }
