@@ -1,5 +1,5 @@
 # functions to filter genes with L1000 genes
-# latest modified: 06/16/24
+# latest modified: 06/17/24
 # Kewalin Samart
 
 # load the needed libraries
@@ -19,9 +19,24 @@ getL1000 <- function(LINCSGenes_path = here("data/metadata/LINCSGeneSpaceSub.txt
   LINCSGenes <- read.delim(LINCSGenes_path, sep='\t')
   # get L1000 gene list
   L1000_genes <- LINCSGenes[LINCSGenes$Type == 'landmark',]
-  L1000_gene_entrezid <- as.list(L1000_genes$`Entrez.ID`)
+  L1000_gene_entrezid <- as.character(L1000_genes$`Entrez.ID`)
 
   return(L1000_gene_entrezid)
+}
+
+filterSig_withL1000 <- function(signature, L1000_genes=getL1000()){
+  #' @description filters signature with L1000 genes
+  #' @param signature output from get_signature()
+  #' @param L1000_genes list of L1000 gene ids; default val set to the output from getL1000()
+  #' @returns L1000_filtered_sig signature with only L1000 genes
+  #' @author Kewalin Samart
+
+  # filter the signature dataframe with L1000 genes
+  signature$GeneID <- as.character(signature$GeneID)
+
+  L1000_filtered_sig <- signature[signature$GeneID %in% L1000_genes,]
+
+  return(L1000_filtered_sig)
 }
 
 prepare_signature <- function(signature, L1000 = FALSE){
@@ -32,15 +47,20 @@ prepare_signature <- function(signature, L1000 = FALSE){
   #' @author Kewalin Samart
 
   # read in gene info for gene conversion
-  gene_info <- read.delim(file = here("data/metadata/Homo_sapiens.gene_info.csv"))
-  gene_info <- gene_info[,c("GeneID","Symbol","GeneID", "P.Value", "adj.P.Val")]
+  gene_info <- read.delim(file = here("data/metadata/Homo_sapiens.gene_info.csv"), sep = ",")
+  gene_info <- gene_info[,c("GeneID","Symbol")]
   # check if the input signature contains all the required column names
   required_colnames <- c('Ensembl', 'Symbol', 'GeneID', 'P.Value', 'adj.P.Val')
   sig_cols <- colnames(signature)
 
-  if(required_colnames %in% sig_cols){
+  if(all(required_colnames %in% sig_cols)){
     print("The signature contains all the required column names: Ensembl, Symbol, GeneID, P.Value, adj.P.Val")
-    return(signature)
+    processed_signature <- signature[!apply(is.na(signature), 1, all), ]
+    # filter out non-L1000 genes
+    if(L1000){
+      processed_signature = filterSig_withL1000(processed_signature, L1000_genes=getL1000())
+    }
+    return(processed_signature)
   }else{
     missing_colnames <- required_colnames[which(!required_colnames %in% sig_cols)]
     print(paste0("The signature is missing ", missing_colnames))
@@ -79,22 +99,13 @@ prepare_signature <- function(signature, L1000 = FALSE){
   signature <- signature[,c("Ensembl", "GeneID","Symbol","log2FoldChange", "P.Value", "adj.P.Val")]
   processed_signature <- signature %>% arrange(adj.P.Val)
 
+  # filter out non-L1000 genes
   if(L1000){
     processed_signature = filterSig_withL1000(processed_signature, L1000_genes=getL1000())
   }
 
+  # remove rows with all NAs
+  processed_signature <- processed_signature[!apply(is.na(processed_signature), 1, all), ]
+
   return(processed_signature)
-}
-
-filterSig_withL1000 <- function(signature, L1000_genes=getL1000()){
-  #' @description filters signature with L1000 genes
-  #' @param signature output from get_signature()
-  #' @param L1000_genes list of L1000 gene ids; default val set to the output from getL1000()
-  #' @returns L1000_filtered_sig signature with only L1000 genes
-  #' @author Kewalin Samart
-
-  # filter the signature dataframe with L1000 genes
-  L1000_filtered_sig <- signature[which(signature$GeneID %in% L1000_genes),]
-
-  return(L1000_filtered_sig)
 }

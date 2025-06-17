@@ -1,6 +1,8 @@
 # Clean up signatures for disease-drug comparison
-# Created date: 06/13/25
-# Author: Kewalin Samart
+
+### Last modified: 06/17/25
+
+### Author: Kewalin Samart
 
 ```{r sourcing functions}
 library(here)
@@ -13,9 +15,18 @@ head(L1000genes)
 ```
 
 ```{r reading in a signature and clean it up}
-GSE139871_GPL10558_signature = read_tsv(here("data/microarray_TBsignatures/up/GSE139871_GPL10558_MTB_control_up_landmark.tsv"), show_col_types = FALSE)
-prepare_signature(signature = GSE139871_GPL10558_signature,
+# read in an example signature (output of limma, DESeq2)
+GSE54992_GPL570_signature = read_tsv(here("data/microarray_TBsignatures/dn/GSE54992_GPL570_MTB_control_dn_none.tsv"), show_col_types = FALSE)
+
+# clean up the signature (all genes included)
+clean_signature = prepare_signature(signature = GSE54992_GPL570_signature,
                   L1000 = FALSE)
-prepare_signature(signature = GSE139871_GPL10558_signature,
+print(clean_signature)
+print(dim(clean_signature))
+
+# clean up the signature (L1000 genes only)
+clean_L1000signature = prepare_signature(signature = GSE54992_GPL570_signature,
                   L1000 = TRUE)
+print(clean_L1000signature)
+print(dim(clean_L1000signature))
 ```
