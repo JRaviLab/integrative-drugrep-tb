@@ -1,0 +1,96 @@
+# Compute disease-drug connectivity scores via signatureSearch
+
+#### Last modified: 06/17/25
+
+#### Author: Kewalin Samart
+
+```{r import functions/libraries}
+library(signatureSearch)
+library(here)
+library(readr)
+
+source(here("scripts/01_signature_landmark_prep_functions.R"))
+source(here("scripts/02_signatureSearch_connectivity_scores_functions.R"))
+```
+
+### Functions to retrieve drug database from signatureSearchData
+
+```{r set up CMap drug database}
+cmap_path = setup_cmap1db() # this can take a few minutes
+print(cmap_path)
+```
+
+```{r set up LINCS drug database}
+lincs_path = setup_lincsdb() # this can take a few minutes (much longer than CMap)
+print(lincs_path)
+```
+
+### Functions to obtain precomputed disease signatures
+
+#### up and down regulated gene sets for CMAP 1.0 and LINCS methods (enrichment-based methods)
+
+```{r obtain up/dn genes from up/dn signatures}
+# get upregulated gene list
+up_TB_signature_path = here("data/microarray_TBsignatures/up/E-MEXP-3521_NA_MTB4hD_control_up_landmark.tsv")
+up_genes = get_updn_signature(up_TB_signature_path, L1000 = TRUE)
+print("Example up genes:")
+print(head(up_genes))
+
+# get downregulated gene list
+dn_TB_signature_path = here("data/microarray_TBsignatures/dn/E-MEXP-3521_NA_MTB4hD_control_dn_landmark.tsv")
+dn_genes = get_updn_signature(dn_TB_signature_path, L1000 = TRUE)
+print("Example down genes:")
+print(head(dn_genes))
+```
+
+#### full signatures (up+dn) for XCor and XSpe (correlation-based methods)
+
+```{r combine up and dn signatures into a full signature}
+up_TB_signature = read_tsv(here("data/microarray_TBsignatures/up/E-MEXP-3521_NA_MTB4hD_control_up_landmark.tsv"))
+dn_TB_signature = read_tsv(here("data/microarray_TBsignatures/dn/E-MEXP-3521_NA_MTB4hD_control_dn_landmark.tsv"))
+full_signature = combine_signatures(up_signature = up_TB_signature, 
+                                    dn_signature = dn_TB_signature, 
+                                    L1000 = TRUE)
+head(full_signature)
+```
+
+```{r preping full signatures for correlation-based methods}
+full_TB_signature_path = here("data/microarray_TBsignatures/full/E-MEXP-3521_NA_MTB4hD_control_full_landmark.tsv")
+full_TB_signature = get_full_signature(full_sig_path = full_TB_signature_path,
+                    L1000 = TRUE)
+head(full_TB_signature)
+```
+### Functions to calculate disease-drug connectivity scores
+#### Enrichment-based methods: CMAP1.0 (CS), LINCS (WCS, NCS, Tau)
+```{r CMAP 1.0}
+cmap1.0_res = compute_CMap1_scores(up_genes = up_genes, 
+                                   dn_genes = dn_genes, 
+                                   db_path = lincs_path)
+head(cmap1.0_res)
+print(dim(cmap1.0_res))
+```
+```{r LINCS}
+lincs_res = compute_CMap2lincs_scores(up_genes = up_genes, 
+                                   dn_genes = dn_genes, 
+                                   db_path = lincs_path)
+head(lincs_res)
+print(dim(lincs_res))
+```
+
+#### Correlation-based methods: XCor (extreme Pearson), XSpe (extreme Spearman)
+```{r XCor}
+xcor_res = compute_Cor_based_scores(full_signature_matrix = full_TB_signature, 
+                                    score_method = 'Cor_pearson', 
+                                    db_path = lincs_path)
+head(xcor_res)
+print(dim(xcor_res))
+```
+
+```{r XSpe}
+xspe_res = compute_Cor_based_scores(full_signature_matrix = full_TB_signature, 
+                                    score_method = 'Cor_spearman', 
+                                    db_path = lincs_path)
+head(xspe_res)
+print(dim(xspe_res))
+```
+

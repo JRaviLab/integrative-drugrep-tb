@@ -1,6 +1,5 @@
 # functions for drug search by CMap1.0, CMap2.0, and Correlation-based connectvity scores
-# created date: 10/17/21
-# last modified: 01/17/24
+# last modified: 06/17/25
 # Kewalin Samart
 
 # loading the needed libraries
@@ -8,49 +7,52 @@ library(signatureSearch)
 library(rhdf5)
 library(ExperimentHub)
 library(tidyverse)
+library(here)
 
-combine_signatures <- function(up_signature, dn_signature){
+source(here("scripts/01_signature_landmark_prep_functions.R"))
+
+combine_signatures <- function(up_signature, dn_signature, L1000 = TRUE){
   #' @description This function combines up and dn input signatures into a full signature
   #' @param up_signature up signature dataframe containing genes and other statistics from DE analysis
   #' @param dn_signature dn signature dataframe containing genes and other statistics from DE analysis
+  #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @returns full_signature
   #' @author Kewalin Samart
-  full_signature <- rbind(up_signature, dn_signature)
-  full_signature <- full_signature %>% arrange(-full_signature$log2FoldChange)
+  full_signature_ <- rbind(up_signature, dn_signature)
+  clean_full_sig = prepare_signature(signature = full_signature_, L1000 = L1000)
+  full_signature <- clean_full_sig %>% arrange(-clean_full_sig$log2FoldChange)
 
   return(full_signature)
 }
 
-get_full_signature <- function(full_sig_path){
+get_full_signature <- function(full_sig_path, L1000 = TRUE){
   #' @description This function reads in a full signature + convert it to a matrix with row names: GeneID (Entrezid) and a column of log2FoldChange
   #' @param full_sig_path path to a full signature (up+dn genes)
   #' @returns full_signature input for gess_cor methods; signature in the format with row names: GeneID (Entrezid) and a column of log2FoldChange
+  #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @author Kewalin Samart
   input_full_sig <- read.delim(full_sig_path, sep="\t")
-  input_full_sig <- na.omit(input_full_sig)
+  clean_full_sig = prepare_signature(signature = input_full_sig, L1000 = L1000)
   full_signature <- input_full_sig[,c("GeneID","log2FoldChange")]
   row.names(full_signature) <- as.character(full_signature$GeneID)
   full_signature$GeneID <- NULL
+  full_signature <- na.omit(full_signature) # remove gene(s) with NA log2FoldChange
   full_signature_matrix <- as.matrix(full_signature)
 
   return(full_signature_matrix)
 }
 
-get_updn_signature <- function(updn_sig_path){
+get_updn_signature <- function(updn_sig_path, L1000 = TRUE){
   #' @description This function gets up/dn gene lists from either up or down input signatures
   #' @param sig_path path to either up/dn signatures to get genes from
+  #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @returns updn_genes
   #' @author Kewalin Samart
   input_updn_sig <- read.delim(updn_sig_path, sep='\t')
-  updn_genes <- as.character(input_updn_sig$GeneID)
+  clean_input_updn_sig = prepare_signature(signature = input_updn_sig, L1000 = L1000)
+  updn_genes <- as.character(clean_input_updn_sig$GeneID)
 
   return(updn_genes)
-}
-
-get_custom_db <- function(path_to_data_matrix){
-  # figure out this function
-  # construct h5 file of a custom data matrix
-
 }
 
 setup_cmap1db <- function(){
@@ -104,7 +106,7 @@ compute_CMap1_scores <- function(up_genes, dn_genes, db_path){
                gess_method = "CMAP",  # gess_method: one of 'CMAP', 'LINCS', 'gCMAP', 'Fisher' or 'Cor'
                refdb = db_path)
   # obtain query results
-  res <- gess_cmap(qsig, GeneType = "landmark")
+  res <- gess_cmap(qsig)
   final_res <- finalize_result(result(res))
 
   return(final_res)
@@ -125,7 +127,7 @@ compute_CMap2lincs_scores <- function(up_genes, dn_genes, db_path){
                gess_method = "LINCS",
                refdb = db_path)
   # obtain query results
-  res <- gess_lincs(qsig, sortby = "Tau", tau = TRUE, GeneType = "landmark")
+  res <- gess_lincs(qsig, sortby = "Tau", tau = TRUE)
 
   final_res <- finalize_result(result(res))
 
@@ -164,7 +166,7 @@ combine_res_meta <- function(final_res){
   #' @author Kewalin Samart
 
   # get perturbation metdata
-  pert_meta <- read.csv(file="./data/metadata/repurposing_drugs_20200324.csv",skip=9)
+  pert_meta <- read.csv(file=here("data/metadata/repurposing_drugs_20200324.csv"),skip=9)
   pert_meta <- pert_meta[c("pert_iname","clinical_phase")]
   # merge metadata with the final result
   final_res <- merge(final_res, pert_meta, by.x = "pert", by.y = "pert_iname", all.y = FALSE)
