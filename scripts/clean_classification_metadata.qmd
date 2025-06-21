@@ -1,0 +1,15 @@
+```{r}
+# Load the data
+df <- read.delim("../data/RNAseq_data_forDE/TB_sample_metadata_classification.tsv", sep = "\t", header = TRUE)
+
+# Create SAMPLE_CONDITION from non-NA TISSUE, CELL, TIME_POINT
+df$SAMPLE_CONDITION <- apply(df[, c("TISSUE", "CELL", "TIME_POINT")], 1, function(x) {
+  parts <- x[!is.na(x) & x != ""]  # exclude NA and empty strings
+  if (length(parts) > 0) paste(parts, collapse = "_") else NA
+})
+
+# View result
+head(df$SAMPLE_CONDITION)
+
+write_tsv(df, file="~/Documents/GitHub/integrative-drugrep-tb/data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv")
+```
