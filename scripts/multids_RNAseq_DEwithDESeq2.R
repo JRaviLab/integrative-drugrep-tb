@@ -4,14 +4,13 @@
 # datasets using DESeq2.
 #
 # The per‑dataset *metadata* already contains a cleaned
-# classification column with exactly four possible values:
+# classification column with exactly two possible values:
 #   1) healthy control without treatment
-#   2) healthy control with treatment
-#   3) disease without treatment
-#   4) disease with treatment
+#   2) disease without treatment
 #
-# Only rows 1 and 3 participate in the contrast:
+# The contrast within a study:
 #     disease_without_treatment  vs  healthy_control_without_treatment
+# with unique sample conditions
 #
 # Required R packages: DESeq2, readr, dplyr, AnnotationDbi, org.Hs.eg.db
 #
@@ -19,14 +18,13 @@
 # Usage:
 #   Rscript multids_RNAseq_DEwithDESeq2.R <args_file.tsv> [padj_cutoff]
 #
-#   args_file.tsv  : Tab‑separated file listing all datasets.
+#   meta_class_file.tsv  : Tab‑separated file listing all datasets.
 #                    Mandatory columns:
-#                       meta_path               (path to sample metadata TSV)
-#                       exprmat_path            (path to raw‑count matrix TSV)
-#                       classification_colname  (column in meta_path that
-#                                                holds the 4‑level class above)
-#                       gse_id                   (short tag for naming outputs)
-#
+#                       series_id       (GEO study identifier)
+#                       geo_accession   (GEO sample identifier )
+#                       SIGNATURE_NAME  (name of signature containing unique sample conditions)
+#                       EXPRMAT_PATH    (path to raw‑count matrix TSV)
+#                       CLASSIFICATION  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
 #   padj_cutoff    : Adjusted‑p significance threshold (default 0.05)
 # --------------------------------------------------------------------
 
@@ -36,6 +34,7 @@ suppressPackageStartupMessages({
   library(dplyr)
   library(AnnotationDbi)
   library(org.Hs.eg.db)
+  library(here)
 })
 
 # --------------------------------------------------------------------
@@ -46,16 +45,18 @@ argv <- commandArgs(trailingOnly = TRUE)
 if (length(argv) < 1) {
   stop("
   Usage:
-    Rscript multids_RNAseq_DEwithDESeq2.R <args_file.tsv> [padj_cutoff]
+    Rscript multids_RNAseq_DEwithDESeq2.R <meta_class_file.tsv> [padj_cutoff]
 
-  See header comments for required columns in args_file.tsv.
+  See header comments for required columns in meta_class_file.tsv.
   ")
 }
 
-meta_class_file_path <- "~/Documents/GitHub/integrative-drugrep-tb/data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv" #argv[1]
-padj_cutoff <- 0.05 #ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
-message("Using padj_cutoff = ", padj_cutoff)
+meta_class_file_path <- argv[1]
+padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
+#########------------ Example arguments ------------#########
+# meta_class_file_path <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
+# padj_cutoff <- 0.05
 # --------------------------------------------------------------------
 # 1.  Read the batch table
 # --------------------------------------------------------------------
@@ -83,7 +84,6 @@ for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
 
   tag <- study_df$series_id[i]
-  #meta_path <- study_df$meta_path[i]
   expr_path <- study_df$EXPRMAT_PATH[i]
 
   # ---- 3.1  Load inputs ----
@@ -173,13 +173,15 @@ for (i in seq_len(nrow(study_df))) {
       )
     )
 
-  # renme symbol column
+  # rename symbol column
   res_df <- res_df %>%
     dplyr::rename(Symbol = EnsemblID) %>%
     dplyr::filter(!is.na(EntrezID))
+  # rename to uniform column names
+  colnames(res_df) <- c("Ensembl", "baseMean", "log2FoldChange",	"lfcSE", "stat", "P.Value",	"adj.P.Val",	"GeneID",	"Symbol")
 
   # ---- 3.6  Significance filter ----
-  sig_df <- dplyr::filter(res_df, !is.na(padj) & padj < padj_cutoff)
+  sig_df <- dplyr::filter(res_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
 
   if (nrow(sig_df) == 0) {
     message("  No significant genes (padj < ", padj_cutoff, ")")
