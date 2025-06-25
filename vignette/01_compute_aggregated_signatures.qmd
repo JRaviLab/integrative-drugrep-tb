@@ -13,7 +13,7 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 # example argument
 metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
 data_path = here("data/v2/signatures/RNAseq")
-direction = "up"
+direction = "dn"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "landmark"
 output_dir = here("data/v2/signatures/RNAseq/aggregated_signatures")
@@ -36,7 +36,7 @@ jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path
 ```
 
 ```{r compute aggregated signature}
-aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold=0.4, save_result=TRUE)
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct=0.90, save_result=TRUE)
 ```
 
 

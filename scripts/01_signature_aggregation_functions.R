@@ -190,50 +190,53 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
   return(mat)
 }
 
-aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold=0.4, save_result=TRUE){
-    #' @description Given a gene membership and a jaccard similarity matrix computed from a set of signatures, this function compute an aggregated signature.
-    #' @param gene_membership_matrix gene membership matrix returned by compute_membership_matrix(...)
-    #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
-    #' @param output_dir path to the output directory
-    #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
-    #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
-    #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
-    #' @author Kewalin Samart
+aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct=0.4, save_result=TRUE){
+  #' @description Given a gene membership and a jaccard similarity matrix computed from a set of signatures, this function compute an aggregated signature.
+  #' @param gene_membership_matrix gene membership matrix returned by compute_membership_matrix(...)
+  #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
+  #' @param output_dir path to the output directory
+  #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
+  #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
+  #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
+  #' @author Kewalin Samart
 
-    # read in gene membership matrix
-    gene_membership_df <- gene_membership_matrix
-    # set row names to GeneID
-    row.names(gene_membership_df) <- gene_membership_df$GeneID
-    gene_membership_df$GeneID <- NULL
-    # reorder columns
-    gene_membership_df <- gene_membership_df[,order(colnames(gene_membership_df))]
-    gene_membership_mat <- as.matrix(gene_membership_df)
+  # read in gene membership matrix
+  gene_membership_df <- gene_membership_matrix
+  # set row names to GeneID
+  row.names(gene_membership_df) <- gene_membership_df$GeneID
+  gene_membership_df$GeneID <- NULL
+  # reorder columns
+  gene_membership_df <- gene_membership_df[,order(colnames(gene_membership_df))]
+  gene_membership_mat <- as.matrix(gene_membership_df)
 
-    # read in jaccard matrices
-    jaccard_df <- jaccard_matrix
-    # set row names to GeneID
-    row.names(jaccard_df) <- jaccard_df$names
-    jaccard_df$names <- NULL
-    # reorder columns
-    jaccard_df <- jaccard_df[,order(colnames(jaccard_df))]
-    jaccard_mat <- as.matrix(jaccard_df)
+  # read in jaccard matrices
+  jaccard_df <- jaccard_matrix
+  # set row names to GeneID
+  row.names(jaccard_df) <- jaccard_df$names
+  jaccard_df$names <- NULL
+  # reorder columns
+  jaccard_df <- jaccard_df[,order(colnames(jaccard_df))]
+  jaccard_mat <- as.matrix(jaccard_df)
 
-    # compute average jaccard scores across signatures
-    ## specified disease
-    jaccard_mean_vec <- rowMeans(jaccard_mat)
+  # compute average jaccard scores across signatures
+  ## specified disease
+  jaccard_mean_vec <- rowMeans(jaccard_mat)
 
-    ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
-    aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec/sum(jaccard_mean_vec)))
-    colnames(aggregated_gene_sig)[1] <- "aggregated_GeneScores"
-    aggregated_gene_sig$GeneID <- row.names(gene_membership_df)
+  ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
+  aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec/sum(jaccard_mean_vec)))
+  colnames(aggregated_gene_sig)[1] <- "aggregated_GeneScores"
+  aggregated_gene_sig$GeneID <- row.names(gene_membership_df)
 
-    selected_genes_df <- aggregated_gene_sig[abs(aggregated_gene_sig$aggregated_GeneScores) > threshold,]
+  # calculate threshold from the threshold_pct
+  threshold <- quantile(abs(aggregated_gene_sig$aggregated_GeneScores), probs = threshold_pct)
+  # select genes with logFC > threshold
+  selected_genes_df <- aggregated_gene_sig[abs(aggregated_gene_sig$aggregated_GeneScores) > threshold,]
 
-    if(save_result){
-      saveRDS(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.rds"))
-      write_tsv(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.tsv"))
-      print(paste0("The final aggregated signature was saved at ", output_dir))
-    }
+  if(save_result){
+    saveRDS(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.rds"))
+    write_tsv(selected_genes_df, file = paste0(output_dir,"/",direction,"_aggregated_signature.tsv"))
+    print(paste0("The final aggregated signature was saved at ", output_dir))
+  }
 
-    return(selected_genes_df)
+  return(selected_genes_df)
 }
