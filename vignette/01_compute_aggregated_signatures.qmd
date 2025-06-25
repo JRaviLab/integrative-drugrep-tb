@@ -1,5 +1,5 @@
 # Compute aggregated signatures
-# Last modified: 06/13/25
+# Last modified: 06/25/25
 # Author: Kewalin Samart
 
 ```{r load libraries and sort scripts}
@@ -11,12 +11,12 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 
 ```{r initialize arguments}
 # example argument
-metadata_path = here("data/TB_microarray_args.tsv")
-data_path = here("data/microarray_TBsignatures")
+metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path = here("data/v2/signatures/RNAseq")
 direction = "up"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "landmark"
-output_dir = here("data/aggregated_signatures")
+output_dir = here("data/v2/signatures/RNAseq/aggregated_signatures")
 threshold <- NULL # aggregated gene score cutoff; 0.4 by default
 if(is.null(threshold)){
     threshold <- 0.4

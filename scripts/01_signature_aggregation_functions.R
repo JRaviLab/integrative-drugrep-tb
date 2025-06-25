@@ -49,29 +49,14 @@ compute_membership_matrix <- function(metadata_path, data_path, direction, bg_so
     data_to_run <- read_tsv(metadata_path)
 
     for(i in 1:nrow(data_to_run)){
-      # set full variables
-      accession_no <- data_to_run$accession_no[i]
-      file_name <- data_to_run$file_name[i]
 
       print(paste0("iteration ",i))
-      print(paste0("reading in up and dn genes: ",accession_no, " ",file_name))
 
-      if("platform" %in% colnames(data_to_run)){
-        platform <- data_to_run$platform[i]
-        if(!is.null(extra_arg)){
-          signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",direction,"_",extra_arg,".tsv")
-        }else{
-          signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
-        }
+      # set full variables
+      signature_name <- data_to_run$SIGNATURE_NAME[i]
+      signature_filename = paste0(signature_name,"_",direction,".tsv")
 
-      }else{
-        if(!is.null(extra_arg)){
-          signature_filename <- paste0(accession_no, "_",file_name,"_",direction,"_",extra_arg,".tsv")
-        }else{
-          signature_filename <- paste0(accession_no, "_",file_name,".tsv")
-        }
-      }
-
+      print(paste0("reading in up and dn genes: ", signature_filename))
       # ----------------------------------------------------------------------------------
       signature_path <- paste0(data_path,"/",direction,"/",signature_filename)
 
@@ -90,7 +75,7 @@ compute_membership_matrix <- function(metadata_path, data_path, direction, bg_so
 
       sigval_replaced <- merge(bg_genes_df,to_merge_logFC,by = "GeneID",all.x = TRUE)
       sigval_replaced[is.na(sigval_replaced)] <- 0
-      colnames(sigval_replaced)[2] <- paste0(accession_no,"_",file_name)
+      colnames(sigval_replaced)[2] <- signature_filename
 
       if(i == 1){
         old_sigval <- sigval_replaced
@@ -144,24 +129,9 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
   for(i in 1:(nrow(data_to_run))){
 
     # get accession no. and file name for reading in gene signatures
-    accession_no <- data_to_run$accession_no[i]
-    file_name <- data_to_run$file_name[i]
+    signature_name <- data_to_run$SIGNATURE_NAME[i]
 
-    # read in gene signature and get list of GeneIDs
-    if("platform" %in% colnames(data_to_run)){
-      platform <- data_to_run$platform[i]
-      if(!is.null(extra_arg)){
-        signature_filename = paste0(accession_no,"_",platform,"_",file_name,"_",direction,"_",extra_arg,".tsv")
-      }else{
-        signature_filename = paste0(accession_no,"_",platform,"_",file_name,".tsv")
-      }
-    }else{
-      if(!is.null(extra_arg)){
-        signature_filename <- paste0(accession_no, "_",file_name,"_", direction, "_", extra_arg,".tsv")
-      }else{
-        signature_filename <- paste0(accession_no, "_",file_name,".tsv")
-      }
-    }
+    signature_filename = paste0(signature_name,"_",direction,".tsv")
 
     signature_path <- paste0(data_path,"/",direction,"/",signature_filename)
 
@@ -174,7 +144,7 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
       # append vector of genes to the big vector
       vec[[n]] <- GeneIDs
       # create proper name for each gene list
-      name = paste0(accession_no,"_",file_name)
+      name = signature_filename
       # append names to the vectors of names
       name_vec[[n]] <- name
     }else{
