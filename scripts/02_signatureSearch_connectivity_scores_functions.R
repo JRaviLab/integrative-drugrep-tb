@@ -31,13 +31,21 @@ get_full_signature <- function(full_sig_path, L1000 = TRUE){
   #' @returns full_signature input for gess_cor methods; signature in the format with row names: GeneID (Entrezid) and a column of log2FoldChange
   #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @author Kewalin Samart
-  input_full_sig <- read.delim(full_sig_path, sep="\t")
-  clean_full_sig = prepare_signature(signature = input_full_sig, L1000 = L1000)
-  full_signature <- input_full_sig[,c("GeneID","log2FoldChange")]
-  row.names(full_signature) <- as.character(full_signature$GeneID)
-  full_signature$GeneID <- NULL
-  full_signature <- na.omit(full_signature) # remove gene(s) with NA log2FoldChange
-  full_signature_matrix <- as.matrix(full_signature)
+
+  # read the full signature
+  input_full_sig <- read.delim(full_sig_path, sep = "\t")
+
+  # collapse duplicated GeneIDs by median log2FC
+  collapsed_sig <- input_full_sig %>%
+    dplyr::select(GeneID, log2FoldChange) %>%
+    dplyr::group_by(GeneID) %>%
+    dplyr::summarise(log2FoldChange = median(log2FoldChange, na.rm = TRUE), .groups = "drop") %>%
+    dplyr::filter(!is.na(log2FoldChange))  # Remove any remaining NA values
+
+  # convert to matrix
+  full_signature_matrix <- collapsed_sig %>%
+    tibble::column_to_rownames("GeneID") %>%
+    as.matrix()
 
   return(full_signature_matrix)
 }
