@@ -180,8 +180,11 @@ for (i in seq_len(nrow(study_df))) {
   # rename to uniform column names
   colnames(res_df) <- c("Ensembl", "baseMean", "log2FoldChange",	"lfcSE", "stat", "P.Value",	"adj.P.Val",	"GeneID",	"Symbol")
 
-  # ---- 3.6  Significance filter ----
-  sig_df <- dplyr::filter(res_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
+  # ---- 3.6  Landmark genes filter ----
+  sig_df <- dplyr::filter(res_df, GeneID %in% landmark_genes)
+
+  # ---- 3.7  Significance filter ----
+  sig_df <- dplyr::filter(sig_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
 
   if (nrow(sig_df) == 0) {
     message("  No significant genes (padj < ", padj_cutoff, ")")
@@ -189,7 +192,7 @@ for (i in seq_len(nrow(study_df))) {
     next
   }
 
-  # ---- 3.7  Split Up / Down ----
+  # ---- 3.8  Split Up / Down ----
   up_df <- dplyr::filter(sig_df, log2FoldChange > 0)
   dn_df <- dplyr::filter(sig_df, log2FoldChange < 0)
 
@@ -201,19 +204,23 @@ for (i in seq_len(nrow(study_df))) {
     dn_genes_num[i] <- nrow(dn_df)
   }
 
-  # ---- 3.8  Write outputs ----
+  # ---- 3.9  Write outputs ----
   dir.create(here("data/DE_results/RNAseq"), showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
 
+  landmark_genes_df <- read_tsv(here("data/LINCSGeneSpaceSub.txt"))
+  landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == 'landmark',]$`Entrez ID`)
+
   today <- format(Sys.Date(), "%Y%m%d")
   base_fname <- study_df$SIGNATURE_NAME[i]
-  if (nrow(res_df) > 0){
-  readr::write_tsv(
-    res_df %>% arrange(desc(log2FoldChange)),
-    file.path(here("data/DE_results/RNAseq"), paste0(base_fname, "_DESeq2.tsv"))
-  )
+  if (nrow(res_df) > 0) {
+    readr::write_tsv(
+      res_df %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/RNAseq"), paste0(base_fname, "_DESeq2.tsv"))
+    )
   }
   if (nrow(sig_df) > 0){
   readr::write_tsv(
