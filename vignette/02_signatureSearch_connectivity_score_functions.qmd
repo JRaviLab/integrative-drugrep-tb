@@ -31,13 +31,13 @@ print(lincs_path)
 
 ```{r obtain up/dn genes from up/dn signatures}
 # get upregulated gene list
-up_TB_signature_path = here("data/microarray_TBsignatures/up/E-MEXP-3521_NA_MTB4hD_control_up_landmark.tsv")
+up_TB_signature_path = here("data/v2/signatures/RNAseq/up/GSE64179_MTB_control_blood_dendritic_cells_up.tsv")
 up_genes = get_updn_signature(up_TB_signature_path, L1000 = TRUE)
 print("Example up genes:")
 print(head(up_genes))
 
 # get downregulated gene list
-dn_TB_signature_path = here("data/microarray_TBsignatures/dn/E-MEXP-3521_NA_MTB4hD_control_dn_landmark.tsv")
+dn_TB_signature_path = here("data/v2/signatures/RNAseq/dn/GSE64179_MTB_control_blood_dendritic_cells_dn.tsv")
 dn_genes = get_updn_signature(dn_TB_signature_path, L1000 = TRUE)
 print("Example down genes:")
 print(head(dn_genes))
@@ -46,8 +46,8 @@ print(head(dn_genes))
 #### full signatures (up+dn) for XCor and XSpe (correlation-based methods)
 
 ```{r combine up and dn signatures into a full signature}
-up_TB_signature = read_tsv(here("data/microarray_TBsignatures/up/E-MEXP-3521_NA_MTB4hD_control_up_landmark.tsv"))
-dn_TB_signature = read_tsv(here("data/microarray_TBsignatures/dn/E-MEXP-3521_NA_MTB4hD_control_dn_landmark.tsv"))
+up_TB_signature = read_tsv(here("data/v2/signatures/RNAseq/up/GSE64179_MTB_control_blood_dendritic_cells_up.tsv"))
+dn_TB_signature = read_tsv(here("data/v2/signatures/RNAseq/dn/GSE64179_MTB_control_blood_dendritic_cells_dn.tsv"))
 full_signature = combine_signatures(up_signature = up_TB_signature, 
                                     dn_signature = dn_TB_signature, 
                                     L1000 = TRUE)
@@ -55,7 +55,7 @@ head(full_signature)
 ```
 
 ```{r preping full signatures for correlation-based methods}
-full_TB_signature_path = here("data/microarray_TBsignatures/full/E-MEXP-3521_NA_MTB4hD_control_full_landmark.tsv")
+full_TB_signature_path = here("data/v2/signatures/RNAseq/full/GSE64179_MTB_control_blood_dendritic_cells_full.tsv")
 full_TB_signature = get_full_signature(full_sig_path = full_TB_signature_path,
                     L1000 = TRUE)
 head(full_TB_signature)
