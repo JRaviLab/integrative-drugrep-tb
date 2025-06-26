@@ -190,7 +190,7 @@ compute_jaccard_matrix <- function(metadata_path, data_path, direction, output_d
   return(mat)
 }
 
-aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct=0.4, save_result=TRUE){
+aggregate_signatures <- function(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct=0.90, save_result=TRUE){
   #' @description Given a gene membership and a jaccard similarity matrix computed from a set of signatures, this function compute an aggregated signature.
   #' @param gene_membership_matrix gene membership matrix returned by compute_membership_matrix(...)
   #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
