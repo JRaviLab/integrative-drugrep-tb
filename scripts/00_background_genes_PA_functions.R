@@ -34,8 +34,8 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   #' @param GeneType a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
   #' @returns bg_lincs_genes a character vector of the selected LINCS GeneID
   #' @author Kewalin Samart
-
-  lincs_genes <- read.delim("../data/metadata/LINCSGeneSpaceSub.txt", sep="\t")
+  require(here)
+  lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep="\t")
 
   if(GeneType=="reference"){ # all genes in LINCS
     selected_lincs_genes <- lincs_genes$`Entrez.ID`
@@ -47,37 +47,25 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   return(bg_lincs_genes)
 }
 
-bg_from_data <- function(metadata_path, data_path, extension=""){
+bg_from_data <- function(metadata_path, extension=""){
   #' @description background genes across datasets
-  #' @param metadata_path path to metadata file describing DE results/signatures details
-  #' @example "./data/metadata/"
+  #' @param metadata_path path to metadata file describing dataset details including SIGNATURE_NAME column
+  #' with paths to signatures for background genes e.g., "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
   #' @param data_path path to DE data table/ signatures
-  #' @example "./data/uniformly_processed/microarray/DEresults/", "./data/uniformly_processed/microarray/signatures/dn/"
-  #' @param extension a string describing the signature direction and GeneType e.g., "up_none", "dn_landmark", "full_none", "" (by default)
-  #' @returns genes all genes present across every input datasets
+  #' @example "data/v2/signatures/RNAseq/up",
+  #' @param extension a string indicating a suffix of file names to get background genes from; "" by default; e.g., "up", "dn", "full"
+  #' @returns genes all genes present across all input datasets
   #' @author Kewalin Samart
 
   union_bg_data_genes <- c()
   if(extension != ""){
     extension <- paste0("_",extension)
   }
-  data_to_run <- read_tsv(metadata_path)
+  data_to_run <- read_tsv(here(metadata_path))
   for(i in 1:nrow(data_to_run)){
     # read in variables
-    accession_no <- data_to_run$accession_no[i]
-    file_name <- data_to_run$file_name[i]
-    if("platform" %in% colnames(data_to_run)){
-      platform <- data_to_run$platform[i]
-      file_path = paste0(data_path,"/",accession_no,"_",platform,"_",file_name,extension,".tsv")
-      # check if file exists, if not then skip
-      if(file.exists(file_path)){
-        dataset <- read.delim(file_path, sep="\t")
-      }else{
-        next
-      }
-
-    }else{
-      file_path = paste0(data_path,"/",accession_no,"_",file_name,extension,".tsv")
+    signature_name <- data_to_run$SIGNATURE_NAME[i]
+    file_path <- here::here(data_path, paste0(signature_name, extension, ".tsv"))
       # check if file exists, if not then skip
       if(file.exists(file_path)){
         dataset <- read.delim(file_path, sep="\t")
@@ -94,7 +82,6 @@ bg_from_data <- function(metadata_path, data_path, extension=""){
     }else{
       union_bg_data_genes <- c(union_bg_data_genes,as.character(dataset$GeneID)) # get all the genes present across every input datasets
     }
-  }
 
   return(unique(union_bg_data_genes)) # return only unique genes
 }

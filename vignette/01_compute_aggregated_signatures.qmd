@@ -1,5 +1,5 @@
 # Compute aggregated signatures
-# Last modified: 06/25/25
+# Last modified: 06/26/25
 # Author: Kewalin Samart
 
 ```{r load libraries and sort scripts}
@@ -17,10 +17,7 @@ direction = "dn"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "landmark"
 output_dir = here("data/v2/signatures/RNAseq/aggregated_signatures")
-threshold <- NULL # aggregated gene score cutoff; 0.4 by default
-if(is.null(threshold)){
-    threshold <- 0.4
-}
+threshold_pct <- 0.90
 ```
 
 ```{r compute membership matrix}
@@ -36,7 +33,5 @@ jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path
 ```
 
 ```{r compute aggregated signature}
-aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct=0.90, save_result=TRUE)
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct, save_result=TRUE)
 ```
-
-
