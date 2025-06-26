@@ -1,6 +1,5 @@
 # functions to obtain background genes for Pathway analyses and suchs -- Homo Sapiens
-# created date: 07/21/22
-# last modified: 04/11/23
+# last modified: 06/26/25
 # Kewalin Samart
 
 GO_genes <- function(){
@@ -24,7 +23,7 @@ KEGG_genes <- function(){
   #' @author Kewalin Samart
   require(org.Hs.eg.db)
   df = as.data.frame(org.Hs.egPATH)
-  kegg_genes = unique(sort(df$gene_id))
+  kegg_genes = as.character(unique(sort(df$gene_id)))
 
   return(kegg_genes)
 }
@@ -47,7 +46,7 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   return(bg_lincs_genes)
 }
 
-bg_from_data <- function(metadata_path, extension=""){
+bg_from_data <- function(metadata_path, data_path, extension=""){
   #' @description background genes across datasets
   #' @param metadata_path path to metadata file describing dataset details including SIGNATURE_NAME column
   #' with paths to signatures for background genes e.g., "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
@@ -108,20 +107,8 @@ get_bg_genes <- function(bg_source, metadata_path=NULL, data_path=NULL, extra_ar
   }else if(bg_source == "GO") {
     bg_genes <- GO_genes()
   }else if(bg_source == "input data") {
-    bg_genes <- bg_from_data(metadata_path,data_path,extension = extension)
+    bg_genes <- bg_from_data(metadata_path = metadata_path, data_path = data_path, extension = extension)
   }
+
   return(bg_genes)
-}
-
-final_bg_genes <- function(gene_set, bg_source, GeneType=NULL){
-   #' @description Given a gene set of interest (GeneID i.e., Entrezid) and name of database to perform analyses, this function gives back the intersecting genes as the final background genes.
-   #' @param gene_set a character vector of GeneIDs of interest
-   #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
-   #' @param GeneType (optional) a string indicating gene type(s) from the L1000 project: (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference"
-   #' @returns final_bg_genes a character vector containing the final backgroud genes
-   #' @author Kewalin Samart
-  bg_genes = get_bg_genes(bg_source, extra_arg=GeneType)
-  final_bg_genes = intersect(as.character(gene_set), bg_genes)
-
-  return(final_bg_genes)
 }

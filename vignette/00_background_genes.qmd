@@ -1,0 +1,40 @@
+# Get background genes
+# Last modified: 06/26/2025
+# Author: Kewalin Samart
+
+```{r load libraries and sort scripts}
+library(readr)
+library(here)
+source(here("scripts/00_background_genes_PA_functions.R"))
+```
+
+```{r getting background genes from human Gene Ontology database}
+GO_genes_bg <- GO_genes()
+head(GO_genes_bg)
+```
+
+```{r getting background genes from human KEGG pathway database}
+KEGG_genes_bg <- KEGG_genes()
+head(KEGG_genes_bg)
+```
+
+```{r getting background genes from LINCS}
+LINCS_genes_bg <- bg_LINCS_genes() 
+head(LINCS_genes_bg)
+```
+
+```{r getting background genes from data}
+metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
+data_path <- "data/v2/signatures/RNAseq/up"
+extension <- "up"
+data_genes_bg <- bg_from_data(metadata_path = metadata_path, data_path = data_path, extension = extension)
+head(data_genes_bg)
+```
+```{r getting background genes from any source above}
+tryCatch({
+get_bg_genes(bg_source = "GO")
+get_bg_genes(bg_source = "KEGG")
+get_bg_genes(bg_source = "LINCS")
+get_bg_genes(bg_source = "input data", metadata_path = metadata_path, data_path = data_path, extension = extension)
+})
+```

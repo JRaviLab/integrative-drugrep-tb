@@ -1,4 +1,4 @@
-# Compute aggregated signatures
+# Compute aggregated signatures from individual signatures
 # Last modified: 06/26/25
 # Author: Kewalin Samart
 
