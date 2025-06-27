@@ -15,117 +15,119 @@ library(here)
 ## set up arguments
 args <- commandArgs(TRUE)
 # args[1]: path to tsv file with datasets with arguments to perform DE analyses e.g., "./data/metadata/TB_microarray_args.tsv"
-# args[2]: whether or not to filter DE results by "landmark", "best inferred", "inferred", "reference" (all gene types combined) genes in LINCS database, or "none"
-# args[3]: adj.p val cutoff (0.05 by default)
+# args[2]: adj.p val cutoff (0.05 by default)
 args[1] <- "data/v2/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv"
-args[2] <- "landmark"
-args[3] <- 0.05
+args[2] <- 0.05
 
 # read in argument file
-args_file = read.delim(here(args[1]), sep='\t')
+meta_class_file_path = args[1]
+padj_cutoff = args[2]
 lincs_genes = read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep='\t')
-GeneType <- as.character(str_split(args[2],",")[[1]])
 
 signature_boolean <- list()
 platform_list <- list()
 
-### modified up to here*****
+# --------------------------------------------------------------------
+# 1.  Read the batch table
+# --------------------------------------------------------------------
+meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
+study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
+signature_boolean <- logical(nrow(study_df))
+up_genes_num <- integer(nrow(study_df))
+dn_genes_num <- integer(nrow(study_df))
 
-for(i in 1:nrow(args_file)){
-  meta_path = paste0(args_file$meta_path[i]) # e.g., "/data/metadata/metadata_GSE16250.tsv"
-  exprmat_path = paste0(args_file$exprmat_path[i]) # e.g., "/data/expression_matrices/GSE16250.tsv"
-
-  ## read in input files
-  # read in metadata
-  metadata <- read.delim(meta_path,sep = "\t")
+for(i in 1:nrow(study_df)){
+  # define tag i.e., study id
+  tag <- study_df$series_id[i]
   # read in expression matrix
-  expr_mat <- read.delim(exprmat_path,sep = "\t")
+  exprmat_path = paste0(study_df$EXPRMAT_PATH[i])
+  expr_mat <- read.delim(here(exprmat_path),sep = "\t")
 
-  # get common sample ids
-  common_sampleids = intersect(colnames(expr_mat),metadata$refinebio_accession_code)
-  expression_df <- expr_mat[,common_sampleids]
-  row.names(expression_df) <- expr_mat$Gene
-  metadata <- metadata %>%filter(metadata$refinebio_accession_code %in% common_sampleids)
+  # standardise GSM IDs: trim whitespace and set to upper‑case
+  colnames(expr_mat) <- trimws(toupper(colnames(expr_mat)))
+  meta_class_df$series_id <- trimws(toupper(meta_class_df$series_id))
 
-  ## pre-processing inputs
-  # set up conditions for comparison/contrast
-  condition_colname = args_file$condition_colname[i]
-  inf_keywords = args_file$inf_keywords[i]
-  control_keywords = args_file$control_keywords[i]
+  # ---- 3.1b  Pull in the classification column from args_df ----
+  class_df <- meta_class_df %>%
+    filter(series_id == tag) %>% # rows for this dataset
+    mutate(geo_accession = trimws(toupper(geo_accession))) # normalise case/space
+  # here we need a column for condition so that we can focus on case and control in the next step
+  class_df <- dplyr::select(class_df, geo_accession, platform_id, CLASSIFICATION) # using the classification column here
 
-  inf_indices = grep(inf_keywords, metadata[,c(condition_colname)])
-  inf_samples = metadata[c(inf_indices),]$refinebio_accession_code
+  # ---- 3.2  Attach classification and ensure matched GSMs ----
+  # Keep only GSMs present in *both* metadata and matrix
+  common_ids_infected <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment",]$geo_accession, colnames(expr_mat))
+  common_ids_control <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment",]$geo_accession, colnames(expr_mat))
 
-  control_indices = grep(control_keywords, metadata[,c(condition_colname)])
-  control_samples = metadata[c(control_indices),]$refinebio_accession_code
+  if ((length(common_ids_infected) < 3) | (length(common_ids_control) < 3)) {
+    warning("  skipped: either infected or control condition has < 3 classified samples present in the count matrix")
+    signature_boolean[i] <- FALSE
+    next
+  }
 
-  # Check if this is in the same order # this should be done before specifying conditions
-  expression_df = expression_df[metadata$refinebio_accession_code]
-  all.equal(colnames(expression_df), metadata$refinebio_accession_code)
+  # get all the common ids
+  common_ids = c(common_ids_infected, common_ids_control)
+  # Trim & reorder metadata and matrix to identical GSM sets
+  class_df <- metadata[match(common_ids, class_df$geo_accession), ]
+  expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
-  # subset metadata and expression matrix by samples: infected and control samples
-  selected_samples = c(inf_samples,control_samples)
-  metadata <- metadata %>%filter(metadata$refinebio_accession_code %in% selected_samples)
-  conditions = as.character(metadata[,c(condition_colname)]) # get condition names for DE comparison
-  platform_ids = unique(metadata$platform_id) # get platform id(s) associated with the selected samples
-  expression_df <-  expression_df[,selected_samples]
+  # ---- 3.3  Build the condition factor (now classification exists!) ----
+  # get infected/control sample indices
+  inf_indices = which(trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment")
+  control_indices = which(trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment")
 
-  # replace inf_indices with 'infected' and control_indices with 'control' # ** something is wrong here
-  # the indices don't match
-  # get new indices
-  inf_indices = grep(inf_keywords, conditions)
-  control_indices = grep(control_keywords, conditions)
+  # Create classification labels
+  conditions = c()
+  conditions[inf_indices] <- "infected"
+  conditions[control_indices] <- "control"
 
-  conditions[inf_indices ] <- "infected"
-  conditions[control_indices ] <- "control"
+  # Create a factor for group assignment
+  class_df$CLASSIFICATION <- factor(conditions, levels = c("infected", "control"))
 
-  # create a design matrix
-  groups <- factor(conditions, levels = c("infected","control"))
+  # Platform batch info
+  platform_ids = unique(class_df$platform_id)
 
-  if(length(platform_ids) > 1) {
+  if (length(platform_ids) > 1) {
     print("removing batch effect caused by platform")
-    design_mat = model.matrix(~0 + groups + platform_ids)
-    platform_ids <- cat(paste(platform_ids, collapse = "_"))
-  }else if(length(platform_ids) == 1){
-    design_mat = model.matrix(~0 + groups)
+    message("Platform IDs: ", paste(platform_ids, collapse = "_"))
+
+    # Ensure platform_id is a factor
+    class_df$platform_id <- factor(class_df$platform_id)
+
+    # Use CLASSIFICATION and platform_id to build design matrix
+    design_mat = model.matrix(~0 + CLASSIFICATION + platform_id, data = class_df)
+  } else {
+    design_mat = model.matrix(~0 + CLASSIFICATION, data = class_df)
     print("no batch effect caused by GSE or platform")
   }
 
-  # record platform ids
-  platform_list[[i]] <- platform_ids
-
-  colnames(design_mat) <- c("infected","control")
+  # Rename classification columns only
+  group_levels <- levels(class_df$CLASSIFICATION)
+  group_cols <- grep("^CLASSIFICATION", colnames(design_mat))
+  colnames(design_mat)[group_cols] <- tolower(group_levels)
 
   ## perform differential gene expression analysis
   # apply linear model to the expression matrix
-  fit <- lmFit(expression_df, design = design_mat)
+  fit <- lmFit(expr_mat, design = design_mat)
   # compute batch-corrected mean log expression
   mean_exp = as.data.frame(fit$coefficients)
-
-  # check and create mean_exp dirname
-  mean_exp_dirname <- paste0("./batch_corrected_mean_exp/")
-  if(!dir.exists(mean_exp_dirname)) {
-    dir.create(mean_exp_dirname)
-  }
-
-  write_tsv(mean_exp, file = paste0(mean_exp_dirname, args_file$refine.bio_accession[i],"_",platform_ids,"_",args_file$file_name[i],"_batch_corrected_mean_log_expression.tsv"))
 
   # apply empirical Bayes to smooth standard errors
   fit <- eBayes(fit)
 
   # correct biases by performing multiple testing, and obtain result table
-  stats_df <- topTable(fit, number = nrow(expression_df),) %>% tibble::rownames_to_column("Gene")
+  stats_df <- topTable(fit, number = nrow(expr_mat),) %>% tibble::rownames_to_column("Gene")
 
   ## add gene annotations
   # get gene annotation table
-  annot_path = paste0("./annotation/Homo_sapiens.gene_info.csv")
+  annot_path = paste0(here("data/metadata/Homo_sapiens.gene_info.csv"))
   annotdata <- read.delim(annot_path,sep = ",")  # GeneID, Symbol, Ensembl
-  ensembl <- stats_df$Gene
-  annotdata_subset <- annotdata %>%filter(annotdata$Ensembl %in% ensembl)
+  entrezids <- stats_df$Gene
+  annotdata_subset <- annotdata %>% filter(as.character(annotdata$GeneID) %in% entrezids)
   annotdata_subset = annotdata_subset[,c('GeneID','Symbol','Ensembl')]
-  res_df =  merge(stats_df, annotdata_subset,  by.x = 'Gene', by.y = 'Ensembl', all.x = TRUE, all.y = FALSE)
-  res_df = res_df[c("Gene", "GeneID","Symbol","infected","control","AveExpr","F","P.Value","adj.P.Val")]
-  colnames(res_df)[1] <- "Ensembl"
+  res_df =  merge(stats_df, annotdata_subset,  by.x = 'Gene', by.y = 'GeneID', all.x = TRUE, all.y = FALSE)
+  res_df = res_df[c("Gene","Symbol","infected","control","AveExpr","F","P.Value","adj.P.Val")]
+  colnames(res_df)[1] <- "GeneID"
   res_df$log2FoldChange = log2(res_df$infected) - log2(res_df$control)
 
   # identify duplicated genes (EntrezID)
@@ -145,85 +147,86 @@ for(i in 1:nrow(args_file)){
     }
   }
 
-  print(paste0("Saving DE results for Contrast: ",inf_keywords," vs ",control_keywords))
+  # remove NA logFC
+  res_df <- res_df[!is.na(res_df$log2FoldChange), ]
 
-  # check and create DE dirname
-  DE_dirname <- "./DE_results/"
-  if(!dir.exists(DE_dirname)) {
-    dir.create(DE_dirname)
+  # ---- 3.6  Landmark genes filter ----
+  landmark_genes = as.character(lincs_genes[lincs_genes$Type == "landmark",]$Entrez.ID)
+  sig_df <- dplyr::filter(res_df, GeneID %in% landmark_genes)
+
+  # ---- 3.7  Significance filter ----
+  sig_df <- dplyr::filter(sig_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
+
+  if (nrow(sig_df) == 0) {
+    message("  No significant genes (padj < ", padj_cutoff, ")")
+    signature_boolean[i] <- FALSE
+    next
   }
 
-  ## save DE stats table
-  write_tsv(res_df, file = paste0(DE_dirname,args_file$refine.bio_accession[i],"_",platform_ids,"_",args_file$file_name[i],"_",GeneType,".tsv"))
+  # ---- 3.8  Split Up / Down ----
+  up_df <- dplyr::filter(sig_df, log2FoldChange > 0)
+  dn_df <- dplyr::filter(sig_df, log2FoldChange < 0)
 
-  if(!is.null(args[2])){
-    if(args[2] == "none"){
-    }else if(args[2] == "reference"){
-      reference_genes <- as.character(lincs_genes$`Entrez.ID`)
-      res_df <- res_df[as.character(res_df$GeneID) %in% reference_genes,]
-    }else{
-      subset_genes <- as.character(lincs_genes[lincs_genes$Type %in% GeneType,]$`Entrez.ID`)
-      res_df <- res_df[as.character(res_df$GeneID) %in% subset_genes,]
-    }
-
-    # concatenate GeneType strings for file naming
-    if(length(GeneType) > 1){
-      GeneType <- paste(GeneType, collapse = "-")
-    }else{
-      GeneType <-toString(GeneType[1])
-    }
-
-    # filter out genes with adj.p val > 0.05 (not statistically significant)
-    if(!is.null(args[3])){
-      signi_cutoff <- as.numeric(args[3])
-      res_df <- res_df[res_df$adj.P.Val < signi_cutoff,]
-    }else{res_df <- res_df[res_df$adj.P.Val < 0.05,]}
-
-    # check dimension of the signature based on the specified significance-level cutoff
-    if(dim(res_df)[1] == 0){
-      print(paste0('There is no significantly expressed genes at the specified adjusted p-value of ', signi_cutoff))
-      print(paste(args_file$refine.bio_accession[i],"for",inf_keywords,"vs",control_keywords,sep=" "))
-      signature_boolean[[i]] <- 0
-      next
-    }else{
-      signature_boolean[[i]] <- 1
-    }
-
-    print(paste0("Saving signture for Contrast: ",inf_keywords," vs ",control_keywords))
-
-    # check and create signature dirnames for up, dn, and full signatures
-    sig_dirname <- "./signatures/"
-    if(!dir.exists(sig_dirname)) {
-      dir.create(sig_dirname)
-    }
-    sig_up_dirname <- "./signatures/up/"
-    if(!dir.exists(sig_up_dirname)) {
-      dir.create(sig_up_dirname)
-    }
-    sig_dn_dirname <- "./signatures/dn/"
-    if(!dir.exists(sig_dn_dirname)) {
-      dir.create(sig_dn_dirname)
-    }
-    sig_full_dirname <- "./signatures/full/"
-    if(!dir.exists(sig_full_dirname)) {
-      dir.create(sig_full_dirname)
-    }
-
-    ## save full signature
-    write_tsv(res_df, file = paste0(sig_full_dirname,args_file$refine.bio_accession[i],"_",platform_ids,"_",args_file$file_name[i],"_full","_",GeneType,".tsv"))
-
-    ## save up/dn signatures
-    res_df_up <- res_df[res_df$log2FoldChange > 0,]
-    res_df_dn <- res_df[res_df$log2FoldChange < 0,]
-
-    print(paste0("Saving up/dn signtures for Contrast: ",inf_keywords," vs ",control_keywords))
-    write_tsv(res_df_up, file = paste0(sig_up_dirname,args_file$refine.bio_accession[i],"_",platform_ids,"_",args_file$file_name[i],"_up","_",GeneType,".tsv"))
-    write_tsv(res_df_dn, file = paste0(sig_dn_dirname,args_file$refine.bio_accession[i],"_",platform_ids,"_",args_file$file_name[i],"_dn","_",GeneType,".tsv"))
+  if(nrow(up_df) > 0){
+    up_genes_num[i] <- nrow(up_df)
   }
+
+  if(nrow(dn_df) > 0){
+    dn_genes_num[i] <- nrow(dn_df)
+  }
+
+
+  # save the signatures
+  today <- format(Sys.Date(), "%Y%m%d")
+  base_fname <- study_df$SIGNATURE_NAME[i]
+  if (nrow(res_df) > 0) {
+    readr::write_tsv(
+      res_df %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/v2/DE_results/microarray"), paste0(base_fname, "_limma.tsv"))
+    )
+  }
+  if (nrow(sig_df) > 0){
+    readr::write_tsv(
+      sig_df %>% arrange(desc(log2FoldChange)),
+      file.path(here("data/v2/signatures/microarray/full"), paste0(base_fname, "_full.tsv"))
+    )
+  }
+  if (nrow(up_df) > 0) {
+    readr::write_tsv(
+      up_df %>% arrange(desc(log2FoldChange)),
+      file.path(here("data/v2/signatures/microarray/up"), paste0(base_fname, "_up.tsv"))
+    )
+  }
+  if (nrow(dn_df) > 0) {
+    readr::write_tsv(
+      dn_df %>% arrange(desc(log2FoldChange)),
+      file.path(here("data/v2/signatures/microarray/dn"), paste0(base_fname, "_dn.tsv"))
+    )
+  }
+
+  message(
+    "  ✔  Saved ", nrow(up_df), " up‑regulated and ",
+    nrow(dn_df), " down‑regulated genes"
+  )
+
+  signature_boolean[i] <- TRUE
 }
 
-# saving signature generation record
-args_file$platform <- as.character(unlist(platform_list))
-args_file$signature <- as.numeric(unlist(signature_boolean))
-date_time <- gsub(" ", "_",  Sys.time())
-write_tsv(args_file, file = paste0(sig_dirname,date_time,"_marray_signatures_info.tsv"))
+# --------------------------------------------------------------------
+# 4.  Run summary
+# --------------------------------------------------------------------
+study_df$signature <- as.integer(signature_boolean)
+study_df$up_genes_num <- as.integer(up_genes_num)
+study_df$dn_genes_num <- as.integer(dn_genes_num)
+
+run_info <- file.path(
+  here("data/v2/signatures"),
+  paste0("microarray_TB_signature_run_info.tsv")
+)
+readr::write_tsv(study_df, run_info)
+message("\nFinished.  Summary written to ", run_info)
+
+
+
+
