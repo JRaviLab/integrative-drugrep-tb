@@ -25,8 +25,8 @@ extra_arg <- args[9] # extra argument; optional if "LINCS" is specified for bg_s
 sig_metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
 sig_data_path <- "data/v2/signatures/RNAseq"
 drugdb_name <- "LINCS"
-output_dir <- "results/RNAseq/Cor_pearson"
-score_method <- "Cor_pearson"
+output_dir <- "results/RNAseq/LINCS"
+score_method <- "LINCS"
 
 
 # read in metadata file
@@ -42,11 +42,6 @@ if(drugdb_name == "CMAP"){
 }
 
 ## --------- aggregated signature ----------- ##
-# set threshold to 0.4 if not specified
-# if(is.null(threshold)){
-#     threshold <- 0.4
-# }
-#
 # # compute aggregate signatures for all the direction: "up", "dn", and
 # # concatenate into "full" aggregated signature
 # directions = c("up","dn")
@@ -67,54 +62,59 @@ if(drugdb_name == "CMAP"){
 # up_aggr_sig_df <- as.data.frame(aggr_sig_list[[1]])
 # dn_aggr_sig_df <- as.data.frame(aggr_sig_list[[2]])
 #
-# # sort genes by their aggregated gene scores
-# up_aggr_sig_df <- up_aggr_sig_df[order(up_aggr_sig_df$aggregated_GeneScores, decreasing = TRUE),]
-# dn_aggr_sig_df <- dn_aggr_sig_df[order(dn_aggr_sig_df$aggregated_GeneScores, decreasing = FALSE),]
-#
-# up_aggr_genes <- up_aggr_sig_df$GeneID
-# dn_aggr_genes <- dn_aggr_sig_df$GeneID
-#
-# # set up output directory
-# # make the directory to write the files to (needs to be high I/O capable)
-# if(!dir.exists(output_dir)){
-#   dir.create(output_dir)
-# }
-#
-# # quantify drug candidates for the aggregated signature
-# if(score_method == "CMAP"){
-#     final_aggr_res <- compute_CMap1_scores(up_aggr_genes, dn_aggr_genes, db_path)
-# }else if (score_method == "LINCS"){
-#     final_aggr_res <- compute_CMap2lincs_scores(up_aggr_genes, dn_aggr_genes, db_path)
-# }else if(score_method %in% c("Cor_spearman","Cor_pearson")){
-#     # concatenate up amd dn aggregated signatures into a full signature
-#     full_aggr_signature <- rbind(up_aggr_sig_df, dn_aggr_sig_df)
-#     # deal with duplicates
-#     dup_genes <- full_aggr_signature$GeneID[duplicated(full_aggr_signature$GeneID)]
-#     for(gene in dup_genes){
-#         aggr_gene_scores <- full_aggr_signature$aggregated_GeneScores[full_aggr_signature$GeneID == gene]
-#         new_aggr_gene_score <- mean(aggr_gene_scores)
-#         full_aggr_signature <- full_aggr_signature[!(full_aggr_signature$GeneID == gene),]
-#         new_val_df = data.frame(aggregated_GeneScores = new_aggr_gene_score, GeneID=gene)
-#         row.names(new_val_df) <- gene
-#        full_aggr_signature = rbind(full_aggr_signature,new_val_df)
-#     }
-#     # sort genes in descending order by the aggregated_GeneScores
-#     full_aggr_signature <- full_aggr_signature[order(full_aggr_signature$aggregated_GeneScores, decreasing = TRUE), ]
-#     # save the computed aggregated full signature
-#     saveRDS(full_aggr_signature, file = paste0(sig_data_path,"full/","full_aggregated_signature.rds"))
-#     write_tsv(full_aggr_signature, file = paste0(sig_data_path,"full/","full_aggregated_signature.tsv"))
-#     print(paste0("The full aggregated signature was saved at ",output_dir))
-#
-#     # convert the full aggregated signature to matrix with row names: GeneID and col: aggregated_GeneScores for connectivity metric calculation
-#     row.names(full_aggr_signature) <- full_aggr_signature$GeneID
-#     full_aggr_signature$GeneID <- NULL
-#     full_aggr_sig_matrix <- as.matrix(full_aggr_signature)
-#     # get drug candidates using the specified Correlation-based method
-#     final_aggr_res <- compute_Cor_based_scores(full_aggr_sig_matrix, score_method, db_path)
-# }
-# write_tsv(final_aggr_res, file=paste0(output_dir,"/",score_method,"_",platform,"_aggregated_signature.tsv"))
-# print(paste0("Aggregated-signature drug results saved for ",sig_metadata_path," at ",output_dir,"/",score_method,"_",platform,"_aggregated_signature.tsv"))
-#
+# read in up- and down- aggregated signatures
+up_aggr_sig_df <- read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"))
+dn_aggr_sig_df <- read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"))
+
+# sort genes by their aggregated gene scores
+up_aggr_sig_df <- up_aggr_sig_df[order(up_aggr_sig_df$aggregated_GeneScores, decreasing = TRUE),]
+dn_aggr_sig_df <- dn_aggr_sig_df[order(dn_aggr_sig_df$aggregated_GeneScores, decreasing = FALSE),]
+
+up_aggr_genes <- as.character(up_aggr_sig_df$GeneID)
+dn_aggr_genes <- as.character(dn_aggr_sig_df$GeneID)
+
+# set up output directory
+# make the directory to write the files to (needs to be high I/O capable)
+if(!dir.exists(output_dir)){
+  dir.create(output_dir)
+}
+
+# quantify drug candidates for the aggregated signature
+if(score_method == "CMAP"){
+    final_aggr_res <- compute_CMap1_scores(up_aggr_genes, dn_aggr_genes, db_path)
+}else if (score_method == "LINCS"){
+    final_aggr_res <- compute_CMap2lincs_scores(up_aggr_genes, dn_aggr_genes, db_path)
+}else if(score_method %in% c("Cor_spearman","Cor_pearson")){
+    # concatenate up amd dn aggregated signatures into a full signature
+    full_aggr_signature <- rbind(up_aggr_sig_df, dn_aggr_sig_df)
+    # deal with duplicates
+    dup_genes <- full_aggr_signature$GeneID[duplicated(full_aggr_signature$GeneID)]
+    for(gene in dup_genes){
+        aggr_gene_scores <- full_aggr_signature$aggregated_GeneScores[full_aggr_signature$GeneID == gene]
+        new_aggr_gene_score <- mean(aggr_gene_scores)
+        full_aggr_signature <- full_aggr_signature[!(full_aggr_signature$GeneID == gene),]
+        new_val_df = data.frame(aggregated_GeneScores = new_aggr_gene_score, GeneID=gene)
+        row.names(new_val_df) <- gene
+       full_aggr_signature = rbind(full_aggr_signature,new_val_df)
+    }
+    # sort genes in descending order by the aggregated_GeneScores
+    full_aggr_signature <- full_aggr_signature[order(full_aggr_signature$aggregated_GeneScores, decreasing = TRUE), ]
+    # save the computed aggregated full signature
+    saveRDS(full_aggr_signature, file = paste0(sig_data_path,"/full/","full_aggregated_signature.rds"))
+    write_tsv(full_aggr_signature, file = paste0(sig_data_path,"/full/","full_aggregated_signature.tsv"))
+    print(paste0("The full aggregated signature was saved at ",output_dir))
+
+    # convert the full aggregated signature to matrix with row names: GeneID and col: aggregated_GeneScores for connectivity metric calculation
+    full_aggr_signature <- as.data.frame(full_aggr_signature)
+    row.names(full_aggr_signature) <- as.character(full_aggr_signature$GeneID)
+    full_aggr_signature$GeneID <- NULL
+    full_aggr_sig_matrix <- as.matrix(full_aggr_signature)
+    # get drug candidates using the specified Correlation-based method
+    final_aggr_res <- compute_Cor_based_scores(full_aggr_sig_matrix, score_method, db_path)
+}
+write_tsv(final_aggr_res, file=paste0(output_dir,"/",score_method,"_aggregated_signature.tsv"))
+print(paste0("Aggregated-signature drug results saved for ",sig_metadata_path," at ",output_dir,"/",score_method,"_",platform,"_aggregated_signature.tsv"))
+
 # ## --------- individual signatures ----------- ##
 #
 # iterate through each signature info
