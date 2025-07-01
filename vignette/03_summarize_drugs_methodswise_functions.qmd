@@ -1,0 +1,54 @@
+# Functions to summarize drug results prioritized by multiple methods
+## 1. method-wise summarization
+
+```{r sourcing function script}
+library(here)
+source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+```
+
+```{r get_drug_results}
+# read in data_to_run df
+microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
+data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
+score_method = "LINCS"
+drug_res_path = "results/microarray/LINCS/"
+score = "WCS"
+
+require(stringr)
+
+for(i in 1:nrow(data_to_run)){
+  # read in variables
+  filename <- data_to_run$SIGNATURE_NAME[i] 
+
+  #print(paste0("Iteration ",i))
+  #print(paste0("Getting drug result: ", accession_no," ", filename))
+
+  drug_df <- read.delim(here(paste0(drug_res_path,score_method,"_",filename,".tsv")), sep="\t")
+    #drug_df <- merge(x=drug_df, y=drug_metadata, by.x = "pert", by.y = "pert_iname", all.x=TRUE, all.y=FALSE) # not needed as we are merging drug info later
+
+  if(score == "CMAP"){
+    drug_df <- drug_df[, c("scaled_score","pert","cell","t_gn_sym")]
+  }else if(score == "WCS"){
+    drug_df <- drug_df[, c("WTCS","pert","cell","t_gn_sym")]
+  }else if(score == "NCS"){
+    drug_df <- drug_df[, c("NCS","pert","cell","t_gn_sym")]
+  }else if(score == "Tau"){
+    drug_df <- drug_df[, c("Tau","pert","cell","t_gn_sym")]
+  }else if(score %in% list("Cor_spearman","Cor_pearson")){
+    drug_df <- drug_df[, c("cor_score","pert","cell","t_gn_sym")]
+  }
+  # add pert_cell column
+  drug_df$pert_cell <- str_c(drug_df$pert,"_",drug_df$cell)
+
+  # add GSE_platform_contrast column
+  drug_df$GSE_platform <- filename
+
+  if(i == 1){
+    combined_drug_df <- drug_df
+  }else{
+    # bind dataframes by rows -- rbind
+    combined_drug_df <- rbind(drug_df, combined_drug_df)
+  }
+}
+
+```
