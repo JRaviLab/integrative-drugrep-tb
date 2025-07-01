@@ -170,11 +170,20 @@ for(i in 1:nrow(study_df)){
   if(nrow(up_df) > 0){
     up_genes_num[i] <- nrow(up_df)
   }
+  if (nrow(up_df) == 0) {
+    message("  No significant up genes (padj < ", padj_cutoff, ")")
+    signature_boolean[i] <- FALSE
+    next
+  }
 
   if(nrow(dn_df) > 0){
     dn_genes_num[i] <- nrow(dn_df)
   }
-
+  if (nrow(dn_df) == 0) {
+    message("  No significant dn genes (padj < ", padj_cutoff, ")")
+    signature_boolean[i] <- FALSE
+    next
+  }
 
   # save the signatures
   today <- format(Sys.Date(), "%Y%m%d")
