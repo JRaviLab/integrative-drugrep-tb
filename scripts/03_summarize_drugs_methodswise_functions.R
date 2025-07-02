@@ -33,15 +33,16 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score){
   #' @author Kewalin Samart
   require(stringr)
 
+  require(stringr)
+
   for(i in 1:nrow(data_to_run)){
     # read in variables
-    accession_no <- data_to_run$accession_no[i] # GEO/refine.bio accession id e.g., GSE16250
-    filename <- data_to_run$file_name[i] # cond1_cond2 e.g., MTB_control
+    filename <- data_to_run$SIGNATURE_NAME[i]
 
     #print(paste0("Iteration ",i))
     #print(paste0("Getting drug result: ", accession_no," ", filename))
 
-    drug_df <- read.delim(paste0(drug_res_path,score_method,"_",accession_no,"_",filename,".tsv"), sep="\t")
+    drug_df <- read.delim(here(paste0(drug_res_path,score_method,"_",filename,".tsv")), sep="\t")
     #drug_df <- merge(x=drug_df, y=drug_metadata, by.x = "pert", by.y = "pert_iname", all.x=TRUE, all.y=FALSE) # not needed as we are merging drug info later
 
     if(score == "CMAP"){
@@ -59,7 +60,7 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score){
     drug_df$pert_cell <- str_c(drug_df$pert,"_",drug_df$cell)
 
     # add GSE_platform_contrast column
-    drug_df$GSE_platform <- paste0(accession_no,"_",filename)
+    drug_df$GSE_platform <- filename
 
     if(i == 1){
       combined_drug_df <- drug_df
@@ -279,7 +280,7 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
   # add drug info to the occurrence dataframe
   # "moa","disease_area","t_gn_sym","target","indication"
   # read in drug info from drug repurposing hub (treat this as a extdata)
-  drug_metadata <- read.csv(file="./data/metadata/repurposing_drugs_20200324.csv",skip = 9)
+  drug_metadata <- read.csv(file=here("data/metadata/repurposing_drugs_20200324.csv"),skip = 9)
   pert_occurrence_df <- merge(x=pert_occurrence_df, y=drug_metadata, by.x = "unique_pert", by.y = "pert_iname", all.x=TRUE, all.y=FALSE)
   # select drugs with at least 1 occurrence
   pert_occurrence_df <- pert_occurrence_df[pert_occurrence_df$occurrence > 0,]
