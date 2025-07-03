@@ -1,88 +1,131 @@
 # Functions to summarize drug results prioritized by multiple methods
-## 1. method-wise summarization
+## method-wise summarization
 
-```{r sourcing function script}
-library(readr)
-library(here)
-source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+```{r}
+source(here("scripts/03_summarize_drugs_methodswise_functions"))
+
 ```
 
-```{r get_drug_results WCS}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "LINCS"
-drug_res_path = "results/microarray/LINCS/"
-score = "WCS"
+```{r}
+summarize_significant_drugs <- function(
+  metadata_path,
+  signature_id = 1,
+  drug_res_base = "results",
+  score_method = "Cor",
+  score = "Cor_pearson",
+  stats = "min",
+  score_percentile = 0.8,
+  percent_reverse = NA,
+  n = 50,
+  values = "neg",
+  tail = "left"
+) {
+  #' @description Summarizes significant drugs from RNA-seq or microarray for a given score
+  #' @returns A named list containing all intermediate and final results
+  
+  require(readr)
+  
+  # load metadata and filter by signature ID
+  metadata_df <- read_tsv(here::here(metadata_path), show_col_types = FALSE)
+  data_to_run <- metadata_df[metadata_df$signature == signature_id, ]
+  
+  # build drug results path
+  technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
+  drug_res_path <- file.path(drug_res_base, technology, score_method)
+  
+  # get drug scores
+  combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
+  score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
+  score_vector <- as.numeric(unlist(combined_drug_df[1]))
 
-combined_drug_df_WCS = get_drug_results(data_to_run, drug_res_path, score_method, score)
-WCS_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_WCS, score, stats = "median")
-score_vec_WCS <- as.numeric(unlist(combined_drug_df_WCS[1]))
-threshold <- determine_threshold(score_vec_WCS, values = "neg", tail = "left", score_percentile=0.9)
-pert_occurrence_WCS <- get_reversing_drugs_freq(WCS_combined_drug_df, threshold=threshold, values="neg")
+  # compute threshold and occurrences
+  threshold <- determine_threshold(score_vector, values = values, tail = tail, score_percentile = score_percentile)
+
+  message(glue::glue("Processing: {technology} | {score_method} | {score} | threshold: {round(threshold, 3)}"))
+
+  pert_occurrence <- get_reversing_drugs_freq(score_matrix, threshold = threshold, values = values)
+
+  # get top significant drugs
+  significant_drugs <- get_significant_drugs(pert_occurrence, score_matrix, percent_reverse = percent_reverse, n = n)
+
+  # return all intermediate objects
+  return(list(
+    combined_drug_df = combined_drug_df,
+    score_matrix = score_matrix,
+    threshold = threshold,
+    pert_occurrence = pert_occurrence,
+    significant_drugs = significant_drugs
+  ))
+}
+
 ```
 
-```{r get_drug_results NCS}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "LINCS"
-drug_res_path = "results/microarray/LINCS/"
-score = "NCS"
+```{r}
+results <- summarize_significant_drugs(
+  metadata_path = "data/v2/signatures/RNAseq_TB_signature_run_info.tsv",
+  signature_id = 1,
+  score_method = "Cor",
+  score = "Cor_pearson",
+  score_percentile = 0.8,
+  percent_reverse = NA,
+  n = 50
+)
 
-combined_drug_df_NCS = get_drug_results(data_to_run, drug_res_path, score_method, score)
-NCS_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_NCS, score, stats = "median")
-score_vec_NCS <- as.numeric(unlist(combined_drug_df_NCS[1]))
-threshold <- determine_threshold(score_vec_NCS, values = "neg", tail = "left", score_percentile=0.9)
-pert_occurrence_NCS <- get_reversing_drugs_freq(NCS_combined_drug_df, threshold=threshold, values="neg")
-```
-
-```{r get_drug_results Tau}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "LINCS"
-drug_res_path = "results/microarray/LINCS/"
-score = "Tau"
-
-combined_drug_df_Tau = get_drug_results(data_to_run, drug_res_path, score_method, score)
-Tau_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_Tau, score, stats = "median")
-```
-
-```{r get_drug_results CMAP}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "CMAP"
-drug_res_path = "results/microarray/CMAP/"
-score = "CMAP"
-
-combined_drug_df_CMAP = get_drug_results(data_to_run, drug_res_path, score_method, score)
-CMAP_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_CMAP, score, stats = "median")
-```
-
-```{r get_drug_results Cor_pearson}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "Cor_pearson"
-drug_res_path = "results/microarray/Cor_pearson/"
-score = "Cor_pearson"
-
-combined_drug_df_pearson = get_drug_results(data_to_run, drug_res_path, score_method, score)
-pearson_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_pearson, score, stats = "median")
-```
-
-```{r get_drug_results Cor_spearman}
-# read in data_to_run df
-microarray_data_to_run = read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
-data_to_run = microarray_data_to_run[microarray_data_to_run$signature == 1,]
-score_method = "Cor_spearman"
-drug_res_path = "results/microarray/Cor_spearman/"
-score = "Cor_spearman"
-
-combined_drug_df_spearman = get_drug_results(data_to_run, drug_res_path, score_method, score)
-spearman_combined_drug_df = get_DrugDis_ScoreMatrix(combined_drug_df_pearson, score, stats = "median")
+# access the final result
+results$significant_drugs
 ```
 
 
+```{r}
+# define input metadata and parameters
+metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
+scores_list <- list(
+  CMAP = "CMAP",
+  WCS = "WCS",
+  NCS = "NCS",
+  Tau = "Tau",
+  Cor_pearson = "Cor_pearson",
+  Cor_spearman = "Cor_spearman"
+)
+
+score_method_map <- list(
+  CMAP = "CMAP",
+  WCS = "LINCS",
+  NCS = "LINCS",
+  Tau = "LINCS",
+  Cor_pearson = "Cor",
+  Cor_spearman = "Cor"
+)
+
+# collect all significant drugs into a named list
+all_signi <- list()
+
+for (score in names(scores_list)) {
+  result <- summarize_significant_drugs(
+    metadata_path = metadata_path,
+    score_method = score_method_map[[score]],
+    score = score,
+    score_percentile = 0.8,
+    percent_reverse = NA,
+    n = 50
+  )
+  if (!is.null(result$significant_drugs) && nrow(result$significant_drugs) > 0) {
+    all_signi[[score]] <- result$significant_drugs$unique_pert
+  }
+}
+
+# create all_signi_drugs_df: wide-format binary matrix
+all_drugs <- unique(unlist(all_signi))
+all_signi_drugs_df <- data.frame(significant_drug = all_drugs)
+
+for (score in names(scores_list)) {
+  all_signi_drugs_df[[score]] <- as.integer(all_signi_drugs_df$significant_drug %in% all_signi[[score]])
+}
+
+# inspect the result
+head(all_signi_drugs_df)
+```
+
+```{r}
+summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
+```

@@ -1,76 +1,54 @@
 # functions to finalize drug results from individual disease signatures
-# created dates: 06/13/22
-# last modified: 09/08/24
+# last modified: 07/03/25
 # Kewalin Samart
 
-clean_data_to_run <- function(metadata_path,disease_keywords){
-  #' @description this function subsets metadata of disease signatures of interest i.e., selecting specific disease comparisons
-  #' @param metadata_path path to metadata file of input disease signatures
-  #' @param disease_keywords a string indicating specific disease keywords separated by comma
-  #' @returns data_to_run: filtered metadata of disease signatures of interest
-  #' @author Kewalin Samart
-
-  # read in metadata file
-  data_to_run <- read.delim(metadata_path, sep = "\t")
-  # subset the metadata table to get only data for the specified disease
-  # subset specific infection(s)
-  data_to_run <- data_to_run[grep(paste(disease_keywords, collapse = "|"),
-                                  data_to_run$file_name), ]
-  # subset data table to get only infected-control signatures
-  data_to_run <- data_to_run[grep("control", data_to_run$file_name), ]
-
-  return(data_to_run)
-}
-
-get_drug_results <- function(data_to_run, drug_res_path, score_method, score){
-  #' @description function to read in drug results prioritized by a specific connectivity score
-  #' @param data_to_run metadata for reading in drug results containing the columns: "accession_no" indicating GEO/refine.bio accession id e.g., GSE16250
-  #' @param data_to_run (cont.) and "file_name"indicating cond1_cond2 (DE comparison for the disease signature) e.g., MTB_control
-  #' @param drug_res_path path to the data folder with drug results
-  #' @param score_method a string indicating a choice of connectivity methods: "CMAP","LINCS","Cor_spearman","Cor_pearson"
-  #' @param score a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman","Cor_pearson"
-  #' @returns combined_drug_df: a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
-  #' @author Kewalin Samart
+# to be documented
+get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   require(stringr)
 
-  require(stringr)
-
-  for(i in 1:nrow(data_to_run)){
-    # read in variables
+  for (i in 1:nrow(data_to_run)) {
     filename <- data_to_run$SIGNATURE_NAME[i]
 
-    #print(paste0("Iteration ",i))
-    #print(paste0("Getting drug result: ", accession_no," ", filename))
+    # Use score_method as file prefix for LINCS scores (WCS, NCS, Tau), else use score
+    file_prefix <- if (score_method == "LINCS") "LINCS" else score
 
-    drug_df <- read.delim(here(paste0(drug_res_path,score_method,"_",filename,".tsv")), sep="\t")
-    #drug_df <- merge(x=drug_df, y=drug_metadata, by.x = "pert", by.y = "pert_iname", all.x=TRUE, all.y=FALSE) # not needed as we are merging drug info later
+    file_path <- file.path(drug_res_path, paste0(file_prefix, "_", filename, ".tsv"))
 
-    if(score == "CMAP"){
-      drug_df <- drug_df[, c("scaled_score","pert","cell","t_gn_sym")]
-    }else if(score == "WCS"){
-      drug_df <- drug_df[, c("WTCS","pert","cell","t_gn_sym")]
-    }else if(score == "NCS"){
-      drug_df <- drug_df[, c("NCS","pert","cell","t_gn_sym")]
-    }else if(score == "Tau"){
-      drug_df <- drug_df[, c("Tau","pert","cell","t_gn_sym")]
-    }else if(score %in% list("Cor_spearman","Cor_pearson")){
-      drug_df <- drug_df[, c("cor_score","pert","cell","t_gn_sym")]
+    # Read the drug result file
+    if (!file.exists(here::here(file_path))) {
+      warning(paste("File not found:", file_path))
+      next
     }
-    # add pert_cell column
-    drug_df$pert_cell <- str_c(drug_df$pert,"_",drug_df$cell)
 
-    # add GSE_platform_contrast column
+    drug_df <- read.delim(here::here(file_path), sep = "\t")
+
+    # Extract correct score column based on the actual score value
+    if (score == "CMAP") {
+      drug_df <- drug_df[, c("scaled_score", "pert", "cell", "t_gn_sym")]
+    } else if (score == "WCS") {
+      drug_df <- drug_df[, c("WTCS", "pert", "cell", "t_gn_sym")]
+    } else if (score == "NCS") {
+      drug_df <- drug_df[, c("NCS", "pert", "cell", "t_gn_sym")]
+    } else if (score == "Tau") {
+      drug_df <- drug_df[, c("Tau", "pert", "cell", "t_gn_sym")]
+    } else if (score %in% c("Cor_spearman", "Cor_pearson")) {
+      drug_df <- drug_df[, c("cor_score", "pert", "cell", "t_gn_sym")]
+    }
+
+    # Add pert_cell and GSE_platform columns
+    drug_df$pert_cell <- str_c(drug_df$pert, "_", drug_df$cell)
     drug_df$GSE_platform <- filename
 
-    if(i == 1){
+    if (i == 1) {
       combined_drug_df <- drug_df
-    }else{
-      # bind dataframes by rows -- rbind
-      combined_drug_df <- rbind(drug_df, combined_drug_df)
+    } else {
+      combined_drug_df <- rbind(combined_drug_df, drug_df)
     }
   }
+
   return(combined_drug_df)
 }
+
 
 get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drugs and cols: disease signatures
@@ -343,111 +321,168 @@ get_signi_info <- function(combined_drug_df, signi_drug_df){
   return(signi_info_df)
 }
 
-get_signidrugs_by_score <- function(metadata_path, drug_summ_path, dirname="./results"){
-  #' @description this function quantifies significant drugs by score given a set of disease signatures in metadata_path
-  #' @description (cont.) and score parameters in drug_summ_path: (i) drug_res_path, (ii) score_method, (iii) score, (iv) percent_reverse, (v) n or score_percentile
-  #' @param metadata_path path to input disease signatures
-  #' @param drug_sum_path path to the drug summarization arguments file
-  #' @param dirname output directory; set to "./results/" by default
-  #' @returns all_signi_drugs_df: a dataframe containing all significant drugs picked up by one of the 6 scores: CMAP, LINCS: WCS, NCS, Tau, Cor: Cor_spearman, Cor_pearson
-  #' @author Kewalin Samart
-
-  #metadata_path <- "./inputs/TB_microarray_args.tsv"
-  #drug_summ_path <- "./inputs/drug_summarization_args.tsv"
-  #dirname <- paste0("./results/uniformly_processed/microarray/",score_method,"/")
+## to be documented
+summarize_significant_drugs <- function(
+    metadata_path,
+    signature_id = 1,
+    drug_res_base = "results",
+    score_method = "Cor",
+    score = "Cor_pearson",
+    stats = "min",
+    score_percentile = 0.8,
+    percent_reverse = NA,
+    n = 50,
+    values = "neg",
+    tail = "left"
+) {
+  #' @description Summarizes significant drugs from RNA-seq or microarray for a given score
+  #' @returns A named list containing all intermediate and final results
 
   require(readr)
-  # read in metadata for disease signatures and drug results
-  data_to_run <- read.delim(file=metadata_path, sep="\t")
-  drug_summ_args <- read.delim(file=drug_summ_path, sep="\t")
 
-  all_signi_drugs <- c()
-  signi_drugs_score_list <- list()
+  # load metadata and filter by signature ID
+  metadata_df <- read_tsv(here::here(metadata_path), show_col_types = FALSE)
+  data_to_run <- metadata_df[metadata_df$signature == signature_id, ]
 
-  for(i in 1:ncol(drug_summ_args)){
+  # build drug results path
+  technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
+  drug_res_path <- file.path(drug_res_base, technology, score_method)
 
-    # getting arguments for drug summarization
-    drug_res_path <- drug_summ_args$drug_res_path[i]
-    score_method <- drug_summ_args$score_method[i]
-    score <- drug_summ_args$score[i]
-    percent_reverse <- drug_summ_args$percent_reverse[i]
-    n <- drug_summ_args$n[i]
-    score_percentile <- drug_summ_args$score_percentile[i]
+  # get drug scores
+  combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
+  score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
+  score_vector <- as.numeric(unlist(combined_drug_df[1]))
 
-    print(paste("Getting significant drugs for the disease signatures", metadata_path,"prioritized by", score,sep = " "))
-    combined_drug_df <- get_drug_results(data_to_run = data_to_run, drug_res_path = drug_res_path, score_method = score_method, score=score)
-    threshold <- determine_threshold(combined_drug_df, score_percentile=score_percentile)
+  # compute threshold and occurrences
+  threshold <- determine_threshold(score_vector, values = values, tail = tail, score_percentile = score_percentile)
 
-    transformed_combined_drug_df <- modify_df_drugs(combined_drug_df,score = score)
-    pert_occurrence_df <- get_reversing_drugs_freq(transformed_combined_drug_df, threshold=threshold)
-    signi_drug_df <- get_significant_drugs(pert_occurrence_df, transformed_combined_drug_df, percent_reverse = percent_reverse, n = n)
+  message(glue::glue("Processing: {technology} | {score_method} | {score} | threshold: {round(threshold, 3)}"))
 
-    dirname <- paste(dirname,score_method,sep="/")
-    if(!dir.exists(dirname)){
-      dir.create(dirname)
+  pert_occurrence <- get_reversing_drugs_freq(score_matrix, threshold = threshold, values = values)
+
+  # get top significant drugs
+  significant_drugs <- get_significant_drugs(pert_occurrence, score_matrix, percent_reverse = percent_reverse, n = n)
+
+  # return all intermediate objects
+  return(list(
+    combined_drug_df = combined_drug_df,
+    score_matrix = score_matrix,
+    threshold = threshold,
+    pert_occurrence = pert_occurrence,
+    significant_drugs = significant_drugs
+  ))
+}
+
+create_drug_method_table <- function(metadata_path){
+  # define input metadata and parameters
+  # metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
+  scores_list <- list(
+    CMAP = "CMAP",
+    WCS = "WCS",
+    NCS = "NCS",
+    Tau = "Tau",
+    Cor_pearson = "Cor_pearson",
+    Cor_spearman = "Cor_spearman"
+  )
+
+  score_method_map <- list(
+    CMAP = "CMAP",
+    WCS = "LINCS",
+    NCS = "LINCS",
+    Tau = "LINCS",
+    Cor_pearson = "Cor",
+    Cor_spearman = "Cor"
+  )
+
+  # collect all significant drugs into a named list
+  all_signi <- list()
+
+  for (score in names(scores_list)) {
+    result <- summarize_significant_drugs(
+      metadata_path = metadata_path,
+      score_method = score_method_map[[score]],
+      score = score,
+      score_percentile = 0.8,
+      percent_reverse = NA,
+      n = 50
+    )
+    if (!is.null(result$significant_drugs) && nrow(result$significant_drugs) > 0) {
+      all_signi[[score]] <- result$significant_drugs$unique_pert
     }
-
-    write_tsv(signi_drug_df,file = paste0(dirname,"/",score,"_top_",score_percentile,"pct_",percent_reverse,"reversed_drugs.tsv"))
-
-    signi_drugs_score <- signi_drug_df$unique_pert
-    signi_drugs_score_list[[score]] <- signi_drugs_score # named list containing significant drugs prioritized by different metrics
-    all_signi_drugs <- c(all_signi_drugs,signi_drugs_score)
   }
 
-  all_signi_drugs_df <- data.frame(unique(all_signi_drugs))
-  colnames(all_signi_drugs_df)[1] <- "significant_drug"
+  # create all_signi_drugs_df: wide-format binary matrix
+  all_drugs <- unique(unlist(all_signi))
+  all_signi_drugs_df <- data.frame(significant_drug = all_drugs)
 
-  for(score in names(signi_drugs_score_list)){
-    score_signi_drugs_boolean <- all_signi_drugs_df$significant_drug %in% signi_drugs_score_list[[score]]
-    score_signi_drugs_numeric <- replace(score_signi_drugs_boolean, score_signi_drugs_boolean==TRUE, 1)
-    all_signi_drugs_df[score] <- score_signi_drugs_numeric
+  for (score in names(scores_list)) {
+    all_signi_drugs_df[[score]] <- as.integer(all_signi_drugs_df$significant_drug %in% all_signi[[score]])
   }
-
   return(all_signi_drugs_df)
 }
 
-summarize_drugs_bymethods <- function(all_signi_drugs_df, prefix, dirname="./results"){
-  #' @description this function prioritizes final significant drugs based on 3 methods: CMAP, LINCS, and Cor
-  #' @description (cont.) the drugs that come up in two out of the three methods are selected.
-  #' @param all_signi_drugs_df a dataframe containing all significant drugs picked up by one of the 6 scores: CMAP, LINCS: WCS, NCS, Tau, Cor: Cor_spearman, Cor_pearson
-  #' @param prefix a string for output file prefix e.g., uni_marray for uniformly processed-microarray data
-  #' @param dirname output directory; set to "./results/" by default
-  #' @returns indiv_drugs_res_top: a dataframe containing final significant drugs based on 3 methods: CMAP, LINCS, and Cor sorted by their occurrence across the 6 scores
-  #' @author Kewalin Samart
+## to better documented
+summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = "results") {
+  #' @description Summarizes final significant drugs based on CMAP, LINCS (WCS, NCS, Tau), and Cor (Cor_spearman, Cor_pearson)
+  #' @param all_signi_drugs_df A dataframe with binary indicators per score and column "significant_drug"
+  #' @param technology A string for output file prefix indicating data technology
+  #' @param dirname Output directory; default is "results"
+  #' @return indiv_drugs_res_top: Dataframe of top drugs in ≥2 of the 3 method groups
 
   require(readr)
-  # summarize based on 3 methods: CMAP, LINCS, Cor
-  all_signi_drugs_df$LINCS = rowSums(all_signi_drugs_df[,c("WCS", "NCS", "Tau")])
-  all_signi_drugs_df$Cor = rowSums(all_signi_drugs_df[,c("Cor_spearman", "Cor_pearson")])
-  all_signi_drugs_df$occurrence = rowSums(all_signi_drugs_df[,c("CMAP", "LINCS", "Cor")])
-  signi_drug_summary_df <- all_signi_drugs_df[,c("significant_drug","CMAP","LINCS","Cor","occurrence")]
+  require(here)
 
-  drug_info_df <- read.csv(file="./data/metadata/repurposing_drugs_20200324.csv",skip=9)
-  merged_signi_drug_summary <- merge(signi_drug_summary_df,
-                                     drug_info_df,
-                                     by.x = "significant_drug",
-                                     by.y = "pert_iname",
-                                     all.x = TRUE,
-                                     all.y = FALSE)
-  merged_signi_drug_summary <- merged_signi_drug_summary[order(-merged_signi_drug_summary$occurrence),]
-  rownames(merged_signi_drug_summary) <- 1:nrow(merged_signi_drug_summary)
+  # handle method groups dynamically
+  lincs_scores <- intersect(c("WCS", "NCS", "Tau"), colnames(all_signi_drugs_df))
+  cor_scores <- intersect(c("Cor_spearman", "Cor_pearson"), colnames(all_signi_drugs_df))
+  cmap_score <- "CMAP"
 
-  if(!dir.exists(dirname)) {
-    dir.create(dirname)
+  # add LINCS and Cor group summary columns
+  all_signi_drugs_df$LINCS <- if (length(lincs_scores) > 0) {
+    rowSums(all_signi_drugs_df[, lincs_scores, drop = FALSE], na.rm = TRUE)
+  } else 0
+
+  all_signi_drugs_df$Cor <- if (length(cor_scores) > 0) {
+    rowSums(all_signi_drugs_df[, cor_scores, drop = FALSE], na.rm = TRUE)
+  } else 0
+
+  if (!("CMAP" %in% colnames(all_signi_drugs_df))) {
+    all_signi_drugs_df$CMAP <- 0
   }
 
-  write_tsv(merged_signi_drug_summary,file = paste0(dirname,"/",prefix,"_indiv_drug_summary.tsv"))
+  # compute total across 3 methods
+  all_signi_drugs_df$occurrence <- rowSums(all_signi_drugs_df[, c("CMAP", "LINCS", "Cor")], na.rm = TRUE)
 
-  # replace non-zero values with 1
-  indiv_drugs_score <- merged_signi_drug_summary[,c("CMAP","LINCS","Cor")]
-  indiv_drugs_score[-1] <- as.integer(indiv_drugs_score[-1] != 0)
-  # subset only drugs that show up in at least 2 out of the 3 methods
-  indiv_drugs_score$medthod_freq <- rowSums(indiv_drugs_score)
-  indiv_drugs_res_top <- merged_signi_drug_summary[which(indiv_drugs_score$medthod_freq >= 2),]
-  rownames(indiv_drugs_res_top) <- 1:nrow(indiv_drugs_res_top)
+  # subset summary columns
+  summary_df <- all_signi_drugs_df[, c("significant_drug", "CMAP", "LINCS", "Cor", "occurrence")]
 
-  write_tsv(indiv_drugs_res_top,file = paste0(dirname,"/",prefix,"_indiv_top_drugs.tsv"))
+  # add metadata (optional)
+  drug_info_path <- here::here("data/metadata/repurposing_drugs_20200324.csv")
+  if (file.exists(drug_info_path)) {
+    drug_info_df <- read.csv(drug_info_path, skip = 9)
+    summary_df <- merge(summary_df, drug_info_df,
+                        by.x = "significant_drug", by.y = "pert_iname",
+                        all.x = TRUE, all.y = FALSE)
+  }
+
+  # sort and write full summary
+  summary_df <- summary_df[order(-summary_df$occurrence), ]
+  rownames(summary_df) <- NULL
+
+  full_summary_path <- here::here(dirname, paste0(technology, "_indiv_drug_summary.tsv"))
+  if (!dir.exists(here::here(dirname))) dir.create(here::here(dirname), recursive = TRUE)
+  write_tsv(summary_df, file = full_summary_path)
+
+  # select drugs in ≥2 of the 3 methods
+  bin_mat <- summary_df[, c("CMAP", "LINCS", "Cor")]
+  bin_mat <- as.data.frame(lapply(bin_mat, function(x) as.integer(x > 0)))
+  bin_mat$method_freq <- rowSums(bin_mat)
+
+  indiv_drugs_res_top <- summary_df[bin_mat$method_freq >= 2, ]
+  rownames(indiv_drugs_res_top) <- NULL
+
+  top_summary_path <- here::here(dirname, paste0(technology, "_indiv_top_drugs.tsv"))
+  write_tsv(indiv_drugs_res_top, file = top_summary_path)
 
   return(indiv_drugs_res_top)
 }
-
