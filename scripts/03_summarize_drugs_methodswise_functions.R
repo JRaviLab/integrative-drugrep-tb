@@ -73,12 +73,19 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
 
   col_idx = 1
   for(sig in unique_signature){
+    print(sig)
     col_idx = col_idx + 1
     # get tau vector for each signature
     score_vec = c()
     for(pert in unique_pert){
 
       pert_df = combined_drug_df[which(combined_drug_df$pert == pert & combined_drug_df$GSE_platform == sig),]
+
+      if (nrow(pert_df) == 0) {
+        score_vec <- append(score_vec, NA)
+        next
+      }
+
       if(score == "Tau"){
         if(stats == "min"){
           index = which.min(pert_df$Tau)
