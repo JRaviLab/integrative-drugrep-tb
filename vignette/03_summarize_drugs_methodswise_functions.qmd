@@ -2,6 +2,10 @@
 
 ## method-wise summarization
 
+#### Last modified: 06/17/25
+
+#### Author: Kewalin Samart
+
 ```{r}
 library(here)
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
@@ -30,7 +34,7 @@ methodwise_results
 
 ```{r}
 metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
-all_signi_drugs_df <- create_drug_method_table(metadata_path, score_percentile = 0.9, n = 5)
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.9, n = 3)
 all_signi_drugs_df
 ```
 
