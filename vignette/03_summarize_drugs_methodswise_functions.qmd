@@ -2,130 +2,62 @@
 ## method-wise summarization
 
 ```{r}
-source(here("scripts/03_summarize_drugs_methodswise_functions"))
-
+library(here)
+source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 ```
 
-```{r}
-summarize_significant_drugs <- function(
-  metadata_path,
-  signature_id = 1,
-  drug_res_base = "results",
-  score_method = "Cor",
-  score = "Cor_pearson",
-  stats = "min",
-  score_percentile = 0.8,
-  percent_reverse = NA,
-  n = 50,
-  values = "neg",
-  tail = "left"
-) {
-  #' @description Summarizes significant drugs from RNA-seq or microarray for a given score
-  #' @returns A named list containing all intermediate and final results
-  
-  require(readr)
-  
-  # load metadata and filter by signature ID
-  metadata_df <- read_tsv(here::here(metadata_path), show_col_types = FALSE)
-  data_to_run <- metadata_df[metadata_df$signature == signature_id, ]
-  
-  # build drug results path
-  technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
-  drug_res_path <- file.path(drug_res_base, technology, score_method)
-  
-  # get drug scores
-  combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
-  score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
-  score_vector <- as.numeric(unlist(combined_drug_df[1]))
-
-  # compute threshold and occurrences
-  threshold <- determine_threshold(score_vector, values = values, tail = tail, score_percentile = score_percentile)
-
-  message(glue::glue("Processing: {technology} | {score_method} | {score} | threshold: {round(threshold, 3)}"))
-
-  pert_occurrence <- get_reversing_drugs_freq(score_matrix, threshold = threshold, values = values)
-
-  # get top significant drugs
-  significant_drugs <- get_significant_drugs(pert_occurrence, score_matrix, percent_reverse = percent_reverse, n = n)
-
-  # return all intermediate objects
-  return(list(
-    combined_drug_df = combined_drug_df,
-    score_matrix = score_matrix,
-    threshold = threshold,
-    pert_occurrence = pert_occurrence,
-    significant_drugs = significant_drugs
-  ))
-}
-
-```
-
+### RNAseq
 ```{r}
 results <- summarize_significant_drugs(
   metadata_path = "data/v2/signatures/RNAseq_TB_signature_run_info.tsv",
   signature_id = 1,
-  score_method = "Cor",
-  score = "Cor_pearson",
+  score_method = "CMAP",
+  score = "CMAP",
+  stats = "median",
   score_percentile = 0.8,
   percent_reverse = NA,
-  n = 50
+  n = 3
 )
 
 # access the final result
 results$significant_drugs
 ```
 
-
 ```{r}
 # define input metadata and parameters
 metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
-scores_list <- list(
-  CMAP = "CMAP",
-  WCS = "WCS",
-  NCS = "NCS",
-  Tau = "Tau",
-  Cor_pearson = "Cor_pearson",
-  Cor_spearman = "Cor_spearman"
-)
-
-score_method_map <- list(
-  CMAP = "CMAP",
-  WCS = "LINCS",
-  NCS = "LINCS",
-  Tau = "LINCS",
-  Cor_pearson = "Cor",
-  Cor_spearman = "Cor"
-)
-
-# collect all significant drugs into a named list
-all_signi <- list()
-
-for (score in names(scores_list)) {
-  result <- summarize_significant_drugs(
-    metadata_path = metadata_path,
-    score_method = score_method_map[[score]],
-    score = score,
-    score_percentile = 0.8,
-    percent_reverse = NA,
-    n = 50
-  )
-  if (!is.null(result$significant_drugs) && nrow(result$significant_drugs) > 0) {
-    all_signi[[score]] <- result$significant_drugs$unique_pert
-  }
-}
-
-# create all_signi_drugs_df: wide-format binary matrix
-all_drugs <- unique(unlist(all_signi))
-all_signi_drugs_df <- data.frame(significant_drug = all_drugs)
-
-for (score in names(scores_list)) {
-  all_signi_drugs_df[[score]] <- as.integer(all_signi_drugs_df$significant_drug %in% all_signi[[score]])
-}
-
-# inspect the result
-head(all_signi_drugs_df)
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.9, n = 3)
+all_signi_drugs_df
 ```
 
 ```{r}
-summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
+methodwise_results
+```
+
+### microarray
+```{r}
+results <- summarize_significant_drugs(
+  metadata_path = "data/v2/signatures/microarray_TB_signature_run_info.tsv",
+  signature_id = 1,
+  score_method = "LINCS",
+  score = "WCS",
+  score_percentile = 0.9,
+  percent_reverse = NA,
+  n = 1
+)
+
+# access the final result
+results$significant_drugs
+```
+
+```{r}
+metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
+all_signi_drugs_df <- create_drug_method_table(metadata_path, score_percentile = 0.9, n = 5)
+all_signi_drugs_df
+```
+
+```{r}
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "microarray", dirname = "results")
+methodwise_results 
 ```

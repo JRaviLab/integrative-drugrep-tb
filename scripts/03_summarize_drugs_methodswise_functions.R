@@ -62,7 +62,7 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
   unique_pert <- unique(combined_drug_df$pert)
   unique_signature <- unique(combined_drug_df$GSE_platform)
 
-  transformed_combined_drug_df <- as.data.frame(unique_pert)
+  transformed_combined_drug_df <- data.frame(unique_pert = unique_pert, stringsAsFactors = FALSE)
 
   col_idx = 1
   for(sig in unique_signature){
@@ -77,7 +77,12 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
           index = which.min(pert_df$Tau)
           score_vec <- append(score_vec, pert_df$Tau[index])
         }else if(stats == "median"){
-          score_vec <- append(score_vec, median(pert_df$Tau))
+          if (nrow(pert_df) == 0 || all(is.na(pert_df$Tau))) {
+          score_vec <- append(score_vec, NA)
+        } else {
+          score_vec <- append(score_vec, median(pert_df$Tau, na.rm = TRUE))
+        }
+
         }else if(stats == "max"){
           score_vec <- append(score_vec, max(pert_df$Tau))
         }
@@ -87,7 +92,11 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
           index = which.min(pert_df$NCS)
           score_vec <- append(score_vec, pert_df$NCS[index])
         }else if(stats == "median"){
-          score_vec <- append(score_vec, median(pert_df$NCS))
+          if (nrow(pert_df) == 0 || all(is.na(pert_df$NCS))) {
+            score_vec <- append(score_vec, NA)
+          } else {
+            score_vec <- append(score_vec, median(pert_df$NCS, na.rm = TRUE))
+          }
         }else if(stats == "max"){
           score_vec <- append(score_vec, max(pert_df$NCS))
         }
@@ -97,7 +106,11 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
           index = which.min(pert_df$WTCS)
           score_vec <- append(score_vec, pert_df$WTCS[index])
         }else if(stats == "median"){
-          score_vec <- append(score_vec, median(pert_df$WTCS))
+          if (nrow(pert_df) == 0 || all(is.na(pert_df$WTCS))) {
+            score_vec <- append(score_vec, NA)
+          } else {
+            score_vec <- append(score_vec, median(pert_df$WTCS, na.rm = TRUE))
+          }
         }else if(stats == "max"){
           score_vec <- append(score_vec, max(pert_df$WTCS))
         }
@@ -107,7 +120,11 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
           index = which.min(pert_df$scaled_score)
           score_vec <- append(score_vec, pert_df$scaled_score[index])
         }else if(stats == "median"){
-          score_vec <- append(score_vec, median(pert_df$scaled_score))
+          if (nrow(pert_df) == 0 || all(is.na(pert_df$scaled_score))) {
+            score_vec <- append(score_vec, NA)
+          } else {
+            score_vec <- append(score_vec, median(pert_df$scaled_score, na.rm = TRUE))
+          }
         }else if(stats == "max"){
           score_vec <- append(score_vec, max(pert_df$scaled_score))
         }
@@ -117,16 +134,22 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
           index = which.min(pert_df$cor_score)
           score_vec <- append(score_vec, pert_df$cor_score[index])
         }else if(stats == "median"){
-          score_vec <- append(score_vec, median(pert_df$cor_score))
+          if (nrow(pert_df) == 0 || all(is.na(pert_df$cor_score))) {
+            score_vec <- append(score_vec, NA)
+          } else {
+            score_vec <- append(score_vec, median(pert_df$cor_score, na.rm = TRUE))
+          }
         }else if(stats == "max"){
           score_vec <- append(score_vec, max(pert_df$cor_score))
         }
       }
     }
     # now we have the vector; we want to add this as a new column to the data frame
+    colnames(transformed_combined_drug_df)[1] <- "unique_pert"
     transformed_combined_drug_df[col_idx] <- score_vec
     colnames(transformed_combined_drug_df)[col_idx] <- sig
   }
+  print(transformed_combined_drug_df)
 
   return(transformed_combined_drug_df)
 }
@@ -270,43 +293,48 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
 
 
 get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_df, percent_reverse = NA, n = NA){
-  #' @description this function identifies significant drugs based on reversing threshold and either a given percentage of reversal or top n drugs ranked by the score
-  #' @param pert_occurrence_df a sorted dataframe with drug names and their occurrences across the input signatures
-  #' @param transformed_combined_drug_df a dataframe with rows: drugs, columns: disease signatures, entries: scores
-  #' @param percent_reverse a numerical value in the range [0,1] indicating the percentage of reversal for drug prioritization
-  #' @param n an integer indicating top n drugs decreasingly sorted by the occurrences
-  #' @returns signi_drug_df: a dataframe containing the drugs prioritized "significant" based on either the given percent_reverse or (top) n
-  #' @author Kewalin Samart
+  #' @description Identifies significant drugs based on either a reversal percentage threshold or the top n most frequent occurrences (including ties).
+  #' @param pert_occurrence_df A sorted dataframe with drug names and their occurrences.
+  #' @param transformed_combined_drug_df A dataframe with drug vs. disease signature scores.
+  #' @param percent_reverse A float in [0,1] indicating the percentage of signatures reversed.
+  #' @param n An integer: the number of top occurrences to include (ties allowed).
+  #' @returns signi_drug_df: A dataframe with significant drugs.
 
-  # check if either percent_reverse or n is specified to a numeric value
-  if(!(is.numeric(percent_reverse) | is.numeric(n))){
+  # Check input
+  if (!(is.numeric(percent_reverse) | is.numeric(n))) {
     print("Please enter a numerical value for either percent_reverse or n")
     return(NULL)
   }
 
-  # if n (top n drugs) not specified, then get significant drugs by percent of reversal
-  if(is.na(n)){
+  # Select based on percent_reverse
+  if (is.na(n)) {
     print("Selecting drugs by percent_reverse")
-    signi_drug_df <- pert_occurrence_df[which(pert_occurrence_df$occurrence >= percent_reverse*ncol(transformed_combined_drug_df)),]
+    threshold <- percent_reverse * ncol(transformed_combined_drug_df)
+    signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= threshold, ]
   }
-  # if percent of reversal not specified, then get significant drugs by top n with the highest occurrences
-  if(is.na(percent_reverse)){
-    print("Selecting drugs by top n")
-    # rank by occurrence frequency
-    pert_occurrence_df = pert_occurrence_df[order(pert_occurrence_df$occurrence, decreasing = TRUE),]
-    # take the top n drugs if n < number of rows
-    if(n < dim(pert_occurrence_df)[1]){
-      signi_drug_df <- pert_occurrence_df[1:n,]
-    }else{
+
+  # Select based on top n (including ties at the nth level)
+  if (is.na(percent_reverse)) {
+    print("Selecting drugs by top n occurrences (including ties)")
+
+    # Sort by occurrence
+    pert_occurrence_df <- pert_occurrence_df[order(pert_occurrence_df$occurrence, decreasing = TRUE), ]
+
+    # Identify the nth highest occurrence value
+    if (n <= nrow(pert_occurrence_df)) {
+      u <- unique(pert_occurrence_df$occurrence)
+      cutoff_occurrence <- u[min(n, length(u))]
+      signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= cutoff_occurrence, ]
+    } else {
       signi_drug_df <- pert_occurrence_df
     }
+  }
 
+  # Check if result is empty
+  if (nrow(signi_drug_df) == 0) {
+    print("No significant drugs identified. Try adjusting threshold or n.")
   }
-  # check the output dataframe dimension
-  if(dim(signi_drug_df)[1] == 0){
-    print("No significant drugs identified. Please try adjusting the following parameters: threshold or percent_reverse")
-  }
-  print(paste0("number of significant drugs:",dim(signi_drug_df)[1]))
+  print(paste0("number of significant drugs: ", nrow(signi_drug_df)))
   return(signi_drug_df)
 }
 
@@ -328,7 +356,7 @@ summarize_significant_drugs <- function(
     drug_res_base = "results",
     score_method = "Cor",
     score = "Cor_pearson",
-    stats = "min",
+    stats = "median",
     score_percentile = 0.8,
     percent_reverse = NA,
     n = 50,
@@ -350,6 +378,7 @@ summarize_significant_drugs <- function(
 
   # get drug scores
   combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
+
   score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
   score_vector <- as.numeric(unlist(combined_drug_df[1]))
 
@@ -373,7 +402,7 @@ summarize_significant_drugs <- function(
   ))
 }
 
-create_drug_method_table <- function(metadata_path){
+create_drug_method_table <- function(metadata_path, stats = "median", score_percentile = 0.8, percent_reverse = NA, n = 3){
   # define input metadata and parameters
   # metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
   scores_list <- list(
@@ -402,9 +431,10 @@ create_drug_method_table <- function(metadata_path){
       metadata_path = metadata_path,
       score_method = score_method_map[[score]],
       score = score,
-      score_percentile = 0.8,
+      stats = stats,
+      score_percentile = score_percentile,
       percent_reverse = NA,
-      n = 50
+      n = n
     )
     if (!is.null(result$significant_drugs) && nrow(result$significant_drugs) > 0) {
       all_signi[[score]] <- result$significant_drugs$unique_pert
