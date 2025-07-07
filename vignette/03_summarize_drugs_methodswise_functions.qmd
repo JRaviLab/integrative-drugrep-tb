@@ -1,4 +1,5 @@
 # Functions to summarize drug results prioritized by multiple methods
+
 ## method-wise summarization
 
 ```{r}
@@ -7,28 +8,16 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 ```
 
 ### RNAseq
-```{r}
-results <- summarize_significant_drugs(
-  metadata_path = "data/v2/signatures/RNAseq_TB_signature_run_info.tsv",
-  signature_id = 1,
-  score_method = "CMAP",
-  score = "CMAP",
-  stats = "median",
-  score_percentile = 0.8,
-  percent_reverse = NA,
-  n = 3
-)
 
-# access the final result
-results$significant_drugs
-```
+1.  Obtain drugs within top 3 occurrences passing 90% reversal for all the six connectivity scores
 
 ```{r}
-# define input metadata and parameters
 metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
 all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.9, n = 3)
 all_signi_drugs_df
 ```
+
+2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
 
 ```{r}
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
@@ -36,26 +25,16 @@ methodwise_results
 ```
 
 ### microarray
-```{r}
-results <- summarize_significant_drugs(
-  metadata_path = "data/v2/signatures/microarray_TB_signature_run_info.tsv",
-  signature_id = 1,
-  score_method = "LINCS",
-  score = "WCS",
-  score_percentile = 0.9,
-  percent_reverse = NA,
-  n = 1
-)
 
-# access the final result
-results$significant_drugs
-```
+1.  obtain drugs within top 3 occurrences passing 90% reversal for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
 all_signi_drugs_df <- create_drug_method_table(metadata_path, score_percentile = 0.9, n = 5)
 all_signi_drugs_df
 ```
+
+2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
 
 ```{r}
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "microarray", dirname = "results")
