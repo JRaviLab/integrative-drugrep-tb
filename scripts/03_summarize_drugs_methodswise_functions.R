@@ -1,9 +1,16 @@
 # functions to finalize drug results from individual disease signatures
-# last modified: 07/03/25
+# last modified: 07/07/25
 # Kewalin Samart
 
 # to be documented
 get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
+  #' @description this function obtains all the drug results prioritized by a connectivity scores for a set of individual signatures
+  #' @param data_to_run a data detail table containing SIGNATURE_NAME column corresponding to signature file names to read in
+  #' @param drug_res_path a path to the drug results (start with a first-level folder name inside the project repository)
+  #' @param score_method a string indicating a method category: "CMAP", "LINCS", "Cor"
+  #' @param score a string indicating a connectivity score name: "CMAP", "WCS", "NCS", "Tau", "Cor_pearson", "Cor_spearman"
+  #' @returns combined_drug_df: a dataframe combining all srug results across individual signatures and the six connectivity scores
+  #' @author Kewalin Samart
   require(stringr)
 
   for (i in 1:nrow(data_to_run)) {
@@ -50,11 +57,11 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
 }
 
 
-get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "median"){
+get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drugs and cols: disease signatures
   #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param score a string indicating a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman", "Cor_pearson"
-  #' @param stats a string indicating the stats of score to include in the matrix: "median", "min", max".; "median" by default.
+  #' @param stats a string indicating the stats of score to include in the matrix: "median", "min", max".; "min" by default.
   #' @returns transformed_combined_drug_df: a dataframe with rows: drugs, columns: disease signatures, entries: scores
   #' @author Kewalin Samart
 
@@ -300,27 +307,27 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
   #' @param n An integer: the number of top occurrences to include (ties allowed).
   #' @returns signi_drug_df: A dataframe with significant drugs.
 
-  # Check input
+  # check input
   if (!(is.numeric(percent_reverse) | is.numeric(n))) {
     print("Please enter a numerical value for either percent_reverse or n")
     return(NULL)
   }
 
-  # Select based on percent_reverse
+  # select based on percent_reverse
   if (is.na(n)) {
     print("Selecting drugs by percent_reverse")
     threshold <- percent_reverse * ncol(transformed_combined_drug_df)
     signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= threshold, ]
   }
 
-  # Select based on top n (including ties at the nth level)
+  # select based on top n (including ties at the nth level)
   if (is.na(percent_reverse)) {
     print("Selecting drugs by top n occurrences (including ties)")
 
-    # Sort by occurrence
+    # sort by occurrence
     pert_occurrence_df <- pert_occurrence_df[order(pert_occurrence_df$occurrence, decreasing = TRUE), ]
 
-    # Identify the nth highest occurrence value
+    # identify the nth highest occurrence value
     if (n <= nrow(pert_occurrence_df)) {
       u <- unique(pert_occurrence_df$occurrence)
       cutoff_occurrence <- u[min(n, length(u))]
@@ -330,7 +337,7 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
     }
   }
 
-  # Check if result is empty
+  # check if result is empty
   if (nrow(signi_drug_df) == 0) {
     print("No significant drugs identified. Try adjusting threshold or n.")
   }
@@ -349,28 +356,35 @@ get_signi_info <- function(combined_drug_df, signi_drug_df){
   return(signi_info_df)
 }
 
-## to be documented
 summarize_significant_drugs <- function(
     metadata_path,
-    signature_id = 1,
     drug_res_base = "results",
     score_method = "Cor",
     score = "Cor_pearson",
     stats = "median",
-    score_percentile = 0.8,
+    score_percentile = 0.9,
     percent_reverse = NA,
-    n = 50,
+    n = 3,
     values = "neg",
     tail = "left"
 ) {
   #' @description Summarizes significant drugs from RNA-seq or microarray for a given score
+  #' @param metadata_path path to signature detail table starting at a first-level folder within the project repository
+  #' @param drug_res_base drug result directory; default is "results"
+  #' @param score_method a string indicating a method categories: "CMAP", "LINCS", "Cor"
+  #' @param score a string indicating a connectivity score name: "CMAP", "WCS", "NCS", "Tau", "Cor_pearson", "Cor_spearman"
+  #' @param percent_reverse A float in [0,1] indicating the percentage of signatures reversed
+  #' @param n An integer: the number of top occurrences to include (ties allowed)
+  #' @param score_percentile a numeric indicating percentile of choice e.g. 0.75 representing a threshold being the 75th percentile of the flipped score distribution (dist x-axis: positive <---> negative, as negative score preferred for disease-drug reversal)
+  #' @param values a string indicating which non-zero values to include in the distribution: "neg", "pos", if other values specified for this argument, it means including all values.
+  #' @param tail a string indicating which side of the distribution to get the indicated top percentile from
   #' @returns A named list containing all intermediate and final results
 
   require(readr)
 
   # load metadata and filter by signature ID
   metadata_df <- read_tsv(here::here(metadata_path), show_col_types = FALSE)
-  data_to_run <- metadata_df[metadata_df$signature == signature_id, ]
+  data_to_run <- metadata_df[metadata_df$signature == 1, ]
 
   # build drug results path
   technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
@@ -402,9 +416,16 @@ summarize_significant_drugs <- function(
   ))
 }
 
-create_drug_method_table <- function(metadata_path, stats = "median", score_percentile = 0.8, percent_reverse = NA, n = 3){
+create_drug_method_table <- function(metadata_path, stats = "min", score_percentile = 0.8, percent_reverse = NA, n = 3){
+  #' @description Build a table of significant drugs from RNA-seq or microarray for a given score with occurrences of reversal across scores
+  #' @param metadata_path path to signature detail table starting at a first-level folder within the project repository
+  #' @param stats a string indicating the stats of score to include in the matrix: "median", "min", max".; "min" by default.
+  #' @param score_percentile a numeric indicating percentile of choice e.g. 0.75 representing a threshold being the 75th percentile of the flipped score distribution (dist x-axis: positive <---> negative, as negative score preferred for disease-drug reversal)
+  #' @param percent_reverse A float in [0,1] indicating the percentage of signatures reversed
+  #' @param n An integer: the number of top occurrences to include (ties allowed)
+  #' @returns all_signi_drugs_df: a table of significant drugs from RNA-seq or microarray for a given score with occurrences of reversal across scores
+
   # define input metadata and parameters
-  # metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
   scores_list <- list(
     CMAP = "CMAP",
     WCS = "WCS",
@@ -451,13 +472,13 @@ create_drug_method_table <- function(metadata_path, stats = "median", score_perc
   return(all_signi_drugs_df)
 }
 
-## to better documented
 summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = "results") {
   #' @description Summarizes final significant drugs based on CMAP, LINCS (WCS, NCS, Tau), and Cor (Cor_spearman, Cor_pearson)
   #' @param all_signi_drugs_df A dataframe with binary indicators per score and column "significant_drug"
   #' @param technology A string for output file prefix indicating data technology
   #' @param dirname Output directory; default is "results"
   #' @return indiv_drugs_res_top: Dataframe of top drugs in ≥2 of the 3 method groups
+  #' @author Kewalin Samart
 
   require(readr)
   require(here)
