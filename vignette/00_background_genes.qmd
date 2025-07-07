@@ -2,39 +2,61 @@
 # Last modified: 06/26/2025
 # Author: Kewalin Samart
 
-```{r load libraries and sort scripts}
+##### **Load libraries and sort scripts** 
+```{r}
 library(readr)
 library(here)
 source(here("scripts/00_background_genes_PA_functions.R"))
 ```
 
-```{r getting background genes from human Gene Ontology database}
+##### **Get background genes from human Gene Ontology database** 
+```{r}
 GO_genes_bg <- GO_genes()
 head(GO_genes_bg)
 ```
 
-```{r getting background genes from human KEGG pathway database}
+##### **Get background genes from human KEGG pathway database** 
+```{r}
 KEGG_genes_bg <- KEGG_genes()
 head(KEGG_genes_bg)
 ```
 
-```{r getting background genes from LINCS}
-LINCS_genes_bg <- bg_LINCS_genes() 
+##### **Get background genes from LINCS** 
+```{r}
+LINCS_genes_bg <- bg_LINCS_genes()
 head(LINCS_genes_bg)
 ```
 
-```{r getting background genes from data}
+##### **Get background genes from data** 
+```{r}
 metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
 data_path <- "data/v2/signatures/RNAseq/up"
 extension <- "up"
 data_genes_bg <- bg_from_data(metadata_path = metadata_path, data_path = data_path, extension = extension)
 head(data_genes_bg)
 ```
-```{r getting background genes from any source above}
-tryCatch({
-get_bg_genes(bg_source = "GO")
-get_bg_genes(bg_source = "KEGG")
-get_bg_genes(bg_source = "LINCS")
-get_bg_genes(bg_source = "input data", metadata_path = metadata_path, data_path = data_path, extension = extension)
-})
+
+##### **Get background genes from any source above** 
+```{r}
+tryCatch(
+    {
+        bg_genes_GO <- get_bg_genes(bg_source = "GO")
+        cat("GO genes background size:", length(bg_genes_GO), "\n")
+
+        bg_genes_KEGG <- get_bg_genes(bg_source = "KEGG")
+        cat("KEGG genes background size:", length(bg_genes_KEGG), "\n")
+
+        bg_genes_LINCS <- get_bg_genes(bg_source = "LINCS")
+        cat("LINCS genes background size:", length(bg_genes_LINCS), "\n")
+
+		cat("\nRUNNING ON INPUT DATA...")
+
+        bg_genes_INPUT <- get_bg_genes(bg_source = "input data", metadata_path = metadata_path, data_path = data_path, extension = extension)
+        cat("Input data genes background size:", length(bg_genes_INPUT), "\n")
+		bg_genes_INPUT
+    },
+    error = function(e) {
+        cat("Error: ", e$message, "\n")
+    }
+)
 ```
