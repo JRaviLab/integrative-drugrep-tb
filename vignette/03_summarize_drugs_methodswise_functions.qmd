@@ -11,13 +11,14 @@ library(here)
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 ```
 
+## Individual signatures
 ### RNAseq
 
-1.  Obtain drugs within top 3 occurrences passing 90% reversal for all the six connectivity scores
+1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
-all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.9, n = 3)
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
 all_signi_drugs_df
 ```
 
@@ -25,16 +26,15 @@ all_signi_drugs_df
 
 ```{r}
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
-methodwise_results
 ```
 
 ### microarray
 
-1.  obtain drugs within top 3 occurrences passing 90% reversal for all the six connectivity scores
+1.  obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
-all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.9, n = 3)
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.8, n = 3)
 all_signi_drugs_df
 ```
 
