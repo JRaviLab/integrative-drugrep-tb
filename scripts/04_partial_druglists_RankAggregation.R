@@ -4,7 +4,7 @@
 # ref1: https://doi.org/10.1002%2Fsim.7920
 # ref2: https://github.com/baillielab/comparison_of_RA_methods/blob/main/algorithms/useBiG.R
 # created date: 01/02/24
-# last modified: 09/14/24
+# last modified: 07/08/25
 # Kewalin Samart
 
 source("./scripts/04_RankAggregation_utilities.R")
@@ -12,18 +12,19 @@ source("./scripts/04_BiG_RankAggregation_functions.R")
 
 library(tidyverse)
 library(readr)
+library(here)
 
 data_technologies <- c("microarray","RNAseq")
 n_p1_params <- c(4,3) # number of studies (scores) belong to platform 1 (GSEA-based); RNAseq is missing WCS
 
-## Individual signatures
+## Individual signatures ---- the code works!
 for(i in range(1:2)){
   data_technology <- data_technologies[i]
   n_p1 <- n_p1_params[i]
 
-  dirname <- paste0("./results/uniformly_processed/",data_technology,"/")
+  dirname <- paste0(here("results",data_technology,"04_rank_aggregation/"))
   # read in ranked drug list
-  ranked_drug_list <- readRDS(paste0(dirname,"04_rank_aggregation/ranked_0.9pct0.5rv_topdrugs_indivSig_TB_",data_technology,"_list.rds"))
+  ranked_drug_list <- readRDS(paste0(dirname,"ranked_topdrugs_indivSig_TB_",data_technology,"_list.rds"))
 
   # transform to a rank matrix
   rank_matrix <- matrix_transfer(ranked_drug_list, full = FALSE)
@@ -41,14 +42,8 @@ for(i in range(1:2)){
   RA_0.9pct0.5rv <- RA_0.9pct0.5rv[order(-RA_0.9pct0.5rv$rank_score),] # put higher rank scores at the top
 
   # save RA outputs
-  write_tsv(RA_0.9pct0.5rv,paste0(dirname,"04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_",data_technology,".tsv")) # data frame
-  saveRDS(rankedEntities, paste0(dirname,"04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_",data_technology,".rds")) # vector of ranked drugs
-
-  # filter by top methods-wide drugs (picked up by 2/3 method categories: CMAP, LINCS, and Correlation-based methods)
-  methodswide_drugs <- read.delim(paste0(dirname,"03b_uni_",data_technology,"_indiv_top_drugs.tsv"),sep = "\t")
-  RA_methodswide_drugs <- methodswide_drugs[methodswide_drugs$significant_drug %in% rankedEntities,]
-  # save RA methods-wide drug data frame
-  write_tsv(RA_methodswide_drugs,paste0(dirname,"04_rank_aggregation/04_uni_",data_technology,"_indiv_RAmethodswide_drugs.tsv"))
+  write_tsv(RA_0.9pct0.5rv,paste0(dirname,"RAresult_indivSig_TB_",data_technology,".tsv")) # data frame
+  saveRDS(rankedEntities, paste0(dirname,"RAresult_indivSig_TB_",data_technology,".rds")) # vector of ranked drugs
 }
 
 n_p1_params <- c(4,4)

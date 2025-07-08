@@ -1,6 +1,6 @@
 # script to generate intermediate data objects for rank aggregation (for results from both indiv and aggr signatures)
 # created date: 01/02/24
-# last modified: 07/07/24
+# last modified: 07/08/24
 # Kewalin Samart
 
 library(tidyverse)
@@ -23,11 +23,13 @@ score_method_map <- list(
 )
 
 # Load metadata table that contains SIGNATURE_NAME
-data_to_run <- read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))  # Adjust path if needed
-data_to_run <- data_to_run[data_to_run$signature == 1,]
+
 
 # Main loop
 for (technology in technologies) {
+  print(technology)
+  data_to_run <- read_tsv(here(paste0("data/v2/signatures/",technology,"_TB_signature_run_info.tsv")))  # Adjust path if needed
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
   for (score in scores) {
     score_method <- score_method_map[[score]]
     drug_res_path <- here(paste0("results/", technology,"/",score_method))
@@ -44,15 +46,16 @@ for (technology in technologies) {
                            "Cor_spearman" = "cor_score",
                            "Cor_pearson" = "cor_score"
     )
-
-    # Get min score + cell type per drug
+    # the cell line where it shows the lowest median score across all disease signatures
     min_score_df <- combined_drug_df %>%
       select(unique_pert = pert, cell, score = !!sym(score_column)) %>%
+      group_by(unique_pert, cell) %>%
+      summarise(median_score = median(score, na.rm = TRUE), .groups = "drop") %>%
       group_by(unique_pert) %>%
-      filter(score == min(score, na.rm = TRUE)) %>%
+      filter(median_score == min(median_score, na.rm = TRUE)) %>%
       slice(1) %>%
       ungroup() %>%
-      rename(min_score = score)
+      rename(min_score = median_score)
 
     # Get score matrix (rows: drugs, cols: signatures)
     score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score = score, stats = "min")
@@ -62,17 +65,40 @@ for (technology in technologies) {
     rownames(ranked_matrix) <- ranked_matrix$unique_pert
     ranked_matrix <- ranked_matrix[, -1]
 
-    rank_df <- apply(ranked_matrix, 2, function(x) rank(x, na.last = "keep"))
-    mean_ranks <- rowMeans(rank_df, na.rm = TRUE)
-    ranked_drugs <- names(sort(mean_ranks))
+    # Compute median of minimum scores across all signatures (rows = drugs)
+    median_min_scores <- apply(ranked_matrix, 1, median, na.rm = TRUE)
+
+    # Sort drugs: smaller median min = stronger reversal → rank 1
+    median_min_scores <- sort(median_min_scores)  # ascending order
+    ranked_drugs <- names(median_min_scores)
+
+    # Reorder min_score_df to match new ranked order
+    min_score_df <- min_score_df[match(ranked_drugs, min_score_df$unique_pert), ]
+
+    # the median of minimum scores across all disease signatures, regardless of cell line
+    median_score_df <- data.frame(
+      unique_pert = ranked_drugs,
+      median_min_score = as.numeric(median_min_scores),
+      stringsAsFactors = FALSE
+    )
+
+    # Add median_min_scores as a data frame for output
+    median_score_df <- data.frame(
+      unique_pert = names(median_min_scores),
+      median_min_score = as.numeric(median_min_scores),
+      stringsAsFactors = FALSE
+    )
+
     # Reorder min_score_df to match ranked_drugs
     min_score_df <- min_score_df[match(ranked_drugs, min_score_df$unique_pert), ]
 
     # Save as RDS
     output_obj <- list(
       ranked_pert = ranked_drugs,
-      min_score_df = min_score_df  # includes unique_pert, min_score, cell
+      min_score_df = min_score_df,  # includes best score per drug
+      median_score_df = median_score_df  # NEW: includes median score per drug
     )
+
 
     output_dir <- here("results", technology, "04_rank_aggregation")
     dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
@@ -111,26 +137,30 @@ for(technology in c("microarray","RNAseq")){
 top_pct_drugs_list <- list()
 score_ranked_drugs_list <- list()
 scores <- c("CMAP","WCS","NCS","Tau","Cor_spearman","Cor_pearson")
-for(data_technology in c("microarray","RNAseq")){
-  dirname <- paste0("results",data_technology,"/")
+for(technology in c("microarray","RNAseq")){
+  dirname <- paste0("results/",technology,"/04_rank_aggregation/")
   for(score in scores){
-    top_drugs_tech_df <- read.delim(paste0("./results/uniformly_processed/",data_technology,"/",score,"_top_0.9pct_0.5reversed_drugs.tsv"),sep = "\t")
-    drugs_score_mean_med_added <- readRDS(paste0(dirname,score,"_indivSig_TB_",data_technology,"_matrix.rds")) # overwrite the current matrix with same data and mean/median added
-    topdrugs_score_mean_med_added <- drugs_score_mean_med_added[drugs_score_mean_med_added$unique_pert %in% top_drugs_tech_df$unique_pert,]
-    score_ranked_drugs <- topdrugs_score_mean_med_added$unique_pert
-    top_pct_drugs_list[[score]] <- top_drugs_tech_df$unique_pert
+    top_drugs_tech_df <- read.delim(here(paste0("results/",technology,"/03_methodwise/",technology,"_indiv_top_drugs.tsv")),sep = "\t")
+    drugs_score_mean_med_added <- readRDS(here(paste0(dirname,score,"_indivSig_TB_",technology,".rds"))) # overwrite the current matrix with same data and mean/median added
+    #topdrugs_score_mean_med_added <- drugs_score_mean_med_added[drugs_score_mean_med_added$ranked_pert %in% top_drugs_tech_df$significant_drug,]
+    topdrugs_score_mean_med_added <- list(
+      ranked_pert = drugs_score_mean_med_added$ranked_pert[drugs_score_mean_med_added$ranked_pert %in% top_drugs_tech_df$significant_drug],
+      min_score_df = drugs_score_mean_med_added$min_score_df[
+        drugs_score_mean_med_added$min_score_df$unique_pert %in% top_drugs_tech_df$significant_drug, ]
+    )
+    score_ranked_drugs <- topdrugs_score_mean_med_added$ranked_pert
+    top_pct_drugs_list[[score]] <- top_drugs_tech_df$ranked_pert
     score_ranked_drugs_list[[score]] <- score_ranked_drugs
   }
-  saveRDS(score_ranked_drugs_list, paste0(dirname,"04_rank_aggregation/ranked_0.9pct0.5rv_topdrugs_indivSig_TB_",data_technology,"_list.rds"))
-  saveRDS(top_pct_drugs_list, paste0(dirname,"04_rank_aggregation/unranked_0.9pct0.5rv_topdrugs_indivSig_TB_",data_technology,"_list.rds"))
+  saveRDS(score_ranked_drugs_list, paste0(dirname,"ranked_topdrugs_indivSig_TB_",technology,"_list.rds"))
 }
 
 #-----------------
 # Aggregated signatures
 # generate lists of partial ranked top drugs
-for(data_technology in c("microarray","RNAseq")){
-  dirname <- paste0("./results/uniformly_processed/",data_technology,"/")
-  drugs_score <- read.csv(paste0(dirname,"uni_",data_technology,"_aggrSig_drugs_scores_neg_left_0.9.tsv"),sep="\t")
+for(technology in c("microarray","RNAseq")){
+  dirname <- paste0("results/uniformly_processed/",technology,"/")
+  drugs_score <- read.csv(here(paste0(dirname, technology,"_aggrSig_drugs_scores_neg_left_0.9.tsv")),sep="\t")
   for(i in 3:dim(drugs_score)[2]){
     score_ranked_drugs = drugs_score[order(drugs_score[i], decreasing = FALSE), ]$pert
     score_ranked_drugs <- as.data.frame(score_ranked_drugs)
