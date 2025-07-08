@@ -326,7 +326,6 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
     threshold <- percent_reverse * ncol(transformed_combined_drug_df)
     signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= threshold, ]
   }
-
   # select based on top n (including ties at the nth level)
   if (is.na(percent_reverse)) {
     print("Selecting drugs by top n occurrences (including ties)")
@@ -337,7 +336,10 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
     # identify the nth highest occurrence value
     if (n <= nrow(pert_occurrence_df)) {
       u <- unique(pert_occurrence_df$occurrence)
-      cutoff_occurrence <- u[min(n, length(u))]
+      n <- min(n, length(u))
+      # Define cutoff: lowest occurrence value to include
+      cutoff_occurrence <- u[n]
+      print(paste0("occurrence cutoffs: ",cutoff_occurrence))
       signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= cutoff_occurrence, ]
     } else {
       signi_drug_df <- pert_occurrence_df
