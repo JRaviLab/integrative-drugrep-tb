@@ -46,8 +46,21 @@ compute_membership_matrix <- function(metadata_path,
   require(dplyr)
   require(readr)
 
+  # input validation
+  stopifnot(
+    "metadata_path must be a valid file path" = file.exists(metadata_path),
+    "data_path must be a valid directory" = dir.exists(data_path),
+    "direction must be 'up', 'dn', or 'full'" = tolower(direction) %in% c("up", "dn", "full")
+  )
+
   # get background genes across datasets
-  bg_genes <- get_bg_genes(bg_source = bg_source, metadata_path = metadata_path, data_path = data_path, extra_arg = extra_arg)
+  message(paste0("Getting background genes from : ", bg_source))
+  bg_genes <- get_bg_genes(
+    bg_source = bg_source,
+    metadata_path = metadata_path,
+    data_path = data_path,
+    extra_arg = extra_arg
+  )
   bg_genes_df <- as.data.frame(bg_genes)
   colnames(bg_genes_df)[1] <- "GeneID"
 
@@ -62,7 +75,6 @@ compute_membership_matrix <- function(metadata_path,
     signature_name <- data_to_run$SIGNATURE_NAME[i]
     signature_filename <- paste0(signature_name, "_", direction, ".tsv")
     print(paste0("reading in up and dn genes: ", signature_filename))
-    # ----------------------------------------------------------------------------------
     signature_path <- paste0(data_path, "/", direction, "/", signature_filename)
 
     print(signature_path)
@@ -126,6 +138,13 @@ compute_jaccard_matrix <- function(metadata_path,
 
   # load libraries
   require(readr)
+
+  # input validation
+  stopifnot(
+    "metadata_path must be a valid file path" = file.exists(metadata_path),
+    "data_path must be a valid directory" = dir.exists(data_path),
+    "direction must be 'up', 'dn', or 'full'" = tolower(direction) %in% c("up", "dn", "full")
+  )
 
   # get data_to_run df
   data_to_run <- read_tsv(metadata_path)
@@ -213,6 +232,13 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
   #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
   #' @author Kewalin Samart
+
+  # Input Validations
+  stopifnot(
+    "gene_membership_matrix must be a data frame or matrix" = is.data.frame(gene_membership_matrix) || is.matrix(gene_membership_matrix),
+    "jaccard_matrix must be a data frame or matrix" = is.data.frame(jaccard_matrix) || is.matrix(jaccard_matrix),
+    "Exactly one thresholding method (quantile or fixed) must be specified." = !is.null(quantile_threshold) || !is.null(fixed_threshold)
+  )
 
   # read in gene membership matrix
   gene_membership_df <- gene_membership_matrix
