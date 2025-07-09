@@ -27,6 +27,8 @@ print(lincs_path)
 
 ### Functions to obtain precomputed disease signatures
 
+#### Individual signatures
+
 #### up and down regulated gene sets for CMAP 1.0 and LINCS methods (enrichment-based methods)
 
 ```{r obtain up/dn genes from up/dn signatures}
@@ -60,8 +62,46 @@ full_TB_signature = get_full_signature(full_sig_path = full_TB_signature_path,
                     L1000 = TRUE)
 head(full_TB_signature)
 ```
+
+#### Aggregated signatures
+
+#### up and down regulated gene sets for CMAP 1.0 and LINCS methods (enrichment-based methods)
+
+```{r obtain up/dn genes from up/dn signatures}
+# get upregulated gene list
+up_aggr_TB_signature_path = here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv")
+up_aggr_genes = as.character(read_tsv(up_aggr_TB_signature_path)$GeneID)
+print("Example up genes:")
+print(head(up_aggr_genes))
+
+# get downregulated gene list
+dn_aggr_TB_signature_path = here("data/v2/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv")
+dn_aggr_genes = as.character(read_tsv(dn_aggr_TB_signature_path)$GeneID)
+print("Example down genes:")
+print(head(dn_aggr_genes))
+```
+
+#### full signatures (up+dn) for XCor and XSpe (correlation-based methods)
+
+```{r combine up and dn signatures into a full signature}
+up_aggr_TB_signature = read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"))
+dn_aggr_TB_signature = read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"))
+combined_aggr_TB_signature <- rbind(up_aggr_TB_signature, dn_aggr_TB_signature)
+combined_aggr_TB_signature <- combined_aggr_TB_signature[order(-combined_aggr_TB_signature$aggregated_GeneScores), ]
+
+#combined_aggr_TB_signature$GeneID <- NULL
+full_aggr_TB_signature <- as.matrix(combined_aggr_TB_signature[, !colnames(combined_aggr_TB_signature) %in% "GeneID"])
+rownames(full_aggr_TB_signature) <- as.character(combined_aggr_TB_signature$GeneID)
+
+head(full_aggr_TB_signature)
+```
+
 ### Functions to calculate disease-drug connectivity scores
+
+### Individual signatures
+
 #### Enrichment-based methods: CMAP1.0 (CS), LINCS (WCS, NCS, Tau)
+
 ```{r CMAP 1.0}
 cmap1.0_res = compute_CMap1_scores(up_genes = up_genes, 
                                    dn_genes = dn_genes, 
@@ -69,6 +109,7 @@ cmap1.0_res = compute_CMap1_scores(up_genes = up_genes,
 head(cmap1.0_res)
 print(dim(cmap1.0_res))
 ```
+
 ```{r LINCS}
 lincs_res = compute_CMap2lincs_scores(up_genes = up_genes, 
                                    dn_genes = dn_genes, 
@@ -78,6 +119,7 @@ print(dim(lincs_res))
 ```
 
 #### Correlation-based methods: XCor (extreme Pearson), XSpe (extreme Spearman)
+
 ```{r XCor}
 xcor_res = compute_Cor_based_scores(full_signature_matrix = full_TB_signature, 
                                     score_method = 'Cor_pearson', 
@@ -94,3 +136,40 @@ head(xspe_res)
 print(dim(xspe_res))
 ```
 
+### Aggregated signatures
+
+#### Enrichment-based methods: CMAP1.0 (CS), LINCS (WCS, NCS, Tau)
+
+```{r CMAP 1.0}
+cmap1.0_aggr_res = compute_CMap1_scores(up_genes = up_aggr_genes, 
+                                   dn_genes = dn_aggr_genes, 
+                                   db_path = lincs_path)
+head(cmap1.0_aggr_res)
+print(dim(cmap1.0_aggr_res))
+```
+
+```{r LINCS}
+lincs_aggr_res = compute_CMap2lincs_scores(up_genes = up_aggr_genes, 
+                                   dn_genes = dn_aggr_genes, 
+                                   db_path = lincs_path)
+head(lincs_aggr_res)
+print(dim(lincs_aggr_res))
+```
+
+#### Correlation-based methods: XCor (extreme Pearson), XSpe (extreme Spearman)
+
+```{r XCor}
+xcor_aggr_res = compute_Cor_based_scores(full_signature_matrix = full_aggr_TB_signature, 
+                                    score_method = 'Cor_pearson', 
+                                    db_path = lincs_path)
+head(xcor_aggr_res)
+print(dim(xcor_aggr_res))
+```
+
+```{r XSpe}
+xspe_aggr_res = compute_Cor_based_scores(full_signature_matrix = full_aggr_TB_signature, 
+                                    score_method = 'Cor_spearman', 
+                                    db_path = lincs_path)
+head(xspe_aggr_res)
+print(dim(xspe_aggr_res))
+```
