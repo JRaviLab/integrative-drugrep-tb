@@ -161,6 +161,13 @@ compute_Cor_based_scores <- function(full_signature_matrix, score_method, db_pat
   #' @author Kewalin Samart
 
   require(signatureSearch)
+
+  # input validation
+  stopifnot(
+    "score_method must be either 'Cor_spearman' or 'Cor_pearson'" =
+      tolower(score_method) %in% tolower(c("cor_spearman", "cor_pearson"))
+  )
+
   # get CMap 2.0 connectivity scores
   qsig <- qSig(
     query = full_signature_matrix,
@@ -168,9 +175,9 @@ compute_Cor_based_scores <- function(full_signature_matrix, score_method, db_pat
     refdb = db_path
   )
   # obtain query results
-  if (score_method == "Cor_spearman") {
+  if (tolower(score_method) == "cor_spearman") {
     res <- gess_cor(qsig, method = "spearman")
-  } else if (score_method == "Cor_pearson") {
+  } else if (tolower(score_method) == "cor_pearson") {
     res <- gess_cor(qsig, method = "pearson")
   }
 

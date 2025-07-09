@@ -15,6 +15,9 @@ getL1000 <- function(LINCSGenes_path = here("data/metadata/LINCSGeneSpaceSub.txt
   #' @returns L1000_gene_symbols a list of L1000 gene symbols (978 in total)
   #' @author Kewalin Samart
 
+  # aborts if file does not exist
+  stopifnot("Lincs gene file does not exist" = file.exists(LINCSGenes_path))
+
   # read in L1000 gene file
   LINCSGenes <- read.delim(LINCSGenes_path, sep = "\t")
   # get L1000 gene list
@@ -35,6 +38,11 @@ filterSig_withL1000 <- function(signature, L1000_genes = getL1000()) {
   signature$GeneID <- as.character(signature$GeneID)
 
   L1000_filtered_sig <- signature[signature$GeneID %in% L1000_genes, ]
+
+  # handle the case where no L1000 genes are found
+  if (nrow(L1000_filtered_sig) == 0) {
+    warning(paste0("No landmark genes were found for the provided signature."))
+  }
 
   return(L1000_filtered_sig)
 }
