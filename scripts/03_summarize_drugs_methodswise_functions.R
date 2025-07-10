@@ -73,7 +73,6 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
 
   col_idx = 1
   for(sig in unique_signature){
-    print(sig)
     col_idx = col_idx + 1
     # get tau vector for each signature
     score_vec = c()
@@ -163,7 +162,6 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
     transformed_combined_drug_df[col_idx] <- score_vec
     colnames(transformed_combined_drug_df)[col_idx] <- sig
   }
-  print(transformed_combined_drug_df)
 
   return(transformed_combined_drug_df)
 }
