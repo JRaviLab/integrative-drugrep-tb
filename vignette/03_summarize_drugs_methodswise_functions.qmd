@@ -2,7 +2,7 @@
 
 ## method-wise summarization
 
-#### Last modified: 07/03/25
+#### Last modified: 07/11/25
 
 #### Author: Kewalin Samart
 
@@ -30,7 +30,7 @@ methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = 
 
 ### microarray
 
-1.  obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
+1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
@@ -43,4 +43,31 @@ all_signi_drugs_df
 ```{r}
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "microarray", dirname = "results")
 methodwise_results 
+```
+
+
+## Individual signatures
+### RNAseq
+1.  Obtain drugs passing 90% reversal for all the six connectivity scores
+```{r}
+technologies = c("microarray", "RNAseq")
+scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
+values = "neg"
+tail = "left"
+score_percentile = 0.9
+base_dir = "results"
+```
+
+```{r}
+aggr_res = extract_aggrSig_significant_drugs(technologies = technologies,
+                                             scores = scores,
+                                             values = values,
+                                             tail = tail,
+                                             score_percentile = score_percentile,
+                                             base_dir = base_dir)
+```
+
+```{r}
+aggr_methodwise_res = summarize_methodwise_aggrSig(aggr_res)
+head(aggr_methodwise_res)
 ```
