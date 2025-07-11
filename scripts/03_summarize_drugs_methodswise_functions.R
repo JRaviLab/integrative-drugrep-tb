@@ -484,6 +484,7 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   #' @param technology A string for output file prefix indicating data technology
   #' @param dirname Output directory; default is "results"
   #' @return indiv_drugs_res_top: Dataframe of top drugs in ≥2 of the 3 method groups
+  #'        Note: the output is also written to dirname
   #' @author Kewalin Samart
 
   require(readr)
@@ -544,13 +545,25 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   return(indiv_drugs_res_top)
 }
 
-# to be documented
 extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RNAseq"),
                                               scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson"),
                                               values = "neg",
                                               tail = "left",
                                               score_percentile = 0.9,
                                               base_dir = "results") {
+  #' @description this function extracts significant drugs from aggregated signatures based on a percentile cutoff
+  #' @param technogies a character vector containing data technology names; default: c("microarray", "RNAseq")
+  #' @param scores a character vector with score names; default: c("CMAP","WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
+  #' @param values a string either "neg" (reversal) or "pos" (additive)
+  #' @param tail a string indicating the tail where we want to extract the extreme scores where "left" and "right" mean means left and right on a number scale, respectively
+  #' @param score_percentile a float indicating the percentile to prioritize drugs; 0.9 (at 90% percentile) by default
+  #' @param base_dir a string indicating the output directory (will be created at the first level inside the project directory)
+  #' @returns a list of score_df_list and score_drug_list
+  #'          score_df_list is a list of <technology>_<score> dataframes of the drugs passing the score threshold with 3 columns: pert, cell, and score (ranked by score in descending order)
+  #'          score_drug_list is a list of character vectors containing ranked drug names (pert in score_df_list)
+  #'          Note: the function writes <score>_aggrSig_ranked_<values>_<tail>_<score_percentile>.tsv which is the dataframes in score_df_list for all scores
+  #' @author Kewalin Samart
+
   require(dplyr)
   require(readr)
   require(here)
@@ -617,7 +630,6 @@ extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RN
       signi_drugs_score_df_all[[key]] <- signi_drug_df
       signi_drugs_score_list_all[[key]] <- signi_drug_df$pert
 
-      # Save output
       output_dir <- here(base_dir, technology, "03_methodwise")
       dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
@@ -632,10 +644,19 @@ extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RN
   ))
 }
 
-# to be documented
 summarize_methodwise_aggrSig <- function(res,
                                           base_dir = "results",
                                           metadata_path = here("data/metadata/repurposing_drugs_20200324.csv")) {
+  #' @description this function summarize drugs from aggregated signatures based on methodwise approach (selecting drugs showing up in 2/3 method categories)
+  #' @param res the output of extract_aggrSig_significant_drugs function
+  #' @param base_dir a string indicating the output directory name (first level inside the project directory)
+  #' @param metadata_path a string indicating metadata path to a drug information .csv file
+  #' @returns results a list of technology lists containing two lists: all_summary and top_drugs
+  #'          all_summary contain multiple lists storing significant_drugs, CMAP, LINCS, Cor, occurrence, and other drug info
+  #'          top_drugs contain multiple lists storing same piece of info as all_summary but only for the drugs passing 2/3 method categories
+  #'          Note: <technology>_aggr_drug_summary.tsv and <technology>_aggr_top_drugs.tsv are written to the base_dir/<technology>
+  #' @author Kewalin Samart
+
   require(dplyr)
   require(readr)
   require(here)
@@ -648,7 +669,7 @@ summarize_methodwise_aggrSig <- function(res,
   all_keys <- names(score_list)
   technologies <- unique(sub("_.*", "", all_keys))
 
-  # Load metadata once
+  # load metadata once
   drug_info_df <- read.csv(metadata_path, skip = 9)
   results <- list()
 
@@ -661,31 +682,31 @@ summarize_methodwise_aggrSig <- function(res,
     sub_all_drugs <- unique(unlist(sublist))
     sub_all_drugs_df <- data.frame(significant_drug = sub_all_drugs, stringsAsFactors = FALSE)
 
-    # Add indicator columns for each score
+    # add indicator columns for each score
     for (score in names(sublist)) {
       method <- sub(paste0(tech, "_"), "", score)
       sub_all_drugs_df[[method]] <- as.integer(sub_all_drugs_df$significant_drug %in% sublist[[score]])
     }
 
-    # Summarize method groups
+    # summarize method groups
     sub_all_drugs_df$LINCS <- rowSums(sub_all_drugs_df[, c("WCS", "NCS", "Tau")], na.rm = TRUE)
     sub_all_drugs_df$Cor <- rowSums(sub_all_drugs_df[, c("Cor_spearman", "Cor_pearson")], na.rm = TRUE)
     sub_all_drugs_df$occurrence <- rowSums(sub_all_drugs_df[, c("CMAP", "LINCS", "Cor")], na.rm = TRUE)
 
     summary_df <- sub_all_drugs_df[, c("significant_drug", "CMAP", "LINCS", "Cor", "occurrence")]
 
-    # Merge with metadata
+    # merge with metadata
     merged_df <- merge(summary_df, drug_info_df,
                        by.x = "significant_drug", by.y = "pert_iname",
                        all.x = TRUE)
     merged_df <- merged_df[order(-merged_df$occurrence), ]
     rownames(merged_df) <- NULL
 
-    # Filter top drugs supported by ≥2 methods
+    # filter top drugs supported by ≥2 methods
     top_df <- merged_df[rowSums(merged_df[, c("CMAP", "LINCS", "Cor")] > 0, na.rm = TRUE) >= 2, ]
     rownames(top_df) <- NULL
 
-    # Save to disk
+    # save to disk
     output_dir <- here(base_dir,tech, "03_methodwise")
     dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
