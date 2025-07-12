@@ -1,0 +1,145 @@
+# Figure 1a: Sankey diagram showing information of all the TB signatures up to June 2025
+# last modified: 07/12/25
+# author: Kewalin Samart
+
+```{r load libraries}
+library(tidyverse)
+library(here)
+library(readr)
+```
+
+```{r microarray signature info}
+microarray_signatures_df <- read_tsv(here("data/v2/signatures/microarray_TB_signature_run_info.tsv"))
+microarray_signatures_df <- microarray_signatures_df[microarray_signatures_df$signature == 1,]
+
+microarray_signatures_info <- microarray_signatures_df %>%
+  mutate(
+    before_control = str_extract(SIGNATURE_NAME, "^[^_]+_[^_]+_[^_]+"),
+    after_control = str_replace(SIGNATURE_NAME, ".*?_control_", ""),
+    
+    study_id = str_extract(before_control, "^GSE\\d+"),
+    platform_id = str_extract(before_control, "GPL\\d+"),
+    tb_status = str_extract(before_control, "(?<=_)[^_]+$"),
+    
+    time_point = if_else(str_detect(after_control, "^[0-9]"),
+                         str_extract(after_control, "^[^_]+"),
+                         NA_character_),
+    tissue_cell_type = if_else(str_detect(after_control, "^[0-9]"),
+                           str_replace(after_control, "^[^_]+_", ""),
+                           after_control),
+    
+    tissue_category = case_when(
+      str_detect(tolower(tissue_cell_type), "blood") ~ "circulating",
+      str_detect(tolower(tissue_cell_type), "lung") ~ "lung",
+      TRUE ~ "other"
+    )
+  ) %>%
+  select(study_id, platform_id, tb_status, time_point,
+         tissue_cell_type, sample_origin, tissue_category,
+         everything(), -before_control, -after_control)
+
+microarray_signatures_info$technology <- "microarray"
+
+head(microarray_signatures_info)
+```
+
+```{r rnaseq signature info}
+rnaseq_signatures_df <- read_tsv(here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv"))
+rnaseq_signatures_df <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1,]
+
+rnaseq_signatures_info <- rnaseq_signatures_df %>%
+  mutate(
+    before_control = str_extract(SIGNATURE_NAME, "^[^_]+_[^_]+_[^_]+"),
+    after_control = str_replace(SIGNATURE_NAME, ".*?_control_", ""),
+    
+    study_id = str_extract(before_control, "^GSE\\d+"),
+    tb_status = str_extract(before_control, "^GSE\\d+_([^_]+)") %>% str_replace("^GSE\\d+_", ""),
+    
+    time_point = if_else(str_detect(after_control, "^[0-9]"),
+                         str_extract(after_control, "^[^_]+"),
+                         NA_character_),
+    tissue_cell_type = if_else(str_detect(after_control, "^[0-9]"),
+                           str_replace(after_control, "^[^_]+_", ""),
+                           after_control),
+    
+    sample_origin = case_when(
+      str_detect(tolower(tissue_cell_type), "thp-1") ~ "cell line",
+      TRUE ~ "primary"
+    ),
+    
+    tissue_category = case_when(
+      str_detect(tolower(tissue_cell_type), "blood") ~ "circulating",
+      str_detect(tolower(tissue_cell_type), "lung") ~ "lung",
+      TRUE ~ "other"
+    )
+  ) %>%
+  select(study_id, tb_status, time_point,
+         tissue_cell_type, sample_origin, tissue_category,
+         everything(), -before_control, -after_control)
+
+rnaseq_signatures_info$technology <- "RNAseq"
+
+head(rnaseq_signatures_info)
+```
+```{r combine signature info}
+rnaseq_signatures_info <- rnaseq_signatures_info %>%
+  mutate(platform_id = NA) %>%
+  select(1, platform_id, everything())
+
+all_signatures_info = rbind(microarray_signatures_info, rnaseq_signatures_info)
+write_tsv(all_signatures_info, file = here("data/metadata/202506_TB_signatures_info.tsv"))
+```
+
+```{r Sankey diagram}
+df_unique <- all_signatures_info %>%
+  mutate(signature = SIGNATURE_NAME,
+         cell_tissue_type = tissue_cell_type,
+         origin = sample_origin,
+         origin_type = tissue_category,
+         TB = tb_status) %>%
+  select(signature, cell_tissue_type, origin, origin_type, TB, technology)
+
+cell_counts <- df_unique %>% count(cell_tissue_type)
+keep_types <- cell_counts %>% filter(n >= 2) %>% pull(cell_tissue_type)
+df_unique$cell_tissue_type <- ifelse(df_unique$cell_tissue_type %in% keep_types,
+                                     df_unique$cell_tissue_type,
+                                     "Other tissue/cell types")
+
+link1 <- df_unique %>% count(cell_tissue_type, origin) %>%
+  rename(source = cell_tissue_type, target = origin, value = n)
+link2 <- df_unique %>% count(origin, origin_type) %>%
+  rename(source = origin, target = origin_type, value = n)
+link3 <- df_unique %>% count(origin_type, TB) %>%
+  rename(source = origin_type, target = TB, value = n)
+link4 <- df_unique %>% count(TB, technology) %>%
+  rename(source = TB, target = technology, value = n)
+
+links_all <- bind_rows(link1, link2, link3, link4)
+
+sig_paths <- df_unique %>%
+  select(signature, cell_tissue_type, origin, origin_type, TB, technology) %>%
+  pivot_longer(-signature, names_to = "layer", values_to = "name") %>%
+  distinct(signature, name)
+
+all_node_counts <- sig_paths %>%
+  count(name) %>%
+  rename(total = n)
+
+nodes <- all_node_counts %>%
+  mutate(label = paste0(name, " (", total, ")")) %>%
+  select(name, label)
+
+links_all$source_id <- match(links_all$source, nodes$name) - 1
+links_all$target_id <- match(links_all$target, nodes$name) - 1
+
+sankeyNetwork(Links = links_all,
+              Nodes = nodes,
+              Source = "source_id",
+              Target = "target_id",
+              Value = "value",
+              NodeID = "label",
+              fontSize = 12,
+              nodeWidth = 30,
+              nodePadding = 15,
+              sinksRight = TRUE)
+```
