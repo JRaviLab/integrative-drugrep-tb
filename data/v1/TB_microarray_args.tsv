@@ -1,0 +1,17 @@
+accession_no	meta_path	exprmat_path	condition_colname	inf_keywords	control_keywords	file_name	platform	signature
+GSE16250	./data/metadata/metadata_GSE16250.tsv	./data/expression_matrices/GSE16250.tsv	refinebio_title	H37Ra	PBMCs	MTB_control	GPL570	1
+GSE17477	./data/metadata/metadata_GSE17477.tsv	./data/expression_matrices/GSE17477.tsv	refinebio_title	THP1, TB infected, biological rep	Untreated	MTB_control	GPL571	1
+GSE19435	./data/metadata/metadata_GSE19435.tsv	./data/expression_matrices/GSE19435.tsv	description	active TB before treatment	healthy control	MTB_control	GPL6947	1
+GSE19439	./data/metadata/metadata_GSE19439.tsv	./data/expression_matrices/GSE19439.tsv	characteristics_ch1_illness	PTB	BCG-	PTB_control	GPL6947	1
+GSE19444	./data/metadata/metadata_GSE19444.tsv	./data/expression_matrices/GSE19444.tsv	description	active TB	healthy control	PTB_control	GPL6947	1
+GSE19491	./data/metadata/metadata_GSE19491.tsv	./data/expression_matrices/GSE19491.tsv	characteristics_ch1_illness	PTB	Control	PTB_control	GPL6947	1
+GSE29536	./data/metadata/metadata_GSE29536.tsv	./data/expression_matrices/GSE29536.tsv	characteristics_ch1_disease_status	PTB	Control BCG-	PTB_control	GPL6102	1
+GSE34151	./data/metadata/metadata_GSE34151.tsv	./data/expression_matrices/GSE34151.tsv	characteristics_ch1_infection_status	MTB-infected	non-infected	MTB_control	GPL10558	1
+GSE54992	./data/metadata/metadata_GSE54992.tsv	./data/expression_matrices/GSE54992.tsv	source_name_ch1	PBMC from TB	PBMC from HC	MTB_control	GPL570	1
+GSE139871	./data/metadata/metadata_GSE139871.tsv	./data/expression_matrices/GSE139871.tsv	refinebio_title	Monocyte from TB	Monocyte from healthy	MTB_control	GPL10558	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	4h treated D	untreated D	MTB4hD_control	NA	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	18h treated D	untreated D	MTB18hD_control	NA	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	48h treated D	untreated D	MTB48hD_control	NA	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	4h treated M	untreated M	MTB4hM_control	NA	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	18h treated M	untreated M	MTB18hM_control	NA	1
+E-MEXP-3521	./data/metadata/metadata_E-MEXP-3521.tsv	./data/expression_matrices/E-MEXP-3521.tsv	refinebio_title	48h treated M	untreated M	MTB48hM_control	NA	1
