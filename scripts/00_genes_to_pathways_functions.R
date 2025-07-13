@@ -153,3 +153,131 @@ for (direction in directions) {
     write_tsv(enrichGO_res, file = output_file)
   }
 }
+
+###--------------- Aggregated signatures
+bg_genes_source <- "input data"
+
+### RNAseq
+technology <- "RNAseq"
+metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
+data_path <- here(paste0("data/v2/DE_results/", technology))
+if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
+if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
+### up signatures
+direction <- "up"
+# Define background genes
+dirname_read <- file.path(data_path, direction)
+bg_genes_up_rnaseq <- get_bg_genes(bg_source = bg_genes_source,
+                          metadata_path = metadata_path,
+                          data_path = dirname_read,
+                          extension = extension)
+bg_genes_up_rnaseq <- intersect(bg_genes_up_rnaseq, GO_genes())  # Restrict to GO-annotated genes
+up_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
+enrichGO_res_up_aggr_rnaseq <- enrichGO(gene = up_aggr_signature_rnaseq,
+                         OrgDb = org.Hs.eg.db,
+                         readable = TRUE,
+                         ont = "BP",
+                         universe = bg_genes_up_rnaseq,
+                         pvalueCutoff = 0.05,
+                         qvalueCutoff = 0.1,
+                         minGSSize = 5,
+                         maxGSSize = 200)
+
+enrichGO_res_up_aggr_rnaseq <- as.data.frame(enrichGO_res_up_aggr_rnaseq)
+
+# Save results
+output_file <- file.path(here("data/v2/RNAseq_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_RNAseq.tsv"))
+
+write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file)
+
+
+### dn signatures
+direction <- "dn"
+if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
+if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
+# Define background genes
+dirname_read <- file.path(data_path, direction)
+bg_genes_dn_rnaseq <- get_bg_genes(bg_source = bg_genes_source,
+                            metadata_path = metadata_path,
+                            data_path = dirname_read,
+                            extension = extension)
+bg_genes_dn_rnaseq <- intersect(bg_genes_dn_rnaseq, GO_genes())  # Restrict to GO-annotated genes
+dn_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"))$GeneID)
+enrichGO_res_dn_aggr_rnaseq <- enrichGO(gene = dn_aggr_signature_rnaseq,
+                                        OrgDb = org.Hs.eg.db,
+                                        readable = TRUE,
+                                        ont = "BP",
+                                        universe = bg_genes_dn_rnaseq,
+                                        pvalueCutoff = 0.05,
+                                        qvalueCutoff = 0.1,
+                                        minGSSize = 5,
+                                        maxGSSize = 200)
+
+enrichGO_res_dn_aggr_rnaseq <- as.data.frame(enrichGO_res_dn_aggr_rnaseq)
+
+# Save results
+output_file_dn_aggr_rnaseq <- file.path(here("data/v2/RNAseq_pathways/dn"), paste0("GO_ORA_BGcorrected_dn_aggregated_RNAseq.tsv"))
+
+write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file_dn_aggr_rnaseq )
+
+### microarray
+technology <- "microarray"
+metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
+data_path <- here(paste0("data/v2/DE_results/", technology))
+### up signatures
+direction <- "up"
+if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
+if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
+# Define background genes
+dirname_read <- file.path(data_path, direction)
+bg_genes_up_marray <- get_bg_genes(bg_source = bg_genes_source,
+                                   metadata_path = metadata_path,
+                                   data_path = dirname_read,
+                                   extension = extension)
+bg_genes_up_marray <- intersect(bg_genes_up_marray, GO_genes())  # Restrict to GO-annotated genes
+up_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
+enrichGO_res_up_aggr_marray <- enrichGO(gene = up_aggr_signature_marray,
+                                        OrgDb = org.Hs.eg.db,
+                                        readable = TRUE,
+                                        ont = "BP",
+                                        universe = bg_genes_up_marray,
+                                        pvalueCutoff = 0.05,
+                                        qvalueCutoff = 0.1,
+                                        minGSSize = 5,
+                                        maxGSSize = 200)
+
+enrichGO_res_up_aggr_marray <- as.data.frame(enrichGO_res_up_aggr_marray)
+
+# Save results
+output_file_up_aggr_marray <- file.path(here("data/v2/microarray_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_microarray.tsv"))
+
+write_tsv(enrichGO_res_up_aggr_marray, file = output_file_up_aggr_marray)
+
+### dn signatures
+direction <- "dn"
+if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
+if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
+# Define background genes
+dirname_read <- file.path(data_path, direction)
+bg_genes_dn_marray <- get_bg_genes(bg_source = bg_genes_source,
+                                   metadata_path = metadata_path,
+                                   data_path = dirname_read,
+                                   extension = extension)
+bg_genes_dn_marray <- intersect(bg_genes_dn_marray, GO_genes())  # Restrict to GO-annotated genes
+dn_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv"))$GeneID)
+enrichGO_res_dn_aggr_marray <- enrichGO(gene = dn_aggr_signature_marray,
+                                        OrgDb = org.Hs.eg.db,
+                                        readable = TRUE,
+                                        ont = "BP",
+                                        universe = bg_genes_dn_marray,
+                                        pvalueCutoff = 0.05,
+                                        qvalueCutoff = 0.1,
+                                        minGSSize = 5,
+                                        maxGSSize = 200)
+
+enrichGO_res_dn_aggr_marray <- as.data.frame(enrichGO_res_dn_aggr_marray)
+
+# Save results
+output_file_dn_aggr_marray <- file.path(here("data/v2/microarray_pathways/dn"), paste0("GO_ORA_BGcorrected_dn_aggregated_microarray.tsv"))
+
+write_tsv(enrichGO_res_dn_aggr_marray, file = output_file_dn_aggr_marray)
