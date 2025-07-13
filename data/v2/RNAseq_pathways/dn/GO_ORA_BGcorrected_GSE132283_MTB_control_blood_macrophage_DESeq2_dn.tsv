@@ -1,0 +1,2 @@
+ID	Description	GeneRatio	BgRatio	RichFactor	FoldEnrichment	zScore	pvalue	p.adjust	qvalue	geneID	Count
+GO:1904706	negative regulation of vascular associated smooth muscle cell proliferation	6/508	11/9189	0.5454545454545454	9.866499642090194	7.117573950023681	1.009357531068496e-5	0.0394658794647782	0.03936494371167135	PTEN/TPM1/GPER1/PPARG/BMP4/APLN	6

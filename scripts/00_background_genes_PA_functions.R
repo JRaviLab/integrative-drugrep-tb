@@ -47,56 +47,31 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   return(bg_lincs_genes)
 }
 
-bg_from_data <- function(metadata_path, data_path, extension=""){
-  #' @description background genes across datasets
-  #' @param metadata_path path to metadata file describing DE results/signatures details
-  #' @example "./data/metadata/"
-  #' @param data_path path to DE data table/ signatures
-  #' @example "./data/uniformly_processed/microarray/DEresults/", "./data/uniformly_processed/microarray/signatures/dn/"
-  #' @param extension a string describing the signature direction and GeneType e.g., "up_none", "dn_landmark", "full_none", "" (by default)
-  #' @returns genes all genes present across every input datasets
+bg_from_data <- function(metadata_path, data_path, extension="") {
+  #' @description Collect union of genes across all datasets (background genes)
+  #' @param metadata_path Path to metadata file listing datasets
+  #' @param data_path Path to DE result tables or signatures
+  #' @param extension String like "up_none", "dn_landmark", "full_none" (optional)
+  #' @return Character vector of unique genes across datasets
   #' @author Kewalin Samart
 
-  union_bg_data_genes <- c()
-  if(extension != ""){
-    extension <- paste0("_",extension)
-  }
-  data_to_run <- read_tsv(metadata_path)
-  for(i in 1:nrow(data_to_run)){
-    # read in variables
-    accession_no <- data_to_run$accession_no[i]
-    file_name <- data_to_run$file_name[i]
-    if("platform" %in% colnames(data_to_run)){
-      platform <- data_to_run$platform[i]
-      file_path = paste0(data_path,"/",accession_no,"_",platform,"_",file_name,extension,".tsv")
-      # check if file exists, if not then skip
-      if(file.exists(file_path)){
-        dataset <- read.delim(file_path, sep="\t")
-      }else{
-        next
-      }
+  all_genes <- character(0)
 
-    }else{
-      file_path = paste0(data_path,"/",accession_no,"_",file_name,extension,".tsv")
-      # check if file exists, if not then skip
-      if(file.exists(file_path)){
-        dataset <- read.delim(file_path, sep="\t")
-      }else{
-        next
-      }
-    }
+  data_to_run <- readr::read_tsv(metadata_path)
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
 
-    dataset <- na.omit(dataset) # remove rows with all NAs in the data
+  for (i in seq_len(nrow(data_to_run))) {
+    file_name <- data_to_run$SIGNATURE_NAME[i]
+    file_path <- paste0(data_path,"/",file_name,extension)
 
-    if(i == 1){
-      union_bg_data_genes = as.character(dataset$GeneID)
-      print("yes, i is equal to 1")
-    }else{
-      union_bg_data_genes <- c(union_bg_data_genes,as.character(dataset$GeneID)) # get all the genes present across every input datasets
-    }
+    if (!file.exists(file_path)) next
+
+    dataset <- readr::read_tsv(file_path) %>% tidyr::drop_na()
+
+    all_genes <- c(all_genes, as.character(dataset$GeneID))
   }
 
-  return(unique(union_bg_data_genes)) # return only unique genes
+  return(unique(all_genes))
 }
 
 get_bg_genes <- function(bg_source, metadata_path=NULL, data_path=NULL, extra_arg=NULL, extension=NULL){

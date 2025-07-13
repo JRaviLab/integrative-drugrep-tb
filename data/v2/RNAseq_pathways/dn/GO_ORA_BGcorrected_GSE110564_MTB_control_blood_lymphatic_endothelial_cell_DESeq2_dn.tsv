@@ -1,0 +1,2 @@
+ID	Description	GeneRatio	BgRatio	RichFactor	FoldEnrichment	zScore	pvalue	p.adjust	qvalue	geneID	Count
+GO:0048873	homeostasis of number of cells within a tissue	7/288	20/9189	0.35	11.167187499999999	8.187327838539295	1.5081628067626568e-6	0.004747696515688843	0.004554651676423224	AKT3/RAC3/KRAS/TUBA1A/NOS3/GNAT2/SMO	7
