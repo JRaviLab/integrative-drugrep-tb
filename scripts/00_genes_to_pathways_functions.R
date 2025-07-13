@@ -35,8 +35,8 @@ split_DE_results <- function(technology) {
     dn_genes <- de_df %>% filter(adj.P.Val < 0.05, log2FoldChange < 0)
 
     base_filename <- sub("\\.tsv$", "", file)
-    write_tsv(up_genes, file.path(data_path, "up", paste0(base_filename, ".up.tsv")))
-    write_tsv(dn_genes, file.path(data_path, "dn", paste0(base_filename, ".dn.tsv")))
+    write_tsv(up_genes, file.path(data_path, "up", paste0(base_filename, "-up.tsv")))
+    write_tsv(dn_genes, file.path(data_path, "dn", paste0(base_filename, "_dn.tsv")))
   }
 }
 
@@ -79,7 +79,7 @@ run_pathway_analysis <- function(technology, direction) {
       as.data.frame()
 
     base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
-    output_file <- file.path(output_dir, paste0("GO_ORA_BGcorrected_", base_filename, ".tsv"))
+    output_file <- file.path(output_dir, paste0("GO_ORA_BGcorrected_", base_filename))
 
     write_tsv(enrichGO_res, file = output_file)
   }
