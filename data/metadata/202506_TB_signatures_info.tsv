@@ -26,7 +26,7 @@ GSE143627	NA	MTB	NA	PBMC_macrophage	primary	circulating	GSE143627	GSE143627_MTB_
 GSE148731	NA	MTB	NA	blood_monocytes	primary	circulating	GSE148731	GSE148731_MTB_control_blood_monocytes	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	206	89	RNAseq
 GSE174566	NA	MTB	NA	blood_PBMC	primary	circulating	GSE174566	GSE174566_MTB_control_blood_PBMC	data/RNAseq_data_forDE/expression_matrices/GSE174566.tsv	1	225	79	RNAseq
 GSE193777	NA	MTB	NA	blood	primary	circulating	GSE193777	GSE193777_MTB_control_blood	data/RNAseq_data_forDE/expression_matrices/GSE193777.tsv	1	226	101	RNAseq
-GSE256184	NA	MTB	NA	HEPG2_HepG2	primary	other	GSE256184	GSE256184_MTB_control_HEPG2_HepG2	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	258	59	RNAseq
+GSE256184	NA	MTB	NA	HEPG2_HepG2	cell line	other	GSE256184	GSE256184_MTB_control_HEPG2_HepG2	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	258	59	RNAseq
 GSE64179	NA	MTB	NA	blood_dendritic_cells	primary	circulating	GSE64179	GSE64179_MTB_control_blood_dendritic_cells	data/RNAseq_data_forDE/expression_matrices/GSE64179.tsv	1	268	258	RNAseq
 GSE64182	NA	MTB	NA	blood_dendritic_cells	primary	circulating	GSE64182	GSE64182_MTB_control_blood_dendritic_cells	data/RNAseq_data_forDE/expression_matrices/GSE64182.tsv	1	256	67	RNAseq
 GSE110564	NA	MTB	NA	blood_lymphatic_endothelial_cell	primary	circulating	GSE110564	GSE110564_MTB_control_blood_lymphatic_endothelial_cell	data/RNAseq_data_forDE/expression_matrices/GSE110564.tsv	1	70	21	RNAseq

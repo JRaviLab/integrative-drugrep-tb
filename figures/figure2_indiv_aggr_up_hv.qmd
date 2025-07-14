@@ -22,9 +22,9 @@ aggr_enrichGO_res_up_rnaseq = read_tsv(here("data/v2/RNAseq_pathways/up/GO_ORA_B
 ### Up individual signatures
 ```{r define indiv file paths}
 marray_path_up <- here("data/v2/microarray_pathways/up")
-marray_path_dn <- here("data/v2/microarray_pathways/dn")
+# marray_path_dn <- here("data/v2/microarray_pathways/dn")
 rnaseq_path_up <- here("data/v2/RNAseq_pathways/up")
-rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
+# rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
 ```
 
 ```{r define accessory variables/paths}
@@ -56,12 +56,12 @@ new_row_aggr <- data.frame(
   sample_origin = c(NA,NA),
   tissue_category = c(NA,NA),  
   series_id = c(NA,NA), 
-  SIGNATURE_NAME = c("aggregated_TB_signature1", "aggregated_TB_signature2"),  
+  SIGNATURE_NAME = c("aggregated_microarray", "aggregated_RNAseq"),  
   EXPRMAT_PATH = c(NA,NA),    
   signature = c(1,1),
   up_genes_num = c(98,98),
   dn_genes_num = c(98,98),
-  technology = c("microarray", "RNASeq")
+  technology = c("microarray", "RNAseq")
 )
 
 final_summary_df = rbind(summary_df, new_row_aggr)
@@ -75,9 +75,11 @@ write_tsv(final_summary_df, here("data/metadata/202506_all_TB_signatures_info.ts
 
 cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray"))
 df1 <- marray_GO_mat_up[, cols_to_keep_marray]
+colnames(df1) <- gsub("^up_", "", colnames(df1))
 
 cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq"))
 df2 <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
+colnames(df2) <- gsub("^up_", "", colnames(df2))
 
 # Reshape from wide to long
 library(tidyr)
@@ -110,18 +112,15 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 
 # Reorder dataframe
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
+final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
+final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
+
 ```
 
-### up pathway clusters combining aggr and indiv results
+### up pathways that are highly variable
 ```{r}
 rnaseq_marray_GO_mat_up <- final_df_up
-# USE STATISCALLY SIGNIFICANT TERMS INSTEAD
-# read in the df
-#up_stat_terms = read_tsv("/Users/kewalinsamart/Documents/GitHub/drugrep_tb/figures/up_stats_terms_cellline_EX3521_GPL751_df.tsv")
-#rnaseq_marray_GO_mat_up = final_df_up[final_df_up$Description %in% up_stat_terms$GO_term,]
-# now highly viable terms instead
-# count number of non-NA and non-zero entries per row (excluding Description column)
-final_df_up_indiv <- final_df_up[, !grepl("aggregated", colnames(final_df_up))]
+final_df_up_indiv <- final_df_up[, !grepl("aggregated", colnames(final_df_up))] # get pathway matrix for only individual signatures
 
 library(dplyr)
 
@@ -131,24 +130,21 @@ viable_counts <- final_df_up_indiv %>%
   dplyr::mutate(across(everything(), ~ as.numeric(.))) %>%
   apply(1, function(row) sum(!is.na(row) & row != 0))
 
-
 # filter terms that are viable in at least N signatures (e.g., 2 or more)
-N <- 18  # change this threshold as needed
+N <- 16  # change this threshold as needed 40% variability gives 9 variable pathways
 final_df_up_viable <- final_df_up[viable_counts >= N, ]
-
-#rnaseq_marray_GO_mat_up = final_df_up[final_df_up$Description %in% final_df_up_viable$Description,]
 ```
 
-```{r}
-row.names(final_df_up_viable) <- final_df_up_viable$Description
+```{r convert GO matrix df to matrix format}
+hv_GO_terms <- final_df_up_viable$Description
 final_df_up_viable$Description <- NULL
 sig_mat_indiv_aggr_up <- as.matrix(final_df_up_viable)
 colnames(sig_mat_indiv_aggr_up) <- gsub("\\.", "-", colnames(sig_mat_indiv_aggr_up))
-sig_mat_indiv_aggr_up[is.na(sig_mat_indiv_aggr_up)] <- 0
+#sig_mat_indiv_aggr_up[is.na(sig_mat_indiv_aggr_up)] <- 0
+row.names(sig_mat_indiv_aggr_up) <- hv_GO_terms
 ```
 
-#### continue from this point**
-```{r heatmap | modify this as it's only GO terms now, not clusters}
+```{r heatmap | order the GO terms by their semantic similarity}
 library(ComplexHeatmap)
 library(circlize)
 library(grid)
@@ -156,15 +152,12 @@ library(dplyr)
 library(stringr)
 library(GOSemSim)
 
-#--------------------------------
-# 0. Define vector of individual GO terms (character vector)
-#--------------------------------
+
+# Define vector of individual GO terms (character vector)
 # Must match rownames of your matrix exactly
 go_terms <- rownames(sig_mat_indiv_aggr_up)
 
-#--------------------------------
 # 1. Compute semantic similarity matrix
-#--------------------------------
 hsGO <- godata('org.Hs.eg.db', ont = "BP")
 
 n <- length(go_terms)
@@ -177,23 +170,16 @@ for (i in seq_len(n)) {
   }
 }
 
-#--------------------------------
 # 2. Hierarchical clustering and reordering
-#--------------------------------
 hc <- hclust(as.dist(1 - sim_matrix), method = "average")
 ordered_go_terms <- hc$labels[hc$order]
 
-#--------------------------------
 # 3. Reorder matrix by GO semantic similarity
-#--------------------------------
 sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[ordered_go_terms, , drop = FALSE]
-
 ```
 
 ```{r up signature heatmap}
-#-------------------------------
 # 1. Define tissue short names
-#-------------------------------
 tissue_map <- c(
   "blood_pmbc"                         = "PBMC",
   "blood_pbmc"                         = "PBMC",
@@ -225,9 +211,7 @@ tissue_map <- c(
   "HEPG2_HepG2"                        = "HepG2_cells"
 )
 
-#---------------------------------------
 # 2. Define tissue & technology colors
-#---------------------------------------
 tissue_colors <- c(
   # Blood-related (red/orange tones)
   "PBMC"                  = "#E41A1C",
@@ -260,74 +244,61 @@ tissue_colors <- c(
 
 
 tech_colors <- c(
-  "RNASeq" = "#E69F00",
+  "RNAseq" = "#E69F00",
   "microarray" = "#56B4E9"
 )
 
-#---------------------------------------
 # 3. Prepare metadata
-#---------------------------------------
 meta_df <- final_summary_df %>%
-  filter(signature %in% colnames(sig_mat_indiv_aggr_up)) %>%
+  filter(SIGNATURE_NAME %in% colnames(sig_mat_indiv_aggr_up)) %>%
   mutate(
-    tissue_short = recode(cell_tissue_type, !!!tissue_map),
-    GSE_id_tissue_cell = ifelse(
-      is.na(platform_id) | platform_id == "" | platform_id == "NA",
-      str_c(study_id, tissue_short, sep = "_"),
-      str_c(study_id, platform_id, tissue_short, sep = "_")
-    )
+    tissue_short = recode(tissue_cell_type, !!!tissue_map),
   )
-meta_df$GSE_id_tissue_cell[nrow(meta_df) - 1] <- "aggregated_microarray"
-meta_df$GSE_id_tissue_cell[nrow(meta_df)]     <- "aggregated_rnaseq"
 
-# Match column order of sig_mat
-meta_df_sorted <- meta_df %>%
-  right_join(tibble(signature = colnames(sig_mat_indiv_aggr_up)), by = "signature")
+# Find matching column indices
+matched_cols <- match(meta_df$SIGNATURE_NAME, colnames(sig_mat_indiv_aggr_up))
 
+# Subset matrix to only those columns
+sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, matched_cols, drop = TRUE]
 
-#---------------------------------------
-# 4. Set rownames and transform matrix
-#---------------------------------------
-colnames(sig_mat_indiv_aggr_up_ordered) <- meta_df_sorted$GSE_id_tissue_cell
-sig_mat_log <- -log10(sig_mat_indiv_aggr_up_ordered)
-sig_mat_log[sig_mat_log > 20] <- 20  # cap extreme values
+# 4. Set rownames 
 
 col_fun <- colorRamp2(
-  c(0, 5, 10, 15),
-  c("white", "lightgreen", "forestgreen", "darkgreen")
+  c(0, 0.05, 0.1),
+  c("#ccffcc", "forestgreen", "darkgreen")
 )
 
-#---------------------------------------
 # 5. Create top and bottom annotations
-#---------------------------------------
 ha_top <- HeatmapAnnotation(
-  technology = meta_df_sorted$technology,
+  technology = meta_df$technology,
   col = list(technology = tech_colors),
   annotation_name_side = "left" 
 )
 
 ha_bottom <- HeatmapAnnotation(
-  tissue_cell = meta_df_sorted$tissue_short,
-  TB = meta_df_sorted$TB,
-  origin_type = meta_df_sorted$origin_type,
+  tissue_cell = meta_df$tissue_short,
+  TB = meta_df$TB,
+  origin_type = meta_df$sample_origin,
   col = list(
     tissue_cell = tissue_colors,
     technology = tech_colors
   ),
   annotation_name_side = "left" 
 )
+```
 
-#---------------------------------------
+```{r}
 # 6. Plot heatmap and save
-#---------------------------------------
-pdf("/Users/kewalinsamart/Documents/GitHub/drugrep_tb/figures/up_stats_hv_indiv_aggr_rnaseq_marray_GOterms_technology.pdf", width = 40, height = 30)
+
+pdf(here("figures/up_hv_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 40, height = 30)
 
 heatmap_sig_up_go <- Heatmap(
-  sig_mat_log,
+  sig_mat_indiv_aggr_up_ordered,
   name = "GO term enrichment",
+  na_col = "lightgrey",
   col = col_fun,
   heatmap_legend_param = list(
-    title = "-log10(q-value)",
+    title = "Gene Ratio",
     title_gp = gpar(fontsize = 15),
     labels_gp = gpar(fontsize = 16)
   ),
@@ -342,8 +313,8 @@ heatmap_sig_up_go <- Heatmap(
   bottom_annotation = ha_bottom,
   row_names_gp = gpar(fontsize = 16),
   column_names_gp = gpar(fontsize = 16),
-  width = unit(42, "cm"),
-  height = unit(25, "cm")
+  width = unit(55, "cm"),
+  height = unit(15, "cm")
 )
 
 draw(heatmap_sig_up_go,
@@ -351,4 +322,5 @@ draw(heatmap_sig_up_go,
      annotation_legend_side = "left")
 
 dev.off()
+
 ```

@@ -2,7 +2,7 @@
 ## **figure out a way to grab the 2-3 most significant terms in each cluster [DONE]
 
 # created date: 05/14/24
-# last modified: 05/20/25
+# last modified: 07/14/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -19,6 +19,7 @@ get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   for(i in seq_along(filenames)){
     file <- filenames[i]
     GO_res <- read_tsv(file.path(data_path, file), show_col_types = FALSE)
+    GO_res <- GO_res[GO_res$qvalue < 0.05,]
 
     # get signature name
     signature_name <- gsub(paste0(prefix_sub, "_"), "", file)
