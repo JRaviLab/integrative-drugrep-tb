@@ -11,36 +11,53 @@ library(readr)
 library(tidyverse)
 library(simplifyEnrichment)
 
-get_GOqval_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
-  # data_path <- "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/data/pathways/RNAseq/dn/GO_ORA"
-  # prefix_sub <- "GO_ORA_BGcorrected"
-  # suffix_sub <- "none.tsv"
+get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
+  filenames <- list.files(path = data_path, pattern = pattern, full.names = FALSE)
 
-  filenames <- list.files(path = data_path,pattern = pattern, all.files = FALSE,
-                          full.names = FALSE, recursive = FALSE,ignore.case = FALSE,
-                          include.dirs = FALSE, no.. = FALSE)
+  GO_mat <- NULL  # initialize result matrix
 
-  for(i in 1:length(filenames)){
-    file = filenames[i]
-    GO_res <- read_tsv(paste0(data_path,"/",file),show_col_types = FALSE)
+  for(i in seq_along(filenames)){
+    file <- filenames[i]
+    GO_res <- read_tsv(file.path(data_path, file), show_col_types = FALSE)
+
+    # get signature name
+    signature_name <- gsub(paste0(prefix_sub, "_"), "", file)
+    signature_name <- gsub(paste0("_", suffix_sub), "", signature_name)
+    signature_name <- gsub(".tsv", "", signature_name)
+    signature_name <- gsub("_limma", "", signature_name)
+    signature_name <- gsub("_DESeq2", "", signature_name)
+    signature_name <- make.unique(signature_name)  # ensure unique signature names
+
     if(nrow(GO_res) > 0){
-      # get only data description i.e., signature name
-      signature_name <- gsub(paste0(prefix_sub,"_"),"",file)
-      signature_name <- gsub(paste0("_",suffix_sub),"",signature_name)
+      # compute GeneRatio numeric
+      GO_res$GeneRatio_numeric <- sapply(GO_res$GeneRatio, function(x) {
+        nums <- as.numeric(unlist(strsplit(x, "/")))
+        return(nums[1] / nums[2])
+      })
 
-      GO_col <- GO_res[c("Description","qvalue")]
+      GO_col <- GO_res[c("Description", "GeneRatio_numeric")]
       colnames(GO_col)[2] <- signature_name
 
-      if(!exists("GO_mat")){
-        #union_GO_res <- GO_res
-        GO_mat <- GO_col
-      }else{
-        #union_GO_res <- rbind(union_GO_res, GO_res)
-        GO_mat <- merge(GO_mat,GO_col, by = "Description",all = TRUE)
+    } else {
+      # handle empty results: if GO_mat exists, fill new column with NA
+      if(!is.null(GO_mat)){
+        GO_mat[[signature_name]] <- NA
       }
+      next  # skip to next file if nothing to merge
+    }
+
+    # merge or initialize GO_mat
+    if(is.null(GO_mat)){
+      GO_mat <- GO_col
+    } else {
+      GO_mat <- merge(GO_mat, GO_col, by = "Description", all = TRUE)
     }
   }
-  GO_mat[is.na(GO_mat)] <- 0.0
+
+  # fill missing values with 0.0 or NA
+  if(!is.null(GO_mat)){
+    GO_mat[is.na(GO_mat)] <- NA
+  }
 
   return(GO_mat)
 }
@@ -57,12 +74,16 @@ get_GO_testStat_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   for(i in 1:length(filenames)){
     file = filenames[i]
     GO_res <- read_tsv(paste0(data_path,"/",file),show_col_types = FALSE)
+    GO_res$GeneRatio_numeric <- sapply(GO_res$GeneRatio, function(x) {
+      nums <- as.numeric(unlist(strsplit(x, "/")))
+      return(nums[1] / nums[2])
+    })
     if(nrow(GO_res) > 0){
       # get only data description i.e., signature name
       signature_name <- gsub(paste0(prefix_sub,"_"),"",file)
       signature_name <- gsub(paste0("_",suffix_sub),"",signature_name)
 
-      GO_col <- GO_res[c("Description","Count")]
+      GO_col <- GO_res[c("Description","GeneRatio_numeric")]
       colnames(GO_col)[2] <- signature_name
 
       if(!exists("GO_mat")){
