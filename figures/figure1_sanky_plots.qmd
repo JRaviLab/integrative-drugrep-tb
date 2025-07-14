@@ -27,6 +27,10 @@ microarray_signatures_info <- microarray_signatures_df %>%
     tissue_cell_type = if_else(str_detect(after_control, "^[0-9]"),
                            str_replace(after_control, "^[^_]+_", ""),
                            after_control),
+    sample_origin = case_when(
+      str_detect(tolower(tissue_cell_type), "thp-1") ~ "cell line",
+      TRUE ~ "primary"
+    ),
     
     tissue_category = case_when(
       str_detect(tolower(tissue_cell_type), "blood") ~ "circulating",
@@ -63,7 +67,7 @@ rnaseq_signatures_info <- rnaseq_signatures_df %>%
                            after_control),
     
     sample_origin = case_when(
-      str_detect(tolower(tissue_cell_type), "thp-1") ~ "cell line",
+      str_detect(tolower(tissue_cell_type), "thp-1|hepg2") ~ "cell line",
       TRUE ~ "primary"
     ),
     
@@ -91,6 +95,8 @@ write_tsv(all_signatures_info, file = here("data/metadata/202506_TB_signatures_i
 ```
 
 ```{r Sankey diagram}
+library(networkD3)
+
 df_unique <- all_signatures_info %>%
   mutate(signature = SIGNATURE_NAME,
          cell_tissue_type = tissue_cell_type,
