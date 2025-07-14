@@ -1,0 +1,197 @@
+### Figure 5. Pairwise drug synergy found in the prediction
+
+#### Individual signatures
+
+```{r}
+library(readr)
+library(tidyverse)
+
+drug_response_data = read.csv("/Users/kewalinsamart/Documents/GitHub/drugrep_tb/data/metadata/20240729DrugCombDB_drugcombs_response.csv")
+
+## Aggregated signatures' drug results
+RAresult_aggrSig_RNAseq <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/RNAseq/04_rank_aggregation/RAresult_negleft0.9_aggrSig_TB_RNAseq.rds")
+RAresult_aggrSig_marray <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/microarray/04_rank_aggregation/RAresult_negleft0.9_aggrSig_TB_microarray.rds")
+predicted_aggr_drugs = union(RAresult_aggrSig_RNAseq, RAresult_aggrSig_marray) # 505 drugs
+##Individual signatures' drug results
+RAresult_indivSig_RNAseq <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/RNAseq/04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_RNAseq.rds")
+RAresult_indivSig_marray <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/microarray/04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_microarray.rds")
+predicted_indiv_drugs = union(RAresult_indivSig_RNAseq, RAresult_indivSig_marray) # 160 drugs ---- z-score the full distribution then select the drugs we care about (flip) |  the moas including all the drugs and see if the | similar perturbations were assumed | what fraction has high/low synergy | then plot for my drugs and see the distributions | more synergistic pairs or not? 
+# overlapping drugs between aggr and indiv 's drug predictions
+predicted_drugs = intersect(predicted_aggr_drugs,predicted_indiv_drugs)
+
+drugs_synergy_df = read.csv("~/Documents/GitHub/drugrep_tb/data/metadata/20240724DrugCombDB_Syner&Antag_voting.csv")
+drugs_synergy_df$Drug1 <- tolower(drugs_synergy_df$Drug1)
+drugs_synergy_df$Drug2 <- tolower(drugs_synergy_df$Drug2)
+predicted_drugs_synergy = filter(drugs_synergy_df, Drug1 %in% predicted_drugs, Drug2 %in% predicted_drugs)
+# Z-score transform each synergy metric across all entries
+synergy_z <- predicted_drugs_synergy %>%
+  mutate(across(c(ZIP, Bliss, Loewe, HSA), ~as.numeric(scale(.)))) %>%
+  mutate(combined_zscore = rowMeans(across(c(ZIP, Bliss, Loewe, HSA)))) %>%
+  filter(Drug1 %in% predicted_drug_names, Drug2 %in% predicted_drug_names) %>%
+  unite("drugcomb", Drug1:Drug2, sep = "+", remove = FALSE)
+drugs_synergy_140drugs = filter(synergy_z, Drug1 %in% predicted_drug_names, Drug2 %in% predicted_drug_names)
+
+# Sort by combined z-score
+synergy_z_sorted <- drugs_synergy_140drugs %>%
+  arrange(desc(combined_zscore))
+
+write_tsv(synergy_z_sorted, file = "~/Documents/GitHub/drugrep_tb/figures/predicted_drug_synnergy_data_combined_zscore.tsv")
+```
+
+```{r}
+# Step 1: Duplicate with swapped Drug1 and Drug2
+drug_df = synergy_z_sorted
+drug_df_swapped <- drug_df %>%
+  rename(Drug1_orig = Drug1, Drug2_orig = Drug2) %>%
+  mutate(Drug1 = Drug2_orig, Drug2 = Drug1_orig) %>%
+  select(Drug1, Drug2, everything())
+
+# Step 2: Combine original and swapped
+drug_df_full <- bind_rows(drug_df, drug_df_swapped)
+
+# Step 3: Standardize drug pair (alphabetical order)
+drug_df_full_std <- drug_df_full %>%
+  mutate(
+    DrugA = pmin(Drug1, Drug2),  # alphabetically first
+    DrugB = pmax(Drug1, Drug2)   # alphabetically second
+  )
+
+# Step 4: Group by standardized pair and select highest synergy
+# 37 drugs with synergy with another drug
+final_drugcomb_df <- drug_df_full_std %>%
+  group_by(DrugA, DrugB) %>%
+  slice_max(order_by = combined_zscore, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(DrugA, DrugB, combined_zscore)
+
+final_drugcomb_df2 = tibble(
+  "DrugA" = final_drugcomb_df$DrugB,
+  "DrugB" = final_drugcomb_df$DrugA,
+  "combined_zscore" = final_drugcomb_df$combined_zscore
+)
+
+final_drugcomb_symm = rbind(final_drugcomb_df, final_drugcomb_df2)
+```
+
+```{r moa mapping}
+drug_moa_df = read_csv("~/Documents/GitHub/drugrep_tb/data/metadata/repurposing_drugs_20200324.csv", skip=9)
+# Map DrugA and DrugB
+moa_mapped_df <- final_drugcomb_symm %>%
+  left_join(drug_moa_df, by = c("DrugA" = "pert_iname")) %>%
+  rename(MOA1 = moa) %>%
+  left_join(drug_moa_df, by = c("DrugB" = "pert_iname")) %>%
+  rename(MOA2 = moa)
+
+moa_mapped_df_std <- moa_mapped_df %>%
+  mutate(
+    MOA_A = pmin(MOA1, MOA2),  # alphabetical order
+    MOA_B = pmax(MOA1, MOA2)
+  )
+
+moa_pair_synergy <- moa_mapped_df_std %>%
+  group_by(MOA_A, MOA_B) %>%
+  summarise(mean_combined_zscore = mean(combined_zscore), .groups = "drop")
+
+moa_pair_synergy2 = tibble(
+  "MOA_A" = moa_pair_synergy$MOA_B,
+  "MOA_B" = moa_pair_synergy$MOA_A,
+  "mean_combined_zscore" = moa_pair_synergy$mean_combined_zscore
+)
+
+final_moa_pair_synergy = rbind(moa_pair_synergy, moa_pair_synergy2)
+final_moa_pair_synergy$mean_combined_zscore = as.numeric(final_moa_pair_synergy$mean_combined_zscore)
+```
+
+```{r}
+library(tidyverse)
+
+# Assuming your dataframe is called `final_moa_pair_synergy`
+
+# Step 1: Expand MOA_B values (split by "|")
+final_moa_pair_synergy_expanded <- final_moa_pair_synergy %>%
+  mutate(
+    MOA_A = str_replace_all(MOA_A, " *\\| *", "|"),
+    MOA_B = str_replace_all(MOA_B, " *\\| *", "|")
+  ) %>%
+  separate_rows(MOA_A, sep = "\\|") %>%
+  separate_rows(MOA_B, sep = "\\|")
+
+# Step 2: (Optional) Remove self-pairs
+final_moa_pair_synergy_expanded <- final_moa_pair_synergy_expanded %>%
+  filter(MOA_A != MOA_B)
+
+# Step 3: Duplicate to make symmetric
+final_moa_pair_synergy_symm <- bind_rows(
+  final_moa_pair_synergy_expanded,
+  final_moa_pair_synergy_expanded %>%
+    rename(MOA_temp = MOA_A, MOA_A = MOA_B) %>%
+    rename(MOA_B = MOA_temp)
+)
+
+# Step 4: Re-aggregate in case expansion created duplicates
+final_moa_pair_synergy_symm_avg <- final_moa_pair_synergy_symm %>%
+  group_by(MOA_A, MOA_B) %>%
+  summarise(score = mean(mean_combined_zscore), .groups = "drop")
+
+# Step 5: Convert to matrix
+moa_synergy_mat <- final_moa_pair_synergy_symm_avg %>%
+  pivot_wider(
+    names_from = MOA_B,
+    values_from = score,
+    values_fill = list(score = 0)
+  ) %>%
+  column_to_rownames("MOA_A") %>%
+  as.matrix()
+
+# Get consistent MOA order (e.g., alphabetical or your own vector)
+moa_order <- sort(unique(c(final_moa_pair_synergy_symm_avg$MOA_A,
+                           final_moa_pair_synergy_symm_avg$MOA_B)))
+
+# Reorder rows and columns of matrix
+moa_synergy_mat <- moa_synergy_mat[moa_order, moa_order]
+
+# Make a copy of the matrix
+moa_synergy_upper <- moa_synergy_mat
+
+# Set lower triangle (including diagonal) to NA
+moa_synergy_upper[lower.tri(moa_synergy_upper, diag = TRUE)] <- NA
+```
+
+```{r MOA synergy heatmap | full}
+library(ComplexHeatmap)
+library(circlize)
+
+# Green for synergy, white for neutral
+col_fun <- colorRamp2(
+  c(-0.18, 0, 0.22),
+  c("red","white", "blue")
+)
+# Define the output file path correctly
+pdf(file = "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/figures/MOA_synnergy_heatmap_full_zscore.pdf", width = 20, height = 20)
+
+# Generate Heatmap for MOA Synergy
+ht <- Heatmap(
+  moa_synergy_mat,
+  cluster_rows = TRUE,
+  cluster_columns = TRUE,
+  name = "Combined synergy \n z-score",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  column_names_gp = gpar(fontsize = 10),
+  row_names_gp = gpar(fontsize = 10),
+  na_col = "white",  # ensures NA cells show as white
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 12),
+    labels_gp = gpar(fontsize = 12)
+  ),
+  width = unit(22, "cm"),
+  height = unit(20, "cm")
+)
+
+draw(ht, show_heatmap_legend = FALSE)
+
+# Close the PDF device properly
+dev.off()
+```
+
