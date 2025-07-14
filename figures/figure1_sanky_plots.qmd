@@ -30,7 +30,7 @@ microarray_signatures_info <- microarray_signatures_df %>%
     
     tissue_category = case_when(
       str_detect(tolower(tissue_cell_type), "blood") ~ "circulating",
-      str_detect(tolower(tissue_cell_type), "lung") ~ "lung",
+      str_detect(tolower(tissue_cell_type), "lung|BAL|BALF") ~ "lung",
       TRUE ~ "other"
     )
   ) %>%
@@ -69,7 +69,7 @@ rnaseq_signatures_info <- rnaseq_signatures_df %>%
     
     tissue_category = case_when(
       str_detect(tolower(tissue_cell_type), "blood") ~ "circulating",
-      str_detect(tolower(tissue_cell_type), "lung") ~ "lung",
+      str_detect(tolower(tissue_cell_type), "lung|BAL|BALF") ~ "lung",
       TRUE ~ "other"
     )
   ) %>%
