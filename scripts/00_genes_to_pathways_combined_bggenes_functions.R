@@ -85,79 +85,130 @@ library(clusterProfiler)
 library(org.Hs.eg.db)
 library(here)
 
-technologies <- c("RNAseq", "microarray")
+#--------- Set up background genes ---------
+
+get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
+                                  metadata_path_microarray, data_path_microarray,
+                                  direction, GO_genes_vector) {
+  #' @param metadata_path_rnaseq: Metadata TSV for RNAseq
+  #' @param data_path_rnaseq: Path to DE results for RNAseq
+  #' @param metadata_path_microarray: Metadata TSV for microarray
+  #' @param data_path_microarray: Path to DE results for microarray
+  #' @param direction: "up" or "dn"
+  #' @param GO_genes_vector: Vector of GO-annotated gene IDs
+
+  # Build extension
+  extension_rnaseq <- paste0("_DESeq2_", direction, ".tsv")
+  extension_microarray <- paste0("_limma_", direction, ".tsv")
+
+  # RNAseq background
+  bg_genes_rnaseq_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_rnaseq,
+    data_path = paste0(data_path_rnaseq,"/",direction),
+    extension = extension_rnaseq
+  )
+  bg_genes_rnaseq <- intersect(bg_genes_rnaseq_raw, GO_genes_vector)
+
+  # Microarray background
+  bg_genes_microarray_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_microarray,
+    data_path = paste0(data_path_microarray,"/",direction),
+    extension = extension_microarray
+  )
+  bg_genes_microarray <- intersect(bg_genes_microarray_raw, GO_genes_vector)
+
+  # Combine across technologies (intersection)
+  bg_genes_combined <- intersect(bg_genes_rnaseq, bg_genes_microarray)
+
+  return(bg_genes_combined)
+}
+
+# Define input paths
+metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+
+metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/v2/DE_results/microarray")
+
+# Load GO genes
+GO_genes_vector <- GO_genes()
+
+# Get upregulated combined background
+bg_genes_combined_up <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "up",
+  GO_genes_vector
+)
+
+# Get downregulated combined background
+bg_genes_combined_dn <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "dn",
+  GO_genes_vector
+)
+
+
+#-------------------------------------------
+
+technology <- "RNAseq"
 directions <- c("up", "dn")
+metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
+data_path <- here(paste0("data/v2/DE_results/", technology))
 
-for (technology in technologies) {
+for (direction in directions) {
+  print(direction)
+  # Set output directory
+  dirname <- here(paste0("data/v2/", technology, "_pathways/", direction))
+  if (!dir.exists(dirname)) {
+    dir.create(dirname, recursive = TRUE)
+  }
+  dirname_read <- file.path(data_path, direction)
+  filenames <- list.files(path = dirname_read, pattern = "*.tsv", full.names = FALSE)
 
-  metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
-  data_path <- here(paste0("data/v2/DE_results/", technology))
+  # Iterate through each file
+  itr <- 1
+  for (file in filenames) {
 
-  for (direction in directions) {
+    print(paste0("Running iteration: ", itr))
+    itr <- itr + 1
 
-    # Set output directory
-    dirname <- here(paste0("data/v2/", technology, "_pathways/", direction))
-    if (!dir.exists(dirname)) {
-      dir.create(dirname, recursive = TRUE)
+    genes_df <- read_tsv(file.path(dirname_read, file))
+
+    # Use gene IDs as input for ORA
+    gene_vector <- genes_df$log2FoldChange
+    names(gene_vector) <- as.character(genes_df$GeneID)
+
+    gene_list <- names(gene_vector)
+
+    # Run ORA
+    print(paste0("Getting enriched GO pathways for ", file))
+    if(direction == "up"){
+      bg_genes = bg_genes_combined_up
+    }else if(direction == "dn"){
+      bg_genes = bg_genes_combined_dn
     }
 
-    # Read gene files from up/dn folder
-    dirname_read <- file.path(data_path, direction)
-    filenames <- list.files(path = dirname_read, pattern = paste0(direction, ".tsv"))
+    enrichGO_res <- enrichGO(gene = gene_list,
+                             OrgDb = org.Hs.eg.db,
+                             readable = TRUE,
+                             ont = "BP",
+                             universe = bg_genes,
+                             pvalueCutoff = 0.05,
+                             qvalueCutoff = 0.1,
+                             minGSSize = 5,
+                             maxGSSize = 200)
 
-    # Define background genes
-    if(technology == "RNAseq") {
-      extension <- paste0("_DESeq2_", direction, ".tsv")
-    } else if(technology == "microarray") {
-      extension <- paste0("_limma_", direction, ".tsv")
-    }
+    enrichGO_res <- as.data.frame(enrichGO_res)
 
-    extra_arg <- NULL  # This seems unused
+    # Save results
+    base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+    output_file <- file.path(dirname, paste0("GO_ORA_BGcorrected_", base_filename))
 
-    bg_genes_source <- "input data"
-    bg_genes_ <- get_bg_genes(bg_source = bg_genes_source,
-                              metadata_path = metadata_path,
-                              data_path = dirname_read,
-                              extension = extension)
-
-    bg_genes <- intersect(bg_genes_, GO_genes())  # Restrict to GO-annotated genes
-
-    # Iterate through each file
-    itr <- 1
-    for (file in filenames) {
-
-      print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
-      itr <- itr + 1
-
-      genes_df <- read_tsv(file.path(dirname_read, file))
-
-      # Use gene IDs as input for ORA
-      gene_vector <- genes_df$log2FoldChange
-      names(gene_vector) <- as.character(genes_df$GeneID)
-
-      gene_list <- names(gene_vector)
-
-      # Run ORA
-      print(paste0("Getting enriched GO pathways for ", file))
-
-      enrichGO_res <- enrichGO(gene = gene_list,
-                               OrgDb = org.Hs.eg.db,
-                               readable = TRUE,
-                               ont = "BP",
-                               universe = bg_genes,
-                               pvalueCutoff = 0.05,
-                               qvalueCutoff = 0.1,
-                               minGSSize = 5,
-                               maxGSSize = 200)
-
-      enrichGO_res <- as.data.frame(enrichGO_res)
-
-      # Save results
-      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
-      output_file <- file.path(dirname, paste0("GO_ORA_BGcorrected_", base_filename))
-
-      write_tsv(enrichGO_res, file = output_file)
-    }
+    write_tsv(enrichGO_res, file = output_file)
   }
 }
 
@@ -193,9 +244,9 @@ enrichGO_res_up_aggr_rnaseq <- enrichGO(gene = up_aggr_signature_rnaseq,
 enrichGO_res_up_aggr_rnaseq <- as.data.frame(enrichGO_res_up_aggr_rnaseq)
 
 # Save results
-output_file_up_aggr_rnaseq <- file.path(here("data/v2/RNAseq_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_RNAseq.tsv"))
+output_file <- file.path(here("data/v2/RNAseq_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_RNAseq.tsv"))
 
-write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file_up_aggr_rnaseq)
+write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file)
 
 
 ### dn signatures
