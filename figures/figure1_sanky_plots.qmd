@@ -91,6 +91,15 @@ rnaseq_signatures_info <- rnaseq_signatures_info %>%
   select(1, platform_id, everything())
 
 all_signatures_info = rbind(microarray_signatures_info, rnaseq_signatures_info)
+
+all_signatures_info <- all_signatures_info %>%
+  mutate(tissue_cell_type = case_when(
+    tissue_cell_type == 'blood' ~ 'blood_whole_blood', # standardize 
+    tissue_cell_type == 'THP-1' ~ 'blood_THP-1', # thp-1 is a monocyte cell line
+    tissue_cell_type == 'blood_blood' ~ 'blood_monocyte_derived_macrophages', # unique to GSE141656
+    TRUE ~ tissue_cell_type
+  ))
+
 write_tsv(all_signatures_info, file = here("data/metadata/202506_TB_signatures_info.tsv"))
 ```
 
