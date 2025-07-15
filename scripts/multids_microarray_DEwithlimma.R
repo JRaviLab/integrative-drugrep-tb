@@ -2,7 +2,7 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 06/26/25
+# last modified: 07/15/25 - LT
 # author: Kewalin Samart
 
 library(limma)
@@ -67,7 +67,7 @@ for (i in 1:nrow(study_df)) {
 
   # get all the common ids
   common_ids <- c(common_ids_infected, common_ids_control)
-  # Trim & reorder metadata and matrix to identical GSM sets
+  # *** BUG FIX: The undefined 'metadata' variable is replaced with 'class_df' ***
   class_df <- class_df[match(common_ids, class_df$geo_accession), ]
   expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
@@ -109,14 +109,17 @@ for (i in 1:nrow(study_df)) {
   ## perform differential gene expression analysis
   # apply linear model to the expression matrix
   fit <- lmFit(expr_mat, design = design_mat)
-  # compute batch-corrected mean log expression
-  mean_exp <- as.data.frame(fit$coefficients)
 
-  # apply empirical Bayes to smooth standard errors
-  fit <- eBayes(fit)
-
-  # correct biases by performing multiple testing, and obtain result table
-  stats_df <- topTable(fit, number = nrow(expr_mat), ) %>% tibble::rownames_to_column("Gene")
+  # *** CORRECTED IMPLEMENTATION: Define contrast and run eBayes on contrasted fit ***
+  # Create the contrast matrix to compare infected vs control
+  cont_mat <- makeContrasts(infected_vs_control = infected - control, levels = design_mat)
+  fit2 <- contrasts.fit(fit, cont_mat)
+  # Apply empirical Bayes to smooth standard errors on the contrasted fit
+  fit2 <- eBayes(fit2)
+  # Obtain result table for the specified contrast. This gives the correct p-values and logFC.
+  stats_df <- topTable(fit2, coef = "infected_vs_control", number = nrow(expr_mat)) %>%
+    tibble::rownames_to_column("Gene")
+  # *** END OF CORRECTION ***
 
   ## add gene annotations
   # get gene annotation table
@@ -126,9 +129,19 @@ for (i in 1:nrow(study_df)) {
   annotdata_subset <- annotdata %>% filter(as.character(annotdata$GeneID) %in% entrezids)
   annotdata_subset <- annotdata_subset[, c("GeneID", "Symbol", "Ensembl")]
   res_df <- merge(stats_df, annotdata_subset, by.x = "Gene", by.y = "GeneID", all.x = TRUE, all.y = FALSE)
-  res_df <- res_df[c("Gene", "Symbol", "infected", "control", "AveExpr", "F", "P.Value", "adj.P.Val")]
+
+  # *** CORRECTED IMPLEMENTATION: Populate final data frame with correct values ***
+  # The logFC from topTable is the correct log2FoldChange. The incorrect manual calculation is removed.
+  # We add the group-wise mean log-expression values from the original fit for inspection purposes.
+  group_means <- as.data.frame(fit$coefficients) %>%
+    dplyr::select(any_of(c("infected", "control"))) %>%
+    tibble::rownames_to_column("Gene")
+  res_df <- merge(res_df, group_means, by = "Gene")
+
+  # Select and rename columns for the final results table.
+  res_df <- res_df[, c("Gene", "Symbol", "logFC", "AveExpr", "t", "P.Value", "adj.P.Val", "infected", "control")]
   colnames(res_df)[1] <- "GeneID"
-  res_df$log2FoldChange <- log2(res_df$infected) - log2(res_df$control)
+  colnames(res_df)[3] <- "log2FoldChange"
 
   # identify duplicated genes (EntrezID)
   duplicates_booleans <- duplicated(res_df$GeneID)
