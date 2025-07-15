@@ -233,13 +233,6 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
   #' @author Kewalin Samart
 
-  # Input Validations
-  stopifnot(
-    "gene_membership_matrix must be a data frame or matrix" = is.data.frame(gene_membership_matrix) || is.matrix(gene_membership_matrix),
-    "jaccard_matrix must be a data frame or matrix" = is.data.frame(jaccard_matrix) || is.matrix(jaccard_matrix),
-    "Exactly one thresholding method (quantile or fixed) must be specified." = !is.null(quantile_threshold) || !is.null(fixed_threshold)
-  )
-
   # read in gene membership matrix
   gene_membership_df <- gene_membership_matrix
   # set row names to GeneID

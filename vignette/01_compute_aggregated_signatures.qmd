@@ -13,12 +13,12 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ##### Initialize arguments
 ```{r}
 # example argument
-metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
-data_path = here("data/v2/signatures/RNAseq")
+metadata_path = here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
+data_path = here("data/v2/signatures/microarray")
 direction = "dn"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "landmark"
-output_dir = here("data/v2/signatures/RNAseq/aggregated_signatures")
+output_dir = here("data/v2/signatures/microarray/aggregated_signatures")
 threshold_pct <- 0.90
 ```
 
