@@ -9,7 +9,7 @@
 #      I suppose they only give intersecting MOA-target-genes when a drug is associated with >1 MOAs (code at the bottom)
 
 # created date: 01/16/24
-# last modified: 03/17/24 # fixed bugs causing lowly-connected STRING genes added to subnetworks
+# last modified: 07/15/25 # fixed paths
 # Kewalin Samart
 
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
@@ -92,7 +92,7 @@ get_drug_perturbed_genes <- function(drug_names,
                                      time_point = "24 h",
                                      dosage = "10 µM",
                                      N = 5,
-                                     gene_conversion_file = "./data/metadata/Homo_sapiens.gene_info.csv"){
+                                     gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv")){
   #' @description this function identifies significantly pertubed genes of given drug names based on LINCS level 5 signatures GSE70138
   #' @param drug_names a character vector containing drug names to identify enriched/perturbed drug genes
   #' @param signature_matrix a matrix of drug signatures where first col: rid represents gene ids and other columns are signature ids
@@ -146,7 +146,7 @@ get_drugtarget_NetworkNodeData <- function(drug_names,
                                           drug_genes_df,
                                           disease_pathways = c(),
                                           N = 15,
-                                          interaction_file = "./data/metadata/interactions_DGIdb.tsv",
+                                          interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
                                           intscore_values = "all",
                                           intscore_tail = "right",
                                           intscore_pct = 0.9,
@@ -243,7 +243,7 @@ get_drugtarget_NetworkNodeData <- function(drug_names,
 }
 
 add_STRING_genes <- function(drug_dpgene_tg_pw_moas,
-                             STRING_path = "./data/metadata/STRING_hs_interactions.txt",
+                             STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
                              STRING_intscore = 0.7,
                              min_degree = 4,
                              disease_genes = c()) {
