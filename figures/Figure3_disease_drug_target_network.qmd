@@ -1,3 +1,7 @@
+# Obtain node and edge data for figure 3: disease-drug-target network
+### last modified: 07/15/25
+### Author: Kewalin Samart
+
 ```{r load libraries and functions}
 library(readr)
 library(here)
@@ -33,5 +37,51 @@ final_drugs
 
 ```{r get drug-interacting genes}
 DGIdb_targets_list = get_DTG_interactions_DGIdb(drug_names = final_drugs)
+DGIdb_targets_df = get_DGIdb_targets_table(DGIdb_targets_list)
+```
+
+```{r read in drug signature matrix}
+signature_matrix = read_tsv(here("data/v2/figure3/GSE92742_level5_signatures_lm.tsv"))
+```
+
+```{r read in drug signature metadata}
+signature_metadata = read_tsv(here("data/v2/figure3/GSE92742_Broad_LINCS_sig_info.txt"))
+```
+
+```{r get drug perturbed genes}
+drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
+                         signature_matrix = signature_matrix,
+                         signature_metadata = signature_metadata,
+                         time_point = "24 h",
+                         dosage = "10 µM",
+                         N = 5,
+                         gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv"))
+
+```
+
+```{r obtain node data}
+node_data <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = c(),
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c())
+
+```
+
+```{r add STRING genes to the node data}
+node_data_STRING <- add_STRING_genes(node_data,
+                                    STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
+                                    STRING_intscore = 0.7,
+                                    min_degree = 4,
+                                    disease_genes = c())
+
+```
+
+```{r get edge data from the node data}
+edge_data = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING)
 
 ```
