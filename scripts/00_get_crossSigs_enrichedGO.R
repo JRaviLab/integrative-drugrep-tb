@@ -40,11 +40,9 @@ get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
       colnames(GO_col)[2] <- signature_name
 
     } else {
-      # handle empty results: if GO_mat exists, fill new column with NA
-      if(!is.null(GO_mat)){
-        GO_mat[[signature_name]] <- NA
-      }
-      next  # skip to next file if nothing to merge
+      # handle empty result: create single NA row
+      GO_col <- data.frame(Description = NA, temp_col = NA)
+      colnames(GO_col)[2] <- signature_name
     }
 
     # merge or initialize GO_mat
@@ -59,6 +57,7 @@ get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   if(!is.null(GO_mat)){
     GO_mat[is.na(GO_mat)] <- NA
   }
+  GO_mat <- GO_mat[!is.na(GO_mat$Description), ]
 
   return(GO_mat)
 }
