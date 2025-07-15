@@ -1,5 +1,5 @@
 study_id	platform_id	tb_status	time_point	tissue_cell_type	sample_origin	tissue_category	series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	technology
-GSE16250	GPL570	MTB	NA	blood_pmbc	primary	circulating	GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	data/v2/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	300	177	microarray
+GSE16250	GPL570	MTB	NA	blood_pbmc	primary	circulating	GSE16250	GSE16250_GPL570_MTB_control_blood_pbmc	data/v2/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	300	177	microarray
 GSE18794	GPL6244	MTB	2h	blood_monocytes	primary	circulating	GSE18794	GSE18794_GPL6244_MTB_Cpn60.1_control_2h_blood_monocytes	data/v2/microarray_data_forDE/expression_matrices/GSE18794.tsv	1	72	71	microarray
 GSE19491	GPL6947	PTB	NA	blood_whole_blood	primary	circulating	GSE19491	GSE19491_GPL6947_PTB_control_blood_whole_blood	data/v2/microarray_data_forDE/expression_matrices/GSE19491.tsv	1	53	17	microarray
 GSE34151	GPL10558	MTB	NA	blood_dcs	primary	circulating	GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	data/v2/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	5	4	microarray
