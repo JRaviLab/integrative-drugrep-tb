@@ -1,0 +1,37 @@
+```{r load libraries and functions}
+library(readr)
+library(here)
+source(here("scripts/05_build_drugtarget_network_functions.R"))
+```
+
+```{r get disease genes}
+microarray_up_aggr_genes = as.character(read_tsv(here("data/v2/figure3/microarray_up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+microarray_dn_aggr_genes = as.character(read_tsv(here("data/v2/figure3/microarray_dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+
+rnaseq_up_aggr_genes = as.character(read_tsv(here("data/v2/figure3/rnaseq_up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/v2/figure3/rnaseq_dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+
+up_aggr_genes = intersect(microarray_up_aggr_genes, rnaseq_up_aggr_genes)
+dn_aggr_genes = intersect(microarray_dn_aggr_genes, rnaseq_dn_aggr_genes)
+
+TB_aggregated_genes = unique(union(up_aggr_genes, dn_aggr_genes))
+
+write_tsv(as.data.frame(TB_aggregated_genes), file = here("data/v2/figure3/TB_aggregated_genes.tsv"))
+```
+
+```{r get final drug list}
+RAresult_indivSig_TB_RNAseq <- readRDS(here("data/v2/figure3/RAresult_indivSig_TB_RNAseq.rds"))
+RAresult_indivSig_TB_microarray <- readRDS(here("data/v2/figure3/RAresult_indivSig_TB_microarray.rds"))
+RAresult_aggrSig_TB_RNAseq <- readRDS(here("data/v2/figure3/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.rds"))
+RAresult_aggrSig_TB_microarray <- readRDS(here("data/v2/figure3/RAresult_neg_left_0.9_aggrSig_TB_microarray.rds"))
+
+indiv_result <- union(RAresult_indivSig_TB_RNAseq, RAresult_indivSig_TB_microarray)
+aggr_result <- union(RAresult_aggrSig_TB_RNAseq, RAresult_aggrSig_TB_microarray)
+final_drugs <- intersect(indiv_result, aggr_result)
+final_drugs 
+```
+
+```{r get drug-interacting genes}
+DGIdb_targets_list = get_DTG_interactions_DGIdb(drug_names = final_drugs)
+
+```
