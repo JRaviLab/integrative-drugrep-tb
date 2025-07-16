@@ -2,7 +2,6 @@
 # last modified: 07/13/25
 # Kewalin Samart
 
-library(ReactomePA)
 library(clusterProfiler)
 library(DOSE)
 library(org.Hs.eg.db)
@@ -62,8 +61,8 @@ for (technology in technologies) {
     de_df <- read_tsv(file_path)
 
     # Filter upregulated and downregulated
-    up_genes <- de_df %>% filter(adj.P.Val < 0.05, log2FoldChange > 0)
-    dn_genes <- de_df %>% filter(adj.P.Val < 0.05, log2FoldChange < 0)
+    up_genes <- de_df %>% filter(log2FoldChange > 0)
+    dn_genes <- de_df %>% filter(log2FoldChange < 0)
 
     # Create new filenames with suffixes
     base_filename <- sub("\\.tsv$", "", file)
@@ -85,13 +84,13 @@ library(clusterProfiler)
 library(org.Hs.eg.db)
 library(here)
 
-technologies <- c("RNAseq", "microarray")
+technologies <- c("microarray", "RNAseq")
 directions <- c("up", "dn")
 
 for (technology in technologies) {
 
   metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
-  data_path <- here(paste0("data/v2/DE_results/", technology))
+  data_path <- here(paste0("data/v2/DE_results/",technology))
 
   for (direction in directions) {
 
