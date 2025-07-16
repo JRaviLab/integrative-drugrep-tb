@@ -4,7 +4,7 @@
 # ref1: https://doi.org/10.1002%2Fsim.7920
 # ref2: https://github.com/baillielab/comparison_of_RA_methods/blob/main/algorithms/useBiG.R
 # created date: 01/02/24
-# last modified: 07/08/25
+# last modified: 07/16/25
 # Kewalin Samart
 
 library(tidyverse)
@@ -14,7 +14,7 @@ library(here)
 source(here("scripts/04_RankAggregation_utilities.R"))
 source(here("scripts/04_BiG_RankAggregation_functions.R"))
 
-run_BiG_diffuse_indivSig <- function(data_technologies = c("microarray", "RNAseq"),
+run_BiG_diffuse_indivSig <- function(technologies = c("microarray", "RNAseq"),
                                                  n_p1_params = c(4, 4),
                                                  n_iter = 2000,
                                                  burnin = 1000,
@@ -22,14 +22,14 @@ run_BiG_diffuse_indivSig <- function(data_technologies = c("microarray", "RNAseq
   require(here)
   require(readr)
 
-  for (i in seq_along(data_technologies)) {
-    data_technology <- data_technologies[i]
+  for (i in seq_along(technologies)) {
+    technology <- technologies[i]
     n_p1 <- n_p1_params[i]
 
-    dirname <- here("results", data_technology, "04_rank_aggregation")
+    dirname <- here("results", technology, "04_rank_aggregation")
 
     # load ranked top drug list
-    ranked_drug_list_path <- file.path(dirname, paste0("ranked_topdrugs_indivSig_TB_", data_technology, "_list.rds"))
+    ranked_drug_list_path <- file.path(dirname, paste0("ranked_topdrugs_indivSig_TB_", technology, "_list.rds"))
     ranked_drug_list <- readRDS(ranked_drug_list_path)
 
     # convert to rank matrix
@@ -51,8 +51,8 @@ run_BiG_diffuse_indivSig <- function(data_technologies = c("microarray", "RNAseq
     RA_df <- RA_df[order(-RA_df$rank_score), ]
 
     # save outputs
-    write_tsv(RA_df, file.path(dirname, paste0("RAresult_indivSig_TB_", data_technology, ".tsv")))
-    saveRDS(rankedEntities, file.path(dirname, paste0("RAresult_indivSig_TB_", data_technology, ".rds")))
+    write_tsv(RA_df, file.path(dirname, paste0("RAresult_indivSig_TB_", technology, ".tsv")))
+    saveRDS(rankedEntities, file.path(dirname, paste0("RAresult_indivSig_TB_", technology, ".rds")))
   }
 }
 

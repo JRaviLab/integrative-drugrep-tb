@@ -527,7 +527,7 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   summary_df <- summary_df[order(-summary_df$occurrence), ]
   rownames(summary_df) <- NULL
 
-  full_summary_path <- here::here(dirname, paste0(technology, "_indiv_drug_summary.tsv"))
+  full_summary_path <- here::here(dirname,technology,"03_methodwise", paste0(technology, "_indiv_drug_summary.tsv"))
   if (!dir.exists(here::here(dirname))) dir.create(here::here(dirname), recursive = TRUE)
   write_tsv(summary_df, file = full_summary_path)
 
@@ -539,7 +539,7 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   indiv_drugs_res_top <- summary_df[bin_mat$method_freq >= 2, ]
   rownames(indiv_drugs_res_top) <- NULL
 
-  top_summary_path <- here::here(dirname, paste0(technology, "_indiv_top_drugs.tsv"))
+  top_summary_path <- here::here(dirname,technology,"03_methodwise", paste0(technology, "_indiv_top_drugs.tsv"))
   write_tsv(indiv_drugs_res_top, file = top_summary_path)
 
   return(indiv_drugs_res_top)
