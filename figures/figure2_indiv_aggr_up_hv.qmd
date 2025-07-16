@@ -14,11 +14,6 @@ library(tidyr)
 library(tidyverse)
 ```
 
-```{r up aggregated signatures | microarray and RNAseq} 
-aggr_enrichGO_res_up_marray = read_tsv(here("data/v2/microarray_pathways/up/GO_ORA_BGcorrected_up_aggregated_microarray.tsv"))
-aggr_enrichGO_res_up_rnaseq = read_tsv(here("data/v2/RNAseq_pathways/up/GO_ORA_BGcorrected_up_aggregated_RNAseq.tsv"))
-```
-
 ### Up individual signatures
 ```{r define indiv file paths}
 marray_path_up <- here("data/v2/microarray_pathways/up")

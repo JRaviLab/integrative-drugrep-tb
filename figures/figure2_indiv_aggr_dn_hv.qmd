@@ -27,9 +27,17 @@ suffix_sub <- "dn.tsv"
 annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
-```{r microarray dn pathway clusters}
+````{r microarray dn pathway clusters}
 marray_GO_mat_dn = get_GO_generatio_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 GO_annotation = get_GO_annotation(here(annotation_file))
+
+if(nrow(marray_GO_mat_dn) == 0){
+  # number of NA rows to add
+  n_rows_to_add <- 5
+
+  # fill with NA rows
+  marray_GO_mat_dn[1:n_rows_to_add, ] <- NA  
+}
 ```
 
 ```{r RNAseq dn pathway clusters}
@@ -79,14 +87,28 @@ library(tidyr)
 long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
 long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
 
-# Combine long formats and sum values where matching
-library(dplyr)
+# Ensure both have correct types even if empty
+long1 <- long1 %>%
+  mutate(
+    Description = as.character(Description),
+    Signature = as.character(Signature),
+    Value = as.numeric(Value)
+  )
+
+long2 <- long2 %>%
+  mutate(
+    Description = as.character(Description),
+    Signature = as.character(Signature),
+    Value = as.numeric(Value)
+  )
+
+# Then safely combine and summarise
 combined_long <- bind_rows(long1, long2) %>%
   group_by(Description, Signature) %>%
   summarise(
-  Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
-  .grodns = "drop"
-)
+    Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+    .groups = "drop"
+  )
 
 # Reshape back to wide format
 final_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
