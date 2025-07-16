@@ -61,6 +61,7 @@ get_updn_signature <- function(updn_sig_path, L1000 = TRUE) {
   input_updn_sig <- read.delim(updn_sig_path, sep = "\t")
   clean_input_updn_sig <- prepare_signature(signature = input_updn_sig, L1000 = L1000)
   updn_genes <- as.character(clean_input_updn_sig$GeneID)
+  # updn_genes <- as.character(input_updn_sig$GeneID)
 
   return(updn_genes)
 }
