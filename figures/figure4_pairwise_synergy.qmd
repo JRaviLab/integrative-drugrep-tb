@@ -5,19 +5,18 @@
 ```{r}
 library(readr)
 library(tidyverse)
-
-drug_response_data = read.csv("/Users/kewalinsamart/Documents/GitHub/drugrep_tb/data/metadata/20240729DrugCombDB_drugcombs_response.csv")
+library(here)
 
 ## Aggregated signatures' drug results
-RAresult_aggrSig_RNAseq <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/RNAseq/04_rank_aggregation/RAresult_negleft0.9_aggrSig_TB_RNAseq.rds")
-RAresult_aggrSig_marray <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/microarray/04_rank_aggregation/RAresult_negleft0.9_aggrSig_TB_microarray.rds")
-predicted_aggr_drugs = union(RAresult_aggrSig_RNAseq, RAresult_aggrSig_marray) # 505 drugs
+RAresult_aggrSig_RNAseq <- readRDS(here("results/figure4_synergy/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.rds"))
+RAresult_aggrSig_marray <- readRDS(here("results/figure4_synergy/RAresult_neg_left_0.9_aggrSig_TB_microarray.rds"))
+predicted_aggr_drugs = union(RAresult_aggrSig_RNAseq, RAresult_aggrSig_marray) # 216 drugs
 ##Individual signatures' drug results
-RAresult_indivSig_RNAseq <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/RNAseq/04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_RNAseq.rds")
-RAresult_indivSig_marray <- readRDS("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/microarray/04_rank_aggregation/RAresult_0.9pct0.5rv_indivSig_TB_microarray.rds")
-predicted_indiv_drugs = union(RAresult_indivSig_RNAseq, RAresult_indivSig_marray) # 160 drugs ---- z-score the full distribution then select the drugs we care about (flip) |  the moas including all the drugs and see if the | similar perturbations were assumed | what fraction has high/low synergy | then plot for my drugs and see the distributions | more synergistic pairs or not? 
+RAresult_indivSig_RNAseq <- readRDS(here("results/figure4_synergy/RAresult_indivSig_TB_RNAseq.rds"))
+RAresult_indivSig_marray <- readRDS(here("results/figure4_synergy/RAresult_indivSig_TB_microarray.rds"))
+predicted_indiv_drugs = union(RAresult_indivSig_RNAseq, RAresult_indivSig_marray) # 227 drugs ---- z-score the full distribution then select the drugs we care about (flip) |  the moas including all the drugs and see if the | similar perturbations were assumed | what fraction has high/low synergy | then plot for my drugs and see the distributions | more synergistic pairs or not? 
 # overlapping drugs between aggr and indiv 's drug predictions
-predicted_drugs = intersect(predicted_aggr_drugs,predicted_indiv_drugs)
+predicted_drugs = intersect(predicted_aggr_drugs,predicted_indiv_drugs) # 108 drugs
 
 drugs_synergy_df = read.csv("~/Documents/GitHub/drugrep_tb/data/metadata/20240724DrugCombDB_Syner&Antag_voting.csv")
 drugs_synergy_df$Drug1 <- tolower(drugs_synergy_df$Drug1)
@@ -27,15 +26,13 @@ predicted_drugs_synergy = filter(drugs_synergy_df, Drug1 %in% predicted_drugs, D
 synergy_z <- predicted_drugs_synergy %>%
   mutate(across(c(ZIP, Bliss, Loewe, HSA), ~as.numeric(scale(.)))) %>%
   mutate(combined_zscore = rowMeans(across(c(ZIP, Bliss, Loewe, HSA)))) %>%
-  filter(Drug1 %in% predicted_drug_names, Drug2 %in% predicted_drug_names) %>%
+  filter(Drug1 %in% predicted_drugs, Drug2 %in% predicted_drugs) %>%
   unite("drugcomb", Drug1:Drug2, sep = "+", remove = FALSE)
-drugs_synergy_140drugs = filter(synergy_z, Drug1 %in% predicted_drug_names, Drug2 %in% predicted_drug_names)
+drugs_synergy_drugs = filter(synergy_z, Drug1 %in% predicted_drugs, Drug2 %in% predicted_drugs)
 
 # Sort by combined z-score
-synergy_z_sorted <- drugs_synergy_140drugs %>%
+synergy_z_sorted <- drugs_synergy_drugs %>%
   arrange(desc(combined_zscore))
-
-write_tsv(synergy_z_sorted, file = "~/Documents/GitHub/drugrep_tb/figures/predicted_drug_synnergy_data_combined_zscore.tsv")
 ```
 
 ```{r}
@@ -167,7 +164,7 @@ col_fun <- colorRamp2(
   c("red","white", "blue")
 )
 # Define the output file path correctly
-pdf(file = "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/figures/MOA_synnergy_heatmap_full_zscore.pdf", width = 20, height = 20)
+pdf(file = here("figures/Figure4_MOA_synnergy_heatmap_full_zscore.pdf"), width = 25, height = 25)
 
 # Generate Heatmap for MOA Synergy
 ht <- Heatmap(
@@ -185,8 +182,8 @@ ht <- Heatmap(
     title_gp = gpar(fontsize = 12),
     labels_gp = gpar(fontsize = 12)
   ),
-  width = unit(22, "cm"),
-  height = unit(20, "cm")
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
 )
 
 draw(ht, show_heatmap_legend = FALSE)
