@@ -12,8 +12,8 @@ source(here("scripts/05_build_drugtarget_network_functions.R"))
 microarray_up_aggr_genes = as.character(read_tsv(here("data/v2/figure3/microarray_up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
 microarray_dn_aggr_genes = as.character(read_tsv(here("data/v2/figure3/microarray_dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
 
-rnaseq_up_aggr_genes = as.character(read_tsv(here("data/v2/figure3/rnaseq_up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
-rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/v2/figure3/rnaseq_dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_up_aggr_genes = as.character(read_tsv(here("data/v2/figure3/RNAseq_up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/v2/figure3/RNAseq_dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
 
 up_aggr_genes = intersect(microarray_up_aggr_genes, rnaseq_up_aggr_genes)
 dn_aggr_genes = intersect(microarray_dn_aggr_genes, rnaseq_dn_aggr_genes)
