@@ -14,11 +14,11 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ```{r}
 # example argument
 metadata_path = here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
-data_path = here("data/v2/signatures/microarray")
-direction = "dn"
+data_path = here("data/v2/DE_results/microarray/up")
+direction = "up"
 bg_source = "LINCS" # L1000 genes
-extra_arg= "landmark"
-output_dir = here("data/v2/signatures/microarray/aggregated_signatures")
+extra_arg= "up"
+output_dir = here("data/v2/signatures/microarray/aggregated_DE_signatures")
 threshold_pct <- 0.90
 ```
 
@@ -38,5 +38,5 @@ jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path
 
 ##### Compute aggregated signature
 ```{r}
-aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct, save_result=TRUE)
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
 ```
