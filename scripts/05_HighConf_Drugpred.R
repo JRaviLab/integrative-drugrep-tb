@@ -1,7 +1,7 @@
 # utility functions for #drugrep_tb project
 # created date: 07/16/25
 # last modified: 07/16/25
-# Ling Thang (edited by Gemini)
+# Ling Thang
 
 # Implements Figure 1c from Integrative transcriptome-based drug repurposing in tuberculosis
 # Key implementation (page 10) :
