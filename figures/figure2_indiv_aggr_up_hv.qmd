@@ -68,13 +68,15 @@ write_tsv(final_summary_df, here("data/metadata/202506_all_TB_signatures_info.ts
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first
 
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray", "up_aggregated_microarray_0.8"))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray_DE"))
 df1 <- marray_GO_mat_up[, cols_to_keep_marray]
 colnames(df1) <- gsub("^up_", "", colnames(df1))
+colnames(df1) <- gsub("_DE", "", colnames(df1))
 
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq", "up_aggregated_RNAseq_0.8"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq_DE"))
 df2 <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
 colnames(df2) <- gsub("^up_", "", colnames(df2))
+colnames(df2) <- gsub("_DE", "", colnames(df2))
 
 # Reshape from wide to long
 library(tidyr)
@@ -129,7 +131,7 @@ viable_counts <- final_df_up_indiv %>%
   apply(1, function(row) sum(!is.na(row) & row != 0))
 
 # filter terms that are viable in at least N signatures (e.g., 2 or more)
-N <- 25  # change this threshold as needed 40% variability gives 9 variable pathways
+N <- 26  # change this threshold as needed 40% variability gives 9 variable pathways
 final_df_up_viable <- final_df_up[viable_counts >= N, ]
 ```
 
@@ -285,7 +287,14 @@ col_fun <- colorRamp2(
 ha_top <- HeatmapAnnotation(
   technology = meta_df$technology,
   col = list(technology = tech_colors),
-  annotation_name_side = "left" 
+  annotation_name_side = "left",
+  annotation_name_gp = gpar(fontsize = 20),
+  annotation_legend_param = list(
+    technology = list(
+      title_gp = gpar(fontsize = 18),
+      labels_gp = gpar(fontsize = 18)
+    )
+  )
 )
 
 ha_bottom <- HeatmapAnnotation(
@@ -297,7 +306,18 @@ ha_bottom <- HeatmapAnnotation(
     technology = tech_colors,
     origin_type = origin_colors
   ),
-  annotation_name_side = "left" 
+  annotation_name_side = "left",
+  annotation_name_gp = gpar(fontsize = 20),
+  annotation_legend_param = list(
+    tissue_cell = list(
+      title_gp = gpar(fontsize = 18),
+      labels_gp = gpar(fontsize = 18)
+    ),
+    origin_type = list(
+      title_gp = gpar(fontsize = 18),
+      labels_gp = gpar(fontsize = 18)
+    )
+  )
 )
 ```
 
@@ -317,11 +337,12 @@ heatmap_sig_up_go <- Heatmap(
   col = col_fun,
   heatmap_legend_param = list(
     title = "Gene Ratio",
-    title_gp = gpar(fontsize = 15),
-    labels_gp = gpar(fontsize = 16)
+    title_gp = gpar(fontsize = 20),
+    labels_gp = gpar(fontsize = 20)
   ),
   column_title = "Individual upregulated \n microarray & RNASeq TB signatures",
   row_title = "Enriched GO biological processes",
+  row_title_gp = gpar(fontsize = 20),
   rect_gp = gpar(col = "grey"),
   cluster_rows = FALSE,
   cluster_columns = FALSE,
@@ -329,10 +350,10 @@ heatmap_sig_up_go <- Heatmap(
   column_names_rot = 70,
   top_annotation = ha_top,
   bottom_annotation = ha_bottom,
-  row_names_gp = gpar(fontsize = 16),
-  column_names_gp = gpar(fontsize = 16),
+  row_names_gp = gpar(fontsize = 20),
+  column_names_gp = gpar(fontsize = 20),
   width = unit(55, "cm"),
-  height = unit(12, "cm")
+  height = unit(25, "cm")
 )
 
 draw(heatmap_sig_up_go,
