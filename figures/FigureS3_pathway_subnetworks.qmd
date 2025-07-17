@@ -45,7 +45,8 @@ signature_matrix = read_tsv(here("data/v2/figure3/GSE92742_level5_signatures_lm.
 ```
 
 ```{r read in drug signature metadata}
-signature_metadata = read_tsv(here("data/v2/figure3/GSE92742_Broad_LINCS_sig_info.txt"))
+library(data.table)
+signature_metadata <- fread(here("data/v2/figure3/GSE92742_Broad_LINCS_sig_info.txt"))
 ```
 
 ```{r get drug perturbed genes}
@@ -54,11 +55,31 @@ drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
                          signature_metadata = signature_metadata,
                          time_point = "24 h",
                          dosage = "10 µM",
-                         N = 5,
+                         N = 2,
                          gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv"))
 
 ```
 
+#### Create node_types.txt for figure 3
+```{r}
+# read in gene mapping
+gene_mapping = read_csv(here("data/metadata/Homo_sapiens.gene_info.csv"))
+gene_mapping = gene_mapping[,c('GeneID','Symbol')]
+TB_aggregated_genes = gene_mapping[gene_mapping$GeneID %in% TB_aggregated_genes,]$Symbol
+
+node_TB_genes <- TB_aggregated_genes
+type_TB_genes <- "source"
+
+TB_genes_df <- data.frame(node = node_TB_genes, type = type_TB_genes, stringsAsFactors = FALSE)
+
+node_drug_genes <- union(drug_genes_df$drug_gene, DGIdb_targets_df$target)
+type_drug_genes <- "target"
+drug_perturbed_genes_df <- data.frame(node = node_drug_genes, type = type_drug_genes, stringsAsFactors = FALSE)
+
+node_type_df <- rbind(TB_genes_df, drug_perturbed_genes_df)
+```
+
+#### Create and save node/edge data for figure S3
 ```{r obtain node data}
 node_data <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
                                drug_genes_df = drug_genes_df,

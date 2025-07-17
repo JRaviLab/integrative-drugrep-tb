@@ -13,6 +13,7 @@
 # Kewalin Samart
 
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+library(signatureSearch)
 
 get_DTG_interactions_DGIdb <- function(drug_names,
                                       interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
