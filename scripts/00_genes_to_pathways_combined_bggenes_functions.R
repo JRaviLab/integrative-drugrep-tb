@@ -1,8 +1,7 @@
 # script to perform pathway analyses: GO/KEGG/Reactome ORA
-# last modified: 07/13/25
+# last modified: 07/16/25
 # Kewalin Samart
 
-library(ReactomePA)
 library(clusterProfiler)
 library(DOSE)
 library(org.Hs.eg.db)
@@ -62,8 +61,8 @@ for (technology in technologies) {
     de_df <- read_tsv(file_path)
 
     # Filter upregulated and downregulated
-    up_genes <- de_df %>% filter(adj.P.Val < 0.05, log2FoldChange > 0)
-    dn_genes <- de_df %>% filter(adj.P.Val < 0.05, log2FoldChange < 0)
+    up_genes <- de_df %>% filter(log2FoldChange > 0)
+    dn_genes <- de_df %>% filter(log2FoldChange < 0)
 
     # Create new filenames with suffixes
     base_filename <- sub("\\.tsv$", "", file)
@@ -89,7 +88,7 @@ library(here)
 
 get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
                                   metadata_path_microarray, data_path_microarray,
-                                  direction, GO_genes_vector) {
+                                  direction, GO_genes_vector, combine) {
   #' @param metadata_path_rnaseq: Metadata TSV for RNAseq
   #' @param data_path_rnaseq: Path to DE results for RNAseq
   #' @param metadata_path_microarray: Metadata TSV for microarray
@@ -119,8 +118,13 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   )
   bg_genes_microarray <- intersect(bg_genes_microarray_raw, GO_genes_vector)
 
-  # Combine across technologies (intersection)
-  bg_genes_combined <- intersect(bg_genes_rnaseq, bg_genes_microarray)
+  if(combine == "intersect"){
+    # Combine across technologies (intersection)
+    bg_genes_combined <- intersect(bg_genes_rnaseq, bg_genes_microarray)
+  }else if(combine == "union"){
+    bg_genes_combined <- union(bg_genes_rnaseq, bg_genes_microarray)
+  }
+
 
   return(bg_genes_combined)
 }
@@ -140,7 +144,8 @@ bg_genes_combined_up <- get_combined_bg_genes(
   metadata_path_rnaseq, data_path_rnaseq,
   metadata_path_microarray, data_path_microarray,
   direction = "up",
-  GO_genes_vector
+  GO_genes_vector,
+  combine = "union"
 )
 
 # Get downregulated combined background
@@ -148,7 +153,8 @@ bg_genes_combined_dn <- get_combined_bg_genes(
   metadata_path_rnaseq, data_path_rnaseq,
   metadata_path_microarray, data_path_microarray,
   direction = "dn",
-  GO_genes_vector
+  GO_genes_vector,
+  combine = "union"
 )
 
 
@@ -225,17 +231,12 @@ if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 direction <- "up"
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-bg_genes_up_rnaseq <- get_bg_genes(bg_source = bg_genes_source,
-                          metadata_path = metadata_path,
-                          data_path = dirname_read,
-                          extension = extension)
-bg_genes_up_rnaseq <- intersect(bg_genes_up_rnaseq, GO_genes())  # Restrict to GO-annotated genes
 up_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_up_aggr_rnaseq <- enrichGO(gene = up_aggr_signature_rnaseq,
                          OrgDb = org.Hs.eg.db,
                          readable = TRUE,
                          ont = "BP",
-                         universe = bg_genes_up_rnaseq,
+                         universe = bg_genes_combined_up,
                          pvalueCutoff = 0.05,
                          qvalueCutoff = 0.1,
                          minGSSize = 5,
@@ -255,17 +256,12 @@ if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
 if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-bg_genes_dn_rnaseq <- get_bg_genes(bg_source = bg_genes_source,
-                            metadata_path = metadata_path,
-                            data_path = dirname_read,
-                            extension = extension)
-bg_genes_dn_rnaseq <- intersect(bg_genes_dn_rnaseq, GO_genes())  # Restrict to GO-annotated genes
 dn_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_dn_aggr_rnaseq <- enrichGO(gene = dn_aggr_signature_rnaseq,
                                         OrgDb = org.Hs.eg.db,
                                         readable = TRUE,
                                         ont = "BP",
-                                        universe = bg_genes_dn_rnaseq,
+                                        universe = bg_genes_combined_dn,
                                         pvalueCutoff = 0.05,
                                         qvalueCutoff = 0.1,
                                         minGSSize = 5,
@@ -288,17 +284,12 @@ if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
 if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-bg_genes_up_marray <- get_bg_genes(bg_source = bg_genes_source,
-                                   metadata_path = metadata_path,
-                                   data_path = dirname_read,
-                                   extension = extension)
-bg_genes_up_marray <- intersect(bg_genes_up_marray, GO_genes())  # Restrict to GO-annotated genes
 up_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_up_aggr_marray <- enrichGO(gene = up_aggr_signature_marray,
                                         OrgDb = org.Hs.eg.db,
                                         readable = TRUE,
                                         ont = "BP",
-                                        universe = bg_genes_up_marray,
+                                        universe = bg_genes_combined_up,
                                         pvalueCutoff = 0.05,
                                         qvalueCutoff = 0.1,
                                         minGSSize = 5,
@@ -317,17 +308,12 @@ if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
 if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-bg_genes_dn_marray <- get_bg_genes(bg_source = bg_genes_source,
-                                   metadata_path = metadata_path,
-                                   data_path = dirname_read,
-                                   extension = extension)
-bg_genes_dn_marray <- intersect(bg_genes_dn_marray, GO_genes())  # Restrict to GO-annotated genes
 dn_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_dn_aggr_marray <- enrichGO(gene = dn_aggr_signature_marray,
                                         OrgDb = org.Hs.eg.db,
                                         readable = TRUE,
                                         ont = "BP",
-                                        universe = bg_genes_dn_marray,
+                                        universe = bg_genes_combined_dn,
                                         pvalueCutoff = 0.05,
                                         qvalueCutoff = 0.1,
                                         minGSSize = 5,
