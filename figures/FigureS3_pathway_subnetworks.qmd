@@ -77,6 +77,7 @@ type_drug_genes <- "target"
 drug_perturbed_genes_df <- data.frame(node = node_drug_genes, type = type_drug_genes, stringsAsFactors = FALSE)
 
 node_type_df <- rbind(TB_genes_df, drug_perturbed_genes_df)
+write_tsv(node_type_df, file = here("data/v2/figure3/node_types.tsv"))
 ```
 
 #### Create and save node/edge data for figure S3
