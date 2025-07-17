@@ -225,8 +225,6 @@ bg_genes_source <- "input data"
 technology <- "RNAseq"
 metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
 data_path <- here(paste0("data/v2/DE_results/", technology))
-if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
-if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 ### up signatures
 direction <- "up"
 # Define background genes
@@ -281,11 +279,9 @@ metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_r
 data_path <- here(paste0("data/v2/DE_results/", technology))
 ### up signatures
 direction <- "up"
-if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
-if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-up_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_signatures/microarray_up_aggregated_signature_0.8.tsv"))$GeneID)
+up_aggr_signature_marray <- as.character(read_tsv(here("data/v2/signatures/microarray/aggregated_DE_signatures/up_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_up_aggr_marray <- enrichGO(gene = up_aggr_signature_marray,
                                         OrgDb = org.Hs.eg.db,
                                         readable = TRUE,
@@ -299,7 +295,7 @@ enrichGO_res_up_aggr_marray <- enrichGO(gene = up_aggr_signature_marray,
 enrichGO_res_up_aggr_marray <- as.data.frame(enrichGO_res_up_aggr_marray)
 
 # Save results
-output_file_up_aggr_marray <- file.path(here("data/v2/microarray_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_microarray_0.8.tsv"))
+output_file_up_aggr_marray <- file.path(here("data/v2/microarray_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_microarray_DE.tsv"))
 
 write_tsv(enrichGO_res_up_aggr_marray, file = output_file_up_aggr_marray)
 

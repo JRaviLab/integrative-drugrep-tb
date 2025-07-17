@@ -1,0 +1,114 @@
+# Compute aggregated signatures from individual signatures
+# Last modified: 06/26/25
+# Author: Kewalin Samart
+
+##### Load libraries and sort scripts
+```{r}
+library(readr)
+library(here)
+source(here("scripts/00_background_genes_PA_functions.R"))
+source(here("scripts/01_DE_signature_aggregation_functions.R"))
+```
+
+##### Get backgrounf genes
+```{r}
+get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
+                                  metadata_path_microarray, data_path_microarray,
+                                  direction, GO_genes_vector, combine) {
+  #' @param metadata_path_rnaseq: Metadata TSV for RNAseq
+  #' @param data_path_rnaseq: Path to DE results for RNAseq
+  #' @param metadata_path_microarray: Metadata TSV for microarray
+  #' @param data_path_microarray: Path to DE results for microarray
+  #' @param direction: "up" or "dn"
+  #' @param GO_genes_vector: Vector of GO-annotated gene IDs
+
+  # Build extension
+  extension_rnaseq <- paste0("_DESeq2_", direction, ".tsv")
+  extension_microarray <- paste0("_limma_", direction, ".tsv")
+
+  # RNAseq background
+  bg_genes_rnaseq_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_rnaseq,
+    data_path = paste0(data_path_rnaseq,"/",direction),
+    extension = extension_rnaseq
+  )
+  bg_genes_rnaseq <- intersect(bg_genes_rnaseq_raw, GO_genes_vector)
+
+  # Microarray background
+  bg_genes_microarray_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_microarray,
+    data_path = paste0(data_path_microarray,"/",direction),
+    extension = extension_microarray
+  )
+  bg_genes_microarray <- intersect(bg_genes_microarray_raw, GO_genes_vector)
+
+  if(combine == "intersect"){
+    # Combine across technologies (intersection)
+    bg_genes_combined <- intersect(bg_genes_rnaseq, bg_genes_microarray)
+  }else if(combine == "union"){
+    bg_genes_combined <- union(bg_genes_rnaseq, bg_genes_microarray)
+  }
+
+
+  return(bg_genes_combined)
+}
+
+# Define input paths
+metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+
+metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/v2/DE_results/microarray")
+
+# Load GO genes
+GO_genes_vector <- GO_genes()
+
+# Get upregulated combined background
+bg_genes_combined_up <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "up",
+  GO_genes_vector,
+  combine = "union"
+)
+
+# Get downregulated combined background
+bg_genes_combined_dn <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "dn",
+  GO_genes_vector,
+  combine = "union"
+)
+```
+
+##### Initialize arguments
+```{r}
+# example argument
+metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path = here("data/v2/DE_results/RNAseq")
+output_dir = here("data/v2/signatures/RNAseq/aggregated_DE_signatures")
+direction = "dn"
+#threshold_pct <- 0.90
+```
+
+##### Compute membership matrix
+```{r}
+gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_genes = bg_genes_combined_dn, 
+                          output_dir = output_dir,save_result=TRUE)
+```
+
+##### Compute jaccard matrix
+```{r}
+jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                       direction = direction, output_dir = output_dir, 
+                       extra_arg = extra_arg, save_result=TRUE) 
+```
+
+##### Compute aggregated signature
+```{r}
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+```
