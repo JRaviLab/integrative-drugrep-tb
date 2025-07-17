@@ -68,11 +68,11 @@ write_tsv(final_summary_df, here("data/metadata/202506_all_TB_signatures_info.ts
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first
 
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray"))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray", "up_aggregated_microarray_0.8"))
 df1 <- marray_GO_mat_up[, cols_to_keep_marray]
 colnames(df1) <- gsub("^up_", "", colnames(df1))
 
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq", "up_aggregated_RNAseq_0.8"))
 df2 <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
 colnames(df2) <- gsub("^up_", "", colnames(df2))
 
@@ -129,7 +129,7 @@ viable_counts <- final_df_up_indiv %>%
   apply(1, function(row) sum(!is.na(row) & row != 0))
 
 # filter terms that are viable in at least N signatures (e.g., 2 or more)
-N <- 16  # change this threshold as needed 40% variability gives 9 variable pathways
+N <- 25  # change this threshold as needed 40% variability gives 9 variable pathways
 final_df_up_viable <- final_df_up[viable_counts >= N, ]
 ```
 
