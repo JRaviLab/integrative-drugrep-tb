@@ -11,8 +11,6 @@
 # were generated using Bayesian Latent Variable Approach for partial rank aggregation; “BiG” method [44], and high-confidence predictions
 # were obtained by intersecting results across signature types."
 
-# 1. Setup
-
 # import libraries
 library(here)
 library(dplyr)
@@ -54,41 +52,8 @@ read_pipeline_results <- function(microarray_indiv_path, microarray_agg_path, rn
     ))
 }
 
-# Define paths to the rank-aggregated results from the four pipelines
-indivSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_indivSig_TB_microarray.tsv")
-aggSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_microarray.tsv")
-indivSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_indivSig_TB_RNAseq.tsv")
-aggSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.tsv")
+# Process Individual and Aggregated Pipelines Separately
 
-# Read data into dataframes 'drug_name' and 'rank_score'
-pipeline_results <- read_pipeline_results(
-    indivSig_TB_microarray_path,
-    aggSig_TB_microarray_path,
-    indivSig_TB_RNAseq_path,
-    aggSig_TB_RNAseq_path
-)
-
-indivSig_TB_microarray <- pipeline_results$indivSig_TB_microarray
-aggSig_TB_microarray <- pipeline_results$aggSig_TB_microarray
-indivSig_TB_RNAseq <- pipeline_results$indivSig_TB_RNAseq
-aggSig_TB_RNAseq <- pipeline_results$aggSig_TB_RNAseq
-
-# 2. Utility Function
-
-convert_to_zscore <- function(scores_vector) {
-    #' @description Converts a numeric vector into standard scores (z-scores).
-    #' @param scores_vector A numeric vector of scores.
-    #' @returns A numeric vector of z-scores.
-
-    z_scores <- (scores_vector - mean(scores_vector, na.rm = TRUE)) / sd(scores_vector, na.rm = TRUE)
-    return(z_scores)
-}
-
-# 3. Process Individual and Aggregated Pipelines Separately
-
-# --- Individual Signatures Pipeline ---
-# Use a full join to merge the two dataframes.
-# dplyr automatically handles the identical 'rank_score' column by adding suffixes (.x, .y)
 process_pipeline <- function(indiv_microarray, indiv_rnaseq, agg_microarray, agg_rnaseq) {
     # --- Individual Signatures Pipeline ---
     indiv_merged_df <- dplyr::full_join(indiv_microarray, indiv_rnaseq, by = "drug_name")
@@ -109,19 +74,16 @@ process_pipeline <- function(indiv_microarray, indiv_rnaseq, agg_microarray, agg
     return(list(indiv_results = indiv_results, agg_results = agg_results))
 }
 
-pipeline_processed <- process_pipeline(
-    indivSig_TB_microarray,
-    indivSig_TB_RNAseq,
-    aggSig_TB_microarray,
-    aggSig_TB_RNAseq
-)
+convert_to_zscore <- function(scores_vector) {
+    #' @description Converts a numeric vector into standard scores (z-scores).
+    #' @param scores_vector A numeric vector of scores.
+    #' @returns A numeric vector of z-scores.
 
-indiv_results <- pipeline_processed$indiv_results
-agg_results <- pipeline_processed$agg_results
+    z_scores <- (scores_vector - mean(scores_vector, na.rm = TRUE)) / sd(scores_vector, na.rm = TRUE)
+    return(z_scores)
+}
 
-# 4. Identify High-Confidence Drugs and Calculate Final Score
-
-# Merge the results from both pipelines (inner join automatically finds high-confidence drugs)
+# Identify High-Confidence Drugs and Calculate Final Score
 get_high_confidence_predictions <- function(indiv_results, agg_results) {
     final_merged_df <- merge(indiv_results, agg_results, by = "drug_name", all = FALSE)
 
@@ -143,15 +105,10 @@ get_high_confidence_predictions <- function(indiv_results, agg_results) {
     return(high_confidence_predictions)
 }
 
-high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)
-
-# 5. Save and Display Results
+# Save and Display Results
 save_and_display_predictions <- function(predictions, output_path) {
     write_tsv(predictions, output_path)
     message(paste("Final high-confidence drug predictions saved to:", output_path))
     print("Top 20 High-Confidence Drug Predictions:")
     print(head(predictions, 20))
 }
-
-output_path <- here("results/final_high_confidence_drug_predictions.tsv")
-save_and_display_predictions(high_confidence_predictions, output_path)
