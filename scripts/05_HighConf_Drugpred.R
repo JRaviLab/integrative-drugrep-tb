@@ -18,21 +18,60 @@ library(here)
 library(dplyr)
 library(readr)
 
+# Function to read rank-aggregated results from four pipelines with input validation
+read_pipeline_results <- function(microarray_indiv_path, microarray_agg_path, rnaseq_indiv_path, rnaseq_agg_path) {
+    # Helper to check file existence
+    check_file <- function(path) {
+        if (!file.exists(path)) {
+            stop(paste("File does not exist:", path))
+        }
+    }
+    check_file(microarray_indiv_path)
+    check_file(microarray_agg_path)
+    check_file(rnaseq_indiv_path)
+    check_file(rnaseq_agg_path)
+
+    # Read files
+    microarray_indiv <- read_tsv(microarray_indiv_path, show_col_types = FALSE)
+    microarray_agg <- read_tsv(microarray_agg_path, show_col_types = FALSE)
+    rnaseq_indiv <- read_tsv(rnaseq_indiv_path, show_col_types = FALSE)
+    rnaseq_agg <- read_tsv(rnaseq_agg_path, show_col_types = FALSE)
+
+    # Validate required columns
+    required_cols <- c("drug_name", "rank_score")
+    for (df in list(microarray_indiv, microarray_agg, rnaseq_indiv, rnaseq_agg)) {
+        missing <- setdiff(required_cols, colnames(df))
+        if (length(missing) > 0) {
+            stop(paste("Missing columns:", paste(missing, collapse = ", ")))
+        }
+    }
+
+    return(list(
+        indivSig_TB_microarray = microarray_indiv,
+        aggSig_TB_microarray = microarray_agg,
+        indivSig_TB_RNAseq = rnaseq_indiv,
+        aggSig_TB_RNAseq = rnaseq_agg
+    ))
+}
+
 # Define paths to the rank-aggregated results from the four pipelines
-# MICROARRAY
 indivSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_indivSig_TB_microarray.tsv")
 aggSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_microarray.tsv")
-
-# RNA-SEQ
 indivSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_indivSig_TB_RNAseq.tsv")
 aggSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.tsv")
 
-# Read data into dataframes 'drug_name' and 'rank_score' !EXPECTED!
-indivSig_TB_microarray <- read_tsv(indivSig_TB_microarray_path, show_col_types = FALSE)
-aggSig_TB_microarray <- read_tsv(aggSig_TB_microarray_path, show_col_types = FALSE)
+# Read data into dataframes 'drug_name' and 'rank_score'
+pipeline_results <- read_pipeline_results(
+    indivSig_TB_microarray_path,
+    aggSig_TB_microarray_path,
+    indivSig_TB_RNAseq_path,
+    aggSig_TB_RNAseq_path
+)
 
-indivSig_TB_RNAseq <- read_tsv(indivSig_TB_RNAseq_path, show_col_types = FALSE)
-aggSig_TB_RNAseq <- read_tsv(aggSig_TB_RNAseq_path, show_col_types = FALSE)
+indivSig_TB_microarray <- pipeline_results$indivSig_TB_microarray
+aggSig_TB_microarray <- pipeline_results$aggSig_TB_microarray
+indivSig_TB_RNAseq <- pipeline_results$indivSig_TB_RNAseq
+aggSig_TB_RNAseq <- pipeline_results$aggSig_TB_RNAseq
 
 # 2. Utility Function
 
@@ -50,56 +89,69 @@ convert_to_zscore <- function(scores_vector) {
 # --- Individual Signatures Pipeline ---
 # Use a full join to merge the two dataframes.
 # dplyr automatically handles the identical 'rank_score' column by adding suffixes (.x, .y)
-indiv_merged_df <- dplyr::full_join(indivSig_TB_microarray, indivSig_TB_RNAseq, by = "drug_name")
+process_pipeline <- function(indiv_microarray, indiv_rnaseq, agg_microarray, agg_rnaseq) {
+    # --- Individual Signatures Pipeline ---
+    indiv_merged_df <- dplyr::full_join(indiv_microarray, indiv_rnaseq, by = "drug_name")
+    indiv_results <- indiv_merged_df %>%
+        rowwise() %>%
+        mutate(mean_rank_score_indiv = mean(c(rank_score.x, rank_score.y), na.rm = TRUE)) %>%
+        dplyr::select(drug_name, mean_rank_score_indiv)
+    message("Processed individual signatures pipeline.")
 
-# Calculate the mean rank score for the individual pipeline using the new column names
-indiv_results <- indiv_merged_df %>%
-    rowwise() %>%
-    mutate(mean_rank_score_indiv = mean(c(rank_score.x, rank_score.y), na.rm = TRUE)) %>%
-    dplyr::select(drug_name, mean_rank_score_indiv)
+    # --- Aggregated Signatures Pipeline ---
+    agg_merged_df <- dplyr::full_join(agg_microarray, agg_rnaseq, by = "drug_name")
+    agg_results <- agg_merged_df %>%
+        rowwise() %>%
+        mutate(mean_rank_score_agg = mean(c(rank_score.x, rank_score.y), na.rm = TRUE)) %>%
+        dplyr::select(drug_name, mean_rank_score_agg)
+    message("Processed aggregated signatures pipeline.")
 
-message("Processed individual signatures pipeline.")
+    return(list(indiv_results = indiv_results, agg_results = agg_results))
+}
 
+pipeline_processed <- process_pipeline(
+    indivSig_TB_microarray,
+    indivSig_TB_RNAseq,
+    aggSig_TB_microarray,
+    aggSig_TB_RNAseq
+)
 
-# --- Aggregated Signatures Pipeline ---
-# Use a full join to merge the two dataframes.
-agg_merged_df <- dplyr::full_join(aggSig_TB_microarray, aggSig_TB_RNAseq, by = "drug_name")
-
-# Calculate the mean rank score for the aggregated pipeline
-agg_results <- agg_merged_df %>%
-    rowwise() %>%
-    mutate(mean_rank_score_agg = mean(c(rank_score.x, rank_score.y), na.rm = TRUE)) %>%
-    dplyr::select(drug_name, mean_rank_score_agg)
-
-message("Processed aggregated signatures pipeline.")
+indiv_results <- pipeline_processed$indiv_results
+agg_results <- pipeline_processed$agg_results
 
 # 4. Identify High-Confidence Drugs and Calculate Final Score
 
 # Merge the results from both pipelines (inner join automatically finds high-confidence drugs)
-final_merged_df <- merge(indiv_results, agg_results, by = "drug_name", all = FALSE)
+get_high_confidence_predictions <- function(indiv_results, agg_results) {
+    final_merged_df <- merge(indiv_results, agg_results, by = "drug_name", all = FALSE)
 
-message(paste("Identified", nrow(final_merged_df), "high-confidence drug candidates."))
+    message(paste("Identified", nrow(final_merged_df), "high-confidence drug candidates."))
 
-# Convert each pipeline's mean rank score to a z-score
-final_merged_df$z_score_indiv <- convert_to_zscore(final_merged_df$mean_rank_score_indiv)
-final_merged_df$z_score_agg <- convert_to_zscore(final_merged_df$mean_rank_score_agg)
+    # Convert each pipeline's mean rank score to a z-score
+    final_merged_df$z_score_indiv <- convert_to_zscore(final_merged_df$mean_rank_score_indiv)
+    final_merged_df$z_score_agg <- convert_to_zscore(final_merged_df$mean_rank_score_agg)
 
-# Calculate the final combined z-score as per the formula in Figure 1c
-high_confidence_predictions <- final_merged_df %>%
-    mutate(
-        # Formula: (z1 + z2) / sqrt(2)
-        combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
-    ) %>%
-    dplyr::select(drug_name, combined_z_score) %>%
-    arrange(desc(combined_z_score))
+    # Calculate the final combined z-score as per the formula in Figure 1c
+    high_confidence_predictions <- final_merged_df %>%
+        mutate(
+            # Formula: (z1 + z2) / sqrt(2)
+            combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
+        ) %>%
+        dplyr::select(drug_name, combined_z_score) %>%
+        arrange(desc(combined_z_score))
+
+    return(high_confidence_predictions)
+}
+
+high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)
 
 # 5. Save and Display Results
+save_and_display_predictions <- function(predictions, output_path) {
+    write_tsv(predictions, output_path)
+    message(paste("Final high-confidence drug predictions saved to:", output_path))
+    print("Top 20 High-Confidence Drug Predictions:")
+    print(head(predictions, 20))
+}
 
 output_path <- here("results/final_high_confidence_drug_predictions.tsv")
-write_tsv(high_confidence_predictions, output_path)
-
-message(paste("Final high-confidence drug predictions saved to:", output_path))
-
-# Display the top 20 predicted drugs
-print("Top 20 High-Confidence Drug Predictions:")
-print(head(high_confidence_predictions, 20))
+save_and_display_predictions(high_confidence_predictions, output_path)
