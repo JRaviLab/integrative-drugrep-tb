@@ -72,12 +72,18 @@ type_TB_genes <- "source"
 
 TB_genes_df <- data.frame(node = node_TB_genes, type = type_TB_genes, stringsAsFactors = FALSE)
 
-node_drug_genes <- union(drug_genes_df$drug_gene, DGIdb_targets_df$target)
+node_drug_genes <- DGIdb_targets_df$target
 type_drug_genes <- "target"
 drug_perturbed_genes_df <- data.frame(node = node_drug_genes, type = type_drug_genes, stringsAsFactors = FALSE)
 
 node_type_df <- rbind(TB_genes_df, drug_perturbed_genes_df)
 write_tsv(node_type_df, file = here("data/v2/figure3/node_types.tsv"))
+
+node_drug_genes_wperturbed <- union(drug_genes_df$drug_gene, DGIdb_targets_df$target)
+drug_perturbed_genes_df_wperturbed <- data.frame(node = node_drug_genes_wperturbed, type = type_drug_genes, stringsAsFactors = FALSE)
+
+node_type_df_ <- rbind(TB_genes_df, drug_perturbed_genes_df_wperturbed)
+write_tsv(node_type_df_, file = here("data/v2/figure3/node_types_with_perturbed_genes.tsv"))
 ```
 
 #### Create and save node/edge data for figure S3
