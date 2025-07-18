@@ -62,8 +62,12 @@ drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
 #### get drug-gene table
 ```{r}
 DGIdb_targets_df_ = DGIdb_targets_df[,c("drug_name","target")]
+colnames(DGIdb_targets_df_) <- gsub("target","drug_gene",colnames(DGIdb_targets_df_))
+DGIdb_targets_df_$type <- "DGIdb"
+drug_genes_df$type <- "LINCS"
 
-drug_genes_df
+drug_gene_df_network = rbind(drug_genes_df, DGIdb_targets_df_)
+write_tsv(drug_gene_df_network, file=here("data/v2/figure3/drug_gene_table.tsv"))
 ```
 
 #### Create node_types.txt for figure 3
