@@ -1,0 +1,1070 @@
+```{r setup, include=FALSE}
+library(ComplexHeatmap)
+library(colorRamp2)
+#library(ReactomePA) # can't install this
+library(clusterProfiler)
+library(DOSE)
+library(readr)
+source(here("scripts/00_get_crossSigs_enrichedGO.R"))
+library(gridExtra)
+library(grid)
+library(tibble)
+library(tidyr)
+library(gt)
+```
+
+```{r}
+marray_path_up <- here("data/v2/microarray_pathways/up")
+rnaseq_path_up <- here("data/v2/RNAseq_pathways/up")
+```
+
+```{r}
+pattern <- "GO_ORA_BGcorrected"
+prefix_sub <- "GO_ORA_BGcorrected"
+suffix_sub <- "up.tsv"
+annotation_file = here('data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv')
+```
+
+```{r read in summary table}
+summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df
+```
+
+### Upregulated genes' pathways
+```{r microarray up pathway clusters}
+marray_GO_mat_up = get_GO_testStat_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+colnames(marray_GO_mat_up) <- gsub("_limma", "", colnames(marray_GO_mat_up))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_microarray_DE.tsv"))
+marray_GO_mat_up <- marray_GO_mat_up[, cols_to_keep_marray]
+colnames(marray_GO_mat_up) <- gsub("_DE.tsv", "", colnames(marray_GO_mat_up))
+```
+
+```{r RNAseq up pathway clusters}
+rnaseq_GO_mat_up = get_GO_testStat_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+colnames(rnaseq_GO_mat_up) <- gsub("_DESeq2", "", colnames(rnaseq_GO_mat_up))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME, "up_aggregated_RNAseq_DE.tsv"))
+rnaseq_GO_mat_up <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
+colnames(rnaseq_GO_mat_up) <- gsub("_DE.tsv", "", colnames(rnaseq_GO_mat_up))
+```
+```{r combine microarray and RNAseq}
+df1 <- marray_GO_mat_up
+df2 <- rnaseq_GO_mat_up
+
+# Reshape from wide to long
+library(tidyr)
+long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
+long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
+
+# Combine long formats and sum values where matching
+library(dplyr)
+combined_long <- bind_rows(long1, long2) %>%
+  group_by(Description, Signature) %>%
+  summarise(
+  Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+  .groups = "drop"
+)
+
+# Reshape back to wide format
+final_df_up <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+colnames(final_df_up) <- gsub("\\.", "-", colnames(final_df_up))
+
+# Identify columns with "aggregated" in their names
+agg_cols <- grep("aggregated", names(final_df_up), value = TRUE)
+
+# Identify columns that do not contain "aggregated"
+non_agg_cols <- setdiff(names(final_df_up), agg_cols)
+
+# Reorder the dataframe
+final_df_up <- final_df_up[, c(non_agg_cols, agg_cols)]
+# Identify columns
+desc_col <- grep("Description", names(final_df_up), value = TRUE)
+gpl_cols <- grep("GPL", names(final_df_up), value = TRUE)
+rnaseq_col <- grep("RNAseq", names(final_df_up), value = TRUE)
+other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
+
+# Reorder dataframe
+final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
+final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
+final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
+```
+
+```{r}
+GO_annotation = get_GO_annotation(annotation_file)
+```
+
+### MW stats up signatures
+```{r circulating vs lung}
+rnaseq_marray_GO_mat_up <- final_df_up
+go_mat = rnaseq_marray_GO_mat_up
+summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(tissue_category)) %>%
+            select(SIGNATURE_NAME, tissue_category)
+# set rownames to GO term descriptions and remove Description column
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description")
+
+# clean up column names (remove "_up")
+colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
+
+# keep only columns present in the summary
+common_sigs <- intersect(colnames(go_mat_filtered), summary_df_$SIGNATURE_NAME)
+go_mat_filtered <- go_mat_filtered[, common_sigs]
+
+# build group vector
+group_vec <- summary_df_ %>%
+  filter(SIGNATURE_NAME %in% common_sigs) %>%
+  distinct(SIGNATURE_NAME, tissue_category) %>%
+  deframe()
+
+# Initialize results
+results <- data.frame(
+  GO_term = rownames(go_mat_filtered),
+  p_value = NA_real_,
+  statistic = NA_real_
+)
+
+# Perform Mann-Whitney test for each GO term
+for (i in seq_len(nrow(go_mat_filtered))) {
+  values <- go_mat_filtered[i, ]
+  
+  lung_vals <- as.numeric(values[, names(group_vec[group_vec == "circulating"])])
+  circ_vals <- as.numeric(values[, names(group_vec[group_vec == "lung"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(lung_vals)) > 0 && sum(!is.na(circ_vals)) > 0) {
+    test <- wilcox.test(lung_vals, circ_vals, exact = FALSE)
+    results$p_value[i] <- test$p.value
+    results$statistic[i] <- test$statistic
+  }
+}
+
+# adjust p-values using BH correction
+results <- results %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH"))
+
+results <- arrange(results, p_adj)
+head(results)
+
+significant_go_terms <- results %>%
+  filter(p_adj < 0.05) # None
+head(significant_go_terms)
+```
+
+```{r microarray vs. RNASeq}
+go_mat = rnaseq_marray_GO_mat_up
+summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(technology)) %>%
+            select(SIGNATURE_NAME, technology)
+# set rownames to GO term descriptions and remove Description column
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description")
+
+# clean up column names (remove "_up")
+colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
+
+# keep only columns present in the summary
+common_sigs <- intersect(colnames(go_mat_filtered), summary_df$SIGNATURE_NAME)
+go_mat_filtered <- go_mat_filtered[, common_sigs]
+
+# build group vector
+group_vec <- summary_df_ %>%
+  filter(SIGNATURE_NAME %in% common_sigs) %>%
+  distinct(SIGNATURE_NAME, technology) %>%
+  deframe()
+
+# Initialize results
+results <- data.frame(
+  GO_term = rownames(go_mat_filtered),
+  p_value = NA_real_,
+  statistic = NA_real_
+)
+
+# Perform Mann-Whitney test for each GO term
+for (i in seq_len(nrow(go_mat_filtered))) {
+  values <- go_mat_filtered[i, ]
+  
+  lung_vals <- as.numeric(values[, names(group_vec[group_vec == "microarray"])])
+  circ_vals <- as.numeric(values[, names(group_vec[group_vec == "RNASeq"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(lung_vals)) > 0 && sum(!is.na(circ_vals)) > 0) {
+    test <- wilcox.test(lung_vals, circ_vals, exact = FALSE)
+    results$p_value[i] <- test$p.value
+    results$statistic[i] <- test$statistic
+  }
+}
+
+# adjust p-values using BH correction
+results <- results %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH"))
+
+results <- arrange(results, p_adj)
+head(results)
+
+significant_go_terms <- results %>% filter(p_adj < 0.05) # None
+head(significant_go_terms)
+```
+```{r MTB vs. PTB}
+go_mat = rnaseq_marray_GO_mat_up
+summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(TB)) %>%
+            select(signature, TB)
+# set rownames to GO term descriptions and remove Description column
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description")
+
+# clean up column names (remove "_up")
+colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
+
+# keep only columns present in the summary
+common_sigs <- intersect(colnames(go_mat_filtered), summary_df_$signature)
+go_mat_filtered <- go_mat_filtered[, common_sigs]
+
+# build group vector
+group_vec <- summary_df_ %>%
+  filter(signature %in% common_sigs) %>%
+  distinct(signature, TB) %>%
+  deframe()
+
+# Initialize results
+results <- data.frame(
+  GO_term = rownames(go_mat_filtered),
+  p_value = NA_real_,
+  statistic = NA_real_
+)
+
+# Perform Mann-Whitney test for each GO term
+for (i in seq_len(nrow(go_mat_filtered))) {
+  values <- go_mat_filtered[i, ]
+  
+  lung_vals <- as.numeric(values[, names(group_vec[group_vec == "PTB"])])
+  circ_vals <- as.numeric(values[, names(group_vec[group_vec == "MTB"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(lung_vals)) > 0 && sum(!is.na(circ_vals)) > 0) {
+    test <- wilcox.test(lung_vals, circ_vals, exact = FALSE)
+    results$p_value[i] <- test$p.value
+    results$statistic[i] <- test$statistic
+  }
+}
+
+# adjust p-values using BH correction
+results <- results %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH"))
+
+results <- arrange(results, p_adj)
+#head(results)
+
+significant_go_terms <- results %>% filter(p_adj < 0.05) # None
+head(significant_go_terms)
+```
+```{r cell line vs. primary}
+go_mat = rnaseq_marray_GO_mat_up
+summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(origin_type)) %>%
+            select(signature, origin_type)
+# set rownames to GO term descriptions and remove Description column
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description")
+
+# clean up column names (remove "_up")
+colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
+
+# keep only columns present in the summary
+common_sigs <- intersect(colnames(go_mat_filtered), summary_df$signature)
+go_mat_filtered <- go_mat_filtered[, common_sigs]
+
+# build group vector
+group_vec <- summary_df_ %>%
+  filter(signature %in% common_sigs) %>%
+  distinct(signature, origin_type) %>%
+  deframe()
+
+# Initialize results
+results_cellline_primary <- data.frame(
+  GO_term = rownames(go_mat_filtered),
+  p_value = NA_real_,
+  statistic = NA_real_
+)
+
+# Perform Mann-Whitney test for each GO term
+for (i in seq_len(nrow(go_mat_filtered))) {
+  values <- go_mat_filtered[i, ]
+  
+  lung_vals <- as.numeric(values[, names(group_vec[group_vec == "cell line"])])
+  circ_vals <- as.numeric(values[, names(group_vec[group_vec == "primary"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(lung_vals)) > 0 && sum(!is.na(circ_vals)) > 0) {
+    test <- wilcox.test(lung_vals, circ_vals, exact = FALSE)
+    results_cellline_primary$p_value[i] <- test$p.value
+    results_cellline_primary$statistic[i] <- test$statistic
+  }
+}
+
+# adjust p-values using BH correction
+results_cellline_primary <- results_cellline_primary %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH"))
+
+results_cellline_primary <- arrange(results_cellline_primary, p_adj)
+#head(results)
+
+significant_go_terms <- results_cellline_primary %>% filter(p_adj < 0.05) # None
+head(significant_go_terms)
+
+# Convert significant GO terms dataframe to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "Cell Line vs. Primary | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+
+
+```
+
+```{r platform microarray | E-MEXP-3521 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "E-MEXP-3521"
+group_1_sigs <- microarray_df %>% filter(grepl("E-MEXP-3521", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("E-MEXP-3521", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "E-MEXP-3521", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "E-MEXP-3521"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "E-MEXP-3521 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(format(p_value, scientific = TRUE), format(p_adj, scientific = TRUE)))
+  )
+
+# Display the gt table
+gt_table
+```
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(tibble)
+library(gt)
+
+# ---- 1. Filter for microarray technology ----
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# ---- 2. Define groups ----
+group_1_sigs <- microarray_df %>%
+  filter(grepl("E-MEXP-3521", signature)) %>%
+  pull(signature)
+
+group_2_sigs <- microarray_df %>%
+  filter(!grepl("E-MEXP-3521", signature)) %>%
+  pull(signature)
+
+# ---- 3. Filter the GO matrix ----
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# ---- 4. Build group vector ----
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "E-MEXP-3521", "other microarray platforms")) %>%
+  deframe()
+
+# ---- 5. Mann-Whitney U test across GO terms ----
+results <- apply(go_mat_filtered, 1, function(values) {
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "E-MEXP-3521"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# ---- 6. Convert results to data frame ----
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# ---- 7. Adjust p-values and reorder columns ----
+results_df <- results_df %>%
+  mutate(p_value = as.numeric(p_value),
+         statistic = as.numeric(statistic),
+         p_adj = p.adjust(p_value, method = "BH")) %>%
+  select(GO_term, p_value, statistic, p_adj) %>%
+  arrange(p_adj)
+
+# ---- 8. Filter for significant GO terms ----
+significant_go_terms <- results_df %>%
+  filter(p_adj < 0.05) %>%
+  mutate(
+    p_value = formatC(p_value, format = "e", digits = 2),
+    p_adj = formatC(p_adj, format = "e", digits = 2)
+  )
+
+# ---- 9. Build gt table ----
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "E-MEXP-3521 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c(p_value, p_adj)
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = c(p_value, p_adj))
+  )
+
+# ---- 10. Display the table ----
+gt_table
+```
+```{r}
+write_tsv(significant_go_terms, file="~/Documents/GitHub/drugrep_tb/figures/diffplatform.tsv")
+
+```
+
+```{r platform microarray | GPL10558 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "GPL10558"
+group_1_sigs <- microarray_df %>% filter(grepl("GPL10558", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("GPL10558", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "GPL10558", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "GPL10558"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "GPL10558 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
+
+```{r platform microarray | GPL570 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "GPL10558"
+group_1_sigs <- microarray_df %>% filter(grepl("GPL570", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("GPL570", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "GPL570", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "GPL570"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "GPL570 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
+
+```{r platform microarray | GPL571 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "GPL10558"
+group_1_sigs <- microarray_df %>% filter(grepl("GPL571", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("GPL571", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "GPL571", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "GPL571"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df_GPL571 <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df_GPL571 <- results_df_GPL571 %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df_GPL571 %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "GPL571 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
+
+
+```{r platform microarray | GPL6947 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "GPL6947"
+group_1_sigs <- microarray_df %>% filter(grepl("GPL6947", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("GPL6947", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "GPL6947", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "GPL6947"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "GPL6947 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
+
+
+```{r platform microarray | GPL10558 vs. rest}
+# Filter for microarray technology
+microarray_df <- summary_df %>%
+  filter(technology == "microarray")
+
+# Separate the group with signatures that partially match "GPL10558"
+group_1_sigs <- microarray_df %>% filter(grepl("GPL10558", signature)) %>% pull(signature)
+group_2_sigs <- microarray_df %>% filter(!grepl("GPL10558", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- microarray_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "GPL10558", "other microarray platforms")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "GPL10558"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other microarray platforms"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "GPL6947 vs. other microarray platforms | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
+
+```{r platform microarray | one cell/tissue type vs. rest}
+# List of platforms to iterate over
+platforms <- c("CD34_blood", "DC_blood", "innateT_lung", "macro_blood", "mono_macro", "NTK_lung",
+               "PB", "PBMC", "THP1_macro", "whole_blood")  
+
+# Initialize an empty list to store the results for each platform
+all_results <- list()
+
+# Iterate over each platform
+for (platform in platforms) {
+  
+  # Separate the group with signatures that partially match the current platform
+  group_1_sigs <- summary_df %>% filter(grepl(platform, cell_tissue_type)) %>% pull(cell_tissue_type)
+  group_2_sigs <- summary_df %>% filter(!grepl(platform, cell_tissue_type)) %>% pull(cell_tissue_type)
+  
+  # Filter the GO matrix to keep only the signatures in group 1 and group 2
+  go_mat_filtered <- go_mat %>%
+    column_to_rownames("Description") %>%
+    select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+  
+  # Build group vector for these two groups
+  group_vec <- summary_df %>%
+    filter(signature %in% colnames(go_mat_filtered)) %>%
+    distinct(cell_tissue_type) %>%
+    mutate(group = ifelse(cell_tissue_type %in% group_1_sigs, platform, "other cell/tissue types")) %>%
+    deframe()
+  
+  # Perform Mann-Whitney test for each GO term using vectorized operations
+  results <- apply(go_mat_filtered, 1, function(values) {
+    # Separate values for the two groups
+    group_1_vals <- as.numeric(values[names(group_vec[group_vec == platform])])
+    group_2_vals <- as.numeric(values[names(group_vec[group_vec == "other cell/tissue types"])])
+  
+    # Check for at least one non-NA value in each group
+    if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+      test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+      c(p_value = test$p.value, statistic = test$statistic)
+    } else {
+      c(p_value = NA, statistic = NA)
+    }
+  })
+  
+  # Convert results to a dataframe
+  results_df <- as.data.frame(t(results))
+  colnames(results_df) <- c("p_value", "statistic")
+  results_df$GO_term <- rownames(go_mat_filtered)
+  
+  # Adjust p-values using BH correction
+  results_df <- results_df %>%
+    mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+    arrange(p_adj)
+  
+  # Reorder the columns to place GO_term first
+  results_df <- results_df %>%
+    select(GO_term, p_value, statistic, p_adj)
+  
+  # Get significant GO terms
+  significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+  
+  # Convert significant GO terms to a gt table
+  gt_table <- significant_go_terms %>%
+    gt() %>%
+    tab_header(
+      title = paste(platform, "vs. other cell/tissue types | Significant GO Terms from The Mann-Whitney U Test")
+    ) %>%
+    cols_label(
+      GO_term = "GO Term",
+      p_value = "Raw p-value",
+      p_adj = "Adjusted p-value"
+    ) %>%
+    tab_spanner(
+      label = "Enrichment Results",
+      columns = c("p_value", "p_adj")
+    ) %>%
+    tab_style(
+      style = list(
+        cell_text(weight = "bold", color = "blue")
+      ),
+      locations = cells_body(columns = vars(p_value, p_adj))
+    )
+  
+  # Add the table to the list of results
+  all_results[[platform]] <- gt_table
+}
+
+# no significant terms
+```
+
+```{r platform aggregated vs individual signatures}
+# Separate the group with signatures that partially match "aggregated"
+group_1_sigs <- summary_df %>% filter(grepl("aggregated", signature)) %>% pull(signature)
+group_2_sigs <- summary_df %>% filter(!grepl("aggregated", signature)) %>% pull(signature)
+
+# Filter the GO matrix to keep only the signatures in group 1 and group 2
+go_mat_filtered <- go_mat %>%
+  column_to_rownames("Description") %>%
+  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+
+# Build group vector for these two groups
+group_vec <- summary_df %>%
+  filter(signature %in% colnames(go_mat_filtered)) %>%
+  distinct(signature) %>%
+  mutate(group = ifelse(signature %in% group_1_sigs, "aggregated signatures", "individual signatures")) %>%
+  deframe()
+
+# Perform Mann-Whitney test for each GO term using vectorized operations
+results <- apply(go_mat_filtered, 1, function(values) {
+  # Separate values for the two groups
+  group_1_vals <- as.numeric(values[names(group_vec[group_vec == "aggregated signatures"])])
+  group_2_vals <- as.numeric(values[names(group_vec[group_vec == "individual signatures"])])
+
+  # Check for at least one non-NA value in each group
+  if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    test <- wilcox.test(group_1_vals, group_2_vals, exact = FALSE)
+    c(p_value = test$p.value, statistic = test$statistic)
+  } else {
+    c(p_value = NA, statistic = NA)
+  }
+})
+
+# Convert results to a dataframe
+results_df <- as.data.frame(t(results))
+colnames(results_df) <- c("p_value", "statistic")
+results_df$GO_term <- rownames(go_mat_filtered)
+
+# Adjust p-values using BH correction
+results_df <- results_df %>%
+  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
+  arrange(p_adj)
+
+# Reorder the columns to place GO_term first
+results_df <- results_df %>%
+  select(GO_term, p_value, statistic, p_adj)
+
+# Get significant GO terms
+significant_go_terms <- results_df %>% filter(p_adj < 0.05)
+
+# Convert significant GO terms to a gt table
+gt_table <- significant_go_terms %>%
+  gt() %>%
+  tab_header(
+    title = "Aggregated vs. Individual Signatures | Significant GO Terms from The Mann-Whitney U Test"
+  ) %>%
+  cols_label(
+    GO_term = "GO Term",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  tab_spanner(
+    label = "Enrichment Results",
+    columns = c("p_value", "p_adj")
+  ) %>%
+  tab_style(
+    style = list(
+      cell_text(weight = "bold", color = "blue")
+    ),
+    locations = cells_body(columns = vars(p_value, p_adj))
+  )
+
+# Display the gt table
+gt_table
+```
