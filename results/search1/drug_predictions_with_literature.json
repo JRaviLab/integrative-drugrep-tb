@@ -1,0 +1,2055 @@
+[
+    {
+        "drug_name":"nilotinib",
+        "combined_z_score":2.5243985181,
+        "search_type":"Direct (HDT)",
+        "studies_found":1,
+        "literature_evidence":[
+            {
+                "title":"Mycobacterium tuberculosis resides in lysosome-poor monocyte-derived lung cells during chronic infection.",
+                "authors":"Zheng W, Chang IC, Limberis J, Budzik JM, Zha BS, Howard Z, Chen L, Ernst JD",
+                "pmid":"38701094",
+                "doi":"10.1371\/journal.ppat.1012205"
+            }
+        ]
+    },
+    {
+        "drug_name":"mycophenolic-acid",
+        "combined_z_score":2.4950332575,
+        "search_type":"Direct (TB)",
+        "studies_found":11,
+        "literature_evidence":[
+            {
+                "title":"A new target for drug repositioning: CEBPalpha elicits LL-37 expression in a vitamin D-independent manner promoting Mtb clearance.",
+                "authors":"Jacobo-Delgado YM, Rodriguez-Carlos A, Santos-Mena A, Gonzalez-Muniz OE, Felix-Arellano C, Navarro-Tovar G, Rivas-Santiago B",
+                "pmid":"40252936",
+                "doi":"S0882-4010(25)00311-0"
+            },
+            {
+                "title":"Disseminated Histoplasmosis, Pulmonary Tuberculosis, and Cytomegalovirus Disease in a Renal Transplant Recipient after Infection with SARS-CoV-2.",
+                "authors":"Mauricio CV, Angelica FE, de Jesus AA, Rodrigo TJ, Aldo CC, Ignacio CJ, Jorge AS",
+                "pmid":"36071914",
+                "doi":"10.1155\/2022\/8042168"
+            },
+            {
+                "title":"Reversible sirolimus-induced pulmonary alveolar proteinosis in a renal transplant patient.",
+                "authors":"Hinojosa-Gonzalez DE, Davila-Gonzalez D, Salgado-Garza G, Flores-Villalba E",
+                "pmid":"32367848",
+                "doi":"10.4103\/lungindia.lungindia_484_19"
+            },
+            {
+                "title":"Massive Ascites of Unknown Origin: A Case Report.",
+                "authors":"Kikowicz M, Gozdowska J, Durlik M",
+                "pmid":"32276839",
+                "doi":"S0041-1345(19)31596-9"
+            },
+            {
+                "title":"Influence of epidemiology, immunosuppressive regimens, clinical presentation, and treatment on kidney transplant outcomes of patients diagnosed with tuberculosis: A retrospective cohort analysis.",
+                "authors":"Viana LA, Cristelli MP, Santos DW, Tavares MG, Dantas MTC, Felipe CR, Silva HT, Pestana JM",
+                "pmid":"30556285",
+                "doi":"10.1111\/ajt.15220"
+            },
+            {
+                "title":"Hit discovery of Mycobacterium tuberculosis inosine 5'-monophosphate dehydrogenase, GuaB2, inhibitors.",
+                "authors":"Sahu NU, Singh V, Ferraris DM, Rizzi M, Kharkar PS",
+                "pmid":"29699922",
+                "doi":"S0960-894X(18)30357-3"
+            },
+            {
+                "title":"A rare paracoccidioidomycosis diagnosis in a kidney transplant receptor: case report.",
+                "authors":"Pontes AM, Borborema J, Correia CR, de Almeida WL, Maciel RF",
+                "pmid":"26036516",
+                "doi":"S0041-1345(15)00234-1"
+            },
+            {
+                "title":"Safety profile comparing azathioprine and mycophenolate in kidney transplant recipients receiving tacrolimus and corticosteroids.",
+                "authors":"Cristelli MP, Tedesco-Silva H, Medina-Pestana JO, Franco MF",
+                "pmid":"23701592",
+                "doi":"10.1111\/tid.12095"
+            },
+            {
+                "title":"Mycophenolic acid area under the curve recovery time following rifampicin withdrawal.",
+                "authors":"Annapandian VM, Fleming DH, Mathew BS, John GT",
+                "pmid":"20535273",
+                "doi":"10.4103\/0971-4065.62091"
+            },
+            {
+                "title":"Experience with Alemtuzumab (Campath-1H) as induction agent in renal transplantation followed by steroid-free immunosuppression.",
+                "authors":"Baez Y, Giron F, Nino-Murcia A, Rodriguez J, Salcedo S",
+                "pmid":"18454990",
+                "doi":"10.1016\/j.transproceed.2008.02.026"
+            },
+            {
+                "title":"Conversion to combined therapy with sirolimus and mycophenolate mofetil improved renal function in stable renal transplant recipients.",
+                "authors":"Tsai MK, Lee CY, Hu RH, Lee PH",
+                "pmid":"17561472",
+                "doi":"10.1016\/S0929-6646(09)60322-3"
+            }
+        ]
+    },
+    {
+        "drug_name":"resveratrol",
+        "combined_z_score":1.9760935021,
+        "search_type":"Direct (HDT)",
+        "studies_found":1,
+        "literature_evidence":[
+            {
+                "title":"Sirtuin 3 is essential for host defense against Mycobacterium abscessus infection through regulation of mitochondrial homeostasis.",
+                "authors":"Kim YJ, Lee SH, Jeon SM, Silwal P, Seo JY, Hanh BTB, Park JW, Whang J, Lee MJ, Heo JY, Kim SH, Kim JM, Song GY, Jang J, Jo EK",
+                "pmid":"32835604",
+                "doi":"10.1080\/21505594.2020.1809961"
+            }
+        ]
+    },
+    {
+        "drug_name":"cilastatin",
+        "combined_z_score":1.7211145054,
+        "search_type":"Direct (TB)",
+        "studies_found":23,
+        "literature_evidence":[
+            {
+                "title":"A rare case of multiple brain abscesses caused by Nocardia abscessus co-infection with tuberculous meningitis in an immunocompetent patient.",
+                "authors":"Wang X, Liang L, Liang Y, Hu L",
+                "pmid":"40360973",
+                "doi":"10.1186\/s12879-025-11056-5"
+            },
+            {
+                "title":"Mycobacterium goodii pulmonary disease in an immunocompetent patient: A case report and literature review.",
+                "authors":"Shiratori T, Nunomura Y, Itoga M, Makiguchi T, Tanaka H, Taima K, Chikamatsu K, Kurose A, Mitarai S, Tasaka S",
+                "pmid":"40015373",
+                "doi":"S1341-321X(25)00062-5"
+            },
+            {
+                "title":"Combination of Imipenem-Cilastatin-Relebactam and Amoxicillin in the Antibiotic Regimen in Two Cases of Mycobacterium abscessus Lung Infection.",
+                "authors":"Vogiatzoglou AI, Hadji Muitrova M, Papadaki E, Sionidou M, Nikopoulou A, Kontos F, Papaventsis D, Papavasileiou A, Manika K",
+                "pmid":"39171000",
+                "doi":"10.7759\/cureus.65112"
+            },
+            {
+                "title":"Screening, epidemic trends and drug sensitivity analysis of nontuberculous mycobacteria in a local area of China.",
+                "authors":"Lin WH, Yao C, Mei L, Wang DP, Bao XD, Liu SS",
+                "pmid":"39114690",
+                "doi":"10.62347\/MAJY5046"
+            },
+            {
+                "title":"[Expert consensus on off-label use of antituberculosis drugs (2023 Update)].",
+                "authors":"",
+                "pmid":"37914420",
+                "doi":"10.3760\/cma.j.cn112147-20230809-00062"
+            },
+            {
+                "title":"Aortic endograft infection by Mycobacterium abscessus subsp. massiliense with acquired clarithromycin resistance: a case report.",
+                "authors":"Akiyama Y, Iwamoto N, Kamada K, Yoshida A, Osugi A, Mitarai S, Suzuki T, Yamamoto K, Nagashima M, Horai T, Ohmagari N",
+                "pmid":"37848843",
+                "doi":"10.1186\/s12879-023-08702-1"
+            },
+            {
+                "title":"Hyperammonemia in a septic patient with Ureaplasma parvum arthritis: a case report.",
+                "authors":"Pan X, Xu J, Pan L, Wang C, Qiu J, Huang X, Yan C, Mao M",
+                "pmid":"36550469",
+                "doi":"10.1186\/s12879-022-07953-8"
+            },
+            {
+                "title":"Carbapenem Antibiotics: Recent Update on Synthesis and Pharmacological Activities.",
+                "authors":"Tiwari A, Tiwari V, Sahoo BM, Banik BK, Kumar M, Verma N",
+                "pmid":"36082853",
+                "doi":"10.2174\/2589977514666220907141939"
+            },
+            {
+                "title":"A case report of Nocardia asiatica constrictive pericarditis in a patient with Human Immunodeficiency Virus.",
+                "authors":"Griessel R, Mitton B, Rule R, Said M",
+                "pmid":"34954072",
+                "doi":"S1054-8807(21)00087-9"
+            },
+            {
+                "title":"Severe Pulmonary Mycobacterium abscessus Cases Due to Co-Infection with Other Microorganisms Well Treated by Clarithromycin and Sitafloxacin in Japan.",
+                "authors":"Takano K, Shimada D, Kashiwagura S, Kamioka Y, Hariu M, Watanabe Y, Seki M",
+                "pmid":"34285595",
+                "doi":"10.2147\/IMCRJ.S321969"
+            },
+            {
+                "title":"Pneumonia, pleurisy, mediastinitis, and mediastinal cyst infection secondary to endobronchial ultrasound-guided transbronchial needle aspiration: A case report.",
+                "authors":"Liu W, Wang Y, Zhang W, Wu H, Liu Z",
+                "pmid":"34011084",
+                "doi":"10.1097\/MD.0000000000025973"
+            },
+            {
+                "title":"FDA approved antibacterial drugs: 2018-2019.",
+                "authors":"Andrei S, Droc G, Stefan G",
+                "pmid":"32309620",
+                "doi":"10.15190\/d.2019.15"
+            },
+            {
+                "title":"Incidental intraoperative diagnosis of Mycobacterium abscessus meningeal infection: a case report and review of the literature.",
+                "authors":"Giovannenze F, Stifano V, Scoppettuolo G, Damiano F, Pallavicini F, Delogu G, Palucci I, Rapisarda A, Sturda C, Pompucci A",
+                "pmid":"29687315",
+                "doi":"10.1007\/s15010-018-1141-5"
+            },
+            {
+                "title":"Delayed diagnosis of cholestatic drug-induced liver injury treated with corticosteroid for adrenal insufficiency secondary to miliary tuberculosis.",
+                "authors":"Lee SY, Schneier A, Schiano T, Liu SJ, Machado ON",
+                "pmid":"26367727",
+                "doi":""
+            },
+            {
+                "title":"Disseminated Mycobacterium abscessus Infection Following Septic Arthritis: A Case Report and Review of the Literature.",
+                "authors":"Fukui S, Sekiya N, Takizawa Y, Morioka H, Kato H, Aono A, Chikamatsu K, Mitarai S, Kobayashi S, Kamei S, Setoguchi K",
+                "pmid":"26020393",
+                "doi":"10.1097\/MD.0000000000000861"
+            },
+            {
+                "title":"Multidrug-resistant tuberculosis in an adult with cystic fibrosis.",
+                "authors":"Manika K, Giouleka P, Zarogoulidis K, Kioumis I",
+                "pmid":"22869452",
+                "doi":"10.1159\/000338846"
+            },
+            {
+                "title":"[A case of Mycobacterium abscessus pulmonary infection; effectiveness of clarithromycin, amikacin and imipenem\/cilastatin].",
+                "authors":"Shikama Y, Kamio Y, Kuriu K, Shibuya Y, Kimura S, Nakajima H",
+                "pmid":"17144576",
+                "doi":""
+            },
+            {
+                "title":"[A case of tuberculous pyometrium concurrent with tuberculous pleurisy].",
+                "authors":"Hashida H, Hanayama Y, Honda T, Aibara Y",
+                "pmid":"14999927",
+                "doi":"10.3143\/geriatrics.41.117"
+            },
+            {
+                "title":"[A case of lung infection due to Mycobacterium abscessus].",
+                "authors":"Tagawa A, Ikehara K, Nishiyama H, Tsuburai T, Shinohara T, Kusano N, Baba T, Shoji A, Kaneko T, Suzuki S, Ishigatsubo Y",
+                "pmid":"14503341",
+                "doi":""
+            },
+            {
+                "title":"[An elderly case with Listeria monocytogenes sepsis and pulmonary non-tuberculous mycobacterial infection].",
+                "authors":"Hontsu S, Konishi M, Takenaka H, Kasahara K, Takahashi K, Yoshimoto E, Murakawa K, Maeda K, Mikasa K, Kimura H, Sano R, Masutani T, Narita N",
+                "pmid":"12607349",
+                "doi":"10.11150\/kansenshogakuzasshi1970.76.1025"
+            },
+            {
+                "title":"[Mycobacterium abscessus infection complicated with diabetes mellitus].",
+                "authors":"Takemura Y, Iwasaki Y, Minagawa T, Nakanishi M, Nagata K, Natsuhara A, Harada H, Nakagawa M",
+                "pmid":"11925921",
+                "doi":""
+            },
+            {
+                "title":"Hospitalized patients with community-acquired pneumonia in Hong Kong: a randomized study comparing imipenem\/cilastatin and ceftazidime.",
+                "authors":"Ho A, Leung R, Lai CK, Chan TH, Chan CH",
+                "pmid":"9154675",
+                "doi":"10.1159\/000196675"
+            },
+            {
+                "title":"Antibiotic therapy for severe infections in infants and children.",
+                "authors":"Rhodes KH, Henry NK",
+                "pmid":"1732693",
+                "doi":"10.1016\/s0025-6196(12)60280-8"
+            }
+        ]
+    },
+    {
+        "drug_name":"menadione",
+        "combined_z_score":1.6977975628,
+        "search_type":"Direct (TB)",
+        "studies_found":21,
+        "literature_evidence":[
+            {
+                "title":"Design, Synthesis, and In Vitro Evaluation of 4-(Arylchalcogenyl)methyl)-1H-1,2,3-triazol-1-yl-menadione: Exploring Their Potential Against Tuberculosis.",
+                "authors":"Santos NLB, Gomes LS, Ribeiro RCB, Carvalho AS, Lourenco MCS, Marins LM, Valle SP, Doring TH, Andricopulo AD, Oliveira AS, Ferreira VF, da Silva FC, Forezi LDSM, Nascimento V",
+                "pmid":"40573194",
+                "doi":"10.3390\/ph18060797"
+            },
+            {
+                "title":"Mycobacterial DNA-binding protein 1 is critical for BCG survival in stressful environments and simultaneously regulates gene expression.",
+                "authors":"Shaban AK, Gebretsadik G, Hakamata M, Takihara H, Inouchi E, Nishiyama A, Ozeki Y, Tateishi Y, Nishiuchi Y, Yamaguchi T, Ohara N, Okuda S, Matsumoto S",
+                "pmid":"37644087",
+                "doi":"10.1038\/s41598-023-40941-9"
+            },
+            {
+                "title":"The impact of genotype on the phenotype of Mycobacterium tuberculosis DeltasufR mutants.",
+                "authors":"Willemse D, Baatjies L, Dippenaar A, Warren RM, Williams MJ",
+                "pmid":"37295353",
+                "doi":"S1472-9792(23)00058-6"
+            },
+            {
+                "title":"The AhR ligand phthiocol and vitamin K analogs as Pseudomonas aeruginosa quorum sensing inhibitors.",
+                "authors":"Jia T, Liu D, Bi X, Li M, Cai Z, Fu J, Liu Z, Wu P, Ke X, Jia A, Zhang G, Li G, Yang L",
+                "pmid":"36187967",
+                "doi":"10.3389\/fmicb.2022.896687"
+            },
+            {
+                "title":"Detecting Validated Intracellular ROS Generation with (18)F-dihydroethidine-Based PET.",
+                "authors":"Waters ECT, Baark F, Yu Z, Mota F, Eykyn TR, Yan R, Southworth R",
+                "pmid":"34820762",
+                "doi":"10.1007\/s11307-021-01683-0"
+            },
+            {
+                "title":"Antimycobacterial activity of acetone extract and isolated metabolites from folklore medicinal lichen Usnea laevis Nyl. against drug-sensitive and multidrug-resistant tuberculosis strains.",
+                "authors":"Tatipamula VB, Annam SSP",
+                "pmid":"34536516",
+                "doi":"S0378-8741(21)00870-9"
+            },
+            {
+                "title":"Anti-tubercular profile of new selenium-menadione conjugates against Mycobacterium tuberculosis H37Rv (ATCC 27294) strain and multidrug-resistant clinical isolates.",
+                "authors":"Ribeiro RCB, de Marins DB, Di Leo I, da Silva Gomes L, de Moraes MG, Abbadi BL, Villela AD, da Silva WF, da Silva LCRP, Machado P, Bizarro CV, Basso LA, Cristina de Moraes M, Ferreira VF, da Silva FC, Nascimento V",
+                "pmid":"33010635",
+                "doi":"S0223-5234(20)30831-X"
+            },
+            {
+                "title":"Synthesis and biological evaluation of some new tricyclic pyrrolo[3,2-e]tetrazolo[1,5-c]pyrimidine derivatives as potential antitubercular agents.",
+                "authors":"Patil Y, Shingare R, Choudhari A, Borkute R, Sarkar D, Madje BR",
+                "pmid":"29943427",
+                "doi":"10.1002\/ardp.201800040"
+            },
+            {
+                "title":"Identification of a Mycothiol-Dependent Nitroreductase from Mycobacterium tuberculosis.",
+                "authors":"Negri A, Javidnia P, Mu R, Zhang X, Vendome J, Gold B, Roberts J, Barman D, Ioerger T, Sacchettini JC, Jiang X, Burns-Huang K, Warrier T, Ling Y, Warren JD, Oren DA, Beuming T, Wang H, Wu J, Li H, Rhee KY, Nathan CF, Liu G, Somersan-Karakaya S",
+                "pmid":"29465985",
+                "doi":"10.1021\/acsinfecdis.7b00111"
+            },
+            {
+                "title":"Uptake and metabolism of fluorescent steroids by mycobacterial cells.",
+                "authors":"Faletrov Y, Brzostek A, Plocinska R, Dziadek J, Rudaya E, Edimecheva I, Shkumatov V",
+                "pmid":"27718364",
+                "doi":"S0039-128X(16)30153-2"
+            },
+            {
+                "title":"Antitubercular and antibacterial activity of quinonoid natural products against multi-drug resistant clinical isolates.",
+                "authors":"Dey D, Ray R, Hazra B",
+                "pmid":"24318724",
+                "doi":"10.1002\/ptr.5090"
+            },
+            {
+                "title":"A novel F(420) -dependent anti-oxidant mechanism protects Mycobacterium tuberculosis against oxidative stress and bactericidal agents.",
+                "authors":"Gurumurthy M, Rao M, Mukherjee T, Rao SP, Boshoff HI, Dick T, Barry CE 3rd, Manjunatha UH",
+                "pmid":"23240649",
+                "doi":"10.1111\/mmi.12127"
+            },
+            {
+                "title":"A novel screening method based on menadione mediated rapid reduction of tetrazolium salt for testing of anti-mycobacterial agents.",
+                "authors":"Singh U, Akhtar S, Mishra A, Sarkar D",
+                "pmid":"21129420",
+                "doi":"10.1016\/j.mimet.2010.11.013"
+            },
+            {
+                "title":"Rv3303c of Mycobacterium tuberculosis protects tubercle bacilli against oxidative stress in vivo and contributes to virulence in mice.",
+                "authors":"Akhtar P, Srivastava S, Srivastava A, Srivastava M, Srivastava BS, Srivastava R",
+                "pmid":"17097323",
+                "doi":"10.1016\/j.micinf.2006.09.004"
+            },
+            {
+                "title":"Effects of weak acids, UV and proton motive force inhibitors on pyrazinamide activity against Mycobacterium tuberculosis in vitro.",
+                "authors":"Wade MM, Zhang Y",
+                "pmid":"16950824",
+                "doi":"10.1093\/jac\/dkl358"
+            },
+            {
+                "title":"Co-induction of methyltransferase Rv0560c by naphthoquinones and fibric acids suggests attenuation of isoprenoid quinone action in Mycobacterium tuberculosis.",
+                "authors":"Garbe TR",
+                "pmid":"15644891",
+                "doi":"10.1139\/w04-067"
+            },
+            {
+                "title":"Targeted mutagenesis of the Mycobacterium smegmatis mca gene, encoding a mycothiol-dependent detoxification protein.",
+                "authors":"Rawat M, Uppal M, Newton G, Steffek M, Fahey RC, Av-Gay Y",
+                "pmid":"15342574",
+                "doi":"10.1128\/JB.186.18.6050-6058.2004"
+            },
+            {
+                "title":"sigmaR, an RNA polymerase sigma factor that modulates expression of the thioredoxin system in response to oxidative stress in Streptomyces coelicolor A3(2).",
+                "authors":"Paget MS, Kang JG, Roe JH, Buttner MJ",
+                "pmid":"9755177",
+                "doi":"10.1093\/emboj\/17.19.5776"
+            },
+            {
+                "title":"Superoxide production by the mycobacterial and pseudomonad quinoid pigments phthiocol and pyocyanine in human lung cells.",
+                "authors":"Gardner PR",
+                "pmid":"8806780",
+                "doi":"10.1006\/abbi.1996.0390"
+            },
+            {
+                "title":"Response of Mycobacterium tuberculosis to reactive oxygen and nitrogen intermediates.",
+                "authors":"Garbe TR, Hibler NS, Deretic V",
+                "pmid":"8900541",
+                "doi":""
+            },
+            {
+                "title":"Stimulation of NADH-dependent microsomal DNA strand cleavage by rifamycin SV.",
+                "authors":"Kukielka E, Cederbaum AI",
+                "pmid":"7733870",
+                "doi":"10.1042\/bj3070361"
+            }
+        ]
+    },
+    {
+        "drug_name":"rosuvastatin",
+        "combined_z_score":1.6275952073,
+        "search_type":"Direct (TB)",
+        "studies_found":4,
+        "literature_evidence":[
+            {
+                "title":"PET-CT outcomes from a randomised controlled trial of rosuvastatin as an adjunct to standard tuberculosis treatment.",
+                "authors":"Cross GB, Sari IP, Burkill SM, Yap CW, Nguyen H, Quyet D, Dalay VB, Gutierrez E, Balanag VM, Castillo RJ, Chang CC, Kelleher AD, O'Doherty J, Paton NI",
+                "pmid":"39622823",
+                "doi":"10.1038\/s41467-024-54419-3"
+            },
+            {
+                "title":"Rosuvastatin adjunctive therapy for rifampicin-susceptible pulmonary tuberculosis: a phase 2b, randomised, open-label, multicentre trial.",
+                "authors":"Cross GB, Sari IP, Kityo C, Lu Q, Pokharkar Y, Moorakonda RB, Thi HN, Do Q, Dalay VB, Gutierrez E, Balanag VM, Castillo RJ, Mugerwa H, Fanusi F, Kwan P, Chew KL, Paton NI",
+                "pmid":"36966799",
+                "doi":"S1473-3099(23)00067-1"
+            },
+            {
+                "title":"Efficacy and safety of statin therapy in pulmonary hypertension: a systematic review and meta-analysis.",
+                "authors":"Chen F, Yang M, Wan C, Liu L, Chen L",
+                "pmid":"32042802",
+                "doi":"10.21037\/atm.2019.11.19"
+            },
+            {
+                "title":"Pharmacogenomics of Rosuvastatin: A Glocal (Global+Local) African Perspective and Expert Review on a Statin Drug.",
+                "authors":"Soko ND, Masimirembwa C, Dandara C",
+                "pmid":"27631189",
+                "doi":"10.1089\/omi.2016.0114"
+            }
+        ]
+    },
+    {
+        "drug_name":"fludroxycortide",
+        "combined_z_score":1.6041484453,
+        "search_type":"No Results",
+        "studies_found":0,
+        "literature_evidence":[
+
+        ]
+    },
+    {
+        "drug_name":"lapatinib",
+        "combined_z_score":1.5903468109,
+        "search_type":"Direct (TB)",
+        "studies_found":1,
+        "literature_evidence":[
+            {
+                "title":"Identification of the novel markers of PPAR signalling affecting immune microenvironment and immunotherapy response of lung adenocarcinoma patients.",
+                "authors":"Zhang W, Liu J, Ren X, Zhang Z, Zhou M, Li Y, Wang J, Li Q, Zhu Q, Wu G",
+                "pmid":"37556076",
+                "doi":"10.1111\/jcmm.17877"
+            }
+        ]
+    },
+    {
+        "drug_name":"fostamatinib",
+        "combined_z_score":1.5732046993,
+        "search_type":"Direct (TB)",
+        "studies_found":1,
+        "literature_evidence":[
+            {
+                "title":"Inhibition of spleen tyrosine kinase in the treatment of rheumatoid arthritis.",
+                "authors":"Nijjar JS, Tindell A, McInnes IB, Siebert S",
+                "pmid":"23861534",
+                "doi":"10.1093\/rheumatology\/ket225"
+            }
+        ]
+    },
+    {
+        "drug_name":"fenbendazole",
+        "combined_z_score":1.5037002084,
+        "search_type":"No Results",
+        "studies_found":0,
+        "literature_evidence":[
+
+        ]
+    },
+    {
+        "drug_name":"minoxidil",
+        "combined_z_score":1.4976543269,
+        "search_type":"Direct (TB)",
+        "studies_found":2,
+        "literature_evidence":[
+            {
+                "title":"Brazilian blood donation eligibility criteria for dermatologic patients.",
+                "authors":"Wambier CG, Pereira CS, Prado Junior Bde P, Foss NT",
+                "pmid":"22892774",
+                "doi":"10.1590\/s0365-05962012000400012"
+            },
+            {
+                "title":"Pericarditis following renal transplantation.",
+                "authors":"Sever MS, Steinmuller DR, Hayes JM, Streem SB, Novick AC",
+                "pmid":"1646505",
+                "doi":"10.1097\/00007890-199106000-00016"
+            }
+        ]
+    },
+    {
+        "drug_name":"verapamil",
+        "combined_z_score":1.4869917603,
+        "search_type":"Direct (HDT)",
+        "studies_found":1,
+        "literature_evidence":[
+            {
+                "title":"Old Drugs and New Targets as an Outlook for the Treatment of Tuberculosis.",
+                "authors":"Zitko J, Dolezal M",
+                "pmid":"28933298",
+                "doi":"10.2174\/0929867324666170920154325"
+            }
+        ]
+    },
+    {
+        "drug_name":"simvastatin",
+        "combined_z_score":1.4047401962,
+        "search_type":"Direct (HDT)",
+        "studies_found":3,
+        "literature_evidence":[
+            {
+                "title":"Simvastatin Enhances the Immune Response Against Mycobacterium tuberculosis.",
+                "authors":"Guerra-De-Blas PDC, Bobadilla-Del-Valle M, Sada-Ovalle I, Estrada-Garcia I, Torres-Gonzalez P, Lopez-Saavedra A, Guzman-Beltran S, Ponce-de-Leon A, Sifuentes-Osornio J",
+                "pmid":"31616387",
+                "doi":"10.3389\/fmicb.2019.02097"
+            },
+            {
+                "title":"Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.",
+                "authors":"Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC",
+                "pmid":"31605489",
+                "doi":"10.1093\/infdis\/jiz517"
+            },
+            {
+                "title":"Topical Simvastatin as Host-Directed Therapy against Severity of Cutaneous Leishmaniasis in Mice.",
+                "authors":"Parihar SP, Hartley MA, Hurdayal R, Guler R, Brombacher F",
+                "pmid":"27632901",
+                "doi":"10.1038\/srep33458"
+            }
+        ]
+    },
+    {
+        "drug_name":"sirolimus",
+        "combined_z_score":1.398325738,
+        "search_type":"Direct (TB)",
+        "studies_found":26,
+        "literature_evidence":[
+            {
+                "title":"Sirolimus treatment of generalized lymphatic anomaly with multiple congenital defects.",
+                "authors":"Piekarczyk P, Blasinska K, Polaczek M, Bilny-Paluch M, Radzikowska E",
+                "pmid":"40105220",
+                "doi":"16977"
+            },
+            {
+                "title":"Diagnostic and Therapeutic Strategies in Evans Syndrome: A Case Report and Literature Review.",
+                "authors":"Palvia AR, Damera AR, Magar S, Nandi AR, Goyal M",
+                "pmid":"39156320",
+                "doi":"10.7759\/cureus.64866"
+            },
+            {
+                "title":"Effect of mTOR inhibitors on the mortality and safety of patients with lymphangioleiomyomatosis on the lung transplantation waitlist: A retrospective cohort study.",
+                "authors":"Sakurai T, Kanou T, Funaki S, Fukui E, Kimura T, Ose N, Inoue Y, Shintani Y",
+                "pmid":"38761480",
+                "doi":"S2212-5345(24)00083-2"
+            },
+            {
+                "title":"Lymphangioleiomyomatosis Showing the Development of Mycobacterium abscessus subsp. massiliense Infection during Sirolimus Therapy.",
+                "authors":"Yanagisawa A, Takimoto T, Kurahara Y, Tsuyuguchi K, Yoshida S, Hirose M, Inoue Y, Arai T",
+                "pmid":"38008448",
+                "doi":"10.2169\/internalmedicine.2847-23"
+            },
+            {
+                "title":"Tuberculosis treatment without rifampin in kidney\/kidney-pancreas transplantation: A case series report.",
+                "authors":"Radisic MV, Pujato NR, Bravo PM, Del Grosso RC, Hunter M, Beltramino S, Linares Gonzalez L, Cornet ML, Del Carmen Rial M, Franzini RL, Dotta AC, Leon LR, Walther J, Uva PD, Werber G",
+                "pmid":"36515463",
+                "doi":"10.1111\/tid.13949"
+            },
+            {
+                "title":"Branched chain amino acids are associated with metabolic complications in liver transplant recipients.",
+                "authors":"Bohler M, van den Berg EH, Almanza MCT, Connelly MA, Bakker SJL, de Meijer VE, Dullaart RPF, Blokzijl H",
+                "pmid":"35143831",
+                "doi":"S0009-9120(22)00023-6"
+            },
+            {
+                "title":"Relapse of Lymphangioleiomyomatosis Five Years after Bilateral-Lung Transplantation.",
+                "authors":"Heshmatnia J, Mirenayat MS, Rezaei M, Bongomin F, Bakhshayeshkaram M, Tabarsi P, Sheikhy K, Mortezaee V",
+                "pmid":"34816687",
+                "doi":"10.34172\/aim.2021.101"
+            },
+            {
+                "title":"Reversible sirolimus-induced pulmonary alveolar proteinosis in a renal transplant patient.",
+                "authors":"Hinojosa-Gonzalez DE, Davila-Gonzalez D, Salgado-Garza G, Flores-Villalba E",
+                "pmid":"32367848",
+                "doi":"10.4103\/lungindia.lungindia_484_19"
+            },
+            {
+                "title":"Clinical application of a dried blood spot assay for sirolimus and everolimus in transplant patients.",
+                "authors":"Veenhof H, Koster RA, Alffenaar JC, van den Berg AP, de Groot MR, Verschuuren EAM, Berger SP, Bakker SJL, Touw DJ",
+                "pmid":"30939110",
+                "doi":"10.1515\/cclm-2019-0053"
+            },
+            {
+                "title":"Effects of Sirolimus on Lung function in patients with Lymphangioleiomyomatosis.",
+                "authors":"Aghaeimeybodi F, Najafizadeh K, Razavi-Ratki SK, Namiranian N",
+                "pmid":"30858935",
+                "doi":"10.22088\/cjim.10.1.7"
+            },
+            {
+                "title":"Clinical Outcomes of Tuberculosis in Recipients After Living Donor Liver Transplantation.",
+                "authors":"Salvador NGA, Wee SY, Lin CC, Wu CC, Lu HI, Lin TL, Lee WF, Chan YC, Lin LM, Chen CL",
+                "pmid":"30337516",
+                "doi":"10.12659\/AOT.911034"
+            },
+            {
+                "title":"Treatment of Chronic Pulmonary Aspergillosis: Current Standards and Future Perspectives.",
+                "authors":"Alastruey-Izquierdo A, Cadranel J, Flick H, Godet C, Hennequin C, Hoenigl M, Kosmidis C, Lange C, Munteanu O, Page I, Salzer HJF",
+                "pmid":"29982245",
+                "doi":"10.1159\/000489474"
+            },
+            {
+                "title":"Clinical, immunologic, molecular analyses and outcomes of iranian patients with LRBA deficiency: A longitudinal study.",
+                "authors":"Azizi G, Abolhassani H, Mahdaviani SA, Chavoshzadeh Z, Eshghi P, Yazdani R, Kiaee F, Shaghaghi M, Mohammadi J, Rezaei N, Hammarstrom L, Aghamohammadi A",
+                "pmid":"28512785",
+                "doi":"10.1111\/pai.12735"
+            },
+            {
+                "title":"Successful treatment of ileal ulcers caused by immunosuppressants in two organ transplant recipients.",
+                "authors":"Guo YW, Gu HY, Abassa KK, Lin XY, Wei XQ",
+                "pmid":"27350740",
+                "doi":"10.3748\/wjg.v22.i24.5616"
+            },
+            {
+                "title":"Lymphangioleiomyomatosis: New Treatment Perspectives.",
+                "authors":"Radzikowska E",
+                "pmid":"25980593",
+                "doi":"10.1007\/s00408-015-9742-6"
+            },
+            {
+                "title":"Late post transplant HIV infection with BK viremia and allograft tuberculosis in a renal transplant recipient with Kaposi sarcoma.",
+                "authors":"Viswanathan V, Kandasamy V, Reddy YN, Reddy YN, Kurien A, Mathew M, Abraham G",
+                "pmid":"23326054",
+                "doi":"10.4103\/0971-4065.103929"
+            },
+            {
+                "title":"Early everolimus-induced pneumonitis in a renal transplant recipient: A case report.",
+                "authors":"Sulkowska K, Palczewski P, Miszewska-Szyszkowska D, Durlik M, Golebiowski M, Malkowski P",
+                "pmid":"23274336",
+                "doi":"10.12659\/aot.883706"
+            },
+            {
+                "title":"Pulmonary embolism and reactivation of tuberculosis during everolimus therapy in a kidney transplant recipient.",
+                "authors":"Fijalkowska-Morawska JB, Jagodzinska M, Nowicki M",
+                "pmid":"22210429",
+                "doi":"10.12659\/aot.882226"
+            },
+            {
+                "title":"Diagnostic utility of flexible bronchoscopy in recipients of solid organ transplants.",
+                "authors":"Kupeli E, Akcay S, Ulubay G, Ozyurek BA, Ozdemirel TS, Haberal M",
+                "pmid":"21440756",
+                "doi":"10.1016\/j.transproceed.2011.01.015"
+            },
+            {
+                "title":"Drug interaction between rifampicin and sirolimus in transplant patients.",
+                "authors":"Ngo BT, Pascoe M, Khan D",
+                "pmid":"21196624",
+                "doi":""
+            },
+            {
+                "title":"The use of sirolimus as a rescue therapy in pediatric intestinal transplant recipients.",
+                "authors":"Andres AM, Lopez Santamaria M, Ramos E, Hernandez F, Prieto G, Encinas J, Leal N, Molina M, Sarria J, Tovar J",
+                "pmid":"20946188",
+                "doi":"10.1111\/j.1399-3046.2010.01363.x"
+            },
+            {
+                "title":"Lung cavitation due to Mycobacterium xenopi in a renal transplant recipient.",
+                "authors":"Martin-Penagos L, Rodrigo E, Ruiz JC, Aguero J, Fernandez-Mazarrasa C, Martinez L, Pinera C, Arias M",
+                "pmid":"19298241",
+                "doi":"10.1111\/j.1399-3062.2009.00376.x"
+            },
+            {
+                "title":"Renal Transplantation: Experience at a Single Centre.",
+                "authors":"Murty M, Saxena VK, Sharma UK, Tandon S, Sharma P",
+                "pmid":"27408183",
+                "doi":"10.1016\/S0377-1237(09)80047-6"
+            },
+            {
+                "title":"Posttransplantation conversion to sirolimus-based immunosuppression: a single center experience.",
+                "authors":"Saber LT, Ikeda MY, Almeida JM",
+                "pmid":"18089330",
+                "doi":"10.1016\/j.transproceed.2007.04.021"
+            },
+            {
+                "title":"Conversion to combined therapy with sirolimus and mycophenolate mofetil improved renal function in stable renal transplant recipients.",
+                "authors":"Tsai MK, Lee CY, Hu RH, Lee PH",
+                "pmid":"17561472",
+                "doi":"10.1016\/S0929-6646(09)60322-3"
+            },
+            {
+                "title":"Clinical islet transplantation in type 1 diabetes mellitus: results of Australia's first trial.",
+                "authors":"O'Connell PJ, Hawthorne WJ, Holmes-Walker DJ, Nankivell BJ, Gunton JE, Patel AT, Walters SN, Pleass HC, Allen RD, Chapman JR",
+                "pmid":"16515432",
+                "doi":"10.5694\/j.1326-5377.2006.tb00206.x"
+            }
+        ]
+    },
+    {
+        "drug_name":"terguride",
+        "combined_z_score":1.3608810345,
+        "search_type":"No Results",
+        "studies_found":0,
+        "literature_evidence":[
+
+        ]
+    },
+    {
+        "drug_name":"topotecan",
+        "combined_z_score":1.3184774661,
+        "search_type":"Direct (TB)",
+        "studies_found":2,
+        "literature_evidence":[
+            {
+                "title":"Lung cancer drug therapy in Hungary - 3-year experience.",
+                "authors":"Moldvay J, Rokszin G, Abonyi-Toth Z, Katona L, Fabian K, Kovacs G",
+                "pmid":"25999737",
+                "doi":"10.2147\/OTT.S65794"
+            },
+            {
+                "title":"[A randomized study comparing topotecan plus cisplatin versus etoposide plus carboplatin for previously untreated small cell lung cancer].",
+                "authors":"Zhang S, Wang J, Wang Q, Zhang H, Hu F, Yang X, Fan X, Wang H, Gu Y, Li X",
+                "pmid":"21114940",
+                "doi":"10.3779\/j.issn.1009-3419.2007.02.15"
+            }
+        ]
+    },
+    {
+        "drug_name":"dopamine",
+        "combined_z_score":1.2985943395,
+        "search_type":"Direct (TB)",
+        "studies_found":49,
+        "literature_evidence":[
+            {
+                "title":"Cryptococcus neoformans: Brain Preference, Gender Bias, and Interactions with Mycobacterium tuberculosis and Toxoplasma gondii in HIV-Positive Patients.",
+                "authors":"Moroti R, Hristea A, Neagu G, Penescu I, Florea D, Tiliscan C, Benea SN",
+                "pmid":"40142374",
+                "doi":"10.3390\/microorganisms13030481"
+            },
+            {
+                "title":"Causal association and potential mediator between lung cancer and tuberculosis: A Mendelian randomization study.",
+                "authors":"Li X, Huang D, Liu C, Yu W, Bi L",
+                "pmid":"39884473",
+                "doi":"S0882-4010(25)00071-3"
+            },
+            {
+                "title":"Exploration of vanoxerine analogues as antibacterial agents.",
+                "authors":"Kingdon ADH, Adcock HV, Kasimati EM, Craven P, van Schaik W, Cox LR, Besra GS",
+                "pmid":"39402358",
+                "doi":"10.1038\/s41429-024-00781-9"
+            },
+            {
+                "title":"A novel fluorescent sensor for selective rifampicin detection based on the bio-inspired molecularly imprinted polymer-AgInS(2)\/ZnS quantum dots.",
+                "authors":"Rasoulzadeh F, Amjadi M",
+                "pmid":"38461465",
+                "doi":"10.1007\/s44211-024-00512-y"
+            },
+            {
+                "title":"Epinephrine Stimulates Mycobacterium tuberculosis Growth and Biofilm Formation.",
+                "authors":"Lei Y, Rahman K, Cao X, Yang B, Zhou W, Reheman A, Cai L, Wang Y, Tyagi R, Wang Z, Chen X, Cao G",
+                "pmid":"38139199",
+                "doi":"10.3390\/ijms242417370"
+            },
+            {
+                "title":"Possible genetic biomarker associated with antipsychotic-induced amenorrhea in female patients with schizophrenia.",
+                "authors":"Moon JJ, Kim HS, Shim JC, Ahn JM, Jung DU, Kim DJ, Jeong HE, Kim EY, Jeon DW, Kim SJ, Shin JG",
+                "pmid":"37551597",
+                "doi":"10.1097\/YIC.0000000000000501"
+            },
+            {
+                "title":"Vanoxerine kills mycobacteria through membrane depolarization and efflux inhibition.",
+                "authors":"Kingdon ADH, Meosa-John AR, Batt SM, Besra GS",
+                "pmid":"36778873",
+                "doi":"10.3389\/fmicb.2023.1112491"
+            },
+            {
+                "title":"The potential use of mesenchymal stem cells and their exosomes in Parkinson's disease treatment.",
+                "authors":"Heris RM, Shirvaliloo M, Abbaspour-Aghdam S, Hazrati A, Shariati A, Youshanlouei HR, Niaragh FJ, Valizadeh H, Ahmadi M",
+                "pmid":"35902981",
+                "doi":"10.1186\/s13287-022-03050-4"
+            },
+            {
+                "title":"Chronic Fatigue Exhibits Heterogeneous Autoimmunity Characteristics Which Reflect Etiology.",
+                "authors":"Danilenko OV, Gavrilova NY, Churilov LP",
+                "pmid":"35736644",
+                "doi":"10.3390\/pathophysiology29020016"
+            },
+            {
+                "title":"Neurodevelopmental toxicity of pyrazinamide to larval zebrafish and the restoration after intoxication withdrawal.",
+                "authors":"Wang X, Wu F, Zou H, Yang Y, Chen G, Liu K, Zhang Y, Liu L",
+                "pmid":"35102572",
+                "doi":"10.1002\/jat.4294"
+            },
+            {
+                "title":"Gene Expression and In Vitro Pharmacogenetic Studies of Dopamine and Serotonin Gene Receptors in Tuberculosis.",
+                "authors":"Sheikhpour M, Shokrgozar MA, Biglari A, Pornour M, Abdolrahimi F, Poorazar Dizaji S, Khanipour S, Masoumi M, Ebrahimzadeh N, Abolfathi H",
+                "pmid":"34976083",
+                "doi":""
+            },
+            {
+                "title":"Is cerebral salt wasting related to sympathetic dysregulation in tuberculous meningitis?",
+                "authors":"Tripathi A, Thakur RS, Kalita J, Patel DK, Misra UK",
+                "pmid":"33516801",
+                "doi":"S0304-3940(21)00049-5"
+            },
+            {
+                "title":"A review on modafinil: the characteristics, function, and use in critical care.",
+                "authors":"Hashemian SM, Farhadi T",
+                "pmid":"32341841",
+                "doi":"10.1080\/21556660.2020.1745209"
+            },
+            {
+                "title":"Application of chitosan as biocompatible polysaccharide in quantification of some benzodiazepines affecting sleep disorders: A new platform for preparation of bioactive scaffolds.",
+                "authors":"Ashrafi H, Hasanzadeh M, Ansarin K, Ozkan SA, Jouyban A",
+                "pmid":"30194999",
+                "doi":"S0141-8130(18)33995-3"
+            },
+            {
+                "title":"The neuro-endocrine-immune relationship in pulmonary and pleural tuberculosis: a better local profile in pleural fluid.",
+                "authors":"D'Attilio L, Diaz A, Fernandez RDV, Bongiovanni B, Santucci N, Didoli G, Lioi S, Gardenez W, Naninni JL, Del Rey A, Besedovsky H, Bottasso O, Bay ML",
+                "pmid":"29471911",
+                "doi":"10.5588\/ijtld.17.0270"
+            },
+            {
+                "title":"Activation studies with amines and amino acids of the beta-carbonic anhydrase encoded by the Rv3273 gene from the pathogenic bacterium Mycobacterium tuberculosis.",
+                "authors":"Angeli A, Del Prete S, Osman SM, Alasmary FAS, AlOthman Z, Donald WA, Capasso C, Supuran CT",
+                "pmid":"29322836",
+                "doi":"10.1080\/14756366.2017.1422250"
+            },
+            {
+                "title":"Effect of smoking on acute phase reactants, stress hormone responses and vitamin C in pulmonary tuberculosis.",
+                "authors":"Opolot JO, Theron AJ, MacPhail P, Feldman C, Anderson R",
+                "pmid":"29062328",
+                "doi":"10.4314\/ahs.v17i2.7"
+            },
+            {
+                "title":"Metabolic correlate of memory-deficit awareness in dementia with Lewy bodies: Implication in cortical midline structure.",
+                "authors":"Iizuka T, Kameyama M",
+                "pmid":"28938220",
+                "doi":"S0925-4927(17)30065-3"
+            },
+            {
+                "title":"Dopamine-assisted fixation of drug-loaded polymeric multilayers to osteoarticular implants for tuberculosis therapy.",
+                "authors":"Li D, Li L, Ma Y, Zhuang Y, Li D, Shen H, Wang X, Yang F, Ma Y, Wu D",
+                "pmid":"28218329",
+                "doi":"10.1039\/c7bm00042a"
+            },
+            {
+                "title":"A whole animal chemical screen approach to identify modifiers of intestinal neutrophilic inflammation.",
+                "authors":"Oehlers SH, Flores MV, Hall CJ, Wang L, Ko DC, Crosier KE, Crosier PS",
+                "pmid":"27885812",
+                "doi":"10.1111\/febs.13976"
+            },
+            {
+                "title":"An Overview of Analytical Methods for the Determination of Monoamine Oxidase Inhibitors in Pharmaceutical Formulations and Biological Fluids.",
+                "authors":"Saka C",
+                "pmid":"27715253",
+                "doi":"10.1080\/10408347.2014.964835"
+            },
+            {
+                "title":"Cingulate island sign on FDG-PET is associated with medial temporal lobe atrophy in dementia with Lewy bodies.",
+                "authors":"Iizuka T, Kameyama M",
+                "pmid":"27098829",
+                "doi":"10.1007\/s12149-016-1076-9"
+            },
+            {
+                "title":"Acute phase proteins and stress hormone responses in patients with newly diagnosed active pulmonary tuberculosis.",
+                "authors":"Opolot JO, Theron AJ, Anderson R, Feldman C",
+                "pmid":"25549893",
+                "doi":"10.1007\/s00408-014-9680-8"
+            },
+            {
+                "title":"Simplified severe sepsis protocol: a randomized controlled trial of modified early goal-directed therapy in Zambia.",
+                "authors":"Andrews B, Muchemwa L, Kelly P, Lakhi S, Heimburger DC, Bernard GR",
+                "pmid":"25072757",
+                "doi":"10.1097\/CCM.0000000000000541"
+            },
+            {
+                "title":"Reinforcing the membrane-mediated mechanism of action of the anti-tuberculosis candidate drug thioridazine with molecular simulations.",
+                "authors":"Kopec W, Khandelia H",
+                "pmid":"24577873",
+                "doi":"10.1007\/s10822-014-9737-z"
+            },
+            {
+                "title":"Novel non-neuroleptic phenothiazines inhibit Mycobacterium tuberculosis replication.",
+                "authors":"Salie S, Hsu NJ, Semenya D, Jardine A, Jacobs M",
+                "pmid":"24569630",
+                "doi":"10.1093\/jac\/dku036"
+            },
+            {
+                "title":"Argyreia nervosa (Burm. f.): receptor profiling of lysergic acid amide and other potential psychedelic LSD-like compounds by computational and binding assay approaches.",
+                "authors":"Paulke A, Kremer C, Wunder C, Achenbach J, Djahanschiri B, Elias A, Schwed JS, Hubner H, Gmeiner P, Proschak E, Toennes SW, Stark H",
+                "pmid":"23665164",
+                "doi":"S0378-8741(13)00323-1"
+            },
+            {
+                "title":"Synthesis and carbonic anhydrase inhibitory properties of sulfamides structurally related to dopamine.",
+                "authors":"Aksu K, Nar M, Tanc M, Vullo D, Gulcin I, Goksu S, Tumer F, Supuran CT",
+                "pmid":"23623256",
+                "doi":"S0968-0896(13)00299-X"
+            },
+            {
+                "title":"Docking studies and network analyses reveal capacity of compounds from Kandelia rheedii to strengthen cellular immunity by interacting with host proteins during tuberculosis infection.",
+                "authors":"Zaman A",
+                "pmid":"23275699",
+                "doi":"10.6026\/97320630081012"
+            },
+            {
+                "title":"BCG vaccine-induced neuroprotection in a mouse model of Parkinson's disease.",
+                "authors":"Yong J, Lacan G, Dang H, Hsieh T, Middleton B, Wasserfall C, Tian J, Melega WP, Kaufman DL",
+                "pmid":"21304945",
+                "doi":"10.1371\/journal.pone.0016610"
+            },
+            {
+                "title":"Two loci control tuberculin skin test reactivity in an area hyperendemic for tuberculosis.",
+                "authors":"Cobat A, Gallant CJ, Simkin L, Black GF, Stanley K, Hughes J, Doherty TM, Hanekom WA, Eley B, Jais JP, Boland-Auge A, van Helden P, Casanova JL, Abel L, Hoal EG, Schurr E, Alcais A",
+                "pmid":"19901083",
+                "doi":"10.1084\/jem.20090892"
+            },
+            {
+                "title":"Characteristics and prognosis of patients with decompensated right ventricular failure during the course of pulmonary hypertension.",
+                "authors":"Kurzyna M, Zylkowska J, Fijalkowska A, Florczyk M, Wieteska M, Kacprzak A, Burakowski J, Szturmowicz M, Wawrzynska L, Torbicki A",
+                "pmid":"19006024",
+                "doi":""
+            },
+            {
+                "title":"[Acute respiratory failure in a 16-yr-old girl with alveolar soft part sarcoma].",
+                "authors":"Piotrowski A, Stengert W, Stolarska M, Fendler W",
+                "pmid":"19469095",
+                "doi":""
+            },
+            {
+                "title":"MPTP-induced central dopamine depletion exacerbates experimental autoimmune encephalomyelitis (EAE) in C57BL mice.",
+                "authors":"Balkowiec-Iskra E, Kurkowska-Jastrzebska I, Joniec I, Ciesielska A, Muszynska A, Przybylkowski A, Czlonkowska A, Czlonkowski A",
+                "pmid":"17687515",
+                "doi":"10.1007\/s00011-007-6128-0"
+            },
+            {
+                "title":"Synthesis and antitubercular activity of phenothiazines with reduced binding to dopamine and serotonin receptors.",
+                "authors":"Madrid PB, Polgar WE, Toll L, Tanga MJ",
+                "pmid":"17407813",
+                "doi":"10.1016\/j.bmcl.2007.03.064"
+            },
+            {
+                "title":"Rifampicin attenuates the MPTP-induced neurotoxicity in mouse brain.",
+                "authors":"Oida Y, Kitaichi K, Nakayama H, Ito Y, Fujimoto Y, Shimazawa M, Nagai H, Hara H",
+                "pmid":"16515773",
+                "doi":"10.1016\/j.brainres.2006.01.116"
+            },
+            {
+                "title":"Oxidative stress in the molecular mechanism of pathogenesis at different diseased states of organism in clinics and experiment.",
+                "authors":"Karageuzyan KG",
+                "pmid":"15720241",
+                "doi":"10.2174\/1568010053622939"
+            },
+            {
+                "title":"Dopamine agonists for cocaine dependence.",
+                "authors":"Soares BG, Lima MS, Reisser AA, Farrell M",
+                "pmid":"12804461",
+                "doi":"10.1002\/14651858.CD003352"
+            },
+            {
+                "title":"[Pergolide-induced pleural effusion in a patient with juvenile parkinsonism].",
+                "authors":"Kuwabara T",
+                "pmid":"12701223",
+                "doi":""
+            },
+            {
+                "title":"Dopamine agonists for cocaine dependence.",
+                "authors":"Soares BG, Lima MS, Reisser AA, Farrell M",
+                "pmid":"11687193",
+                "doi":"10.1002\/14651858.CD003352"
+            },
+            {
+                "title":"In vivo evidence that endogenous dopamine modulates sympathetic activity in man.",
+                "authors":"Mannelli M, Ianni L, Lazzeri C, Castellani W, Pupilli C, La Villa G, Barletta G, Serio M, Franchi F",
+                "pmid":"10489384",
+                "doi":"10.1161\/01.hyp.34.3.398"
+            },
+            {
+                "title":"Neuroleptic discontinuation syndromes.",
+                "authors":"Tranter R, Healy D",
+                "pmid":"10065916",
+                "doi":"10.1177\/026988119801200412"
+            },
+            {
+                "title":"Dopamine beta-hydroxylase deficiency impairs cellular immunity.",
+                "authors":"Alaniz RC, Thomas SA, Perez-Melgosa M, Mueller K, Farr AG, Palmiter RD, Wilson CB",
+                "pmid":"10051631",
+                "doi":"10.1073\/pnas.96.5.2274"
+            },
+            {
+                "title":"Plasma catecholamines in pulmonary tuberculosis.",
+                "authors":"Hafeiz AA, Issa HA, el-Kammah B, Abdel-Hafez MA, Abdou MA, Abdel-Khalek M, Ramadan SM",
+                "pmid":"1333543",
+                "doi":""
+            },
+            {
+                "title":"[Sexual problems in dermatovenereology consultations].",
+                "authors":"Munteanu M",
+                "pmid":"1823415",
+                "doi":""
+            },
+            {
+                "title":"[Excretion of catecholamines and DOPA in the urine of patients with pulmonary tuberculosis during chemotherapy].",
+                "authors":"Prosvetov IuV",
+                "pmid":"2512573",
+                "doi":""
+            },
+            {
+                "title":"Suppression of macrophage activation and T-lymphocyte function in hypoprolactinemic mice.",
+                "authors":"Bernton EW, Meltzer MS, Holaday JW",
+                "pmid":"3122324",
+                "doi":"10.1126\/science.3122324"
+            },
+            {
+                "title":"Correlation of daily urinary excretion of met-enkephalin-like immunoreactivity and epinephrine in men.",
+                "authors":"Yanase T, Nawata H, Kato K, Ibayashi H",
+                "pmid":"3440570",
+                "doi":"10.1055\/s-2007-1011901"
+            },
+            {
+                "title":"Sympathetic nervous systems in chronic hypoxic states from pulmonary tuberculosis: a clinical study on plasma norepinephrine and cyclic AMP levels.",
+                "authors":"Watanabe E, Ogawa K, Ban M, Satake T",
+                "pmid":"6279943",
+                "doi":"10.2169\/internalmedicine1962.20.180"
+            }
+        ]
+    },
+    {
+        "drug_name":"chloroquine",
+        "combined_z_score":1.225618446,
+        "search_type":"Direct (TB)",
+        "studies_found":121,
+        "literature_evidence":[
+            {
+                "title":"Acquired Dyschromatopsia and Its Link to Drug Toxicity.",
+                "authors":"Ageed A, Aslam MD, El Haouari S",
+                "pmid":"39840156",
+                "doi":"10.7759\/cureus.76190"
+            },
+            {
+                "title":"Repurposing of anti-malarial drugs for the treatment of tuberculosis: realistic strategy or fanciful dead end?",
+                "authors":"Hanscheid T, Del Portal Luyten CR, Hermans SM, Grobusch MP",
+                "pmid":"38702649",
+                "doi":"10.1186\/s12936-024-04967-2"
+            },
+            {
+                "title":"High Target Homology Does Not Guarantee Inhibition: Aminothiazoles Emerge as Inhibitors of Plasmodium falciparum.",
+                "authors":"Johannsen S, Gierse RM, Kruger A, Edwards RL, Nanna V, Fontana A, Zhu D, Masini T, de Carvalho LP, Poizat M, Kieftenbelt B, Hodge DM, Alvarez S, Bunt D, Lacour A, Shams A, Meissner KA, de Souza EE, Droge M, van Vliet B, den Hartog J, Hutter MC, Held J, Odom John AR, Wrenger C, Hirsch AKH",
+                "pmid":"38367280",
+                "doi":"10.1021\/acsinfecdis.3c00670"
+            },
+            {
+                "title":"Tetrahydrobenzo[h]quinoline derivatives as a novel chemotype for dual antileishmanial-antimalarial activity graced with antitubercular activity: Design, synthesis and biological evaluation.",
+                "authors":"Ibrahim TM, Abada G, Dammann M, Maklad RM, Eldehna WM, Salem R, Abdelaziz MM, El-Domany RA, Bekhit AA, Beockler FM",
+                "pmid":"37269671",
+                "doi":"S0223-5234(23)00500-7"
+            },
+            {
+                "title":"Human Cytochrome P450 1, 2, 3 Families as Pharmacogenes with Emphases on Their Antimalarial and Antituberculosis Drugs and Prevalent African Alleles.",
+                "authors":"Chamboko CR, Veldman W, Tata RB, Schoeberl B, Tastan Bishop O",
+                "pmid":"36834793",
+                "doi":"10.3390\/ijms24043383"
+            },
+            {
+                "title":"An Attention towards the Prophylactic and Therapeutic Options of Phytochemicals for SARS-CoV-2: A Molecular Insight.",
+                "authors":"Shoaib S, Ansari MA, Kandasamy G, Vasudevan R, Hani U, Chauhan W, Alhumaidi MS, Altammar KA, Azmi S, Ahmad W, Wahab S, Islam N",
+                "pmid":"36677853",
+                "doi":"10.3390\/molecules28020795"
+            },
+            {
+                "title":"Discovery and Mechanistic Analysis of Structurally Diverse Inhibitors of Acetyltransferase Eis among FDA-Approved Drugs.",
+                "authors":"Pang AH, Green KD, Punetha A, Thamban Chandrika N, Howard KC, Garneau-Tsodikova S, Tsodikov OV",
+                "pmid":"36657084",
+                "doi":"10.1021\/acs.biochem.2c00658"
+            },
+            {
+                "title":"Spotlight on 4-substituted quinolines as potential anti-infective agents: Journey beyond chloroquine.",
+                "authors":"Goyal A, Kharkwal H, Piplani M, Singh Y, Murugesan S, Aggarwal A, Kumar P, Chander S",
+                "pmid":"36494101",
+                "doi":"10.1002\/ardp.202200361"
+            },
+            {
+                "title":"MmpL3 Inhibition as a Promising Approach to Develop Novel Therapies against Tuberculosis: A Spotlight on SQ109, Clinical Studies, and Patents Literature.",
+                "authors":"Imran M, Arora MK, Chaudhary A, Khan SA, Kamal M, Alshammari MM, Alharbi RM, Althomali NA, Alzimam IM, Alshammari AA, Alharbi BH, Alshengeti A, Alsaleh AA, Alqahtani SA, Rabaan AA",
+                "pmid":"36359313",
+                "doi":"10.3390\/biomedicines10112793"
+            },
+            {
+                "title":"Folic acid supplementation and malaria susceptibility and severity among people taking antifolate antimalarial drugs in endemic areas.",
+                "authors":"Crider K, Williams J, Qi YP, Gutman J, Yeung L, Mai C, Finkelstain J, Mehta S, Pons-Duran C, Menendez C, Moraleda C, Rogers L, Daniels K, Green P",
+                "pmid":"36321557",
+                "doi":"10.1002\/14651858.CD014217"
+            },
+            {
+                "title":"Isoniazid preventive therapy-related adverse events among Malawian adults on antiretroviral therapy: A cohort study.",
+                "authors":"Tsirizani-Galileya L, Milanzi E, Mungwira R, Divala T, Mallewa J, Mategula D, Nampota N, Mwapasa V, Buchwald A, Laurens MB, Laufer MK, Van Oosterhout JJ",
+                "pmid":"36181120",
+                "doi":"10.1097\/MD.0000000000030591"
+            },
+            {
+                "title":"Mechanism underlying linezolid-induced peripheral neuropathy in multidrug-resistant tuberculosis.",
+                "authors":"Yuan Y, Li J, Chen Y, Cai Q, Xu Y, Lin L, Lang Y, Guo S, Zhang R, Cai X",
+                "pmid":"36160387",
+                "doi":"10.3389\/fphar.2022.946058"
+            },
+            {
+                "title":"An insight into the discovery, clinical studies, compositions, and patents of macozinone: A drug targeting the DprE1 enzyme of Mycobacterium tuberculosis.",
+                "authors":"Imran M, Khan SA, Asdaq SMB, Almehmadi M, Abdulaziz O, Kamal M, Alshammari MK, Alsubaihi LI, Hussain KH, Alharbi AS, Alzahrani AK",
+                "pmid":"36122509",
+                "doi":"S1876-0341(22)00232-5"
+            },
+            {
+                "title":"Antiplasmodial and antimycobacterial activities of crude and lead-like enhanced extracts from Namibian medicinal plants.",
+                "authors":"Raidron C, Jordaan A, Seldon R, Warner DF, de Kock C, Taylor D, Louw S, Sunassee S, Hans RH",
+                "pmid":"35589021",
+                "doi":"S0378-8741(22)00428-7"
+            },
+            {
+                "title":"Artesunate-amodiaquine and artemether-lumefantrine for the treatment of uncomplicated falciparum malaria in Liberia: in vivo efficacy and frequency of molecular markers.",
+                "authors":"Koko VS, Warsame M, Vonhm B, Jeuronlon MK, Menard D, Ma L, Taweh F, Tehmeh L, Nyansaiye P, Pratt OJ, Parwon S, Kamara P, Asinya M, Kollie A, Ringwald P",
+                "pmid":"35477399",
+                "doi":"10.1186\/s12936-022-04140-7"
+            },
+            {
+                "title":"Infectious agents breaking the immunological tolerance: The holy grail in rheumatoid arthritis reconsidered.",
+                "authors":"Gremese E, Tolusso B, Bruno D, Alivernini S, Ferraccioli G",
+                "pmid":"35452849",
+                "doi":"S1568-9972(22)00072-6"
+            },
+            {
+                "title":"Effect of adverse events on non-adherence and study non-completion in malaria chemoprevention during pregnancy trial: A nested case control study.",
+                "authors":"Patson N, Mukaka M, Peterson I, Divala T, Kazembe L, Mathanga D, Laufer MK, Chirwa T",
+                "pmid":"35045119",
+                "doi":"10.1371\/journal.pone.0262797"
+            },
+            {
+                "title":"Epigenetic reader BRD4 supports mycobacterial pathogenesis by co-modulating host lipophagy and angiogenesis.",
+                "authors":"Mukherjee T, Bhatt B, Prakhar P, Lohia GK, Rajmani RS, Balaji KN",
+                "pmid":"34074211",
+                "doi":"10.1080\/15548627.2021.1936355"
+            },
+            {
+                "title":"Influence of Malnutrition on the Pharmacokinetics of Drugs Used in the Treatment of Poverty-Related Diseases: A Systematic Review.",
+                "authors":"Verrest L, Wilthagen EA, Beijnen JH, Huitema ADR, Dorlo TPC",
+                "pmid":"34060020",
+                "doi":"10.1007\/s40262-021-01031-z"
+            },
+            {
+                "title":"Effects of tafenoquine against active, dormant and resistant Mycobacterium tuberculosis.",
+                "authors":"Sidronio MGS, Castelo Branco APOT, Abbadi BL, Macchi F, Silveira MD, Lock GA, Costa TD, de Araujo DM, Cibulski S, Bizarro CV, Machado P, Basso LA, Rodrigues-Junior VS",
+                "pmid":"34004588",
+                "doi":"S1472-9792(21)00039-1"
+            },
+            {
+                "title":"Epidemiology, clinical characteristics, and treatment outcomes of patients with COVID-19 at Thailand's university-based referral hospital.",
+                "authors":"Sirijatuphat R, Suputtamongkol Y, Angkasekwinai N, Horthongkham N, Chayakulkeeree M, Rattanaumpawan P, Koomanachai P, Assanasen S, Rongrungruang Y, Chierakul N, Ratanarat R, Jitmuang A, Wangchinda W, Kantakamalakul W",
+                "pmid":"33902480",
+                "doi":"10.1186\/s12879-021-06081-z"
+            },
+            {
+                "title":"Effect of COVID-19 medications on corrected QT interval and induction of torsade de pointes: Results of a multicenter national survey.",
+                "authors":"Haghjoo M, Golipra R, Kheirkhah J, Golabchi A, Shahabi J, Oni-Heris S, Sami R, Tajmirriahi M, Saravi M, Khatami M, Varnasseri M, Kiarsi M, Hejazi SF, Yousefzadeh Rahaghi M, Taherkhani M, Ashraf H, Keshmiri MS, Akbarzadeh MA, Bozorgi A, Mottaghizadeh F, Hedayat B, Heidarali M, Hajhossein Talasaz A",
+                "pmid":"33759318",
+                "doi":"10.1111\/ijcp.14182"
+            },
+            {
+                "title":"Unusual association of COVID-19, pulmonary tuberculosis and human immunodeficiency virus, having progressed favorably under treatment with chloroquine and rifampin.",
+                "authors":"Bouare F, Laghmari M, Etouche FN, Arjdal B, Saidi I, Hajhouji F, Ghannane H, Amro L, Tassi N, Benali SA",
+                "pmid":"33282065",
+                "doi":"10.11604\/pamj.supp.2020.35.2.24952"
+            },
+            {
+                "title":"Pandemics and Traditional Plant-Based Remedies. A Historical-Botanical Review in the Era of COVID19.",
+                "authors":"Garcia S",
+                "pmid":"32983220",
+                "doi":"10.3389\/fpls.2020.571042"
+            },
+            {
+                "title":"Phagosome-regulated mTOR signalling during sarcoidosis granuloma biogenesis.",
+                "authors":"Crouser ED, Locke LW, Julian MW, Bicer S, Sadee W, White P, Schlesinger LS",
+                "pmid":"32943400",
+                "doi":"2002695"
+            },
+            {
+                "title":"Antimicrobial evaluation of neutral and cationic iridium(III) and rhodium(III) aminoquinoline-benzimidazole hybrid complexes.",
+                "authors":"Baartzes N, Jordaan A, Warner DF, Combrinck J, Taylor D, Chibale K, Smith GS",
+                "pmid":"32861176",
+                "doi":"S0223-5234(20)30666-8"
+            },
+            {
+                "title":"Clinical trials and the COVID-19 pandemic.",
+                "authors":"Retsas S",
+                "pmid":"32361715",
+                "doi":"10.1967\/s002449912014"
+            },
+            {
+                "title":"Targeting redox heterogeneity to counteract drug tolerance in replicating Mycobacterium tuberculosis.",
+                "authors":"Mishra R, Kohli S, Malhotra N, Bandyopadhyay P, Mehta M, Munshi M, Adiga V, Ahuja VK, Shandil RK, Rajmani RS, Seshasayee ASN, Singh A",
+                "pmid":"31723039",
+                "doi":"10.1126\/scitranslmed.aaw6635"
+            },
+            {
+                "title":"Discovery and Pharmacophore Mapping of a Low-Nanomolar Inhibitor of P. falciparum Growth.",
+                "authors":"Bassanini I, Parapini S, Galli C, Vaiana N, Pancotti A, Basilico N, Taramelli D, Romeo S",
+                "pmid":"31665565",
+                "doi":"10.1002\/cmdc.201900526"
+            },
+            {
+                "title":"The clinical characteristics of systemic lupus erythematosus patients in Indonesia: a cohort registry from an Indonesia-based tertiary referral hospital.",
+                "authors":"Hamijoyo L, Candrianita S, Rahmadi AR, Dewi S, Darmawan G, Suryajaya BS, Rainy NR, Hidayat II, Moenardi VN, Wachjudi RG",
+                "pmid":"31566078",
+                "doi":"10.1177\/0961203319878499"
+            },
+            {
+                "title":"Bioisosteric ferrocenyl aminoquinoline-benzimidazole hybrids: Antimicrobial evaluation and mechanistic insights.",
+                "authors":"Baartzes N, Stringer T, Seldon R, Warner DF, Taylor D, Wittlin S, Chibale K, Smith GS",
+                "pmid":"31301563",
+                "doi":"S0223-5234(19)30596-3"
+            },
+            {
+                "title":"Optimization of the autophagy measurement in a human cell line and primary cells by flow cytometry.",
+                "authors":"Alonzi T, Petruccioli E, Vanini V, Fimia GM, Goletti D",
+                "pmid":"31243942",
+                "doi":"10.4081\/ejh.2019.3044"
+            },
+            {
+                "title":"Efficacy of artemether-lumefantrine and dihydroartemisinin-piperaquine for the treatment of uncomplicated malaria in Papua New Guinea.",
+                "authors":"Tavul L, Hetzel MW, Teliki A, Walsh D, Kiniboro B, Rare L, Pulford J, Siba PM, Karl S, Makita L, Robinson L, Kattenberg JH, Laman M, Oswyn G, Mueller I",
+                "pmid":"30290825",
+                "doi":"10.1186\/s12936-018-2494-z"
+            },
+            {
+                "title":"Mir223 restrains autophagy and promotes CNS inflammation by targeting ATG16L1.",
+                "authors":"Li Y, Zhou D, Ren Y, Zhang Z, Guo X, Ma M, Xue Z, Lv J, Liu H, Xi Q, Jia L, Zhang L, Liu Y, Zhang Q, Yan J, Da Y, Gao F, Yue J, Yao Z, Zhang R",
+                "pmid":"30208760",
+                "doi":"10.1080\/15548627.2018.1522467"
+            },
+            {
+                "title":"Surveillance of Antimalarial Resistance Pfcrt, Pfmdr1, and Pfkelch13 Polymorphisms in African Plasmodium falciparum imported to Shandong Province, China.",
+                "authors":"Xu C, Wei Q, Yin K, Sun H, Li J, Xiao T, Kong X, Wang Y, Zhao G, Zhu S, Kou J, Yan G, Huang B",
+                "pmid":"30154519",
+                "doi":"10.1038\/s41598-018-31207-w"
+            },
+            {
+                "title":"Organometallic Conjugates of the Drug Sulfadoxine for Combatting Antimicrobial Resistance.",
+                "authors":"Chellan P, Avery VM, Duffy S, Triccas JA, Nagalingam G, Tam C, Cheng LW, Liu J, Land KM, Clarkson GJ, Romero-Canelon I, Sadler PJ",
+                "pmid":"29653033",
+                "doi":"10.1002\/chem.201801090"
+            },
+            {
+                "title":"Antimicrobial activity of organometallic isonicotinyl and pyrazinyl ferrocenyl-derived complexes.",
+                "authors":"Stringer T, Seldon R, Liu N, Warner DF, Tam C, Cheng LW, Land KM, Smith PJ, Chibale K, Smith GS",
+                "pmid":"28713884",
+                "doi":"10.1039\/c7dt01952a"
+            },
+            {
+                "title":"Imported malaria in pregnant women experienced in Japan.",
+                "authors":"Kimura M, Koga M, Hasegawa C, Mutoh Y, Kato Y, Maruyama H",
+                "pmid":"28583709",
+                "doi":"S1341-321X(17)30110-1"
+            },
+            {
+                "title":"Chloroquine enhances the antimycobacterial activity of isoniazid and pyrazinamide by reversing inflammation-induced macrophage efflux.",
+                "authors":"Matt U, Selchow P, Dal Molin M, Strommer S, Sharif O, Schilcher K, Andreoni F, Stenzinger A, Zinkernagel AS, Zeitlinger M, Sander P, Nemeth J",
+                "pmid":"28506804",
+                "doi":"S0924-8579(17)30151-6"
+            },
+            {
+                "title":"[ESAT-6 inhibits autophagy in macrophages and promotes the growth of BCG].",
+                "authors":"Xu X, Zhao R, Zhang R, Wu J, Hu D, Xing Y, Ni S, Tie B",
+                "pmid":"28274307",
+                "doi":""
+            },
+            {
+                "title":"[Secretory acid phosphatase of Mycobacterium tuberculosis inhibits the autophagy of murine macrophages].",
+                "authors":"Hu D, Wang W, Zhao R, Xu X, Xing Y, Xu C, Zhang R, Wu J",
+                "pmid":"27371835",
+                "doi":""
+            },
+            {
+                "title":"Straightforward conversion of decoquinate into inexpensive tractable new derivatives with significant antimalarial activities.",
+                "authors":"Beteck RM, Coertzen D, Smit FJ, Birkholtz LM, Haynes RK, N'Da DD",
+                "pmid":"27210430",
+                "doi":"S0960-894X(16)30509-1"
+            },
+            {
+                "title":"Induction of protective autophagy against apoptosis in HepG2 cells by isoniazid independent of the p38 signaling pathway.",
+                "authors":"Zhang TG, Wang YM, Zhao J, Xia MY, Peng SQ, Ikejima T",
+                "pmid":"30090405",
+                "doi":"10.1039\/c5tx00470e"
+            },
+            {
+                "title":"Novel morpholinoquinoline nucleus clubbed with pyrazoline scaffolds: Synthesis, antibacterial, antitubercular and antimalarial activities.",
+                "authors":"Karad SC, Purohit VB, Thakor P, Thakkar VR, Raval DK",
+                "pmid":"26900659",
+                "doi":"S0223-5234(16)30086-1"
+            },
+            {
+                "title":"Biologically Active Acetylenic Amino Alcohol and N-Hydroxylated 1,2,3,4-Tetrahydro-beta-carboline Constituents of the New Zealand Ascidian Pseudodistoma opacum.",
+                "authors":"Wang J, Pearce AN, Chan ST, Taylor RB, Page MJ, Valentin A, Bourguet-Kondracki ML, Dalton JP, Wiles S, Copp BR",
+                "pmid":"26670413",
+                "doi":"10.1021\/acs.jnatprod.5b00770"
+            },
+            {
+                "title":"Synthesis and preliminary biological evaluation of a small library of hybrid compounds based on Ugi isocyanide multicomponent reactions with a marine natural product scaffold.",
+                "authors":"Aviles E, Prudhomme J, Le Roch KG, Franzblau SG, Chandrasena K, Mayer AM, Rodriguez AD",
+                "pmid":"26421992",
+                "doi":"S0960-894X(15)30070-6"
+            },
+            {
+                "title":"Lymphangioleiomyomatosis: New Treatment Perspectives.",
+                "authors":"Radzikowska E",
+                "pmid":"25980593",
+                "doi":"10.1007\/s00408-015-9742-6"
+            },
+            {
+                "title":"Treatment of neurosarcoidosis--innovations and challenges.",
+                "authors":"Stjepanovic MI, Vucinic VM, Jovanovic D, Mijajlovic M, Trifunovic VS, Stjepanovic MM",
+                "pmid":"25033575",
+                "doi":""
+            },
+            {
+                "title":"Medicinal chemistry discoveries among 1,3,5-triazines: recent advances (2000-2013) as antimicrobial, anti-TB, anti-HIV and antimalarials.",
+                "authors":"Patel RV, Keum YS, Park SW",
+                "pmid":"24958216",
+                "doi":"10.2174\/1389557514666140622205904"
+            },
+            {
+                "title":"Polyclonal activation of naive T cells by urease deficient-recombinant BCG that produced protein complex composed of heat shock protein 70, CysO and major membrane protein-II.",
+                "authors":"Tsukamoto Y, Maeda Y, Tamura T, Mukai T, Makino M",
+                "pmid":"24690183",
+                "doi":"10.1186\/1471-2334-14-179"
+            },
+            {
+                "title":"Gold complexes as antimicrobial agents: an overview of different biological activities in relation to the oxidation state of the gold ion and the ligand structure.",
+                "authors":"Glisic BD, Djuran MI",
+                "pmid":"24598838",
+                "doi":"10.1039\/c4dt00022f"
+            },
+            {
+                "title":"Safety of synthetic and biological DMARDs: a systematic literature review informing the 2013 update of the EULAR recommendations for management of rheumatoid arthritis.",
+                "authors":"Ramiro S, Gaujoux-Viala C, Nam JL, Smolen JS, Buch M, Gossec L, van der Heijde D, Winthrop K, Landewe R",
+                "pmid":"24401994",
+                "doi":"10.1136\/annrheumdis-2013-204575"
+            },
+            {
+                "title":"Synthesis and biological evaluation of 2-aminothiazole derivatives as antimycobacterial and antiplasmodial agents.",
+                "authors":"Mjambili F, Njoroge M, Naran K, De Kock C, Smith PJ, Mizrahi V, Warner D, Chibale K",
+                "pmid":"24373723",
+                "doi":"S0960-894X(13)01394-2"
+            },
+            {
+                "title":"7-chloroquinoline-isatin conjugates: antimalarial, antitubercular, and cytotoxic evaluation.",
+                "authors":"Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Forge D, Kumar V",
+                "pmid":"24341638",
+                "doi":"10.1111\/cbdd.12273"
+            },
+            {
+                "title":"Efficient activation of human T cells of both CD4 and CD8 subsets by urease-deficient recombinant Mycobacterium bovis BCG that produced a heat shock protein 70-M. tuberculosis-derived major membrane protein II fusion protein.",
+                "authors":"Mukai T, Tsukamoto Y, Maeda Y, Tamura T, Makino M",
+                "pmid":"24152387",
+                "doi":"10.1128\/CVI.00564-13"
+            },
+            {
+                "title":"4-Aminoquinoline-beta-lactam conjugates: synthesis, antimalarial, and antitubercular evaluation.",
+                "authors":"Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Kumar V",
+                "pmid":"24034147",
+                "doi":"10.1111\/cbdd.12225"
+            },
+            {
+                "title":"Hypoxia inducible NOD2 interacts with 3-O-sulfogalactoceramide and regulates vesicular homeostasis.",
+                "authors":"Nabatov AA, Hatzis P, Rouschop KM, van Diest P, Vooijs M",
+                "pmid":"23880069",
+                "doi":"S0304-4165(13)00320-6"
+            },
+            {
+                "title":"Changes in the burden of malaria following scale up of malaria control interventions in Mutasa District, Zimbabwe.",
+                "authors":"Mharakurwa S, Mutambu SL, Mberikunashe J, Thuma PE, Moss WJ, Mason PR",
+                "pmid":"23815862",
+                "doi":"10.1186\/1475-2875-12-223"
+            },
+            {
+                "title":"Synthesis and biological evaluation of a new class of 4-aminoquinoline-rhodanine hybrid as potent anti-infective agents.",
+                "authors":"Chauhan K, Sharma M, Saxena J, Singh SV, Trivedi P, Srivastava K, Puri SK, Saxena JK, Chaturvedi V, Chauhan PM",
+                "pmid":"23454512",
+                "doi":"S0223-5234(13)00045-7"
+            },
+            {
+                "title":"Vitamin D-dependent cathelicidin inhibits Mycobacterium marinum infection in human monocytic cells.",
+                "authors":"Sato E, Imafuku S, Ishii K, Itoh R, Chou B, Soejima T, Nakayama J, Hiromatsu K",
+                "pmid":"23452544",
+                "doi":"S0923-1811(13)00040-6"
+            },
+            {
+                "title":"Synthesis and antiplasmodial and antimycobacterial evaluation of new nitroimidazole and nitroimidazooxazine derivatives.",
+                "authors":"Tukulula M, Sharma RK, Meurillon M, Mahajan A, Naran K, Warner D, Huang J, Mekonnen B, Chibale K",
+                "pmid":"24900574",
+                "doi":"10.1021\/ml300362a"
+            },
+            {
+                "title":"Neurological manifestations of TB-IRIS: a report of 4 children.",
+                "authors":"van Toorn R, Rabie H, Dramowski A, Schoeman JF",
+                "pmid":"22658306",
+                "doi":"S1090-3798(12)00095-5"
+            },
+            {
+                "title":"Ajuga remota Benth.: from ethnopharmacology to phytomedical perspective in the treatment of malaria.",
+                "authors":"Cocquyt K, Cos P, Herdewijn P, Maes L, Van den Steen PE, Laekeman G",
+                "pmid":"22015320",
+                "doi":"10.1016\/j.phymed.2011.08.063"
+            },
+            {
+                "title":"Harmonine, a defence compound from the harlequin ladybird, inhibits mycobacterial growth and demonstrates multi-stage antimalarial activity.",
+                "authors":"Rohrich CR, Ngwa CJ, Wiesner J, Schmidtberg H, Degenkolb T, Kollewe C, Fischer R, Pradel G, Vilcinskas A",
+                "pmid":"21937493",
+                "doi":"10.1098\/rsbl.2011.0760"
+            },
+            {
+                "title":"Novel thiolactone-isatin hybrids as potential antimalarial and antitubercular agents.",
+                "authors":"Hans RH, Wiid IJ, van Helden PD, Wan B, Franzblau SG, Gut J, Rosenthal PJ, Chibale K",
+                "pmid":"21376591",
+                "doi":"10.1016\/j.bmcl.2011.02.008"
+            },
+            {
+                "title":"The quest for universal access to effective malaria treatment: how can the AMFm contribute?",
+                "authors":"Matowe L, Adeyi O",
+                "pmid":"20932286",
+                "doi":"10.1186\/1475-2875-9-274"
+            },
+            {
+                "title":"Design, synthesis, and in vitro antiprotozoal, antimycobacterial activities of N-2-[(7-chloroquinolin-4-yl)amino]ethylureas.",
+                "authors":"Nava-Zuazo C, Estrada-Soto S, Guerrero-Alvarez J, Leon-Rivera I, Molina-Salinas GM, Said-Fernandez S, Chan-Bacab MJ, Cedillo-Rivera R, Moo-Puc R, Miron-Lopez G, Navarrete-Vazquez G",
+                "pmid":"20674375",
+                "doi":"10.1016\/j.bmc.2010.07.008"
+            },
+            {
+                "title":"Toward the virtual screening of potential drugs in the homology modeled NAD+ dependent DNA ligase from Mycobacterium tuberculosis.",
+                "authors":"Singh V, Somvanshi P",
+                "pmid":"20214650",
+                "doi":"10.2174\/092986610790225950"
+            },
+            {
+                "title":"[The epidemiological and clinical characteristics of malaria under the present conditions of Tajikistan].",
+                "authors":"Rafiev KhK, Aliev SP, Karimov SS, Khodzhaeva NM, Bazarova LM",
+                "pmid":"20120380",
+                "doi":""
+            },
+            {
+                "title":"The bioactivity of novel furanoterpenoids isolated from Siphonochilus aethiopicus.",
+                "authors":"Lategan CA, Campbell WE, Seaman T, Smith PJ",
+                "pmid":"18996179",
+                "doi":"10.1016\/j.jep.2008.10.007"
+            },
+            {
+                "title":"[Current antimalarial drugs: resistance and new strategies].",
+                "authors":"Ringwald P",
+                "pmid":"18447049",
+                "doi":""
+            },
+            {
+                "title":"Leflunomide-associated infections in rheumatoid arthritis.",
+                "authors":"Jenks KA, Stamp LK, O'Donnell JL, Savage RL, Chapman PT",
+                "pmid":"17937473",
+                "doi":""
+            },
+            {
+                "title":"The challenges of changing national malaria drug policy to artemisinin-based combinations in Kenya.",
+                "authors":"Amin AA, Zurovac D, Kangwana BB, Greenfield J, Otieno DN, Akhwale WS, Snow RW",
+                "pmid":"17535417",
+                "doi":"10.1186\/1475-2875-6-72"
+            },
+            {
+                "title":"Synthesis and biological evaluation of thiazolidine-2-one 1,1-dioxide as inhibitors of Escherichia coli beta-ketoacyl-ACP-synthase III (FabH).",
+                "authors":"Alhamadsheh MM, Waters NC, Huddler DP, Kreishman-Deitrick M, Florova G, Reynolds KA",
+                "pmid":"17189694",
+                "doi":"10.1016\/j.bmcl.2006.11.067"
+            },
+            {
+                "title":"Immunostimulatory activity of recombinant Mycobacterium bovis BCG that secretes major membrane protein II of Mycobacterium leprae.",
+                "authors":"Makino M, Maeda Y, Inagaki K",
+                "pmid":"17057093",
+                "doi":"10.1128\/IAI.00878-06"
+            },
+            {
+                "title":"From chloroquine to artemisinin-based combination therapy: the Sudanese experience.",
+                "authors":"Malik EM, Mohamed TA, Elmardi KA, Mowien RM, Elhassan AH, Elamin SB, Mannan AA, Ahmed ES",
+                "pmid":"16879742",
+                "doi":"10.1186\/1475-2875-5-65"
+            },
+            {
+                "title":"Efficiency of combined methotrexate\/chloroquine therapy in adjuvant-induced arthritis.",
+                "authors":"Silva MA, Ishii-Iwamoto EL, Bracht A, Caparroz-Assef SM, Kimura E, Cuman RK, Bersani-Amado CA",
+                "pmid":"16011736",
+                "doi":"10.1111\/j.1472-8206.2005.00346.x"
+            },
+            {
+                "title":"Recognition of mycobacterial antigens delivered by genetically detoxified Bordetella pertussis adenylate cyclase by T cells from cattle with bovine tuberculosis.",
+                "authors":"Vordermeier HM, Simsova M, Wilkinson KA, Wilkinson RJ, Hewinson RG, Sebo P, Leclerc C",
+                "pmid":"15501751",
+                "doi":"10.1128\/IAI.72.11.6255-6261.2004"
+            },
+            {
+                "title":"Drug targets in malaria parasites.",
+                "authors":"Padmanaban G",
+                "pmid":"12934935",
+                "doi":"10.1007\/3-540-36488-9_4"
+            },
+            {
+                "title":"The contribution of clinical pharmacology to antimalarial drug discovery and development.",
+                "authors":"Winstanley P",
+                "pmid":"12755808",
+                "doi":"10.1046\/j.1365-2125.2003.01845.x"
+            },
+            {
+                "title":"Mixed steroidal 1,2,4,5-tetraoxanes: antimalarial and antimycobacterial activity.",
+                "authors":"Solaja BA, Terzic N, Pocsfalvi G, Gerena L, Tinant B, Opsenica D, Milhous WK",
+                "pmid":"12139444",
+                "doi":"10.1021\/jm020891g"
+            },
+            {
+                "title":"Phosphoantigen presentation by macrophages to mycobacterium tuberculosis--reactive Vgamma9Vdelta2+ T cells: modulation by chloroquine.",
+                "authors":"Rojas RE, Torres M, Fournie JJ, Harding CV, Boom WH",
+                "pmid":"12117907",
+                "doi":"10.1128\/IAI.70.8.4019-4027.2002"
+            },
+            {
+                "title":"Screening of African medicinal plants for antimicrobial and enzyme inhibitory activity.",
+                "authors":"Tshibangu JN, Chifundera K, Kaminsky R, Wright AD, Konig GM",
+                "pmid":"11891084",
+                "doi":"10.1016\/s0378-8741(01)00409-3"
+            },
+            {
+                "title":"Modern chemotherapeutic options for malaria.",
+                "authors":"Winstanley P",
+                "pmid":"11871511",
+                "doi":"10.1016\/S1473-3099(01)00119-0"
+            },
+            {
+                "title":"Effect of chloroquine on phagolysosomal fusion in cultured guinea pig alveolar macrophages: implications in drug delivery.",
+                "authors":"Bhat M, Hickey AJ",
+                "pmid":"11741250",
+                "doi":"10.1208\/ps020434"
+            },
+            {
+                "title":"New manzamine alkaloids with potent activity against infectious diseases.",
+                "authors":"El Sayed KA, Kelly M, Kara UA, Ang KK, Katsuyama I, Dunbar DC, Khan AA, Hamann MT",
+                "pmid":"11456797",
+                "doi":"10.1021\/ja002073o"
+            },
+            {
+                "title":"Hypercalcemia in granulomatous disorders: a clinical review.",
+                "authors":"Sharma OP",
+                "pmid":"10958237",
+                "doi":"10.1097\/00063198-200009000-00010"
+            },
+            {
+                "title":"Enhancement of the T cell response to a mycobacterial peptide by conjugation to synthetic branched polypeptide.",
+                "authors":"Wilkinson KA, Hudecz F, Vordermeier HM, Ivanyi J, Wilkinson RJ",
+                "pmid":"10508253",
+                "doi":"10.1002\/(SICI)1521-4141(199909)29:09<2788::AID-IMMU2788>3.0.CO;2-4"
+            },
+            {
+                "title":"Mefloquine-induced grand mal seizure in tubercular meningitis.",
+                "authors":"Bregani ER, Tien TV, Figini G",
+                "pmid":"9973835",
+                "doi":""
+            },
+            {
+                "title":"Human immunodeficiency virus status and delayed-type hypersensitivity skin testing in Ugandan children.",
+                "authors":"Mandalakas AM, Guay L, Musoke P, Carroll-Pankhurst C, Olness KN",
+                "pmid":"9925867",
+                "doi":"10.1542\/peds.103.2.e21"
+            },
+            {
+                "title":"Major histocompatibility complex class II-dependent antigen presentation by human intestinal endothelial cells.",
+                "authors":"Haraldsen G, Sollid LM, Bakke O, Farstad IN, Kvale D, Molberg, Norstein J, Stang E, Brandtzaeg P",
+                "pmid":"9516385",
+                "doi":"10.1016\/s0016-5085(98)70578-5"
+            },
+            {
+                "title":"Processing of Mycobacterium tuberculosis bacilli by human monocytes for CD4+ alphabeta and gammadelta T cells: role of particulate antigen.",
+                "authors":"Balaji KN, Boom WH",
+                "pmid":"9423845",
+                "doi":"10.1128\/IAI.66.1.98-106.1998"
+            },
+            {
+                "title":"Lymphocyte proliferative response and subset profiles during extended periods of chloroquine or primaquine prophylaxis.",
+                "authors":"Fryauff DJ, Richards AL, Baird JK, Richie TL, Mouzin E, Tjitra E, Sutamihardja MA, Ratiwayanto S, Hadiputranto H, Larasati RP, Pudjoprawoto N, Subianto B, Hoffman SL",
+                "pmid":"9124832",
+                "doi":"10.1128\/AAC.40.12.2737"
+            },
+            {
+                "title":"[Granulomatous hepatitis attributed to the combination pyrimethamine-chloroquine].",
+                "authors":"van Everdingen-Bongers JJ, Janssen P, Lammens M, Stricker BH, Bravenboer B",
+                "pmid":"8720707",
+                "doi":""
+            },
+            {
+                "title":"Incidence and relative risk for hepatitis A, hepatitis B and tuberculosis and occurrence of malaria among merchant seamen.",
+                "authors":"Hansen HL, Hansen KG, Andersen PL",
+                "pmid":"8792473",
+                "doi":"10.3109\/00365549609049058"
+            },
+            {
+                "title":"The spondyloarthropathies.",
+                "authors":"Richens J, McGill PE",
+                "pmid":"7728892",
+                "doi":"10.1016\/s0950-3579(05)80147-5"
+            },
+            {
+                "title":"Chloroquine does not enhance the activity of clarithromycin against multiplication of Mycobacterium avium within human macrophages.",
+                "authors":"Lazard T, Perronne C, Truffot-Pernot C, Grosset J, Vilde JL, Pocidalo JJ",
+                "pmid":"7949074",
+                "doi":"10.1016\/0962-8479(94)90133-3"
+            },
+            {
+                "title":"Letter from Ethiopia.",
+                "authors":"King M",
+                "pmid":"8477220",
+                "doi":""
+            },
+            {
+                "title":"Munchausen syndrome by proxy: an experience from Nigeria.",
+                "authors":"Ifere OA, Yakubu AM, Aikhionbare HA, Quaitey GE, Taqi AM",
+                "pmid":"7505555",
+                "doi":"10.1080\/02724936.1993.11747660"
+            },
+            {
+                "title":"Chloroquine inhibits the intracellular multiplication of Legionella pneumophila by limiting the availability of iron. A potential new mechanism for the therapeutic effect of chloroquine against intracellular pathogens.",
+                "authors":"Byrd TF, Horwitz MA",
+                "pmid":"2056129",
+                "doi":"10.1172\/JCI115301"
+            },
+            {
+                "title":"Evidence that vesicles containing living, virulent Mycobacterium tuberculosis or Mycobacterium avium in cultured human macrophages are not acidic.",
+                "authors":"Crowle AJ, Dahl R, Ross E, May MH",
+                "pmid":"1902198",
+                "doi":"10.1128\/iai.59.5.1823-1831.1991"
+            },
+            {
+                "title":"Killing of intracellular Mycobacterium tuberculosis by receptor-mediated drug delivery.",
+                "authors":"Majumdar S, Basu SK",
+                "pmid":"1901694",
+                "doi":"10.1128\/AAC.35.1.135"
+            },
+            {
+                "title":"Inhibition of tubercle bacilli in cultured human macrophages by chloroquine used alone and in combination with streptomycin, isoniazid, pyrazinamide, and two metabolites of vitamin D3.",
+                "authors":"Crowle AJ, May MH",
+                "pmid":"2127346",
+                "doi":"10.1128\/AAC.34.11.2217"
+            },
+            {
+                "title":"Public-health epidemiology in Vanuatu.",
+                "authors":"Bastien P",
+                "pmid":"2403624",
+                "doi":"10.5694\/j.1326-5377.1990.tb124420.x"
+            },
+            {
+                "title":"[Health care organization and health in a region of Zaire].",
+                "authors":"Campanella N, Tarantini F",
+                "pmid":"2484474",
+                "doi":""
+            },
+            {
+                "title":"[Treatment of parasitic liver diseases].",
+                "authors":"Lecuna V",
+                "pmid":"2535455",
+                "doi":""
+            },
+            {
+                "title":"Perspectives on research and diseases of the Tropics: an Asian view.",
+                "authors":"Ramalingaswami V",
+                "pmid":"2698093",
+                "doi":"10.1111\/j.1749-6632.1989.tb27356.x"
+            },
+            {
+                "title":"Attempts to characterize the mechanisms involved in mycobacterial growth inhibition by gamma-interferon-activated bone marrow macrophages.",
+                "authors":"Flesch IE, Kaufmann SH",
+                "pmid":"2453466",
+                "doi":"10.1128\/iai.56.6.1464-1469.1988"
+            },
+            {
+                "title":"The processing and presentation of mycobacterial antigens by human monocytes.",
+                "authors":"Bhardwaj V, Colston MJ",
+                "pmid":"3132396",
+                "doi":"10.1002\/eji.1830180506"
+            },
+            {
+                "title":"Epstein-Barr virus-transformed B cells process and present Mycobacterium tuberculosis particulate antigens to T-cell clones.",
+                "authors":"Lombardi G, del Gallo F, Vismara D, Piccolella E, de Martino C, Garzelli C, Puglisi C, Colizzi V",
+                "pmid":"3036374",
+                "doi":"10.1016\/0008-8749(87)90237-1"
+            },
+            {
+                "title":"Electron microscopic evidence for stimulation of melanosomal maturation by lysosomotropic agents and monensin in cultured B16 mouse melanoma cells.",
+                "authors":"Oikawa A, Saeki H, Akiyama T, Matsumoto J",
+                "pmid":"3507662",
+                "doi":"10.1111\/j.1600-0749.1987.tb00533.x"
+            },
+            {
+                "title":"Malaria chemoprophylaxis with chloroquine in young Nigerian children. II. Effect on the immune response to vaccination.",
+                "authors":"Bradley-Moore AM, Greenwood BM, Bradley AK, Bartlett A, Bidwell DE, Voller A, Craske J, Kirkwood BR, Gilles HM",
+                "pmid":"3834841",
+                "doi":"10.1080\/00034983.1985.11811963"
+            },
+            {
+                "title":"[Program to combat communicable diseases in children].",
+                "authors":"Ntilivamunda A",
+                "pmid":"12340378",
+                "doi":""
+            },
+            {
+                "title":"Chloroquine resistant malignant subtertian malaria unmasked by systematic steroid therapy.",
+                "authors":"Livesey JR, Henderson A",
+                "pmid":"6363685",
+                "doi":"10.1136\/jramc-129-03-10"
+            },
+            {
+                "title":"The role of pharmaceuticals in the total health care of developing countries.",
+                "authors":"Hoekenga MT",
+                "pmid":"6859394",
+                "doi":"10.4269\/ajtmh.1983.32.437"
+            },
+            {
+                "title":"Sarcoidosis of the upper respiratory tract (SURT).",
+                "authors":"James DG, Barter S, Jash D, MacKinnon DM, Carstairs LS",
+                "pmid":"7108358",
+                "doi":"10.1017\/s0022215100093026"
+            },
+            {
+                "title":"[Big venture to improve children's health].",
+                "authors":"Olsson P",
+                "pmid":"6920976",
+                "doi":""
+            },
+            {
+                "title":"An investigation of the effect of anti-inflammatory and anti-rheumatoid drugs in cell-mediated immune arthritis in guinea-pigs by microfocal radiography.",
+                "authors":"Cashin CH, Doherty NS, Jeffries BL, Buckland-Wright JC",
+                "pmid":"6775665",
+                "doi":""
+            },
+            {
+                "title":"Manipulations of the phagosome-lysosome fusion response in cultured macrophages. Enhancement of fusion by chloroquine and other amines.",
+                "authors":"Hart PD, Young MR",
+                "pmid":"98333",
+                "doi":"10.1016\/0014-4827(78)90516-5"
+            },
+            {
+                "title":"Chloroquine in the treatment of sarcoidosis. A report from the Research Committee of the British Tuberculosis Association.",
+                "authors":"",
+                "pmid":"4872114",
+                "doi":""
+            },
+            {
+                "title":"[On the therapy of rheumatoid arthritis in diabetes tuberculosis].",
+                "authors":"PFAFFENBERG R",
+                "pmid":"14432496",
+                "doi":""
+            }
+        ]
+    },
+    {
+        "drug_name":"loperamide",
+        "combined_z_score":1.221109195,
+        "search_type":"Direct (TB)",
+        "studies_found":5,
+        "literature_evidence":[
+            {
+                "title":"In Silico Drug Repurposing Approach: Investigation of Mycobacterium tuberculosis FadD32 Targeted by FDA-Approved Drugs.",
+                "authors":"Ngidi NTP, Machaba KE, Mhlongo NN",
+                "pmid":"35163931",
+                "doi":"10.3390\/molecules27030668"
+            },
+            {
+                "title":"Loperamide exerts a direct bactericidal effect against M. tuberculosis, M. bovis, M. terrae and M. smegmatis.",
+                "authors":"Barrientos OM, Juarez E, Gonzalez Y, Castro-Villeda DA, Torres M, Guzman-Beltran S",
+                "pmid":"33220096",
+                "doi":"10.1111\/lam.13432"
+            },
+            {
+                "title":"Antimicrobial and immunomodulatory activity induced by loperamide in mycobacterial infections.",
+                "authors":"Juarez E, Ruiz A, Cortez O, Sada E, Torres M",
+                "pmid":"30268801",
+                "doi":"S1567-5769(18)30608-8"
+            },
+            {
+                "title":"Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.",
+                "authors":"Juarez E, Carranza C, Sanchez G, Gonzalez M, Chavez J, Sarabia C, Torres M, Sada E",
+                "pmid":"27468130",
+                "doi":"10.1165\/rcmb.2015-0383OC"
+            },
+            {
+                "title":"Antidiarrhoeal activity of an ethanol extract of the stem bark of Piliostigma reticulatum (Caesalpiniaceae) in rats.",
+                "authors":"Dosso K, N'guessan BB, Bidie AP, Gnangoran BN, Meite S, N'guessan D, Yapo AP, Ehile EE",
+                "pmid":"23983341",
+                "doi":"10.4314\/ajtcam.v9i2.9"
+            }
+        ]
+    },
+    {
+        "drug_name":"paclitaxel",
+        "combined_z_score":1.220734647,
+        "search_type":"Direct (TB)",
+        "studies_found":43,
+        "literature_evidence":[
+            {
+                "title":"[A Case of Pulmonary Tuberculosis Developed During Neoadjuvant Chemotherapy for HER2-Enriched Breast Cancer].",
+                "authors":"Mizuyama Y, Takashima T",
+                "pmid":"40189766",
+                "doi":""
+            },
+            {
+                "title":"Treatment rechallenge is safe and leads to better survival in pancreatic cancer patients with interstitial pneumonitis.",
+                "authors":"Yu HY, Lee CY, Hu YC, Lin LG, Chao Y, Li CP",
+                "pmid":"40108538",
+                "doi":"10.1186\/s12885-025-13896-5"
+            },
+            {
+                "title":"Opportunities for Precision Dosing of Cytotoxic Drugs in Non-Small Cell Lung Cancer: Bridging the Gap in Precision Medicine.",
+                "authors":"Kicken MP, Deenen MJ, van der Wekken AJ, van den Borne BEEM, van den Heuvel MM, Ter Heine R",
+                "pmid":"40045151",
+                "doi":"10.1007\/s40262-025-01492-6"
+            },
+            {
+                "title":"Very Early Health Technology Assessment for Potential Predictive Biomarkers in the Treatment of Advanced Non-Small Cell Lung Cancer.",
+                "authors":"Otten LS, Buma AIG, Piet B, Ter Heine R, van den Heuvel MM, Retel VP",
+                "pmid":"39875696",
+                "doi":"10.1007\/s41669-025-00557-3"
+            },
+            {
+                "title":"Angiosarcoma associated with Kasabach-Merritt syndrome presenting with typical signs and symptoms of pulmonary tuberculosis: a case report.",
+                "authors":"Tariq AT, Kazmi SMH, Riyaz S, Ali Z",
+                "pmid":"39719629",
+                "doi":"10.1186\/s13256-024-04895-4"
+            },
+            {
+                "title":"A case of metachronous triple primary carcinoma complicated with pulmonary tuberculosis: Case report and review.",
+                "authors":"Chen Y, Luo S, Zheng Q, Yu Q, Liu C, Tang R, Chen F, Zhang Y",
+                "pmid":"39312323",
+                "doi":"10.1097\/MD.0000000000039638"
+            },
+            {
+                "title":"Thoracic Angiosarcoma Arising from Chronic Tuberculous Pyothorax.",
+                "authors":"Horii T, Sasaki J, Ishii H, Sudou M, Takaki R, Tokito T, Azuma K, Hoshino T",
+                "pmid":"39231669",
+                "doi":"10.2169\/internalmedicine.4088-24"
+            },
+            {
+                "title":"NGEF is a potential prognostic biomarker and could serve as an indicator for immunotherapy and chemotherapy in lung adenocarcinoma.",
+                "authors":"Chen X, Zhang T, He YQ, Miao TW, Yin J, Ding Q, Yang M, Chen FY, Zeng HP, Liu J, Zhu Q",
+                "pmid":"38764064",
+                "doi":"10.1186\/s12890-024-03046-1"
+            },
+            {
+                "title":"Treatment Strategies for Non-Small-Cell Lung Cancer with Comorbid Respiratory Disease; Interstitial Pneumonia, Chronic Obstructive Pulmonary Disease, and Tuberculosis.",
+                "authors":"Otoshi R, Ikeda S, Kaneko T, Sagawa S, Yamada C, Kumagai K, Moriuchi A, Sekine A, Baba T, Ogura T",
+                "pmid":"38730686",
+                "doi":"10.3390\/cancers16091734"
+            },
+            {
+                "title":"Durvalumab and taxane family combination therapy enhances the antitumoral effects for NSCLC: An in vitro study.",
+                "authors":"Firoozi MR, Sadeghi-Mohammadi S, Asadi M, Shekari N, Seyed Nejad F, Alizade-Harakiyan M, Soleimani Z, Zarredar H",
+                "pmid":"38269512",
+                "doi":"10.1002\/cbf.3919"
+            },
+            {
+                "title":"Ultrasound findings in Kaposi sarcoma patients: overlapping sonographic features with disseminated tuberculosis.",
+                "authors":"Huson MAM, Kumwenda T, Gumulira J, Rambiki E, Wallrauch C, Heller T",
+                "pmid":"37258984",
+                "doi":"10.1186\/s13089-023-00323-8"
+            },
+            {
+                "title":"Prospective Randomized Trial of Docetaxel Versus Best Supportive Care in Patients With Non-Small-Cell Lung Cancer Previously Treated With Platinum-Based Chemotherapy.",
+                "authors":"Shepherd FA, Dancey J, Ramlau R, Mattson K, Gralla R, O'Rourke M, Levitan N, Gressot L, Vincent M, Burkes R, Coughlin S, Kim Y, Berille J",
+                "pmid":"37196430",
+                "doi":"10.1200\/JCO.22.02545"
+            },
+            {
+                "title":"Tislelizumab plus chemotherapy versus placebo plus chemotherapy as first-line treatment for advanced or metastatic oesophageal squamous cell carcinoma (RATIONALE-306): a global, randomised, placebo-controlled, phase 3 study.",
+                "authors":"Xu J, Kato K, Raymond E, Hubner RA, Shu Y, Pan Y, Park SR, Ping L, Jiang Y, Zhang J, Wu X, Yao Y, Shen L, Kojima T, Gotovkin E, Ishihara R, Wyrwicz L, Van Cutsem E, Jimenez-Fonseca P, Lin CY, Wang L, Shi J, Li L, Yoon HH",
+                "pmid":"37080222",
+                "doi":"S1470-2045(23)00108-0"
+            },
+            {
+                "title":"A single center analysis of first-line treatment in advanced KRAS mutant non-small cell lung cancer: real-world practice.",
+                "authors":"Liu Y, Gao Y, Wang Y, Zhao C, Zhang Z, Li B, Zhang T",
+                "pmid":"36376839",
+                "doi":"10.1186\/s12885-022-10236-9"
+            },
+            {
+                "title":"Interstitial Lung Disease Associated with Agaricus blazei Murill in a Patient with Pancreatic Ductal Adenocarcinoma Receiving Gemcitabine-Based Therapy.",
+                "authors":"Iwai N, Okuda T, Sawada R, Ohara T, Hattori C, Taniguchi M, Sakai H, Oka K, Hara T, Tsuji T, Komaki T, Sakagami J, Kagawa K, Dohi O, Yasuda H, Itoh Y",
+                "pmid":"35528774",
+                "doi":"10.1159\/000522639"
+            },
+            {
+                "title":"Autologous dendritic cell-based immunotherapy (DCVAC\/LuCa) and carboplatin\/paclitaxel in advanced non-small cell lung cancer: A randomized, open-label, phase I\/II trial.",
+                "authors":"Zemanova M, Cernovska M, Havel L, Bartek T, Lukesova S, Jakesova J, Vanasek J, Reiterer P, Kultan J, Andrasina I, Siskova L, Koubkova L, Skrickova J, Salajka F, Pesek M, Klepetko P, Beniak J, Fricke H, Kadlecova P, Korolkiewicz RP, Hraska M, Bartunkova J, Spisek R",
+                "pmid":"34284344",
+                "doi":"S2468-2942(21)00125-8"
+            },
+            {
+                "title":"Exosome-Based Delivery of Natural Products in Cancer Therapy.",
+                "authors":"Song H, Liu B, Dong B, Xu J, Zhou H, Na S, Liu Y, Pan Y, Chen F, Li L, Wang J",
+                "pmid":"33738290",
+                "doi":"10.3389\/fcell.2021.650426"
+            },
+            {
+                "title":"Acute exacerbation of idiopathic interstitial pneumonias related to chemotherapy for lung cancer: nationwide surveillance in Japan.",
+                "authors":"Minegishi Y, Gemma A, Homma S, Kishi K, Azuma A, Ogura T, Hamada N, Taniguchi H, Hattori N, Nishioka Y, Tanizawa K, Johkoh T, Yokoyama T, Mori K, Taguchi Y, Ebina M, Inase N, Hagiwara K, Ohnishi H, Mukae H, Inoue Y, Kuwano K, Chiba H, Ohta K, Tanino Y, Sakai F, Sugiyama Y",
+                "pmid":"32494570",
+                "doi":"00184-2019"
+            },
+            {
+                "title":"Anlotinib in treatment of an elderly patient with recurrent advanced SCLC.",
+                "authors":"Zhang Y, Jia B, Li J, Xu X",
+                "pmid":"32031060",
+                "doi":"10.1177\/0300891619900673"
+            },
+            {
+                "title":"Evaluating Inhibitory Effects of Paclitaxel and Vitamin D(3) Loaded Poly Lactic Glycolic Acid Co-Delivery Nanoparticles on the Breast Cancer Cell Line.",
+                "authors":"Khodaverdi S, Jafari A, Movahedzadeh F, Madani F, Yousefi Avarvand A, Falahatkar S",
+                "pmid":"32002359",
+                "doi":"10.15171\/apb.2020.004"
+            },
+            {
+                "title":"NEAT1 mediates paclitaxel-resistance of non-small cell of lung cancer through activation of Akt\/mTOR signalling pathway.",
+                "authors":"Li B, Gu W, Zhu X",
+                "pmid":"30782035",
+                "doi":"10.1080\/1061186X.2019.1585437"
+            },
+            {
+                "title":"Multiple gastrointestinal metastases of squamous-cell lung cancer: A case report.",
+                "authors":"Li X, Li S, Ma Z, Zhao S, Wang X, Wen D",
+                "pmid":"29901596",
+                "doi":"10.1097\/MD.0000000000011027"
+            },
+            {
+                "title":"Tuberculous Meningitis during Chemotherapy for Advanced Gastric Cancer.",
+                "authors":"Matsumoto H, Sasaki A, Nakamura Y, Kawazoe A, Kuboki Y, Okinaka K, Shitara K",
+                "pmid":"29805373",
+                "doi":"10.1159\/000488313"
+            },
+            {
+                "title":"Prognostic Factors and Efficacy of First-Line Chemotherapy in Patients with Advanced Thymic Carcinoma: A Retrospective Analysis of 286 Patients from NEJ023 Study.",
+                "authors":"Ko R, Shukuya T, Okuma Y, Tateishi K, Imai H, Iwasawa S, Miyauchi E, Fujiwara A, Sugiyama T, Azuma K, Muraki K, Yamasaki M, Tanaka H, Takashima Y, Soda S, Ishimoto O, Koyama N, Morita S, Kobayashi K, Nukiwa T, Takahashi K",
+                "pmid":"29567820",
+                "doi":"10.1634\/theoncologist.2017-0586"
+            },
+            {
+                "title":"Application of paclitaxel as adjuvant treatment for benign cicatricial airway stenosis.",
+                "authors":"Qiu XJ, Zhang J, Wang J, Wang YL, Xu M",
+                "pmid":"27924518",
+                "doi":"10.1007\/s11596-016-1668-6"
+            },
+            {
+                "title":"Accelerated hypofractionated radiotherapy with concomitant chemotherapy in locally advanced squamous cell carcinoma of lung: evaluation of response, survival, toxicity and quality of life from a Phase II randomized study.",
+                "authors":"Roy S, Pathy S, Mohanti BK, Raina V, Jaiswal A, Kumar R, Kalaivani M",
+                "pmid":"26986459",
+                "doi":"10.1259\/bjr.20150966"
+            },
+            {
+                "title":"Crizotinib versus platinum-based double-agent chemotherapy as the first line treatment in advanced anaplastic lymphoma kinase-positive lung adenocarcinoma.",
+                "authors":"Zhang Q, Qin N, Wang J, Lv J, Yang X, Li X, Nong J, Zhang H, Zhang X, Wu Y, Zhang S",
+                "pmid":"26816533",
+                "doi":"10.1111\/1759-7714.12264"
+            },
+            {
+                "title":"Comparison of Gefitinib Versus Chemotherapy in Patients with Non-small Cell Lung Cancer with Exon 19 Deletion.",
+                "authors":"Watanabe S, Inoue A, Nukiwa T, Kobayashi K",
+                "pmid":"26637922",
+                "doi":""
+            },
+            {
+                "title":"Efficacy of 18F-fluorodeoxyglucose positron emission tomography\/computed tomography as a predictor of response in locally advanced non-small-cell carcinoma of the lung.",
+                "authors":"Roy S, Pathy S, Kumar R, Mohanti BK, Raina V, Jaiswal A, Taywade S, Garg K, Thulkar S, Mohan A, Mathur S, Behera D",
+                "pmid":"26544097",
+                "doi":"10.1097\/MNM.0000000000000422"
+            },
+            {
+                "title":"Uniform and amorphous rifampicin microspheres obtained by freezing induced LLPS during lyophilization.",
+                "authors":"Liu C, Kong C, Wu G, Zhu J, Javid B, Qian F",
+                "pmid":"26383842",
+                "doi":"S0378-5173(15)30221-0"
+            },
+            {
+                "title":"Lung cancer drug therapy in Hungary - 3-year experience.",
+                "authors":"Moldvay J, Rokszin G, Abonyi-Toth Z, Katona L, Fabian K, Kovacs G",
+                "pmid":"25999737",
+                "doi":"10.2147\/OTT.S65794"
+            },
+            {
+                "title":"Factors associated with a poor response to gefitinib in the NEJ002 study: smoking and the L858R mutation.",
+                "authors":"Fukuhara T, Maemondo M, Inoue A, Kobayashi K, Sugawara S, Oizumi S, Isobe H, Gemma A, Harada M, Yoshizawa H, Kinoshita I, Fujita Y, Saijo Y, Hagiwara K, Morita S, Nukiwa T",
+                "pmid":"25726043",
+                "doi":"S0169-5002(15)00090-2"
+            },
+            {
+                "title":"Primary peritoneal carcinoma: regional cancer institute experience.",
+                "authors":"Ifthikar AM, Rathod PS, Shruthi S, Pallavi VR, Shobha K, Shankaranand B, Umadevi K, Bafna UD",
+                "pmid":"25419074",
+                "doi":"10.1007\/s13193-014-0347-y"
+            },
+            {
+                "title":"Comparing docetaxel plus Cisplatin with Paclitaxel plus Carboplatin in chemotherapy-naive patients with advanced non-small-cell lung cancer: a single institute study.",
+                "authors":"Khodadad K, Khosravi A, Esfahani-Monfared Z, Karimi S, Seifi S",
+                "pmid":"25237353",
+                "doi":""
+            },
+            {
+                "title":"Drug discovery targeting cell division proteins, microtubules and FtsZ.",
+                "authors":"Ojima I, Kumar K, Awasthi D, Vineberg JG",
+                "pmid":"24680057",
+                "doi":"S0968-0896(14)00142-4"
+            },
+            {
+                "title":"Treatment of advanced ovarian carcinoma coexistent with peritoneal tuberculosis.",
+                "authors":"Nagashima A, Matsumoto Y, Ohsawa M, Sumi T",
+                "pmid":"24649297",
+                "doi":"10.3892\/mco.2013.183"
+            },
+            {
+                "title":"[Effects of p53 gene on drug resistance in human lung cancer cell lines.].",
+                "authors":"Tao H, Zhu Y, Wang H, Lai B, Zhang C, Zhan X, Wang Y, Yang X, Yue W, Zhang H",
+                "pmid":"20731894",
+                "doi":"10.3779\/j.issn.1009-3419.2008.02.001"
+            },
+            {
+                "title":"[A randomized study of docetaxel plus cisplatin versus paclitaxel plus cisplatin in previously untreated advanced non-small cell lung cancer.].",
+                "authors":"Zhang S, Wang J, Wang Q, Yang X, Hu F, Li X, Gu Y, Wang H",
+                "pmid":"20727278",
+                "doi":"10.3779\/j.issn.1009-3419.2008.01.024"
+            },
+            {
+                "title":"A routine experimental protocol for qHNMR illustrated with Taxol.",
+                "authors":"Pauli GF, Jaki BU, Lankin DC",
+                "pmid":"17298095",
+                "doi":"10.1021\/np060535r"
+            },
+            {
+                "title":"Management of bilateral fallopian tube carcinoma coexistent with tuberculous salpingitis.",
+                "authors":"Ingec M, Erdogan F, Kumtepe Y, Isaoglu U, Gundogdu C, Kadanali S",
+                "pmid":"15669995",
+                "doi":"10.1111\/j.1447-0756.2005.00242.x"
+            },
+            {
+                "title":"[Paclitaxel combined with platinum-based chemotherapy as second-line treatment in patients with advanced non-small cell lung cancer: A forty case-report].",
+                "authors":"Meng Q, Zhu Y, Xu L, Shi H, Liu Z, You Y, Tang J",
+                "pmid":"21272489",
+                "doi":"10.3779\/j.issn.1009-3419.2003.04.16"
+            },
+            {
+                "title":"Identification of a novel steroid derivative, NSC12983, as a paclitaxel-like tubulin assembly promoter by 3-D virtual screening.",
+                "authors":"Wu JH, Batist G, Zamir LO",
+                "pmid":"11962510",
+                "doi":""
+            },
+            {
+                "title":"Effective treatment of a patient with a high-grade endometrial stromal sarcoma with an accelerated regimen of carboplatin and paclitaxel.",
+                "authors":"Szlosarek PW, Lofts FJ, Pettengell R, Carter P, Young M, Harmer C",
+                "pmid":"10898543",
+                "doi":"10.1097\/00001813-200004000-00008"
+            }
+        ]
+    }
+]

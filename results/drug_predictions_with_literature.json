@@ -1,0 +1,1468 @@
+[
+  {
+    "drug_name": "nilotinib",
+    "combined_z_score": 2.5243985181,
+    "search_type": "Direct (HDT)",
+    "studies_found": 1,
+    "literature_evidence": [
+      {
+        "title": "Mycobacterium tuberculosis resides in lysosome-poor monocyte-derived lung cells during chronic infection.",
+        "authors": "Zheng W, Chang IC, Limberis J, Budzik JM, Zha BS, Howard Z, Chen L, Ernst JD",
+        "pmid": "38701094",
+        "doi": "10.1371/journal.ppat.1012205"
+      }
+    ]
+  },
+  {
+    "drug_name": "mycophenolic-acid",
+    "combined_z_score": 2.4950332575,
+    "search_type": "Direct (TB)",
+    "studies_found": 3,
+    "literature_evidence": [
+      {
+        "title": "A new target for drug repositioning: CEBPalpha elicits LL-37 expression in a vitamin D-independent manner promoting Mtb clearance.",
+        "authors": "Jacobo-Delgado YM, Rodriguez-Carlos A, Santos-Mena A, Gonzalez-Muniz OE, Felix-Arellano C, Navarro-Tovar G, Rivas-Santiago B",
+        "pmid": "40252936",
+        "doi": "S0882-4010(25)00311-0"
+      },
+      {
+        "title": "Hit discovery of Mycobacterium tuberculosis inosine 5'-monophosphate dehydrogenase, GuaB2, inhibitors.",
+        "authors": "Sahu NU, Singh V, Ferraris DM, Rizzi M, Kharkar PS",
+        "pmid": "29699922",
+        "doi": "S0960-894X(18)30357-3"
+      },
+      {
+        "title": "A rare paracoccidioidomycosis diagnosis in a kidney transplant receptor: case report.",
+        "authors": "Pontes AM, Borborema J, Correia CR, de Almeida WL, Maciel RF",
+        "pmid": "26036516",
+        "doi": "S0041-1345(15)00234-1"
+      }
+    ]
+  },
+  {
+    "drug_name": "resveratrol",
+    "combined_z_score": 1.9760935021,
+    "search_type": "Direct (HDT)",
+    "studies_found": 1,
+    "literature_evidence": [
+      {
+        "title": "Sirtuin 3 is essential for host defense against Mycobacterium abscessus infection through regulation of mitochondrial homeostasis.",
+        "authors": "Kim YJ, Lee SH, Jeon SM, Silwal P, Seo JY, Hanh BTB, Park JW, Whang J, Lee MJ, Heo JY, Kim SH, Kim JM, Song GY, Jang J, Jo EK",
+        "pmid": "32835604",
+        "doi": "10.1080/21505594.2020.1809961"
+      }
+    ]
+  },
+  {
+    "drug_name": "cilastatin",
+    "combined_z_score": 1.7211145054,
+    "search_type": "Direct (TB)",
+    "studies_found": 17,
+    "literature_evidence": [
+      {
+        "title": "A rare case of multiple brain abscesses caused by Nocardia abscessus co-infection with tuberculous meningitis in an immunocompetent patient.",
+        "authors": "Wang X, Liang L, Liang Y, Hu L",
+        "pmid": "40360973",
+        "doi": "10.1186/s12879-025-11056-5"
+      },
+      {
+        "title": "Mycobacterium goodii pulmonary disease in an immunocompetent patient: A case report and literature review.",
+        "authors": "Shiratori T, Nunomura Y, Itoga M, Makiguchi T, Tanaka H, Taima K, Chikamatsu K, Kurose A, Mitarai S, Tasaka S",
+        "pmid": "40015373",
+        "doi": "S1341-321X(25)00062-5"
+      },
+      {
+        "title": "Combination of Imipenem-Cilastatin-Relebactam and Amoxicillin in the Antibiotic Regimen in Two Cases of Mycobacterium abscessus Lung Infection.",
+        "authors": "Vogiatzoglou AI, Hadji Muitrova M, Papadaki E, Sionidou M, Nikopoulou A, Kontos F, Papaventsis D, Papavasileiou A, Manika K",
+        "pmid": "39171000",
+        "doi": "10.7759/cureus.65112"
+      },
+      {
+        "title": "Screening, epidemic trends and drug sensitivity analysis of nontuberculous mycobacteria in a local area of China.",
+        "authors": "Lin WH, Yao C, Mei L, Wang DP, Bao XD, Liu SS",
+        "pmid": "39114690",
+        "doi": "10.62347/MAJY5046"
+      },
+      {
+        "title": "[Expert consensus on off-label use of antituberculosis drugs (2023 Update)].",
+        "authors": "",
+        "pmid": "37914420",
+        "doi": "10.3760/cma.j.cn112147-20230809-00062"
+      },
+      {
+        "title": "Aortic endograft infection by Mycobacterium abscessus subsp. massiliense with acquired clarithromycin resistance: a case report.",
+        "authors": "Akiyama Y, Iwamoto N, Kamada K, Yoshida A, Osugi A, Mitarai S, Suzuki T, Yamamoto K, Nagashima M, Horai T, Ohmagari N",
+        "pmid": "37848843",
+        "doi": "10.1186/s12879-023-08702-1"
+      },
+      {
+        "title": "Severe Pulmonary Mycobacterium abscessus Cases Due to Co-Infection with Other Microorganisms Well Treated by Clarithromycin and Sitafloxacin in Japan.",
+        "authors": "Takano K, Shimada D, Kashiwagura S, Kamioka Y, Hariu M, Watanabe Y, Seki M",
+        "pmid": "34285595",
+        "doi": "10.2147/IMCRJ.S321969"
+      },
+      {
+        "title": "Pneumonia, pleurisy, mediastinitis, and mediastinal cyst infection secondary to endobronchial ultrasound-guided transbronchial needle aspiration: A case report.",
+        "authors": "Liu W, Wang Y, Zhang W, Wu H, Liu Z",
+        "pmid": "34011084",
+        "doi": "10.1097/MD.0000000000025973"
+      },
+      {
+        "title": "Incidental intraoperative diagnosis of Mycobacterium abscessus meningeal infection: a case report and review of the literature.",
+        "authors": "Giovannenze F, Stifano V, Scoppettuolo G, Damiano F, Pallavicini F, Delogu G, Palucci I, Rapisarda A, Sturda C, Pompucci A",
+        "pmid": "29687315",
+        "doi": "10.1007/s15010-018-1141-5"
+      },
+      {
+        "title": "Disseminated Mycobacterium abscessus Infection Following Septic Arthritis: A Case Report and Review of the Literature.",
+        "authors": "Fukui S, Sekiya N, Takizawa Y, Morioka H, Kato H, Aono A, Chikamatsu K, Mitarai S, Kobayashi S, Kamei S, Setoguchi K",
+        "pmid": "26020393",
+        "doi": "10.1097/MD.0000000000000861"
+      },
+      {
+        "title": "Multidrug-resistant tuberculosis in an adult with cystic fibrosis.",
+        "authors": "Manika K, Giouleka P, Zarogoulidis K, Kioumis I",
+        "pmid": "22869452",
+        "doi": "10.1159/000338846"
+      },
+      {
+        "title": "[A case of Mycobacterium abscessus pulmonary infection; effectiveness of clarithromycin, amikacin and imipenem/cilastatin].",
+        "authors": "Shikama Y, Kamio Y, Kuriu K, Shibuya Y, Kimura S, Nakajima H",
+        "pmid": "17144576",
+        "doi": ""
+      },
+      {
+        "title": "[A case of tuberculous pyometrium concurrent with tuberculous pleurisy].",
+        "authors": "Hashida H, Hanayama Y, Honda T, Aibara Y",
+        "pmid": "14999927",
+        "doi": "10.3143/geriatrics.41.117"
+      },
+      {
+        "title": "[A case of lung infection due to Mycobacterium abscessus].",
+        "authors": "Tagawa A, Ikehara K, Nishiyama H, Tsuburai T, Shinohara T, Kusano N, Baba T, Shoji A, Kaneko T, Suzuki S, Ishigatsubo Y",
+        "pmid": "14503341",
+        "doi": ""
+      },
+      {
+        "title": "[An elderly case with Listeria monocytogenes sepsis and pulmonary non-tuberculous mycobacterial infection].",
+        "authors": "Hontsu S, Konishi M, Takenaka H, Kasahara K, Takahashi K, Yoshimoto E, Murakawa K, Maeda K, Mikasa K, Kimura H, Sano R, Masutani T, Narita N",
+        "pmid": "12607349",
+        "doi": "10.11150/kansenshogakuzasshi1970.76.1025"
+      },
+      {
+        "title": "[Mycobacterium abscessus infection complicated with diabetes mellitus].",
+        "authors": "Takemura Y, Iwasaki Y, Minagawa T, Nakanishi M, Nagata K, Natsuhara A, Harada H, Nakagawa M",
+        "pmid": "11925921",
+        "doi": ""
+      },
+      {
+        "title": "Hospitalized patients with community-acquired pneumonia in Hong Kong: a randomized study comparing imipenem/cilastatin and ceftazidime.",
+        "authors": "Ho A, Leung R, Lai CK, Chan TH, Chan CH",
+        "pmid": "9154675",
+        "doi": "10.1159/000196675"
+      }
+    ]
+  },
+  {
+    "drug_name": "menadione",
+    "combined_z_score": 1.6977975628,
+    "search_type": "Direct (TB)",
+    "studies_found": 18,
+    "literature_evidence": [
+      {
+        "title": "Design, Synthesis, and In Vitro Evaluation of 4-(Arylchalcogenyl)methyl)-1H-1,2,3-triazol-1-yl-menadione: Exploring Their Potential Against Tuberculosis.",
+        "authors": "Santos NLB, Gomes LS, Ribeiro RCB, Carvalho AS, Lourenco MCS, Marins LM, Valle SP, Doring TH, Andricopulo AD, Oliveira AS, Ferreira VF, da Silva FC, Forezi LDSM, Nascimento V",
+        "pmid": "40573194",
+        "doi": "10.3390/ph18060797"
+      },
+      {
+        "title": "The impact of genotype on the phenotype of Mycobacterium tuberculosis DeltasufR mutants.",
+        "authors": "Willemse D, Baatjies L, Dippenaar A, Warren RM, Williams MJ",
+        "pmid": "37295353",
+        "doi": "S1472-9792(23)00058-6"
+      },
+      {
+        "title": "The AhR ligand phthiocol and vitamin K analogs as Pseudomonas aeruginosa quorum sensing inhibitors.",
+        "authors": "Jia T, Liu D, Bi X, Li M, Cai Z, Fu J, Liu Z, Wu P, Ke X, Jia A, Zhang G, Li G, Yang L",
+        "pmid": "36187967",
+        "doi": "10.3389/fmicb.2022.896687"
+      },
+      {
+        "title": "Antimycobacterial activity of acetone extract and isolated metabolites from folklore medicinal lichen Usnea laevis Nyl. against drug-sensitive and multidrug-resistant tuberculosis strains.",
+        "authors": "Tatipamula VB, Annam SSP",
+        "pmid": "34536516",
+        "doi": "S0378-8741(21)00870-9"
+      },
+      {
+        "title": "Anti-tubercular profile of new selenium-menadione conjugates against Mycobacterium tuberculosis H37Rv (ATCC 27294) strain and multidrug-resistant clinical isolates.",
+        "authors": "Ribeiro RCB, de Marins DB, Di Leo I, da Silva Gomes L, de Moraes MG, Abbadi BL, Villela AD, da Silva WF, da Silva LCRP, Machado P, Bizarro CV, Basso LA, Cristina de Moraes M, Ferreira VF, da Silva FC, Nascimento V",
+        "pmid": "33010635",
+        "doi": "S0223-5234(20)30831-X"
+      },
+      {
+        "title": "Synthesis and biological evaluation of some new tricyclic pyrrolo[3,2-e]tetrazolo[1,5-c]pyrimidine derivatives as potential antitubercular agents.",
+        "authors": "Patil Y, Shingare R, Choudhari A, Borkute R, Sarkar D, Madje BR",
+        "pmid": "29943427",
+        "doi": "10.1002/ardp.201800040"
+      },
+      {
+        "title": "Identification of a Mycothiol-Dependent Nitroreductase from Mycobacterium tuberculosis.",
+        "authors": "Negri A, Javidnia P, Mu R, Zhang X, Vendome J, Gold B, Roberts J, Barman D, Ioerger T, Sacchettini JC, Jiang X, Burns-Huang K, Warrier T, Ling Y, Warren JD, Oren DA, Beuming T, Wang H, Wu J, Li H, Rhee KY, Nathan CF, Liu G, Somersan-Karakaya S",
+        "pmid": "29465985",
+        "doi": "10.1021/acsinfecdis.7b00111"
+      },
+      {
+        "title": "Uptake and metabolism of fluorescent steroids by mycobacterial cells.",
+        "authors": "Faletrov Y, Brzostek A, Plocinska R, Dziadek J, Rudaya E, Edimecheva I, Shkumatov V",
+        "pmid": "27718364",
+        "doi": "S0039-128X(16)30153-2"
+      },
+      {
+        "title": "Antitubercular and antibacterial activity of quinonoid natural products against multi-drug resistant clinical isolates.",
+        "authors": "Dey D, Ray R, Hazra B",
+        "pmid": "24318724",
+        "doi": "10.1002/ptr.5090"
+      },
+      {
+        "title": "A novel F(420) -dependent anti-oxidant mechanism protects Mycobacterium tuberculosis against oxidative stress and bactericidal agents.",
+        "authors": "Gurumurthy M, Rao M, Mukherjee T, Rao SP, Boshoff HI, Dick T, Barry CE 3rd, Manjunatha UH",
+        "pmid": "23240649",
+        "doi": "10.1111/mmi.12127"
+      },
+      {
+        "title": "A novel screening method based on menadione mediated rapid reduction of tetrazolium salt for testing of anti-mycobacterial agents.",
+        "authors": "Singh U, Akhtar S, Mishra A, Sarkar D",
+        "pmid": "21129420",
+        "doi": "10.1016/j.mimet.2010.11.013"
+      },
+      {
+        "title": "Rv3303c of Mycobacterium tuberculosis protects tubercle bacilli against oxidative stress in vivo and contributes to virulence in mice.",
+        "authors": "Akhtar P, Srivastava S, Srivastava A, Srivastava M, Srivastava BS, Srivastava R",
+        "pmid": "17097323",
+        "doi": "10.1016/j.micinf.2006.09.004"
+      },
+      {
+        "title": "Effects of weak acids, UV and proton motive force inhibitors on pyrazinamide activity against Mycobacterium tuberculosis in vitro.",
+        "authors": "Wade MM, Zhang Y",
+        "pmid": "16950824",
+        "doi": "10.1093/jac/dkl358"
+      },
+      {
+        "title": "Co-induction of methyltransferase Rv0560c by naphthoquinones and fibric acids suggests attenuation of isoprenoid quinone action in Mycobacterium tuberculosis.",
+        "authors": "Garbe TR",
+        "pmid": "15644891",
+        "doi": "10.1139/w04-067"
+      },
+      {
+        "title": "Targeted mutagenesis of the Mycobacterium smegmatis mca gene, encoding a mycothiol-dependent detoxification protein.",
+        "authors": "Rawat M, Uppal M, Newton G, Steffek M, Fahey RC, Av-Gay Y",
+        "pmid": "15342574",
+        "doi": "10.1128/JB.186.18.6050-6058.2004"
+      },
+      {
+        "title": "sigmaR, an RNA polymerase sigma factor that modulates expression of the thioredoxin system in response to oxidative stress in Streptomyces coelicolor A3(2).",
+        "authors": "Paget MS, Kang JG, Roe JH, Buttner MJ",
+        "pmid": "9755177",
+        "doi": "10.1093/emboj/17.19.5776"
+      },
+      {
+        "title": "Superoxide production by the mycobacterial and pseudomonad quinoid pigments phthiocol and pyocyanine in human lung cells.",
+        "authors": "Gardner PR",
+        "pmid": "8806780",
+        "doi": "10.1006/abbi.1996.0390"
+      },
+      {
+        "title": "Response of Mycobacterium tuberculosis to reactive oxygen and nitrogen intermediates.",
+        "authors": "Garbe TR, Hibler NS, Deretic V",
+        "pmid": "8900541",
+        "doi": ""
+      }
+    ]
+  },
+  {
+    "drug_name": "rosuvastatin",
+    "combined_z_score": 1.6275952073,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "fludroxycortide",
+    "combined_z_score": 1.6041484453,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "lapatinib",
+    "combined_z_score": 1.5903468109,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "fostamatinib",
+    "combined_z_score": 1.5732046993,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "fenbendazole",
+    "combined_z_score": 1.5037002084,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "minoxidil",
+    "combined_z_score": 1.4976543269,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "verapamil",
+    "combined_z_score": 1.4869917603,
+    "search_type": "Direct (TB)",
+    "studies_found": 92,
+    "literature_evidence": [
+      {
+        "title": "Verapamil and its metabolite norverapamil inhibit the Mycobacterium tuberculosis MmpS5L5 efflux pump to increase bedaquiline activity.",
+        "authors": "Fountain AJ, Waller NJE, Cheung CY, Jowsey W, Chrisp MT, Troll M, Edelstein PH, Cook GM, McNeil MB, Ramakrishnan L",
+        "pmid": "40244664",
+        "doi": "10.1073/pnas.2426827122"
+      },
+      {
+        "title": "Thymol as Biofilm and Efflux Pump Inhibitor: A Dual-Action Approach to Combat Mycobacterium tuberculosis.",
+        "authors": "Shankar Das B, Sarangi A, Pahuja I, Singh V, Ojha S, Giri S, Bhaskar A, Bhattacharya D",
+        "pmid": "39676255",
+        "doi": "10.1002/cbf.70030"
+      },
+      {
+        "title": "The importance of heteroresistance and efflux pumps in bedaquiline-resistant Mycobacterium tuberculosis isolates from Iran.",
+        "authors": "Madadi-Goli N, Ahmadi K, Kamakoli MK, Azizi M, Khanipour S, Dizaji SP, Nasehi M, Siadat SD, Fateh A, Vaziri F",
+        "pmid": "38664815",
+        "doi": "10.1186/s12941-024-00694-3"
+      },
+      {
+        "title": "Efflux pump effects on levofloxacin resistance in Mycobacterium abscessus.",
+        "authors": "Teng T, Chen S, Huo F, Jia J, Zhao L, Jiang G, Wang F, Chu N, Huang H",
+        "pmid": "38572960",
+        "doi": "10.1128/aac.01348-23"
+      },
+      {
+        "title": "Phytocompounds as potential inhibitors of mycobacterial multidrug efflux pump Rv1258c: an in silico approach.",
+        "authors": "Biswas SS, Roy JD",
+        "pmid": "38360998",
+        "doi": "10.1186/s13568-024-01673-9"
+      },
+      {
+        "title": "Overexpression of efflux pump genes is one of the mechanisms causing drug resistance in Mycobacterium tuberculosis.",
+        "authors": "Long Y, Wang B, Xie T, Luo R, Tang J, Deng J, Wang C",
+        "pmid": "38047702",
+        "doi": "10.1128/spectrum.02510-23"
+      },
+      {
+        "title": "Interactive effect of oral anti-hyperglycaemic or anti-hypertensive drugs on the inhibitory and bactericidal activity of first line anti-TB drugs against M. tuberculosis.",
+        "authors": "Trivedi P, Chaturvedi V",
+        "pmid": "38032920",
+        "doi": "10.1371/journal.pone.0292397"
+      },
+      {
+        "title": "A Dose-Finding Study to Guide Use of Verapamil as an Adjunctive Therapy in Tuberculosis.",
+        "authors": "Padmapriyadarsini C, Szumowski JD, Akbar N, Shanmugasundaram P, Jain A, Bathragiri M, Pattnaik M, Turuk J, Karunaianantham R, Balakrishnan S, Pati S, Kumar AKH, Rathore MK, Raja J, Naidu KR, Horn J, Whitworth L, Sewell R, Ramakrishnan L, Swaminathan S, Edelstein PH",
+        "pmid": "37983978",
+        "doi": "10.1002/cpt.3108"
+      },
+      {
+        "title": "Investigation of efflux pump genes in isoniazid resistant Mycobacterium tuberculosis isolates.",
+        "authors": "Kaya H, Ersoy L, Ulger M, Bozok T, Aslan G",
+        "pmid": "37945121",
+        "doi": "S0255-0857(23)00144-5"
+      },
+      {
+        "title": "Antimicrobial drug resistant features of Mycobacterium tuberculosis associated with treatment failure.",
+        "authors": "Mushtaq F, Raza SM, Ahmad A, Aslam H, Adeel A, Saleem S, Ahmad I",
+        "pmid": "37883448",
+        "doi": "10.1371/journal.pone.0293194"
+      },
+      {
+        "title": "A dose-finding study to guide use of verapamil as an adjunctive therapy in tuberculosis.",
+        "authors": "Padmapriyadarsini C, Szumowski JD, Akbar N, Shanmugasundaram P, Jain A, Bathragiri M, Pattnaik M, Turuk J, Karunaianantham R, Balakrishnan S, Pati S, Agibothu Kupparam HK, Rathore MK, Raja J, Naidu KR, Horn J, Whitworth L, Sewell R, Ramakrishnan L, Swaminathan S, Edelstein PH",
+        "pmid": "37577511",
+        "doi": "2023.07.28.23293316"
+      },
+      {
+        "title": "The potential role of drug transporters and amikacin modifying enzymes in M. avium.",
+        "authors": "Schildkraut JA, Coolen JPM, Ruesen C, van den Heuvel JJMW, Acena LE, Wertheim HFL, Jansen RS, Koenderink JB, Te Brake LHM, van Ingen J",
+        "pmid": "37453496",
+        "doi": "S2213-7165(23)00111-X"
+      },
+      {
+        "title": "Mycobacterium tuberculosis Gene Expression Associated With Fluoroquinolone Resistance and Efflux Pump Inhibition.",
+        "authors": "van der Heijden YF, Maruri F, Blackman A, Morrison R, Guo Y, Sterling TR",
+        "pmid": "37079382",
+        "doi": "10.1093/infdis/jiad112"
+      },
+      {
+        "title": "[Investigation of Efflux Pump Genes in Resistant Mycobacterium tuberculosis Complex Clinical Isolates Exposed to First Line Antituberculosis Drugs and Verapamil Combination].",
+        "authors": "Ozgur D, Ersoy L, Ulger M, Tezcan Ulger S, Aslan G",
+        "pmid": "37067206",
+        "doi": "10.5578/mb.20239916"
+      },
+      {
+        "title": "The human proton pump inhibitors inhibit Mycobacterium tuberculosis rifampicin efflux and macrophage-induced rifampicin tolerance.",
+        "authors": "Lake MA, Adams KN, Nie F, Fowler E, Verma AK, Dei S, Teodori E, Sherman DR, Edelstein PH, Spring DR, Troll M, Ramakrishnan L",
+        "pmid": "36763530",
+        "doi": "10.1073/pnas.2215512120"
+      },
+      {
+        "title": "Efflux pump effects on Mycobacterium tuberculosis drug resistance.",
+        "authors": "Valiyeva G, Durupinar B, Coban AY",
+        "pmid": "36718107",
+        "doi": "10.1080/1120009X.2023.2173857"
+      },
+      {
+        "title": "Mab2780c, a TetV-like efflux pump, confers high-level spectinomycin resistance in mycobacterium abscessus.",
+        "authors": "Hurst-Hess KR, Phelps GA, Wilt LA, Lee RE, Ghosh P",
+        "pmid": "36584486",
+        "doi": "S1472-9792(22)00132-9"
+      },
+      {
+        "title": "Elucidating the function of hypothetical PE_PGRS45 protein of Mycobacterium tuberculosis as an oxido-reductase: a potential target for drug repurposing for the treatment of tuberculosis.",
+        "authors": "Medha, Joshi H, Sharma S, Sharma M",
+        "pmid": "36448553",
+        "doi": "10.1080/07391102.2022.2151514"
+      },
+      {
+        "title": "Verapamil Regulates the Macrophage Immunity to Mycobacterium tuberculosis through NF-kappaB Signaling.",
+        "authors": "Gong W, Cui R, Song L, Yang Y, Zhang J, Liang Y, Bai X, Wang J, Wang L, Wu X, Zhao W",
+        "pmid": "35570540",
+        "doi": "10.2174/1566524022666220513092244"
+      },
+      {
+        "title": "[Effects of four efflux pump inhibitors on the activities of clarithromycin against Mycobacterium abscessus].",
+        "authors": "Teng TL, Shang YY, Huang HR, Chu NH, Chen ST",
+        "pmid": "35527462",
+        "doi": "10.3760/cma.j.cn112147-20210923-00669"
+      },
+      {
+        "title": "Rescue of susceptibility to second-line drugs in resistant clinical isolates of Mycobacterium tuberculosis.",
+        "authors": "Maringolo-Ribeiro C, Grecco JA, Bellato DL, Almeida AL, Baldin VP, Caleffi-Ferracioli KR, Pavan FR",
+        "pmid": "35317616",
+        "doi": "10.2217/fmb-2021-0215"
+      },
+      {
+        "title": "Mycobactin Analogues with Excellent Pharmacokinetic Profile Demonstrate Potent Antitubercular Specific Activity and Exceptional Efflux Pump Inhibition.",
+        "authors": "Shyam M, Verma H, Bhattacharje G, Mukherjee P, Singh S, Kamilya S, Jalani P, Das S, Dasgupta A, Mondal A, Das AK, Singh A, Brucoli F, Bagneris C, Dickman R, Basavanakatti VN, Naresh Babu P, Sankaran V, Dev A, Sinha BN, Bhakta S, Jayaprakash V",
+        "pmid": "34981940",
+        "doi": "10.1021/acs.jmedchem.1c01349"
+      },
+      {
+        "title": "Repurposing Immunomodulatory Drugs to Combat Tuberculosis.",
+        "authors": "Fatima S, Bhaskar A, Dwivedi VP",
+        "pmid": "33927718",
+        "doi": "10.3389/fimmu.2021.645485"
+      },
+      {
+        "title": "Ion Transport Modulators as Antimycobacterial Agents.",
+        "authors": "Mitini-Nkhoma SC, Fernando N, Ishaka GKD, Handunnetti SM, Pathirana SL",
+        "pmid": "33294223",
+        "doi": "10.1155/2020/3767915"
+      },
+      {
+        "title": "Isoniazid and verapamil modulatory activity and efflux pump gene expression in Mycobacterium tuberculosis.",
+        "authors": "de Souza JVP, Murase LS, Caleffi-Ferracioli KR, Palomo CT, de Lima Scodro RB, Siqueira VLD, Pavan FR, Cardoso RF",
+        "pmid": "32553016",
+        "doi": "10.5588/ijtld.19.0458"
+      },
+      {
+        "title": "Exploration of 5-(5-nitrothiophen-2-yl)-4,5-dihydro-1H-pyrazoles as selective, multitargeted antimycobacterial agents.",
+        "authors": "Agre N, Khambete M, Maitra A, Gupta A, Munshi T, Bhakta S, Degani M",
+        "pmid": "31560814",
+        "doi": "10.1111/cbdd.13624"
+      },
+      {
+        "title": "In silico and in vitro evaluation of tetrahydropyridine compounds as efflux inhibitors in Mycobacterium abscessus.",
+        "authors": "Ramis IB, Vianna JS, Silva Junior L, von Groll A, Ramos DF, Lobo MM, Zanatta N, Viveiros M, Silva PEAD",
+        "pmid": "31430699",
+        "doi": "S1472-9792(19)30065-4"
+      },
+      {
+        "title": "Synthesis and mycobacterial evaluation of 5-substituted-6-acetyl-2-amino-7-methyl-5,8-dihydropyrido-[2,3-d]pyrimidin-4(3H)-one derivatives.",
+        "authors": "Agre N, Degani M, Gupta A, Bhakta S, Ray MK",
+        "pmid": "31339194",
+        "doi": "10.1002/ardp.201900068"
+      },
+      {
+        "title": "Scrutinizing the drug resistance mechanism of multi- and extensively-drug resistant Mycobacterium tuberculosis: mutations versus efflux pumps.",
+        "authors": "Ghajavand H, Kargarpour Kamakoli M, Khanipour S, Pourazar Dizaji S, Masoumi M, Rahimi Jamnani F, Fateh A, Yaseri M, Siadat SD, Vaziri F",
+        "pmid": "31073401",
+        "doi": "10.1186/s13756-019-0516-4"
+      },
+      {
+        "title": "Sodium Hyaluronate Nanocomposite Respirable Microparticles to Tackle Antibiotic Resistance with Potential Application in Treatment of Mycobacterial Pulmonary Infections.",
+        "authors": "Rossi I, Buttini F, Sonvico F, Affaticati F, Martinelli F, Annunziato G, Machado D, Viveiros M, Pieroni M, Bettini R",
+        "pmid": "31052403",
+        "doi": "10.3390/pharmaceutics11050203"
+      },
+      {
+        "title": "Assessment of preclinical drug interactions of bedaquiline by a highly sensitive LC-ESI-MS/MS based bioanalytical method.",
+        "authors": "Kotwal P, Magotra A, Dogra A, Sharma S, Gour A, Bhatt S, Wazir P, Singh PP, Singh G, Nandi U",
+        "pmid": "30851617",
+        "doi": "S1570-0232(18)31469-7"
+      },
+      {
+        "title": "Modulatory effects of verapamil in rifampicin activity against Mycobacterium tuberculosis.",
+        "authors": "Caleffi-Ferracioli KR, Cardoso RF, de Souza JV, Murase LS, Canezin PH, Scodro RB, Ld Siqueira V, Pavan FR",
+        "pmid": "30648892",
+        "doi": "10.2217/fmb-2018-0277"
+      },
+      {
+        "title": "High Prevalence of Bedaquiline Resistance in Treatment-Naive Tuberculosis Patients and Verapamil Effectiveness.",
+        "authors": "Ghajavand H, Kargarpour Kamakoli M, Khanipour S, Pourazar Dizaji S, Masoumi M, Rahimi Jamnani F, Fateh A, Siadat SD, Vaziri F",
+        "pmid": "30602521",
+        "doi": "10.1128/AAC.02530-18"
+      },
+      {
+        "title": "Molecular modelling and competitive inhibition of a Mycobacterium tuberculosis multidrug-resistance efflux pump.",
+        "authors": "Scaini JLR, Camargo AD, Seus VR, von Groll A, Werhli AV, da Silva PEA, Machado KDS",
+        "pmid": "30529931",
+        "doi": "S1093-3263(18)30411-X"
+      },
+      {
+        "title": "Molecular modelling and simulation studies of the Mycobacterium tuberculosis multidrug efflux pump protein Rv1258c.",
+        "authors": "Cloete R, Kapp E, Joubert J, Christoffels A, Malan SF",
+        "pmid": "30475855",
+        "doi": "10.1371/journal.pone.0207605"
+      },
+      {
+        "title": "Assessment of the Additional Value of Verapamil to a Moxifloxacin and Linezolid Combination Regimen in a Murine Tuberculosis Model.",
+        "authors": "Pieterman ED, Te Brake LHM, de Knegt GJ, van der Meijden A, Alffenaar JC, Bax HI, Aarnoutse RE, de Steenwinkel JEM",
+        "pmid": "29987154",
+        "doi": "10.1128/AAC.01354-18"
+      },
+      {
+        "title": "Intramacrophage Mycobacterium tuberculosis efflux pump gene regulation after rifampicin and verapamil exposure.",
+        "authors": "Canezin PH, Caleffi-Ferracioli KR, Scodro RBL, Siqueira VLD, Pavan FR, Barros ILE, Cardoso RF",
+        "pmid": "29579201",
+        "doi": "10.1093/jac/dky091"
+      },
+      {
+        "title": "Efflux Activity Differentially Modulates the Levels of Isoniazid and Rifampicin Resistance among Multidrug Resistant and Monoresistant Mycobacterium tuberculosis Strains.",
+        "authors": "Machado D, Perdigao J, Portugal I, Pieroni M, Silva PA, Couto I, Viveiros M",
+        "pmid": "29510519",
+        "doi": "10.3390/antibiotics7010018"
+      },
+      {
+        "title": "Verapamil Targets Membrane Energetics in Mycobacterium tuberculosis.",
+        "authors": "Chen C, Gardete S, Jansen RS, Shetty A, Dick T, Rhee KY, Dartois V",
+        "pmid": "29463541",
+        "doi": "10.1128/AAC.02107-17"
+      },
+      {
+        "title": "Effect of efflux pump inhibitors on the susceptibility of Mycobacterium tuberculosis to isoniazid.",
+        "authors": "Jaiswal I, Jain A, Verma SK, Singh P, Kant S, Singh M",
+        "pmid": "29098993",
+        "doi": "10.4103/0970-2113.217567"
+      },
+      {
+        "title": "Verapamil Increases the Bioavailability and Efficacy of Bedaquiline but Not Clofazimine in a Murine Model of Tuberculosis.",
+        "authors": "Xu J, Tasneen R, Peloquin CA, Almeida DV, Li SY, Barnes-Boyle K, Lu Y, Nuermberger E",
+        "pmid": "29038265",
+        "doi": "10.1128/AAC.01692-17"
+      },
+      {
+        "title": "High incidence of fluoroquinolone resistance and effect of efflux pump inhibitors on moxifloxacin resistance among Mycobacterium tuberculosis isolates causing urinary tract infection in Taiwan.",
+        "authors": "Chien JY, Yu CJ, Hsueh PR",
+        "pmid": "28668684",
+        "doi": "S0924-8579(17)30207-8"
+      },
+      {
+        "title": "Identification of Novel Efflux Proteins Rv0191, Rv3756c, Rv3008, and Rv1667c Involved in Pyrazinamide Resistance in Mycobacterium tuberculosis.",
+        "authors": "Zhang Y, Zhang J, Cui P, Zhang Y, Zhang W",
+        "pmid": "28584158",
+        "doi": "10.1128/AAC.00940-17"
+      },
+      {
+        "title": "Efflux Attenuates the Antibacterial Activity of Q203 in Mycobacterium tuberculosis.",
+        "authors": "Jang J, Kim R, Woo M, Jeong J, Park DE, Kim G, Delorme V",
+        "pmid": "28416541",
+        "doi": "10.1128/AAC.02637-16"
+      },
+      {
+        "title": "Activity of moxifloxacin and linezolid against Mycobacterium tuberculosis in combination with potentiator drugs verapamil, timcodar, colistin and SQ109.",
+        "authors": "de Knegt GJ, van der Meijden A, de Vogel CP, Aarnoutse RE, de Steenwinkel JE",
+        "pmid": "28162983",
+        "doi": "S0924-8579(17)30029-8"
+      },
+      {
+        "title": "Design, Synthesis, and Evaluation of Novel Hybrid Efflux Pump Inhibitors for Use against Mycobacterium tuberculosis.",
+        "authors": "Kumar M, Singh K, Naran K, Hamzabegovic F, Hoft DF, Warner DF, Ruminski P, Abate G, Chibale K",
+        "pmid": "27737555",
+        "doi": "10.1021/acsinfecdis.6b00111"
+      },
+      {
+        "title": "Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.",
+        "authors": "Juarez E, Carranza C, Sanchez G, Gonzalez M, Chavez J, Sarabia C, Torres M, Sada E",
+        "pmid": "27468130",
+        "doi": "10.1165/rcmb.2015-0383OC"
+      },
+      {
+        "title": "A novel resistance mutation in eccC5 of the ESX-5 secretion system confers ofloxacin resistance in Mycobacterium tuberculosis.",
+        "authors": "Eilertson B, Maruri F, Blackman A, Guo Y, Herrera M, van der Heijden Y, Shyr Y, Sterling TR",
+        "pmid": "27261264",
+        "doi": "10.1093/jac/dkw168"
+      },
+      {
+        "title": "Development of efflux pump inhibitors in antituberculosis therapy.",
+        "authors": "Song L, Wu X",
+        "pmid": "27211826",
+        "doi": "S0924-8579(16)30073-5"
+      },
+      {
+        "title": "Mutations in pepQ Confer Low-Level Resistance to Bedaquiline and Clofazimine in Mycobacterium tuberculosis.",
+        "authors": "Almeida D, Ioerger T, Tyagi S, Li SY, Mdluli K, Andries K, Grosset J, Sacchettini J, Nuermberger E",
+        "pmid": "27185800",
+        "doi": "10.1128/AAC.00753-16"
+      },
+      {
+        "title": "Morphological changes and differentially expressed efflux pump genes in Mycobacterium tuberculosis exposed to a rifampicin and verapamil combination.",
+        "authors": "Caleffi-Ferracioli KR, Amaral RC, Demitto FO, Maltempe FG, Canezin PH, Scodro RB, Nakamura CV, Leite CQ, Siqueira VL, Cardoso RF",
+        "pmid": "26980498",
+        "doi": "S1472-9792(14)20606-8"
+      },
+      {
+        "title": "Ion Channel Blockers as Antimicrobial Agents, Efflux Inhibitors, and Enhancers of Macrophage Killing Activity against Drug Resistant Mycobacterium tuberculosis.",
+        "authors": "Machado D, Pires D, Perdigao J, Couto I, Portugal I, Martins M, Amaral L, Anes E, Viveiros M",
+        "pmid": "26919135",
+        "doi": "10.1371/journal.pone.0149326"
+      },
+      {
+        "title": "Design and Synthesis of 1-((1,5-Bis(4-chlorophenyl)-2-methyl-1H-pyrrol-3-yl)methyl)-4-methylpiperazine (BM212) and N-Adamantan-2-yl-N'-((E)-3,7-dimethylocta-2,6-dienyl)ethane-1,2-diamine (SQ109) Pyrrole Hybrid Derivatives: Discovery of Potent Antitubercular Agents Effective against Multidrug-Resistant Mycobacteria.",
+        "authors": "Bhakta S, Scalacci N, Maitra A, Brown AK, Dasugari S, Evangelopoulos D, McHugh TD, Mortazavi PN, Twist A, Petricci E, Manetti F, Castagnolo D",
+        "pmid": "26907951",
+        "doi": "10.1021/acs.jmedchem.6b00031"
+      },
+      {
+        "title": "In Vitro Evaluation of Inhalable Verapamil-Rifapentine Particles for Tuberculosis Therapy.",
+        "authors": "Parumasivam T, Chan JG, Pang A, Quan DH, Triccas JA, Britton WJ, Chan HK",
+        "pmid": "26808409",
+        "doi": "10.1021/acs.molpharmaceut.5b00833"
+      },
+      {
+        "title": "New Verapamil Analogs Inhibit Intracellular Mycobacteria without Affecting the Functions of Mycobacterium-Specific T Cells.",
+        "authors": "Abate G, Ruminiski PG, Kumar M, Singh K, Hamzabegovic F, Hoft DF, Eickhoff CS, Selimovic A, Campbell M, Chibale K",
+        "pmid": "26643325",
+        "doi": "10.1128/AAC.01567-15"
+      },
+      {
+        "title": "Mutation of Rv2887, a marR-like gene, confers Mycobacterium tuberculosis resistance to an imidazopyridine-based agent.",
+        "authors": "Winglee K, Lun S, Pieroni M, Kozikowski A, Bishai W",
+        "pmid": "26303802",
+        "doi": "10.1128/AAC.01341-15"
+      },
+      {
+        "title": "Correction: In Vitro Activity of Rifampicin and Verapamil Combination in Multidrug-Resistant Mycobacterium tuberculosis.",
+        "authors": "Demitto Fde O, do Amaral RC, Maltempe FG, Siqueira VL, Scodro RB, Lopes MA, Caleffi-Ferracioli KR, Canezin PH, Cardoso RF",
+        "pmid": "26207741",
+        "doi": "10.1371/journal.pone.0133343"
+      },
+      {
+        "title": "Exploring the potential of adjunct therapy in tuberculosis.",
+        "authors": "Rayasam GV, Balganesh TS",
+        "pmid": "26073420",
+        "doi": "S0165-6147(15)00095-4"
+      },
+      {
+        "title": "Enhancement of antibiotic activity by efflux inhibitors against multidrug resistant Mycobacterium tuberculosis clinical isolates from Brazil.",
+        "authors": "Coelho T, Machado D, Couto I, Maschmann R, Ramos D, von Groll A, Rossetti ML, Silva PA, Viveiros M",
+        "pmid": "25972842",
+        "doi": "10.3389/fmicb.2015.00330"
+      },
+      {
+        "title": "Tetrandrine reverses drug resistance in isoniazid and ethambutol dual drug-resistant Mycobacterium tuberculosis clinical isolates.",
+        "authors": "Zhang Z, Yan J, Xu K, Ji Z, Li L",
+        "pmid": "25887373",
+        "doi": "10.1186/s12879-015-0905-0"
+      },
+      {
+        "title": "Study of efflux pump gene expression in rifampicin-monoresistant Mycobacterium tuberculosis clinical isolates.",
+        "authors": "Li G, Zhang J, Guo Q, Wei J, Jiang Y, Zhao X, Zhao LL, Liu Z, Lu J, Wan K",
+        "pmid": "25690361",
+        "doi": "10.1038/ja.2015.9"
+      },
+      {
+        "title": "In vitro activity of rifampicin and verapamil combination in multidrug-resistant mycobacterium tuberculosis.",
+        "authors": "Demitto Fde O, do Amaral RC, Maltempe FG, Siqueira VL, Scodro RB, Lopes MA, Caleffi-Ferracioli KR, Canezin PH, Cardoso RF",
+        "pmid": "25689777",
+        "doi": "10.1371/journal.pone.0116545"
+      },
+      {
+        "title": "Verapamil increases the bactericidal activity of bedaquiline against Mycobacterium tuberculosis in a mouse model.",
+        "authors": "Gupta S, Tyagi S, Bishai WR",
+        "pmid": "25331694",
+        "doi": "10.1128/AAC.04019-14"
+      },
+      {
+        "title": "Docking analysis insights quercetin can be a non-antibiotic adjuvant by inhibiting Mmr drug efflux pump in Mycobacterium sp. and its homologue EmrE in Escherichia coli.",
+        "authors": "Suriyanarayanan B, Sarojini Santhosh R",
+        "pmid": "25297690",
+        "doi": "10.1080/07391102.2014.974211"
+      },
+      {
+        "title": "Acquired resistance of Mycobacterium tuberculosis to bedaquiline.",
+        "authors": "Andries K, Villellas C, Coeck N, Thys K, Gevers T, Vranckx L, Lounis N, de Jong BC, Koul A",
+        "pmid": "25010492",
+        "doi": "10.1371/journal.pone.0102135"
+      },
+      {
+        "title": "Ofloxacin resistance in Mycobacterium tuberculosis is associated with efflux pump activity independent of resistance pattern and genotype.",
+        "authors": "Sun Z, Xu Y, Sun Y, Liu Y, Zhang X, Huang H, Li C",
+        "pmid": "24940805",
+        "doi": "10.1089/mdr.2013.0171"
+      },
+      {
+        "title": "Synthesis of new verapamil analogues and their evaluation in combination with rifampicin against Mycobacterium tuberculosis and molecular docking studies in the binding site of efflux protein Rv1258c.",
+        "authors": "Singh K, Kumar M, Pavadai E, Naran K, Warner DF, Ruminski PG, Chibale K",
+        "pmid": "24894561",
+        "doi": "S0960-894X(14)00522-8"
+      },
+      {
+        "title": "Development of antimycobacterial tetrahydrothieno[2,3-c]pyridine-3-carboxamides and hexahydrocycloocta[b]thiophene-3-carboxamides: Molecular modification from known antimycobacterial lead.",
+        "authors": "Nallangi R, Samala G, Sridevi JP, Yogeeswari P, Sriram D",
+        "pmid": "24583350",
+        "doi": "S0223-5234(14)00148-2"
+      },
+      {
+        "title": "Verapamil, and its metabolite norverapamil, inhibit macrophage-induced, bacterial efflux pump-mediated tolerance to multiple anti-tubercular drugs.",
+        "authors": "Adams KN, Szumowski JD, Ramakrishnan L",
+        "pmid": "24532601",
+        "doi": "10.1093/infdis/jiu095"
+      },
+      {
+        "title": "Efflux inhibition with verapamil potentiates bedaquiline in Mycobacterium tuberculosis.",
+        "authors": "Gupta S, Cohen KA, Winglee K, Maiga M, Diarra B, Bishai WR",
+        "pmid": "24126586",
+        "doi": "10.1128/AAC.01462-13"
+      },
+      {
+        "title": "Acceleration of tuberculosis treatment by adjunctive therapy with verapamil as an efflux inhibitor.",
+        "authors": "Gupta S, Tyagi S, Almeida DV, Maiga MC, Ammerman NC, Bishai WR",
+        "pmid": "23805786",
+        "doi": "10.1164/rccm.201304-0650OC"
+      },
+      {
+        "title": "Antimicrobial efflux pumps and Mycobacterium tuberculosis drug tolerance: evolutionary considerations.",
+        "authors": "Szumowski JD, Adams KN, Edelstein PH, Ramakrishnan L",
+        "pmid": "23242857",
+        "doi": "10.1007/82_2012_300"
+      },
+      {
+        "title": "Role of the Mmr efflux pump in drug resistance in Mycobacterium tuberculosis.",
+        "authors": "Rodrigues L, Villellas C, Bailo R, Viveiros M, Ainsa JA",
+        "pmid": "23165464",
+        "doi": "10.1128/AAC.01482-12"
+      },
+      {
+        "title": "Efflux pumps of Mycobacterium tuberculosis play a significant role in antituberculosis activity of potential drug candidates.",
+        "authors": "Balganesh M, Dinesh N, Sharma S, Kuruppath S, Nair AV, Sharma U",
+        "pmid": "22314527",
+        "doi": "10.1128/AAC.06003-11"
+      },
+      {
+        "title": "MmpL3 is the cellular target of the antitubercular pyrrole derivative BM212.",
+        "authors": "La Rosa V, Poce G, Canseco JO, Buroni S, Pasca MR, Biava M, Raju RM, Porretta GC, Alfonso S, Battilocchio C, Javid B, Sorrentino F, Ioerger TR, Sacchettini JC, Manetti F, Botta M, De Logu A, Rubin EJ, De Rossi E",
+        "pmid": "22024828",
+        "doi": "10.1128/AAC.05270-11"
+      },
+      {
+        "title": "Contribution of efflux activity to isoniazid resistance in the Mycobacterium tuberculosis complex.",
+        "authors": "Rodrigues L, Machado D, Couto I, Amaral L, Viveiros M",
+        "pmid": "21871582",
+        "doi": "10.1016/j.meegid.2011.08.009"
+      },
+      {
+        "title": "Effect of efflux pump inhibitors on drug susceptibility of ofloxacin resistant Mycobacterium tuberculosis isolates.",
+        "authors": "Singh M, Jadaun GP, Ramdas, Srivastava K, Chauhan V, Mishra R, Gupta K, Nair S, Chauhan DS, Sharma VD, Venkatesan K, Katoch VM",
+        "pmid": "21623040",
+        "doi": ""
+      },
+      {
+        "title": "Rifampicin reduces susceptibility to ofloxacin in rifampicin-resistant Mycobacterium tuberculosis through efflux.",
+        "authors": "Louw GE, Warren RM, Gey van Pittius NC, Leon R, Jimenez A, Hernandez-Pando R, McEvoy CR, Grobbelaar M, Murray M, van Helden PD, Victor TC",
+        "pmid": "21512166",
+        "doi": "10.1164/rccm.201011-1924OC"
+      },
+      {
+        "title": "Drug tolerance in replicating mycobacteria mediated by a macrophage-induced efflux mechanism.",
+        "authors": "Adams KN, Takaki K, Connolly LE, Wiedenhoft H, Winglee K, Humbert O, Edelstein PH, Cosma CL, Ramakrishnan L",
+        "pmid": "21376383",
+        "doi": "10.1016/j.cell.2011.02.022"
+      },
+      {
+        "title": "Ethidium bromide transport across Mycobacterium smegmatis cell-wall: correlation with antibiotic resistance.",
+        "authors": "Rodrigues L, Ramos J, Couto I, Amaral L, Viveiros M",
+        "pmid": "21332993",
+        "doi": "10.1186/1471-2180-11-35"
+      },
+      {
+        "title": "[The effects of gene mutation related to drug resistance and drug efflux pump in extensively drug-resistant tuberculosis clinical isolates].",
+        "authors": "Cui ZL, Wang XL, Wang J, Lu JM, Hu ZY",
+        "pmid": "20979796",
+        "doi": ""
+      },
+      {
+        "title": "jefA (Rv2459), a drug efflux gene in Mycobacterium tuberculosis confers resistance to isoniazid & ethambutol.",
+        "authors": "Gupta AK, Reddy VP, Lavania M, Chauhan DS, Venkatesan K, Sharma VD, Tyagi AK, Katoch VM",
+        "pmid": "20716818",
+        "doi": ""
+      },
+      {
+        "title": "Plant phenolic compounds as ethidium bromide efflux inhibitors in Mycobacterium smegmatis.",
+        "authors": "Lechner D, Gibbons S, Bucar F",
+        "pmid": "18430720",
+        "doi": "10.1093/jac/dkn178"
+      },
+      {
+        "title": "Inhibitors of Ca2+ and K+ transport enhance intracellular killing of M. tuberculosis by non-killing macrophages.",
+        "authors": "Martins M, Viveiros M, Amaral L",
+        "pmid": "18396785",
+        "doi": ""
+      },
+      {
+        "title": "Enhanced killing of intracellular multidrug-resistant Mycobacterium tuberculosis by compounds that affect the activity of efflux pumps.",
+        "authors": "Amaral L, Martins M, Viveiros M",
+        "pmid": "17218448",
+        "doi": "10.1093/jac/dkl500"
+      },
+      {
+        "title": "[In vitro development of rifampicin resistance in the epithelial cells].",
+        "authors": "Erokhina MV, Aleksandrova EA",
+        "pmid": "17002061",
+        "doi": ""
+      },
+      {
+        "title": "Rv2686c-Rv2687c-Rv2688c, an ABC fluoroquinolone efflux pump in Mycobacterium tuberculosis.",
+        "authors": "Pasca MR, Guglierame P, Arcesi F, Bellinzoni M, De Rossi E, Riccardi G",
+        "pmid": "15273144",
+        "doi": "10.1128/AAC.48.8.3175-3178.2004"
+      },
+      {
+        "title": "Isoniazid-induced transient high-level resistance in Mycobacterium tuberculosis.",
+        "authors": "Viveiros M, Portugal I, Bettencourt R, Victor TC, Jordaan AM, Leandro C, Ordway D, Amaral L",
+        "pmid": "12183232",
+        "doi": "10.1128/AAC.46.9.2804-2810.2002"
+      },
+      {
+        "title": "Overexpression and functional characterization of an ABC (ATP-binding cassette) transporter encoded by the genes drrA and drrB of Mycobacterium tuberculosis.",
+        "authors": "Choudhuri BS, Bhakta S, Barik R, Basu J, Kundu M, Chakrabarti P",
+        "pmid": "12057006",
+        "doi": "10.1042/BJ20020615"
+      },
+      {
+        "title": "Characterization of P55, a multidrug efflux pump in Mycobacterium bovis and Mycobacterium tuberculosis.",
+        "authors": "Silva PE, Bigi F, Santangelo MP, Romano MI, Martin C, Cataldi A, Ainsa JA",
+        "pmid": "11181364",
+        "doi": "10.1128/AAC.45.3.800-804.2001"
+      },
+      {
+        "title": "Isoniazid accumulation in Mycobacterium smegmatis is modulated by proton motive force-driven and ATP-dependent extrusion systems.",
+        "authors": "Choudhuri BS, Sen S, Chakrabarti P",
+        "pmid": "10080959",
+        "doi": "10.1006/bbrc.1999.0357"
+      },
+      {
+        "title": "Mycobacterium tuberculosis induces expression of P-glycoprotein in promonocytic U1 cells chronically infected with HIV type 1.",
+        "authors": "Gollapudi S, Reddy M, Gangadharam P, Tsuruo T, Gupta S",
+        "pmid": "7908516",
+        "doi": "10.1006/bbrc.1994.1355"
+      }
+    ]
+  },
+  {
+    "drug_name": "simvastatin",
+    "combined_z_score": 1.4047401962,
+    "search_type": "Direct (HDT)",
+    "studies_found": 3,
+    "literature_evidence": [
+      {
+        "title": "Simvastatin Enhances the Immune Response Against Mycobacterium tuberculosis.",
+        "authors": "Guerra-De-Blas PDC, Bobadilla-Del-Valle M, Sada-Ovalle I, Estrada-Garcia I, Torres-Gonzalez P, Lopez-Saavedra A, Guzman-Beltran S, Ponce-de-Leon A, Sifuentes-Osornio J",
+        "pmid": "31616387",
+        "doi": "10.3389/fmicb.2019.02097"
+      },
+      {
+        "title": "Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.",
+        "authors": "Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC",
+        "pmid": "31605489",
+        "doi": "10.1093/infdis/jiz517"
+      },
+      {
+        "title": "Topical Simvastatin as Host-Directed Therapy against Severity of Cutaneous Leishmaniasis in Mice.",
+        "authors": "Parihar SP, Hartley MA, Hurdayal R, Guler R, Brombacher F",
+        "pmid": "27632901",
+        "doi": "10.1038/srep33458"
+      }
+    ]
+  },
+  {
+    "drug_name": "sirolimus",
+    "combined_z_score": 1.398325738,
+    "search_type": "Direct (TB)",
+    "studies_found": 3,
+    "literature_evidence": [
+      {
+        "title": "Lymphangioleiomyomatosis Showing the Development of Mycobacterium abscessus subsp. massiliense Infection during Sirolimus Therapy.",
+        "authors": "Yanagisawa A, Takimoto T, Kurahara Y, Tsuyuguchi K, Yoshida S, Hirose M, Inoue Y, Arai T",
+        "pmid": "38008448",
+        "doi": "10.2169/internalmedicine.2847-23"
+      },
+      {
+        "title": "Diagnostic utility of flexible bronchoscopy in recipients of solid organ transplants.",
+        "authors": "Kupeli E, Akcay S, Ulubay G, Ozyurek BA, Ozdemirel TS, Haberal M",
+        "pmid": "21440756",
+        "doi": "10.1016/j.transproceed.2011.01.015"
+      },
+      {
+        "title": "Lung cavitation due to Mycobacterium xenopi in a renal transplant recipient.",
+        "authors": "Martin-Penagos L, Rodrigo E, Ruiz JC, Aguero J, Fernandez-Mazarrasa C, Martinez L, Pinera C, Arias M",
+        "pmid": "19298241",
+        "doi": "10.1111/j.1399-3062.2009.00376.x"
+      }
+    ]
+  },
+  {
+    "drug_name": "terguride",
+    "combined_z_score": 1.3608810345,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "topotecan",
+    "combined_z_score": 1.3184774661,
+    "search_type": "No Results",
+    "studies_found": 0,
+    "literature_evidence": []
+  },
+  {
+    "drug_name": "dopamine",
+    "combined_z_score": 1.2985943395,
+    "search_type": "Direct (TB)",
+    "studies_found": 17,
+    "literature_evidence": [
+      {
+        "title": "Cryptococcus neoformans: Brain Preference, Gender Bias, and Interactions with Mycobacterium tuberculosis and Toxoplasma gondii in HIV-Positive Patients.",
+        "authors": "Moroti R, Hristea A, Neagu G, Penescu I, Florea D, Tiliscan C, Benea SN",
+        "pmid": "40142374",
+        "doi": "10.3390/microorganisms13030481"
+      },
+      {
+        "title": "Exploration of vanoxerine analogues as antibacterial agents.",
+        "authors": "Kingdon ADH, Adcock HV, Kasimati EM, Craven P, van Schaik W, Cox LR, Besra GS",
+        "pmid": "39402358",
+        "doi": "10.1038/s41429-024-00781-9"
+      },
+      {
+        "title": "Epinephrine Stimulates Mycobacterium tuberculosis Growth and Biofilm Formation.",
+        "authors": "Lei Y, Rahman K, Cao X, Yang B, Zhou W, Reheman A, Cai L, Wang Y, Tyagi R, Wang Z, Chen X, Cao G",
+        "pmid": "38139199",
+        "doi": "10.3390/ijms242417370"
+      },
+      {
+        "title": "Vanoxerine kills mycobacteria through membrane depolarization and efflux inhibition.",
+        "authors": "Kingdon ADH, Meosa-John AR, Batt SM, Besra GS",
+        "pmid": "36778873",
+        "doi": "10.3389/fmicb.2023.1112491"
+      },
+      {
+        "title": "Gene Expression and In Vitro Pharmacogenetic Studies of Dopamine and Serotonin Gene Receptors in Tuberculosis.",
+        "authors": "Sheikhpour M, Shokrgozar MA, Biglari A, Pornour M, Abdolrahimi F, Poorazar Dizaji S, Khanipour S, Masoumi M, Ebrahimzadeh N, Abolfathi H",
+        "pmid": "34976083",
+        "doi": ""
+      },
+      {
+        "title": "Activation studies with amines and amino acids of the beta-carbonic anhydrase encoded by the Rv3273 gene from the pathogenic bacterium Mycobacterium tuberculosis.",
+        "authors": "Angeli A, Del Prete S, Osman SM, Alasmary FAS, AlOthman Z, Donald WA, Capasso C, Supuran CT",
+        "pmid": "29322836",
+        "doi": "10.1080/14756366.2017.1422250"
+      },
+      {
+        "title": "Effect of smoking on acute phase reactants, stress hormone responses and vitamin C in pulmonary tuberculosis.",
+        "authors": "Opolot JO, Theron AJ, MacPhail P, Feldman C, Anderson R",
+        "pmid": "29062328",
+        "doi": "10.4314/ahs.v17i2.7"
+      },
+      {
+        "title": "Dopamine-assisted fixation of drug-loaded polymeric multilayers to osteoarticular implants for tuberculosis therapy.",
+        "authors": "Li D, Li L, Ma Y, Zhuang Y, Li D, Shen H, Wang X, Yang F, Ma Y, Wu D",
+        "pmid": "28218329",
+        "doi": "10.1039/c7bm00042a"
+      },
+      {
+        "title": "Simplified severe sepsis protocol: a randomized controlled trial of modified early goal-directed therapy in Zambia.",
+        "authors": "Andrews B, Muchemwa L, Kelly P, Lakhi S, Heimburger DC, Bernard GR",
+        "pmid": "25072757",
+        "doi": "10.1097/CCM.0000000000000541"
+      },
+      {
+        "title": "Novel non-neuroleptic phenothiazines inhibit Mycobacterium tuberculosis replication.",
+        "authors": "Salie S, Hsu NJ, Semenya D, Jardine A, Jacobs M",
+        "pmid": "24569630",
+        "doi": "10.1093/jac/dku036"
+      },
+      {
+        "title": "Synthesis and carbonic anhydrase inhibitory properties of sulfamides structurally related to dopamine.",
+        "authors": "Aksu K, Nar M, Tanc M, Vullo D, Gulcin I, Goksu S, Tumer F, Supuran CT",
+        "pmid": "23623256",
+        "doi": "S0968-0896(13)00299-X"
+      },
+      {
+        "title": "BCG vaccine-induced neuroprotection in a mouse model of Parkinson's disease.",
+        "authors": "Yong J, Lacan G, Dang H, Hsieh T, Middleton B, Wasserfall C, Tian J, Melega WP, Kaufman DL",
+        "pmid": "21304945",
+        "doi": "10.1371/journal.pone.0016610"
+      },
+      {
+        "title": "Two loci control tuberculin skin test reactivity in an area hyperendemic for tuberculosis.",
+        "authors": "Cobat A, Gallant CJ, Simkin L, Black GF, Stanley K, Hughes J, Doherty TM, Hanekom WA, Eley B, Jais JP, Boland-Auge A, van Helden P, Casanova JL, Abel L, Hoal EG, Schurr E, Alcais A",
+        "pmid": "19901083",
+        "doi": "10.1084/jem.20090892"
+      },
+      {
+        "title": "MPTP-induced central dopamine depletion exacerbates experimental autoimmune encephalomyelitis (EAE) in C57BL mice.",
+        "authors": "Balkowiec-Iskra E, Kurkowska-Jastrzebska I, Joniec I, Ciesielska A, Muszynska A, Przybylkowski A, Czlonkowska A, Czlonkowski A",
+        "pmid": "17687515",
+        "doi": "10.1007/s00011-007-6128-0"
+      },
+      {
+        "title": "Synthesis and antitubercular activity of phenothiazines with reduced binding to dopamine and serotonin receptors.",
+        "authors": "Madrid PB, Polgar WE, Toll L, Tanga MJ",
+        "pmid": "17407813",
+        "doi": "10.1016/j.bmcl.2007.03.064"
+      },
+      {
+        "title": "Dopamine beta-hydroxylase deficiency impairs cellular immunity.",
+        "authors": "Alaniz RC, Thomas SA, Perez-Melgosa M, Mueller K, Farr AG, Palmiter RD, Wilson CB",
+        "pmid": "10051631",
+        "doi": "10.1073/pnas.96.5.2274"
+      },
+      {
+        "title": "Suppression of macrophage activation and T-lymphocyte function in hypoprolactinemic mice.",
+        "authors": "Bernton EW, Meltzer MS, Holaday JW",
+        "pmid": "3122324",
+        "doi": "10.1126/science.3122324"
+      }
+    ]
+  },
+  {
+    "drug_name": "chloroquine",
+    "combined_z_score": 1.225618446,
+    "search_type": "Direct (TB)",
+    "studies_found": 59,
+    "literature_evidence": [
+      {
+        "title": "Repurposing of anti-malarial drugs for the treatment of tuberculosis: realistic strategy or fanciful dead end?",
+        "authors": "Hanscheid T, Del Portal Luyten CR, Hermans SM, Grobusch MP",
+        "pmid": "38702649",
+        "doi": "10.1186/s12936-024-04967-2"
+      },
+      {
+        "title": "High Target Homology Does Not Guarantee Inhibition: Aminothiazoles Emerge as Inhibitors of Plasmodium falciparum.",
+        "authors": "Johannsen S, Gierse RM, Kruger A, Edwards RL, Nanna V, Fontana A, Zhu D, Masini T, de Carvalho LP, Poizat M, Kieftenbelt B, Hodge DM, Alvarez S, Bunt D, Lacour A, Shams A, Meissner KA, de Souza EE, Droge M, van Vliet B, den Hartog J, Hutter MC, Held J, Odom John AR, Wrenger C, Hirsch AKH",
+        "pmid": "38367280",
+        "doi": "10.1021/acsinfecdis.3c00670"
+      },
+      {
+        "title": "Tetrahydrobenzo[h]quinoline derivatives as a novel chemotype for dual antileishmanial-antimalarial activity graced with antitubercular activity: Design, synthesis and biological evaluation.",
+        "authors": "Ibrahim TM, Abada G, Dammann M, Maklad RM, Eldehna WM, Salem R, Abdelaziz MM, El-Domany RA, Bekhit AA, Beockler FM",
+        "pmid": "37269671",
+        "doi": "S0223-5234(23)00500-7"
+      },
+      {
+        "title": "Discovery and Mechanistic Analysis of Structurally Diverse Inhibitors of Acetyltransferase Eis among FDA-Approved Drugs.",
+        "authors": "Pang AH, Green KD, Punetha A, Thamban Chandrika N, Howard KC, Garneau-Tsodikova S, Tsodikov OV",
+        "pmid": "36657084",
+        "doi": "10.1021/acs.biochem.2c00658"
+      },
+      {
+        "title": "MmpL3 Inhibition as a Promising Approach to Develop Novel Therapies against Tuberculosis: A Spotlight on SQ109, Clinical Studies, and Patents Literature.",
+        "authors": "Imran M, Arora MK, Chaudhary A, Khan SA, Kamal M, Alshammari MM, Alharbi RM, Althomali NA, Alzimam IM, Alshammari AA, Alharbi BH, Alshengeti A, Alsaleh AA, Alqahtani SA, Rabaan AA",
+        "pmid": "36359313",
+        "doi": "10.3390/biomedicines10112793"
+      },
+      {
+        "title": "An insight into the discovery, clinical studies, compositions, and patents of macozinone: A drug targeting the DprE1 enzyme of Mycobacterium tuberculosis.",
+        "authors": "Imran M, Khan SA, Asdaq SMB, Almehmadi M, Abdulaziz O, Kamal M, Alshammari MK, Alsubaihi LI, Hussain KH, Alharbi AS, Alzahrani AK",
+        "pmid": "36122509",
+        "doi": "S1876-0341(22)00232-5"
+      },
+      {
+        "title": "Antiplasmodial and antimycobacterial activities of crude and lead-like enhanced extracts from Namibian medicinal plants.",
+        "authors": "Raidron C, Jordaan A, Seldon R, Warner DF, de Kock C, Taylor D, Louw S, Sunassee S, Hans RH",
+        "pmid": "35589021",
+        "doi": "S0378-8741(22)00428-7"
+      },
+      {
+        "title": "Infectious agents breaking the immunological tolerance: The holy grail in rheumatoid arthritis reconsidered.",
+        "authors": "Gremese E, Tolusso B, Bruno D, Alivernini S, Ferraccioli G",
+        "pmid": "35452849",
+        "doi": "S1568-9972(22)00072-6"
+      },
+      {
+        "title": "Epigenetic reader BRD4 supports mycobacterial pathogenesis by co-modulating host lipophagy and angiogenesis.",
+        "authors": "Mukherjee T, Bhatt B, Prakhar P, Lohia GK, Rajmani RS, Balaji KN",
+        "pmid": "34074211",
+        "doi": "10.1080/15548627.2021.1936355"
+      },
+      {
+        "title": "Effects of tafenoquine against active, dormant and resistant Mycobacterium tuberculosis.",
+        "authors": "Sidronio MGS, Castelo Branco APOT, Abbadi BL, Macchi F, Silveira MD, Lock GA, Costa TD, de Araujo DM, Cibulski S, Bizarro CV, Machado P, Basso LA, Rodrigues-Junior VS",
+        "pmid": "34004588",
+        "doi": "S1472-9792(21)00039-1"
+      },
+      {
+        "title": "Phagosome-regulated mTOR signalling during sarcoidosis granuloma biogenesis.",
+        "authors": "Crouser ED, Locke LW, Julian MW, Bicer S, Sadee W, White P, Schlesinger LS",
+        "pmid": "32943400",
+        "doi": "2002695"
+      },
+      {
+        "title": "Antimicrobial evaluation of neutral and cationic iridium(III) and rhodium(III) aminoquinoline-benzimidazole hybrid complexes.",
+        "authors": "Baartzes N, Jordaan A, Warner DF, Combrinck J, Taylor D, Chibale K, Smith GS",
+        "pmid": "32861176",
+        "doi": "S0223-5234(20)30666-8"
+      },
+      {
+        "title": "Targeting redox heterogeneity to counteract drug tolerance in replicating Mycobacterium tuberculosis.",
+        "authors": "Mishra R, Kohli S, Malhotra N, Bandyopadhyay P, Mehta M, Munshi M, Adiga V, Ahuja VK, Shandil RK, Rajmani RS, Seshasayee ASN, Singh A",
+        "pmid": "31723039",
+        "doi": "10.1126/scitranslmed.aaw6635"
+      },
+      {
+        "title": "Bioisosteric ferrocenyl aminoquinoline-benzimidazole hybrids: Antimicrobial evaluation and mechanistic insights.",
+        "authors": "Baartzes N, Stringer T, Seldon R, Warner DF, Taylor D, Wittlin S, Chibale K, Smith GS",
+        "pmid": "31301563",
+        "doi": "S0223-5234(19)30596-3"
+      },
+      {
+        "title": "Optimization of the autophagy measurement in a human cell line and primary cells by flow cytometry.",
+        "authors": "Alonzi T, Petruccioli E, Vanini V, Fimia GM, Goletti D",
+        "pmid": "31243942",
+        "doi": "10.4081/ejh.2019.3044"
+      },
+      {
+        "title": "Organometallic Conjugates of the Drug Sulfadoxine for Combatting Antimicrobial Resistance.",
+        "authors": "Chellan P, Avery VM, Duffy S, Triccas JA, Nagalingam G, Tam C, Cheng LW, Liu J, Land KM, Clarkson GJ, Romero-Canelon I, Sadler PJ",
+        "pmid": "29653033",
+        "doi": "10.1002/chem.201801090"
+      },
+      {
+        "title": "Antimicrobial activity of organometallic isonicotinyl and pyrazinyl ferrocenyl-derived complexes.",
+        "authors": "Stringer T, Seldon R, Liu N, Warner DF, Tam C, Cheng LW, Land KM, Smith PJ, Chibale K, Smith GS",
+        "pmid": "28713884",
+        "doi": "10.1039/c7dt01952a"
+      },
+      {
+        "title": "Chloroquine enhances the antimycobacterial activity of isoniazid and pyrazinamide by reversing inflammation-induced macrophage efflux.",
+        "authors": "Matt U, Selchow P, Dal Molin M, Strommer S, Sharif O, Schilcher K, Andreoni F, Stenzinger A, Zinkernagel AS, Zeitlinger M, Sander P, Nemeth J",
+        "pmid": "28506804",
+        "doi": "S0924-8579(17)30151-6"
+      },
+      {
+        "title": "[ESAT-6 inhibits autophagy in macrophages and promotes the growth of BCG].",
+        "authors": "Xu X, Zhao R, Zhang R, Wu J, Hu D, Xing Y, Ni S, Tie B",
+        "pmid": "28274307",
+        "doi": ""
+      },
+      {
+        "title": "[Secretory acid phosphatase of Mycobacterium tuberculosis inhibits the autophagy of murine macrophages].",
+        "authors": "Hu D, Wang W, Zhao R, Xu X, Xing Y, Xu C, Zhang R, Wu J",
+        "pmid": "27371835",
+        "doi": ""
+      },
+      {
+        "title": "Novel morpholinoquinoline nucleus clubbed with pyrazoline scaffolds: Synthesis, antibacterial, antitubercular and antimalarial activities.",
+        "authors": "Karad SC, Purohit VB, Thakor P, Thakkar VR, Raval DK",
+        "pmid": "26900659",
+        "doi": "S0223-5234(16)30086-1"
+      },
+      {
+        "title": "Biologically Active Acetylenic Amino Alcohol and N-Hydroxylated 1,2,3,4-Tetrahydro-beta-carboline Constituents of the New Zealand Ascidian Pseudodistoma opacum.",
+        "authors": "Wang J, Pearce AN, Chan ST, Taylor RB, Page MJ, Valentin A, Bourguet-Kondracki ML, Dalton JP, Wiles S, Copp BR",
+        "pmid": "26670413",
+        "doi": "10.1021/acs.jnatprod.5b00770"
+      },
+      {
+        "title": "Synthesis and preliminary biological evaluation of a small library of hybrid compounds based on Ugi isocyanide multicomponent reactions with a marine natural product scaffold.",
+        "authors": "Aviles E, Prudhomme J, Le Roch KG, Franzblau SG, Chandrasena K, Mayer AM, Rodriguez AD",
+        "pmid": "26421992",
+        "doi": "S0960-894X(15)30070-6"
+      },
+      {
+        "title": "Medicinal chemistry discoveries among 1,3,5-triazines: recent advances (2000-2013) as antimicrobial, anti-TB, anti-HIV and antimalarials.",
+        "authors": "Patel RV, Keum YS, Park SW",
+        "pmid": "24958216",
+        "doi": "10.2174/1389557514666140622205904"
+      },
+      {
+        "title": "Polyclonal activation of naive T cells by urease deficient-recombinant BCG that produced protein complex composed of heat shock protein 70, CysO and major membrane protein-II.",
+        "authors": "Tsukamoto Y, Maeda Y, Tamura T, Mukai T, Makino M",
+        "pmid": "24690183",
+        "doi": "10.1186/1471-2334-14-179"
+      },
+      {
+        "title": "Gold complexes as antimicrobial agents: an overview of different biological activities in relation to the oxidation state of the gold ion and the ligand structure.",
+        "authors": "Glisic BD, Djuran MI",
+        "pmid": "24598838",
+        "doi": "10.1039/c4dt00022f"
+      },
+      {
+        "title": "Synthesis and biological evaluation of 2-aminothiazole derivatives as antimycobacterial and antiplasmodial agents.",
+        "authors": "Mjambili F, Njoroge M, Naran K, De Kock C, Smith PJ, Mizrahi V, Warner D, Chibale K",
+        "pmid": "24373723",
+        "doi": "S0960-894X(13)01394-2"
+      },
+      {
+        "title": "7-chloroquinoline-isatin conjugates: antimalarial, antitubercular, and cytotoxic evaluation.",
+        "authors": "Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Forge D, Kumar V",
+        "pmid": "24341638",
+        "doi": "10.1111/cbdd.12273"
+      },
+      {
+        "title": "Efficient activation of human T cells of both CD4 and CD8 subsets by urease-deficient recombinant Mycobacterium bovis BCG that produced a heat shock protein 70-M. tuberculosis-derived major membrane protein II fusion protein.",
+        "authors": "Mukai T, Tsukamoto Y, Maeda Y, Tamura T, Makino M",
+        "pmid": "24152387",
+        "doi": "10.1128/CVI.00564-13"
+      },
+      {
+        "title": "4-Aminoquinoline-beta-lactam conjugates: synthesis, antimalarial, and antitubercular evaluation.",
+        "authors": "Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Kumar V",
+        "pmid": "24034147",
+        "doi": "10.1111/cbdd.12225"
+      },
+      {
+        "title": "Hypoxia inducible NOD2 interacts with 3-O-sulfogalactoceramide and regulates vesicular homeostasis.",
+        "authors": "Nabatov AA, Hatzis P, Rouschop KM, van Diest P, Vooijs M",
+        "pmid": "23880069",
+        "doi": "S0304-4165(13)00320-6"
+      },
+      {
+        "title": "Synthesis and biological evaluation of a new class of 4-aminoquinoline-rhodanine hybrid as potent anti-infective agents.",
+        "authors": "Chauhan K, Sharma M, Saxena J, Singh SV, Trivedi P, Srivastava K, Puri SK, Saxena JK, Chaturvedi V, Chauhan PM",
+        "pmid": "23454512",
+        "doi": "S0223-5234(13)00045-7"
+      },
+      {
+        "title": "Vitamin D-dependent cathelicidin inhibits Mycobacterium marinum infection in human monocytic cells.",
+        "authors": "Sato E, Imafuku S, Ishii K, Itoh R, Chou B, Soejima T, Nakayama J, Hiromatsu K",
+        "pmid": "23452544",
+        "doi": "S0923-1811(13)00040-6"
+      },
+      {
+        "title": "Ajuga remota Benth.: from ethnopharmacology to phytomedical perspective in the treatment of malaria.",
+        "authors": "Cocquyt K, Cos P, Herdewijn P, Maes L, Van den Steen PE, Laekeman G",
+        "pmid": "22015320",
+        "doi": "10.1016/j.phymed.2011.08.063"
+      },
+      {
+        "title": "Harmonine, a defence compound from the harlequin ladybird, inhibits mycobacterial growth and demonstrates multi-stage antimalarial activity.",
+        "authors": "Rohrich CR, Ngwa CJ, Wiesner J, Schmidtberg H, Degenkolb T, Kollewe C, Fischer R, Pradel G, Vilcinskas A",
+        "pmid": "21937493",
+        "doi": "10.1098/rsbl.2011.0760"
+      },
+      {
+        "title": "Novel thiolactone-isatin hybrids as potential antimalarial and antitubercular agents.",
+        "authors": "Hans RH, Wiid IJ, van Helden PD, Wan B, Franzblau SG, Gut J, Rosenthal PJ, Chibale K",
+        "pmid": "21376591",
+        "doi": "10.1016/j.bmcl.2011.02.008"
+      },
+      {
+        "title": "Design, synthesis, and in vitro antiprotozoal, antimycobacterial activities of N-2-[(7-chloroquinolin-4-yl)amino]ethylureas.",
+        "authors": "Nava-Zuazo C, Estrada-Soto S, Guerrero-Alvarez J, Leon-Rivera I, Molina-Salinas GM, Said-Fernandez S, Chan-Bacab MJ, Cedillo-Rivera R, Moo-Puc R, Miron-Lopez G, Navarrete-Vazquez G",
+        "pmid": "20674375",
+        "doi": "10.1016/j.bmc.2010.07.008"
+      },
+      {
+        "title": "Toward the virtual screening of potential drugs in the homology modeled NAD+ dependent DNA ligase from Mycobacterium tuberculosis.",
+        "authors": "Singh V, Somvanshi P",
+        "pmid": "20214650",
+        "doi": "10.2174/092986610790225950"
+      },
+      {
+        "title": "The bioactivity of novel furanoterpenoids isolated from Siphonochilus aethiopicus.",
+        "authors": "Lategan CA, Campbell WE, Seaman T, Smith PJ",
+        "pmid": "18996179",
+        "doi": "10.1016/j.jep.2008.10.007"
+      },
+      {
+        "title": "Synthesis and biological evaluation of thiazolidine-2-one 1,1-dioxide as inhibitors of Escherichia coli beta-ketoacyl-ACP-synthase III (FabH).",
+        "authors": "Alhamadsheh MM, Waters NC, Huddler DP, Kreishman-Deitrick M, Florova G, Reynolds KA",
+        "pmid": "17189694",
+        "doi": "10.1016/j.bmcl.2006.11.067"
+      },
+      {
+        "title": "Immunostimulatory activity of recombinant Mycobacterium bovis BCG that secretes major membrane protein II of Mycobacterium leprae.",
+        "authors": "Makino M, Maeda Y, Inagaki K",
+        "pmid": "17057093",
+        "doi": "10.1128/IAI.00878-06"
+      },
+      {
+        "title": "Efficiency of combined methotrexate/chloroquine therapy in adjuvant-induced arthritis.",
+        "authors": "Silva MA, Ishii-Iwamoto EL, Bracht A, Caparroz-Assef SM, Kimura E, Cuman RK, Bersani-Amado CA",
+        "pmid": "16011736",
+        "doi": "10.1111/j.1472-8206.2005.00346.x"
+      },
+      {
+        "title": "Recognition of mycobacterial antigens delivered by genetically detoxified Bordetella pertussis adenylate cyclase by T cells from cattle with bovine tuberculosis.",
+        "authors": "Vordermeier HM, Simsova M, Wilkinson KA, Wilkinson RJ, Hewinson RG, Sebo P, Leclerc C",
+        "pmid": "15501751",
+        "doi": "10.1128/IAI.72.11.6255-6261.2004"
+      },
+      {
+        "title": "Mixed steroidal 1,2,4,5-tetraoxanes: antimalarial and antimycobacterial activity.",
+        "authors": "Solaja BA, Terzic N, Pocsfalvi G, Gerena L, Tinant B, Opsenica D, Milhous WK",
+        "pmid": "12139444",
+        "doi": "10.1021/jm020891g"
+      },
+      {
+        "title": "Phosphoantigen presentation by macrophages to mycobacterium tuberculosis--reactive Vgamma9Vdelta2+ T cells: modulation by chloroquine.",
+        "authors": "Rojas RE, Torres M, Fournie JJ, Harding CV, Boom WH",
+        "pmid": "12117907",
+        "doi": "10.1128/IAI.70.8.4019-4027.2002"
+      },
+      {
+        "title": "Screening of African medicinal plants for antimicrobial and enzyme inhibitory activity.",
+        "authors": "Tshibangu JN, Chifundera K, Kaminsky R, Wright AD, Konig GM",
+        "pmid": "11891084",
+        "doi": "10.1016/s0378-8741(01)00409-3"
+      },
+      {
+        "title": "Effect of chloroquine on phagolysosomal fusion in cultured guinea pig alveolar macrophages: implications in drug delivery.",
+        "authors": "Bhat M, Hickey AJ",
+        "pmid": "11741250",
+        "doi": "10.1208/ps020434"
+      },
+      {
+        "title": "Enhancement of the T cell response to a mycobacterial peptide by conjugation to synthetic branched polypeptide.",
+        "authors": "Wilkinson KA, Hudecz F, Vordermeier HM, Ivanyi J, Wilkinson RJ",
+        "pmid": "10508253",
+        "doi": "10.1002/(SICI)1521-4141(199909)29:09<2788::AID-IMMU2788>3.0.CO;2-4"
+      },
+      {
+        "title": "Major histocompatibility complex class II-dependent antigen presentation by human intestinal endothelial cells.",
+        "authors": "Haraldsen G, Sollid LM, Bakke O, Farstad IN, Kvale D, Molberg, Norstein J, Stang E, Brandtzaeg P",
+        "pmid": "9516385",
+        "doi": "10.1016/s0016-5085(98)70578-5"
+      },
+      {
+        "title": "Processing of Mycobacterium tuberculosis bacilli by human monocytes for CD4+ alphabeta and gammadelta T cells: role of particulate antigen.",
+        "authors": "Balaji KN, Boom WH",
+        "pmid": "9423845",
+        "doi": "10.1128/IAI.66.1.98-106.1998"
+      },
+      {
+        "title": "Lymphocyte proliferative response and subset profiles during extended periods of chloroquine or primaquine prophylaxis.",
+        "authors": "Fryauff DJ, Richards AL, Baird JK, Richie TL, Mouzin E, Tjitra E, Sutamihardja MA, Ratiwayanto S, Hadiputranto H, Larasati RP, Pudjoprawoto N, Subianto B, Hoffman SL",
+        "pmid": "9124832",
+        "doi": "10.1128/AAC.40.12.2737"
+      },
+      {
+        "title": "Chloroquine does not enhance the activity of clarithromycin against multiplication of Mycobacterium avium within human macrophages.",
+        "authors": "Lazard T, Perronne C, Truffot-Pernot C, Grosset J, Vilde JL, Pocidalo JJ",
+        "pmid": "7949074",
+        "doi": "10.1016/0962-8479(94)90133-3"
+      },
+      {
+        "title": "Evidence that vesicles containing living, virulent Mycobacterium tuberculosis or Mycobacterium avium in cultured human macrophages are not acidic.",
+        "authors": "Crowle AJ, Dahl R, Ross E, May MH",
+        "pmid": "1902198",
+        "doi": "10.1128/iai.59.5.1823-1831.1991"
+      },
+      {
+        "title": "Killing of intracellular Mycobacterium tuberculosis by receptor-mediated drug delivery.",
+        "authors": "Majumdar S, Basu SK",
+        "pmid": "1901694",
+        "doi": "10.1128/AAC.35.1.135"
+      },
+      {
+        "title": "Inhibition of tubercle bacilli in cultured human macrophages by chloroquine used alone and in combination with streptomycin, isoniazid, pyrazinamide, and two metabolites of vitamin D3.",
+        "authors": "Crowle AJ, May MH",
+        "pmid": "2127346",
+        "doi": "10.1128/AAC.34.11.2217"
+      },
+      {
+        "title": "Attempts to characterize the mechanisms involved in mycobacterial growth inhibition by gamma-interferon-activated bone marrow macrophages.",
+        "authors": "Flesch IE, Kaufmann SH",
+        "pmid": "2453466",
+        "doi": "10.1128/iai.56.6.1464-1469.1988"
+      },
+      {
+        "title": "The processing and presentation of mycobacterial antigens by human monocytes.",
+        "authors": "Bhardwaj V, Colston MJ",
+        "pmid": "3132396",
+        "doi": "10.1002/eji.1830180506"
+      },
+      {
+        "title": "Epstein-Barr virus-transformed B cells process and present Mycobacterium tuberculosis particulate antigens to T-cell clones.",
+        "authors": "Lombardi G, del Gallo F, Vismara D, Piccolella E, de Martino C, Garzelli C, Puglisi C, Colizzi V",
+        "pmid": "3036374",
+        "doi": "10.1016/0008-8749(87)90237-1"
+      },
+      {
+        "title": "Manipulations of the phagosome-lysosome fusion response in cultured macrophages. Enhancement of fusion by chloroquine and other amines.",
+        "authors": "Hart PD, Young MR",
+        "pmid": "98333",
+        "doi": "10.1016/0014-4827(78)90516-5"
+      }
+    ]
+  },
+  {
+    "drug_name": "loperamide",
+    "combined_z_score": 1.221109195,
+    "search_type": "Direct (TB)",
+    "studies_found": 4,
+    "literature_evidence": [
+      {
+        "title": "In Silico Drug Repurposing Approach: Investigation of Mycobacterium tuberculosis FadD32 Targeted by FDA-Approved Drugs.",
+        "authors": "Ngidi NTP, Machaba KE, Mhlongo NN",
+        "pmid": "35163931",
+        "doi": "10.3390/molecules27030668"
+      },
+      {
+        "title": "Loperamide exerts a direct bactericidal effect against M. tuberculosis, M. bovis, M. terrae and M. smegmatis.",
+        "authors": "Barrientos OM, Juarez E, Gonzalez Y, Castro-Villeda DA, Torres M, Guzman-Beltran S",
+        "pmid": "33220096",
+        "doi": "10.1111/lam.13432"
+      },
+      {
+        "title": "Antimicrobial and immunomodulatory activity induced by loperamide in mycobacterial infections.",
+        "authors": "Juarez E, Ruiz A, Cortez O, Sada E, Torres M",
+        "pmid": "30268801",
+        "doi": "S1567-5769(18)30608-8"
+      },
+      {
+        "title": "Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.",
+        "authors": "Juarez E, Carranza C, Sanchez G, Gonzalez M, Chavez J, Sarabia C, Torres M, Sada E",
+        "pmid": "27468130",
+        "doi": "10.1165/rcmb.2015-0383OC"
+      }
+    ]
+  },
+  {
+    "drug_name": "paclitaxel",
+    "combined_z_score": 1.220734647,
+    "search_type": "Direct (TB)",
+    "studies_found": 1,
+    "literature_evidence": [
+      {
+        "title": "Identification of a novel steroid derivative, NSC12983, as a paclitaxel-like tubulin assembly promoter by 3-D virtual screening.",
+        "authors": "Wu JH, Batist G, Zamir LO",
+        "pmid": "11962510",
+        "doi": ""
+      }
+    ]
+  }
+]
