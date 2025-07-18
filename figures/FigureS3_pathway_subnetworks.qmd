@@ -59,6 +59,12 @@ drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
                          gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv"))
 
 ```
+#### get drug-gene table
+```{r}
+DGIdb_targets_df_ = DGIdb_targets_df[,c("drug_name","target")]
+
+drug_genes_df
+```
 
 #### Create node_types.txt for figure 3
 ```{r}
