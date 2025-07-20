@@ -595,7 +595,7 @@ top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0
 gt_top10_positive <- top10_positive %>%
   select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 GO Terms Enriched in Individual Signatures") %>%
+  tab_header(title = "Top Down-Regulated GO Terms Enriched in Individual Signatures") %>%
   cols_label(
     GO_term = "GO Term",
     median_diff = "Median Difference (Individual - Aggregated)",

@@ -625,7 +625,7 @@ top_combined_df <- bind_rows(
 gt_top_bottom <- top_combined_df %>%
   select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 GO Terms More Enriched in Individual or Aggregated Signatures") %>%
+  tab_header(title = "Top Upregulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
