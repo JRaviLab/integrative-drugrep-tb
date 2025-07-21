@@ -1,10 +1,11 @@
 # Obtain node and edge data for figure 3: disease-drug-target network
-### last modified: 07/15/25
+### last modified: 07/20/25
 ### Author: Kewalin Samart
 
 ```{r load libraries and functions}
 library(readr)
 library(here)
+library(tidyverse)
 source(here("scripts/05_build_drugtarget_network_functions.R"))
 ```
 
@@ -55,7 +56,7 @@ drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
                          signature_metadata = signature_metadata,
                          time_point = "24 h",
                          dosage = "10 µM",
-                         N = 2,
+                         N = 3,
                          gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv"))
 
 ```
@@ -166,10 +167,6 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-# View node table
-print(node_table)
-
-# Optional: write to CSV
 write_tsv(node_table, here("figures/figureS3_ch_node_type_table.tsv"))
 
 ```
@@ -200,4 +197,30 @@ edge_data_cy = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_c
 ```{r save network tables}
 write_tsv(node_data_STRING_cy, file = here("figures/figureS3_cytokine_node_subnetwork.tsv"))
 write_tsv(edge_data_cy, file = here("figures/figureS3_cytokine_edge_subnetwork.tsv"))
+```
+
+```{r save node type}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Split 'type' column into two separate columns
+edge_df <- edge_data_cy %>%
+  separate(type, into = c("type_from", "type_to"), sep = "-")
+
+# Create node-type pairs for 'from' nodes
+from_nodes <- edge_df %>%
+  select(node = from, type = type_from)
+
+# Create node-type pairs for 'to' nodes
+to_nodes <- edge_df %>%
+  select(node = to, type = type_to)
+
+# Combine both, remove duplicates
+node_table <- bind_rows(from_nodes, to_nodes) %>%
+  distinct() %>%
+  arrange(node)
+
+write_tsv(node_table, here("figures/figureS3_cy_node_type_table.tsv"))
+
 ```
