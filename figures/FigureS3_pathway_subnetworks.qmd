@@ -110,8 +110,23 @@ node_data <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
 
 ```
 
-```{r add STRING genes to the node data}
-node_data_STRING <- add_STRING_genes(node_data,
+```{r get pathway names}
+# get pathways containing the word 'cholesterol' (case-insensitive)
+cholesterol_pathways <- unique(node_data$enriched_pathway[grepl("cholesterol", node_data$enriched_pathway, ignore.case = TRUE)])
+cytokine_pathways <- unique(node_data$enriched_pathway[grepl("cytokine", node_data$enriched_pathway, ignore.case = TRUE)])
+```
+
+```{r add STRING genes to the node data for cholesterol-related pathways}
+node_data_ch <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = cholesterol_pathways,
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c())
+node_data_STRING_ch <- add_STRING_genes(node_data_ch,
                                     STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
                                     STRING_intscore = 0.7,
                                     min_degree = 4,
@@ -119,7 +134,70 @@ node_data_STRING <- add_STRING_genes(node_data,
 
 ```
 
-```{r get edge data from the node data}
-edge_data = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING)
+```{r get edge data from the node data for cholesterol-related pathways}
+edge_data_ch = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_ch)
 
+```
+
+```{r save network tables}
+write_tsv(node_data_STRING_ch, file = here("figures/figureS3_cholesterol_node_subnetwork.tsv"))
+write_tsv(edge_data_ch, file = here("figures/figureS3_cholesterol_edge_subnetwork.tsv"))
+```
+
+```{r save node type}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Split 'type' column into two separate columns
+edge_df <- edge_data_ch %>%
+  separate(type, into = c("type_from", "type_to"), sep = "-")
+
+# Create node-type pairs for 'from' nodes
+from_nodes <- edge_df %>%
+  select(node = from, type = type_from)
+
+# Create node-type pairs for 'to' nodes
+to_nodes <- edge_df %>%
+  select(node = to, type = type_to)
+
+# Combine both, remove duplicates
+node_table <- bind_rows(from_nodes, to_nodes) %>%
+  distinct() %>%
+  arrange(node)
+
+# View node table
+print(node_table)
+
+# Optional: write to CSV
+write_tsv(node_table, here("figures/figureS3_ch_node_type_table.tsv"))
+
+```
+
+```{r add STRING genes to the node data for cytokine-related pathways}
+node_data_cy <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = cytokine_pathways,
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c())
+node_data_STRING_cy <- add_STRING_genes(node_data_cy,
+                                    STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
+                                    STRING_intscore = 0.7,
+                                    min_degree = 4,
+                                    disease_genes = c())
+
+```
+
+```{r get edge data from the node data for cytokine-related pathways}
+edge_data_cy = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_cy)
+
+```
+
+```{r save network tables}
+write_tsv(node_data_STRING_cy, file = here("figures/figureS3_cytokine_node_subnetwork.tsv"))
+write_tsv(edge_data_cy, file = here("figures/figureS3_cytokine_edge_subnetwork.tsv"))
 ```
