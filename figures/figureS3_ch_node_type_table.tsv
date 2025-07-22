@@ -4,7 +4,6 @@ ACTR2	target
 ADRA2A	target
 AGTR1	target
 AKR7A2	dpgene
-ALDOC	dpgene
 APOB	target
 ATP6V1D	dpgene
 Angiotensin receptor antagonist	moa
@@ -12,7 +11,6 @@ BIRC5	dpgene
 CAMK2A	target
 CASP2	dpgene
 CCDC86	dpgene
-CCNA2	dpgene
 CCNB1	target
 CD34	target
 CDC20	dpgene
@@ -29,13 +27,9 @@ COPS7A	dpgene
 COQ2	target
 CREBBP	target
 CSRP1	dpgene
-CTNNB1	target
-CTSL	dpgene
-CYCS	dpgene
 Calcium channel blocker	moa
 Cyclooxygenase inhibitor	moa
 Cytochrome P450 inhibitor	moa
-DDIT4	dpgene
 DFFB	target
 DLD	dpgene
 DNAJA3	dpgene
@@ -45,19 +39,16 @@ Dopamine receptor agonist	moa
 EP300	target
 ESR1	target
 Estrogen receptor antagonist	moa
-FAS	dpgene
 FDFT1	target
 FMO1	target
 FOXA3	target
 FOXO3	target
 GABPA	target
-GADD45A	dpgene
 GDF15	target
 GFER	target
 GNAS	dpgene
 GRK4	target
 HDAC1	target
-HMG20B	dpgene
 HMGCR	target
 HMGCR	dpgene
 HMGCR inhibitor	moa
@@ -70,7 +61,6 @@ HSP90AA1	target
 Histone acetyltransferase inhibitor	moa
 IAPP	target
 ICMT	target
-IER3	dpgene
 INSIG1	dpgene
 ITGAE	dpgene
 KCNA4	target
@@ -79,21 +69,16 @@ KCNJ5	target
 KCNMB1	target
 KDM3A	dpgene
 KIF5C	dpgene
-LAGE3	dpgene
 LAMA3	dpgene
-LIG1	dpgene
 LIPC	target
 LPA	target
 LRMDA	target
 LTF	target
 Lipoxygenase inhibitor	moa
-MAMLD1	dpgene
-MAP7	dpgene
 MBP	target
 MCOLN1	dpgene
 MDM2	target
 MECOM	target
-MPC2	dpgene
 MVP	dpgene
 NFkB pathway inhibitor	moa
 NOS1AP	target
@@ -102,7 +87,6 @@ ORC5	target
 PAPOLA	target
 PCNA	dpgene
 PECAM1	target
-PIN1	target
 PIP	target
 PKN1	target
 PKN3	target
@@ -110,16 +94,13 @@ PLA2G6	target
 PLD1	target
 PLD2	target
 PLEKHH2	target
-PLK1	dpgene
 PON1	target
-PRKCA	target
 PRSS23	dpgene
 Polar auxin transport inhibitor	moa
 RBM34	dpgene
 RHOA	dpgene
 RIPK1	target
 RRAS2	target
-S100A13	dpgene
 SATB1	dpgene
 SCAP	target
 SCP2	dpgene
@@ -138,7 +119,6 @@ SPG7	target
 SREBF1	target
 STUB1	dpgene
 SULT1C4	target
-SUMO1	target
 SUV39H1	dpgene
 Selective estrogen receptor modulator (SERM)	moa
 TBP	target
@@ -150,16 +130,11 @@ TIPARP	dpgene
 TNF production inhibitor	moa
 TP53	target
 TPM1	dpgene
-TRIB3	dpgene
 TSC22D3	dpgene
-TXNDC9	dpgene
-TXNRD1	dpgene
 Topoisomerase inhibitor	moa
 UBB	target
 UBC	target
-UBR7	dpgene
 USP24	target
-USP6NL	dpgene
 Vesicular monoamine transporter inhibitor	moa
 YAP1	target
 ZNF423	target

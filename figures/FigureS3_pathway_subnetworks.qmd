@@ -63,7 +63,7 @@ drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
                          signature_metadata = signature_metadata,
                          time_point = "24 h",
                          dosage = "10 µM",
-                         N = 3,
+                         N = 2,
                          gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv"))
 
 ```
@@ -124,17 +124,17 @@ cholesterol_pathways <- unique(node_data$enriched_pathway[grepl("cholesterol", n
 cytokine_pathways <- unique(node_data$enriched_pathway[grepl("cytokine", node_data$enriched_pathway, ignore.case = TRUE)])
 ```
 
-```{r add STRING genes to the node data for cholesterol-related pathways}
-node_data_ch <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+```{r add STRING genes to the node data for HMGCR inhibitor}
+node_data_hmgcr <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
                                drug_genes_df = drug_genes_df,
-                               disease_pathways = cholesterol_pathways,
+                               disease_pathways = c(),
                                N = 15,
                                interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
                                intscore_values = "all",
                                intscore_tail = "right",
                                intscore_pct = 0.9,
-                               moas = c())
-node_data_STRING_ch <- add_STRING_genes(node_data_ch,
+                               moas = c("HMGCR inhibitor"))
+node_data_STRING_hmgcr <- add_STRING_genes(node_data_hmgcr,
                                     STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
                                     STRING_intscore = 0.7,
                                     min_degree = 4,
@@ -143,13 +143,13 @@ node_data_STRING_ch <- add_STRING_genes(node_data_ch,
 ```
 
 ```{r get edge data from the node data for cholesterol-related pathways}
-edge_data_ch = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_ch)
+edge_data_hmgcr = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_hmgcr)
 
 ```
 
 ```{r save network tables}
-write_tsv(node_data_STRING_ch, file = here("figures/figureS3_cholesterol_node_subnetwork.tsv"))
-write_tsv(edge_data_ch, file = here("figures/figureS3_cholesterol_edge_subnetwork.tsv"))
+write_tsv(node_data_STRING_hmgcr, file = here("figures/figureS3_hmgcr_node_subnetwork.tsv"))
+write_tsv(edge_data_hmgcr, file = here("figures/figureS3_hmgcr_edge_subnetwork.tsv"))
 ```
 
 ```{r save node type}
@@ -158,7 +158,7 @@ library(tidyr)
 library(readr)
 
 # Split 'type' column into two separate columns
-edge_df <- edge_data_ch %>%
+edge_df <- edge_data_hmgcr %>%
   separate(type, into = c("type_from", "type_to"), sep = "-")
 edge_df <- as_tibble(edge_df)
 # Create node-type pairs for 'from' nodes
@@ -174,7 +174,7 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-write_tsv(node_table, here("figures/figureS3_ch_node_type_table.tsv"))
+write_tsv(node_table, here("figures/figureS3_hmgcr_node_type_table.tsv"))
 
 ```
 
