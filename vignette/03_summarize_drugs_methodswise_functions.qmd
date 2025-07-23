@@ -2,7 +2,7 @@
 
 ## method-wise summarization
 
-#### Last modified: 07/16/25
+#### Last modified: 07/23/25
 
 #### Author: Kewalin Samart
 
@@ -18,13 +18,15 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 
 ```{r}
 metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
-all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
-write_tsv(all_signi_drugs_df, file = here("results/RNAseq/03_methodwise/RNAseq_drug_score_occurrence.tsv"))
+res_list <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
+
+write_tsv(as.data.frame(res_list$count_df), file = here("results/RNAseq/03_methodwise/RNAseq_drug_score_occurrence.tsv"))
 ```
 
 2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
 
 ```{r}
+all_signi_drugs_df = res_list$binary_df
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
 ```
 
