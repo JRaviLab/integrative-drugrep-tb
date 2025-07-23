@@ -127,7 +127,7 @@ filtered_df_nonzero <- filtered_df_nonzero %>%
   
   # Platform
   tab_spanner(
-    label = "Microarray (16 signatures)",
+    label = "Microarray (6 signatures)",
     columns = starts_with("microarray_"),
     id = "marray"
   ) %>%
@@ -159,7 +159,7 @@ filtered_df_nonzero <- filtered_df_nonzero %>%
     id = "rna_correlation"
   ) %>%
   tab_spanner(
-    label = "RNAseq (9 signatures)",
+    label = "RNAseq (29 signatures)",
     columns = starts_with("RNAseq_"),
     id = "rna"
   ) %>%
@@ -179,7 +179,7 @@ filtered_df_nonzero <- filtered_df_nonzero %>%
       domain = c(0, max(filtered_df_nonzero %>% select(starts_with("RNAseq_")), na.rm = TRUE))
     )
   )
-gtsave(filtered_df_nonzero, here("figures/drugs_methodwise_final_table_binary.html"))
+gtsave(filtered_df_nonzero, here("figures/drugs_methodwise_final_table_count.html"))
 filtered_df_nonzero
 ```
 
