@@ -12,6 +12,7 @@ library(grid)
 library(tibble)
 library(tidyr)
 library(gt)
+library(knitr)
 ```
 
 ```{r}
@@ -166,7 +167,8 @@ gt_top10_positive <- top10_positive %>%
     median_diff = "Median Difference (Circulating - Lung)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
-  )
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 gt_top10_negative <- top10_negative %>%
   select(GO_term, median_diff, p_value, p_adj) %>%
@@ -177,7 +179,8 @@ gt_top10_negative <- top10_negative %>%
     median_diff = "Median Difference (Circulating - Lung)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
-  )
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Combine top 10 positive and negative as a single dataframe first
 top_combined_df_circulating_lung <- bind_rows(
@@ -196,10 +199,11 @@ gt_top_bottom <- top_combined_df_circulating_lung %>%
     median_diff = "Median Difference (Circulating - Lung)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
-  )
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom, "up_circulating_lung_signiGO_terms.pdf")
+gtsave(gt_top_bottom, "up_circulating_lung_signiGO_terms.html")
 
 ```
 
@@ -303,10 +307,11 @@ gt_top_bottom <- top_combined_df_microarray_rnaseq %>%
     median_diff = "Median Difference (Microarray - RNAseq)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
-  )
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom, "up_microarray_rnaseq_signiGO_terms.pdf")
+gtsave(gt_top_bottom, "up_microarray_rnaseq_signiGO_terms.html")
 ```
 
 ```{r shared pathways?}
@@ -346,6 +351,49 @@ gtsave(gt_overlapping_terms, "up_overlapping_GO_terms_tissuecat_platform_compari
 gt_overlapping_terms
 
 ```
+
+```{r}
+library(dplyr)
+library(gt)
+
+# Step 1: Identify overlapping GO terms
+overlap_terms <- overlapping_terms_labeled$GO_term
+
+# Step 2: Annotate GO_term column
+annotated_table <- top_combined_df_circulating_lung %>%
+  mutate(
+    GO_term_display = case_when(
+      GO_term %in% overlap_terms ~ paste0("* ", GO_term, " (microarray)"),
+      TRUE ~ GO_term
+    )
+  )
+
+# Step 3: Create gt table
+gt_main_results <- annotated_table %>%
+  select(GO_term_display, Enriched_in, median_diff, p_value, p_adj) %>%
+  gt() %>%
+  tab_header(
+    title = "Top Upregulated GO Terms (Circulating vs. Lung)"
+  ) %>%
+  cols_label(
+    GO_term_display = "GO Term",
+    Enriched_in = "Enriched In",
+    median_diff = "Median Difference (Circulating - Lung)",
+    p_value = "Raw p-value",
+    p_adj = "Adjusted p-value"
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj)) %>%
+  tab_footnote(
+    footnote = "Terms with * are also enriched in Microarray vs. RNA-seq.",
+    locations = cells_column_labels(columns = "GO_term_display")
+  )
+
+# Step 4: Save as PDF
+gtsave(gt_main_results, here("figures/tableS3_top_GO_terms_circulating_vs_lung_highlight_microarray_overlap.html"))
+
+
+```
+
 
 ```{r MTB vs. PTB}
 ### Not valid to perform a statistical test; not enough power
@@ -671,7 +719,8 @@ gt_top_bottom <- top_combined_df %>%
     median_diff = "Median Difference (Individual - Aggregated)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
-  )
+  ) %>%
+  fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
 gtsave(gt_top_bottom, "up_indiv_aggr_signiGO_terms.pdf")
