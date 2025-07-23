@@ -11,72 +11,24 @@ predicted_drugs
 
 ```{r get fraction of signatures each drug reverses}
 # read in result files from different scores
-# microarray (16 signatures) and RNAseq (9 signatures) separately
+# microarray (6 signatures) and RNAseq (29 signatures) separately
 # but we have many connectivity scores; take median?
 # report signature fractions for all scores
 
 library(tidyverse)
 
-# helper to safely extract and rename columns if data frame is not empty
-safe_extract <- function(df, colname) {
-  if (nrow(df) == 0) {
-    return(tibble(unique_pert = character(), !!colname := numeric()))
-  } else {
-    return(df %>% select(unique_pert, !!colname := occurrence))
-  }
-}
+all_scores_marray_df <- read_tsv(here("data/v2/tableS2/microarray_drug_score_occurrence.tsv"))
+all_scores_rnaseq_df <- read_tsv(here("data/v2/tableS2/rnaseq_drug_score_occurrence.tsv"))
 
-CMAP_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/CMAP_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-Cor_pearson_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/Cor_pearson_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-Cor_spearman_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/Cor_spearman_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-NCS_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/NCS_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-Tau_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/Tau_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-WCS_rnaseq <- setNames(as.data.frame(readRDS(here("data/v2/tableS2/WCS_indivSig_TB_RNAseq.rds"))$ranked_pert), "ranked_pert")
-
-CMAP_rnaseq_df <- CMAP_rnaseq %>% mutate(CMAP = 1)
-Cor_pearson_rnaseq_df <- Cor_pearson_rnaseq %>% mutate(Cor_pearson = 1)
-Cor_spearman_rnaseq_df <- Cor_spearman_rnaseq %>% mutate(Cor_spearman = 1)
-NCS_rnaseq_df <- NCS_rnaseq %>% mutate(NCS = 1)
-Tau_rnaseq_df <- Tau_rnaseq %>% mutate(Tau = 1)
-WCS_rnaseq_df <- WCS_rnaseq %>% mutate(WCS = 1)
-
-# merge all
-all_scores_rnaseq_df <- list(CMAP_rnaseq_df, Cor_pearson_rnaseq_df, Cor_spearman_rnaseq_df, NCS_rnaseq_df, Tau_rnaseq_df, WCS_rnaseq_df) %>%
-  purrr::reduce(full_join, by = "ranked_pert") %>%
-  tidyr::replace_na(list(CMAP = 0, Cor_pearson = 0, Cor_spearman = 0, NCS = 0, Tau = 0, WCS = 0))
-
-all_scores_rnaseq_df <- all_scores_rnaseq_df %>%
-  mutate(total_methods = CMAP + Cor_pearson + Cor_spearman + NCS + Tau + WCS)
-
-#--------
-CMAP_marray <- readRDS(here("data/v2/tableS2/CMAP_indivSig_TB_microarray.rds"))
-Cor_pearson_marray <- readRDS(here("data/v2/tableS2/Cor_pearson_indivSig_TB_microarray.rds"))
-Cor_spearman_marray <- readRDS(here("data/v2/tableS2/Cor_spearman_indivSig_TB_microarray.rds"))
-NCS_marray <- readRDS(here("data/v2/tableS2/NCS_indivSig_TB_microarray.rds"))
-Tau_marray <- readRDS(here("data/v2/tableS2/Tau_indivSig_TB_microarray.rds"))
-WCS_marray <- readRDS(here("data/v2/tableS2/WCS_indivSig_TB_microarray.rds"))
-
-# extract with safety
-CMAP_marray_df <- safe_extract(CMAP_marray, "CMAP")
-Cor_pearson_marray_df <- safe_extract(Cor_pearson_marray, "Cor_pearson")
-Cor_spearman_marray_df <- safe_extract(Cor_spearman_marray, "Cor_spearman")
-NCS_marray_df <- safe_extract(NCS_marray, "NCS")
-Tau_marray_df <- safe_extract(Tau_marray, "Tau")
-WCS_marray_df <- safe_extract(WCS_marray, "WCS")
-
-# merge all
-all_scores_marray_df <- list(CMAP_marray_df, Cor_pearson_marray_df, Cor_spearman_marray_df, NCS_marray_df, Tau_marray_df, WCS_marray_df) %>%
-  reduce(full_join, by = "unique_pert") %>%
-  replace_na(list(CMAP = 0, Cor_pearson = 0, Cor_spearman = 0, NCS = 0, Tau = 0, WCS = 0))
 ```
 
 ```{r clean up}
 # add prefixes to distinguish columns
 all_scores_marray_df <- all_scores_marray_df %>%
-  rename_with(~ paste0("microarray_", .x), .cols = -unique_pert)
+  rename_with(~ paste0("microarray_", .x), .cols = -significant_drug)
 
 all_scores_rnaseq_df <- all_scores_rnaseq_df %>%
-  rename_with(~ paste0("RNAseq_", .x), .cols = -unique_pert)
+  rename_with(~ paste0("RNAseq_", .x), .cols = -significant_drug)
 ```
 
 ```{r combined signature fractions & scores | 2/3 for both technologies}
@@ -84,7 +36,9 @@ library(tidyverse)
 library(gt)
 
 # join first (without replace_na)
-combined_scores_df <- inner_join(all_scores_marray_df, all_scores_rnaseq_df, by = "unique_pert")
+# Combine microarray and RNA-seq results by union of drugs
+combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
+
 
 # now safely apply replace_na() on all columns except unique_pert
 replace_list <- as.list(setNames(rep(0, ncol(combined_scores_df) - 1), names(combined_scores_df)[-1]))
@@ -92,7 +46,7 @@ combined_scores_df <- replace_na(combined_scores_df, replace_list)
 
 # unique_pert matches drug_name
 combined_with_rank_df <- combined_scores_df %>%
-  left_join(predicted_drugs, by = c("unique_pert" = "drug_name"))
+  left_join(predicted_drugs, by = c("significant_drug" = "drug_name"))
 
 # visualize with gt grouped columns
 library(tidyverse)
@@ -108,8 +62,8 @@ score_cols <- c(
 
 # Step 2: Select only those columns + MeanRank and unique_pert
 filtered_df <- combined_with_rank_df %>%
-  select(MeanRank, unique_pert, all_of(score_cols)) %>%
-  arrange(desc(MeanRank))  # Show higher ranks first
+  select(combined_z_score, significant_drug, all_of(score_cols)) %>%
+  arrange(desc(combined_z_score))
 
 filtered_df_nonzero <- filtered_df %>%
   rowwise() %>%
@@ -125,9 +79,13 @@ filtered_df_nonzero <- filtered_df %>%
       any(c_across(c("RNAseq_Cor_pearson", "RNAseq_Cor_spearman")) != 0)  # Correlation
     ))
   ) %>%
-  filter(microarray_nonzero_groups >= 2 & rnaseq_nonzero_groups >= 2) %>%
   select(-microarray_nonzero_groups, -rnaseq_nonzero_groups)
 
+filtered_df_nonzero <- filtered_df %>%
+  filter(!is.na(combined_z_score)) %>%
+  arrange(desc(combined_z_score)) %>%
+  mutate(rank = row_number()) %>%
+  relocate(rank, .before = everything())
 
 
 filtered_df_nonzero <- filtered_df_nonzero %>%
@@ -221,7 +179,7 @@ filtered_df_nonzero <- filtered_df_nonzero %>%
       domain = c(0, max(filtered_df_nonzero %>% select(starts_with("RNAseq_")), na.rm = TRUE))
     )
   )
-gtsave(filtered_df_nonzero, "~/Documents/GitHub/drugrep_tb/figures/drugs_methodwise_bothtechs_table.html")
+gtsave(filtered_df_nonzero, here("figures/drugs_methodwise_final_table_binary.html"))
 filtered_df_nonzero
 ```
 
@@ -497,7 +455,7 @@ filtered_either_df <- filtered_either_df %>%
     )
   )
 
-gtsave(filtered_either_df, "~/Documents/GitHub/drugrep_tb/figures/drugs_methodwise_either_table.html")
+gtsave(filtered_either_df, here("figureS2/drugs_methodwise_either_table_binary.html"))
 filtered_either_df
 ```
 
