@@ -1,0 +1,56 @@
+```{r}
+library(tidyverse)
+library(here)
+
+df <- readr::read_tsv(here("figures/marray_rnaseq_up_pathways.tsv"))
+
+# define microarray and RNAseq individual signature columns
+microarray_cols <- colnames(df)[2:7]
+rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 2)], microarray_cols)
+
+# compute median of individual signatures for each platform
+median_micro <- df %>%
+  select(all_of(microarray_cols)) %>%
+  apply(1, median, na.rm = TRUE)
+
+median_rna <- df %>%
+  select(all_of(rnaseq_cols)) %>%
+  apply(1, median, na.rm = TRUE)
+
+# compute squared deviation from the median
+sq_dev_micro <- (df$aggregated_microarray - median_micro)^2 / length(microarray_cols)
+sq_dev_rna <- (df$aggregated_RNAseq - median_rna)^2 / length(rnaseq_cols)
+
+# combine into tidy data frame
+plot_df <- tibble(
+  Pathway = df$Description,
+  Microarray = sq_dev_micro,
+  RNAseq = sq_dev_rna
+) %>%
+  pivot_longer(cols = c(Microarray, RNAseq), names_to = "Platform", values_to = "SquaredDeviation")
+
+# boxplot
+# compute medians manually
+med_labels <- plot_df %>%
+  group_by(Platform) %>%
+  summarise(SquaredDeviation = median(SquaredDeviation, na.rm = TRUE))
+
+# plot with median labels
+ggplot(plot_df, aes(x = Platform, y = SquaredDeviation, fill = Platform)) +
+  geom_boxplot() +
+  geom_text(data = med_labels,
+            aes(x = Platform, y = SquaredDeviation, label = round(SquaredDeviation, 4)),
+            vjust = -0.5,
+            size = 3,
+            color = "black",
+            inherit.aes = FALSE) +
+  labs(
+    title = "Squared Deviation of Aggregated Signature from Median of Individual Signatures",
+    y = "Squared Deviation",
+    x = "Platform"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  coord_cartesian(clip = "off")  # allow text outside panel bounds
+
+```
