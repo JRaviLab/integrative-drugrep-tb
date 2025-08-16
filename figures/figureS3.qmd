@@ -66,5 +66,36 @@ ggplot(combined_plot_df, aes(x = Platform, y = SquaredDeviation, fill = Platform
   theme_minimal() +
   theme(legend.position = "none") +
   coord_cartesian(clip = "off")
+```
 
+```{r figure S3b}
+library(dplyr)
+
+# Choose how many lowest SD pathways you want to plot per group
+top_n <- 10
+
+lowest_sd_paths <- combined_plot_df %>%
+  group_by(Direction, Platform) %>%
+  slice_min(order_by = SquaredDeviation, n = top_n, with_ties = FALSE) %>%
+  ungroup()
+
+```
+
+```{r figure S3b; plotting}
+library(ggplot2)
+
+ggplot(lowest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = SquaredDeviation, fill = Platform)) +
+  geom_col(position = position_dodge(width = 0.8)) +
+  facet_wrap(~ Direction, scales = "free_x") +
+  coord_flip() +
+  labs(
+    title = "Pathways well captured by aggregated sigatures (lowest squared deviation)",
+    x = "Pathway",
+    y = "Squared deviation"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 ```
