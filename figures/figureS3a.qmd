@@ -1,0 +1,70 @@
+```{r Figure S3a function}
+library(readr)
+library(here)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(matrixStats)
+
+# function to process a file and return a tidy dataframe for plotting
+process_file <- function(filepath, direction_label) {
+  df <- as_tibble(fread(here(filepath)))
+  
+  # define microarray and RNAseq individual signature columns
+  microarray_cols <- colnames(df)[2:7]
+  rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 2)], microarray_cols)
+
+  # compute median of individual signatures for each platform
+  median_micro <- rowMedians(as.matrix(df[, microarray_cols]), na.rm = TRUE)
+  median_rna <- rowMedians(as.matrix(df[, rnaseq_cols]), na.rm = TRUE)
+
+  # compute squared deviation from the median
+  sq_dev_micro <- (df$aggregated_microarray - median_micro)^2 / length(microarray_cols)
+  sq_dev_rna <- (df$aggregated_RNAseq - median_rna)^2 / length(rnaseq_cols)
+  
+  # combine into tidy data frame with direction label
+  tibble(
+    Pathway = df$Description,
+    Microarray = sq_dev_micro,
+    RNAseq = sq_dev_rna,
+    Direction = direction_label
+  ) %>%
+    pivot_longer(cols = c(Microarray, RNAseq), names_to = "Platform", values_to = "SquaredDeviation")
+}
+```
+
+```{r Figure S3a plot}
+# process both up- and dn-regulated pathways files
+plot_df_up <- process_file("figures/marray_rnaseq_up_pathways.tsv", "Upregulated")
+plot_df_dn <- process_file("figures/marray_rnaseq_dn_pathways.tsv", "Downregulated")
+
+# combine both into one dataframe
+combined_plot_df <- bind_rows(plot_df_up, plot_df_dn) %>%
+  mutate(Direction = factor(Direction, levels = c("Upregulated", "Downregulated")))
+
+# compute medians for label annotations
+med_labels <- combined_plot_df %>%
+  group_by(Direction, Platform) %>%
+  summarise(SquaredDeviation = median(SquaredDeviation, na.rm = TRUE), .groups = "drop")
+
+# plot
+ggplot(combined_plot_df, aes(x = Platform, y = SquaredDeviation, fill = Platform)) +
+  geom_boxplot() +
+  geom_text(data = med_labels,
+            aes(x = Platform, y = SquaredDeviation, label = format(SquaredDeviation, scientific = TRUE, digits = 3)
+),
+            vjust = -0.5,
+            size = 3,
+            color = "black",
+            inherit.aes = FALSE) +
+  labs(
+    title = "Squared deviation of aggregated signature from median of individual signatures",
+    y = "Squared deviation",
+    x = "Technology"
+  ) +
+  facet_wrap(~Direction) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  coord_cartesian(clip = "off")
+
+```
