@@ -1,0 +1,70 @@
+```{r figure S2 function}
+library(tidyverse)
+library(data.table)
+library(here)
+
+process_file_variance <- function(filepath, direction_label) {
+  df <- as_tibble(fread(here(filepath)))
+
+  # define microarray and RNAseq individual signature columns
+  microarray_cols <- colnames(df)[2:7]
+  rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 2)], microarray_cols)
+
+  # compute row-wise variance for each technology
+  df <- df %>%
+    mutate(
+      Microarray = apply(select(., all_of(microarray_cols)), 1, var, na.rm = TRUE),
+      RNAseq = apply(select(., all_of(rnaseq_cols)), 1, var, na.rm = TRUE),
+      Direction = direction_label
+    )
+
+  # reshape to tidy format
+  df %>%
+    select(Description, Microarray, RNAseq, Direction) %>%
+    rename(Pathway = Description) %>%
+    pivot_longer(cols = c(Microarray, RNAseq), names_to = "Technology", values_to = "Variance")
+}
+```
+
+```{r figure S2 plotting}
+plot_var_df_up <- process_file_variance("figures/marray_rnaseq_up_pathways.tsv", "Upregulated")
+plot_var_df_dn <- process_file_variance("figures/marray_rnaseq_dn_pathways.tsv", "Downregulated")
+
+# combine both into one dataframe
+combined_var_plot_df <- bind_rows(plot_var_df_up, plot_var_df_dn) %>%
+  mutate(Direction = factor(Direction, levels = c("Upregulated", "Downregulated")))
+
+# compute medians for label annotations
+med_var_labels <- combined_var_plot_df %>%
+  group_by(Direction, Technology) %>%
+  summarise(
+    Variance = median(Variance, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+
+# plot
+ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology)) +
+  geom_boxplot() +
+  stat_summary(
+  fun = median,
+  geom = "text",
+  aes(label = after_stat(format(y, scientific = TRUE, digits = 3))),
+  vjust = -0.5,
+  size = 3,
+  color = "black"
+) +
+  scale_y_log10() + 
+  labs(
+    title = "Log-transformed variance across individual signatures",
+    y = "Variance (log10 scale)",
+    x = "Technology"
+  ) +
+  facet_wrap(~Direction) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  coord_cartesian(clip = "off")
+
+```
+
+
