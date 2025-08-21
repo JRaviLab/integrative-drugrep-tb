@@ -1,0 +1,42 @@
+# Compute blood aggregated signatures from individual signatures
+# Last modified: 08/21/25
+# Author: Kewalin Samart
+
+##### Load libraries and sort scripts
+```{r}
+library(readr)
+library(here)
+source(here("scripts/00_background_genes_PA_functions.R"))
+source(here("scripts/01_signature_aggregation_functions.R"))
+```
+
+##### Initialize arguments
+```{r}
+# example argument
+metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info_blood.tsv")
+data_path = here("data/v2/signatures/RNAseq")
+direction = "up"
+bg_source = "LINCS" # L1000 genes
+extra_arg= "up"
+output_dir = here("data/v2/signatures/RNAseq/blood_aggregated_signatures")
+threshold_pct <- 0.90
+```
+
+##### Compute membership matrix
+```{r}
+gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_source = bg_source, 
+                          output_dir = output_dir, extra_arg = extra_arg, save_result=TRUE)
+```
+
+##### Compute jaccard matrix
+```{r}
+jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                       direction = direction, output_dir = output_dir, 
+                       extra_arg = extra_arg, save_result=TRUE) 
+```
+
+##### Compute aggregated signature
+```{r}
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+```
