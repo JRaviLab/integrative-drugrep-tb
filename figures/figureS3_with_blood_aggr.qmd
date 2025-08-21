@@ -5,6 +5,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(matrixStats)
+library(data.table)
 
 # function to process a file and return a tidy dataframe for plotting
 process_file <- function(filepath, direction_label) {
@@ -12,7 +13,7 @@ process_file <- function(filepath, direction_label) {
   
   # define microarray and RNAseq individual signature columns
   microarray_cols <- colnames(df)[2:7]
-  rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 2)], microarray_cols)
+  rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 3)], microarray_cols)
   rnaseq_blood_cols <- rnaseq_cols[grepl("blood", rnaseq_cols, ignore.case = TRUE)]
 
   # compute median of individual signatures for each Technology
@@ -28,12 +29,12 @@ process_file <- function(filepath, direction_label) {
   # combine into tidy data frame with direction label
   tibble(
     Pathway = df$Description,
-    Microarray = sq_dev_micro,
-    RNAseq = sq_dev_rna,
+    Microarray_blood = sq_dev_micro,
+    RNAseq_blood_lung_cellline = sq_dev_rna,
     RNAseq_blood = sq_dev_rna_blood,
     Direction = direction_label
   ) %>%
-    pivot_longer(cols = c(Microarray, RNAseq, RNAseq_blood), names_to = "Technology", values_to = "SquaredDeviation")
+    pivot_longer(cols = c(Microarray_blood, RNAseq_blood_lung_cellline, RNAseq_blood), names_to = "Technology", values_to = "SquaredDeviation")
 }
 ```
 
