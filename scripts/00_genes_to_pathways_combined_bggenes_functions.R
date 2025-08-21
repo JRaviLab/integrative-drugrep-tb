@@ -97,8 +97,10 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   #' @param GO_genes_vector: Vector of GO-annotated gene IDs
 
   # Build extension
-  extension_rnaseq <- paste0("_DESeq2_", direction, ".tsv")
-  extension_microarray <- paste0("_limma_", direction, ".tsv")
+  #extension_rnaseq <- paste0("_DESeq2_", direction, ".tsv")
+  #extension_microarray <- paste0("_limma_", direction, ".tsv")
+  extension_rnaseq <- paste0("_",direction, ".tsv")
+  extension_microarray <- paste0("_",direction, ".tsv")
 
   # RNAseq background
   bg_genes_rnaseq_raw <- get_bg_genes(
@@ -230,7 +232,7 @@ direction <- "up"
 # Define background genes
 dirname_read <- file.path(data_path, direction)
 #up_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
-up_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_DE_signatures/up_aggregated_signature.tsv"))$GeneID)
+up_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/blood_aggregated_signatures/up_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_up_aggr_rnaseq <- enrichGO(gene = up_aggr_signature_rnaseq,
                          OrgDb = org.Hs.eg.db,
                          readable = TRUE,
@@ -244,7 +246,7 @@ enrichGO_res_up_aggr_rnaseq <- enrichGO(gene = up_aggr_signature_rnaseq,
 enrichGO_res_up_aggr_rnaseq <- as.data.frame(enrichGO_res_up_aggr_rnaseq)
 
 # Save results
-output_file <- file.path(here("data/v2/RNAseq_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_RNAseq_DE.tsv"))
+output_file <- file.path(here("data/v2/RNAseq_pathways/up"), paste0("GO_ORA_BGcorrected_up_aggregated_RNAseq_DE_blood.tsv"))
 
 write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file)
 
@@ -255,7 +257,7 @@ if(technology == "RNAseq"){extension <- paste0("_DESeq2_",direction,".tsv")}
 if(technology == "microarray"){extension <- paste0("_limma_",direction,".tsv")}
 # Define background genes
 dirname_read <- file.path(data_path, direction)
-dn_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/aggregated_DE_signatures/dn_aggregated_signature.tsv"))$GeneID)
+dn_aggr_signature_rnaseq <- as.character(read_tsv(here("data/v2/signatures/RNAseq/blood_aggregated_signatures/dn_aggregated_signature.tsv"))$GeneID)
 enrichGO_res_dn_aggr_rnaseq <- enrichGO(gene = dn_aggr_signature_rnaseq,
                                         OrgDb = org.Hs.eg.db,
                                         readable = TRUE,
@@ -269,9 +271,9 @@ enrichGO_res_dn_aggr_rnaseq <- enrichGO(gene = dn_aggr_signature_rnaseq,
 enrichGO_res_dn_aggr_rnaseq <- as.data.frame(enrichGO_res_dn_aggr_rnaseq)
 
 # Save results
-output_file_dn_aggr_rnaseq <- file.path(here("data/v2/RNAseq_pathways/dn"), paste0("GO_ORA_BGcorrected_dn_aggregated_RNAseq_DE.tsv"))
+output_file_dn_aggr_rnaseq <- file.path(here("data/v2/RNAseq_pathways/dn"), paste0("GO_ORA_BGcorrected_dn_aggregated_RNAseq_DE_blood.tsv"))
 
-write_tsv(enrichGO_res_up_aggr_rnaseq, file = output_file_dn_aggr_rnaseq )
+write_tsv(enrichGO_res_dn_aggr_rnaseq, file = output_file_dn_aggr_rnaseq )
 
 ### microarray
 technology <- "microarray"
