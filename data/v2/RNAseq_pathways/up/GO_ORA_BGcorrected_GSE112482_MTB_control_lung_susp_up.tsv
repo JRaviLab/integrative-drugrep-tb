@@ -1,0 +1,2 @@
+ID	Description	GeneRatio	BgRatio	pvalue	p.adjust	qvalue	geneID	Count	bp_gene_length	log_observed_expected
+GO:0051661	maintenance of centrosome location	0.058823529411764705	6/16034	6.512004723654562e-5	0.04441187221532411	0.03399951939929119	AKAP9/GPSM2	2	4	-0.4818380868927383

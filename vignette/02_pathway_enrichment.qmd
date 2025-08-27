@@ -1,0 +1,153 @@
+# Compute aggregated signatures from individual signatures
+# for pathway enrichment analyses (all genes present across datasets are background genes)
+# these are done separately by technology-direction
+# Last modified: 08/27/25
+# Author: Kewalin Samart
+
+##### Load libraries and sort scripts
+```{r}
+library(readr)
+library(here)
+library(tidyverse)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+source(here("scripts/00_background_genes_PA_functions.R"))
+```
+
+##### Get background genes
+```{r}
+# define input paths
+metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+
+metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/v2/DE_results/microarray")
+GO_genes_vector <- GO_genes()
+
+# get upregulated combined background
+bg_genes_combined_up <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "up",
+  GO_genes_vector,
+  combine = "union"
+)
+
+# get downregulated combined background
+bg_genes_combined_dn <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "dn",
+  GO_genes_vector,
+  combine = "union"
+)
+```
+
+##### Construct pathway-gene annotation dictionary
+```{r}
+# read in the pathway-gene annotation file
+# we filter to class=BP and must have one of the following evidence codes: EXP, IDA, IPI, IMP, IGI, TAS, IC (don't remember what they stand for)
+term_gene_annotation = read_tsv(here("data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv"))
+bp_gene_mapping_df = term_gene_annotation %>% filter(Class == "BP") %>%
+  filter(Evidence %in% c("EXP", "IDA", "IPI", "IMP", "IGI", "TAS", "IC"))
+bp_gene_mapping <- split(bp_gene_mapping_df$EntrezID, bp_gene_mapping_df$GOID)
+bp_gene_length <- sapply(bp_gene_mapping, length)
+bp_gene_length_df <- as.data.frame(bp_gene_length)
+bp_gene_length_df$ID <- row.names(bp_gene_length_df)
+```
+
+##### Pathway enrichment analysis 
+```{r}
+technologies <- c("microarray", "RNAseq")
+directions <- c("up", "dn")
+
+for (technology in technologies) {
+
+  metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
+  data_path <- here(paste0("data/v2/DE_results/",technology))
+
+  for (direction in directions) {
+
+    # set output directory
+    dirname <- here(paste0("data/v2/", technology, "_pathways/", direction))
+    if (!dir.exists(dirname)) {
+      dir.create(dirname, recursive = TRUE)
+    }
+
+    # read gene files from up/dn folder
+    dirname_read <- file.path(data_path, direction)
+    filenames <- list.files(path = dirname_read, pattern = paste0(direction, ".tsv"))
+
+    # define background genes
+    if(direction == "up"){
+      bg_genes_ <- bg_genes_combined_up
+    }else if(direction == "dn"){
+      bg_genes_ <- bg_genes_combined_dn
+    }
+    
+    # restrict to GO-annotated genes
+    bg_genes <- intersect(bg_genes_, GO_genes())  
+
+    # iterate through each file
+    itr <- 1
+    for (file in filenames) {
+
+      print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
+      itr <- itr + 1
+
+      genes_df <- read_tsv(file.path(dirname_read, file))
+      genes_df_filtered <- genes_df[genes_df$adj.P.Val < 0.05,]
+
+      # use gene IDs as input for ORA
+      gene_vector <- genes_df_filtered$log2FoldChange
+      names(gene_vector) <- as.character(genes_df_filtered$GeneID)
+
+      gene_list <- names(gene_vector)
+
+      # run ORA
+      print(paste0("Getting enriched GO pathways for ", file))
+
+      enrichGO_res <- enrichGO(gene = gene_list,
+                               OrgDb = org.Hs.eg.db,
+                               readable = TRUE,
+                               ont = "BP",
+                               universe = bg_genes,
+                               pvalueCutoff = 0.05,
+                               qvalueCutoff = 0.1,
+                               minGSSize = 5,
+                               maxGSSize = 200)
+
+      enrichGO_res <- as.data.frame(enrichGO_res)
+      
+      if (!is.null(enrichGO_res) && nrow(enrichGO_res) > 0) {
+      
+        enrichGO_res_corrected = merge(enrichGO_res, bp_gene_length_df, by="ID", all.x = TRUE)
+      
+        # make sure GeneRatio column is numeric
+        enrichGO_res_corrected$GeneRatio <- sapply(
+          as.character(enrichGO_res_corrected$GeneRatio),
+          function(x) {
+            parts <- as.numeric(unlist(strsplit(x, "/")))
+            parts[1] / parts[2]
+          }
+        )
+      
+        # calculate log(observed / expected)
+        enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
+      
+        # save results
+        base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+        output_file <- file.path(dirname, paste0("GO_ORA_BGcorrected_", base_filename))
+
+        write_tsv(enrichGO_res_corrected, file = output_file)
+      }else{
+        message("No enriched GO terms, skipping")
+      }
+    }
+  }
+}
+
+```
+
+

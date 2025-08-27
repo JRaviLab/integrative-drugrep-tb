@@ -1,0 +1,2 @@
+ID	Description	GeneRatio	BgRatio	pvalue	p.adjust	qvalue	geneID	Count	bp_gene_length	log_observed_expected
+GO:0046578	regulation of Ras protein signal transduction	0.07476635514018691	180/16075	2.6836182999802413e-5	0.04613139857666035	0.04180794825232376	GPR20/ARHGDIA/MYO9B/ITGB1/COL3A1/RASA4/SPRY1/STAMBP	8	3	1.9138024848458173

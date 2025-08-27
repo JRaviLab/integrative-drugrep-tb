@@ -1,0 +1,2 @@
+ID	Description	GeneRatio	BgRatio	pvalue	p.adjust	qvalue	geneID	Count	bp_gene_length	log_observed_expected
+GO:0048873	homeostasis of number of cells within a tissue	0.020761245674740483	31/16075	1.616742378481078e-5	0.048615443320926016	0.04707273072503855	AKT3/RAC3/KRAS/TUBA1A/NOS3/SMO	6	NA	NA
