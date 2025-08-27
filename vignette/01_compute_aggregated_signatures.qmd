@@ -1,5 +1,6 @@
 # Compute aggregated signatures from individual signatures
-# Last modified: 06/26/25
+# for disease-drug comparisons (landmark genes are background genes)
+# Last modified: 08/27/25
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -14,7 +15,7 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ```{r}
 # example argument
 metadata_path = here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
-data_path = here("data/v2/DE_results/microarray/up")
+data_path = here("data/v2/DE_results/microarray")
 direction = "up"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "up"
