@@ -1,8 +1,7 @@
 # function to summarize pathways across disease signatures
-## **figure out a way to grab the 2-3 most significant terms in each cluster [DONE]
+## change generatio to log(observed/expected)
 
-# created date: 05/14/24
-# last modified: 07/14/25
+# last modified: 08/28/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -11,7 +10,7 @@ library(readr)
 library(tidyverse)
 library(simplifyEnrichment)
 
-get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
+get_GO_logratio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   filenames <- list.files(path = data_path, pattern = pattern, full.names = FALSE)
 
   GO_mat <- NULL  # initialize result matrix
@@ -31,10 +30,7 @@ get_GO_generatio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
 
     if(nrow(GO_res) > 0){
       # compute GeneRatio numeric
-      GO_res$GeneRatio_numeric <- sapply(GO_res$GeneRatio, function(x) {
-        nums <- as.numeric(unlist(strsplit(x, "/")))
-        return(nums[1] / nums[2])
-      })
+      GO_res$GeneRatio_numeric <- as.numeric(GO_res$log_observed_expected)
 
       GO_col <- GO_res[c("Description", "GeneRatio_numeric")]
       colnames(GO_col)[2] <- signature_name
