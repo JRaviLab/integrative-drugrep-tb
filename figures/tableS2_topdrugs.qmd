@@ -95,6 +95,7 @@ final_gt_table <- final_table_df %>%
   data_color(
     columns = starts_with("MA_"),
     colors = scales::col_numeric(
+      # Use Firebrick for readability on the higher end
       palette = c("mistyrose", "firebrick"),
       domain = NULL
     )
