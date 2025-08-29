@@ -32,20 +32,20 @@ summary_df
 ```
 
 ### dnregulated genes' pathways
-```{r microarray dn pathway clusters}
+```{r microarray dn pathway}
 marray_GO_mat_dn = get_GO_testStat_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
-colnames(marray_GO_mat_dn) <- gsub("_limma", "", colnames(marray_GO_mat_dn))
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray_DE.tsv"))
+colnames(marray_GO_mat_dn) <- gsub("_up.tsv", "", colnames(marray_GO_mat_dn))
+colnames(marray_GO_mat_dn) <- gsub(".tsv", "", colnames(marray_GO_mat_dn))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray"))
 marray_GO_mat_dn <- marray_GO_mat_dn[, cols_to_keep_marray]
-colnames(marray_GO_mat_dn) <- gsub("_DE.tsv", "", colnames(marray_GO_mat_dn))
 ```
 
-```{r RNAseq dn pathway clusters}
+```{r RNAseq dn pathway}
 rnaseq_GO_mat_dn = get_GO_testStat_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
-colnames(rnaseq_GO_mat_dn) <- gsub("_DESeq2", "", colnames(rnaseq_GO_mat_dn))
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq_DE.tsv"))
+colnames(rnaseq_GO_mat_dn) <- gsub("_dn.tsv", "", colnames(rnaseq_GO_mat_dn))
+colnames(rnaseq_GO_mat_dn) <- gsub(".tsv", "", colnames(rnaseq_GO_mat_dn))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq"))
 rnaseq_GO_mat_dn <- rnaseq_GO_mat_dn[, cols_to_keep_rnaseq]
-colnames(rnaseq_GO_mat_dn) <- gsub("_DE.tsv", "", colnames(rnaseq_GO_mat_dn))
 ```
 
 ```{r combine microarray and RNAseq}
@@ -91,7 +91,7 @@ final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
 ```
 
 ```{r}
-GO_annotation = get_GO_annotation(annotation_file)
+GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ### MW stats dn signatures
@@ -199,7 +199,8 @@ gt_top_bottom <- top_combined_df_circulating_lung %>%
   ) %>% fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom, "dn_circulating_lung_signiGO_terms.pdf")
+gtsave(gt_top_bottom, "dn_variance_circulating_lung_signiGO_terms.html")
+gtsave(gt_top_bottom, "dn_variance_circulating_lung_signiGO_terms.pdf")
 ```
 
 ```{r microarray vs. RNASeq}
@@ -306,8 +307,10 @@ gt_top_bottom <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom , "dn_microarray_rnaseq_signiGO_terms.pdf")
+gtsave(gt_top_bottom , "dn_variance_microarray_rnaseq_signiGO_terms.pdf")
+gtsave(gt_top_bottom , "dn_variance_microarray_rnaseq_signiGO_terms.html")
 ```
+
 ```{r shared pathways?}
 # Find overlapping GO terms
 overlapping_terms_labeled <- top_combined_df_circulating_lung %>%
@@ -339,7 +342,7 @@ gt_overlapping_terms <- overlapping_terms_labeled %>%
   )
 
 # Save as PDF
-gtsave(gt_overlapping_terms, "dn_overlapping_GO_terms_tissuecat_platform_comparison.pdf")
+gtsave(gt_overlapping_terms, "dn_overlapping_GO_terms_tissuecat_platform_comparison.html")
 
 # View in console 
 gt_overlapping_terms
@@ -671,5 +674,5 @@ gt_top_bottom <- top_combined_df %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom, "dn_indiv_aggr_signiGO_terms.pdf")
+gtsave(gt_top_bottom, "dn_variance_indiv_aggr_signiGO_terms.html")
 ```
