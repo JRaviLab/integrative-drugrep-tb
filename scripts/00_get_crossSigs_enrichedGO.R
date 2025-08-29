@@ -1,7 +1,7 @@
 # function to summarize pathways across disease signatures
 ## change generatio to log(observed/expected)
 
-# last modified: 08/28/25
+# last modified: 08/29/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -29,10 +29,10 @@ get_GO_logratio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
     signature_name <- make.unique(signature_name)  # ensure unique signature names
 
     if(nrow(GO_res) > 0){
-      # compute GeneRatio numeric
-      GO_res$GeneRatio_numeric <- as.numeric(GO_res$log_observed_expected)
+      # compute LogRatio numeric
+      GO_res$LogRatio_numeric <- as.numeric(GO_res$log_observed_expected)
 
-      GO_col <- GO_res[c("Description", "GeneRatio_numeric")]
+      GO_col <- GO_res[c("Description", "LogRatio_numeric")]
       colnames(GO_col)[2] <- signature_name
 
     } else {
@@ -70,16 +70,13 @@ get_GO_testStat_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   for(i in 1:length(filenames)){
     file = filenames[i]
     GO_res <- read_tsv(paste0(data_path,"/",file),show_col_types = FALSE)
-    GO_res$GeneRatio_numeric <- sapply(GO_res$GeneRatio, function(x) {
-      nums <- as.numeric(unlist(strsplit(x, "/")))
-      return(nums[1] / nums[2])
-    })
+
     if(nrow(GO_res) > 0){
       # get only data description i.e., signature name
       signature_name <- gsub(paste0(prefix_sub,"_"),"",file)
       signature_name <- gsub(paste0("_",suffix_sub),"",signature_name)
 
-      GO_col <- GO_res[c("Description","GeneRatio_numeric")]
+      GO_col <- GO_res[c("Description","log_observed_expected")]
       colnames(GO_col)[2] <- signature_name
 
       if(!exists("GO_mat")){
