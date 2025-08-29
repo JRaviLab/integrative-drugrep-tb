@@ -34,11 +34,11 @@ all_scores_rnaseq_df <- all_scores_rnaseq_df %>%
 ```{r combined signature fractions & scores | 2/3 for both technologies}
 library(tidyverse)
 library(gt)
+library(stringr)
 
 # join first (without replace_na)
 # Combine microarray and RNA-seq results by union of drugs
 combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
-
 
 # now safely apply replace_na() on all columns except unique_pert
 replace_list <- as.list(setNames(rep(0, ncol(combined_scores_df) - 1), names(combined_scores_df)[-1]))
@@ -48,10 +48,6 @@ combined_scores_df <- replace_na(combined_scores_df, replace_list)
 combined_with_rank_df <- combined_scores_df %>%
   left_join(predicted_drugs, by = c("significant_drug" = "drug_name"))
 
-# visualize with gt grouped columns
-library(tidyverse)
-library(gt)
-
 # Step 1: Manually specify the exact columns to keep
 score_cols <- c(
   "microarray_CMAP", "microarray_NCS", "microarray_Tau", "microarray_WCS", "microarray_Cor_pearson", "microarray_Cor_spearman"
@@ -60,136 +56,89 @@ score_cols <- c(
   
 )
 
-# Step 2: Select only those columns + MeanRank and unique_pert
+# Step 1: Prepare the data
+# The select() call now only includes significant_drug as the identifier.
 filtered_df <- combined_with_rank_df %>%
-  select(combined_z_score, significant_drug, all_of(score_cols)) %>%
-  arrange(desc(combined_z_score))
-
-filtered_df_nonzero <- filtered_df %>%
-  rowwise() %>%
-  mutate(
-    microarray_nonzero_groups = sum(c(
-      any(c_across(starts_with("microarray_CMAP")) != 0),  # CMAP1.0
-      any(c_across(c("microarray_WCS", "microarray_NCS", "microarray_Tau")) != 0),  # CMAP2.0
-      any(c_across(c("microarray_Cor_pearson", "microarray_Cor_spearman")) != 0)    # Correlation
-    )),
-    rnaseq_nonzero_groups = sum(c(
-      any(c_across(starts_with("RNAseq_CMAP")) != 0),  # CMAP1.0
-      any(c_across(c("RNAseq_WCS", "RNAseq_NCS", "RNAseq_Tau")) != 0),  # CMAP2.0
-      any(c_across(c("RNAseq_Cor_pearson", "RNAseq_Cor_spearman")) != 0)  # Correlation
-    ))
-  ) %>%
-  select(-microarray_nonzero_groups, -rnaseq_nonzero_groups)
-
-filtered_df_nonzero <- filtered_df %>%
+  select(significant_drug, combined_z_score, all_of(score_cols)) %>%
   filter(!is.na(combined_z_score)) %>%
   arrange(desc(combined_z_score)) %>%
   mutate(rank = row_number()) %>%
   relocate(rank, .before = everything())
 
+# Step 2: Rename columns to use shorthand *before* creating the gt table.
+final_table_df <- filtered_df %>%
+  rename_with(~ str_replace(.x, "microarray_", "MA_")) %>%
+  rename_with(~ str_replace(.x, "RNAseq_", "RS_"))
 
-filtered_df_nonzero <- filtered_df_nonzero %>%
-  gt(rowname_col = "unique_pert") %>%
+# Step 3: Build the gt table using the new dataframe
+# Step 3: Build the gt table with explicit widths for ALL columns
+final_gt_table <- final_table_df %>%
+  select(rank, combined_z_score, significant_drug, everything()) %>%
+  gt(rowname_col = "rank") %>%
+  tab_stubhead(label = "Rank") %>%
   
-  ### Microarray nested spanners
-  # CMAP1.0 (classic CMAP score)
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = vars(microarray_CMAP),
-    id = "marray_cmap1"
-  ) %>%
+  # ... (all your tab_spanner and data_color calls remain the same) ...
+  tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "marray_cmap1") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(MA_NCS, MA_Tau, MA_WCS), id = "marray_cmap2") %>%
+  tab_spanner(label = "Correlation", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "marray_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(MA_CMAP, MA_NCS, MA_Tau, MA_WCS), id = "marray_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "marray_correlation") %>%
+  tab_spanner(label = "Microarray (6 signatures)", columns = starts_with("MA_"), id = "marray") %>%
   
-  # CMAP2.0 (connectivity scores)
-  tab_spanner(
-    label = "CMAP2.0",
-    columns = vars(microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_cmap2"
-  ) %>%
+  tab_spanner(label = "CMAP1.0", columns = c(RS_CMAP), id = "rna_cmap1") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(RS_NCS, RS_Tau, RS_WCS), id = "rna_cmap2") %>%
+  tab_spanner(label = "Correlation", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rna_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(RS_CMAP, RS_NCS, RS_Tau, RS_WCS), id = "rna_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rna_correlation") %>%
+  tab_spanner(label = "RNAseq (29 signatures)", columns = starts_with("RS_"), id = "rna") %>%
   
-  # Correlation scores
-  tab_spanner(
-    label = "Correlation",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_corr"
-  ) %>%
-  
-  # Method class (enrichment-based includes CMAP1.0 + CMAP2.0)
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = vars(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_correlation"
-  ) %>%
-  
-  # Platform
-  tab_spanner(
-    label = "Microarray (6 signatures)",
-    columns = starts_with("microarray_"),
-    id = "marray"
-  ) %>%
-  
-  ### RNAseq nested spanners
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = vars(RNAseq_CMAP),
-    id = "rna_cmap1"
-  ) %>%
-  tab_spanner(
-    label = "CMAP2.0",
-    columns = vars(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_cmap2"
-  ) %>%
-  tab_spanner(
-    label = "Correlation",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_corr"
-  ) %>%
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = vars(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_correlation"
-  ) %>%
-  tab_spanner(
-    label = "RNAseq (29 signatures)",
-    columns = starts_with("RNAseq_"),
-    id = "rna"
-  ) %>%
-
-  ### Color formatting
   data_color(
-    columns = starts_with("microarray_"),
+    columns = starts_with("MA_"),
     colors = scales::col_numeric(
-      palette = c("mistyrose", "red"),
-      domain = c(0, max(filtered_df_nonzero %>% select(starts_with("microarray_")), na.rm = TRUE))
+      palette = c("mistyrose", "firebrick"),
+      domain = NULL
     )
   ) %>%
   data_color(
-    columns = starts_with("RNAseq_"),
+    columns = starts_with("RS_"),
     colors = scales::col_numeric(
       palette = c("lightblue", "blue"),
-      domain = c(0, max(filtered_df_nonzero %>% select(starts_with("RNAseq_")), na.rm = TRUE))
+      domain = NULL
     )
+  ) %>%
+  
+  # SOLUTION: Define widths for all columns for consistent output
+  cols_width(
+    significant_drug ~ px(180), # Give drug names enough space
+    combined_z_score ~ px(100), # Give the z-score space
+    starts_with(c("MA_", "RS_")) ~ px(75) # Keep your original widths
+  ) %>%
+  
+  tab_source_note(
+    source_note = md("**Abbreviations**: **MA**, Microarray; **RS**, RNA-seq")
   )
-gtsave(filtered_df_nonzero, here("figures/drugs_methodwise_final_table_count.html"))
-filtered_df_nonzero
+
+# Now, save directly without modifying the table options
+gtsave(final_gt_table, here("figures/drugs_methodwise_final_table_count.html"))
+
+# Save the final table to PNG, specifying a wider viewport and some padding
+gtsave(
+  final_gt_table,
+  here("figures/drugs_methodwise_final_table_count.png"),
+  vwidth = 1800, # Set a viewport width in pixels wider than your table
+  expand = 10    # Adds 10 pixels of padding around the table for a cleaner look
+) # MUST : Manually convert png to pdf 
+
+final_gt_table
 ```
 
 ```{r union --> intersect indiv and aggr}
 # unique_pert matches drug_name
-combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "unique_pert")
+combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
 replace_list <- as.list(setNames(rep(0, ncol(combined_scores_df) - 1), names(combined_scores_df)[-1]))
 combined_scores_df <- replace_na(combined_scores_df, replace_list)
 combined_with_rank_df <- combined_scores_df %>%
-  left_join(predicted_drugs, by = c("unique_pert" = "drug_name"))
+  left_join(predicted_drugs, by = c("significant_drug" = "drug_name"))
 
 combined_with_rank_df  <- combined_with_rank_df  %>%
   mutate(across(where(is.numeric), ~replace_na(.x, 0)))
@@ -222,33 +171,33 @@ filtered_df <- filtered_df %>%
   # CMAP1.0 (classic CMAP score)
   tab_spanner(
     label = "CMAP1.0",
-    columns = vars(microarray_CMAP),
+    columns = c(microarray_CMAP),
     id = "marray_cmap1"
   ) %>%
   
   # CMAP2.0 (connectivity scores)
   tab_spanner(
     label = "LINCS",
-    columns = vars(microarray_NCS, microarray_Tau, microarray_WCS),
+    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
     id = "marray_cmap2"
   ) %>%
   
   # Correlation scores
   tab_spanner(
     label = "Correlation",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
+    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
     id = "marray_corr"
   ) %>%
   
   # Method class (enrichment-based includes CMAP1.0 + CMAP2.0)
   tab_spanner(
     label = "Enrichment-based",
-    columns = vars(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
+    columns = c(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
     id = "marray_enrich"
   ) %>%
   tab_spanner(
     label = "Correlation-based",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
+    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
     id = "marray_correlation"
   ) %>%
   
@@ -262,27 +211,27 @@ filtered_df <- filtered_df %>%
   ### RNAseq nested spanners
   tab_spanner(
     label = "CMAP1.0",
-    columns = vars(RNAseq_CMAP),
+    columns = c(RNAseq_CMAP),
     id = "rna_cmap1"
   ) %>%
   tab_spanner(
     label = "LINCS",
-    columns = vars(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
+    columns = c(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
     id = "rna_cmap2"
   ) %>%
   tab_spanner(
     label = "Correlation",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
+    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
     id = "rna_corr"
   ) %>%
   tab_spanner(
     label = "Enrichment-based",
-    columns = vars(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
+    columns = c(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
     id = "rna_enrich"
   ) %>%
   tab_spanner(
     label = "Correlation-based",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
+    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
     id = "rna_correlation"
   ) %>%
   tab_spanner(
@@ -326,13 +275,13 @@ filtered_df <- filtered_df_raw %>%
   gt(rowname_col = "unique_pert") %>%
   tab_spanner(
     label = "CMAP1.0",
-    columns = vars(microarray_CMAP),
+    columns = c(microarray_CMAP),
     id = "marray_cmap1"
   ) %>%
   # CMAP2.0 (connectivity scores)
   tab_spanner(
     label = "CMAP2.0",
-    columns = vars(microarray_NCS, microarray_Tau, microarray_WCS),
+    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
     id = "marray_cmap2"
   ) %>%
 
@@ -370,33 +319,33 @@ filtered_either_df <- filtered_either_df %>%
   # CMAP1.0 (classic CMAP score)
   tab_spanner(
     label = "CMAP1.0",
-    columns = vars(microarray_CMAP),
+    columns = c(microarray_CMAP),
     id = "marray_cmap1"
   ) %>%
   
   # CMAP2.0 (connectivity scores)
   tab_spanner(
     label = "CMAP2.0",
-    columns = vars(microarray_NCS, microarray_Tau, microarray_WCS),
+    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
     id = "marray_cmap2"
   ) %>%
   
   # Correlation scores
   tab_spanner(
     label = "Correlation",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
+    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
     id = "marray_corr"
   ) %>%
   
   # Method class (enrichment-based includes CMAP1.0 + CMAP2.0)
   tab_spanner(
     label = "Enrichment-based",
-    columns = vars(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
+    columns = c(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
     id = "marray_enrich"
   ) %>%
   tab_spanner(
     label = "Correlation-based",
-    columns = vars(microarray_Cor_pearson, microarray_Cor_spearman),
+    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
     id = "marray_correlation"
   ) %>%
   
@@ -410,27 +359,27 @@ filtered_either_df <- filtered_either_df %>%
   ### RNAseq nested spanners
   tab_spanner(
     label = "CMAP1.0",
-    columns = vars(RNAseq_CMAP),
+    columns = c(RNAseq_CMAP),
     id = "rna_cmap1"
   ) %>%
   tab_spanner(
     label = "CMAP2.0",
-    columns = vars(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
+    columns = c(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
     id = "rna_cmap2"
   ) %>%
   tab_spanner(
     label = "Correlation",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
+    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
     id = "rna_corr"
   ) %>%
   tab_spanner(
     label = "Enrichment-based",
-    columns = vars(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
+    columns = c(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
     id = "rna_enrich"
   ) %>%
   tab_spanner(
     label = "Correlation-based",
-    columns = vars(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
+    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
     id = "rna_correlation"
   ) %>%
   tab_spanner(
