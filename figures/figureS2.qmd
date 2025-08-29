@@ -2,6 +2,7 @@
 library(tidyverse)
 library(data.table)
 library(here)
+library(dplyr)
 
 process_file_variance <- function(filepath, direction_label) {
   df <- as_tibble(fread(here(filepath)))
@@ -12,23 +13,22 @@ process_file_variance <- function(filepath, direction_label) {
 
   # compute row-wise variance for each technology
   df <- df %>%
-    mutate(
-      Microarray = apply(select(., all_of(microarray_cols)), 1, var, na.rm = TRUE),
-      RNAseq = apply(select(., all_of(rnaseq_cols)), 1, var, na.rm = TRUE),
-      Direction = direction_label
-    )
+  mutate(
+    Microarray = apply(as.matrix(dplyr::select(., all_of(microarray_cols))), 1, var, na.rm = TRUE),
+    RNAseq     = apply(as.matrix(dplyr::select(., all_of(rnaseq_cols))), 1, var, na.rm = TRUE),
+    Direction  = direction_label
+  )
 
   # reshape to tidy format
   df %>%
-    select(Description, Microarray, RNAseq, Direction) %>%
-    rename(Pathway = Description) %>%
+    dplyr::select(Description, Microarray, RNAseq, Direction) %>%
     pivot_longer(cols = c(Microarray, RNAseq), names_to = "Technology", values_to = "Variance")
 }
 ```
 
 ```{r figure S2 plotting}
-plot_var_df_up <- process_file_variance("figures/marray_rnaseq_up_pathways.tsv", "Upregulated")
-plot_var_df_dn <- process_file_variance("figures/marray_rnaseq_dn_pathways.tsv", "Downregulated")
+plot_var_df_up <- process_file_variance("figures/marray_rnaseq_logratio_up_pathways.tsv", "Upregulated")
+plot_var_df_dn <- process_file_variance("figures/marray_rnaseq_logratio_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_var_plot_df <- bind_rows(plot_var_df_up, plot_var_df_dn) %>%
