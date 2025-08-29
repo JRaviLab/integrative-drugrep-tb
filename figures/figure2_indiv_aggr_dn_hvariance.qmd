@@ -125,7 +125,7 @@ other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
 final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
 final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
-
+write_tsv(final_df_dn, here("figures/marray_rnaseq_variance_dn_pathways.tsv"))
 ```
 
 ### dn pathways that are highly variable
