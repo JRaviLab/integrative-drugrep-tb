@@ -18,7 +18,20 @@ predicted_indiv_drugs = union(RAresult_indivSig_RNAseq, RAresult_indivSig_marray
 # overlapping drugs between aggr and indiv 's drug predictions
 predicted_drugs = intersect(predicted_aggr_drugs,predicted_indiv_drugs) # 108 drugs
 
-drugs_synergy_df = read.csv("~/Documents/GitHub/drugrep_tb/data/metadata/20240724DrugCombDB_Syner&Antag_voting.csv")
+# list of Antitubercular Medications - ncbi.nlm.nih.gov (last updated June 2023)
+tbmedications <- c("rifampin","isoniazid",
+                   "pyrazinamide","ethambutol",
+                   "kanamycin", "streptomycin",
+                   "capreomycin", "amikacin",
+                   "levofloxacin","moxifloxacin",
+                   "gatifloxacin","bedaquiline",
+                   "delamanid","linezolid",
+                   "pretomanid"
+                   ) # 15 drugs
+
+predicted_drugs = union(predicted_drugs, tbmedications) # 108 + 15 = 123 drugs
+
+drugs_synergy_df = read.csv(here("data/metadata/20240724DrugCombDB_Syner&Antag_voting.csv"))
 drugs_synergy_df$Drug1 <- tolower(drugs_synergy_df$Drug1)
 drugs_synergy_df$Drug2 <- tolower(drugs_synergy_df$Drug2)
 predicted_drugs_synergy = filter(drugs_synergy_df, Drug1 %in% predicted_drugs, Drug2 %in% predicted_drugs)
@@ -71,7 +84,7 @@ final_drugcomb_symm = rbind(final_drugcomb_df, final_drugcomb_df2)
 ```
 
 ```{r moa mapping}
-drug_moa_df = read_csv("~/Documents/GitHub/drugrep_tb/data/metadata/repurposing_drugs_20200324.csv", skip=9)
+drug_moa_df = read_csv(here("data/metadata/repurposing_drugs_20200324.csv"), skip=9)
 # Map DrugA and DrugB
 moa_mapped_df <- final_drugcomb_symm %>%
   left_join(drug_moa_df, by = c("DrugA" = "pert_iname")) %>%
@@ -157,16 +170,67 @@ moa_synergy_upper[lower.tri(moa_synergy_upper, diag = TRUE)] <- NA
 ```{r MOA synergy heatmap | full}
 library(ComplexHeatmap)
 library(circlize)
+library(tidyverse) # Added for string manipulation and filtering
 
-# Green for synergy, white for neutral
+# same drugs as above but now categorized -- defined by NIH
+first_line_drugs <- c("rifampin", "isoniazid", "pyrazinamide", "ethambutol")
+second_line_drugs <- c("kanamycin", "streptomycin", "capreomycin", "amikacin", 
+                       "levofloxacin", "moxifloxacin", "gatifloxacin")
+mdr_tb_drugs <- c("bedaquiline", "delamanid", "linezolid", "pretomanid")
+
+# Get the MOAs for each drug category from 'drug_moa_df'
+# This function helps split MOAs that are joined by "|"
+get_unique_moas <- function(drug_list, moa_df) {
+  moa_df %>%
+    filter(pert_iname %in% drug_list) %>%
+    pull(moa) %>%
+    str_split("\\|") %>%
+    unlist() %>%
+    str_trim() %>%
+    unique()
+}
+
+first_line_moas <- get_unique_moas(first_line_drugs, drug_moa_df)
+second_line_moas <- get_unique_moas(second_line_drugs, drug_moa_df)
+mdr_tb_moas <- get_unique_moas(mdr_tb_drugs, drug_moa_df)
+
+# labels with asterisks for visualization
+current_labels <- rownames(moa_synergy_mat)
+
+new_labels <- tibble(moa = current_labels) %>%
+  mutate(
+    new_label = case_when( # if MOA are associated with new drugs tag with * based on class
+      moa %in% mdr_tb_moas    ~ paste0(moa, "***"),
+      moa %in% second_line_moas ~ paste0(moa, "**"),
+      moa %in% first_line_moas  ~ paste0(moa, "*"),
+      TRUE                      ~ moa # No asterisk in the NIH identified TB
+    )
+  ) %>%
+  pull(new_label)
+
+# Apply the new labels to your matrix
+rownames(moa_synergy_mat) <- new_labels
+colnames(moa_synergy_mat) <- new_labels
+
+# Define color function
 col_fun <- colorRamp2(
   c(-0.18, 0, 0.22),
-  c("red","white", "blue")
+  c("red", "white", "blue")
 )
-# Define the output file path correctly
-pdf(file = here("figures/Figure4_MOA_synnergy_heatmap_full_zscore.pdf"), width = 25, height = 25)
 
-# Generate Heatmap for MOA Synergy
+# Create the custom legend for the asterisks
+asterisk_legend <- Legend(
+  labels = c("* First Line", "** Second Line", "*** MDR-TB"),
+  title = "TB Medication MOA",
+  type = "points", # Use 'points' or 'lines' as placeholders
+  pch = NA_integer_ # Hide the placeholder symbol
+)
+
+
+# Define the output file path
+pdf(file = here("figures/withnewdrugs_Figure4_MOA_synnergy_heatmap_full_zscore.pdf"), width = 25, height = 25)
+
+# Generate Heatmap for MOA Synergy (no changes to this part)
 ht <- Heatmap(
   moa_synergy_mat,
   cluster_rows = TRUE,
@@ -177,7 +241,7 @@ ht <- Heatmap(
   column_names_side = "top",
   column_names_gp = gpar(fontsize = 10),
   row_names_gp = gpar(fontsize = 10),
-  na_col = "white",  # ensures NA cells show as white
+  na_col = "white",
   heatmap_legend_param = list(
     title_gp = gpar(fontsize = 12),
     labels_gp = gpar(fontsize = 12)
@@ -186,9 +250,28 @@ ht <- Heatmap(
   height = unit(30, "cm")
 )
 
-draw(ht, show_heatmap_legend = FALSE)
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ht, heatmap_legend_side = "right", annotation_legend_list = list(asterisk_legend))
 
-# Close the PDF device properly
+# Close the PDF device
 dev.off()
 ```
 
+```{r Verification Table: TB Drugs to MOAs } 
+
+# Create a single dataframe with all TB drugs and their categories
+tb_drug_categories_df <- bind_rows(
+  tibble(pert_iname = first_line_drugs, category = "First Line (*)"),
+  tibble(pert_iname = second_line_drugs, category = "Second Line (**)"),
+  tibble(pert_iname = mdr_tb_drugs, category = "MDR-TB (***)")
+)
+
+# Join with the main MOA dataframe to find the MOA for each drug
+verification_table <- tb_drug_categories_df %>%
+  left_join(drug_moa_df, by = "pert_iname") %>%
+  select(Category = category, Drug = pert_iname, MOA = moa) %>%
+  arrange(Category, Drug) # Sort for clarity
+
+print(verification_table)
+```
