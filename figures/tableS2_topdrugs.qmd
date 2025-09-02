@@ -139,7 +139,7 @@ gtsave(final_gt_table, here("drugs_methodwise_final_table_count.html"))
 final_gt_table <- final_gt_table %>%
   tab_options(
     # Set a smaller font size for the entire table
-    table.font.size = px(18),
+    table.font.size = px(16),
     # Reduce the vertical padding in data rows to make them shorter
     data_row.padding = px(10)
   )
