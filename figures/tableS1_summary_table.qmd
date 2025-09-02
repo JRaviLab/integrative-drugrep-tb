@@ -15,13 +15,13 @@ library(here)
 ```
 
 ```{r load data}
-summary_df <- read.delim(here("data/tableS1/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/v2/tableS1/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
 summary_df 
 ```
 
 ```{r read in microarray and RNAseq}
-microarray_df <- read.delim(here("data/tableS1/microarray_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
-rnaseq_df <- read.delim(here("data/tableS1/RNAseq_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+microarray_df <- read.delim(here("data/v2/tableS1/microarray_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+rnaseq_df <- read.delim(here("data/v2/tableS1/RNAseq_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
 combined_df <- rbind(microarray_df, rnaseq_df)
 combined_df
 ```
@@ -43,7 +43,7 @@ all_info = all_info[all_info$signature.x == 1,]
 
 # Create the table
 my_gt_table <- all_info %>%
-  select(SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
+  dplyr::select(SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
   arrange(technology) %>%
   gt(groupname_col = "technology") %>%
   tab_header(
