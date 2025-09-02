@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 08/28/25
+# Last modified: 09/02/25 ; use propagated genes provided by Keenan Manpearl
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -15,6 +15,7 @@ library(tidyverse)
 library(clusterProfiler)
 library(org.Hs.eg.db)
 library(GO.db)
+library(jsonlite)
 source(here("scripts/00_background_genes_PA_functions.R"))
 ```
 
@@ -49,6 +50,7 @@ bg_genes_combined_dn <- get_combined_bg_genes(
 
 ##### Pathway enrichment analysis 
 ```{r get children terms for propagation}
+### not using this anymore
 bp_children <- AnnotationDbi::as.list(GOBPCHILDREN)
 get_descendants <- local({
   cache <- new.env(parent = emptyenv())
@@ -72,6 +74,10 @@ get_descendants <- local({
 ```{r}
 technologies <- c("microarray", "RNAseq")
 directions <- c("up", "dn")
+json_propagated_genes <- fromJSON(here("data/metadata/propagated_annotations.json"))
+bp_gene_length_df <- as.data.frame(lengths(json_propagated_genes))
+colnames(bp_gene_length_df)[1] <- "bp_gene_length"
+bp_gene_length_df$ID<- row.names(bp_gene_length_df)
 
 for (technology in technologies) {
 
@@ -132,38 +138,9 @@ for (technology in technologies) {
 
       enrichGO_res <- as.data.frame(enrichGO_res)
       
+      # get all bp terms 
       all_bp_terms <- enrichGO_res$ID
-      all_terms_needed <- unique(unlist(lapply(all_bp_terms, function(g) c(g, get_descendants(g)))))
 
-      res <- AnnotationDbi::select(
-        org.Hs.eg.db,
-        keys     = all_needed_terms,
-        keytype  = "GO",
-        columns  = c("ENTREZID","ONTOLOGY")
-      )
-
-      res <- res[res$ONTOLOGY == "BP" & !is.na(res$ENTREZID), c("GO","ENTREZID")]
-      res <- unique(res)  
-
-      # build a GO to unique EntrezID list 
-      go2entrez <- split(res$ENTREZID, res$GO)
-      go2entrez <- lapply(go2entrez, unique)
-
-      # vectorized union and length for each parent term
-      gene_count_vec <- vapply(names(go2entrez), function(go_term) {
-        # get the term and their children
-        terms <- unique(c(go_term, bp_children[[go_term]]))
-        # keep only terms we actually have mappings for
-        terms <- intersect(terms, names(go2entrez))
-        if (length(terms) == 0L) return(0L)
-        # union the Entrez id across all those terms
-        length(unique(unlist(go2entrez[terms], use.names = FALSE)))
-      }, integer(1))
-      
-      bp_gene_length_df <- as.data.frame(names(go2entrez))
-      colnames(bp_gene_length_df) <- "ID"
-      bp_gene_length_df$bp_gene_length <- gene_count_vec
-      
       if (!is.null(enrichGO_res) && nrow(enrichGO_res) > 0) {
       
         enrichGO_res_corrected = merge(enrichGO_res, bp_gene_length_df, by="ID", all.x = TRUE)
@@ -234,8 +211,8 @@ for(technology in technologies){
     res <- unique(res)  
     
     # build a GO to unique EntrezID list 
-    go2entrez <- split(res$ENTREZID, res$GO)
-    go2entrez <- lapply(go2entrez, unique)
+    #go2entrez <- split(res$ENTREZID, res$GO)
+    #go2entrez <- lapply(go2entrez, unique)
     
     # vectorized union and length for each parent term
     gene_count_vec <- vapply(names(go2entrez), function(go_term) {
