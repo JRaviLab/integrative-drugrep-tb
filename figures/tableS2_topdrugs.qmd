@@ -70,11 +70,25 @@ final_table_df <- filtered_df %>%
   rename_with(~ str_replace(.x, "microarray_", "MA_")) %>%
   rename_with(~ str_replace(.x, "RNAseq_", "RS_"))
 
+# Names for clean visualization
+score_cols_short <- names(final_table_df)[grepl("^(MA_|RS_)", names(final_table_df))]
+label_list <- purrr::set_names(str_remove_all(score_cols_short, "MA_|RS_"), score_cols_short)
+
+# update names for correlations
+label_list$MA_Cor_pearson <- "XCor"
+label_list$MA_Cor_spearman <- "XSpe"
+label_list$RS_Cor_pearson <- "XCor"
+label_list$RS_Cor_spearman <- "XSpe"
+
 # Step 3: Build the gt table with explicit widths and alignment
 final_gt_table <- final_table_df %>%
   select(rank, combined_z_score, significant_drug, everything()) %>%
   gt(rowname_col = "rank") %>%
   tab_stubhead(label = "Rank") %>%
+  
+  cols_label(
+    .list = label_list
+  ) %>%
 
   # --- Spanners with UNIQUE IDs --- #
   tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "ma_cmap1.0") %>%
@@ -106,7 +120,10 @@ final_gt_table <- final_table_df %>%
     )
   ) %>%
   
-  # --- SOLUTION --- #
+  fmt_number(
+    columns = combined_z_score,
+    decimals = 2
+  ) %>%
   
   # 1. Set uniform widths
   cols_width(
@@ -126,10 +143,6 @@ final_gt_table <- final_table_df %>%
   tab_style(
     style = cell_text(align = "center"),
     locations = cells_column_labels(columns = everything())
-  ) %>%
-  
-  tab_source_note(
-    source_note = md("**Abbreviations**: **MA**, Microarray; **RS**, RNA-seq")
   )
 
 # Now, save directly without modifying the table options
