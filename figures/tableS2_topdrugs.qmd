@@ -70,32 +70,30 @@ final_table_df <- filtered_df %>%
   rename_with(~ str_replace(.x, "microarray_", "MA_")) %>%
   rename_with(~ str_replace(.x, "RNAseq_", "RS_"))
 
-# Step 3: Build the gt table using the new dataframe
-# Step 3: Build the gt table with explicit widths for ALL columns
+# Step 3: Build the gt table with explicit widths and alignment
 final_gt_table <- final_table_df %>%
   select(rank, combined_z_score, significant_drug, everything()) %>%
   gt(rowname_col = "rank") %>%
   tab_stubhead(label = "Rank") %>%
+
+  # --- Spanners with UNIQUE IDs --- #
+  tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "ma_cmap1.0") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(MA_NCS, MA_Tau, MA_WCS), id = "ma_cmap2.0") %>%
+  tab_spanner(label = "Correlation", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "ma_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(MA_CMAP, MA_NCS, MA_Tau, MA_WCS), id = "ma_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "ma_correlation") %>%
+  tab_spanner(label = "Microarray (6 signatures)", columns = starts_with("MA_"), id = "ma_main") %>%
   
-  # ... (all your tab_spanner and data_color calls remain the same) ...
-  tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "marray_cmap1") %>%
-  tab_spanner(label = "CMAP2.0", columns = c(MA_NCS, MA_Tau, MA_WCS), id = "marray_cmap2") %>%
-  tab_spanner(label = "Correlation", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "marray_corr") %>%
-  tab_spanner(label = "Enrichment-based", columns = c(MA_CMAP, MA_NCS, MA_Tau, MA_WCS), id = "marray_enrich") %>%
-  tab_spanner(label = "Correlation-based", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "marray_correlation") %>%
-  tab_spanner(label = "Microarray (6 signatures)", columns = starts_with("MA_"), id = "marray") %>%
-  
-  tab_spanner(label = "CMAP1.0", columns = c(RS_CMAP), id = "rna_cmap1") %>%
-  tab_spanner(label = "CMAP2.0", columns = c(RS_NCS, RS_Tau, RS_WCS), id = "rna_cmap2") %>%
-  tab_spanner(label = "Correlation", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rna_corr") %>%
-  tab_spanner(label = "Enrichment-based", columns = c(RS_CMAP, RS_NCS, RS_Tau, RS_WCS), id = "rna_enrich") %>%
-  tab_spanner(label = "Correlation-based", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rna_correlation") %>%
-  tab_spanner(label = "RNAseq (29 signatures)", columns = starts_with("RS_"), id = "rna") %>%
+  tab_spanner(label = "CMAP1.0", columns = c(RS_CMAP), id = "rs_cmap1.0") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(RS_NCS, RS_Tau, RS_WCS), id = "rs_cmap2.0") %>%
+  tab_spanner(label = "Correlation", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(RS_CMAP, RS_NCS, RS_Tau, RS_WCS), id = "rs_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_correlation") %>%
+  tab_spanner(label = "RNAseq (29 signatures)", columns = starts_with("RS_"), id = "rs_main") %>%
   
   data_color(
     columns = starts_with("MA_"),
     colors = scales::col_numeric(
-      # Use Firebrick for readability on the higher end
       palette = c("mistyrose", "firebrick"),
       domain = NULL
     )
@@ -108,11 +106,26 @@ final_gt_table <- final_table_df %>%
     )
   ) %>%
   
-  # SOLUTION: Define widths for all columns for consistent output
+  # --- SOLUTION --- #
+  
+  # 1. Set uniform widths
   cols_width(
-    significant_drug ~ px(180), # Give drug names enough space
-    combined_z_score ~ px(100), # Give the z-score space
-    starts_with(c("MA_", "RS_")) ~ px(75) # Keep your original widths
+    stub() ~ px(50), 
+    significant_drug ~ px(180),
+    combined_z_score ~ px(100),
+    starts_with(c("MA_", "RS_")) ~ px(150) 
+  ) %>%
+  
+  # 2. Center all data cells
+  cols_align(
+    align = "center",
+    columns = c(combined_z_score, starts_with("MA_"), starts_with("RS_"))
+  ) %>%
+  
+  # 3. Center column labels using the backward-compatible tab_style()
+  tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_column_labels(columns = everything())
   ) %>%
   
   tab_source_note(
@@ -120,15 +133,23 @@ final_gt_table <- final_table_df %>%
   )
 
 # Now, save directly without modifying the table options
-gtsave(final_gt_table, here("figures/drugs_methodwise_final_table_count.html"))
+gtsave(final_gt_table, here("drugs_methodwise_final_table_count.html"))
 
-# Save the final table to PNG, specifying a wider viewport and some padding
+# resize to fit into png
+final_gt_table <- final_gt_table %>%
+  tab_options(
+    # Set a smaller font size for the entire table
+    table.font.size = px(18),
+    # Reduce the vertical padding in data rows to make them shorter
+    data_row.padding = px(10)
+  )
+
 gtsave(
   final_gt_table,
-  here("figures/drugs_methodwise_final_table_count.png"),
-  vwidth = 1800, # Set a viewport width in pixels wider than your table
-  expand = 10    # Adds 10 pixels of padding around the table for a cleaner look
-) # MUST : Manually convert png to pdf 
+  "final_drugs_methodwise_final_table_count.png",
+  vwidth = 2500, # Adjust as needed
+  expand = 10
+) # Must manually convert to pdf
 
 final_gt_table
 ```
