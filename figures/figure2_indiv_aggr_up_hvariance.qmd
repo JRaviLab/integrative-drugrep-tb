@@ -16,7 +16,7 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("data/metadata/202506_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
 new_row_aggr <- data.frame(
   study_id = c(NA,NA),
   platform_id = c(NA,NA),
