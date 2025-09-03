@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 09/02/25 ; use propagated genes provided by Keenan Manpearl
+# Last modified: 09/03/25 ; use propagated genes provided by Keenan Manpearl and add pseudocount calculation
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -156,6 +156,9 @@ for (technology in technologies) {
       
         # calculate log(observed / expected)
         enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
+        
+        # calculate pseudocount
+        enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
       
         # save results
         base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
@@ -198,36 +201,6 @@ for(technology in technologies){
     enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
     
     all_bp_terms <- enrichGO_res_aggr$ID
-    all_terms_needed <- unique(unlist(lapply(all_bp_terms, function(g) c(g, get_descendants(g)))))
-    
-    res <- AnnotationDbi::select(
-      org.Hs.eg.db,
-      keys     = all_needed_terms,
-      keytype  = "GO",
-      columns  = c("ENTREZID","ONTOLOGY")
-    )
-    
-    res <- res[res$ONTOLOGY == "BP" & !is.na(res$ENTREZID), c("GO","ENTREZID")]
-    res <- unique(res)  
-    
-    # build a GO to unique EntrezID list 
-    #go2entrez <- split(res$ENTREZID, res$GO)
-    #go2entrez <- lapply(go2entrez, unique)
-    
-    # vectorized union and length for each parent term
-    gene_count_vec <- vapply(names(go2entrez), function(go_term) {
-      # get the term and their children
-      terms <- unique(c(go_term, bp_children[[go_term]]))
-      # keep only terms we actually have mappings for
-      terms <- intersect(terms, names(go2entrez))
-      if (length(terms) == 0L) return(0L)
-      # union the Entrez id across all those terms
-      length(unique(unlist(go2entrez[terms], use.names = FALSE)))
-    }, integer(1))
-          
-    bp_gene_length_df <- as.data.frame(names(go2entrez))
-    colnames(bp_gene_length_df) <- "ID"
-    bp_gene_length_df$bp_gene_length <- gene_count_vec
           
     if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
@@ -244,6 +217,9 @@ for(technology in technologies){
           
       # calculate log(observed / expected)
       enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
+      
+      # calculate pseudocount
+        enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
     
       # save results
       output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
