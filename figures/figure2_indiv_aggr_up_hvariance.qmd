@@ -17,25 +17,6 @@ library(tidyverse)
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
 summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
-new_row_aggr <- data.frame(
-  study_id = c(NA,NA),
-  platform_id = c(NA,NA),
-  tb_status = c(NA,NA),
-  time_point = c(NA,NA),
-  tissue_cell_type = c(NA,NA),
-  sample_origin = c(NA,NA),
-  tissue_category = c(NA,NA),  
-  series_id = c(NA,NA), 
-  SIGNATURE_NAME = c("aggregated_microarray", "aggregated_RNAseq"),  
-  EXPRMAT_PATH = c(NA,NA),    
-  signature = c(1,1),
-  up_genes_num = c(98,98),
-  dn_genes_num = c(98,98),
-  technology = c("microarray", "RNAseq")
-)
-
-final_summary_df = rbind(summary_df, new_row_aggr)
-#write_tsv(final_summary_df, here("data/metadata/202506_all_TB_signatures_info.tsv"))
 ```
 
 ### Up individual signatures
@@ -113,7 +94,7 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
-write_tsv(final_df_up, here("figures/marray_rnaseq_logratio_up_pathways.tsv"))
+write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv"))
 ```
 
 ### up pathways that are highly variable
@@ -259,7 +240,7 @@ origin_colors <- c(
 )
 
 # 3. Prepare metadata/matrix
-meta_df <- final_summary_df %>%
+meta_df <- summary_df %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -282,10 +263,11 @@ sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, meta_df$SIGNATURE_NAME,
 
 
 # 4. Set rownames 
+actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
 
 col_fun <- colorRamp2(
-  c(-0.5, 0, 0.5),
-  c("#ccffcc", "white", "darkgreen")
+  c(min(actual_range), 0, max(actual_range)),
+  c("#EE6677", "white", "#006164")
 )
 
 # 5. Create top and bottom annotations
@@ -329,19 +311,33 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2a_up_hvariance_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
+pdf(here("figures/Figure2a_up_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
+# prepare annotation table
+up_annotation_table = as.data.frame(colnames(sig_mat_indiv_aggr_up_ordered_mat))
+colnames(up_annotation_table)[1] <- "SIGNATURE_NAME"
+up_annotation_table$number <- 1:nrow(up_annotation_table)
+up_annotation_table$ID <- paste0("signature_", seq_len(nrow(up_annotation_table)))
+up_annotation_table$ID[(nrow(up_annotation_table) - 1):nrow(up_annotation_table)] <- c("aggregated_microarray", "aggregated_RNAseq")
+up_annotation_table = merge(up_annotation_table, summary_df, by = "SIGNATURE_NAME")
+up_annotation_table <- up_annotation_table[order(up_annotation_table$number), ]
+write_tsv(up_annotation_table, here("figures/figure2_annotation_table.tsv"))
+
+viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
+colnames(viz_mat_up) <- up_annotation_table$number
+colnames(viz_mat_up)[(ncol(viz_mat_up) - 1):ncol(viz_mat_up)] <- c("aggregated_microarray", "aggregated_RNAseq")
+
 heatmap_sig_up_go <- Heatmap(
-  sig_mat_indiv_aggr_up_ordered_mat,
+  viz_mat_up,
   name = "GO term enrichment",
   na_col = "lightgrey",
   col = col_fun,
   heatmap_legend_param = list(
-    title = "log(observed/expected)",
+    title = "asinh(observed/expected)",
     title_gp = gpar(fontsize = 20),
     labels_gp = gpar(fontsize = 20)
   ),
@@ -351,7 +347,7 @@ heatmap_sig_up_go <- Heatmap(
   rect_gp = gpar(col = "grey"),
   cluster_rows = FALSE,
   cluster_columns = FALSE,
-  row_order = rownames(sig_mat_indiv_aggr_up_ordered_mat),
+  row_order = rownames(viz_mat_up),
   column_names_rot = 70,
   top_annotation = ha_top,
   bottom_annotation = ha_bottom,
