@@ -35,12 +35,12 @@ annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
 ```{r microarray up pathway clusters}
-marray_GO_mat_up = get_GO_logratio_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+marray_GO_mat_up = get_GO_pseudocount_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r RNAseq up pathway clusters}
-rnaseq_GO_mat_up = get_GO_logratio_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+rnaseq_GO_mat_up = get_GO_pseudocount_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
@@ -266,8 +266,8 @@ sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, meta_df$SIGNATURE_NAME,
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
 
 col_fun <- colorRamp2(
-  c(min(actual_range), 0, max(actual_range)),
-  c("#EE6677", "white", "#006164")
+  c(0, max(actual_range)),
+  c("white", "#006164")
 )
 
 # 5. Create top and bottom annotations
@@ -328,7 +328,7 @@ up_annotation_table <- up_annotation_table[order(up_annotation_table$number), ]
 write_tsv(up_annotation_table, here("figures/figure2_annotation_table.tsv"))
 
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
-colnames(viz_mat_up) <- up_annotation_table$number
+colnames(viz_mat_up) <- up_annotation_table$ID
 colnames(viz_mat_up)[(ncol(viz_mat_up) - 1):ncol(viz_mat_up)] <- c("aggregated_microarray", "aggregated_RNAseq")
 
 heatmap_sig_up_go <- Heatmap(

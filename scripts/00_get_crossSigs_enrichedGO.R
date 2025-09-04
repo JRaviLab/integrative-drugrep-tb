@@ -10,7 +10,7 @@ library(readr)
 library(tidyverse)
 library(simplifyEnrichment)
 
-get_GO_logratio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
+get_GO_pseudocount_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   filenames <- list.files(path = data_path, pattern = pattern, full.names = FALSE)
 
   GO_mat <- NULL  # initialize result matrix
@@ -30,9 +30,9 @@ get_GO_logratio_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
 
     if(nrow(GO_res) > 0){
       # compute LogRatio numeric
-      GO_res$LogRatio_numeric <- as.numeric(GO_res$log_observed_expected)
+      GO_res$pseudocount_numeric <- as.numeric(GO_res$pseudocount)
 
-      GO_col <- GO_res[c("Description", "LogRatio_numeric")]
+      GO_col <- GO_res[c("Description", "pseudocount_numeric")]
       colnames(GO_col)[2] <- signature_name
 
     } else {

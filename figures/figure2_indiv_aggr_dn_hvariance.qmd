@@ -16,7 +16,7 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("data/metadata/202506_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ### dn individual and aggregated signatures
@@ -33,12 +33,12 @@ annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
 ````{r microarray dn pathway clusters}
-marray_GO_mat_dn = get_GO_logratio_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
+marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r RNAseq dn pathway clusters}
-rnaseq_GO_mat_dn = get_GO_logratio_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
+rnaseq_GO_mat_dn = get_GO_pseudocount_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
@@ -277,8 +277,8 @@ sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[, meta_df$SIGNATURE_NAME,
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_dn_ordered)), na.rm = TRUE)
 
 col_fun <- colorRamp2(
-  c(min(actual_range), 0, max(actual_range)),
-  c("#CC79A7", "white", "#0072B2")
+  c(0, max(actual_range)),
+  c("white", "#0072B2")
 )
 
 # 5. Create top and bottom annotations
@@ -331,12 +331,14 @@ sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
 # prepare annotation table
 dn_annotation_table = as.data.frame(colnames(sig_mat_indiv_aggr_dn_ordered_mat))
 colnames(dn_annotation_table)[1] <- "SIGNATURE_NAME"
-dn_annotation_table$number <- paste0("signature_", seq_len(nrow(dn_annotation_table)))
-dn_annotation_table$number[(nrow(dn_annotation_table) - 1):nrow(dn_annotation_table)] <- c("aggregated_microarray", "aggregated_RNAseq")
+dn_annotation_table$number <- 1:nrow(dn_annotation_table)
+dn_annotation_table$ID <- paste0("signature_", seq_len(nrow(dn_annotation_table)))
+dn_annotation_table$ID[(nrow(dn_annotation_table) - 1):nrow(dn_annotation_table)] <- c("aggregated_microarray", "aggregated_RNAseq")
 dn_annotation_table = merge(dn_annotation_table, summary_df, by = "SIGNATURE_NAME")
+dn_annotation_table <- dn_annotation_table[order(dn_annotation_table$number), ]
 
 viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
-colnames(viz_mat_dn) <- dn_annotation_table$number
+colnames(viz_mat_dn) <- dn_annotation_table$ID
 colnames(viz_mat_dn)[(ncol(viz_mat_dn) - 1):ncol(viz_mat_dn)] <- c("aggregated_microarray", "aggregated_RNAseq")
 
 heatmap_sig_dn_go <- Heatmap(
