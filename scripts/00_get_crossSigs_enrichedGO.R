@@ -76,7 +76,7 @@ get_GO_testStat_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
       signature_name <- gsub(paste0(prefix_sub,"_"),"",file)
       signature_name <- gsub(paste0("_",suffix_sub),"",signature_name)
 
-      GO_col <- GO_res[c("Description","log_observed_expected")]
+      GO_col <- GO_res[c("Description","pseudocount")]
       colnames(GO_col)[2] <- signature_name
 
       if(!exists("GO_mat")){
