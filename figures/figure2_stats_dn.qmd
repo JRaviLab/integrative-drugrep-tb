@@ -99,7 +99,7 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 rnaseq_marray_GO_mat_dn <- final_df_dn
 go_mat = rnaseq_marray_GO_mat_dn
 summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(tissue_category)) %>%
-            select(SIGNATURE_NAME, tissue_category)
+            dplyr::select(SIGNATURE_NAME, tissue_category)
 # set rownames to GO term descriptions and remove Description column
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description")
@@ -150,15 +150,15 @@ results_df$GO_term <- rownames(go_mat_filtered)
 results_df <- results_df %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(median_diffs_df, by = "GO_term") %>%
-  select(GO_term, median_diff, p_value, statistic, p_adj)
+  dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
 
 # Top 10 GO terms
-top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% slice(1:10)
-top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% slice(1:10)
+top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
+top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
 # Create gt tables
 gt_top10_positive <- top10_positive %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top 10 GO Terms Enriched in Circulating") %>%
   cols_label(
@@ -169,7 +169,7 @@ gt_top10_positive <- top10_positive %>%
   )
 
 gt_top10_negative <- top10_negative %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top 10 GO Terms Circulating in Lung") %>%
   cols_label(
@@ -187,7 +187,7 @@ top_combined_df_circulating_lung <- bind_rows(
 
 # Create one combined gt table
 gt_top_bottom <- top_combined_df_circulating_lung %>%
-  select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top Down-Regulated GO Terms More Enriched in Circulating or Lung Signatures") %>%
   cols_label(
@@ -200,13 +200,12 @@ gt_top_bottom <- top_combined_df_circulating_lung %>%
 
 # Display combined table
 gtsave(gt_top_bottom, "dn_variance_circulating_lung_signiGO_terms.html")
-gtsave(gt_top_bottom, "dn_variance_circulating_lung_signiGO_terms.pdf")
 ```
 
 ```{r microarray vs. RNASeq}
 go_mat = rnaseq_marray_GO_mat_dn
 summary_df_ = summary_df %>% filter(!is.na(signature), !is.na(technology), !grepl("aggregated", SIGNATURE_NAME)) %>%
-            select(SIGNATURE_NAME, technology)
+            dplyr::select(SIGNATURE_NAME, technology)
 # set rownames to GO term descriptions and remove Description column
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description")
@@ -257,15 +256,15 @@ results_df$GO_term <- rownames(go_mat_filtered)
 results_df <- results_df %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(median_diffs_df, by = "GO_term") %>%
-  select(GO_term, median_diff, p_value, statistic, p_adj)
+  dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
 
 # Top 10 GO terms
-top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% slice(1:10)
-top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% slice(1:10)
+top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
+top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
 # Create gt tables
 gt_top10_positive <- top10_positive %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top 10 GO Terms Enriched in Microarray") %>%
   cols_label(
@@ -276,7 +275,7 @@ gt_top10_positive <- top10_positive %>%
   )
 
 gt_top10_negative <- top10_negative %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top 10 GO Terms Enriched in RNAseq") %>%
   cols_label(
@@ -294,7 +293,7 @@ top_combined_df_microarray_rnaseq <- bind_rows(
 
 # Create one combined gt table
 gt_top_bottom <- top_combined_df_microarray_rnaseq %>%
-  select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top Down-Regulated GO Terms More Enriched in Microarray or RNAseq Signatures") %>%
   cols_label(
@@ -307,52 +306,14 @@ gt_top_bottom <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom , "dn_variance_microarray_rnaseq_signiGO_terms.pdf")
 gtsave(gt_top_bottom , "dn_variance_microarray_rnaseq_signiGO_terms.html")
-```
-
-```{r shared pathways?}
-# Find overlapping GO terms
-overlapping_terms_labeled <- top_combined_df_circulating_lung %>%
-  select(GO_term, Enriched_in) %>%
-  distinct() %>%
-  filter(GO_term %in% top_combined_df_microarray_rnaseq$GO_term) %>%
-  rename(Enriched_in_Circulating_Lung = Enriched_in)
-
-# Add enrichment from microarray vs. RNAseq
-overlapping_terms_labeled <- overlapping_terms_labeled %>%
-  left_join(
-    top_combined_df_microarray_rnaseq %>%
-      select(GO_term, Enriched_in) %>%
-      distinct() %>%
-      rename(Enriched_in_Microarray_RNAseq = Enriched_in),
-    by = "GO_term"
-  )
-
-# Create gt table
-gt_overlapping_terms <- overlapping_terms_labeled %>%
-  gt() %>%
-  tab_header(
-    title = "Overlapping GO Terms Between Circulating–Lung and Microarray–RNAseq Comparisons"
-  ) %>%
-  cols_label(
-    GO_term = "GO Term",
-    Enriched_in_Circulating_Lung = "Enriched In (Circulating vs. Lung)",
-    Enriched_in_Microarray_RNAseq = "Enriched In (Microarray vs. RNAseq)"
-  )
-
-# Save as PDF
-gtsave(gt_overlapping_terms, "dn_overlapping_GO_terms_tissuecat_platform_comparison.html")
-
-# View in console 
-gt_overlapping_terms
 ```
 
 ```{r MTB vs. PTB}
 ### Not valid to perform a statistical test; not enough power
 go_mat = rnaseq_marray_GO_mat_dn
 summary_df_ = summary_df %>% filter(!is.na(SIGNATURE_NAME), !is.na(tb_status)) %>%
-            select(SIGNATURE_NAME, tb_status)
+            dplyr::select(SIGNATURE_NAME, tb_status)
 # set rownames to GO term descriptions and remove Description column
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description")
@@ -407,7 +368,7 @@ head(significant_go_terms)
 ## Not enough power for a statistical test
 go_mat = rnaseq_marray_GO_mat_dn
 summary_df_ = summary_df %>% filter(!is.na(SIGNATURE_NAME), !is.na(sample_origin)) %>%
-            select(SIGNATURE_NAME, sample_origin)
+            dplyr::select(SIGNATURE_NAME, sample_origin)
 # set rownames to GO term descriptions and remove Description column
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description")
@@ -501,14 +462,14 @@ for (platform in platforms) {
   # Filter the GO matrix to keep only the signatures in group 1 and group 2
   go_mat_filtered <- go_mat %>%
     column_to_rownames("Description") %>%
-    select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+    dplyr::select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
   
   # Build group vector for these two groups
   # Build correct group vector using SIGNATURE_NAME
   group_vec <- summary_df %>%
     filter(SIGNATURE_NAME %in% colnames(go_mat_filtered)) %>%
     mutate(group = ifelse(tissue_cell_type == platform, platform, "other cell/tissue types")) %>%
-    select(SIGNATURE_NAME, group) %>%
+    dplyr::select(SIGNATURE_NAME, group) %>%
     deframe()
 
   
@@ -539,7 +500,7 @@ for (platform in platforms) {
   
   # Reorder the columns to place GO_term first
   results_df <- results_df %>%
-    select(GO_term, p_value, statistic, p_adj)
+    dplyr::select(GO_term, p_value, statistic, p_adj)
   
   # Get significant GO terms
   significant_go_terms <- results_df %>% filter(p_adj < 0.05)
@@ -582,7 +543,7 @@ colnames(go_mat) <- gsub("dn_", "", colnames(go_mat))
 # Filter GO matrix
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description") %>%
-  select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
+  dplyr::select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
 
 # Build group vector
 group_vec <- summary_df %>%
@@ -624,15 +585,15 @@ results_df$GO_term <- rownames(go_mat_filtered)
 results_df <- results_df %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(median_diffs_df, by = "GO_term") %>%
-  select(GO_term, median_diff, p_value, statistic, p_adj)
+  dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
 
 # Top 10 GO terms
-top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% slice(1:10)
-top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% slice(1:10)
+top10_positive <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
+top10_negative <- results_df %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
 # Create gt tables
 gt_top10_positive <- top10_positive %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top Down-Regulated GO Terms Enriched in Individual Signatures") %>%
   cols_label(
@@ -643,7 +604,7 @@ gt_top10_positive <- top10_positive %>%
   )
 
 gt_top10_negative <- top10_negative %>%
-  select(GO_term, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top 10 GO Terms Enriched in Aggregated Signatures") %>%
   cols_label(
@@ -661,7 +622,7 @@ top_combined_df <- bind_rows(
 
 # Create one combined gt table
 gt_top_bottom <- top_combined_df %>%
-  select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
+  dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
   tab_header(title = "Top Down-Regulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
   cols_label(
