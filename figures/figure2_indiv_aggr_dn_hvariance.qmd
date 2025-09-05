@@ -130,6 +130,7 @@ var_pathway_df <- data.frame(
 )
 
 final_df_dn_viable = final_df_dn[final_df_dn$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways 
+#write_tsv(final_df_dn_viable, here("figures/dn_hv_pseudocount_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}

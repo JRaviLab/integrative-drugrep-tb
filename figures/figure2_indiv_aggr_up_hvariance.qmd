@@ -94,7 +94,7 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
-write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv"))
+#write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv"))
 ```
 
 ### up pathways that are highly variable
@@ -118,7 +118,7 @@ var_pathway_df <- data.frame(
 )
 
 final_df_up_viable = final_df_up[final_df_up$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways 
-
+write_tsv(final_df_up_viable, here("figures/up_hv_pseudocount_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}

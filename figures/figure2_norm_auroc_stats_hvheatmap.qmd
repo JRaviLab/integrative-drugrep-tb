@@ -1,0 +1,116 @@
+```{r}
+library(readr)
+```
+
+```{r define highly variable pathways}
+up_hv_pseudocount_pathways = read_tsv(here("figures/up_hv_pseudocount_pathways.tsv"))$Description
+dn_hv_pseudocount_pathways = read_tsv(here("figures/dn_hv_pseudocount_pathways.tsv"))$Description
+```
+
+### Upregulated pathways
+```{r}
+up_hv_pseudocount_pathways_df = as.data.frame(up_hv_pseudocount_pathways)
+```
+
+```{r read in stats results}
+up_circulating_lung_MW = read_tsv(here("figures/up_circulating_lung_MW.tsv"))
+colnames(up_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(up_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
+up_norm_auroc_df = merge(up_hv_pseudocount_pathways_df, up_circulating_lung_MW[c("GO_term","circulating-lung")], 
+      by.x="up_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+up_microarray_rnaseq_MW = read_tsv(here("figures/up_microarray_rnaseq_MW.tsv"))
+colnames(up_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(up_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
+up_norm_auroc_df = merge(up_norm_auroc_df, up_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
+      by.x="up_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+up_primary_cellline_MW = read_tsv(here("figures/up_primary_cellline_MW.tsv"))
+colnames(up_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(up_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
+up_norm_auroc_df = merge(up_norm_auroc_df, up_primary_cellline_MW[c("GO_term","primary-cellline")], 
+      by.x="up_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+up_indiv_aggr_MW = read_tsv(here("figures/up_indiv_aggr_MW.tsv"))
+colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+      by.x="up_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+```
+
+```{r up hv plot}
+library(ComplexHeatmap)
+library(circlize)
+library(matrixStats)
+# optional if you want NA-aware distances
+# install.packages("proxy")
+library(proxy)
+
+# Build matrix and set row names
+X <- as.matrix(up_norm_auroc_df[, !(names(up_norm_auroc_df) %in% "up_hv_pseudocount_pathways")])
+rownames(X) <- up_norm_auroc_df$up_hv_pseudocount_pathways
+
+# Ensure numeric
+storage.mode(X) <- "numeric"
+
+# Clean non-finite values
+X[!is.finite(X)] <- NA
+
+# Drop all-NA rows/cols
+X <- X[rowSums(is.na(X)) < ncol(X), , drop = FALSE]
+X <- X[, colSums(is.na(X)) < nrow(X), drop = FALSE]
+
+# Impute remaining NAs to a neutral value (for normalized AUROC centered at 0)
+if (anyNA(X)) X[is.na(X)] <- 0
+
+# Drop zero-variance rows/cols (they break distance/clustering)
+rv <- rowVars(X); cv <- colVars(X)
+X <- X[rv > 0 & !is.na(rv), , drop = FALSE]
+X <- X[, cv > 0 & !is.na(cv), drop = FALSE]
+
+# Color scale: clamp to data range to avoid outlier washout
+lims <- range(X, finite = TRUE)
+lo <- max(-1, lims[1]); hi <- min(1, lims[2])
+col_fun <- colorRamp2(c(lo, 0, hi), c("darkblue", "white", "darkred"))
+
+# Optional: NA-aware distances (comment these two lines to use defaults)
+dist_rows  <- function(m) proxy::dist(m,      method = "euclidean", na.rm = TRUE)
+dist_cols  <- function(m) proxy::dist(t(m),   method = "euclidean", na.rm = TRUE)
+
+# Plot
+Heatmap(X, name = "normalized AUROC", col = col_fun,
+        na_col = "lightgrey", cluster_rows = TRUE, cluster_columns = TRUE)
+
+
+```
+
+### Downregulated pathways
+```{r}
+dn_hv_pseudocount_pathways_df = as.data.frame(dn_hv_pseudocount_pathways)
+```
+
+```{r read in stats results}
+dn_circulating_lung_MW = read_tsv(here("figures/dn_circulating_lung_MW.tsv"))
+colnames(dn_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(dn_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
+dn_norm_auroc_df = merge(dn_hv_pseudocount_pathways_df, dn_circulating_lung_MW[c("GO_term","circulating-lung")], 
+      by.x="dn_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+dn_microarray_rnaseq_MW = read_tsv(here("figures/dn_microarray_rnaseq_MW.tsv"))
+colnames(dn_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(dn_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
+dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
+      by.x="dn_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+dn_primary_cellline_MW = read_tsv(here("figures/dn_primary_cellline_MW.tsv"))
+colnames(dn_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(dn_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
+dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_primary_cellline_MW[c("GO_term","primary-cellline")], 
+      by.x="dn_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+
+dn_indiv_aggr_MW = read_tsv(here("figures/dn_indiv_aggr_MW.tsv"))
+colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+      by.x="dn_hv_pseudocount_pathways", 
+      by.y="GO_term", all.x=TRUE)
+```
