@@ -35,8 +35,8 @@ process_file <- function(filepath, direction_label) {
 
 ```{r Figure S3a plot}
 # process both up- and dn-regulated pathways files
-plot_df_up <- process_file("figures/marray_rnaseq_logratio_up_pathways.tsv", "Upregulated")
-plot_df_dn <- process_file("figures/marray_rnaseq_logratio_dn_pathways.tsv", "Downregulated")
+plot_df_up <- process_file("figures/marray_rnaseq_pseudocount_up_pathways.tsv", "Upregulated")
+plot_df_dn <- process_file("figures/marray_rnaseq_pseudocount_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_plot_df <- bind_rows(plot_df_up, plot_df_dn) %>%

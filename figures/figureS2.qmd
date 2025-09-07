@@ -27,8 +27,8 @@ process_file_variance <- function(filepath, direction_label) {
 ```
 
 ```{r figure S2 plotting}
-plot_var_df_up <- process_file_variance("figures/marray_rnaseq_logratio_up_pathways.tsv", "Upregulated")
-plot_var_df_dn <- process_file_variance("figures/marray_rnaseq_logratio_dn_pathways.tsv", "Downregulated")
+plot_var_df_up <- process_file_variance("figures/marray_rnaseq_pseudocount_up_pathways.tsv", "Upregulated")
+plot_var_df_dn <- process_file_variance("figures/marray_rnaseq_pseudocount_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_var_plot_df <- bind_rows(plot_var_df_up, plot_var_df_dn) %>%
@@ -42,18 +42,19 @@ med_var_labels <- combined_var_plot_df %>%
     .groups = "drop"
   )
 
+pdf(here("figures/FigureS2_variance_across_signatures.pdf"),
+    width = 16, height = 12)  
 
-# plot
 ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology)) +
   geom_boxplot() +
   stat_summary(
-  fun = median,
-  geom = "text",
-  aes(label = after_stat(format(y, scientific = TRUE, digits = 3))),
-  vjust = -0.5,
-  size = 3,
-  color = "black"
-) +
+    fun = median,
+    geom = "text",
+    aes(label = after_stat(format(y, scientific = TRUE, digits = 3))),
+    vjust = -0.5,
+    size = 6,   
+    color = "black"
+  ) +
   scale_y_log10() + 
   labs(
     title = "Log-transformed variance across individual signatures",
@@ -61,9 +62,17 @@ ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology
     x = "Technology"
   ) +
   facet_wrap(~Direction) +
-  theme_minimal() +
-  theme(legend.position = "none") +
+  theme_minimal(base_size = 20) +   
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 24, hjust = 0.5), 
+    axis.title = element_text(size = 22),
+    axis.text = element_text(size = 18),
+    strip.text = element_text(size = 20)  
+  ) +
   coord_cartesian(clip = "off")
+
+dev.off()
 
 ```
 
