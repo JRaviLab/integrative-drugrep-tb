@@ -110,7 +110,7 @@ viable_counts <- final_df_up_indiv %>%
 # filter terms that are viable in at least N signatures (e.g., 2 or more)
 N <- 20  # change this threshold as needed 40% variability gives 9 variable pathways
 final_df_up_viable <- final_df_up[viable_counts >= N, ]
-#write_tsv(final_df_up_viable, here("figures/up_consistent_pseudocount_pathways.tsv"))
+write_tsv(final_df_up_viable, here("figures/up_consistent_pseudocount_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}

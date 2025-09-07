@@ -22,9 +22,7 @@ summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv")
 ### Up individual signatures
 ```{r define indiv file paths}
 marray_path_up <- here("data/v2/microarray_pathways/up")
-# marray_path_dn <- here("data/v2/microarray_pathways/dn")
 rnaseq_path_up <- here("data/v2/RNAseq_pathways/up")
-# rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
 ```
 
 ```{r define accessory variables/paths}
@@ -94,7 +92,7 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
-#write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv"))
+write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv"))
 ```
 
 ### up pathways that are highly variable
