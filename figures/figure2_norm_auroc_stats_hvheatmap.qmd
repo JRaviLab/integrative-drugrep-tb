@@ -1,5 +1,10 @@
 ```{r}
 library(readr)
+library(here)
+library(ComplexHeatmap)
+library(circlize)
+library(matrixStats)
+library(proxy)
 ```
 
 ```{r define highly variable pathways}
@@ -39,49 +44,25 @@ up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individ
 ```
 
 ```{r up hv plot}
-library(ComplexHeatmap)
-library(circlize)
-library(matrixStats)
-# optional if you want NA-aware distances
-# install.packages("proxy")
-library(proxy)
+# build matrix and set row names
+up_norm_auroc_mat <- as.matrix(up_norm_auroc_df[, !(names(up_norm_auroc_df) %in% "up_hv_pseudocount_pathways")])
+rownames(up_norm_auroc_mat) <- up_norm_auroc_df$up_hv_pseudocount_pathways
 
-# Build matrix and set row names
-X <- as.matrix(up_norm_auroc_df[, !(names(up_norm_auroc_df) %in% "up_hv_pseudocount_pathways")])
-rownames(X) <- up_norm_auroc_df$up_hv_pseudocount_pathways
+# ensure numeric
+storage.mode(up_norm_auroc_mat) <- "numeric"
 
-# Ensure numeric
-storage.mode(X) <- "numeric"
+# color scale: clamp to data range to avoid outlier washout
+lims <- range(up_norm_auroc_mat, finite = TRUE)
+col_fun <- colorRamp2(c(-1, 0, 1), c("darkblue", "white", "darkred"))
 
-# Clean non-finite values
-X[!is.finite(X)] <- NA
+plot_up <- Heatmap(up_norm_auroc_mat, name = "normalized AUROC", col = col_fun,
+        na_col = "lightgrey", cluster_rows = FALSE, cluster_columns = FALSE,
+        heatmap_legend_param = list(
+            at = c(-1, -0.5, 0, 0.5, 1), # ticks you want to show
+            labels = c("-1", "-0.5", "0", "0.5", "1")
+        ))
 
-# Drop all-NA rows/cols
-X <- X[rowSums(is.na(X)) < ncol(X), , drop = FALSE]
-X <- X[, colSums(is.na(X)) < nrow(X), drop = FALSE]
-
-# Impute remaining NAs to a neutral value (for normalized AUROC centered at 0)
-if (anyNA(X)) X[is.na(X)] <- 0
-
-# Drop zero-variance rows/cols (they break distance/clustering)
-rv <- rowVars(X); cv <- colVars(X)
-X <- X[rv > 0 & !is.na(rv), , drop = FALSE]
-X <- X[, cv > 0 & !is.na(cv), drop = FALSE]
-
-# Color scale: clamp to data range to avoid outlier washout
-lims <- range(X, finite = TRUE)
-lo <- max(-1, lims[1]); hi <- min(1, lims[2])
-col_fun <- colorRamp2(c(lo, 0, hi), c("darkblue", "white", "darkred"))
-
-# Optional: NA-aware distances (comment these two lines to use defaults)
-dist_rows  <- function(m) proxy::dist(m,      method = "euclidean", na.rm = TRUE)
-dist_cols  <- function(m) proxy::dist(t(m),   method = "euclidean", na.rm = TRUE)
-
-# Plot
-Heatmap(X, name = "normalized AUROC", col = col_fun,
-        na_col = "lightgrey", cluster_rows = TRUE, cluster_columns = TRUE)
-
-
+draw(plot_up, heatmap_legend_side = "left")
 ```
 
 ### Downregulated pathways
@@ -113,4 +94,26 @@ colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colname
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
       by.x="dn_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
+```
+
+```{r up hv plot}
+# build matrix and set row names
+dn_norm_auroc_mat <- as.matrix(dn_norm_auroc_df[, !(names(dn_norm_auroc_df) %in% "dn_hv_pseudocount_pathways")])
+rownames(dn_norm_auroc_mat) <- dn_norm_auroc_df$dn_hv_pseudocount_pathways
+
+# ensure numeric
+storage.mode(dn_norm_auroc_mat) <- "numeric"
+
+# color scale: clamp to data range to avoid outlier washout
+lims <- range(dn_norm_auroc_mat, finite = TRUE)
+col_fun <- colorRamp2(c(-1, 0, 1), c("darkblue", "white", "darkred"))
+
+plot_dn <- Heatmap(dn_norm_auroc_mat, name = "normalized AUROC", col = col_fun,
+        na_col = "lightgrey", cluster_rows = FALSE, cluster_columns = FALSE,
+        heatmap_legend_param = list(
+            at = c(-1, -0.5, 0, 0.5, 1), # ticks you want to show
+            labels = c("-1", "-0.5", "0", "0.5", "1")
+        ))
+
+draw(plot_dn, heatmap_legend_side = "left")
 ```
