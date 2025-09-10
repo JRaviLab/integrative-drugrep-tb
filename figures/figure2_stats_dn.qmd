@@ -425,29 +425,29 @@ gt_top10_positive_origin <- top10_positive_origin %>%
 gt_top10_negative_origin <- top10_negative_origin %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 GO terms enriched in RNAseq") %>%
+  tab_header(title = "Top 10 GO terms enriched in cell line") %>%
   cols_label(
     GO_term = "GO Term",
-    median_diff = "Median difference (microarray - RNAseq)",
+    median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
   )
 
 # Combine top 10 positive and negative as a single dataframe first
 top_combined_df_microarray_rnaseq <- bind_rows(
-  top10_positive_origin %>% mutate(Enriched_in = "Microarray"),
-  top10_negative_origin %>% mutate(Enriched_in = "RNAseq")
+  top10_positive_origin %>% mutate(Enriched_in = "primary"),
+  top10_negative_origin %>% mutate(Enriched_in = "cell line")
 )
 
 # Create one combined gt table
 gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO terms more enriched in microarray or RNAseq") %>%
+  tab_header(title = "Top dnregulated GO terms more enriched in primary or cell line") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
-    median_diff = "Median difference (microarray - RNAseq)",
+    median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
   ) %>%
