@@ -302,14 +302,21 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2a_up_consistent_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 60, height = 30)
+pdf(here("figures/Figure2a_up_consistent_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 70, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
+# read in annotation table
+annotation_table = read_tsv(here("figures/figure2_annotation_table.tsv"))
+# create data matrix for viz
+viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
+colnames(viz_mat_up) <- up_annotation_table$ID
+colnames(viz_mat_up)[(ncol(viz_mat_up) - 1):ncol(viz_mat_up)] <- c("aggregated_microarray", "aggregated_RNAseq")
+
 heatmap_sig_up_go <- Heatmap(
-  sig_mat_indiv_aggr_up_ordered_mat,
+  viz_mat_up,
   name = "GO term enrichment",
   na_col = "lightgrey",
   col = col_fun,

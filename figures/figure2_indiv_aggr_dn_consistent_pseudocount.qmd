@@ -323,8 +323,13 @@ sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
+dn_annotation_table = read_tsv(here("figures/figure2_annotation_table.tsv"))
+viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
+colnames(viz_mat_dn) <- dn_annotation_table$ID
+colnames(viz_mat_dn)[(ncol(viz_mat_dn) - 1):ncol(viz_mat_dn)] <- c("aggregated_microarray", "aggregated_RNAseq")
+
 heatmap_sig_dn_go <- Heatmap(
-  sig_mat_indiv_aggr_dn_ordered_mat,
+  viz_mat_dn,
   name = "GO term enrichment",
   na_col = "lightgrey",
   col = col_fun,
