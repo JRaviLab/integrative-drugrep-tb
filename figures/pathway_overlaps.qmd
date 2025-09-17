@@ -102,8 +102,8 @@ library(circlize)
 pdf(file = here("figures/up_pathway_overlap_matrix.pdf"), width = 25, height = 25)
 
 up_pathway_overlap_vector <- as.vector(up_pathway_overlap_matrix)
-ninetyfive_percentile <- quantile(up_pathway_overlap_vector, probs = 0.90)
-five_percentile <- quantile(up_pathway_overlap_vector, probs = 0.25)
+ninetyfive_percentile <- quantile(up_pathway_overlap_vector, probs = 0.95)
+five_percentile <- quantile(up_pathway_overlap_vector, probs = 0.05)
 # Define color function
 col_fun <- colorRamp2(
   c(0, five_percentile, ninetyfive_percentile),
@@ -144,8 +144,8 @@ library(circlize)
 pdf(file = here("figures/dn_pathway_overlap_matrix.pdf"), width = 25, height = 25)
 
 dn_pathway_overlap_vector <- as.vector(dn_pathway_overlap_matrix)
-ninetyfive_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.9)
-five_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.25)
+ninetyfive_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.95)
+five_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.05)
 # Define color function
 col_fun <- colorRamp2(
   c(0, five_percentile, ninetyfive_percentile),
