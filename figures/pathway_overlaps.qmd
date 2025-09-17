@@ -1,0 +1,180 @@
+# Pathway Overlaps
+
+```{r}
+library(here)
+library(readr)
+library(tidyverse)
+
+# read in up TB pathways
+microarray_up_pathways = list.files(path = here("data/v2/microarray_pathways/up/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE,
+                            pattern = "*_up.tsv") 
+rnaseq_up_pathways = list.files(path = here("data/v2/RNAseq_pathways/up/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE,
+                            pattern = "*_up.tsv")  
+# read in dn TB pathways
+microarray_dn_pathways = list.files(path = here("data/v2/microarray_pathways/dn/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE,
+                            pattern = "*_dn.tsv")
+rnaseq_dn_pathways = list.files(path = here("data/v2/RNAseq_pathways/dn/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE,
+                            pattern = "*_dn.tsv")
+
+microarray_up_pathways_list <- list()
+for (up_path_micro in microarray_up_pathways) {
+  up_path_pathways_df <- read_tsv(here(paste0("data/v2/microarray_pathways/up/", up_path_micro)))
+  up_path_pathways_df <- up_path_pathways_df[up_path_pathways_df$qvalue < 0.05,]
+  up_path_pathways <- up_path_pathways_df$ID
+  # store the pathway vector in a named list
+  up_path_micro = gsub(".tsv", "", up_path_micro)
+  microarray_up_pathways_list[[up_path_micro]] <- up_path_pathways
+}
+
+microarray_dn_pathways_list <- list()
+for (dn_path_micro in microarray_dn_pathways) {
+  dn_path_pathways_df <- read_tsv(here(paste0("data/v2/microarray_pathways/dn/", dn_path_micro)))
+  dn_path_pathways_df <- dn_path_pathways_df[dn_path_pathways_df$qvalue < 0.05,]
+  dn_path_pathways <- dn_path_pathways_df$ID
+  # store the pathway vector in a named list
+  dn_path_micro = gsub(".tsv", "", dn_path_micro)
+  microarray_dn_pathways_list[[dn_path_micro]] <- dn_path_pathways
+}
+
+rnaseq_up_pathways_list <- list()
+for (up_path_rnaseq in rnaseq_up_pathways) {
+  up_path_pathways_df <- read_tsv(here(paste0("data/v2/RNAseq_pathways/up/", up_path_rnaseq)))
+  up_path_pathways_df <- up_path_pathways_df[up_path_pathways_df$qvalue < 0.05,]
+  rows_with_all_na <- rowSums(is.na(up_path_pathways_df)) == ncol(up_path_pathways_df)
+  up_path_pathways_df_clean <- up_path_pathways_df[!rows_with_all_na, ]
+  up_path_pathways <- up_path_pathways_df_clean$ID
+  # store the pathway vector in a named list
+  up_path_rnaseq = gsub(".tsv", "", up_path_rnaseq)
+  rnaseq_up_pathways_list[[up_path_rnaseq]] <- up_path_pathways
+}
+
+rnaseq_dn_pathways_list <- list()
+for (dn_path_rnaseq in rnaseq_dn_pathways) {
+  dn_path_pathways_df <- read_tsv(here(paste0("data/v2/RNAseq_pathways/dn/", dn_path_rnaseq)))
+  dn_path_pathways_df <- dn_path_pathways_df[dn_path_pathways_df$qvalue < 0.05,]
+  rows_with_all_na <- rowSums(is.na(dn_path_pathways_df)) == ncol(dn_path_pathways_df)
+  dn_path_pathways_df_clean <- dn_path_pathways_df[!rows_with_all_na, ]
+  dn_path_pathways <- dn_path_pathways_df_clean$ID
+  # store the pathway vector in a named list
+  dn_path_rnaseq = gsub(".tsv", "", dn_path_rnaseq)
+  rnaseq_dn_pathways_list[[dn_path_rnaseq]] <- dn_path_pathways
+}
+
+up_pathway_list = c(microarray_up_pathways_list, rnaseq_up_pathways_list)
+dn_pathway_list = c(microarray_dn_pathways_list, rnaseq_dn_pathways_list)
+
+get_pathway_overlap_matrix <- function(pathway_lists){
+  # initialize an empty matrix
+  n <- length(pathway_lists)
+  overlap_matrix <- matrix(0, nrow = n, ncol = n)
+  rownames(overlap_matrix) <- colnames(overlap_matrix) <- names(pathway_lists)
+
+  # fill in the matrix with intersection sizes
+  for (i in 1:n) {
+    for (j in 1:n) {
+      overlap_matrix[i, j] <- length(intersect(pathway_lists[[i]], pathway_lists[[j]]))
+    }
+  }
+
+  return(overlap_matrix)
+}
+
+up_pathway_overlap_matrix = get_pathway_overlap_matrix(up_pathway_list)
+dn_pathway_overlap_matrix = get_pathway_overlap_matrix(dn_pathway_list)
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+# define the output file path
+pdf(file = here("figures/up_pathway_overlap_matrix.pdf"), width = 25, height = 25)
+
+up_pathway_overlap_vector <- as.vector(up_pathway_overlap_matrix)
+ninetyfive_percentile <- quantile(up_pathway_overlap_vector, probs = 0.90)
+five_percentile <- quantile(up_pathway_overlap_vector, probs = 0.25)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightgreen" , "darkgreen")
+)
+ht <- Heatmap(
+  up_pathway_overlap_matrix,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Number of intersecting pathways",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  column_names_gp = gpar(fontsize = 10),
+  row_names_gp = gpar(fontsize = 10),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 12),
+    labels_gp = gpar(fontsize = 12)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ht, heatmap_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+# define the output file path
+pdf(file = here("figures/dn_pathway_overlap_matrix.pdf"), width = 25, height = 25)
+
+dn_pathway_overlap_vector <- as.vector(dn_pathway_overlap_matrix)
+ninetyfive_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.9)
+five_percentile <- quantile(dn_pathway_overlap_vector, probs = 0.25)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightblue" , "blue")
+)
+ht <- Heatmap(
+  dn_pathway_overlap_matrix,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Number of intersecting pathways",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  column_names_gp = gpar(fontsize = 10),
+  row_names_gp = gpar(fontsize = 10),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 12),
+    labels_gp = gpar(fontsize = 12)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ht, heatmap_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```

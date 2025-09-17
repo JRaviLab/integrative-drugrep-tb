@@ -1,0 +1,180 @@
+# Gene Overlaps
+
+```{r}
+library(here)
+library(readr)
+library(tidyverse)
+
+# read in up TB signatures
+microarray_up_signatures = list.files(path = here("data/v2/DE_results/microarray/up/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE) 
+rnaseq_up_signatures = list.files(path = here("data/v2/DE_results/RNAseq/up/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE) 
+# read in dn TB signatures
+microarray_dn_signatures = list.files(path = here("data/v2/DE_results/microarray/dn/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE) 
+rnaseq_dn_signatures = list.files(path = here("data/v2/DE_results/RNAseq/dn/"), 
+                            all.files = FALSE, 
+                            full.names = FALSE, 
+                            recursive = FALSE) 
+
+microarray_up_genes_list <- list()
+for (up_sig_micro in microarray_up_signatures) {
+  # construct path using the current signature name
+  up_sig_genes_df <- read_tsv(here(paste0("data/v2/DE_results/microarray/up/", up_sig_micro)))
+  up_sig_genes_df <- up_sig_genes_df[up_sig_genes_df$adj.P.Val < 0.05,]
+  up_sig_genes <- up_sig_genes_df$GeneID
+  # store the gene vector in a named list
+  up_sig_micro = gsub(".tsv", "", up_sig_micro)
+  microarray_up_genes_list[[up_sig_micro]] <- up_sig_genes
+}
+
+microarray_dn_genes_list <- list()
+for (dn_sig_micro in microarray_dn_signatures) {
+  # construct path using the current signature name
+  dn_sig_genes_df <- read_tsv(here(paste0("data/v2/DE_results/microarray/dn/", dn_sig_micro)))
+  dn_sig_genes_df <- dn_sig_genes_df[dn_sig_genes_df$adj.P.Val < 0.05,]
+  dn_sig_genes <- dn_sig_genes_df$GeneID
+  # store the gene vector in a named list
+  dn_sig_micro = gsub(".tsv", "", dn_sig_micro)
+  microarray_dn_genes_list[[dn_sig_micro]] <- dn_sig_genes
+}
+
+rnaseq_up_genes_list <- list()
+for (up_sig_rnaseq in rnaseq_up_signatures) {
+  # construct path using the current signature name
+  up_sig_genes_df <- read_tsv(here(paste0("data/v2/DE_results/RNAseq/up/", up_sig_rnaseq)))
+  up_sig_genes_df <- up_sig_genes_df[up_sig_genes_df$adj.P.Val < 0.05,]
+  rows_with_all_na <- rowSums(is.na(up_sig_genes_df)) == ncol(up_sig_genes_df)
+  up_sig_genes_df_clean <- up_sig_genes_df[!rows_with_all_na, ]
+  up_sig_genes <- up_sig_genes_df_clean$GeneID
+  # store the gene vector in a named list
+  up_sig_rnaseq = gsub(".tsv", "", up_sig_rnaseq)
+  rnaseq_up_genes_list[[up_sig_rnaseq]] <- up_sig_genes
+}
+
+rnaseq_dn_genes_list <- list()
+for (dn_sig_rnaseq in rnaseq_dn_signatures) {
+  # construct path using the current signature name
+  dn_sig_genes_df <- read_tsv(here(paste0("data/v2/DE_results/RNAseq/dn/", dn_sig_rnaseq)))
+  dn_sig_genes_df <- dn_sig_genes_df[dn_sig_genes_df$adj.P.Val < 0.05,]
+  rows_with_all_na <- rowSums(is.na(dn_sig_genes_df)) == ncol(dn_sig_genes_df)
+  dn_sig_genes_df_clean <- dn_sig_genes_df[!rows_with_all_na, ]
+  dn_sig_genes <- dn_sig_genes_df_clean$GeneID
+  # store the gene vector in a named list
+  dn_sig_rnaseq = gsub(".tsv", "", dn_sig_rnaseq)
+  rnaseq_dn_genes_list[[dn_sig_rnaseq]] <- dn_sig_genes
+}
+
+up_gene_list = c(microarray_up_genes_list, rnaseq_up_genes_list)
+dn_gene_list = c(microarray_dn_genes_list, rnaseq_dn_genes_list)
+
+get_gene_overlap_matrix <- function(gene_lists){
+  # initialize an empty matrix
+  n <- length(gene_lists)
+  overlap_matrix <- matrix(0, nrow = n, ncol = n)
+  rownames(overlap_matrix) <- colnames(overlap_matrix) <- names(gene_lists)
+
+  # fill in the matrix with intersection sizes
+  for (i in 1:n) {
+    for (j in 1:n) {
+      overlap_matrix[i, j] <- length(intersect(gene_lists[[i]], gene_lists[[j]]))
+    }
+  }
+
+  return(overlap_matrix)
+}
+
+up_gene_overlap_matrix = get_gene_overlap_matrix(up_gene_list)
+dn_gene_overlap_matrix = get_gene_overlap_matrix(dn_gene_list)
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+# define the output file path
+pdf(file = here("figures/up_gene_overlap_matrix.pdf"), width = 25, height = 25)
+
+up_gene_overlap_vector <- as.vector(up_gene_overlap_matrix)
+ninetyfive_percentile <- quantile(up_gene_overlap_vector, probs = 0.90)
+five_percentile <- quantile(up_gene_overlap_vector, probs = 0.25)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightgreen" , "darkgreen")
+)
+ht <- Heatmap(
+  up_gene_overlap_matrix,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Number of intersecting genes",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  column_names_gp = gpar(fontsize = 10),
+  row_names_gp = gpar(fontsize = 10),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 12),
+    labels_gp = gpar(fontsize = 12)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ht, heatmap_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+# define the output file path
+pdf(file = here("figures/dn_gene_overlap_matrix.pdf"), width = 25, height = 25)
+
+dn_gene_overlap_vector <- as.vector(dn_gene_overlap_matrix)
+ninetyfive_percentile <- quantile(dn_gene_overlap_vector, probs = 0.9)
+five_percentile <- quantile(dn_gene_overlap_vector, probs = 0.25)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightblue" , "blue")
+)
+ht <- Heatmap(
+  dn_gene_overlap_matrix,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Number of intersecting genes",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  column_names_gp = gpar(fontsize = 10),
+  row_names_gp = gpar(fontsize = 10),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 12),
+    labels_gp = gpar(fontsize = 12)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ht, heatmap_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```
