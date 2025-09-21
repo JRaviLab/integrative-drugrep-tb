@@ -1,4 +1,4 @@
-# Gene Overlaps
+# Gene overalps via jaccard index
 
 ```{r}
 library(here)
@@ -79,54 +79,54 @@ for (dn_sig_rnaseq in rnaseq_dn_signatures) {
 up_gene_list = c(microarray_up_genes_list, rnaseq_up_genes_list)
 dn_gene_list = c(microarray_dn_genes_list, rnaseq_dn_genes_list)
 
-get_gene_overlap_matrix <- function(gene_lists){
+get_gene_jaccard_matrix <- function(gene_lists){
   # initialize an empty matrix
   n <- length(gene_lists)
-  overlap_matrix <- matrix(0, nrow = n, ncol = n)
-  rownames(overlap_matrix) <- colnames(overlap_matrix) <- names(gene_lists)
+  jaccard_matrix <- matrix(0, nrow = n, ncol = n)
+  rownames(jaccard_matrix) <- colnames(jaccard_matrix) <- names(gene_lists)
 
   # fill in the matrix with intersection sizes
   for (i in 1:n) {
     for (j in 1:n) {
-      overlap_matrix[i, j] <- length(intersect(gene_lists[[i]], gene_lists[[j]]))
+      jaccard_matrix[i, j] <- length(intersect(gene_lists[[i]], gene_lists[[j]])) / length(union(gene_lists[[i]], gene_lists[[j]]))
     }
   }
 
-  return(overlap_matrix)
+  return(jaccard_matrix)
 }
 
-up_gene_overlap_matrix = get_gene_overlap_matrix(up_gene_list)
-dn_gene_overlap_matrix = get_gene_overlap_matrix(dn_gene_list)
+up_gene_jaccard_matrix = get_gene_jaccard_matrix(up_gene_list)
+dn_gene_jaccard_matrix = get_gene_jaccard_matrix(dn_gene_list)
 ```
 
 ```{r}
 library(ComplexHeatmap)
 library(circlize)
 # define the output file path
-pdf(file = here("figures/up_landmarkgene_overlap_matrix.pdf"), width = 25, height = 25)
+pdf(file = here("figures/up_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
 
-up_gene_overlap_vector <- as.vector(up_gene_overlap_matrix)
-ninetyfive_percentile <- quantile(up_gene_overlap_vector, probs = 0.90)
-five_percentile <- quantile(up_gene_overlap_vector, probs = 0.05)
+up_gene_jaccard_vector <- as.vector(up_gene_jaccard_matrix)
+ninetyfive_percentile <- quantile(up_gene_jaccard_vector, probs = 0.90)
+five_percentile <- quantile(up_gene_jaccard_vector, probs = 0.05)
 # Define color function
 col_fun <- colorRamp2(
   c(0, five_percentile, ninetyfive_percentile),
   c("white","lightgreen" , "darkgreen")
 )
 ht <- Heatmap(
-  up_gene_overlap_matrix,
+  up_gene_jaccard_matrix,
   cluster_rows = FALSE,
   cluster_columns = FALSE,
   name = "Number of intersecting genes",
   col = col_fun,
   column_names_rot = 45,
   column_names_side = "top",
-  column_names_gp = gpar(fontsize = 10),
-  row_names_gp = gpar(fontsize = 10),
+  column_names_gp = gpar(fontsize = 15),
+  row_names_gp = gpar(fontsize = 15),
   na_col = "white",
   heatmap_legend_param = list(
-    title_gp = gpar(fontsize = 12),
-    labels_gp = gpar(fontsize = 12)
+    title_gp = gpar(fontsize = 15),
+    labels_gp = gpar(fontsize = 15)
   ),
   width = unit(30, "cm"),
   height = unit(30, "cm")
