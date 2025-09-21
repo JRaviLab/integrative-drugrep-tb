@@ -276,11 +276,22 @@ for(technology in technologies){
       
       # calculate pseudocount
         enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(aggr_signature) / enrichGO_res_corrected$bp_gene_length)
+        
+        # merge with all go terms
+        aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+
+        # replace NAs with 0 enrichment
+        aggr_merged$pvalue[is.na(aggr_merged$pvalue)] <- 1
+        aggr_merged$p.adjust[is.na(aggr_merged$p.adjust)] <- 1
+        aggr_merged$qvalue[is.na(aggr_merged$qvalue)] <- 1
+        aggr_merged$geneID[is.na(aggr_merged$geneID)] <- ""
+        aggr_merged[is.na(aggr_merged)] <- 0  
+        print(paste0("Final dimension: ", paste(dim(aggr_merged), collapse = " x ")))
     
       # save results
-      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
+      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
     
-      write_tsv(enrichGO_res_corrected, file = output_file_aggr)
+      write_tsv(aggr_merged, file = output_file_aggr)
     }
   }
 }
@@ -332,11 +343,22 @@ for(technology in technologies){
       
       # calculate pseudocount
         enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(aggr_signature_blood) / enrichGO_res_corrected$bp_gene_length)
+        
+        # merge with all go terms
+        blood_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+
+        # replace NAs with 0 enrichment
+        blood_aggr_merged$pvalue[is.na(blood_aggr_merged$pvalue)] <- 1
+        blood_aggr_merged$p.adjust[is.na(blood_aggr_merged$p.adjust)] <- 1
+        blood_aggr_merged$qvalue[is.na(blood_aggr_merged$qvalue)] <- 1
+        blood_aggr_merged$geneID[is.na(blood_aggr_merged$geneID)] <- ""
+        blood_aggr_merged[is.na(blood_aggr_merged)] <- 0  
+        print(paste0("Final dimension: ", paste(dim(blood_aggr_merged), collapse = " x ")))
     
       # save results
-      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("blood_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
+      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_blood_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
     
-      write_tsv(enrichGO_res_corrected, file = output_file_aggr)
+      write_tsv(blood_aggr_merged, file = output_file_aggr)
     }
   }
 }
