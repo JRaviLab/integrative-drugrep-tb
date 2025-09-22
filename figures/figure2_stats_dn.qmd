@@ -21,8 +21,8 @@ rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
 ```
 
 ```{r}
-pattern <- "GO_ORA_BGcorrected"
-prefix_sub <- "GO_ORA_BGcorrected"
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
 suffix_sub <- "dn.tsv"
 annotation_file = here('data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv')
 ```
@@ -201,7 +201,7 @@ tissue_MW_results$norm_auroc <- (2 * tissue_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(tissue_MW_results, here("figures/dn_circulating_lung_MW.tsv"))
+write_tsv(tissue_MW_results, here("figures/dn_allvals_circulating_lung_MW.tsv"))
 ```
 
 ```{r differentiating terms in gt format}
@@ -255,7 +255,7 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tissue, "dn_variance_circulating_lung_signiGO_terms.html")
+gtsave(gt_top_bottom_tissue, "dn_allvals_variance_circulating_lung_signiGO_terms.html")
 
 ```
 
@@ -303,7 +303,7 @@ technology_MW_results$norm_auroc <- (2 * technology_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(technology_MW_results, here("figures/dn_microarray_rnaseq_MW.tsv"))
+write_tsv(technology_MW_results, here("figures/dn_allvals_microarray_rnaseq_MW.tsv"))
 ```
 
 ```{r}
@@ -355,7 +355,7 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tech, "dn_variance_microarray_rnaseq_signiGO_terms.html")
+gtsave(gt_top_bottom_tech, "dn_allvals_variance_microarray_rnaseq_signiGO_terms.html")
 ```
 
 ```{r cell line vs. primary}
@@ -402,7 +402,7 @@ origin_MW_results$norm_auroc <- (2 * origin_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(origin_MW_results, here("figures/dn_primary_cellline_MW.tsv"))
+write_tsv(origin_MW_results, here("figures/dn_allvals_primary_cellline_MW.tsv"))
 ```
 
 ```{r}
@@ -435,15 +435,15 @@ gt_top10_negative_origin <- top10_negative_origin %>%
 
 # Combine top 10 positive and negative as a single dataframe first
 top_combined_df_microarray_rnaseq <- bind_rows(
-  top10_positive_origin %>% mutate(Enriched_in = "primary"),
-  top10_negative_origin %>% mutate(Enriched_in = "cell line")
+  top10_positive_origin %>% mutate(Enriched_in = "Primary"),
+  top10_negative_origin %>% mutate(Enriched_in = "Cell line")
 )
 
 # Create one combined gt table
 gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO terms more enriched in primary or cell line") %>%
+  tab_header(title = "Top dnregulated GO terms more enriched in primary or cell line signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
@@ -454,9 +454,11 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_origin, "dn_variance_primary_cellline_signiGO_terms.html")
+gtsave(gt_top_bottom_origin, "dn_allvals_variance_primary_cellline_signiGO_terms.html")
 ```
 
+
+#### NOT ENOUGH POWER FOR a MW test
 ```{r platform aggregated vs individual signatures}
 # Separate the group with signatures that partially match "aggregated"
 group_1_sigs <- summary_df %>% filter(grepl("aggregated", SIGNATURE_NAME)) %>% pull(SIGNATURE_NAME)

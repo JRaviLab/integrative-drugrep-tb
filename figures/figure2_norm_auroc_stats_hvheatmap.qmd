@@ -18,29 +18,29 @@ up_hv_pseudocount_pathways_df = as.data.frame(up_hv_pseudocount_pathways)
 ```
 
 ```{r read in stats results}
-up_circulating_lung_MW = read_tsv(here("figures/up_circulating_lung_MW.tsv"))
+up_circulating_lung_MW = read_tsv(here("figures/up_allvals_circulating_lung_MW.tsv"))
 colnames(up_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(up_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_hv_pseudocount_pathways_df, up_circulating_lung_MW[c("GO_term","circulating-lung")], 
       by.x="up_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_microarray_rnaseq_MW = read_tsv(here("figures/up_microarray_rnaseq_MW.tsv"))
+up_microarray_rnaseq_MW = read_tsv(here("figures/up_allvals_microarray_rnaseq_MW.tsv"))
 colnames(up_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(up_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
       by.x="up_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_primary_cellline_MW = read_tsv(here("figures/up_primary_cellline_MW.tsv"))
+up_primary_cellline_MW = read_tsv(here("figures/up_allvals_primary_cellline_MW.tsv"))
 colnames(up_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(up_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="up_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_indiv_aggr_MW = read_tsv(here("figures/up_indiv_aggr_MW.tsv"))
-colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-      by.x="up_hv_pseudocount_pathways", 
-      by.y="GO_term", all.x=TRUE)
+#up_indiv_aggr_MW = read_tsv(here("figures/up_indiv_aggr_MW.tsv"))
+#colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+#up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+#      by.x="up_hv_pseudocount_pathways", 
+#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r up plot prep}
@@ -55,29 +55,29 @@ dn_hv_pseudocount_pathways_df = as.data.frame(dn_hv_pseudocount_pathways)
 ```
 
 ```{r read in stats results}
-dn_circulating_lung_MW = read_tsv(here("figures/dn_circulating_lung_MW.tsv"))
+dn_circulating_lung_MW = read_tsv(here("figures/dn_allvals_circulating_lung_MW.tsv"))
 colnames(dn_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(dn_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_hv_pseudocount_pathways_df, dn_circulating_lung_MW[c("GO_term","circulating-lung")], 
       by.x="dn_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_microarray_rnaseq_MW = read_tsv(here("figures/dn_microarray_rnaseq_MW.tsv"))
+dn_microarray_rnaseq_MW = read_tsv(here("figures/dn_allvals_microarray_rnaseq_MW.tsv"))
 colnames(dn_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(dn_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
       by.x="dn_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_primary_cellline_MW = read_tsv(here("figures/dn_primary_cellline_MW.tsv"))
+dn_primary_cellline_MW = read_tsv(here("figures/dn_allvals_primary_cellline_MW.tsv"))
 colnames(dn_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(dn_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="dn_hv_pseudocount_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_indiv_aggr_MW = read_tsv(here("figures/dn_indiv_aggr_MW.tsv"))
-colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-      by.x="dn_hv_pseudocount_pathways", 
-      by.y="GO_term", all.x=TRUE)
+#dn_indiv_aggr_MW = read_tsv(here("figures/dn_indiv_aggr_MW.tsv"))
+#colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+#dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+#      by.x="dn_hv_pseudocount_pathways", 
+#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r dn plot prep}
@@ -101,7 +101,7 @@ common_cols <- common_cols[order(common_cols)]  # or your preferred order
 up_mat <- up_norm_auroc_mat[, common_cols, drop = FALSE]
 dn_mat <- dn_norm_auroc_mat[, common_cols, drop = FALSE]
 
-pdf(here("figures/Figure2_up_dn_hvariance_pseudocount_by_contrasts.pdf"),
+pdf(here("figures/Figure2_allvals_up_dn_hvariance_pseudocount_by_contrasts.pdf"),
     width = 40, height = 40)
 
 plot_up <- Heatmap(
