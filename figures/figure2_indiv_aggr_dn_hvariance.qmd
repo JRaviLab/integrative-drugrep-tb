@@ -26,20 +26,19 @@ rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
 ```
 
 ```{r define accessory variables/paths}
-pattern <- "GO_ORA_BGcorrected"
-prefix_sub <- "GO_ORA_BGcorrected"
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
 suffix_sub <- "dn.tsv"
 annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
-````{r microarray dn pathway clusters}
-marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
+```{r annotation and significant pathways}
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
-```{r RNAseq dn pathway clusters}
+````{r microarray and RNAseq dn pathways}
+marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 rnaseq_GO_mat_dn = get_GO_pseudocount_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
-GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r}
@@ -111,8 +110,10 @@ write_tsv(final_df_dn, here("figures/marray_rnaseq_pseudocount_dn_pathways.tsv")
 
 ### dn pathways that are highly variable
 ```{r}
-rnaseq_marray_GO_mat_dn <- final_df_dn
 final_df_dn_indiv <- final_df_dn[, !grepl("aggregated", colnames(final_df_dn))] # get pathway matrix for only individual signatures
+# read in significant pathways 
+signi_dn_pathways <- read_tsv(here("figures/dn_significant_bp_terms.tsv"))$dn_significant_bps
+final_df_dn_indiv <- final_df_dn_indiv[final_df_dn_indiv$Description %in% signi_dn_pathways,]
 
 descriptions <- final_df_dn_indiv$Description
 numeric_mat <- as.matrix(
@@ -323,7 +324,7 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2b_dn_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
+pdf(here("figures/Figure2b_dn_allvals_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%

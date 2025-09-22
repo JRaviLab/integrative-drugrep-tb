@@ -26,20 +26,20 @@ rnaseq_path_up <- here("data/v2/RNAseq_pathways/up")
 ```
 
 ```{r define accessory variables/paths}
-pattern <- "GO_ORA_BGcorrected"
-prefix_sub <- "GO_ORA_BGcorrected"
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
 suffix_sub <- "up.tsv"
 annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
-```{r microarray up pathway clusters}
-marray_GO_mat_up = get_GO_pseudocount_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+```{r annotation and significant pathways}
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
-```{r RNAseq up pathway clusters}
+```{r microarray and RNAseq up pathways}
+# get pseudocount matrix with all available pathways
+marray_GO_mat_up = get_GO_pseudocount_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
 rnaseq_GO_mat_up = get_GO_pseudocount_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
-GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r}
@@ -97,8 +97,10 @@ write_tsv(final_df_up, here("figures/marray_rnaseq_pseudocount_up_pathways.tsv")
 
 ### up pathways that are highly variable
 ```{r}
-rnaseq_marray_GO_mat_up <- final_df_up
 final_df_up_indiv <- final_df_up[, !grepl("aggregated", colnames(final_df_up))] # get pathway matrix for only individual signatures
+# read in significant pathways 
+signi_up_pathways <- read_tsv(here("figures/up_significant_bp_terms.tsv"))$up_significant_bps
+final_df_up_indiv <- final_df_up_indiv[final_df_up_indiv$Description %in% signi_up_pathways,]
 
 descriptions <- final_df_up_indiv$Description
 numeric_mat <- as.matrix(
@@ -264,8 +266,8 @@ sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, meta_df$SIGNATURE_NAME,
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
 
 col_fun <- colorRamp2(
-  c(0, max(actual_range)),
-  c("white", "#006164")
+  c(0, max(actual_range)/2 ,max(actual_range)),
+  c("white","#81cdc6" , "#006164")
 )
 
 # 5. Create top and bottom annotations
@@ -309,7 +311,7 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2a_up_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
+pdf(here("figures/Figure2a_up_allvals_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   mutate(across(everything(), as.numeric)) %>%

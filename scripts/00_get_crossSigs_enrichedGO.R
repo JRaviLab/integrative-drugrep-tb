@@ -18,7 +18,7 @@ get_GO_pseudocount_matrix <- function(data_path, pattern, prefix_sub, suffix_sub
   for(i in seq_along(filenames)){
     file <- filenames[i]
     GO_res <- read_tsv(file.path(data_path, file), show_col_types = FALSE)
-    GO_res <- GO_res[GO_res$qvalue < 0.05,]
+    #GO_res <- GO_res[GO_res$qvalue < 0.05,] # we are filtering out non-significant terms later
 
     # get signature name
     signature_name <- gsub(paste0(prefix_sub, "_"), "", file)
