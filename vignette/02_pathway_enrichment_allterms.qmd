@@ -72,47 +72,41 @@ get_descendants <- local({
 
 ##### Get all GO:BP terms
 ```{r}
+library(clusterProfiler)
 library(org.Hs.eg.db)
-library(GO.db)
-library(AnnotationDbi)
 
-# get all Entrez gene IDs from the OrgDb
-all_genes <- keys(org.Hs.eg.db, keytype = "ENTREZID")
+# set background genes
+bg_genes <- union(bg_genes_combined_up, bg_genes_combined_dn)
 
-# map Entrez IDs to GO terms
-gene2go <- AnnotationDbi::select(
-  org.Hs.eg.db,
-  keys = all_genes,
-  columns = c("GO", "ONTOLOGY"),
+# parameters
+ont <- "BP"
+minGSSize <- 5
+maxGSSize <- 200
+
+# extract GO data as used by enrichGO()
+godata <- clusterProfiler:::get_GO_data(
+  OrgDb = org.Hs.eg.db,
+  ont = ont,
   keytype = "ENTREZID"
 )
 
-# keep only BP terms
-gene2go_bp <- subset(gene2go, ONTOLOGY == "BP" & !is.na(GO))
-
-# create a list: GO term → vector of Entrez IDs
-go_map <- split(gene2go_bp$ENTREZID, gene2go_bp$GO)
-
-# filter by gene set size
-minSize <- 5
-maxSize <- 200
-
-go_map <- go_map[sapply(go_map, function(x) {
-  n <- length(unique(x))
-  n >= minSize && n <= maxSize
-})]
-
-# add descriptions
-go_terms <- data.frame(
-  GO_ID = names(go_map),
-  Description = Term(GOTERM[names(go_map)]),
-  GeneSetSize = sapply(go_map, function(x) length(unique(x))),
-  stringsAsFactors = FALSE
+# load GO data (all genes from OrgDb)
+godata <- clusterProfiler:::get_GO_data(
+  OrgDb = org.Hs.eg.db,
+  ont = "BP",
+  keytype = "ENTREZID"
 )
 
-head(go_terms)
+# filter gene sets to include only genes in your universe
+go_list <- godata$PATHID2EXTID
 
-
+# build data frame of term descriptions
+go_terms <- data.frame(
+  GO_ID = names(go_list),
+  Description = Term(GOTERM[names(go_list)]),
+  GeneSetSize = sapply(go_list, function(x) length(unique(intersect(x, bg_genes)))),
+  stringsAsFactors = FALSE
+)
 ```
 
 ###### Individual signatures
@@ -122,7 +116,9 @@ directions <- c("up", "dn")
 json_propagated_genes <- fromJSON(here("data/metadata/propagated_annotations.json"))
 bp_gene_length_df <- as.data.frame(lengths(json_propagated_genes))
 colnames(bp_gene_length_df)[1] <- "bp_gene_length"
-bp_gene_length_df$ID<- row.names(bp_gene_length_df)
+bp_gene_length_df$ID <- row.names(bp_gene_length_df)
+up_significant_bps <- c()
+dn_significant_bps <- c()
 
 for (technology in technologies) {
 
@@ -205,6 +201,10 @@ for (technology in technologies) {
         # calculate pseudocount
         enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
         
+        # check if the universal bp terms are valid
+        print("All BP terms are valid?")
+        print(unique(enrichGO_res_corrected$Description %in% go_terms$Description))
+        
         # merge with all go terms
         merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
 
@@ -215,6 +215,13 @@ for (technology in technologies) {
         merged$geneID[is.na(merged$geneID)] <- ""
         merged[is.na(merged)] <- 0  
         print(paste0("Final dimension: ", paste(dim(merged), collapse = " x ")))
+        
+        # get significant BP terms and save into up,dn sets separately
+        if(direction == "up"){
+          up_significant_bps <- c(up_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
+        }else if(direction == "dn"){
+          dn_significant_bps <- c(dn_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
+        }
         
         # save results
         base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
@@ -227,6 +234,14 @@ for (technology in technologies) {
     }
   }
 }
+
+up_significant_bps = unique(up_significant_bps)
+up_significant_bps_df = as.data.frame(up_significant_bps)
+write_tsv(up_significant_bps_df, here("figures/up_significant_bp_terms.tsv"))
+
+dn_significant_bps = unique(dn_significant_bps)
+dn_significant_bps_df = as.data.frame(dn_significant_bps)
+write_tsv(dn_significant_bps_df, here("figures/dn_significant_bp_terms.tsv"))
 ```
 
 ###### Aggregated signatures
@@ -249,8 +264,8 @@ for(technology in technologies){
                              readable = TRUE,
                              ont = "BP",
                              universe = bg_genes,
-                             pvalueCutoff = 0.05,
-                             qvalueCutoff = 0.1,
+                             pvalueCutoff = 1, # allows all terms
+                             qvalueCutoff = 1, # allows all terms
                              minGSSize = 5,
                              maxGSSize = 200)
     
@@ -316,8 +331,8 @@ for(technology in technologies){
                              readable = TRUE,
                              ont = "BP",
                              universe = bg_genes,
-                             pvalueCutoff = 0.05,
-                             qvalueCutoff = 0.1,
+                             pvalueCutoff = 1, # allows all terms
+                             qvalueCutoff = 1, # allows all terms
                              minGSSize = 5,
                              maxGSSize = 200)
     
