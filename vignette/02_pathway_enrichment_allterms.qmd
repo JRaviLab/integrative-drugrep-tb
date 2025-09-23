@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 09/21/25 ;  get values for all pathways (removed statistical significance criteria)
+# Last modified: 09/23/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected'
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -49,26 +49,6 @@ bg_genes_combined_dn <- get_combined_bg_genes(
 ```
 
 ##### Pathway enrichment analysis 
-```{r get children terms for propagation}
-### not using this anymore
-bp_children <- AnnotationDbi::as.list(GOBPCHILDREN)
-get_descendants <- local({
-  cache <- new.env(parent = emptyenv())
-  function(root) {
-    if (!is.null(cache[[root]])) return(cache[[root]])
-    seen <- character(); stack <- unname(bp_children[[root]])
-    while (length(stack)) {
-      kid <- stack[[1]]; stack <- stack[-1]
-      if (is.na(kid) || kid %in% seen) next
-      seen <- c(seen, kid)
-      stack <- c(stack, unname(bp_children[[kid]]))
-    }
-    seen <- unique(seen)
-    cache[[root]] <- seen
-    seen
-  }
-})
-```
 
 ##### Get all GO:BP terms
 ```{r}
@@ -196,10 +176,17 @@ for (technology in technologies) {
         )
       
         # calculate log(observed / expected)
-        enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
+        # GeneRatio = k/n
+        # k = the overlap between your genes-of-interest and the geneset
+        # n = the number of all unique genes of interest
+        # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
+        observed = enrichGO_res_corrected$GeneRatio * length(gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
+        # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
+        expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(gene_list)
+        enrichGO_res_corrected$log_observed_expected = log(observed / expected)
         
         # calculate pseudocount
-        enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(gene_list) / enrichGO_res_corrected$bp_gene_length)
+        enrichGO_res_corrected$pseudocount = asinh(observed / expected)
         
         # check if the universal bp terms are valid
         print("All BP terms are valid?")
@@ -250,7 +237,7 @@ technologies <- c("microarray", "RNAseq")
 directions <- c("up","dn")
 for(technology in technologies){
   for(direction in directions){
-    aggr_signature <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
+    aggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
     
     # define background genes
     if(direction == "up"){
@@ -259,7 +246,7 @@ for(technology in technologies){
       bg_genes <- bg_genes_combined_dn
     }
         
-    enrichGO_res_aggr <- enrichGO(gene = aggr_signature,
+    enrichGO_res_aggr <- enrichGO(gene = aggr_gene_list,
                              OrgDb = org.Hs.eg.db,
                              readable = TRUE,
                              ont = "BP",
@@ -287,21 +274,28 @@ for(technology in technologies){
       )
           
       # calculate log(observed / expected)
-      enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(aggr_signature) / enrichGO_res_corrected$bp_gene_length)
-      
-      # calculate pseudocount
-        enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(aggr_signature) / enrichGO_res_corrected$bp_gene_length)
+      # GeneRatio = k/n
+      # k = the overlap between your genes-of-interest and the geneset
+      # n = the number of all unique genes of interest
+      # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
+      observed = enrichGO_res_corrected$GeneRatio * length(aggr_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
+      # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
+      expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(aggr_gene_list)
+      enrichGO_res_corrected$log_observed_expected = log(observed / expected)
         
-        # merge with all go terms
-        aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+      # calculate pseudocount
+      enrichGO_res_corrected$pseudocount = asinh(observed / expected)
+        
+      # merge with all go terms
+      aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
 
-        # replace NAs with 0 enrichment
-        aggr_merged$pvalue[is.na(aggr_merged$pvalue)] <- 1
-        aggr_merged$p.adjust[is.na(aggr_merged$p.adjust)] <- 1
-        aggr_merged$qvalue[is.na(aggr_merged$qvalue)] <- 1
-        aggr_merged$geneID[is.na(aggr_merged$geneID)] <- ""
-        aggr_merged[is.na(aggr_merged)] <- 0  
-        print(paste0("Final dimension: ", paste(dim(aggr_merged), collapse = " x ")))
+      # replace NAs with 0 enrichment
+      aggr_merged$pvalue[is.na(aggr_merged$pvalue)] <- 1
+      aggr_merged$p.adjust[is.na(aggr_merged$p.adjust)] <- 1
+      aggr_merged$qvalue[is.na(aggr_merged$qvalue)] <- 1
+      aggr_merged$geneID[is.na(aggr_merged$geneID)] <- ""
+      aggr_merged[is.na(aggr_merged)] <- 0  
+      print(paste0("Final dimension: ", paste(dim(aggr_merged), collapse = " x ")))
     
       # save results
       output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
@@ -317,7 +311,7 @@ technologies <- c("RNAseq")
 directions <- c("up","dn")
 for(technology in technologies){
   for(direction in directions){
-    aggr_signature_blood <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/blood_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
+    bloodaggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/blood_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
     
     # define background genes
     if(direction == "up"){
@@ -326,7 +320,7 @@ for(technology in technologies){
       bg_genes <- bg_genes_combined_dn
     }
         
-    enrichGO_res_aggr <- enrichGO(gene = aggr_signature_blood,
+    enrichGO_res_aggr <- enrichGO(gene = bloodaggr_gene_list,
                              OrgDb = org.Hs.eg.db,
                              readable = TRUE,
                              ont = "BP",
@@ -354,21 +348,28 @@ for(technology in technologies){
       )
           
       # calculate log(observed / expected)
-      enrichGO_res_corrected$log_observed_expected = log(enrichGO_res_corrected$GeneRatio * length(aggr_signature_blood) / enrichGO_res_corrected$bp_gene_length)
-      
-      # calculate pseudocount
-        enrichGO_res_corrected$pseudocount = asinh(enrichGO_res_corrected$GeneRatio * length(aggr_signature_blood) / enrichGO_res_corrected$bp_gene_length)
+      # GeneRatio = k/n
+      # k = the overlap between your genes-of-interest and the geneset
+      # n = the number of all unique genes of interest
+      # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
+      observed = enrichGO_res_corrected$GeneRatio * length(bloodaggr_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
+      # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
+      expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(bloodaggr_gene_list)
+      enrichGO_res_corrected$log_observed_expected = log(observed / expected)
         
-        # merge with all go terms
-        blood_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+      # calculate pseudocount
+      enrichGO_res_corrected$pseudocount = asinh(observed / expected)
+        
+      # merge with all go terms
+      blood_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
 
-        # replace NAs with 0 enrichment
-        blood_aggr_merged$pvalue[is.na(blood_aggr_merged$pvalue)] <- 1
-        blood_aggr_merged$p.adjust[is.na(blood_aggr_merged$p.adjust)] <- 1
-        blood_aggr_merged$qvalue[is.na(blood_aggr_merged$qvalue)] <- 1
-        blood_aggr_merged$geneID[is.na(blood_aggr_merged$geneID)] <- ""
-        blood_aggr_merged[is.na(blood_aggr_merged)] <- 0  
-        print(paste0("Final dimension: ", paste(dim(blood_aggr_merged), collapse = " x ")))
+      # replace NAs with 0 enrichment
+      blood_aggr_merged$pvalue[is.na(blood_aggr_merged$pvalue)] <- 1
+      blood_aggr_merged$p.adjust[is.na(blood_aggr_merged$p.adjust)] <- 1
+      blood_aggr_merged$qvalue[is.na(blood_aggr_merged$qvalue)] <- 1
+      blood_aggr_merged$geneID[is.na(blood_aggr_merged$geneID)] <- ""
+      blood_aggr_merged[is.na(blood_aggr_merged)] <- 0  
+      print(paste0("Final dimension: ", paste(dim(blood_aggr_merged), collapse = " x ")))
     
       # save results
       output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_blood_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
