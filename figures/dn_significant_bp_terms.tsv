@@ -3,27 +3,24 @@ galactosylceramide metabolic process
 galactosylceramide biosynthetic process
 glycosphingolipid metabolic process
 glycosphingolipid biosynthetic process
-adenylate cyclase-activating G protein-coupled receptor signaling pathway
 blood coagulation, intrinsic pathway
 branched-chain amino acid biosynthetic process
 oligosaccharide biosynthetic process
 galactolipid metabolic process
 galactolipid biosynthetic process
-activation of protein kinase B activity
-vasoconstriction
 glycosylceramide biosynthetic process
-positive regulation of triglyceride lipase activity
 positive regulation of response to wounding
+regulation of Ras protein signal transduction
 spliceosomal complex assembly
 polysaccharide biosynthetic process
 response to reactive oxygen species
+telomere maintenance
 cytokinesis
 response to acid chemical
 action potential
 prostaglandin biosynthetic process
 retinoid metabolic process
 ovarian follicle development
-antral ovarian follicle growth
 urogenital system development
 metanephros development
 ureteric bud development
@@ -31,51 +28,44 @@ branching involved in ureteric bud morphogenesis
 temperature homeostasis
 long-chain fatty acid metabolic process
 intracellular glucose homeostasis
+gastric acid secretion
 gastrulation with mouth forming second
 formation of primary germ layer
 endoderm formation
 mesoderm formation
 cell fate specification
 organ induction
+morphogenesis of a branching structure
 mesonephros development
-response to yeast
 liver development
 placenta development
 embryonic placenta development
+cell killing
 leukocyte mediated cytotoxicity
 regulation of leukocyte mediated cytotoxicity
 negative regulation of leukocyte mediated cytotoxicity
 T cell mediated cytotoxicity
 regulation of T cell mediated cytotoxicity
 endothelial cell proliferation
+regulation of endothelial cell proliferation
 hair follicle development
 endochondral ossification
 G protein-coupled adenosine receptor signaling pathway
+positive regulation of heart rate by epinephrine-norepinephrine
 regulation of the force of heart contraction
 regulation of heart rate
-desensitization of G protein-coupled receptor signaling pathway
-positive regulation of neuroblast proliferation
-positive regulation of mesenchymal cell proliferation
 chondrocyte differentiation
 columnar/cuboidal epithelial cell differentiation
 cytoplasmic translation
-cytoplasmic translational initiation
 innate immune response activating cell surface receptor signaling pathway
 innate immune response in mucosa
 organ or tissue specific immune response
-lymphocyte homeostasis
 myeloid cell homeostasis
 leukocyte activation involved in inflammatory response
 myeloid cell activation involved in immune response
-eosinophil activation involved in immune response
-mast cell activation involved in immune response
 mucosal immune response
 MHC protein complex assembly
-inflammatory response to antigenic stimulus
 myeloid leukocyte mediated immunity
-eosinophil mediated immunity
-mast cell mediated immunity
-T cell mediated immunity
 antigen processing and presentation of exogenous peptide antigen
 antigen processing and presentation of peptide antigen via MHC class II
 peptide antigen assembly with MHC protein complex
@@ -86,11 +76,8 @@ monocyte chemotaxis
 positive regulation of leukocyte migration
 regulation of leukocyte chemotaxis
 positive regulation of leukocyte chemotaxis
-negative regulation of leukocyte activation
-negative regulation of immune effector process
-positive regulation of production of molecular mediator of immune response
-regulation of lymphocyte mediated immunity
 cell surface pattern recognition receptor signaling pathway
+innate immune response-activating signaling pathway
 regulation of antimicrobial humoral response
 regulation of myeloid leukocyte differentiation
 negative regulation of myeloid leukocyte differentiation
@@ -98,6 +85,7 @@ antimicrobial peptide production
 antibacterial peptide production
 regulation of antimicrobial peptide production
 regulation of antibacterial peptide production
+regulation of peptide secretion
 negative regulation of peptide secretion
 positive regulation of peptide secretion
 negative regulation of response to biotic stimulus
@@ -106,40 +94,45 @@ response to ischemia
 skeletal muscle contraction
 renal system process
 negative regulation of systemic arterial blood pressure
-cardiac chamber development
-cardiac ventricle formation
-cardiac ventricle development
+regulation of animal organ formation
 cardiac neural crest cell migration involved in outflow tract morphogenesis
 regulation of membrane depolarization
+cardioblast proliferation
+regulation of cardioblast proliferation
 regulation of secondary heart field cardioblast proliferation
 cardiac muscle hypertrophy
+positive regulation of blood pressure by epinephrine-norepinephrine
 keratinocyte development
 mesenchymal to epithelial transition involved in metanephros morphogenesis
 regulation of mesenchymal to epithelial transition involved in metanephros morphogenesis
-detection of calcium ion
 polysaccharide metabolic process
 glycogen metabolic process
+glycogen biosynthetic process
 fucose metabolic process
-cellular aldehyde metabolic process
+glucose metabolic process
+ethanol metabolic process
+ethanol oxidation
+cellular glucan metabolic process
+acetyl-CoA biosynthetic process from pyruvate
 energy reserve metabolic process
 purine ribonucleoside salvage
 cAMP biosynthetic process
 cGMP biosynthetic process
 mitotic recombination
+nucleosome disassembly
 DNA-templated transcription initiation
 transcription initiation at RNA polymerase II promoter
 translational initiation
 regulation of translational initiation
-negative regulation of protein kinase activity
-protein dephosphorylation
 fatty acid beta-oxidation
 unsaturated fatty acid biosynthetic process
-prostaglandin metabolic process
 steroid biosynthetic process
 isoprenoid metabolic process
 terpenoid metabolic process
-xenobiotic metabolic process
 chloride transport
+neurotransmitter transport
+xenobiotic transmembrane transport
+intracellular copper ion homeostasis
 intracellular sodium ion homeostasis
 phagocytosis, recognition
 regulation of muscle contraction
@@ -149,20 +142,21 @@ regulation of striated muscle contraction
 acute-phase response
 complement activation
 cellular defense response
-tubulin complex assembly
-post-chaperonin tubulin folding pathway
 regulation of mitotic nuclear division
 receptor guanylyl cyclase signaling pathway
-activation of adenylate cyclase activity
+common-partner SMAD protein phosphorylation
+adenylate cyclase-activating G protein-coupled receptor signaling pathway
 adenylate cyclase-inhibiting G protein-coupled receptor signaling pathway
 phospholipase C-activating G protein-coupled receptor signaling pathway
 positive regulation of cytosolic calcium ion concentration
 gamma-aminobutyric acid signaling pathway
 neuropeptide signaling pathway
 integrin-mediated signaling pathway
-Ras protein signal transduction
+receptor signaling pathway via JAK-STAT
+tyrosine phosphorylation of STAT protein
+Rho protein signal transduction
 neurotransmitter secretion
-synaptic transmission, cholinergic
+ensheathment of neurons
 neuromuscular synaptic transmission
 penetration of zona pellucida
 gastrulation
@@ -173,127 +167,122 @@ mesoderm development
 skeletal muscle tissue development
 female pregnancy
 embryo implantation
+aging
 response to nutrient
 respiratory gaseous exchange by respiratory system
 digestion
 body fluid secretion
+phototransduction
 phototransduction, visible light
-learning
+sensory perception of sound
+memory
 rhythmic behavior
 circadian rhythm
-feeding behavior
+locomotory behavior
+chemosensory behavior
 regulation of heart contraction
 cholesterol metabolic process
-androgen metabolic process
 regulation of blood pressure
 opsonization
 regulation of G protein-coupled receptor signaling pathway
 insulin receptor signaling pathway
 glial cell migration
+axon ensheathment
 male gonad development
 female gonad development
-intrinsic apoptotic signaling pathway in response to oxidative stress
 cyclic nucleotide metabolic process
 cyclic nucleotide biosynthetic process
+glucan biosynthetic process
 deoxyribonucleotide biosynthetic process
 2'-deoxyribonucleotide biosynthetic process
 response to temperature stimulus
-response to pH
 mRNA transcription
-tRNA transcription
 oligosaccharide metabolic process
+oligosaccharide catabolic process
 response to heat
-response to cold
-response to UV
-response to fungus
 response to hexose
 response to glucose
-hexose mediated signaling
+hormone-mediated signaling pathway
 axis specification
 embryonic pattern specification
+epidermal cell differentiation
+anterior/posterior axis specification
 proximal/distal pattern formation
 intracellular water homeostasis
 specification of animal organ identity
-sugar mediated signaling pathway
+response to lithium ion
 vascular transport
 establishment or maintenance of transmembrane electrochemical gradient
-glucose mediated signaling pathway
 response to lead ion
 hydrogen peroxide-mediated programmed cell death
+response to acidic pH
 mesenchymal cell proliferation
 regulation of mesenchymal cell proliferation
+positive regulation of phospholipase activity
 regulation of calcium ion transport into cytosol
 positive regulation of calcium ion transport into cytosol
 regulation of platelet activation
 regulation of cellular ketone metabolic process
+positive regulation of platelet activation
 regulation of lamellipodium assembly
 positive regulation of cardiac muscle hypertrophy
 programmed cell death involved in cell development
 cell communication by electrical coupling
-regulation of cell communication by electrical coupling
-muscle cell apoptotic process
-striated muscle cell apoptotic process
-cardiac muscle cell apoptotic process
-regulation of muscle cell apoptotic process
 positive regulation of muscle cell apoptotic process
 positive regulation of striated muscle cell apoptotic process
 positive regulation of cardiac muscle cell apoptotic process
-positive regulation of sodium ion transport
-regulation of tumor necrosis factor-mediated signaling pathway
-regulation of myotube differentiation
+regulation of cellular carbohydrate metabolic process
+positive regulation of cGMP-mediated signaling
+negative regulation of cell-substrate adhesion
 positive regulation of myotube differentiation
 regulation of release of sequestered calcium ion into cytosol by sarcoplasmic reticulum
 regulation of cardiac muscle contraction by regulation of the release of sequestered calcium ion
-regulation of cardiac muscle contraction by calcium ion signaling
-positive regulation of peptidase activity
-regulation of phosphate transport
-astrocyte development
-regulation of gliogenesis
-regulation of norepinephrine secretion
+negative regulation of endopeptidase activity
+regulation of epinephrine secretion
+phosphatidylinositol 3-kinase signaling
+positive regulation of phosphatidylinositol 3-kinase signaling
 response to purine-containing compound
+skeletal muscle atrophy
 positive regulation of muscle hypertrophy
 release of sequestered calcium ion into cytosol by sarcoplasmic reticulum
+muscle cell migration
 regulation of skeletal muscle contraction
-response to activity
+skeletal muscle satellite cell proliferation
 response to inactivity
 striated muscle cell proliferation
 response to muscle inactivity
-response to stimulus involved in regulation of muscle adaptation
 response to muscle inactivity involved in regulation of muscle adaptation
 muscle atrophy
 response to denervation involved in regulation of muscle adaptation
 muscle hypertrophy
 striated muscle hypertrophy
 myotube differentiation
-myotube cell development
+smooth muscle cell migration
+negative regulation of smooth muscle cell migration
 heparan sulfate proteoglycan biosynthetic process, polysaccharide chain biosynthetic process
-inorganic anion transport
-monocarboxylic acid transport
-fatty acid transport
+carbon dioxide transport
 long-chain fatty acid transport
-carbohydrate biosynthetic process
+rhodopsin mediated signaling pathway
+immunoglobulin mediated immune response
 diterpenoid metabolic process
 sterol metabolic process
-regulation of striated muscle tissue development
+morphogenesis of embryonic epithelium
 negative regulation of angiogenesis
-peptidyl-serine phosphorylation
 peptidyl-threonine phosphorylation
-peptidyl-tyrosine phosphorylation
-peptidyl-tyrosine modification
 protein geranylgeranylation
 phenol-containing compound metabolic process
 viral genome replication
-viral gene expression
 viral transcription
+regulation of fatty acid metabolic process
+regulation of steroid metabolic process
 fucose catabolic process
+hexose catabolic process
 cyclooxygenase pathway
 fatty acid oxidation
+calcium-mediated signaling
 B cell mediated immunity
 antimicrobial humoral response
 antibacterial humoral response
-antifungal humoral response
-secondary metabolic process
-polyol metabolic process
 stem cell population maintenance
 antigen processing and presentation
 antigen processing and presentation of endogenous antigen
@@ -301,6 +290,7 @@ antigen processing and presentation of exogenous antigen
 antigen processing and presentation of exogenous peptide antigen via MHC class II
 lipid storage
 cAMP-mediated signaling
+cyclic-nucleotide-mediated signaling
 diencephalon development
 cranial nerve development
 cranial nerve morphogenesis
@@ -311,32 +301,31 @@ olfactory bulb development
 forebrain regionalization
 olfactory lobe development
 metencephalon development
-negative adaptation of signaling pathway
 molting cycle process
 hair cycle process
+circadian sleep/wake cycle process
 digestive system process
 ovulation cycle process
 gland morphogenesis
-regulation of transmembrane transporter activity
-adaptation of signaling pathway
 intracellular potassium ion homeostasis
 actin filament depolymerization
 actin filament-based movement
+insulin secretion
+water homeostasis
 platelet activation
 keratinocyte differentiation
 erythrocyte differentiation
 megakaryocyte differentiation
-macrophage differentiation
 lipid modification
 regulation of ossification
 bone mineralization
 osteoclast differentiation
+respiratory tube development
 lung development
 regulation of complement activation
 regulation of bone mineralization
-nuclear receptor-mediated steroid hormone signaling pathway
 androgen receptor signaling pathway
-adult behavior
+neutrophil chemotaxis
 regulation of actin filament depolymerization
 prostate gland development
 regulation of epithelial cell differentiation
@@ -357,11 +346,13 @@ retinal ganglion cell axon guidance
 regulation of cell killing
 negative regulation of cell killing
 killing of cells of another organism
+regulation of myelination
 lipopolysaccharide-mediated signaling pathway
 cellular response to nutrient
 response to corticosteroid
 positive regulation of insulin secretion
 negative regulation of NF-kappaB transcription factor activity
+regulation of synaptic transmission, GABAergic
 gonadotropin secretion
 luteinizing hormone secretion
 regulation of gonadotropin secretion
@@ -369,20 +360,20 @@ negative regulation of gonadotropin secretion
 positive regulation of gonadotropin secretion
 negative regulation of chondrocyte differentiation
 response to estradiol
-regulation of transporter activity
 negative regulation of transporter activity
 positive regulation of transporter activity
-regulation of monoatomic ion transmembrane transporter activity
 negative regulation of ion transmembrane transporter activity
 positive regulation of ion transmembrane transporter activity
-negative regulation of proteasomal ubiquitin-dependent protein catabolic process
 regulation of cytokinesis
 response to retinoic acid
-response to progesterone
+chemokine production
 interleukin-12 production
+interleukin-6 production
 interleukin-8 production
 tumor necrosis factor production
+regulation of chemokine production
 regulation of interleukin-12 production
+regulation of interleukin-6 production
 regulation of interleukin-8 production
 regulation of tumor necrosis factor production
 positive regulation of chemokine production
@@ -393,36 +384,34 @@ regulation of cellular pH reduction
 regulation of organic acid transport
 positive regulation of organic acid transport
 circadian regulation of gene expression
-regulation of superoxide anion generation
-positive regulation of superoxide anion generation
 positive regulation of mononuclear cell proliferation
-inositol trisphosphate biosynthetic process
 collagen metabolic process
+collagen biosynthetic process
 protein-DNA complex disassembly
+muscle cell proliferation
 T cell differentiation in thymus
 calcineurin-NFAT signaling cascade
 response to vitamin A
-tumor necrosis factor-mediated signaling pathway
 response to vitamin
 unsaturated fatty acid metabolic process
+response to testosterone
 cell adhesion mediated by integrin
-negative regulation of kinase activity
+cellular polysaccharide biosynthetic process
 erythrocyte homeostasis
 regulation of tissue remodeling
 homotypic cell-cell adhesion
-toll-like receptor 4 signaling pathway
+toll-like receptor 2 signaling pathway
 response to monosaccharide
 primary alcohol metabolic process
 response to type II interferon
-protein-lipid complex remodeling
-plasma lipoprotein particle remodeling
 very-low-density lipoprotein particle assembly
 lipid oxidation
-cellular response to heat
+cellular carbohydrate biosynthetic process
 response to prostaglandin
 negative regulation of transmembrane transport
 negative regulation of monoatomic ion transmembrane transport
 positive regulation of monoatomic ion transmembrane transport
+response to histamine
 somatic stem cell population maintenance
 cardiocyte differentiation
 response to nicotine
@@ -432,26 +421,28 @@ regulation of tube size
 organ growth
 endocrine system development
 regulation of tube diameter
-response to interferon-beta
+regulation of dephosphorylation
+regulation of protein dephosphorylation
+positive regulation of protein dephosphorylation
+gastric motility
+calcium-mediated signaling using intracellular calcium source
 G protein-coupled purinergic receptor signaling pathway
 purinergic nucleotide receptor signaling pathway
 entry of bacterium into host cell
-sodium ion transmembrane transport
 natural killer cell chemotaxis
 endothelial cell chemotaxis
 insulin secretion involved in cellular response to glucose stimulus
-negative regulation of mitochondrial membrane permeability
 epithelial cell differentiation involved in kidney development
 megakaryocyte development
 endodermal cell differentiation
 chondrocyte proliferation
-limb joint morphogenesis
 replacement ossification
 granulocyte activation
-cellular response to decreased oxygen levels
 response to sterol
+transforming growth factor beta activation
 sodium ion export across plasma membrane
-neuron intrinsic apoptotic signaling pathway in response to oxidative stress
+cell death in response to oxidative stress
+neuron death in response to oxidative stress
 signal transduction in absence of ligand
 collagen-activated tyrosine kinase receptor signaling pathway
 collagen-activated signaling pathway
@@ -466,20 +457,19 @@ positive regulation of T cell proliferation
 macrophage activation
 regulation of T cell proliferation
 xenobiotic catabolic process
-response to cocaine
-tissue regeneration
 molting cycle
+vasodilation
 L-fucose metabolic process
 L-fucose catabolic process
 odontogenesis of dentin-containing tooth
 odontogenesis
+regulation of tyrosine phosphorylation of STAT protein
+positive regulation of tyrosine phosphorylation of STAT protein
 response to hydrogen peroxide
-pteridine-containing compound metabolic process
 retinol metabolic process
 hair cycle
 ovulation cycle
-embryonic digit morphogenesis
-regulation of circadian sleep/wake cycle
+circadian sleep/wake cycle
 regulation of circadian rhythm
 mRNA transcription by RNA polymerase II
 amyloid precursor protein metabolic process
@@ -489,12 +479,14 @@ regulation of protein-containing complex disassembly
 negative regulation of monoatomic ion transport
 apoptotic cell clearance
 response to alkaloid
+regulation of cysteine-type endopeptidase activity involved in apoptotic process
 leukocyte degranulation
-eosinophil activation
-eosinophil degranulation
-steroid hormone receptor signaling pathway
+positive regulation of DNA binding
+steroid hormone mediated signaling pathway
 negative regulation of DNA-binding transcription factor activity
+protein kinase B signaling
 muscle adaptation
+skeletal muscle adaptation
 regulation of muscle adaptation
 negative regulation of neuron apoptotic process
 positive regulation of neuron apoptotic process
@@ -504,64 +496,57 @@ tongue morphogenesis
 response to estrogen
 recognition of apoptotic cell
 regulation of biological process involved in symbiotic interaction
+movement in host
 glucan metabolic process
 regulation of endocrine process
+cellular polysaccharide metabolic process
 type B pancreatic cell proliferation
-symbiont entry into host
+entry into host
+multi-organism reproductive process
 modulation by host of viral process
 double-strand break repair via synthesis-dependent strand annealing
-positive regulation of viral genome replication
 intermediate filament-based process
 intermediate filament cytoskeleton organization
 intermediate filament organization
-cellular extravasation
 regulation of bone resorption
 myoblast differentiation
 bone resorption
 response to ethanol
-response to ether
-regulation of epidermal cell differentiation
+locomotor rhythm
 positive regulation of epidermal cell differentiation
-negative regulation of myeloid cell differentiation
 positive regulation of myeloid cell differentiation
-regulation of erythrocyte differentiation
-positive regulation of myoblast differentiation
 negative regulation of neuron differentiation
+regulation of osteoblast differentiation
 regulation of osteoclast differentiation
-negative regulation of osteoclast differentiation
 regulation of epidermis development
 positive regulation of epidermis development
-negative regulation of G protein-coupled receptor signaling pathway
+positive regulation of epidermal growth factor-activated receptor activity
 regulation of adenylate cyclase activity
 positive regulation of adenylate cyclase activity
-negative regulation of innate immune response
+positive regulation of heart contraction
 positive regulation of lipid metabolic process
 positive regulation of mitotic cell cycle
-positive regulation of muscle contraction
 negative regulation of translational initiation
-positive regulation of translational initiation
 positive regulation of striated muscle contraction
 cAMP metabolic process
 cGMP metabolic process
 aldehyde catabolic process
+regulation of fatty acid oxidation
 amino sugar catabolic process
 deoxyribose phosphate biosynthetic process
-positive regulation of receptor signaling pathway via JAK-STAT
 prostanoid biosynthetic process
 phosphatidylcholine metabolic process
 development of primary female sexual characteristics
 development of primary male sexual characteristics
 regulation of viral entry into host cell
+positive regulation of viral entry into host cell
 positive regulation of organ growth
 regulation of insulin receptor signaling pathway
-negative regulation of insulin receptor signaling pathway
 female sex differentiation
 male sex differentiation
 response to antibiotic
 response to organophosphorus
-response to cadmium ion
-symbiont entry into host cell
-protein autophosphorylation
+viral entry into host cell
 bone remodeling
 regulation of bone remodeling
 regulation of follicle-stimulating hormone secretion
@@ -574,60 +559,55 @@ regulation of lipid biosynthetic process
 regulation of neurotransmitter secretion
 antigen processing and presentation of peptide antigen
 phosphatidylinositol-mediated signaling
+inositol phosphate-mediated signaling
+inositol lipid-mediated signaling
 astrocyte activation
 fibroblast proliferation
 regulation of fibroblast proliferation
 positive regulation of fibroblast proliferation
 fused antrum stage
+regulation of synaptic plasticity
 regulation of neuronal synaptic plasticity
-positive regulation of long-term neuronal synaptic plasticity
 epinephrine secretion
-norepinephrine secretion
 eosinophil chemotaxis
-response to pain
+lymphocyte chemotaxis
+mRNA stabilization
+behavioral response to pain
 isotype switching to IgA isotypes
 regulation of isotype switching to IgA isotypes
 positive regulation of isotype switching to IgA isotypes
 mesoderm morphogenesis
 mesodermal cell differentiation
 paraxial mesoderm development
-lateral mesoderm development
-retinoic acid receptor signaling pathway
 circadian behavior
 positive regulation of viral process
-negative regulation of viral process
 digestive tract development
 eye morphogenesis
 camera-type eye morphogenesis
-skeletal muscle tissue growth
-regulation of muscle organ development
 muscle organ morphogenesis
 animal organ formation
 smooth muscle cell proliferation
 regulation of smooth muscle cell proliferation
 positive regulation of smooth muscle cell proliferation
+negative regulation of smooth muscle cell proliferation
 response to axon injury
 embryonic skeletal system morphogenesis
 embryonic skeletal system development
-astrocyte differentiation
 oligodendrocyte differentiation
 appendage development
 branching morphogenesis of an epithelial tube
 tissue remodeling
 genitalia development
-brain morphogenesis
-catecholamine secretion
 positive regulation of lymphocyte proliferation
 positive regulation of epithelial cell proliferation
 negative regulation of epithelial cell proliferation
+positive regulation of protein secretion
 negative regulation of inflammatory response
-regulation of peptidyl-tyrosine phosphorylation
 positive regulation of peptidyl-tyrosine phosphorylation
 regulation of phagocytosis
-negative regulation of neurogenesis
-negative regulation of immune response
 regulation of viral process
 regulation of insulin secretion
+circadian sleep/wake cycle, sleep
 defense response to Gram-negative bacterium
 defense response to Gram-positive bacterium
 regulation of calcium-mediated signaling
@@ -636,25 +616,31 @@ positive regulation of calcium-mediated signaling
 antigen receptor-mediated signaling pathway
 regulation of B cell activation
 multicellular organismal movement
+musculoskeletal movement
 neuromuscular process controlling balance
 endocrine process
 intestinal absorption
 neuromuscular process
 positive chemotaxis
 positive regulation of chemotaxis
+regulation of positive chemotaxis
 positive regulation of positive chemotaxis
+sensory perception of mechanical stimulus
 regulation of lipid catabolic process
 positive regulation of lipid catabolic process
 negative regulation of secretion
 chaperone cofactor-dependent protein refolding
+positive regulation of NF-kappaB transcription factor activity
+positive regulation of binding
+regulation of DNA binding
+synaptic assembly at neuromuscular junction
 regulation of muscle cell differentiation
 positive regulation of muscle cell differentiation
-regulation of striated muscle cell differentiation
 positive regulation of striated muscle cell differentiation
 sequestering of calcium ion
 release of sequestered calcium ion into cytosol
 cartilage development
-negative regulation of lymphocyte activation
+cytoplasmic sequestering of protein
 protein depolymerization
 regulation of release of sequestered calcium ion into cytosol
 positive regulation of release of sequestered calcium ion into cytosol
@@ -662,65 +648,59 @@ regulation of sequestering of calcium ion
 negative regulation of sequestering of calcium ion
 regulation of cell division
 regulation of lyase activity
-negative regulation of transferase activity
 positive regulation of lyase activity
 response to glucocorticoid
+regulation of ubiquitin-protein transferase activity
+negative regulation of ubiquitin-protein transferase activity
 myoblast proliferation
 regulation of cytosolic calcium ion concentration
+positive regulation of cytosolic calcium ion concentration involved in phospholipase C-activating G protein-coupled signaling pathway
 regulation of neurotransmitter transport
 response to cAMP
 response to calcium ion
-biological process involved in interaction with host
 biological process involved in interaction with symbiont
 positive regulation of cell division
 regulation of nuclear division
 cytolysis by host of symbiont cells
 modulation by host of symbiont process
 killing by host of symbiont cells
-positive regulation of phosphatidylinositol 3-kinase/protein kinase B signal transduction
+regulation of protein kinase B signaling
 membrane depolarization
 negative regulation of calcium ion transport
 positive regulation of calcium ion transport
 synaptic transmission, GABAergic
-negative regulation of nervous system development
 modulation by symbiont of entry into host
 cyclic purine nucleotide metabolic process
-muscle cell development
-striated muscle cell development
-cardiac muscle tissue growth
-positive regulation of cardiac muscle tissue growth
 potassium ion homeostasis
 sodium ion homeostasis
 response to hyperoxia
-response to lipoprotein particle
 regulation of cardiac muscle contraction
 relaxation of cardiac muscle
 digestive system development
 Sertoli cell differentiation
 roof of mouth development
 cardiac muscle cell proliferation
-positive regulation of cardiac muscle cell proliferation
 cardiac muscle contraction
 vagina development
 regulation of postsynaptic membrane potential
+excitatory postsynaptic potential
 positive regulation of post-transcriptional gene silencing
 limb development
-male mating behavior
 mesenchymal to epithelial transition
-regulation of membrane repolarization
+positive regulation of transcription initiation by RNA polymerase II
 positive regulation of ryanodine-sensitive calcium-release channel activity
 bone morphogenesis
 endochondral bone morphogenesis
 cell adhesion molecule production
-regulation of atrial cardiac muscle cell membrane depolarization
-SMAD protein signal transduction
+regulation of cell adhesion molecule production
 calcium ion transport into cytosol
 muscle tissue morphogenesis
-heart growth
 mammary gland morphogenesis
-lung-associated mesenchyme development
+regulation of gastric acid secretion
+negative regulation of gastric acid secretion
 epithelial cell proliferation involved in lung morphogenesis
 skeletal muscle organ development
+regulation of necroptotic process
 intestinal epithelial cell differentiation
 mammary gland duct morphogenesis
 mammary gland epithelial cell differentiation
@@ -735,7 +715,6 @@ hair follicle placode formation
 cell fate commitment involved in formation of primary germ layer
 heart formation
 cell migration involved in heart development
-coronary vasculature development
 endocrine hormone secretion
 kidney morphogenesis
 cell differentiation involved in kidney development
@@ -743,6 +722,8 @@ hepaticobiliary system development
 negative regulation of cartilage development
 regulation of wound healing
 regulation of branching involved in lung morphogenesis
+regulation of protein tyrosine kinase activity
+positive regulation of protein tyrosine kinase activity
 morphogenesis of a branching epithelium
 regulation of insulin secretion involved in cellular response to glucose stimulus
 mammary gland epithelium development
@@ -752,14 +733,11 @@ cardiac neural crest cell development involved in outflow tract morphogenesis
 renal tubule development
 renal tubule morphogenesis
 cardiac conduction
-neural precursor cell proliferation
 miRNA transcription
 leukocyte adhesion to vascular endothelial cell
 antimicrobial humoral immune response mediated by antimicrobial peptide
 glial cell activation
 positive regulation of small molecule metabolic process
-negative regulation of programmed necrotic cell death
-intrinsic apoptotic signaling pathway in response to endoplasmic reticulum stress
 chemokine-mediated signaling pathway
 regulation of biomineral tissue development
 positive regulation of biomineral tissue development
@@ -769,18 +747,20 @@ sarcoplasmic reticulum calcium ion transport
 cellular response to hydrogen peroxide
 thrombin-activated receptor signaling pathway
 platelet aggregation
-protein K63-linked deubiquitination
 response to fatty acid
 response to interleukin-1
 mast cell proliferation
-negative regulation of leukocyte proliferation
 positive regulation of leukocyte proliferation
 regulation of mast cell proliferation
+response to interleukin-12
 response to cholesterol
 regulation of calcineurin-NFAT signaling cascade
 negative regulation of calcineurin-NFAT signaling cascade
+histone H4 deacetylation
 regulation of phospholipid biosynthetic process
+positive regulation of phospholipid biosynthetic process
 response to parathyroid hormone
+cellular response to lipopolysaccharide
 cellular response to metal ion
 cellular response to mechanical stimulus
 cellular response to retinoic acid
@@ -791,30 +771,26 @@ cellular response to glucose stimulus
 skeletal muscle acetylcholine-gated channel clustering
 cellular response to type II interferon
 cellular response to interleukin-1
+cellular response to ethanol
 cellular response to prostaglandin stimulus
-cellular response to prostaglandin E stimulus
 cellular response to corticosteroid stimulus
-cellular response to glucocorticoid stimulus
 cellular response to estradiol stimulus
-cellular response to cholesterol
 cellular response to lipoprotein particle stimulus
-cellular response to low-density lipoprotein particle stimulus
 cellular response to histamine
-cellular response to oxygen levels
-cellular response to hypoxia
-cellular response to xenobiotic stimulus
 cellular response to pH
-cellular response to external stimulus
+cellular response to acidic pH
 dopaminergic neuron differentiation
-response to dexamethasone
+monocyte chemotactic protein-1 production
 granulocyte chemotaxis
+regulation of monocyte chemotactic protein-1 production
+positive regulation of monocyte chemotactic protein-1 production
+mononuclear cell migration
 regulation of mononuclear cell migration
 positive regulation of mononuclear cell migration
-commissural neuron axon guidance
 ectodermal placode development
 ectodermal placode morphogenesis
 tumor necrosis factor superfamily cytokine production
-protein-lipid complex organization
+protein-lipid complex subunit organization
 plasma lipoprotein particle organization
 nephron development
 nephron epithelium development
@@ -847,6 +823,7 @@ lymphocyte migration
 eosinophil migration
 T cell migration
 thymocyte migration
+positive regulation by symbiont of entry into host
 cardiac muscle cell action potential
 cardiac muscle cell action potential involved in contraction
 cardiac muscle cell contraction
@@ -862,16 +839,12 @@ AV node cell to bundle of His cell communication
 regulation of heart rate by cardiac conduction
 primitive streak formation
 relaxation of muscle
-fibroblast growth factor production
-regulation of fibroblast growth factor production
+regulation of peptide transport
+regulation of peptide hormone secretion
 positive regulation of peptide hormone secretion
-regulation of calcium ion import
-negative regulation of calcium ion import
+negative regulation of peptide hormone secretion
 positive regulation of wound healing
 cellular senescence
-mesenchymal cell migration
-response to oxygen-glucose deprivation
-energy homeostasis
 dendritic cell differentiation
 response to thyroid hormone
 cellular response to thyroid hormone stimulus
@@ -881,16 +854,19 @@ liver regeneration
 programmed cell death in response to reactive oxygen species
 granulocyte migration
 calcium ion transmembrane import into cytosol
+potassium ion export across plasma membrane
+receptor signaling pathway via STAT
 calcineurin-mediated signaling
 blood vessel diameter maintenance
 inorganic cation import across plasma membrane
 inorganic anion transmembrane transport
-sodium ion import across plasma membrane
-maintenance of cell number
 import across plasma membrane
 skin epidermis development
+spontaneous synaptic transmission
 intestinal lipid absorption
 regulation of action potential
+ion channel modulating, G protein-coupled receptor signaling pathway
+chemical synaptic transmission, postsynaptic
 inorganic ion import across plasma membrane
 signal release from synapse
 regulation of calcineurin-mediated signaling
@@ -899,28 +875,32 @@ cold-induced thermogenesis
 cellular detoxification of aldehyde
 cellular response to aldehyde
 regulation of cold-induced thermogenesis
+positive regulation of cold-induced thermogenesis
 olefinic compound metabolic process
 export across plasma membrane
-cell surface toll-like receptor signaling pathway
-disruption of anatomical structure in another organism
-disruption of cell in another organism
-nuclear receptor-mediated signaling pathway
+lipid export from cell
 neuroinflammatory response
 transport across blood-brain barrier
 regulation of phosphatidylcholine metabolic process
 regulation of cellular response to insulin stimulus
-negative regulation of cellular response to insulin stimulus
+regulation of execution phase of apoptosis
 negative regulation of execution phase of apoptosis
 negative regulation of long-term synaptic potentiation
 positive regulation of post-transcriptional gene silencing by RNA
+regulation of cellular response to oxidative stress
+regulation of long-term synaptic depression
 regulation of calcium ion transmembrane transporter activity
 negative regulation of calcium ion transmembrane transporter activity
 positive regulation of calcium ion transmembrane transporter activity
 glucosamine-containing compound metabolic process
+carbohydrate derivative catabolic process
+positive regulation of neuron death
 regulation of hydrogen peroxide-mediated programmed cell death
 negative regulation of vasculature development
 regulation of voltage-gated calcium channel activity
 negative regulation of voltage-gated calcium channel activity
+positive regulation of voltage-gated calcium channel activity
+regulation of transforming growth factor beta activation
 regulation of lymphocyte chemotaxis
 cellular response to ketone
 regulation of signal transduction by p53 class mediator
@@ -928,42 +908,45 @@ positive regulation of signal transduction by p53 class mediator
 regulation of high voltage-gated calcium channel activity
 regulation of cell communication by electrical coupling involved in cardiac conduction
 regulation of protein depolymerization
+negative regulation of protein acetylation
 positive regulation of mitotic cell cycle phase transition
+cellular response to salt
 negative regulation of leukocyte differentiation
-regulation of oxidative stress-induced intrinsic apoptotic signaling pathway
-negative regulation of oxidative stress-induced intrinsic apoptotic signaling pathway
+positive regulation of leukocyte differentiation
 regulation of delayed rectifier potassium channel activity
-negative regulation of RNA catabolic process
 negative regulation of mRNA catabolic process
 negative regulation of stem cell population maintenance
-chloride transmembrane transport
 secondary alcohol metabolic process
-regulation of neuroblast proliferation
 regulation of lamellipodium organization
+regulation of cell cycle G1/S phase transition
+regulation of response to oxidative stress
 regulation of miRNA transcription
 negative regulation of miRNA transcription
-regulation of amyloid precursor protein catabolic process
+positive regulation of supramolecular fiber organization
+positive regulation of aspartic-type endopeptidase activity involved in amyloid precursor protein catabolic process
 positive regulation of amyloid precursor protein catabolic process
 regulation of response to wounding
-regulation of protein localization to plasma membrane
 regulation of actin filament-based movement
 regulation of calcium ion transmembrane transport
 negative regulation of calcium ion transmembrane transport
+regulation of oxidative stress-induced cell death
+negative regulation of oxidative stress-induced cell death
+regulation of oxidative stress-induced neuron death
+negative regulation of oxidative stress-induced neuron death
 regulation of regulated secretory pathway
-negative regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway
-response to bile acid
-regulation of reactive oxygen species biosynthetic process
+response to glycoside
 release of sequestered calcium ion into cytosol by endoplasmic reticulum
+positive regulation of blood circulation
 negative regulation of secretion by cell
 regulation of tumor necrosis factor superfamily cytokine production
 positive regulation of tumor necrosis factor superfamily cytokine production
 negative regulation of hemopoiesis
+positive regulation of hemopoiesis
 regulation of phospholipid metabolic process
 positive regulation of phospholipid metabolic process
 regulation of viral life cycle
-negative regulation of viral life cycle
 positive regulation of viral life cycle
-negative regulation of hepatocyte apoptotic process
+regulation of glial cell migration
 epithelial cell apoptotic process
 regulation of epithelial cell apoptotic process
 negative regulation of epithelial cell apoptotic process
@@ -973,60 +956,54 @@ response to vasopressin
 cellular response to vasopressin
 regulation of adipose tissue development
 cellular response to angiotensin
-regulation of skeletal muscle acetylcholine-gated channel clustering
 positive regulation of calcium ion transmembrane transport
-response to amyloid-beta
-cellular response to amyloid-beta
 positive regulation of receptor signaling pathway via STAT
 regulation of leukocyte adhesion to vascular endothelial cell
 positive regulation of leukocyte adhesion to vascular endothelial cell
 regulation of morphogenesis of an epithelium
 negative regulation of vascular endothelial cell proliferation
-negative regulation of membrane permeability
-regulation of lipid localization
 positive regulation of lipid localization
+neutrophil migration
 potassium ion import across plasma membrane
-ligand-gated ion channel signaling pathway
+response to angiotensin
 adaptive thermogenesis
 response to chemokine
 cellular response to chemokine
+regulation of animal organ morphogenesis
 regulation of stem cell population maintenance
 regulation of G1/S transition of mitotic cell cycle
 negative regulation of ubiquitin-dependent protein catabolic process
-regulation of cysteine-type endopeptidase activity
+negative regulation of cysteine-type endopeptidase activity
+regulation of DNA-templated transcription initiation
 positive regulation of DNA-templated transcription initiation
 negative regulation of blood vessel morphogenesis
 positive regulation of myoblast proliferation
 regulation of myoblast proliferation
+regulation of NMDA receptor activity
 regulation of reactive oxygen species metabolic process
-positive regulation of reactive oxygen species metabolic process
 regulation of neutrophil extravasation
 positive regulation of neutrophil extravasation
 regulation of lymphocyte migration
-positive regulation of lymphocyte migration
-regulation of T cell migration
-positive regulation of T cell migration
 regulation of natural killer cell chemotaxis
 regulation of entry of bacterium into host cell
 positive regulation of gastrulation
-regulation of miRNA metabolic process
 negative regulation of miRNA metabolic process
 positive regulation of miRNA-mediated gene silencing
 negative regulation of stem cell proliferation
+positive regulation of transcription regulatory region DNA binding
 regulation of epithelial cell differentiation involved in kidney development
 positive regulation of epithelial cell differentiation involved in kidney development
 regulation of endothelial cell chemotaxis
 positive regulation of endothelial cell chemotaxis
-positive regulation of cysteine-type endopeptidase activity
 regulation of cation channel activity
 negative regulation of cation channel activity
 positive regulation of cation channel activity
-negative regulation of cell-matrix adhesion
 response to amphetamine
 lens development in camera-type eye
 positive regulation of receptor internalization
 lymphocyte anergy
 cytokine production involved in immune response
+T cell mediated immunity
 antigen processing and presentation via MHC class Ib
 T cell tolerance induction
 production of molecular mediator involved in inflammatory response
@@ -1036,6 +1013,7 @@ regulation of T cell tolerance induction
 positive regulation of T cell tolerance induction
 regulation of T cell anergy
 positive regulation of T cell anergy
+negative regulation of leukocyte activation
 regulation of production of molecular mediator of immune response
 negative regulation of production of molecular mediator of immune response
 regulation of T cell mediated immunity
@@ -1043,52 +1021,41 @@ positive regulation of T cell mediated immunity
 regulation of cytokine production involved in immune response
 negative regulation of cytokine production involved in immune response
 positive regulation of cytokine production involved in immune response
-positive regulation of adaptive immune response based on somatic recombination of immune receptors built from immunoglobulin superfamily domains
 T cell anergy
 regulation of lymphocyte anergy
 positive regulation of lymphocyte anergy
 regulation of systemic arterial blood pressure
 disaccharide metabolic process
-peptide metabolic process
-L-leucine metabolic process
+protein monoubiquitination
+triglyceride metabolic process
 icosanoid metabolic process
 leukotriene metabolic process
 glutathione metabolic process
 glutathione catabolic process
-water transport
-amino acid transport
-Golgi to vacuole transport
-ensheathment of neurons
-memory
-motor neuron axon guidance
+regulation of epidermal growth factor-activated receptor activity
+feeding behavior
 regulation of cell size
-axon ensheathment
-serine family amino acid catabolic process
 branched-chain amino acid metabolic process
-pyrimidine ribonucleoside diphosphate metabolic process
 phospholipid catabolic process
 response to gravity
 response to salt stress
+regulation of signaling receptor activity
 regulation of triglyceride catabolic process
-positive regulation of triglyceride catabolic process
 regulation of very-low-density lipoprotein particle remodeling
-positive regulation of neuron projection development
+negative regulation of neuron projection development
 response to amine
-urinary bladder smooth muscle contraction
-acidic amino acid transport
 basic amino acid transport
 amine transport
 regulation of macroautophagy
 regulation of exocytosis
-regulation of steroid metabolic process
 sensory perception of pain
 leukotriene biosynthetic process
 triglyceride catabolic process
-short-chain fatty acid catabolic process
 facial nerve development
 cranial nerve structural organization
 facial nerve morphogenesis
 facial nerve structural organization
+glial cell development
 contractile actin filament bundle assembly
 B cell differentiation
 monocyte differentiation
@@ -1096,37 +1063,40 @@ regulation of intestinal cholesterol absorption
 positive regulation of cell growth
 negative regulation of cell growth
 negative regulation of actin filament polymerization
-negative regulation of cellular catabolic process
+actomyosin structure organization
 negative regulation of cell projection organization
-receptor internalization
-negative regulation of translation in response to stress
+regulation of nervous system process
+negative regulation of nervous system process
+negative regulation of protein binding
+response to food
+regulation of response to food
 negative regulation of response to food
+regulation of appetite
 negative regulation of appetite
+regulation of response to extracellular stimulus
+negative regulation of response to extracellular stimulus
 regulation of response to nutrient levels
 negative regulation of response to nutrient levels
 regulation of actin filament bundle assembly
 regulation of nucleobase-containing compound transport
 positive regulation of nucleobase-containing compound transport
 regulation of lipid transport
-negative regulation of sterol transport
-negative regulation of cholesterol transport
-positive regulation of cytokinesis
+melanosome localization
+establishment of melanosome localization
+melanosome transport
 positive regulation of type I interferon production
 Cdc42 protein signal transduction
-regulation of Cdc42 protein signal transduction
 maintenance of protein location in cell
-chemokine production
 interleukin-1 production
-regulation of chemokine production
 regulation of interleukin-1 production
-positive regulation of interleukin-23 production
 positive regulation of cellular pH reduction
-regulation of intracellular protein transport
+regulation of peptidyl-serine phosphorylation
 leptin-mediated signaling pathway
 response to vitamin D
-response to testosterone
 phospholipid efflux
 protein-containing complex remodeling
+protein-lipid complex remodeling
+plasma lipoprotein particle remodeling
 triglyceride-rich lipoprotein particle remodeling
 very-low-density lipoprotein particle remodeling
 high-density lipoprotein particle remodeling
@@ -1135,338 +1105,256 @@ chylomicron remnant clearance
 high-density lipoprotein particle clearance
 very-low-density lipoprotein particle clearance
 cellular response to UV
-multicellular organism growth
-peptidyl-tyrosine dephosphorylation
-response to stilbenoid
-photoreceptor cell outer segment organization
 response to potassium ion
 cellular response to potassium ion
 response to macrophage colony-stimulating factor
-macrophage colony-stimulating factor signaling pathway
 regulation of multicellular organism growth
 positive regulation of multicellular organism growth
 monocyte activation
-vasodilation
-myelination
+response to cocaine
+norepinephrine metabolic process
+response to starvation
+regulation of circadian sleep/wake cycle
 eating behavior
 sequestering of actin monomers
 stress fiber assembly
-regulation of translation in response to stress
+negative regulation of cysteine-type endopeptidase activity involved in apoptotic process
+regulation of protein binding
 regulation of insulin-like growth factor receptor signaling pathway
-positive regulation of insulin-like growth factor receptor signaling pathway
 reverse cholesterol transport
 lipid digestion
+relaxation of smooth muscle
 maintenance of protein location
-positive regulation of nitric oxide biosynthetic process
 positive regulation of fatty acid biosynthetic process
-negative regulation of blood pressure
 positive regulation of bone resorption
 positive regulation of endocytosis
 positive regulation of exocytosis
+positive regulation of circadian sleep/wake cycle, sleep
+positive regulation of steroid metabolic process
 negative regulation of smooth muscle contraction
-UDP metabolic process
 icosanoid biosynthetic process
 neutral lipid catabolic process
 acylglycerol catabolic process
 glycerolipid catabolic process
 regulation of organ growth
 negative regulation of organ growth
-response to copper ion
+response to cadmium ion
 regulation of nucleocytoplasmic transport
 negative regulation of nucleocytoplasmic transport
 regulation of protein export from nucleus
-antigen processing and presentation of lipid antigen via MHC class Ib
+regulation of RNA export from nucleus
 antigen processing and presentation, endogenous lipid antigen via MHC class Ib
-antigen processing and presentation, exogenous lipid antigen via MHC class Ib
-platelet-derived growth factor receptor signaling pathway
 insulin-like growth factor receptor signaling pathway
 plasma membrane to endosome transport
 regulation of receptor-mediated endocytosis
 positive regulation of receptor-mediated endocytosis
 positive regulation of behavior
 anatomical structure arrangement
-positive regulation of pinocytosis
 positive regulation of developmental growth
 negative regulation of developmental growth
-negative regulation of axon extension involved in axon guidance
 forebrain morphogenesis
+brain morphogenesis
 hydrogen peroxide biosynthetic process
+negative regulation of neurogenesis
 negative regulation of axonogenesis
 regulation of behavior
 regulation of steroid biosynthetic process
-defense response to fungus
 T cell receptor signaling pathway
 regulation of lipoprotein lipase activity
+negative regulation of binding
+negative regulation of lymphocyte activation
 regulation of stress fiber assembly
 negative regulation of cytoskeleton organization
+pigment granule localization
 negative regulation of focal adhesion assembly
-regulation of amine transport
+pigment granule transport
+establishment of pigment granule localization
 regulation of amino acid transport
 negative regulation of amino acid transport
-positive regulation of transmission of nerve impulse
+negative regulation of nervous system development
+regulation of attachment of spindle microtubules to kinetochore
 negative regulation of cardiac muscle tissue growth
 angiogenesis involved in wound healing
 relaxation of vascular associated smooth muscle
 regulation of growth hormone secretion
-regulation of lipase activity
 negative regulation of lipase activity
-definitive hemopoiesis
 face development
 embryonic placenta morphogenesis
-chorio-allantoic fusion
-labyrinthine layer development
 labyrinthine layer morphogenesis
 regulation of vascular wound healing
 negative regulation of cell growth involved in cardiac muscle cell development
 negative regulation of heart growth
-regulation of extent of cell growth
 protein-lipid complex assembly
 vitamin D receptor signaling pathway
-response to epidermal growth factor
-UV-damage excision repair
 cellular response to cadmium ion
 cellular response to vitamin
 cellular response to vitamin D
+cellular response to xenobiotic stimulus
 cellular response to radiation
 cellular response to light stimulus
 response to BMP
 cellular response to BMP stimulus
 potassium ion transmembrane transport
 triglyceride-rich lipoprotein particle clearance
+ammonium transmembrane transport
 mesenchymal stem cell differentiation
 positive regulation of spindle checkpoint
 positive regulation of mitotic cell cycle spindle assembly checkpoint
-negative regulation of peptide hormone secretion
-regulation of plasma lipoprotein particle levels
 dendritic spine organization
 dendritic spine maintenance
-synaptic vesicle lumen acidification
-extracellular exosome biogenesis
+postsynapse organization
 regulation of postsynapse organization
+synaptic vesicle cycle
 neuron projection organization
 regulation of actomyosin structure organization
-positive regulation of cold-induced thermogenesis
-olefinic compound biosynthetic process
-regulation of long-chain fatty acid import into cell
+positive regulation of macrophage proliferation
 lipid import into cell
-target-directed miRNA degradation
 negative regulation of cell-substrate junction organization
-L-amino acid catabolic process
-proteinogenic amino acid catabolic process
 leukotriene D4 metabolic process
 leukotriene D4 biosynthetic process
 negative regulation of cell junction assembly
 positive regulation of cell cycle checkpoint
-erythrose 4-phosphate/phosphoenolpyruvate family amino acid metabolic process
-regulation of cell cycle G1/S phase transition
+proton transmembrane transport
 negative regulation of supramolecular fiber organization
-positive regulation of protein localization to plasma membrane
-positive regulation of regulated secretory pathway
-reactive oxygen species biosynthetic process
-positive regulation of mitotic cytokinesis
+regulation of intestinal absorption
 regulation of intestinal lipid absorption
-regulation of protein localization to centrosome
-positive regulation of protein localization to centrosome
-regulation of protein localization to membrane
 positive regulation of protein localization to membrane
 regulation of CoA-transferase activity
 positive regulation of CoA-transferase activity
-negative regulation of lipid localization
+regulation of lipid localization
+neuron projection extension
 exosomal secretion
-dorsal root ganglion development
 basic amino acid transmembrane transport
+regulation of actin cytoskeleton reorganization
+positive regulation of actin cytoskeleton reorganization
 regulation of stem cell differentiation
-positive regulation of stem cell differentiation
-regulation of mesenchymal stem cell differentiation
 regulation of cyclin-dependent protein serine/threonine kinase activity
 neurotransmitter uptake
-positive regulation of cell-matrix adhesion
-columnar/cuboidal epithelial cell development
-somatic recombination of immunoglobulin genes involved in immune response
-somatic diversification of immunoglobulins involved in immune response
-B cell activation involved in immune response
+myeloid dendritic cell chemotaxis
 humoral immune response mediated by circulating immunoglobulin
 positive regulation of acute inflammatory response
+negative regulation of immune effector process
 negative regulation of leukocyte mediated immunity
-regulation of B cell mediated immunity
-positive regulation of myeloid leukocyte differentiation
-regulation of immunoglobulin mediated immune response
-regulation of systemic arterial blood pressure mediated by a chemical signal
-renal system process involved in regulation of systemic arterial blood pressure
 cardiac chamber morphogenesis
 cardiac ventricle morphogenesis
 ventricular cardiac muscle tissue development
-muscle hypertrophy in response to stress
-axis elongation
-uronic acid metabolic process
+cardiac ventricle development
+regulation of glycogen catabolic process
 succinate metabolic process
 mitochondrial electron transport, succinate to ubiquinone
 catecholamine metabolic process
-protein import into nucleus
-protein export from nucleus
-steroid catabolic process
 regulation of smooth muscle contraction
 complement activation, classical pathway
-cell surface receptor signaling pathway via JAK-STAT
-excretion
+synaptic transmission, cholinergic
 estrogen metabolic process
 branched-chain amino acid catabolic process
+nucleotide catabolic process
+response to cold
 gamma-aminobutyric acid metabolic process
-gamma-aminobutyric acid biosynthetic process
 catechol-containing compound metabolic process
 catechol-containing compound biosynthetic process
 vascular endothelial growth factor production
 regulation of vascular endothelial growth factor production
 positive regulation of vascular endothelial growth factor production
-regulation of cardiac muscle hypertrophy
-regulation of platelet-derived growth factor receptor signaling pathway
+miRNA metabolic process
 negative regulation of platelet-derived growth factor receptor signaling pathway
+positive regulation of collagen metabolic process
 positive regulation of cell-substrate adhesion
-dopamine secretion
 regulation of muscle hypertrophy
-positive regulation of muscle adaptation
-cardiac muscle adaptation
 striated muscle adaptation
-cardiac muscle hypertrophy in response to stress
-monoamine transport
-dopamine transport
-detection of temperature stimulus
-immunoglobulin mediated immune response
 phenol-containing compound catabolic process
-glucuronate metabolic process
 catechol-containing compound catabolic process
 pituitary gland development
 negative regulation of cell-cell adhesion
-circadian sleep/wake cycle process
 sleep
 positive regulation of bone mineralization
-regulation of B cell proliferation
+intracellular steroid hormone receptor signaling pathway
 positive regulation of B cell proliferation
-regulation of vascular endothelial growth factor receptor signaling pathway
-response to follicle-stimulating hormone
+regulation of protein polymerization
 negative regulation of interleukin-12 production
+regulation of collagen biosynthetic process
+positive regulation of collagen biosynthetic process
 regulation of T cell differentiation in thymus
-negative regulation of T cell differentiation in thymus
 response to type I interferon
 response to gonadotropin
 behavioral response to nicotine
 phosphate ion transmembrane transport
-cellular response to interferon-beta
 TRAIL-activated apoptotic signaling pathway
-C-X-C chemokine receptor CXCR4 signaling pathway
-CXCL12-activated CXCR4 signaling pathway
 dopamine catabolic process
 catecholamine biosynthetic process
 catecholamine catabolic process
-circadian sleep/wake cycle
 lipoprotein transport
 receptor metabolic process
 entrainment of circadian clock by photoperiod
-regulation of MAP kinase activity
 negative regulation of MAPK cascade
 lipoprotein localization
-regulation of circadian sleep/wake cycle, sleep
-isotype switching
-regulation of T cell differentiation
+endothelial cell differentiation
 regulation of macrophage differentiation
+negative regulation of cyclin-dependent protein serine/threonine kinase activity
 positive regulation of ossification
+negative regulation of muscle contraction
 regulation of receptor signaling pathway via JAK-STAT
-response to arsenic-containing substance
-negative regulation of smooth muscle cell proliferation
-circadian sleep/wake cycle, sleep
+regulation of T cell receptor signaling pathway
 positive regulation of B cell activation
 induction of positive chemotaxis
 sensory perception of temperature stimulus
 detection of temperature stimulus involved in sensory perception
 detection of temperature stimulus involved in sensory perception of pain
-response to mineralocorticoid
 positive regulation of cytoskeleton organization
-catecholamine transport
+regulation of amine transport
 cellular glucuronidation
-ventricular cardiac muscle tissue morphogenesis
-excitatory postsynaptic potential
-limb bud formation
 type I interferon-mediated signaling pathway
-cardiac septum morphogenesis
-regulation of gastric acid secretion
-prostate glandular acinus morphogenesis
-prostate epithelial cord arborization involved in prostate glandular acinus morphogenesis
-branch elongation of an epithelium
 branching involved in labyrinthine layer morphogenesis
-epithelial-mesenchymal cell signaling
 regulation of branching involved in prostate gland morphogenesis
-positive regulation of mast cell chemotaxis
 cardiac muscle tissue regeneration
-chaperone-mediated protein folding
 myeloid leukocyte cytokine production
 acetylcholine secretion
 lipophagy
-regulation of protein K48-linked ubiquitination
-detection of stimulus involved in sensory perception of pain
 regulation of lymphocyte apoptotic process
 negative regulation of lymphocyte apoptotic process
-positive regulation of ERK1 and ERK2 cascade
 response to interleukin-6
 cellular response to interleukin-6
 cellular response to type I interferon
 regulation of granulocyte chemotaxis
 positive regulation of granulocyte chemotaxis
-response to indole-3-methanol
-S-shaped body morphogenesis
-metanephric S-shaped body morphogenesis
+negative regulation of protein serine/threonine kinase activity
 multinuclear osteoclast differentiation
-osteoclast fusion
 positive regulation of transmembrane receptor protein serine/threonine kinase signaling pathway
-oncogene-induced cell senescence
-acetylcholine receptor signaling pathway
-renal filtration
-cell surface receptor signaling pathway via STAT
+positive regulation of protein deacetylation
 connective tissue replacement
-regulation of renal system process
-postsynaptic signal transduction
-chemical synaptic transmission, postsynaptic
-L-aspartate import across plasma membrane
-positive regulation of leukocyte differentiation
+interferon-mediated signaling pathway
 regulation of neutrophil migration
 positive regulation of blood vessel endothelial cell proliferation involved in sprouting angiogenesis
-positive regulation of hemopoiesis
-positive regulation of vasculature development
 regulation of cyclin-dependent protein kinase activity
 negative regulation of cyclin-dependent protein kinase activity
 negative regulation of vascular associated smooth muscle cell proliferation
 regulation of receptor signaling pathway via STAT
-regulation of metallopeptidase activity
-negative regulation of metallopeptidase activity
-response to acetylcholine
-cellular response to acetylcholine
 response to nerve growth factor
 cellular response to nerve growth factor stimulus
-regulation of animal organ morphogenesis
 regulation of leukocyte apoptotic process
 negative regulation of leukocyte apoptotic process
-positive regulation of cell proliferation involved in heart morphogenesis
-negative regulation of glucocorticoid receptor signaling pathway
+regulation of miRNA metabolic process
 regulation of DNA recombination
 mitotic spindle elongation
+ribosomal large subunit assembly
 mitotic sister chromatid segregation
+cell cycle checkpoint signaling
 DNA replication checkpoint signaling
 DNA damage checkpoint signaling
 G2/M transition of mitotic cell cycle
 meiotic spindle organization
 mitotic cytokinesis
 maturation of 5.8S rRNA
-telomere maintenance
 double-strand break repair via homologous recombination
 recombinational repair
 double-strand break repair via break-induced replication
 DNA synthesis involved in DNA repair
-assembly of actomyosin apparatus involved in cytokinesis
-actomyosin contractile ring assembly
 formation of extrachromosomal circular DNA
 somatic diversification of immune receptors via somatic mutation
+tricarboxylic acid cycle
 oxidative phosphorylation
 purine nucleobase metabolic process
-purine nucleotide biosynthetic process
+AMP biosynthetic process
 GMP biosynthetic process
 pyrimidine nucleotide metabolic process
 pyrimidine nucleotide biosynthetic process
@@ -1481,13 +1369,11 @@ base-excision repair, gap-filling
 mismatch repair
 postreplication repair
 ATP biosynthetic process
-folic acid-containing compound metabolic process
-outer mitochondrial membrane organization
+spindle organization
 mitotic spindle organization
-spindle assembly involved in female meiosis
 sister chromatid cohesion
 mitotic chromosome condensation
-mitotic metaphase chromosome alignment
+mitotic metaphase plate congression
 metaphase/anaphase transition of mitotic cell cycle
 mitotic cell cycle checkpoint signaling
 mitotic spindle assembly checkpoint signaling
@@ -1513,7 +1399,6 @@ nucleoside triphosphate biosynthetic process
 purine nucleoside triphosphate biosynthetic process
 pyrimidine nucleoside triphosphate metabolic process
 pyrimidine nucleoside triphosphate biosynthetic process
-purine ribonucleotide biosynthetic process
 ribonucleoside monophosphate biosynthetic process
 deoxyribonucleoside monophosphate biosynthetic process
 ribonucleoside monophosphate metabolic process
@@ -1524,10 +1409,11 @@ ribonucleoside triphosphate biosynthetic process
 purine ribonucleoside triphosphate biosynthetic process
 pyrimidine ribonucleoside triphosphate biosynthetic process
 pyrimidine ribonucleotide biosynthetic process
-ribonucleotide biosynthetic process
 deoxyribonucleotide metabolic process
 2'-deoxyribonucleotide metabolic process
+response to UV
 meiotic chromosome condensation
+response to X-ray
 response to ionizing radiation
 regulation of G2/M transition of mitotic cell cycle
 regulation of double-strand break repair via homologous recombination
@@ -1541,17 +1427,13 @@ aerobic electron transport chain
 deoxyribose phosphate metabolic process
 translesion synthesis
 DNA strand elongation
-electron transport chain
 respiratory electron transport chain
-establishment of cell polarity
 regulation of mitotic metaphase/anaphase transition
 regulation of DNA-templated DNA replication initiation
 chromosome condensation
-nuclear migration along microtubule
 microtubule organizing center organization
 chromatin remodeling at centromere
 microtubule polymerization or depolymerization
-rRNA 3'-end processing
 replication fork processing
 negative regulation of protein ubiquitination
 DNA integrity checkpoint signaling
@@ -1560,10 +1442,10 @@ regulation of deoxyribonuclease activity
 regulation of endodeoxyribonuclease activity
 positive regulation of nuclease activity
 positive regulation of deoxyribonuclease activity
-negative regulation of protein binding
 telomere organization
 telomere maintenance via semi-conservative replication
 DNA geometric change
+positive regulation of cytokinesis
 DNA duplex unwinding
 mitochondrial translation
 regulation of sister chromatid segregation
@@ -1577,88 +1459,70 @@ amyloid-beta formation
 protein localization to kinetochore
 protein localization to chromosome
 centromere complex assembly
+cellular response to reactive oxygen species
 hematopoietic stem cell migration
 homologous recombination
 7-methylguanosine cap hypermethylation
 interstrand cross-link repair
-cytosolic ribosome assembly
+neuron intrinsic apoptotic signaling pathway in response to oxidative stress
+ribosome assembly
 ribosomal large subunit biogenesis
 ribosomal small subunit biogenesis
-error-prone translesion synthesis
 signal transduction in response to DNA damage
 ATP synthesis coupled electron transport
 mitochondrial ATP synthesis coupled electron transport
 proton motive force-driven mitochondrial ATP synthesis
+nucleoside salvage
+dicarboxylic acid metabolic process
+post-translational protein modification
 meiotic cell cycle phase transition
 mitotic DNA damage checkpoint signaling
 mitotic DNA integrity checkpoint signaling
 metaphase/anaphase transition of cell cycle
-metaphase/anaphase transition of meiotic cell cycle
 cell cycle DNA replication
 mitotic G2/M transition checkpoint
 cell cycle G2/M phase transition
 DNA-templated DNA replication maintenance of fidelity
-protein insertion into mitochondrial outer membrane
 meiotic chromosome segregation
-homologous chromosome segregation
-regulation of circadian sleep/wake cycle, non-REM sleep
-negative regulation of DNA repair
 positive regulation of DNA repair
-positive regulation of DNA replication
 negative regulation of mitotic nuclear division
 negative regulation of mitotic metaphase/anaphase transition
-positive regulation of mitotic metaphase/anaphase transition
+AMP metabolic process
 dAMP metabolic process
-ribose phosphate biosynthetic process
+nucleobase biosynthetic process
 regulation of mitotic centrosome separation
-microtubule polymerization
 chromosome localization
 amyloid-beta metabolic process
-negative regulation of DNA metabolic process
 spindle assembly
 spindle elongation
 spindle midzone assembly
 mitotic spindle midzone assembly
-establishment of spindle localization
-establishment of spindle orientation
-establishment of meiotic spindle localization
-centrosome duplication
 centrosome separation
 establishment of chromosome localization
 chromosome separation
 mitotic sister chromatid separation
-metaphase chromosome alignment
+metaphase plate congression
 attachment of mitotic spindle microtubules to kinetochore
 kinetochore assembly
 kinetochore organization
-regulation of ubiquitin-protein transferase activity
-regulation of meiotic cell cycle
-negative regulation of meiotic cell cycle
 nucleus localization
 spindle localization
-nuclear pore localization
 negative regulation of nuclear division
 regulation of chromosome segregation
 positive regulation of chromosome segregation
 negative regulation of chromosome segregation
 positive regulation of attachment of spindle microtubules to kinetochore
-regulation of attachment of spindle microtubules to kinetochore
 regulation of mitotic spindle organization
 regulation of chromosome condensation
 cytoskeleton-dependent cytokinesis
 meiosis I cell cycle process
-positive regulation of mitotic sister chromatid segregation
 chromosome organization involved in meiotic cell cycle
 actin polymerization-dependent cell motility
-regulation of microtubule cytoskeleton organization
 DNA conformation change
 spindle assembly checkpoint signaling
 mitotic spindle checkpoint signaling
 protein localization to chromosome, centromeric region
 cellular response to ionizing radiation
-protein localization to centrosome
-response to prostaglandin D
-cellular response to prostaglandin D stimulus
 DNA biosynthetic process
 pyrimidine-containing compound metabolic process
 pyrimidine-containing compound biosynthetic process
@@ -1671,35 +1535,25 @@ mitotic spindle assembly
 regulation of DNA-templated DNA replication
 t-circle formation
 telomere maintenance via telomere trimming
-double-strand break repair via alternative nonhomologous end joining
-regulation of G2/MI transition of meiotic cell cycle
 meiotic nuclear division
 mitochondrial gene expression
 reciprocal homologous recombination
-cGAS/STING signaling pathway
-negative regulation of cGAS/STING signaling pathway
 positive regulation of G1/S transition of mitotic cell cycle
 regulation of DNA-directed DNA polymerase activity
 positive regulation of DNA-directed DNA polymerase activity
+regulation of response to reactive oxygen species
 glycosyl compound metabolic process
-negative regulation of post-translational protein modification
 positive regulation of mitotic sister chromatid separation
 regulation of cell cycle checkpoint
 positive regulation of cell cycle phase transition
 negative regulation of mitotic cell cycle phase transition
-regulation of meiotic cell cycle phase transition
-negative regulation of meiotic cell cycle phase transition
 regulation of amyloid-beta formation
 regulation of metaphase/anaphase transition of cell cycle
 negative regulation of metaphase/anaphase transition of cell cycle
-positive regulation of metaphase/anaphase transition of cell cycle
-negative regulation of metaphase/anaphase transition of meiotic cell cycle
 cell cycle DNA replication initiation
 nuclear cell cycle DNA replication initiation
-regulation of mitotic cytokinesis
 regulation of attachment of mitotic spindle microtubules to kinetochore
 positive regulation of attachment of mitotic spindle microtubules to kinetochore
-proton transmembrane transport
 regulation of cell cycle G2/M phase transition
 negative regulation of cell cycle G2/M phase transition
 positive regulation of cell cycle G2/M phase transition
@@ -1708,84 +1562,80 @@ microtubule cytoskeleton organization involved in mitosis
 mitotic DNA replication
 mitotic DNA replication initiation
 protein localization to condensed chromosome
+negative regulation of protein modification by small protein conjugation or removal
+regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway
+positive regulation of mitotic cytokinesis
 regulation of mitotic spindle checkpoint
 regulation of ubiquitin protein ligase activity
 negative regulation of ubiquitin protein ligase activity
-negative regulation of meiotic chromosome separation
-protein localization to microtubule organizing center
+positive regulation of double-strand break repair via homologous recombination
 regulation of chromosome separation
 negative regulation of chromosome separation
 positive regulation of chromosome separation
 positive regulation of chromosome condensation
-double-strand break repair involved in meiotic recombination
-positive regulation of DNA-templated DNA replication
-regulation of reproductive process
-negative regulation of reproductive process
-positive regulation of monocyte extravasation
+regulation of DNA biosynthetic process
 positive regulation of DNA biosynthetic process
 regulation of double-strand break repair
 positive regulation of double-strand break repair
 negative regulation of mitotic sister chromatid separation
+positive regulation of response to DNA damage stimulus
 negative regulation of chromosome organization
 positive regulation of chromosome organization
 homeostasis of number of cells within a tissue
+negative regulation of mesenchymal cell proliferation
 retrograde trans-synaptic signaling by lipid
 retrograde trans-synaptic signaling by endocannabinoid
 anterograde axonal transport of mitochondrion
+trans-synaptic signaling by lipid
+trans-synaptic signaling by endocannabinoid
+autophagosome assembly
 receptor recycling
 antigen processing and presentation of peptide antigen via MHC class I
-tricarboxylic acid cycle
 membrane protein ectodomain proteolysis
 NADP metabolic process
 NADPH regeneration
-regulation of hydrogen peroxide metabolic process
-positive regulation of hydrogen peroxide metabolic process
-positive regulation of mitochondrial membrane potential
 rRNA catabolic process
-regulation of myelination
+pyridine nucleotide metabolic process
 positive regulation of myelination
 positive regulation of nervous system process
-intracellular oxygen homeostasis
 membrane protein proteolysis
+ncRNA catabolic process
 ceramide transport
-lipoprotein metabolic process
 lipoprotein catabolic process
 antigen processing and presentation of exogenous peptide antigen via MHC class I
-hydrogen peroxide metabolic process
-hydrogen peroxide catabolic process
 proteasome assembly
-positive regulation of cysteine-type endopeptidase activity involved in apoptotic process
-cell redox homeostasis
-positive regulation of membrane potential
+nicotinamide nucleotide metabolic process
 positive regulation of insulin receptor signaling pathway
 glycolipid transport
 negative regulation of fibroblast proliferation
 positive regulation of axonogenesis
 regulation of membrane protein ectodomain proteolysis
 positive regulation of membrane protein ectodomain proteolysis
-regulation of mitochondrial membrane potential
 epithelial cell differentiation involved in prostate gland development
-cellular oxidant detoxification
+pyridine-containing compound metabolic process
+RNA phosphodiester bond hydrolysis, exonucleolytic
 negative regulation of cold-induced thermogenesis
 positive regulation of cellular response to insulin stimulus
 insulin metabolic process
 carbohydrate derivative transport
+autophagosome organization
 establishment of mitotic spindle orientation
+oocyte maturation
 somatic diversification of immune receptors
-inositol metabolic process
 GTP biosynthetic process
 pyrimidine nucleobase metabolic process
 DNA topological change
-DNA replication, synthesis of primer
-nucleosome assembly
+DNA replication, synthesis of RNA primer
 DNA replication-dependent chromatin assembly
 glutamine metabolic process
 microtubule depolymerization
+spindle assembly involved in female meiosis
 regulation of sister chromatid cohesion
 mitotic sister chromatid cohesion
 mitotic nuclear membrane disassembly
 regulation of exit from mitosis
 centriole replication
+meiosis II
 female gamete generation
 negative regulation of DNA replication
 intrinsic apoptotic signaling pathway in response to DNA damage
@@ -1794,6 +1644,7 @@ pyrimidine nucleoside diphosphate biosynthetic process
 pyrimidine deoxyribonucleoside triphosphate metabolic process
 pyrimidine deoxyribonucleotide metabolic process
 pyrimidine deoxyribonucleotide biosynthetic process
+negative regulation of gene expression via chromosomal DNA cytosine methylation
 centriole-centriole cohesion
 exit from mitosis
 regulation of centrosome duplication
@@ -1801,106 +1652,96 @@ folic acid transport
 somatic diversification of immunoglobulins
 peptidyl-threonine modification
 pyrimidine nucleobase biosynthetic process
-intracellular monoatomic anion homeostasis
-membrane disassembly
-intracellular chloride ion homeostasis
-regulation of microtubule polymerization or depolymerization
-heterochromatin formation
-positive regulation of exit from mitosis
 mitotic G1 DNA damage checkpoint signaling
 negative regulation of cytokinesis
 cytokinetic process
-meiotic cell cycle checkpoint signaling
+negative regulation of homotypic cell-cell adhesion
 intraciliary transport involved in cilium assembly
 establishment of mitotic spindle localization
-regulation of meiotic nuclear division
-DNA strand invasion
-negative regulation of gene expression via chromosomal CpG island methylation
+DNA endoreduplication
+strand invasion
+error-prone translesion synthesis
 protein localization to cytoskeleton
 mitotic G1/S transition checkpoint signaling
-actomyosin contractile ring organization
-negative regulation of gene expression, epigenetic
+homologous chromosome segregation
+meiotic sister chromatid segregation
+positive regulation of DNA replication
 negative regulation of meiotic nuclear division
-positive regulation of mitotic nuclear division
-positive regulation of sister chromatid cohesion
-negative regulation of DNA recombination
 GMP metabolic process
-nucleobase biosynthetic process
 regulation of centriole replication
 positive regulation of centriole replication
 regulation of centrosome cycle
+replication fork protection
+negative regulation of DNA metabolic process
 nuclear membrane disassembly
 meiotic sister chromatid cohesion
-meiotic chromosome separation
+establishment of spindle localization
+establishment of spindle orientation
+centrosome duplication
+regulation of meiotic cell cycle
 positive regulation of meiotic cell cycle
+negative regulation of meiotic cell cycle
 centrosome localization
 negative regulation of cell division
-positive regulation of nuclear division
 chloride ion homeostasis
 monoatomic anion homeostasis
 chorion development
 microtubule organizing center localization
-resolution of DNA recombination intermediates
+meiosis II cell cycle process
+regulation of microtubule cytoskeleton organization
+heterochromatin organization
+resolution of recombination intermediates
 protein localization to chromatin
+cellular hypotonic response
+protein localization to centrosome
 protein localization to microtubule cytoskeleton
+protein K6-linked ubiquitination
 regulation of spindle assembly
+negative regulation of lipid kinase activity
 centriole assembly
 folate transmembrane transport
-DNA strand resection involved in replication fork processing
-regulation of metaphase/anaphase transition of meiotic cell cycle
+regulation of meiotic cell cycle phase transition
 positive regulation of organelle assembly
+regulation of mitotic cytokinesis
 negative regulation of cell cycle G1/S phase transition
-ATP export
 regulation of protein localization to cell cortex
-regulation of meiotic chromosome separation
+protein localization to microtubule organizing center
 positive regulation of spindle assembly
-protein localization to site of double-strand break
 regulation of DNA damage checkpoint
 negative regulation of double-strand break repair via homologous recombination
 negative regulation of DNA-templated DNA replication
+positive regulation of DNA-templated DNA replication
 negative regulation of G1/S transition of mitotic cell cycle
-regulation of DNA biosynthetic process
-negative regulation of double-strand break repair
+negative regulation of response to DNA damage stimulus
 regulation of neuron migration
 positive regulation of neuron migration
-regulation of microvillus assembly
-positive regulation of cell-cell adhesion mediated by integrin
+DNA modification
 autophagy of mitochondrion
-mitophagy
-protein depalmitoylation
-regulation of thyroid hormone receptor signaling pathway
+regulation of thyroid hormone mediated signaling pathway
+pattern recognition receptor signaling pathway
 T cell activation via T cell receptor contact with antigen bound to MHC molecule on antigen presenting cell
 cytokine production involved in inflammatory response
-cytoplasmic pattern recognition receptor signaling pathway
-regulation of hypersensitivity
 regulation of myeloid leukocyte mediated immunity
 fructose 2,6-bisphosphate metabolic process
-acetyl-CoA metabolic process
-acetyl-CoA biosynthetic process
-acetyl-CoA biosynthetic process from pyruvate
 mitochondrial electron transport, NADH to ubiquinone
 mitochondrial electron transport, ubiquinol to cytochrome c
 mitochondrial electron transport, cytochrome c to oxygen
-N-glycan processing
-protein quality control for misfolded or incompletely synthesized proteins
-cellular modified amino acid metabolic process
 amino-acid betaine metabolic process
+amino-acid betaine biosynthetic process
 protein targeting to mitochondrion
 acyl-CoA metabolic process
 phosphatidylcholine biosynthetic process
 CDP-choline pathway
 glycerol ether metabolic process
 mitochondrial transport
-xenobiotic transmembrane transport
 regulation of pH
 phagocytosis, engulfment
 mitochondrial membrane organization
 inner mitochondrial membrane organization
-vacuolar transport
+endosome organization
 vacuolar acidification
 protein catabolic process in the vacuole
 lysosome organization
-lysosomal transport
 lysosomal lumen acidification
 regulation of actin polymerization or depolymerization
 ether lipid biosynthetic process
@@ -1910,23 +1751,26 @@ carnitine metabolic process
 NADH dehydrogenase complex assembly
 membrane invagination
 regulation of mitochondrion organization
+negative regulation of mitochondrion organization
 regulation of cholesterol efflux
 positive regulation of cholesterol efflux
-cholesterol storage
 macrophage cytokine production
 regulation of macrophage cytokine production
 regulation of lipoprotein particle clearance
-microglia differentiation
 organophosphate ester transport
 sterol transport
+glycoside catabolic process
+synaptic vesicle maturation
 cytochrome complex assembly
+peptidyl-cysteine modification
 protein palmitoylation
 ether metabolic process
 N-acetylneuraminate catabolic process
-glycolipid catabolic process
+triglyceride biosynthetic process
+short-chain fatty acid catabolic process
 substantia nigra development
+electron transport chain
 actin filament polymerization
-sphingolipid catabolic process
 cholesterol transport
 regulation of cellular pH
 regulation of actin filament length
@@ -1937,47 +1781,40 @@ regulation of sterol transport
 positive regulation of sterol transport
 regulation of cholesterol transport
 positive regulation of cholesterol transport
-detection of lipopolysaccharide
-interleukin-6 production
-regulation of interleukin-6 production
 negative regulation of interleukin-6 production
 negative regulation of tumor necrosis factor production
 low-density lipoprotein receptor particle metabolic process
 receptor catabolic process
 low-density lipoprotein particle receptor catabolic process
 regulation of low-density lipoprotein particle receptor catabolic process
+positive regulation of superoxide anion generation
 negative regulation of mononuclear cell proliferation
-protein insertion into membrane from inner side
-protein insertion into mitochondrial inner membrane from matrix
 mitochondrial respiratory chain complex I assembly
 mitochondrial respiratory chain complex assembly
 negative regulation of amine metabolic process
 cholesterol efflux
-regulation of amide metabolic process
+nucleoside bisphosphate metabolic process
+ribonucleoside bisphosphate metabolic process
+purine nucleoside bisphosphate metabolic process
 Arp2/3 complex-mediated actin nucleation
 plasma lipoprotein particle clearance
 low-density lipoprotein particle clearance
-vacuolar transmembrane transport
 phosphatidylcholine catabolic process
 thioester metabolic process
 regulation of lysosomal lumen pH
-lipoprotein biosynthetic process
+negative regulation of T cell proliferation
+lipoprotein metabolic process
 water-soluble vitamin biosynthetic process
-cristae formation
-negative regulation of Golgi to plasma membrane protein transport
 positive regulation of macrophage activation
 regulation of leukocyte degranulation
 regulation of neutrophil degranulation
-dicarboxylic acid metabolic process
-regulation of vacuole organization
-NLRP3 inflammasome complex assembly
 actin nucleation
 short-chain fatty acid metabolic process
+neutral lipid biosynthetic process
+acylglycerol biosynthetic process
 membrane lipid catabolic process
 platelet activating factor metabolic process
-glycerophospholipid biosynthetic process
 glycerophospholipid catabolic process
-glycosphingolipid catabolic process
 ether lipid metabolic process
 glycerol ether biosynthetic process
 endosomal lumen acidification
@@ -1986,52 +1823,50 @@ positive regulation of inflammatory response
 B cell receptor signaling pathway
 regulation of B cell receptor signaling pathway
 positive regulation of B cell receptor signaling pathway
+negative regulation of T cell activation
 intracellular pH reduction
 regulation of intracellular pH
+regulation of mitochondrial membrane potential
 lipid homeostasis
+response to lipoprotein particle
 positive regulation of macrophage cytokine production
 positive regulation of myeloid leukocyte cytokine production involved in immune response
-protein localization to lysosome
+mitochondrion disassembly
 Golgi lumen acidification
 neuron cellular homeostasis
 protein localization to mitochondrion
+negative regulation of leukocyte proliferation
+cellular response to low-density lipoprotein particle stimulus
 monocarboxylic acid catabolic process
-pyridine-containing compound metabolic process
 establishment of protein localization to mitochondrion
 maintenance of protein location in mitochondrion
-protein localization to vacuole
 lytic vacuole organization
 receptor-mediated endocytosis involved in cholesterol transport
+regulation of plasma lipoprotein particle levels
 cellular response to toxic substance
 amyloid-beta clearance
-mitochondrial respirasome assembly
 cellular lipid biosynthetic process
-lamellipodium organization
 detoxification
 synapse pruning
 plasma membrane invagination
-canonical inflammasome complex assembly
-positive regulation of inflammasome-mediated signaling pathway
 cell junction disassembly
 regulation of cytokine production involved in inflammatory response
 positive regulation of amyloid-beta clearance
-regulation of NLRP3 inflammasome complex assembly
-positive regulation of NLRP3 inflammasome complex assembly
 ether biosynthetic process
-regulation of mitophagy
-regulation of autophagy of mitochondrion
+negative regulation of leukocyte cell-cell adhesion
+regulation of protein localization to plasma membrane
+cellular response to bile acid
 negative regulation of tumor necrosis factor superfamily cytokine production
-regulation of cristae formation
+regulation of protein tyrosine phosphatase activity
 regulation of protein catabolic process in the vacuole
 positive regulation of protein catabolic process in the vacuole
 regulation of protein localization to cell periphery
-lysosomal protein catabolic process
+regulation of protein localization to membrane
 lipid transport across blood-brain barrier
 cellular detoxification
 regulation of receptor catabolic process
 positive regulation of receptor catabolic process
 regulation of T cell activation via T cell receptor contact with antigen bound to MHC molecule on antigen presenting cell
-guanine nucleotide transport
 desmosome organization
 aortic valve development
 aortic valve morphogenesis
@@ -2041,13 +1876,10 @@ endocardial cushion morphogenesis
 endocardial cushion formation
 protein sulfation
 fat-soluble vitamin metabolic process
-nucleotide transport
 substrate-dependent cell migration
-Rho protein signal transduction
 axonal fasciculation
 salivary gland development
 salivary gland morphogenesis
-phototransduction
 neuron recognition
 vitamin biosynthetic process
 response to light intensity
@@ -2055,30 +1887,27 @@ regulation of keratinocyte proliferation
 negative regulation of keratinocyte proliferation
 negative regulation of steroid biosynthetic process
 negative regulation of vitamin D biosynthetic process
-purine nucleotide transport
-purine ribonucleotide transport
+cytolysis
 olfactory nerve development
 preganglionic parasympathetic fiber development
 central nervous system neuron axonogenesis
 regulation of vitamin metabolic process
 establishment or maintenance of cytoskeleton polarity
+regulation of microtubule polymerization or depolymerization
 negative regulation of microtubule polymerization or depolymerization
 negative regulation of microtubule polymerization
 negative regulation of actin filament bundle assembly
 regulation of chondrocyte differentiation
-collagen biosynthetic process
 myeloid cell apoptotic process
 regulation of myeloid cell apoptotic process
 negative regulation of myeloid cell apoptotic process
 regulation of cell adhesion mediated by integrin
 negative regulation of cell adhesion mediated by integrin
-nucleoside bisphosphate metabolic process
-ribonucleoside bisphosphate metabolic process
-purine nucleoside bisphosphate metabolic process
 purine ribonucleoside bisphosphate metabolic process
 tooth mineralization
 regulation of Rho protein signal transduction
 negative regulation of Rho protein signal transduction
+positive regulation of histone acetylation
 exocrine system development
 nucleotide-binding domain, leucine rich repeat containing receptor signaling pathway
 vitamin D metabolic process
@@ -2091,10 +1920,13 @@ negative regulation of vascular permeability
 anoikis
 regulation of DNA damage response, signal transduction by p53 class mediator
 negative regulation of DNA damage response, signal transduction by p53 class mediator
+keratinocyte proliferation
 wound healing, spreading of cells
 positive regulation of cilium assembly
+negative regulation of G protein-coupled receptor signaling pathway
 negative regulation of steroid metabolic process
 negative regulation of vitamin metabolic process
+negative regulation of Ras protein signal transduction
 hepatocyte growth factor receptor signaling pathway
 autonomic nervous system development
 parasympathetic nervous system development
@@ -2104,7 +1936,6 @@ stem cell development
 white fat cell differentiation
 negative regulation of small GTPase mediated signal transduction
 negative regulation of stress fiber assembly
-adenine nucleotide transport
 sulfation
 regulation of feeding behavior
 cardiac epithelial to mesenchymal transition
@@ -2112,36 +1943,34 @@ branching involved in salivary gland morphogenesis
 cartilage morphogenesis
 regulation of vitamin D biosynthetic process
 regulation of branching involved in salivary gland morphogenesis
+cell surface receptor signaling pathway involved in heart development
+Notch signaling involved in heart development
 establishment of skin barrier
+positive regulation of pattern recognition receptor signaling pathway
 enamel mineralization
 regulation of T cell apoptotic process
 negative regulation of T cell apoptotic process
-regulation of nucleotide-binding domain, leucine rich repeat containing receptor signaling pathway
-positive regulation of nucleotide-binding domain, leucine rich repeat containing receptor signaling pathway
+nucleotide-binding oligomerization domain containing signaling pathway
+regulation of nucleotide-binding oligomerization domain containing signaling pathway
+positive regulation of nucleotide-binding oligomerization domain containing signaling pathway
 nucleotide-binding oligomerization domain containing 1 signaling pathway
 regulation of vitamin D receptor signaling pathway
-cyclic nucleotide transport
+response to epidermal growth factor
 cellular response to epidermal growth factor stimulus
 hematopoietic stem cell proliferation
-purine-containing compound transmembrane transport
-negative regulation of spindle checkpoint
+cellular response to light intensity
 epiboly
 epiboly involved in wound healing
 amelogenesis
 calcium ion import across plasma membrane
 neuron projection fasciculation
-cyclic-GMP-AMP transmembrane import across plasma membrane
-negative regulation of mitotic spindle assembly checkpoint signaling
 cell-cell junction disassembly
 negative regulation of signal transduction in absence of ligand
-nucleotide transmembrane transport
 negative regulation of signal transduction by p53 class mediator
-negative regulation of cell cycle checkpoint
+positive regulation of protein acetylation
 regulation of hematopoietic stem cell proliferation
 regulation of intrinsic apoptotic signaling pathway in response to DNA damage
 negative regulation of intrinsic apoptotic signaling pathway in response to DNA damage
-calcium ion import into cytosol
-guanine nucleotide transmembrane transport
 regulation of eating behavior
 regulation of GTP binding
 regulation of guanyl-nucleotide exchange factor activity
@@ -2150,12 +1979,14 @@ semi-lunar valve development
 calcium ion export across plasma membrane
 response to odorant
 regulation of anoikis
+positive regulation of peptidyl-lysine acetylation
 regulation of bicellular tight junction assembly
 negative regulation of anoikis
 regulation of extrinsic apoptotic signaling pathway in absence of ligand
 negative regulation of extrinsic apoptotic signaling pathway in absence of ligand
 regulation of intrinsic apoptotic signaling pathway
 negative regulation of intrinsic apoptotic signaling pathway
+amino sugar metabolic process
 natural killer cell differentiation
 neutrophil homeostasis
 B cell apoptotic process
@@ -2163,26 +1994,29 @@ response to dietary excess
 diet induced thermogenesis
 regulation of B cell apoptotic process
 negative regulation of B cell apoptotic process
+acetyl-CoA metabolic process
+acetyl-CoA biosynthetic process
 DNA methylation-dependent heterochromatin formation
 protein targeting to lysosome
 protein targeting to vacuole
 prostanoid metabolic process
+prostaglandin metabolic process
 zinc ion transport
 glutamine transport
 intracellular zinc ion homeostasis
 hypotonic response
 parturition
-response to lithium ion
-regulation of acetyl-CoA biosynthetic process from pyruvate
 regulation of peptidyl-threonine phosphorylation
 positive regulation of peptidyl-threonine phosphorylation
-bicarbonate transport
-L-glutamate transmembrane transport
+positive regulation of phosphatase activity
 lipoxygenase pathway
 female genitalia development
 ovulation
+regulation of nucleotide biosynthetic process
 regulation of heterochromatin formation
 positive regulation of heterochromatin formation
+negative regulation of proteasomal ubiquitin-dependent protein catabolic process
+positive regulation of phosphoprotein phosphatase activity
 protein exit from endoplasmic reticulum
 protein localization to Golgi apparatus
 negative regulation of amide metabolic process
@@ -2196,22 +2030,18 @@ negative regulation of potassium ion transport
 protein retention in Golgi apparatus
 regulation of neuron differentiation
 positive regulation of neuron differentiation
-regulation of fatty acid oxidation
 regulation of acyl-CoA biosynthetic process
 positive regulation of antigen receptor-mediated signaling pathway
 negative regulation of lipid catabolic process
-L-glutamate import
+histone H3-K9 methylation
 regulation of ER to Golgi vesicle-mediated transport
-early endosome to recycling endosome transport
-heterochromatin organization
+histone H3-K9 modification
 inclusion body assembly
 regulation of protein exit from endoplasmic reticulum
 positive regulation of protein exit from endoplasmic reticulum
 left/right axis specification
-protein K48-linked deubiquitination
 cellular response to lithium ion
 cellular response to fatty acid
-cellular hypotonic response
 zinc ion transmembrane transport
 zinc ion import across plasma membrane
 acyl-CoA biosynthetic process
@@ -2227,7 +2057,10 @@ response to gonadotropin-releasing hormone
 neutrophil clearance
 vesicle-mediated transport between endosomal compartments
 endosome to plasma membrane protein transport
-regulation of potassium ion transmembrane transporter activity
+regulation of heterochromatin organization
+positive regulation of heterochromatin organization
+facultative heterochromatin formation
+regulation of purine nucleotide biosynthetic process
 negative regulation of potassium ion transmembrane transporter activity
 negative regulation of potassium ion transmembrane transport
 icosanoid catabolic process
@@ -2235,69 +2068,84 @@ fatty acid derivative catabolic process
 regulation of chromatin organization
 negative regulation of amyloid-beta formation
 protein localization to early endosome
+regulation of tau-protein kinase activity
+regulation of aspartic-type endopeptidase activity involved in amyloid precursor protein catabolic process
 regulation of protein localization to early endosome
 positive regulation of protein localization to early endosome
+regulation of amyloid precursor protein catabolic process
 negative regulation of amyloid precursor protein catabolic process
+regulation of ER-associated ubiquitin-dependent protein catabolic process
 negative regulation of response to endoplasmic reticulum stress
+regulation of cytoplasmic transport
+positive regulation of cytoplasmic transport
 positive regulation of adipose tissue development
 regulation of ERAD pathway
 negative regulation of ERAD pathway
+regulation of metalloendopeptidase activity
 positive regulation of vascular associated smooth muscle cell proliferation
+regulation of metallopeptidase activity
+negative regulation of metallopeptidase activity
+regulation of aspartic-type peptidase activity
 positive regulation of chromatin organization
 regulation of protein localization to endosome
 positive regulation of protein localization to endosome
 regulation of endocytic recycling
 positive regulation of endocytic recycling
 maturation of LSU-rRNA
+tRNA metabolic process
+tRNA modification
+tRNA processing
 lymphocyte costimulation
 T cell costimulation
 intraciliary anterograde transport
+T cell selection
 thymic T cell selection
 alpha-beta T cell activation
 regulation of antigen receptor-mediated signaling pathway
+amino acid transmembrane transport
+monoatomic anion transport
 homophilic cell adhesion via plasma membrane adhesion molecules
 sensory perception of smell
 bile acid metabolic process
 detection of external stimulus
 detection of abiotic stimulus
 calcium-dependent cell-cell adhesion via plasma membrane cell adhesion molecules
+transmission of nerve impulse
+adult behavior
+regulation of guanylate cyclase activity
 regulation of digestive system process
 sarcomere organization
+embryonic digestive tract development
 detection of chemical stimulus involved in sensory perception
 detection of chemical stimulus involved in sensory perception of smell
 retina development in camera-type eye
+axonemal dynein complex assembly
+mesonephric tubule formation
+monoatomic anion transmembrane transport
+organic acid transmembrane transport
 response to forskolin
 cellular response to forskolin
+carboxylic acid transmembrane transport
+nucleosome assembly
 nucleosome organization
-negative regulation of cytoplasmic pattern recognition receptor signaling pathway
 regulation of megakaryocyte differentiation
 negative regulation of megakaryocyte differentiation
 protein localization to CENP-A containing chromatin
-reticulophagy
-ribosomal small subunit assembly
-RNA methylation
 glucuronate catabolic process
-tRNA modification
 valine metabolic process
-tRNA processing
 respiratory chain complex IV assembly
 amino acid catabolic process
 RNA modification
-D-glucuronate catabolic process to D-xylulose 5-phosphate
-maturation of SSU-rRNA
+glucuronate catabolic process to xylulose 5-phosphate
 cardiolipin metabolic process
 mitochondrial proton-transporting ATP synthase complex assembly
 mitochondrial cytochrome c oxidase assembly
-ribosome assembly
-D-glucuronate metabolic process
-D-glucuronate catabolic process
-macromolecule methylation
 proton-transporting ATP synthase complex assembly
+sulfur compound catabolic process
+organophosphate catabolic process
 xylulose 5-phosphate metabolic process
 proton-transporting two-sector ATPase complex assembly
 tRNA threonylcarbamoyladenosine metabolic process
-cellular response to oxidised low-density lipoprotein particle stimulus
 xylulose 5-phosphate biosynthetic process
-amino-acid betaine biosynthetic process
+regulation of pyruvate dehydrogenase activity
 intraciliary transport
-non-motile cilium assembly
