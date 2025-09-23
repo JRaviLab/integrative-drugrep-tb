@@ -1,0 +1,24 @@
+```{r}
+library(here)
+source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+```
+
+```{r}
+# get drug results for all scores
+data_to_run = read_tsv(here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv"))
+drug_res_path = "results/RNAseq"
+score_method = "LINCS"
+score = "WCS"
+get_drug_results(data_to_run, drug_res_path, score_method, score)
+
+# read in the 107 highly confidence drugs from the prediction
+
+
+# identify threshold using the score vector from drug results
+# score_vec = 
+# determine_threshold
+
+
+# get number of cell lines reversed by each drug (passing the threshold)
+
+```
