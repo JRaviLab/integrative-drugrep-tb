@@ -174,7 +174,7 @@ for (technology in technologies) {
             parts[1] / parts[2]
           }
         )
-      
+        ### BELOW are the new observed / expected calculation
         # calculate log(observed / expected)
         # GeneRatio = k/n
         # k = the overlap between your genes-of-interest and the geneset
@@ -272,7 +272,7 @@ for(technology in technologies){
           parts[1] / parts[2]
         }
       )
-          
+      ### BELOW are the new observed / expected calculation
       # calculate log(observed / expected)
       # GeneRatio = k/n
       # k = the overlap between your genes-of-interest and the geneset
@@ -346,7 +346,7 @@ for(technology in technologies){
           parts[1] / parts[2]
         }
       )
-          
+      ### BELOW are the new observed / expected calculation
       # calculate log(observed / expected)
       # GeneRatio = k/n
       # k = the overlap between your genes-of-interest and the geneset
