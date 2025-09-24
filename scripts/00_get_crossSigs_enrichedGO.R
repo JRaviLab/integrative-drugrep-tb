@@ -58,6 +58,53 @@ get_GO_pseudocount_matrix <- function(data_path, pattern, prefix_sub, suffix_sub
   return(GO_mat)
 }
 
+get_GO_qvalue_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
+  filenames <- list.files(path = data_path, pattern = pattern, full.names = FALSE)
+
+  GO_mat <- NULL  # initialize result matrix
+
+  for(i in seq_along(filenames)){
+    file <- filenames[i]
+    GO_res <- read_tsv(file.path(data_path, file), show_col_types = FALSE)
+
+    # get signature name
+    signature_name <- gsub(paste0(prefix_sub, "_"), "", file)
+    signature_name <- gsub(paste0("_", suffix_sub), "", signature_name)
+    signature_name <- gsub(".tsv", "", signature_name)
+    signature_name <- gsub("_limma", "", signature_name)
+    signature_name <- gsub("_DESeq2", "", signature_name)
+    signature_name <- make.unique(signature_name)  # ensure unique signature names
+
+    if(nrow(GO_res) > 0){
+      # compute LogRatio numeric
+      GO_res$pseudocount_numeric <- as.numeric(GO_res$qvalue)
+
+      GO_col <- GO_res[c("Description", "pseudocount_numeric")]
+      colnames(GO_col)[2] <- signature_name
+
+    } else {
+      # handle empty result: create single NA row
+      GO_col <- data.frame(Description = NA, temp_col = NA)
+      colnames(GO_col)[2] <- signature_name
+    }
+
+    # merge or initialize GO_mat
+    if(is.null(GO_mat)){
+      GO_mat <- GO_col
+    } else {
+      GO_mat <- merge(GO_mat, GO_col, by = "Description", all = TRUE)
+    }
+  }
+
+  # fill missing values with 0.0 or NA
+  if(!is.null(GO_mat)){
+    GO_mat[is.na(GO_mat)] <- NA
+  }
+  GO_mat <- GO_mat[!is.na(GO_mat$Description), ]
+
+  return(GO_mat)
+}
+
 get_GO_testStat_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
   # data_path <- "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/data/pathways/RNAseq/dn/GO_ORA"
   # prefix_sub <- "GO_ORA_BGcorrected"

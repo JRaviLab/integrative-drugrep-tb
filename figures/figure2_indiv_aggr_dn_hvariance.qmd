@@ -32,13 +32,28 @@ suffix_sub <- "dn.tsv"
 annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 ```
 
-```{r annotation and significant pathways}
+```{r annotation}
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ````{r microarray and RNAseq dn pathways}
 marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 rnaseq_GO_mat_dn = get_GO_pseudocount_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
+```
+
+```{r get statistically significant matrics -- positions for astrisk}
+marray_qvalue_GO_mat_dn = get_GO_qvalue_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
+row.names(marray_qvalue_GO_mat_dn) <- marray_qvalue_GO_mat_dn$Description
+marray_decription <- marray_qvalue_GO_mat_dn$Description
+marray_qvalue_GO_mat_dn$Description <- NULL
+marray_signi_GO_mat_dn <- as.data.frame(ifelse(marray_qvalue_GO_mat_dn < 0.05, 1, 0))
+
+
+rnaseq_qvalue_GO_mat_dn = get_GO_qvalue_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
+row.names(rnaseq_qvalue_GO_mat_dn) <- rnaseq_qvalue_GO_mat_dn$Description
+rnaseq_decription <- rnaseq_qvalue_GO_mat_dn$Description
+rnaseq_qvalue_GO_mat_dn$Description <- NULL
+rnaseq_signi_GO_mat_dn <- as.data.frame(ifelse(rnaseq_qvalue_GO_mat_dn < 0.05, 1, 0))
 ```
 
 ```{r}
@@ -108,6 +123,60 @@ final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
 write_tsv(final_df_dn, here("figures/marray_rnaseq_pseudocount_dn_pathways.tsv"))
 ```
 
+```{r process significant matrices}
+# Assuming both data frames have Description as row names
+# If it's a column instead, set it as rownames first
+
+marray_signi_GO_mat_dn$Description <- row.names(marray_signi_GO_mat_dn)
+cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray"))
+df1 <- marray_signi_GO_mat_dn[, cols_to_keep_marray]
+colnames(df1) <- gsub("^dn_", "", colnames(df1))
+colnames(df1) <- gsub("_DE", "", colnames(df1))
+
+rnaseq_signi_GO_mat_dn$Description <- rownames(rnaseq_signi_GO_mat_dn)
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq"))
+df2 <- rnaseq_signi_GO_mat_dn[, cols_to_keep_rnaseq]
+colnames(df2) <- gsub("^dn_", "", colnames(df2))
+colnames(df2) <- gsub("_DE", "", colnames(df2))
+
+# Reshape from wide to long
+library(tidyr)
+long1 <- pivot_longer(as.data.frame(df1), -Description, names_to = "Signature", values_to = "Value")
+long2 <- pivot_longer(as.data.frame(df2), -Description, names_to = "Signature", values_to = "Value")
+
+# Combine long formats and sum values where matching
+library(dplyr)
+combined_long <- bind_rows(long1, long2) %>%
+  group_by(Description, Signature) %>%
+  summarise(
+  Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+  .groups = "drop"
+)
+
+# Reshape back to wide format
+final_signi_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+colnames(final_signi_df_dn) <- gsub("\\.", "-", colnames(final_signi_df_dn))
+
+# Identify columns with "aggregated" in their names
+agg_cols <- grep("aggregated", names(final_signi_df_dn), value = TRUE)
+
+# Identify columns that do not contain "aggregated"
+non_agg_cols <- setdiff(names(final_signi_df_dn), agg_cols)
+
+# Reorder the dataframe
+final_signi_df_dn <- final_signi_df_dn[, c(non_agg_cols, agg_cols)]
+# Identify columns
+desc_col <- grep("Description", names(final_signi_df_dn), value = TRUE)
+gpl_cols <- grep("GPL", names(final_signi_df_dn), value = TRUE)
+rnaseq_col <- grep("RNAseq", names(final_signi_df_dn), value = TRUE)
+other_cols <- setdiff(names(final_signi_df_dn), c(gpl_cols, rnaseq_col))
+
+# Reorder dataframe
+final_signi_df_dn <- final_signi_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
+final_signi_df_dn <- final_signi_df_dn[, !duplicated(colnames(final_signi_df_dn))]
+final_signi_df_dn <- final_signi_df_dn[, !grepl("HIV", colnames(final_signi_df_dn))]
+```
+
 ### dn pathways that are highly variable
 ```{r}
 final_df_dn_indiv <- final_df_dn[, !grepl("aggregated", colnames(final_df_dn))] # get pathway matrix for only individual signatures
@@ -119,7 +188,7 @@ descriptions <- final_df_dn_indiv$Description
 numeric_mat <- as.matrix(
   final_df_dn_indiv[ , sapply(final_df_dn_indiv, is.numeric)]
 )
-
+### variance calculation
 # compute term variance (row variance)
 final_df_dn_variances <- apply(numeric_mat, MARGIN = 1, FUN = var, na.rm = TRUE)
 # sort by variance
@@ -130,14 +199,15 @@ var_pathway_df <- data.frame(
   variance = final_df_dn_variances[sorted_indices]
 )
 
-final_df_dn_viable = final_df_dn[final_df_dn$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways 
-write_tsv(final_df_dn_viable, here("figures/dn_hv_pseudocount_pathways.tsv"))
+final_df_dn_variable = final_df_dn[final_df_dn$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways; the top 20 highest variable 
+final_signi_df_dn_variable = final_signi_df_dn[final_signi_df_dn$Description %in% var_pathway_df$terms[1:20],]
+write_tsv(final_df_dn_variable, here("figures/dn_hv_pseudocount_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
-hv_GO_terms <- final_df_dn_viable$Description
-final_df_dn_viable$Description <- NULL
-sig_mat_indiv_aggr_dn <- as.matrix(final_df_dn_viable)
+hv_GO_terms <- final_df_dn_variable$Description
+final_df_dn_variable$Description <- NULL
+sig_mat_indiv_aggr_dn <- as.matrix(final_df_dn_variable)
 colnames(sig_mat_indiv_aggr_dn) <- gsub("\\.", "-", colnames(sig_mat_indiv_aggr_dn))
 #sig_mat_indiv_aggr_dn[is.na(sig_mat_indiv_aggr_dn)] <- 0
 row.names(sig_mat_indiv_aggr_dn) <- hv_GO_terms
@@ -175,6 +245,16 @@ ordered_go_terms <- hc$labels[hc$order]
 
 # 3. Reorder matrix by GO semantic similarity
 sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[ordered_go_terms, , drop = FALSE]
+```
+
+```{r sort summary_df (metadata)}
+summary_indiv_df <- summary_df[1:35,]
+summary_df_sorted <- summary_indiv_df[order(summary_indiv_df$technology, summary_indiv_df$sample_origin, summary_indiv_df$tissue_category,summary_indiv_df$tissue_cell_type, summary_indiv_df$SIGNATURE_NAME),]
+
+summary_df_sorted <- rbind(summary_df_sorted, summary_df[36:37,])
+summary_df_sorted$number <- 1:nrow(summary_df_sorted)
+summary_df_sorted$ID <- paste0("signature_", seq_len(nrow(summary_df_sorted)))
+summary_df_sorted$ID[(nrow(summary_df_sorted) - 1):nrow(summary_df_sorted)] <- c("aggregated_microarray", "aggregated_RNAseq") 
 ```
 
 ```{r dn signature heatmap}
@@ -253,7 +333,7 @@ origin_colors <- c(
 )
 
 # 3. Prepare metadata/matrix
-meta_df <- summary_df %>%
+meta_df <- summary_df_sorted %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -277,10 +357,12 @@ sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[, meta_df$SIGNATURE_NAME,
 
 # 4. Set rownames 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_dn_ordered)), na.rm = TRUE)
+ninetyfive_percentile <- quantile(actual_range, 0.95)
+fifth_percentile <- quantile(actual_range, 0.05)
 
 col_fun <- colorRamp2(
-  c(0, max(actual_range)),
-  c("white", "#0072B2")
+  c(0, fifth_percentile ,ninetyfive_percentile),
+  c("white","firebrick1" , "firebrick4")
 )
 
 # 5. Create top and bottom annotations
@@ -324,27 +406,30 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2b_dn_allvals_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
+pdf(here("figures/Figure2b_dn_allvals_fixedexpected_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
-# prepare annotation table
-dn_annotation_table = as.data.frame(colnames(sig_mat_indiv_aggr_dn_ordered_mat))
-colnames(dn_annotation_table)[1] <- "SIGNATURE_NAME"
-dn_annotation_table$number <- 1:nrow(dn_annotation_table)
-dn_annotation_table$ID <- paste0("signature_", seq_len(nrow(dn_annotation_table)))
-dn_annotation_table$ID[(nrow(dn_annotation_table) - 1):nrow(dn_annotation_table)] <- c("aggregated_microarray", "aggregated_RNAseq")
-dn_annotation_table = merge(dn_annotation_table, summary_df, by = "SIGNATURE_NAME")
-dn_annotation_table <- dn_annotation_table[order(dn_annotation_table$number), ]
-
 viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
-colnames(viz_mat_dn) <- dn_annotation_table$ID
-colnames(viz_mat_dn)[(ncol(viz_mat_dn) - 1):ncol(viz_mat_dn)] <- c("aggregated_microarray", "aggregated_RNAseq")
+viz_mat_dn <- viz_mat_dn[, summary_df_sorted$SIGNATURE_NAME] 
+colnames(viz_mat_dn) <- summary_df_sorted$ID
 
 heatmap_sig_dn_go <- Heatmap(
   viz_mat_dn,
+  cell_fun = function(j, i, x, y, w, h, fill) {
+                # j: column index, i: row index
+                # x, y: coordinates of the cell center
+                # w, h: width and height of the cell
+                # fill: fill color of the cell (not directly used here, but available)
+
+                # Check if the current cell (i, j) is "significant" in your position matrix
+                if (final_signi_df_dn_variable[i, j] == 1) {
+                  # Add an asterisk to the center of the cell
+                  grid.text("*", x, y, gp = gpar(col = "black", fontsize = 30))
+                }
+              },
   name = "GO term enrichment",
   na_col = "lightgrey",
   col = col_fun,
