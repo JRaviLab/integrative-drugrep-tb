@@ -48,13 +48,16 @@ row.names(marray_qvalue_GO_mat_up) <- marray_qvalue_GO_mat_up$Description
 marray_decription <- marray_qvalue_GO_mat_up$Description
 marray_qvalue_GO_mat_up$Description <- NULL
 marray_signi_GO_mat_up <- as.data.frame(ifelse(marray_qvalue_GO_mat_up < 0.05, 1, 0))
-
+marray_signi_up <- row.names(marray_signi_GO_mat_up[rowSums(marray_signi_GO_mat_up) > 0, ])
 
 rnaseq_qvalue_GO_mat_up = get_GO_qvalue_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
 row.names(rnaseq_qvalue_GO_mat_up) <- rnaseq_qvalue_GO_mat_up$Description
 rnaseq_decription <- rnaseq_qvalue_GO_mat_up$Description
 rnaseq_qvalue_GO_mat_up$Description <- NULL
 rnaseq_signi_GO_mat_up <- as.data.frame(ifelse(rnaseq_qvalue_GO_mat_up < 0.05, 1, 0))
+rnaseq_signi_up <- row.names(rnaseq_signi_GO_mat_up[rowSums(rnaseq_signi_GO_mat_up) > 0, ])
+
+marray_rnaseq_signi_up = unique(c(marray_signi_up, rnaseq_signi_up))
 ```
 
 ```{r process all terms matrices}
@@ -167,9 +170,8 @@ final_signi_df_up <- final_signi_df_up[, !grepl("HIV", colnames(final_signi_df_u
 ### up pathways that are highly variable
 ```{r}
 final_df_up_indiv <- final_df_up[, !grepl("aggregated", colnames(final_df_up))] # get pathway matrix for only individual signatures
-# read in significant pathways 
-signi_up_pathways <- read_tsv(here("figures/up_significant_bp_terms.tsv"))$up_significant_bps
-final_df_up_indiv <- final_df_up_indiv[final_df_up_indiv$Description %in% signi_up_pathways,]
+# only visualize terms at least significantly enriched in one signature
+final_df_up_indiv <- final_df_up_indiv[final_df_up_indiv$Description %in% marray_rnaseq_signi_up,]
 
 descriptions <- final_df_up_indiv$Description
 numeric_mat <- as.matrix(
