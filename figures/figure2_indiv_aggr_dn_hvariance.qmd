@@ -47,13 +47,26 @@ row.names(marray_qvalue_GO_mat_dn) <- marray_qvalue_GO_mat_dn$Description
 marray_decription <- marray_qvalue_GO_mat_dn$Description
 marray_qvalue_GO_mat_dn$Description <- NULL
 marray_signi_GO_mat_dn <- as.data.frame(ifelse(marray_qvalue_GO_mat_dn < 0.05, 1, 0))
-
+# exclude columns whose names contain "aggregated"
+cols_to_use <- grep("aggregated", names(marray_signi_GO_mat_dn), invert = TRUE)
+# filter rows where the sum across the selected columns is > 0
+marray_signi_dn <- row.names(
+  marray_signi_GO_mat_dn[rowSums(marray_signi_GO_mat_dn[, cols_to_use]) > 0, ]
+)
 
 rnaseq_qvalue_GO_mat_dn = get_GO_qvalue_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 row.names(rnaseq_qvalue_GO_mat_dn) <- rnaseq_qvalue_GO_mat_dn$Description
 rnaseq_decription <- rnaseq_qvalue_GO_mat_dn$Description
 rnaseq_qvalue_GO_mat_dn$Description <- NULL
 rnaseq_signi_GO_mat_dn <- as.data.frame(ifelse(rnaseq_qvalue_GO_mat_dn < 0.05, 1, 0))
+# exclude columns whose names contain "aggregated"
+cols_to_use <- grep("aggregated", names(rnaseq_signi_GO_mat_dn), invert = TRUE)
+# filter rows where the sum across the selected columns is > 0
+rnaseq_signi_dn <- row.names(
+  rnaseq_signi_GO_mat_dn[rowSums(rnaseq_signi_GO_mat_dn[, cols_to_use]) > 0, ]
+)
+
+marray_rnaseq_signi_dn = unique(c(marray_signi_dn, rnaseq_signi_dn))
 ```
 
 ```{r}
@@ -180,9 +193,8 @@ final_signi_df_dn <- final_signi_df_dn[, !grepl("HIV", colnames(final_signi_df_d
 ### dn pathways that are highly variable
 ```{r}
 final_df_dn_indiv <- final_df_dn[, !grepl("aggregated", colnames(final_df_dn))] # get pathway matrix for only individual signatures
-# read in significant pathways 
-signi_dn_pathways <- read_tsv(here("figures/dn_significant_bp_terms.tsv"))$dn_significant_bps
-final_df_dn_indiv <- final_df_dn_indiv[final_df_dn_indiv$Description %in% signi_dn_pathways,]
+# only visualize terms at least significantly enriched in one signature
+final_df_dn_indiv <- final_df_dn_indiv[final_df_dn_indiv$Description %in% marray_rnaseq_signi_dn,]
 
 descriptions <- final_df_dn_indiv$Description
 numeric_mat <- as.matrix(
