@@ -301,8 +301,6 @@ for(technology in technologies){
                              maxGSSize = 200)
     
     enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
-    
-    # all_bp_terms <- enrichGO_res_aggr$ID # COMMENTED OUT AS NOT USED
           
     if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
@@ -359,8 +357,6 @@ for(technology in technologies){
                              maxGSSize = 200)
     
     enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
-    
-    # all_bp_terms <- enrichGO_res_aggr$ID # COMMENTED OUT AS NOT USED
           
     if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
