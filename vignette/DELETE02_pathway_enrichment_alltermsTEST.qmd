@@ -271,12 +271,3 @@ for (technology in technologies) {
     }
   }
 }
-
-up_significant_bps = unique(up_significant_bps)
-up_significant_bps_df = as.data.frame(up_significant_bps)
-#write_tsv(up_significant_bps_df, here("figures/up_significant_bp_terms.tsv"))
-
-dn_significant_bps = unique(dn_significant_bps)
-dn_significant_bps_df = as.data.frame(dn_significant_bps)
-#write_tsv(dn_significant_bps_df, here("figures/dn_significant_bp_terms.tsv"))
-```
