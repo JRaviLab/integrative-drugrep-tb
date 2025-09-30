@@ -36,7 +36,7 @@ annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
 GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
-````{r microarray and RNAseq dn pathways}
+```{r microarray and RNAseq dn pathways}
 marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 rnaseq_GO_mat_dn = get_GO_pseudocount_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 ```
@@ -370,11 +370,12 @@ sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[, meta_df$SIGNATURE_NAME,
 # 4. Set rownames 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_dn_ordered)), na.rm = TRUE)
 ninetyfive_percentile <- quantile(actual_range, 0.95)
+fifty_percentile <- quantile(actual_range, 0.50)
 fifth_percentile <- quantile(actual_range, 0.05)
 
 col_fun <- colorRamp2(
-  c(0, fifth_percentile ,ninetyfive_percentile),
-  c("white","firebrick1" , "firebrick4")
+  c(0, fifth_percentile ,fifty_percentile, ninetyfive_percentile),
+  c("white", "indianred1", "firebrick2" , "firebrick4")
 )
 
 # 5. Create top and bottom annotations
