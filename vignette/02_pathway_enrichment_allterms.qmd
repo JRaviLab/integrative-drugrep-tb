@@ -89,6 +89,39 @@ go_terms <- data.frame(
 )
 ```
 
+###### Calculate enrichment metrics
+```{r}
+calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_genes, bp_gene_lengths_df) {
+   # make sure GeneRatio column is numeric (no change)
+  enrichment_df$GeneRatio <- sapply(
+    as.character(enrichment_df$GeneRatio),
+    function(x) {
+      parts <- as.numeric(unlist(strsplit(x, "/")))
+      parts[1] / parts[2]
+    }
+  )
+
+  # merge with total pathway gene lengths (for |P|)
+  enrichment_df <- merge(enrichment_df, bp_gene_lengths_df, by="ID", all.x = TRUE)
+
+  # calculate log(observed / expected)
+  # GeneRatio = k/n
+  # k = the overlap between your genes-of-interest and the geneset
+  # n = the number of all unique genes of interest
+  # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
+  observed_val <- enrichment_df$GeneRatio * length(signature_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
+  
+  # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
+  expected_val <- (enrichment_df$bp_gene_length / length(bg_genes)) * length(signature_gene_list)
+
+  # Calculate and save metrics
+  enrichment_df$log_observed_expected <- log(observed_val / expected_val)
+  enrichment_df$pseudocount <- asinh(observed_val / expected_val)
+
+  return(enrichment_df)
+}
+```
+
 ###### Individual signatures
 ```{r}
 technologies <- c("microarray", "RNAseq")
@@ -159,34 +192,15 @@ for (technology in technologies) {
 
       enrichGO_res <- as.data.frame(enrichGO_res)
       
-      # get all bp terms 
-      all_bp_terms <- enrichGO_res$ID
-
       if (!is.null(enrichGO_res) && nrow(enrichGO_res) > 0) {
       
-        enrichGO_res_corrected = merge(enrichGO_res, bp_gene_length_df, by="ID", all.x = TRUE)
-      
-        # make sure GeneRatio column is numeric
-        enrichGO_res_corrected$GeneRatio <- sapply(
-          as.character(enrichGO_res_corrected$GeneRatio),
-          function(x) {
-            parts <- as.numeric(unlist(strsplit(x, "/")))
-            parts[1] / parts[2]
-          }
+        # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+        enrichGO_res_corrected <- calculate_asinh_enrichment(
+          enrichment_df = enrichGO_res,
+          signature_gene_list = gene_list,
+          bg_genes = bg_genes,
+          bp_gene_lengths_df = bp_gene_length_df
         )
-        ### BELOW are the new observed / expected calculation
-        # calculate log(observed / expected)
-        # GeneRatio = k/n
-        # k = the overlap between your genes-of-interest and the geneset
-        # n = the number of all unique genes of interest
-        # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
-        observed = enrichGO_res_corrected$GeneRatio * length(gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
-        # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
-        expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(gene_list)
-        enrichGO_res_corrected$log_observed_expected = log(observed / expected)
-        
-        # calculate pseudocount
-        enrichGO_res_corrected$pseudocount = asinh(observed / expected)
         
         # check if the universal bp terms are valid
         print("All BP terms are valid?")
@@ -258,33 +272,17 @@ for(technology in technologies){
     
     enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
     
-    all_bp_terms <- enrichGO_res_aggr$ID
+    # all_bp_terms <- enrichGO_res_aggr$ID # COMMENTED OUT AS NOT USED
           
     if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
-      enrichGO_res_corrected = merge(enrichGO_res_aggr, bp_gene_length_df, by="ID", all.x = TRUE)
-          
-      # make sure GeneRatio column is numeric
-      enrichGO_res_corrected$GeneRatio <- sapply(
-        as.character(enrichGO_res_corrected$GeneRatio),
-        function(x) {
-          parts <- as.numeric(unlist(strsplit(x, "/")))
-          parts[1] / parts[2]
-        }
+      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+      enrichGO_res_corrected <- calculate_asinh_enrichment(
+        enrichment_df = enrichGO_res_aggr,
+        signature_gene_list = aggr_gene_list,
+        bg_genes = bg_genes,
+        bp_gene_lengths_df = bp_gene_length_df
       )
-      ### BELOW are the new observed / expected calculation
-      # calculate log(observed / expected)
-      # GeneRatio = k/n
-      # k = the overlap between your genes-of-interest and the geneset
-      # n = the number of all unique genes of interest
-      # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
-      observed = enrichGO_res_corrected$GeneRatio * length(aggr_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
-      # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
-      expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(aggr_gene_list)
-      enrichGO_res_corrected$log_observed_expected = log(observed / expected)
-        
-      # calculate pseudocount
-      enrichGO_res_corrected$pseudocount = asinh(observed / expected)
         
       # merge with all go terms
       aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
@@ -332,33 +330,17 @@ for(technology in technologies){
     
     enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
     
-    all_bp_terms <- enrichGO_res_aggr$ID
+    # all_bp_terms <- enrichGO_res_aggr$ID # COMMENTED OUT AS NOT USED
           
     if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
-      enrichGO_res_corrected = merge(enrichGO_res_aggr, bp_gene_length_df, by="ID", all.x = TRUE)
-          
-      # make sure GeneRatio column is numeric
-      enrichGO_res_corrected$GeneRatio <- sapply(
-        as.character(enrichGO_res_corrected$GeneRatio),
-        function(x) {
-          parts <- as.numeric(unlist(strsplit(x, "/")))
-          parts[1] / parts[2]
-        }
+      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+      enrichGO_res_corrected <- calculate_asinh_enrichment(
+        enrichment_df = enrichGO_res_aggr,
+        signature_gene_list = bloodaggr_gene_list,
+        bg_genes = bg_genes,
+        bp_gene_lengths_df = bp_gene_length_df
       )
-      ### BELOW are the new observed / expected calculation
-      # calculate log(observed / expected)
-      # GeneRatio = k/n
-      # k = the overlap between your genes-of-interest and the geneset
-      # n = the number of all unique genes of interest
-      # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
-      observed = enrichGO_res_corrected$GeneRatio * length(bloodaggr_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
-      # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
-      expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(bloodaggr_gene_list)
-      enrichGO_res_corrected$log_observed_expected = log(observed / expected)
-        
-      # calculate pseudocount
-      enrichGO_res_corrected$pseudocount = asinh(observed / expected)
         
       # merge with all go terms
       blood_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
