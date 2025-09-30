@@ -358,11 +358,12 @@ sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, meta_df$SIGNATURE_NAME,
 # 4. Set rownames 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
 ninetyfive_percentile <- quantile(actual_range, 0.95)
+fifty_percentile <- quantile(actual_range, 0.50)
 fifth_percentile <- quantile(actual_range, 0.05)
 
 col_fun <- colorRamp2(
-  c(0, fifth_percentile ,ninetyfive_percentile),
-  c("white","dodgerblue" , "dodgerblue4")
+  c(0, fifth_percentile, fifty_percentile, ninetyfive_percentile),
+  c("white", "skyblue", "dodgerblue", "dodgerblue4")
 )
 
 # 5. Create top and bottom annotations

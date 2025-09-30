@@ -1,0 +1,273 @@
+# COPY Of the original file - just to prove the integrity of the function
+##### Load libraries and sort scripts
+```{r}
+library(readr)
+library(here)
+library(dplyr)
+library(tidyverse)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(GO.db)
+library(jsonlite)
+source(here("scripts/00_background_genes_PA_functions.R"))
+```
+
+##### Get background genes
+```{r}
+# define input paths
+metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+
+metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/v2/DE_results/microarray")
+GO_genes_vector <- GO_genes()
+
+# get upregulated combined background
+bg_genes_combined_up <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "up",
+  GO_genes_vector,
+  combine = "union"
+)
+
+# get downregulated combined background
+bg_genes_combined_dn <- get_combined_bg_genes(
+  metadata_path_rnaseq, data_path_rnaseq,
+  metadata_path_microarray, data_path_microarray,
+  direction = "dn",
+  GO_genes_vector,
+  combine = "union"
+)
+```
+
+##### Pathway enrichment analysis 
+
+##### Get all GO:BP terms
+```{r}
+library(clusterProfiler)
+library(org.Hs.eg.db)
+
+# set background genes
+bg_genes <- union(bg_genes_combined_up, bg_genes_combined_dn)
+
+# parameters
+ont <- "BP"
+minGSSize <- 5
+maxGSSize <- 200
+
+# extract GO data as used by enrichGO()
+godata <- clusterProfiler:::get_GO_data(
+  OrgDb = org.Hs.eg.db,
+  ont = ont,
+  keytype = "ENTREZID"
+)
+
+# load GO data (all genes from OrgDb)
+godata <- clusterProfiler:::get_GO_data(
+  OrgDb = org.Hs.eg.db,
+  ont = "BP",
+  keytype = "ENTREZID"
+)
+
+# filter gene sets to include only genes in your universe
+go_list <- godata$PATHID2EXTID
+
+# build data frame of term descriptions
+go_terms <- data.frame(
+  GO_ID = names(go_list),
+  Description = Term(GOTERM[names(go_list)]),
+  GeneSetSize = sapply(go_list, function(x) length(unique(intersect(x, bg_genes)))),
+  stringsAsFactors = FALSE
+)
+```
+
+###### Calculate enrichment metrics
+```{r}
+calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_genes, bp_gene_lengths_df) {
+  # Ensure GeneRatio is numeric (as done in the original script)
+  enrichment_df$GeneRatio <- sapply(
+    as.character(enrichment_df$GeneRatio),
+    function(x) {
+      parts <- as.numeric(unlist(strsplit(x, "/")))
+      parts[1] / parts[2]
+    }
+  )
+
+  # 2. Merge with total pathway gene lengths (for |P|)
+  enrichment_df <- merge(enrichment_df, bp_gene_lengths_df, by="ID", all.x = TRUE)
+
+  # Calculate Observed (|P ∩ S|)
+  # Observed = GeneRatio * |S|
+  observed_val <- enrichment_df$GeneRatio * length(signature_gene_list)
+
+  # 4. Calculate Expected ( (|P| / |U|) * |S|)
+  expected_val <- (enrichment_df$bp_gene_length / length(bg_genes)) * length(signature_gene_list)
+
+  # 5. Calculate Metrics
+  enrichment_df$log_observed_expected <- log(observed_val / expected_val)
+  enrichment_df$pseudocount <- asinh(observed_val / expected_val)
+
+  return(enrichment_df)
+}
+
+      # calculate log(observed / expected)
+      # GeneRatio = k/n
+      # k = the overlap between your genes-of-interest and the geneset
+      # n = the number of all unique genes of interest
+      # observed = intersect(P,S); P = pathway gene set, S = signature gene set 
+      observed = enrichGO_res_corrected$GeneRatio * length(aggr_gene_list) # multiply gene ratio by number of genes in the signature to get the actual intersecting genes between pathway P and signature S
+      # expected = (|P| / |U|) * |S|; U = universe i.e., background genes
+      expected = (enrichGO_res_corrected$bp_gene_length / length(bg_genes)) * length(aggr_gene_list)
+      enrichGO_res_corrected$log_observed_expected = log(observed / expected)
+        
+      # calculate pseudocount
+```
+
+###### Individual signatures
+```{r}
+technologies <- c("microarray", "RNAseq")
+directions <- c("up", "dn")
+json_propagated_genes <- fromJSON(here("data/metadata/propagated_annotations.json"))
+bp_gene_length_df <- as.data.frame(lengths(json_propagated_genes))
+colnames(bp_gene_length_df)[1] <- "bp_gene_length"
+bp_gene_length_df$ID <- row.names(bp_gene_length_df)
+up_significant_bps <- c()
+dn_significant_bps <- c()
+
+for (technology in technologies) {
+
+  metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
+  data_path <- here(paste0("data/v2/DE_results/",technology))
+
+  for (direction in directions) {
+
+    # set output directory
+    dirname <- here(paste0("data/v2/", technology, "_pathways/", direction))
+    if (!dir.exists(dirname)) {
+      dir.create(dirname, recursive = TRUE)
+    }
+
+    # read gene files from up/dn folder
+    dirname_read <- file.path(data_path, direction)
+    filenames <- list.files(path = dirname_read, pattern = paste0(direction, ".tsv"))
+
+    # define background genes
+    if(direction == "up"){
+      bg_genes_ <- bg_genes_combined_up
+    }else if(direction == "dn"){
+      bg_genes_ <- bg_genes_combined_dn
+    }
+    
+    # restrict to GO-annotated genes
+    bg_genes <- intersect(bg_genes_, GO_genes())  
+
+    # iterate through each file
+    itr <- 1
+    for (file in filenames) {
+      
+      print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
+      itr <- itr + 1
+
+      genes_df <- read_tsv(file.path(dirname_read, file))
+      # only use differentially expressed genes with adjusted p-val < 0.05
+      genes_df_filtered <- genes_df[genes_df$adj.P.Val < 0.05,]
+
+      # use gene IDs as input for ORA
+      gene_vector <- genes_df_filtered$log2FoldChange
+      names(gene_vector) <- as.character(genes_df_filtered$GeneID)
+
+      gene_list <- names(gene_vector)
+
+      # run ORA
+      print(paste0("Getting enriched GO pathways for ", file))
+
+      enrichGO_res <- enrichGO(gene = gene_list,
+                               OrgDb = org.Hs.eg.db,
+                               readable = TRUE,
+                               ont = "BP",
+                               universe = bg_genes,
+                               pvalueCutoff = 1, # allows all pathways
+                               qvalueCutoff = 1, # allows all pathways
+                               minGSSize = 5,
+                               maxGSSize = 200)
+
+      enrichGO_res <- as.data.frame(enrichGO_res)
+      
+      if (!is.null(enrichGO_res) && nrow(enrichGO_res) > 0) {
+  
+        # call function
+        results_from_function <- calculate_asinh_enrichment(
+          enrichment_df = enrichGO_res,
+          signature_gene_list = gene_list,
+          bg_genes = bg_genes,
+          bp_gene_lengths_df = bp_gene_length_df
+        )
+
+        # manual calculation to compare with function output
+        enrichGO_res_manual <- merge(enrichGO_res, bp_gene_length_df, by = "ID", all.x = TRUE)
+        enrichGO_res_manual$GeneRatio <- sapply(
+          as.character(enrichGO_res_manual$GeneRatio),
+          function(x) {
+            parts <- as.numeric(unlist(strsplit(x, "/")))
+            parts[1] / parts[2]
+          }
+        )
+        observed <- enrichGO_res_manual$GeneRatio * length(gene_list)
+        expected <- (enrichGO_res_manual$bp_gene_length / length(bg_genes)) * length(gene_list)
+        enrichGO_res_manual$log_observed_expected <- log(observed / expected)
+        enrichGO_res_manual$pseudocount <- asinh(observed / expected)
+
+        # COMPARE the relevant columns from both dataframes
+        cols_to_compare <- c("ID", "log_observed_expected", "pseudocount")
+        
+        manual_subset <- enrichGO_res_manual %>% 
+          arrange(ID) %>% 
+          dplyr::select(all_of(cols_to_compare))
+          
+        function_subset <- results_from_function %>% 
+          arrange(ID) %>% 
+          dplyr::select(all_of(cols_to_compare))
+
+        # print comparison results
+        print(paste("Checking file:", file))
+        cat("Are the function and manual calculations equivalent? -> ")
+        # all.equal() returns TRUE if the two objects are the same
+        print(all.equal(manual_subset, function_subset))
+        
+        # You can now proceed using either result. We'll use the original manual one.
+        enrichGO_res_corrected <- enrichGO_res_manual
+        
+        # check if the universal bp terms are valid
+        print("All BP terms are valid?")
+        print(unique(enrichGO_res_corrected$Description %in% go_terms$Description))
+        
+        # merge with all go terms
+        merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+
+        # replace NAs with 0 enrichment
+        merged$pvalue[is.na(merged$pvalue)] <- 1
+        merged$p.adjust[is.na(merged$p.adjust)] <- 1
+        merged$qvalue[is.na(merged$qvalue)] <- 1
+        merged$geneID[is.na(merged$geneID)] <- ""
+        merged[is.na(merged)] <- 0  
+        print(paste0("Final dimension: ", paste(dim(merged), collapse = " x ")))
+        
+        # get significant BP terms and save into up,dn sets separately
+        if(direction == "up"){
+          up_significant_bps <- c(up_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
+        }else if(direction == "dn"){
+          dn_significant_bps <- c(dn_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
+        }
+        
+        # save results
+        base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+        output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
+
+        #write_tsv(merged, file = output_file)
+      }else{
+        message("No enriched GO terms, skipping")
+      }
+    }
+  }
+}
