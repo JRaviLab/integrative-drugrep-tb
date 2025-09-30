@@ -91,6 +91,36 @@ go_terms <- data.frame(
 
 ###### Calculate enrichment metrics
 ```{r}
+#------------------------------------------------------------------------------
+# calculate_asinh_enrichment
+#
+# Description:
+#   Computes enrichment scores for pathways by comparing observed vs expected
+#   overlaps between a signature gene list and pathway gene sets. Adds two
+#   metrics: 
+#     - log(observed / expected)
+#     - asinh(observed / expected) for stabilized values
+#
+# Arguments:
+#   enrichment_df        Data frame with pathway enrichment results.
+#                        Must include columns:
+#                          - ID: pathway identifier
+#                          - GeneRatio: string of the form "k/n"
+#   signature_gene_list  Vector of genes in the signature set (S).
+#   bg_genes             Vector of all background genes (U).
+#   bp_gene_lengths_df   Data frame with pathway sizes.
+#                        Must include columns:
+#                          - ID: pathway identifier
+#                          - bp_gene_length: pathway size (|P|).
+#
+# Returns:
+#   The input data frame with added columns:
+#     - bp_gene_length: size of the pathway
+#     - log_observed_expected: log ratio of observed vs expected overlap
+#     - pseudocount: asinh-transformed observed/expected ratio
+#
+#------------------------------------------------------------------------------
+
 calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_genes, bp_gene_lengths_df) {
    # make sure GeneRatio column is numeric (no change)
   enrichment_df$GeneRatio <- sapply(
