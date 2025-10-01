@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 09/23/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected'
+# Last modified: 10/01/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -16,6 +16,7 @@ library(clusterProfiler)
 library(org.Hs.eg.db)
 library(GO.db)
 library(jsonlite)
+library(tidyr)
 source(here("scripts/00_background_genes_PA_functions.R"))
 ```
 
@@ -117,7 +118,7 @@ go_terms <- data.frame(
 #   The input data frame with added columns:
 #     - bp_gene_length: size of the pathway
 #     - log_observed_expected: log ratio of observed vs expected overlap
-#     - pseudocount: asinh-transformed observed/expected ratio
+#     - asinh_observed_expected: asinh-transformed observed/expected ratio
 #
 #------------------------------------------------------------------------------
 
@@ -146,7 +147,7 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
 
   # Calculate and save metrics
   enrichment_df$log_observed_expected <- log(observed_val / expected_val)
-  enrichment_df$pseudocount <- asinh(observed_val / expected_val)
+  enrichment_df$asinh_observed_expected <- asinh(observed_val / expected_val)
 
   return(enrichment_df)
 }
