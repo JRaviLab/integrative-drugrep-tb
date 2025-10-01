@@ -42,7 +42,7 @@ marray_GO_mat_up = get_GO_pseudocount_matrix(marray_path_up, pattern, prefix_sub
 rnaseq_GO_mat_up = get_GO_pseudocount_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
 ```
 
-```{r get statistically significant matrics -- positions for astrisk}
+```{r get statistically significant metrics -- positions for asterisk}
 marray_qvalue_GO_mat_up = get_GO_qvalue_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
 row.names(marray_qvalue_GO_mat_up) <- marray_qvalue_GO_mat_up$Description
 marray_decription <- marray_qvalue_GO_mat_up$Description
