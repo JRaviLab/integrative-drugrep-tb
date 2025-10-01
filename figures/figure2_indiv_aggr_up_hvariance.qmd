@@ -359,6 +359,7 @@ sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[, meta_df$SIGNATURE_NAME,
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
 ninetyfive_percentile <- quantile(actual_range, 0.95)
 fifty_percentile <- quantile(actual_range, 0.50)
+fifty_percentile <- quantile(actual_range, 0.50)
 fifth_percentile <- quantile(actual_range, 0.05)
 
 col_fun <- colorRamp2(
