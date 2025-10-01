@@ -153,7 +153,6 @@ colnames(df2) <- gsub("^dn_", "", colnames(df2))
 colnames(df2) <- gsub("_DE", "", colnames(df2))
 
 # Reshape from wide to long
-library(tidyr)
 long1 <- pivot_longer(as.data.frame(df1), -Description, names_to = "Signature", values_to = "Value")
 long2 <- pivot_longer(as.data.frame(df2), -Description, names_to = "Signature", values_to = "Value")
 
