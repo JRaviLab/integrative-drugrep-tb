@@ -138,7 +138,15 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
   
   # ensure pathway_genes column is list-type (if it's character, split it)
   if (is.character(enrichment_df$pathway_genes)) {
-    enrichment_df$pathway_genes <- strsplit(enrichment_df$pathway_genes, split = ",")
+    enrichment_df$pathway_genes <- lapply(
+      enrichment_df$pathway_genes,
+      function(x) {
+        x <- gsub("^c\\(|\\)$", "", x)  # remove c( and )
+        x <- gsub('\"', "", x)          # remove double quotes
+        x <- strsplit(x, split = ",\\s*")[[1]]  # split on commas
+        x
+      }
+    )
   }
 
   # calculate observed as actual intersection between pathway genes and signature genes
@@ -146,6 +154,15 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
     enrichment_df$pathway_genes,
     function(genes) length(intersect(genes, signature_gene_list))
   )
+  
+  enrichment_df$pathway_genes <- sapply(enrichment_df$pathway_genes, function(x) {
+    # remove "c(", ")", and double quotes
+    x <- gsub('^c\\(|\\)$', '', x)       # remove leading c( and trailing )
+    x <- gsub('""', '', x)               # remove double double-quotes
+    x <- gsub('"', '', x)                # remove any leftover single double-quotes
+    x <- gsub('\\s+', '', x)             # remove whitespace if needed
+    return(x)                            # already comma-separated
+  })
   
   # expected = (|P| / |U|) * |S|
   enrichment_df$expected_val <- (enrichment_df$pathway_size / length(bg_genes)) * length(signature_gene_list)
