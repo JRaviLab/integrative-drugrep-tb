@@ -37,8 +37,8 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r microarray and RNAseq dn pathways}
-marray_GO_mat_dn = get_GO_pseudocount_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
-rnaseq_GO_mat_dn = get_GO_pseudocount_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
+marray_GO_mat_dn = get_GO_asinh_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
+rnaseq_GO_mat_dn = get_GO_asinh_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 ```
 
 ```{r get statistically significant metrics -- positions for asterisk}
@@ -133,7 +133,7 @@ other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
 final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
 final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
-write_tsv(final_df_dn, here("figures/marray_rnaseq_pseudocount_dn_pathways.tsv"))
+write_tsv(final_df_dn, here("figures/marray_rnaseq_asinh_dn_pathways.tsv"))
 ```
 
 ```{r process significant matrices}
@@ -212,7 +212,7 @@ var_pathway_df <- data.frame(
 
 final_df_dn_variable = final_df_dn[final_df_dn$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways; the top 20 highest variable 
 final_signi_df_dn_variable = final_signi_df_dn[final_signi_df_dn$Description %in% var_pathway_df$terms[1:20],]
-write_tsv(final_df_dn_variable, here("figures/dn_hv_pseudocount_pathways.tsv"))
+write_tsv(final_df_dn_variable, here("figures/dn_hv_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -418,7 +418,7 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2b_dn_allvals_fixedexpected_hvariance_pseudocount_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
+pdf(here("figures/Figure2b_dn_allvals_fixedexpected_hvariance_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 50, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%

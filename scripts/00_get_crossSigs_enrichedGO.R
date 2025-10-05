@@ -1,7 +1,7 @@
 # function to summarize pathways across disease signatures
-## change generatio to log(observed/expected)
+## change asinh(observed/expected)
 
-# last modified: 08/29/25
+# last modified: 10/05/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -30,9 +30,9 @@ get_GO_asinh_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
 
     if(nrow(GO_res) > 0){
       # compute LogRatio numeric
-      GO_res$pseudocount_numeric <- as.numeric(GO_res$asinh_observed_expected)
+      GO_res$asinh_numeric <- as.numeric(GO_res$asinh_observed_expected)
 
-      GO_col <- GO_res[c("Description", "pseudocount_numeric")]
+      GO_col <- GO_res[c("Description", "asinh_numeric")]
       colnames(GO_col)[2] <- signature_name
 
     } else {
@@ -77,9 +77,9 @@ get_GO_qvalue_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
 
     if(nrow(GO_res) > 0){
       # compute LogRatio numeric
-      GO_res$pseudocount_numeric <- as.numeric(GO_res$qvalue)
+      GO_res$qvalue_numeric <- as.numeric(GO_res$qvalue)
 
-      GO_col <- GO_res[c("Description", "pseudocount_numeric")]
+      GO_col <- GO_res[c("Description", "qvalue_numeric")]
       colnames(GO_col)[2] <- signature_name
 
     } else {
@@ -123,7 +123,8 @@ get_GO_testStat_matrix <- function(data_path, pattern, prefix_sub, suffix_sub){
       signature_name <- gsub(paste0(prefix_sub,"_"),"",file)
       signature_name <- gsub(paste0("_",suffix_sub),"",signature_name)
 
-      GO_col <- GO_res[c("Description","pseudocount")]
+      GO_res$asinh_numeric <- as.numeric(GO_res$asinh_observed_expected)
+      GO_col <- GO_res[c("Description","asinh_numeric")]
       colnames(GO_col)[2] <- signature_name
 
       if(!exists("GO_mat")){
