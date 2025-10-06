@@ -55,6 +55,7 @@ ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology
     size = 6,   
     color = "black"
   ) +
+  scale_fill_brewer(palette = "Set2") +
   scale_y_log10() + 
   labs(
     title = "Log-transformed variance across individual signatures",
