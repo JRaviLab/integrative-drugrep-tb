@@ -8,82 +8,82 @@ library(proxy)
 ```
 
 ```{r define highly variable pathways}
-up_consistent_pseudocount_pathways = read_tsv(here("figures/up_consistent_pseudocount_pathways.tsv"))$Description
-dn_consistent_pseudocount_pathways = read_tsv(here("figures/dn_consistent_pseudocount_pathways.tsv"))$Description
+up_consistent_asinh_pathways = read_tsv(here("figures/up_consistent_asinh_pathways.tsv"))$Description
+dn_consistent_asinh_pathways = read_tsv(here("figures/dn_consistent_asinh_pathways.tsv"))$Description
 ```
 
 ### Upregulated pathways
 ```{r}
-up_consistent_pseudocount_pathways_df = as.data.frame(up_consistent_pseudocount_pathways)
+up_consistent_asinh_pathways_df = as.data.frame(up_consistent_asinh_pathways)
 ```
 
 ```{r read in stats results}
-up_circulating_lung_MW = read_tsv(here("figures/up_circulating_lung_MW.tsv"))
+up_circulating_lung_MW = read_tsv(here("figures/up_allvals_circulating_lung_MW.tsv"))
 colnames(up_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(up_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
-up_norm_auroc_df = merge(up_consistent_pseudocount_pathways_df, up_circulating_lung_MW[c("GO_term","circulating-lung")], 
-      by.x="up_consistent_pseudocount_pathways", 
+up_norm_auroc_df = merge(up_consistent_asinh_pathways_df, up_circulating_lung_MW[c("GO_term","circulating-lung")], 
+      by.x="up_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_microarray_rnaseq_MW = read_tsv(here("figures/up_microarray_rnaseq_MW.tsv"))
+up_microarray_rnaseq_MW = read_tsv(here("figures/up_allvals_microarray_rnaseq_MW.tsv"))
 colnames(up_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(up_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
-      by.x="up_consistent_pseudocount_pathways", 
+      by.x="up_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_primary_cellline_MW = read_tsv(here("figures/up_primary_cellline_MW.tsv"))
+up_primary_cellline_MW = read_tsv(here("figures/up_allvals_primary_cellline_MW.tsv"))
 colnames(up_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(up_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_primary_cellline_MW[c("GO_term","primary-cellline")], 
-      by.x="up_consistent_pseudocount_pathways", 
+      by.x="up_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_indiv_aggr_MW = read_tsv(here("figures/up_indiv_aggr_MW.tsv"))
-colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-      by.x="up_consistent_pseudocount_pathways", 
-      by.y="GO_term", all.x=TRUE)
+#up_indiv_aggr_MW = read_tsv(here("figures/up_allvals_indiv_aggr_MW.tsv"))
+#colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+#up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+#      by.x="up_consistent_asinh_pathways", 
+#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r up plot prep}
 # build matrix and set row names
-up_norm_auroc_mat <- as.matrix(up_norm_auroc_df[, !(names(up_norm_auroc_df) %in% "up_consistent_pseudocount_pathways")])
-rownames(up_norm_auroc_mat) <- up_norm_auroc_df$up_consistent_pseudocount_pathways
+up_norm_auroc_mat <- as.matrix(up_norm_auroc_df[, !(names(up_norm_auroc_df) %in% "up_consistent_asinh_pathways")])
+rownames(up_norm_auroc_mat) <- up_norm_auroc_df$up_consistent_asinh_pathways
 ```
 
 ### Downregulated pathways
 ```{r}
-dn_consistent_pseudocount_pathways_df = as.data.frame(dn_consistent_pseudocount_pathways)
+dn_consistent_asinh_pathways_df = as.data.frame(dn_consistent_asinh_pathways)
 ```
 
 ```{r read in stats results}
-dn_circulating_lung_MW = read_tsv(here("figures/dn_circulating_lung_MW.tsv"))
+dn_circulating_lung_MW = read_tsv(here("figures/dn_allvals_circulating_lung_MW.tsv"))
 colnames(dn_circulating_lung_MW) = gsub("norm_auroc", "circulating-lung", colnames(dn_circulating_lung_MW), ignore.case = FALSE, fixed = FALSE)
-dn_norm_auroc_df = merge(dn_consistent_pseudocount_pathways_df, dn_circulating_lung_MW[c("GO_term","circulating-lung")], 
-      by.x="dn_consistent_pseudocount_pathways", 
+dn_norm_auroc_df = merge(dn_consistent_asinh_pathways_df, dn_circulating_lung_MW[c("GO_term","circulating-lung")], 
+      by.x="dn_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_microarray_rnaseq_MW = read_tsv(here("figures/dn_microarray_rnaseq_MW.tsv"))
+dn_microarray_rnaseq_MW = read_tsv(here("figures/dn_allvals_microarray_rnaseq_MW.tsv"))
 colnames(dn_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(dn_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
-      by.x="dn_consistent_pseudocount_pathways", 
+      by.x="dn_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_primary_cellline_MW = read_tsv(here("figures/dn_primary_cellline_MW.tsv"))
+dn_primary_cellline_MW = read_tsv(here("figures/dn_allvals_primary_cellline_MW.tsv"))
 colnames(dn_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(dn_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_primary_cellline_MW[c("GO_term","primary-cellline")], 
-      by.x="dn_consistent_pseudocount_pathways", 
+      by.x="dn_consistent_asinh_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_indiv_aggr_MW = read_tsv(here("figures/dn_indiv_aggr_MW.tsv"))
-colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-      by.x="dn_consistent_pseudocount_pathways", 
-      by.y="GO_term", all.x=TRUE)
+#dn_indiv_aggr_MW = read_tsv(here("figures/dn_allvals_indiv_aggr_MW.tsv"))
+#colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
+#dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
+#      by.x="dn_consistent_asinh_pathways", 
+#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r dn plot prep}
 # build matrix and set row names
-dn_norm_auroc_mat <- as.matrix(dn_norm_auroc_df[, !(names(dn_norm_auroc_df) %in% "dn_consistent_pseudocount_pathways")])
-rownames(dn_norm_auroc_mat) <- dn_norm_auroc_df$dn_consistent_pseudocount_pathways
+dn_norm_auroc_mat <- as.matrix(dn_norm_auroc_df[, !(names(dn_norm_auroc_df) %in% "dn_consistent_asinh_pathways")])
+rownames(dn_norm_auroc_mat) <- dn_norm_auroc_df$dn_consistent_asinh_pathways
 
 # ensure numeric
 storage.mode(dn_norm_auroc_mat) <- "numeric"
@@ -101,8 +101,8 @@ common_cols <- common_cols[order(common_cols)]  # or your preferred order
 up_mat <- up_norm_auroc_mat[, common_cols, drop = FALSE]
 dn_mat <- dn_norm_auroc_mat[, common_cols, drop = FALSE]
 
-pdf(here("figures/Figure2_up_dn_consistent_pseudocount_by_contrasts.pdf"),
-    width = 50, height = 40)
+pdf(here("figures/Figure2_up_dn_consistent_asinh_by_contrasts.pdf"),
+    width = 80, height = 80)
 
 plot_up <- Heatmap(
   up_mat,
@@ -111,20 +111,20 @@ plot_up <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(45, "cm"),
+  height = unit(55, "cm"),
   column_title = "Metadata comparison",
-  column_title_gp = gpar(fontsize = 22),
+  column_title_gp = gpar(fontsize = 30),
   row_title = "Top 20 dominant upregulated GO:BP",
-  row_title_gp = gpar(fontsize = 22),
+  row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(up_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 22),
-  column_names_gp = gpar(fontsize = 22),
+  row_names_gp = gpar(fontsize = 30),
+  column_names_gp = gpar(fontsize = 30),
   heatmap_legend_param = list(   # legend defined once
     title = "normalized AUROC",
-    title_gp = gpar(fontsize = 22),
-    labels_gp = gpar(fontsize = 22),
+    title_gp = gpar(fontsize = 30),
+    labels_gp = gpar(fontsize = 30),
     at = c(-1, -0.5, 0, 0.5, 1),
     labels = c("-1", "-0.5", "0", "0.5", "1")
   )
@@ -137,14 +137,14 @@ plot_dn <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(15, "cm"),
+  height = unit(75, "cm"),
   row_title = "Top 20 dominant downregulated GO:BP",
-  row_title_gp = gpar(fontsize = 22),
+  row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(dn_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 22),
-  column_names_gp = gpar(fontsize = 22)
+  row_names_gp = gpar(fontsize = 30),
+  column_names_gp = gpar(fontsize = 30)
 )
 
 # stack vertically so columns align
