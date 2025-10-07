@@ -1,0 +1,6 @@
+series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num
+GSE100897	GSE100897_MTB_control_24h_THP-1	data/RNAseq_data_forDE/expression_matrices/GSE100897.tsv	1	107	163
+GSE100897	GSE100897_MTB_control_6h_THP-1	data/RNAseq_data_forDE/expression_matrices/GSE100897.tsv	1	107	163
+GSE256184	GSE256184_MTB_control_HEPG2_HepG2	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	258	59
+GSE211974	GSE211974_MTB_control_blood_THP-1	data/RNAseq_data_forDE/expression_matrices/GSE211974.tsv	1	98	61
+GSE211974	GSE211974_MTB_control_48h_blood_THP-1	data/RNAseq_data_forDE/expression_matrices/GSE211974.tsv	1	98	61
