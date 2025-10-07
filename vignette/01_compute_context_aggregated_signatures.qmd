@@ -7,6 +7,8 @@
 library(readr)
 library(here)
 library(tidyverse)
+library(dplyr)
+library(data.table)
 source(here("scripts/00_background_genes_PA_functions.R"))
 source(here("scripts/01_signature_aggregation_functions.R"))
 ```
@@ -14,16 +16,16 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ##### Initialize arguments
 ```{r}
 # example argument
-metadata_path = here("data/v2/signatures/RNAseq_TB_signature_run_info_blood.tsv")
-direction = "dn"
+metadata_path = here("data/v2/signatures/RNASeq_TB_signature_run_info_mixed.tsv")
+direction = "up"
 bg_source = "input data" # L1000 genes
-extra_arg= "_dn.tsv"
-output_dir = here("data/v2/signatures/RNAseq/blood_aggregated_signatures")
+extra_arg= "_up.tsv"
+output_dir = here("data/v2/signatures/RNAseq/mixed_aggregated_signatures")
 threshold_pct <- 0.90
 ```
 
 ```{r get background genes}
-data_path = here("data/v2/DE_results/RNAseq/up")
+data_path = here("data/v2/DE_results/RNASeq/up")
 all_genes <- character(0)
 
 data_to_run <- readr::read_tsv(metadata_path)
@@ -75,18 +77,18 @@ for (i in seq_len(nrow(data_to_run))) {
   to_merge_logFC <- gene_signature %>%
     mutate(GeneID = as.character(GeneID)) %>%
     distinct(GeneID, .keep_all = TRUE) %>%
-    select(GeneID, log2FoldChange)
+    dplyr::select(GeneID, log2FoldChange)
 
   # 4) Prepare a single-column frame named by the signature
-  sig_col <- to_merge_logFC %>%
-    rename(!!signature_filename := log2FoldChange)
+  sig_col <- to_merge_logFC
+  colnames(sig_col)[2] <- signature_name
 
   # 5) LEFT JOIN onto the fixed background (no row growth)
   membership <- membership %>%
     left_join(sig_col, by = "GeneID")
 
   # 6) Replace NA only in the newly added column (do NOT touch GeneID)
-  membership[[signature_filename]][is.na(membership[[signature_filename]])] <- 0
+  membership[is.na(membership)] <- 0
 
   # 7) Safety checks every loop
   stopifnot(anyDuplicated(membership$GeneID) == 0)
