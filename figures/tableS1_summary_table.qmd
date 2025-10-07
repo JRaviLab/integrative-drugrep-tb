@@ -1,12 +1,9 @@
 ```{r setup, include=FALSE}
-knitr::opts_knit$set(root.dir = "~/Documents/GitHub/drugrep_tb/")
 library(ComplexHeatmap)
 library(colorRamp2)
-#library(ReactomePA) # can't install this
 library(clusterProfiler)
 library(DOSE)
 library(readr)
-source("~/Documents/GitHub/drugrep_tb/scripts/00_get_crossSigs_enrichedGO.R")
 library(gridExtra)
 library(grid)
 library(tibble)
@@ -15,7 +12,7 @@ library(here)
 ```
 
 ```{r load data}
-summary_df <- read.delim(here("data/v2/tableS1/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/v2/tableS1/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 summary_df 
 ```
 
@@ -43,24 +40,25 @@ all_info = all_info[all_info$signature.x == 1,]
 
 # Create the table
 my_gt_table <- all_info %>%
-  dplyr::select(SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
+  dplyr::select(ID, SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
   arrange(technology) %>%
   gt(groupname_col = "technology") %>%
   tab_header(
     title = "TB Signature Metadata",
-    subtitle = "Grouped by Technology"
+    subtitle = "Grouped by technology"
   ) %>%
   cols_label(
+    ID = "ID",
     SIGNATURE_NAME = "Signature",
     study_id = "Study",
     platform_id = "Platform",
     tb_status = "TB Status",
-    tissue_category = "Tissue Origin",
-    sample_origin = "Origin Type",
-    tissue_cell_type = "Cell/Tissue Type",
+    tissue_category = "Tissue origin",
+    sample_origin = "Origin type",
+    tissue_cell_type = "Cell/tissue type",
     technology = "Technology",
-    up_genes_num.x = "Up Genes",
-    dn_genes_num.x = "Down Genes"
+    up_genes_num.x = "Upregulated genes",
+    dn_genes_num.x = "Downregulated genes"
   ) %>%
   fmt_missing(
     columns = everything(),
@@ -91,7 +89,7 @@ my_gt_table <- all_info %>%
   )
 
 # Save the table as HTML
-gtsave(my_gt_table, here("figures/signature_summary_table.html"))
+gtsave(my_gt_table, here("figures/tableS1_signature_summary_table.html"))
 
 ```
 
