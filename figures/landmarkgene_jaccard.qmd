@@ -4,6 +4,7 @@
 library(here)
 library(readr)
 library(tidyverse)
+library(ComplexHeatmap)
 
 # read in up TB signatures
 microarray_up_signatures = list.files(path = here("data/v2/DE_results/microarray/up/"), 
@@ -100,7 +101,7 @@ dn_gene_jaccard_matrix = get_gene_jaccard_matrix(dn_gene_list)
 ```
 
 ```{r set up color annotations}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 # Define tissue short names
 tissue_map <- c(
   "blood_pmbc"                         = "PBMC",
@@ -237,24 +238,22 @@ ha_left <- rowAnnotation(
 
 ```
 
-```{r signature name annotation}
-# prepare annotation table
-annotation_table = as.data.frame(colnames(up_gene_jaccard_matrix))
-colnames(annotation_table)[1] <- "SIGNATURE_NAME"
-annotation_table$number <- 1:nrow(annotation_table)
-annotation_table$ID <- paste0("signature_", seq_len(nrow(annotation_table)))
-annotation_table <- annotation_table[1:35,]
-annotation_table = merge(annotation_table, meta_df, by = "SIGNATURE_NAME")
-annotation_table <- annotation_table[order(annotation_table$number), ]
-```
-
 ```{r}
 library(ComplexHeatmap)
 library(circlize)
 
+annotation_table <- meta_df
 viz_mat_up <- up_gene_jaccard_matrix
-colnames(viz_mat_up) <- annotation_table$ID
-row.names(viz_mat_up) <- annotation_table$ID
+
+
+common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
+
+colnames(viz_mat_up) <- annotation_sorted$ID
+row.names(viz_mat_up) <- annotation_sorted$ID
 
 # define the output file path
 pdf(file = here("figures/up_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
@@ -302,9 +301,17 @@ dev.off()
 library(ComplexHeatmap)
 library(circlize)
 
+annotation_table <- meta_df
 viz_mat_dn <- dn_gene_jaccard_matrix
-colnames(viz_mat_dn) <- annotation_table$ID
-row.names(viz_mat_dn) <- annotation_table$ID
+
+common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
+
+colnames(viz_mat_dn) <- annotation_sorted$ID
+row.names(viz_mat_dn) <- annotation_sorted$ID
 
 # define the output file path
 pdf(file = here("figures/dn_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
