@@ -1,4 +1,4 @@
-# Pathway pseudocount correlations 
+# Pathway sinh(observed/expected) correlations 
 
 ```{r}
 library(here)
@@ -31,7 +31,7 @@ rnaseq_dn_pathways = list.files(path = here("data/v2/RNAseq_pathways/dn/"),
 microarray_up_pathways_list <- list()
 for (up_path_micro in microarray_up_pathways) {
   up_path_pathways_df <- read_tsv(here(paste0("data/v2/microarray_pathways/up/", up_path_micro)))
-  up_path_pathway_vals <- up_path_pathways_df$pseudocount
+  up_path_pathway_vals <- up_path_pathways_df$asinh_observed_expected
   # store the pathway vector in a named list
   up_path_micro = gsub("_up.tsv", "", up_path_micro)
   up_path_micro = gsub("allterms_GO_ORA_BGcorrected_", "", up_path_micro)
@@ -41,7 +41,7 @@ for (up_path_micro in microarray_up_pathways) {
 microarray_dn_pathways_list <- list()
 for (dn_path_micro in microarray_dn_pathways) {
   dn_path_pathways_df <- read_tsv(here(paste0("data/v2/microarray_pathways/dn/", dn_path_micro)))
-  dn_path_pathway_vals <- dn_path_pathways_df$pseudocount
+  dn_path_pathway_vals <- dn_path_pathways_df$asinh_observed_expected
   # store the pathway vector in a named list
   dn_path_micro = gsub("_dn.tsv", "", dn_path_micro)
   dn_path_micro = gsub("allterms_GO_ORA_BGcorrected_", "", dn_path_micro)
@@ -53,7 +53,7 @@ for (up_path_rnaseq in rnaseq_up_pathways) {
   up_path_pathways_df <- read_tsv(here(paste0("data/v2/RNAseq_pathways/up/", up_path_rnaseq)))
   rows_with_all_na <- rowSums(is.na(up_path_pathways_df)) == ncol(up_path_pathways_df)
   up_path_pathways_df_clean <- up_path_pathways_df[!rows_with_all_na, ]
-  up_path_pathway_vals <- up_path_pathways_df_clean$pseudocount
+  up_path_pathway_vals <- up_path_pathways_df_clean$asinh_observed_expected
   # store the pathway vector in a named list
   up_path_rnaseq = gsub("_up.tsv", "", up_path_rnaseq)
   up_path_rnaseq = gsub("allterms_GO_ORA_BGcorrected_", "", up_path_rnaseq)
@@ -65,7 +65,7 @@ for (dn_path_rnaseq in rnaseq_dn_pathways) {
   dn_path_pathways_df <- read_tsv(here(paste0("data/v2/RNAseq_pathways/dn/", dn_path_rnaseq)))
   rows_with_all_na <- rowSums(is.na(dn_path_pathways_df)) == ncol(dn_path_pathways_df)
   dn_path_pathways_df_clean <- dn_path_pathways_df[!rows_with_all_na, ]
-  dn_path_pathway_vals <- dn_path_pathways_df_clean$pseudocount
+  dn_path_pathway_vals <- dn_path_pathways_df_clean$asinh_observed_expected
   # store the pathway vector in a named list
   dn_path_rnaseq = gsub("_dn.tsv", "", dn_path_rnaseq)
   dn_path_rnaseq = gsub("allterms_GO_ORA_BGcorrected_", "", dn_path_rnaseq)
@@ -96,7 +96,7 @@ dn_pathway_similarity_matrix = get_pathway_similarity_matrix(dn_pathway_list)
 ```
 
 ```{r set up color annotations}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 # Define tissue short names
 tissue_map <- c(
   "blood_pmbc"                         = "PBMC",
@@ -233,24 +233,21 @@ ha_left <- rowAnnotation(
 
 ```
 
-```{r signature name annotation}
-# prepare annotation table
-annotation_table = as.data.frame(colnames(up_pathway_similarity_matrix))
-colnames(annotation_table)[1] <- "SIGNATURE_NAME"
-annotation_table$number <- 1:nrow(annotation_table)
-annotation_table$ID <- paste0("signature_", seq_len(nrow(annotation_table)))
-annotation_table <- annotation_table[1:35,]
-annotation_table = merge(annotation_table, meta_df, by = "SIGNATURE_NAME")
-annotation_table <- annotation_table[order(annotation_table$number), ]
-```
-
 ```{r}
 library(ComplexHeatmap)
 library(circlize)
 
 viz_mat_up <- up_pathway_similarity_matrix
-colnames(viz_mat_up) <- annotation_table$ID
-row.names(viz_mat_up) <- annotation_table$ID
+annotation_table <- meta_df
+
+common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
+
+colnames(viz_mat_up) <- annotation_sorted$ID
+row.names(viz_mat_up) <- annotation_sorted$ID
 
 # define the output file path
 pdf(file = here("figures/up_pathway_similarity_matrix.pdf"), width = 35, height = 35)
@@ -267,7 +264,7 @@ ht <- Heatmap(
   viz_mat_up,
   cluster_rows = FALSE,
   cluster_columns = FALSE,
-  name = "Jaccard index",
+  name = "Pearson correlation",
   col = col_fun,
   column_names_rot = 45,
   column_names_side = "top",
@@ -299,8 +296,16 @@ library(ComplexHeatmap)
 library(circlize)
 
 viz_mat_dn <- dn_pathway_similarity_matrix
-colnames(viz_mat_dn) <- annotation_table$ID
-row.names(viz_mat_dn) <- annotation_table$ID
+annotation_table <- meta_df
+
+common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
+
+colnames(viz_mat_dn) <- annotation_sorted$ID
+row.names(viz_mat_dn) <- annotation_sorted$ID
 
 # define the output file path
 pdf(file = here("figures/dn_pathway_similarity_matrix.pdf"), width = 35, height = 35)
@@ -317,7 +322,7 @@ ht <- Heatmap(
   viz_mat_dn,
   cluster_rows = FALSE,
   cluster_columns = FALSE,
-  name = "Jaccard index",
+  name = "Pearson correlation",
   col = col_fun,
   column_names_rot = 45,
   column_names_side = "top",
