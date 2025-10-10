@@ -215,7 +215,7 @@ colnames(moa_synergy_mat) <- new_labels
 # Define color function
 col_fun <- colorRamp2(
   c(-0.18, 0, 0.22),
-  c("red", "white", "blue")
+  c("firebrick3", "white", "dodgerblue3")
 )
 
 # Create the custom legend for the asterisks
