@@ -383,11 +383,11 @@ ha_top <- HeatmapAnnotation(
   technology = meta_df$technology,
   col = list(technology = tech_colors),
   annotation_name_side = "left",
-  annotation_name_gp = gpar(fontsize = 20),
+  annotation_name_gp = gpar(fontsize = 25),
   annotation_legend_param = list(
     technology = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     )
   )
 )
@@ -402,15 +402,15 @@ ha_bottom <- HeatmapAnnotation(
     origin_type = origin_colors
   ),
   annotation_name_side = "left",
-  annotation_name_gp = gpar(fontsize = 20),
+  annotation_name_gp = gpar(fontsize = 25),
   annotation_legend_param = list(
     tissue_cell = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     ),
     origin_type = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     )
   )
 )
@@ -427,7 +427,7 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
 
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
 viz_mat_up <- viz_mat_up[, summary_df_sorted$SIGNATURE_NAME] 
-colnames(viz_mat_up) <- summary_df_sorted$ID
+colnames(viz_mat_up) <- summary_df_sorted$number
 
 heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   viz_mat_up,
@@ -448,21 +448,22 @@ heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   col = col_fun,
   heatmap_legend_param = list(
     title = "asinh(observed/expected)",
-    title_gp = gpar(fontsize = 20),
-    labels_gp = gpar(fontsize = 20)
+    title_gp = gpar(fontsize = 25),
+    labels_gp = gpar(fontsize = 25)
   ),
   column_title = "Individual upregulated \n microarray & RNASeq TB signatures",
+  column_title_gp = gpar(fontsize = 25),
   row_title = "Enriched GO biological processes",
-  row_title_gp = gpar(fontsize = 20),
+  row_title_gp = gpar(fontsize = 25),
   rect_gp = gpar(col = "grey"),
   cluster_rows = FALSE,
   cluster_columns = FALSE,
   row_order = rownames(viz_mat_up),
-  column_names_rot = 70,
+  column_names_rot = 0,
   top_annotation = ha_top,
   bottom_annotation = ha_bottom,
-  row_names_gp = gpar(fontsize = 20),
-  column_names_gp = gpar(fontsize = 20),
+  row_names_gp = gpar(fontsize = 25),
+  column_names_gp = gpar(fontsize = 25),
   width = unit(55, "cm"),
   height = unit(25, "cm")
 )
