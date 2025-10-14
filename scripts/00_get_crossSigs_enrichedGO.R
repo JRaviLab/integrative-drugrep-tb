@@ -1,7 +1,7 @@
 # function to summarize pathways across disease signatures
-## change asinh(observed/expected)
+## add functions for pathway clusters and selecting the top terms based on variance
 
-# last modified: 10/05/25
+# last modified: 10/14/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -153,115 +153,29 @@ get_GO_annotation <- function(annotation_file='./data/metadata/direct-annotation
   return(GO_annotation)
 }
 
-summarize_unionGOids <- function(GO_mat, GO_annotation){
-  union_GOids <- GO_mat$Description
+get_GOterms_cl <- function(pathway_variance_df){
   # map the GO descriptions to GO ids
-  union_GO_df <- merge(GO_mat,GO_annotation,by.x="Description",by.y="Term", all.x=T, all.y=F)
-  union_GO_clean <- na.omit(union_GO_df)
-  union_GOids_terms <- unique(union_GO_clean[,c("GOID","Description")]) # some terms don't have associated GO id
-  union_GOids <- union_GOids_terms$GOID
+  GO_df <- merge(pathway_variance_df, GO_annotation, by.x="terms", by.y="Term", all.x=T, all.y=F)
+  GO_clean <- na.omit(GO_df)
+  GOids_terms <- unique(GO_clean[,c("GOID","terms")])
+  GOids <- GOids_terms$GOID
   # calculate similarity matrix
-  simMat <- GO_similarity(go_id = union_GOids, ont = 'BP', db = 'org.Hs.eg.db',
+  simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = 'org.Hs.eg.db',
                           measure = "Rel",remove_orphan_terms = FALSE)
-  # for each GO term, select the lowest adj.p-val
+  # for each GO term, select the highest variance
   cl = cluster_terms(simMat)
-  union_GOids_terms$cluster = cl
-  cl_unionGOids_terms = merge(union_GOids_terms,GO_mat,by="Description")
-  cl_unionGOids_terms = cl_unionGOids_terms[order(cl_unionGOids_terms$cluster, decreasing = FALSE),]
+  GOids_terms$cluster = cl
+  cl_GOids_terms = merge(GOids_terms, pathway_variance_df,by="terms")
+  cl_GOids_terms = cl_GOids_terms[order(cl_GOids_terms$cluster, decreasing = FALSE),]
 
-  GO_mat_float <- GO_mat[GO_mat$Description %in% union_GOids_terms$Description,]
-  GO_mat_float$Description <- NULL
-  #min_GOqvals <- apply(GO_mat_float,1,function(val) if(all(val==0)) 0 else min(val[val>0]))
-  min_GOqvals <- apply(GO_mat_float, 1, function(val) {
-    if (all(val == 0)) 0 else min(val[val > 0])
-  })
-  cl_unionGOids_terms <- cl_unionGOids_terms %>% mutate(min_qval = min_GOqvals, .after=cluster)
-  signatures = colnames(cl_unionGOids_terms)[5:(ncol(cl_unionGOids_terms))]
-  cl_unionGOids_terms <- cl_unionGOids_terms[c(c("Description","GOID","min_qval","cluster"),signatures)]
-
-  return(cl_unionGOids_terms)
+  return(cl_GOids_terms)
 }
 
-get_clusterGOterms_sigs <- function(cl_unionGOids_terms){
-  cluster_num <- unique(cl_unionGOids_terms$cluster)
-  signatures <- colnames(cl_unionGOids_terms)[6:ncol(cl_unionGOids_terms)]
+get_topN_GOterms_cl <- function(cl_GOids_terms, N = 1){
+  top_terms_per_cluster <- cl_GOids_terms %>%
+    group_by(cluster) %>%
+    slice_max(order_by = variance, n = N, with_ties = FALSE) %>%
+    ungroup()
 
-  for (cluster in cluster_num) {
-    cl_unionGOids_subdf <- cl_unionGOids_terms[cl_unionGOids_terms$cluster == cluster, ]
-    sig_cl_qvals <- c()
-
-    for (sig_itr in seq_along(signatures)) {
-      #cl_qval <- unname(apply(cl_unionGOids_subdf[5 + sig_itr], 2, function(val) {
-      #  if (all(val == 0)) 0 else min(val[val > 0])
-      #}))
-      cl_qval <- unname(apply(cl_unionGOids_subdf[5 + sig_itr], 2, function(val) {
-        val_non_na <- val[!is.na(val)]
-        if (length(val_non_na) == 0) {
-          return(NA)  # All NA
-        } else if (all(val_non_na == 0)) {
-          return(0)   # All 0
-        } else {
-          return(min(val_non_na[val_non_na > 0]))
-        }
-      }))
-
-      sig_cl_qvals <- c(sig_cl_qvals, cl_qval)
-    }
-
-    names(sig_cl_qvals) <- signatures
-    sig_cl_qvals_df <- as.data.frame(as.list(sig_cl_qvals))
-
-    if (cluster == cluster_num[1]) {
-      combined_df <- sig_cl_qvals_df
-    } else {
-      combined_df <- rbind(combined_df, sig_cl_qvals_df)
-    }
-  }
-
-  rownames(combined_df) <- cluster_num
-  return(combined_df)
+  return(top_terms_per_cluster)
 }
-
-
-get_topthree_sigGOterms_cl <- function(cl_unionGOids_terms){
-  # calculate the top three significant GO terms in each cluster
-  # get the most significant q-value of each cluster per signature
-  cluster_num = unique(cl_unionGOids_terms$cluster)
-  signatures = colnames(cl_unionGOids_terms)[4:length(cl_unionGOids_terms)]
-  # iterate through each cluster
-  for(cluster in cluster_num){
-    cl_unionGOids_subdf = cl_unionGOids_terms[cl_unionGOids_terms$cluster == cluster,]
-    sorted_by_qval <- cl_unionGOids_subdf[order(cl_unionGOids_subdf$min_qval, decreasing = FALSE),]
-    topN_GOterms <- sorted_by_qval$Description[1:3]
-    names(topN_GOterms) <- c("top1","top2","top3")
-    topN_GOterms_t = t(as.data.frame(topN_GOterms))
-    # we need to stack them right here
-    if(cluster == 1){
-      topN_GOterms_df = topN_GOterms_t
-    }else{
-      topN_GOterms_df = rbind(topN_GOterms_df, topN_GOterms_t)
-    }
-  }
-  row.names(topN_GOterms_df) = cluster_num
-  topN_GOterms_df = as.data.frame(topN_GOterms_df)
-  return(topN_GOterms_df)
-}
-
-
-
-## Example run
-# data_path <- "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/data/pathways/microarray/dn/GO_ORA"
-# pattern <- "GO_ORA_BGcorrected"
-# prefix_sub <- "GO_ORA_BGcorrected"
-# suffix_sub <- "none.tsv"
-#
-#
-#
-# GO_mat = get_GOqval_matrix(data_path, pattern, prefix_sub, suffix_sub)
-# GO_annotation = get_GO_annotation()
-# cl_unionGOids_terms = summarize_unionGOids(GO_mat, GO_annotation)
-# sig_cl_qvals_mat = get_clusterGOterms_sigs(cl_unionGOids_terms) # get qval matrix: cluster x signature
-# write_tsv(sig_cl_qvals_mat,file="./data/pathways/microarray/up/GO_ORA/sig_cl_qvals_mat.tsv")
-#
-# topN_GOterms_df = get_topthree_sigGOterms_cl(cl_unionGOids_terms) # get top 3 terms enriched in each cluster
-# write_tsv(topN_GOterms_df,file="./data/pathways/microarray/up/GO_ORA/topN_GOterms.tsv")
