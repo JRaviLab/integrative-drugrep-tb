@@ -8,8 +8,8 @@ library(proxy)
 ```
 
 ```{r define highly variable pathways}
-up_hv_pathway_pathways = read_tsv(here("figures/up_hv_asinh_pathways.tsv"))$Description
-dn_hv_pathway_pathways = read_tsv(here("figures/dn_hv_asinh_pathways.tsv"))$Description
+up_hv_pathway_pathways = read_tsv(here("figures/up_tophv_clusters_asinh_pathways.tsv"))$Description
+dn_hv_pathway_pathways = read_tsv(here("figures/dn_tophv_clusters_asinh_pathways.tsv"))$Description
 ```
 
 ### Upregulated pathways
@@ -111,20 +111,20 @@ plot_up <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(30, "cm"),
+  height = unit(40, "cm"),
   column_title = "Metadata comparison",
-  column_title_gp = gpar(fontsize = 22),
+  column_title_gp = gpar(fontsize = 30),
   row_title = "Top 20 highly variable upregulated GO:BP",
-  row_title_gp = gpar(fontsize = 22),
+  row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(up_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 22),
-  column_names_gp = gpar(fontsize = 22),
+  row_names_gp = gpar(fontsize = 30),
+  column_names_gp = gpar(fontsize = 30),
   heatmap_legend_param = list(   # legend defined once
     title = "normalized AUROC",
-    title_gp = gpar(fontsize = 22),
-    labels_gp = gpar(fontsize = 22),
+    title_gp = gpar(fontsize = 30),
+    labels_gp = gpar(fontsize = 30),
     at = c(-1, -0.5, 0, 0.5, 1),
     labels = c("-1", "-0.5", "0", "0.5", "1")
   )
@@ -139,12 +139,12 @@ plot_dn <- Heatmap(
   width = unit(8, "cm"),
   height = unit(30, "cm"),
   row_title = "Top 20 highly variable downregulated GO:BP",
-  row_title_gp = gpar(fontsize = 22),
+  row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(dn_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 22),
-  column_names_gp = gpar(fontsize = 22)
+  row_names_gp = gpar(fontsize = 30),
+  column_names_gp = gpar(fontsize = 30)
 )
 
 # stack vertically so columns align

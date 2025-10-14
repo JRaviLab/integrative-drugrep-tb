@@ -198,9 +198,20 @@ var_pathway_df <- data.frame(
   variance = final_df_up_variances[sorted_indices]
 )
 
-final_df_up_variable = final_df_up[final_df_up$Description %in% var_pathway_df$terms[1:20],] # subset highly variable pathways 
-final_signi_df_up_variable = final_signi_df_up[final_signi_df_up$Description %in% var_pathway_df$terms[1:20],]
-write_tsv(final_df_up_variable, here("figures/up_hv_asinh_pathways.tsv"))
+variance_p90 = quantile(var_pathway_df$variance, probs = 0.9, na.rm = TRUE)
+top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
+```
+
+```{r cluster the highly variable terms to reduce redundancy}
+# cluster GO terms based on their semantic similarities
+cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
+write_tsv(cl_GOids_terms, here("figures/up_hv_clusters_asinh_pathways.tsv"))
+# select the term with highest variance from each defined cluster
+top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
+
+final_df_up_variable = final_df_up[final_df_up$Description %in% top_terms_per_cluster$terms,]
+final_signi_df_up_variable = final_signi_df_up[final_signi_df_up$Description %in% top_terms_per_cluster$terms,]
+write_tsv(final_df_up_variable, here("figures/up_tophv_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -408,7 +419,7 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2a_up_allvals_fixedexpected_hvariance_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 60, height = 30)
+pdf(here("figures/Figure2a_up_clustered_allvals_fixedexpected_hvariance_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
