@@ -138,10 +138,28 @@ Mann_Whitney_test <- function(values, group1, group2, group_vec) {
   group_2_vals <- as.numeric(values[names(group_vec[group_vec == group2])])
   
   if (sum(!is.na(group_1_vals)) > 0 && sum(!is.na(group_2_vals)) > 0) {
+    # remove NAs
+    group_1_vals <- group_1_vals[!is.na(group_1_vals)]
+    group_2_vals <- group_2_vals[!is.na(group_2_vals)]
+
+    # combine and rank
+    combined_vals <- c(group_1_vals, group_2_vals)
+    ranks <- rank(combined_vals)
+    
+    # get sizes
+    n1 <- length(group_1_vals)
+    n2 <- length(group_2_vals)
+
+    # U1 = R1 - n1(n1 + 1)/2
+    R1 <- sum(ranks[1:n1])  # ranks of group 1 (which is first in combined_vals)
+    U1 <- R1 - n1 * (n1 + 1) / 2
+
+    # perform the test to get p-value
     test <- wilcox.test(group_1_vals, group_2_vals, exact = TRUE)
+
     out <- data.frame(
       p_value   = unname(test$p.value),
-      statistic = unname(test$statistic)
+      statistic = U1
     )
   } else {
     out <- data.frame(
@@ -149,9 +167,10 @@ Mann_Whitney_test <- function(values, group1, group2, group_vec) {
       statistic = NA_real_
     )
   }
-  
+
   return(out)
 }
+
 ```
 
 ```{r circulating vs. lung}
