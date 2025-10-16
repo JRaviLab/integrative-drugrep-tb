@@ -188,14 +188,29 @@ final_df_dn_indiv <- final_df_dn_indiv[final_df_dn_indiv$Description %in% marray
 consistent_counts <- final_df_dn_indiv %>%
   dplyr::select(-Description) %>%  # ensure Description is not part of count calc
   dplyr::mutate(across(everything(), as.numeric)) %>%
-  apply(1, function(row) sum(!is.na(row) & row != 0))
+  apply(1, function(row) sum(!is.na(row) & row > 0))
 
 # Filter the full original dataframe using the counts
-N <- 26  # your chosen threshold
+N <- 30  # chosen threshold
 final_df_dn <- final_df_dn[final_df_dn$Description %in% marray_rnaseq_signi_dn,]
-final_df_dn_consistent <- final_df_dn[consistent_counts >= N, ] # 24 dnregulated pathways
-final_signi_df_dn_consistent = final_signi_df_dn[final_signi_df_dn$Description %in% final_df_dn_consistent$Description,]
-write_tsv(final_df_dn_consistent, here("figures/dn_consistent_asinh_pathways.tsv"))
+final_df_dn_consistent <- final_df_dn[consistent_counts >= N, ] # XX downregulated pathways
+selected_consistent_counts = consistent_counts[consistent_counts >= N]
+consistent_count_df <- data.frame(
+  terms = final_df_up_consistent$Description,
+  consistent_count = selected_consistent_counts
+)
+```
+
+```{r cluster the consistent terms to reduce redundancy}
+# cluster GO terms based on their semantic similarities
+cl_GOids_terms = get_GOterms_cl(consistent_count_df)
+write_tsv(cl_GOids_terms, here("figures/dn_consistent_clusters_asinh_pathways.tsv"))
+# select the term with highest variance from each defined cluster
+top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, top_by = "con", N = 1)
+
+final_df_dn_consistent = final_df_dn[final_df_dn$Description %in% top_terms_per_cluster$terms,]
+final_signi_df_dn_consistent = final_signi_df_dn[final_signi_df_dn$Description %in% top_terms_per_cluster$terms,]
+write_tsv(final_df_dn_consistent, here("figures/dn_topconsistent_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
