@@ -1,0 +1,15 @@
+```{r}
+library(readr)
+library(tidyverse)
+library(here)
+```
+
+```{r}
+annotation_table = read_tsv(here("figures/figure2_annotation_table.tsv"))
+annotation_table$ID <- gsub("signature_","s",annotation_table$ID)
+colnames(annotation_table)[ncol(annotation_table)] <- "signature_ID"
+annotation_table <- annotation_table %>%
+  mutate(dataset_ID = paste0("d", match(study_id, unique(study_id))))
+annotation_table$dataset_ID[(nrow(annotation_table)-1):nrow(annotation_table)] <- NA
+write_tsv(annotation_table, file=here("figures/annotation_table.tsv"))
+```
