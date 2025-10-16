@@ -101,7 +101,7 @@ dn_gene_jaccard_matrix = get_gene_jaccard_matrix(dn_gene_list)
 ```
 
 ```{r set up color annotations}
-summary_df <- read.delim(here("figures/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 # Define tissue short names
 tissue_map <- c(
   "blood_pmbc"                         = "PBMC",
@@ -176,6 +176,13 @@ origin_colors <- c(
   "primary" = "#009E73"
 )
 
+tb_colors <- c(
+  "MTB" = "black",
+  "PTB" = "#785EF0",
+  "EPTB" = "#DC267F",
+  "LNTB" = "#FE6100"
+)
+
 # Prepare metadata/matrix
 meta_df <- summary_df[1:35,] %>%
   mutate(
@@ -187,12 +194,15 @@ ha_bottom <- HeatmapAnnotation(
   technology = meta_df$technology,
   tissue_cell = meta_df$tissue_short,
   origin_type = meta_df$sample_origin,
-  col = list(technology = tech_colors,
-             tissue_cell = tissue_colors,
-             origin_type = origin_colors),
+  tb_type = meta_df$tb_status,
+  col = list(
+    technology = tech_colors,
+    tissue_cell = tissue_colors,
+    origin_type = origin_colors,
+    tb_type = tb_colors
+  ),
   annotation_name_side = "right",
   annotation_name_gp = gpar(fontsize = 15),
-  
   annotation_legend_param = list(
     technology = list(
       title_gp = gpar(fontsize = 15),
@@ -205,6 +215,10 @@ ha_bottom <- HeatmapAnnotation(
     origin_type = list(
       title_gp = gpar(fontsize = 15),
       labels_gp = gpar(fontsize = 15)
+    ),
+    tb_type = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
     )
   )
 )
@@ -213,9 +227,11 @@ ha_left <- rowAnnotation(
   technology = meta_df$technology,
   tissue_cell = meta_df$tissue_short,
   origin_type = meta_df$sample_origin,
+  tb_type = meta_df$tb_status,
   col = list(technology = tech_colors,
              tissue_cell = tissue_colors,
-             origin_type = origin_colors),
+             origin_type = origin_colors,
+             tb_type = tb_colors),
   annotation_name_side = "top",
   show_legend = FALSE,
   annotation_name_gp = gpar(fontsize = 15),
