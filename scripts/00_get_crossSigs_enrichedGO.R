@@ -177,7 +177,7 @@ get_topN_GOterms_cl <- function(cl_GOids_terms, top_by = "var", N = 1){
       group_by(cluster) %>%
       slice_max(order_by = variance, n = N, with_ties = FALSE) %>%
       ungroup()
-  }ifelse(top_by == "con"){
+  }else if(top_by == "con"){
     top_terms_per_cluster <- cl_GOids_terms %>%
       group_by(cluster) %>%
       slice_max(order_by = consistent_count, n = N, with_ties = FALSE) %>%
