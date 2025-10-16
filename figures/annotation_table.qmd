@@ -1,15 +1,62 @@
 ```{r}
 library(readr)
 library(tidyverse)
+library(dplyr)
 library(here)
 ```
 
 ```{r}
 annotation_table = read_tsv(here("figures/figure2_annotation_table.tsv"))
-annotation_table$ID <- gsub("signature_","s",annotation_table$ID)
-colnames(annotation_table)[ncol(annotation_table)] <- "signature_ID"
-annotation_table <- annotation_table %>%
-  mutate(dataset_ID = paste0("d", match(study_id, unique(study_id))))
-annotation_table$dataset_ID[(nrow(annotation_table)-1):nrow(annotation_table)] <- NA
-write_tsv(annotation_table, file=here("figures/annotation_table.tsv"))
+
+sorted_annotation_table <- annotation_table %>%
+  arrange(desc(technology), tissue_category, sample_origin, tissue_cell_type)
+
+sorted_annotation_table <- sorted_annotation_table %>%
+  arrange(str_detect(ID, "aggregated"))
+
+sorted_annotation_table$number <- 1:nrow(sorted_annotation_table)
+colnames(sorted_annotation_table)[ncol(sorted_annotation_table)] <- "signature_ID"
+
+# replace values starting with "signature_" in signature_ID with s1, s2, ...
+signature_rows <- grepl("^signature_", sorted_annotation_table$signature_ID)
+
+# create replacement s1, s2, ...
+sorted_annotation_table$signature_ID[signature_rows] <- paste0("s", seq_len(sum(signature_rows)))
+sorted_annotation_table <- sorted_annotation_table %>%
+  mutate(dataset_ID = paste0("d", match(series_id, unique(series_id))))
+sorted_annotation_table$dataset_signature_ID <- paste(sorted_annotation_table$dataset_ID, sorted_annotation_table$signature_ID, sep = "_")
+
+```
+
+```{r get sample numbers}
+microarray_meta = read_tsv(here("data/v2/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv"))
+microarray_meta <- microarray_meta %>% group_by(SIGNATURE_NAME) %>% count()
+microarray_meta_signatures <- microarray_meta[microarray_meta$SIGNATURE_NAME %in% sorted_annotation_table$SIGNATURE_NAME,]
+
+rnaseq_meta = read_tsv(here("data/v2/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"))
+rnaseq_meta <- rnaseq_meta %>% group_by(SIGNATURE_NAME) %>% count()
+rnaseq_meta_signatures <- rnaseq_meta[rnaseq_meta$SIGNATURE_NAME %in% sorted_annotation_table$SIGNATURE_NAME,]
+```
+
+```{r combine sample number}
+sorted_annotation_table <- sorted_annotation_table %>%
+  mutate(.row_id = row_number()) %>%
+  left_join(microarray_meta_signatures, by = "SIGNATURE_NAME") %>%
+  rename(n_microarray = n) %>%
+  arrange(.row_id) %>%
+  select(-.row_id)
+
+sorted_annotation_table <- sorted_annotation_table %>%
+  mutate(.row_id = row_number()) %>%
+  left_join(rnaseq_meta_signatures, by = "SIGNATURE_NAME") %>%
+  rename(n_rnaseq = n) %>%
+  arrange(.row_id) %>%
+  select(-.row_id)
+
+# combine both into a single 'n' column
+sorted_annotation_table <- sorted_annotation_table %>%
+  mutate(n = coalesce(n_microarray, n_rnaseq)) %>%
+  select(-n_microarray, -n_rnaseq)
+  
+write_tsv(sorted_annotation_table, file=here("figures/annotation_table.tsv"))
 ```
