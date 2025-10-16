@@ -16,7 +16,7 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ### Up individual signatures
@@ -257,17 +257,6 @@ ordered_go_terms <- hc$labels[hc$order]
 sig_mat_indiv_aggr_up_ordered <- sig_mat_indiv_aggr_up[ordered_go_terms, , drop = FALSE]
 ```
 
-```{r sort summary_df (metadata)}
-summary_indiv_df <- summary_df[1:35,]
-summary_df_sorted <- summary_indiv_df[order(summary_indiv_df$technology, summary_indiv_df$sample_origin, summary_indiv_df$tissue_category,summary_indiv_df$tissue_cell_type, summary_indiv_df$SIGNATURE_NAME),]
-
-summary_df_sorted <- rbind(summary_df_sorted, summary_df[36:37,])
-summary_df_sorted$number <- 1:nrow(summary_df_sorted)
-summary_df_sorted$ID <- paste0("signature_", seq_len(nrow(summary_df_sorted)))
-summary_df_sorted$ID[(nrow(summary_df_sorted) - 1):nrow(summary_df_sorted)] <- c("aggregated_microarray", "aggregated_RNAseq") 
-#write_tsv(summary_df_sorted, here("figures/figure2_annotation_table.tsv"))
-```
-
 ```{r up signature heatmap}
 # 1. Define tissue short names
 tissue_map <- c(
@@ -343,8 +332,15 @@ origin_colors <- c(
   "primary" = "#009E73"
 )
 
+tb_colors <- c(
+  "MTB" = "black",
+  "PTB" = "#785EF0",
+  "EPTB" = "#DC267F",
+  "LNTB" = "#FE6100"
+)
+
 # 3. Prepare metadata/matrix
-meta_df <- summary_df_sorted %>%
+meta_df <- summary_df %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -394,12 +390,13 @@ ha_top <- HeatmapAnnotation(
 
 ha_bottom <- HeatmapAnnotation(
   tissue_cell = meta_df$tissue_short,
-  TB = meta_df$TB,
   origin_type = meta_df$sample_origin,
+  tb_type = meta_df$tb_status,
   col = list(
     tissue_cell = tissue_colors,
     technology = tech_colors,
-    origin_type = origin_colors
+    origin_type = origin_colors,
+    tb_type = tb_colors
   ),
   annotation_name_side = "left",
   annotation_name_gp = gpar(fontsize = 25),
@@ -409,6 +406,10 @@ ha_bottom <- HeatmapAnnotation(
       labels_gp = gpar(fontsize = 25)
     ),
     origin_type = list(
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
+    ),
+    tb_type = list(
       title_gp = gpar(fontsize = 25),
       labels_gp = gpar(fontsize = 25)
     )
