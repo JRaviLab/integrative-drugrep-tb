@@ -160,7 +160,7 @@ get_GOterms_cl <- function(pathway_variance_df){
   GOids_terms <- unique(GO_clean[,c("GOID","terms")])
   GOids <- GOids_terms$GOID
   # calculate similarity matrix
-  simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = 'org.Hs.eg.db',
+  simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = "org.Hs.eg.db",
                           measure = "Rel",remove_orphan_terms = FALSE)
   # for each GO term, select the highest variance
   cl = cluster_terms(simMat)
@@ -171,11 +171,18 @@ get_GOterms_cl <- function(pathway_variance_df){
   return(cl_GOids_terms)
 }
 
-get_topN_GOterms_cl <- function(cl_GOids_terms, N = 1){
-  top_terms_per_cluster <- cl_GOids_terms %>%
-    group_by(cluster) %>%
-    slice_max(order_by = variance, n = N, with_ties = FALSE) %>%
-    ungroup()
+get_topN_GOterms_cl <- function(cl_GOids_terms, top_by = "var", N = 1){
+  if(top_by == "var"){
+    top_terms_per_cluster <- cl_GOids_terms %>%
+      group_by(cluster) %>%
+      slice_max(order_by = variance, n = N, with_ties = FALSE) %>%
+      ungroup()
+  }ifelse(top_by == "con"){
+    top_terms_per_cluster <- cl_GOids_terms %>%
+      group_by(cluster) %>%
+      slice_max(order_by = consistent_count, n = N, with_ties = FALSE) %>%
+      ungroup()
+  }
 
   return(top_terms_per_cluster)
 }
