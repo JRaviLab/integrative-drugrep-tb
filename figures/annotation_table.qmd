@@ -48,7 +48,7 @@ sorted_annotation_table <- sorted_annotation_table %>%
   arrange(str_detect(ID, "aggregated"))
 
 sorted_annotation_table$number <- 1:nrow(sorted_annotation_table)
-colnames(sorted_annotation_table)[ncol(sorted_annotation_table)] <- "signature_ID"
+colnames(sorted_annotation_table)[ncol(sorted_annotation_table)-1] <- "signature_ID"
 
 # replace values starting with "signature_" in signature_ID with s1, s2, ...
 signature_rows <- grepl("^signature_", sorted_annotation_table$signature_ID)
@@ -58,5 +58,5 @@ sorted_annotation_table$signature_ID[signature_rows] <- paste0("s", seq_len(sum(
 sorted_annotation_table <- sorted_annotation_table %>%
   mutate(dataset_ID = paste0("d", match(series_id, unique(series_id))))
 sorted_annotation_table$dataset_signature_ID <- paste(sorted_annotation_table$dataset_ID, sorted_annotation_table$signature_ID, sep = "_")
-#write_tsv(sorted_annotation_table, file=here("figures/annotation_table.tsv"))
+write_tsv(sorted_annotation_table, file=here("figures/annotation_table.tsv"))
 ```
