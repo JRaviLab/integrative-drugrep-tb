@@ -268,11 +268,11 @@ annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
 sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
 viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
 
-colnames(viz_mat_up) <- annotation_sorted$ID
-row.names(viz_mat_up) <- annotation_sorted$ID
+colnames(viz_mat_up) <- annotation_sorted$dataset_signatures_ID
+row.names(viz_mat_up) <- annotation_sorted$dataset_signatures_ID
 
 # define the output file path
-pdf(file = here("figures/up_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
+pdf(file = here("figures/up_samplesize_ordering_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
 
 up_gene_jaccard_vector <- as.vector(up_gene_jaccard_matrix)
 ninetyfive_percentile <- quantile(up_gene_jaccard_vector, probs = 0.90)
@@ -330,7 +330,7 @@ colnames(viz_mat_dn) <- annotation_sorted$ID
 row.names(viz_mat_dn) <- annotation_sorted$ID
 
 # define the output file path
-pdf(file = here("figures/dn_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
+pdf(file = here("figures/dn_samplesize_ordering_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
 
 dn_gene_jaccard_vector <- as.vector(dn_gene_jaccard_matrix)
 ninetyfive_percentile <- quantile(dn_gene_jaccard_vector, probs = 0.90)
