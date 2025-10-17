@@ -326,8 +326,8 @@ annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
 sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
 viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
 
-colnames(viz_mat_dn) <- annotation_sorted$ID
-row.names(viz_mat_dn) <- annotation_sorted$ID
+colnames(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+row.names(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
 
 # define the output file path
 pdf(file = here("figures/dn_samplesize_ordering_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
