@@ -205,7 +205,7 @@ consistent_count_df <- data.frame(
 ```{r cluster the consistent terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
 source(here("scripts/00_get_crossSigs_enrichedGO.R"))
-cl_GOids_terms = get_GOterms_cl(consistent_count_df, sim_cutoff = 0.3)
+cl_GOids_terms = get_GOterms_cl(consistent_count_df, sim_cutoff = 0.6)
 write_tsv(cl_GOids_terms, here("figures/up_consistent_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, top_by = "con", N = 1)
@@ -487,7 +487,7 @@ heatmap_sig_up_go <- Heatmap(
   row_names_gp = gpar(fontsize = 25),
   column_names_gp = gpar(fontsize = 25),
   width = unit(55, "cm"),
-  height = unit(25, "cm")
+  height = unit(35, "cm")
 )
 
 draw(heatmap_sig_up_go,
