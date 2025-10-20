@@ -16,7 +16,7 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ### dn individual and aggregated signatures
@@ -218,6 +218,7 @@ top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
 write_tsv(cl_GOids_terms, here("figures/dn_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms = read_tsv(here("figures/dn_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
@@ -267,16 +268,6 @@ ordered_go_terms <- hc$labels[hc$order]
 
 # 3. Reorder matrix by GO semantic similarity
 sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[ordered_go_terms, , drop = FALSE]
-```
-
-```{r sort summary_df (metadata)}
-summary_indiv_df <- summary_df[1:35,]
-summary_df_sorted <- summary_indiv_df[order(summary_indiv_df$technology, summary_indiv_df$sample_origin, summary_indiv_df$tissue_category,summary_indiv_df$tissue_cell_type, summary_indiv_df$SIGNATURE_NAME),]
-
-summary_df_sorted <- rbind(summary_df_sorted, summary_df[36:37,])
-summary_df_sorted$number <- 1:nrow(summary_df_sorted)
-summary_df_sorted$ID <- paste0("signature_", seq_len(nrow(summary_df_sorted)))
-summary_df_sorted$ID[(nrow(summary_df_sorted) - 1):nrow(summary_df_sorted)] <- c("aggregated_microarray", "aggregated_RNAseq") 
 ```
 
 ```{r dn signature heatmap}
@@ -354,8 +345,15 @@ origin_colors <- c(
   "primary" = "#009E73"
 )
 
+tb_colors <- c(
+  "MTB" = "black",
+  "PTB" = "#785EF0",
+  "EPTB" = "#DC267F",
+  "LNTB" = "#FE6100"
+)
+
 # 3. Prepare metadata/matrix
-meta_df <- summary_df_sorted %>%
+meta_df <- summary_df %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -404,12 +402,13 @@ ha_top <- HeatmapAnnotation(
 
 ha_bottom <- HeatmapAnnotation(
   tissue_cell = meta_df$tissue_short,
-  TB = meta_df$TB,
   origin_type = meta_df$sample_origin,
+  TB_type = meta_df$tb_status,
   col = list(
     tissue_cell = tissue_colors,
     technology = tech_colors,
-    origin_type = origin_colors
+    origin_type = origin_colors,
+    tb_type = tb_colors
   ),
   annotation_name_side = "left",
   annotation_name_gp = gpar(fontsize = 25),
@@ -419,6 +418,10 @@ ha_bottom <- HeatmapAnnotation(
       labels_gp = gpar(fontsize = 25)
     ),
     origin_type = list(
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
+    ),
+    TB_type = list(
       title_gp = gpar(fontsize = 25),
       labels_gp = gpar(fontsize = 25)
     )
@@ -436,8 +439,8 @@ sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   as.matrix()
 
 viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
-viz_mat_dn <- viz_mat_dn[, summary_df_sorted$SIGNATURE_NAME] 
-colnames(viz_mat_dn) <- summary_df_sorted$number
+viz_mat_dn <- viz_mat_dn[, summary_df$SIGNATURE_NAME] 
+colnames(viz_mat_dn) <- summary_df$number
 
 heatmap_sig_dn_go <- Heatmap(
   viz_mat_dn,

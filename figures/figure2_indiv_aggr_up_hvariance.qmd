@@ -206,6 +206,7 @@ top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
 write_tsv(cl_GOids_terms, here("figures/up_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms <- read_tsv(here("figures/up_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
@@ -391,10 +392,9 @@ ha_top <- HeatmapAnnotation(
 ha_bottom <- HeatmapAnnotation(
   tissue_cell = meta_df$tissue_short,
   origin_type = meta_df$sample_origin,
-  tb_type = meta_df$tb_status,
+  TB_type = meta_df$tb_status,
   col = list(
     tissue_cell = tissue_colors,
-    technology = tech_colors,
     origin_type = origin_colors,
     tb_type = tb_colors
   ),
@@ -409,7 +409,7 @@ ha_bottom <- HeatmapAnnotation(
       title_gp = gpar(fontsize = 25),
       labels_gp = gpar(fontsize = 25)
     ),
-    tb_type = list(
+    TB_type = list(
       title_gp = gpar(fontsize = 25),
       labels_gp = gpar(fontsize = 25)
     )
@@ -427,8 +427,9 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   as.matrix()
 
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
-viz_mat_up <- viz_mat_up[, summary_df_sorted$SIGNATURE_NAME] 
-colnames(viz_mat_up) <- summary_df_sorted$number
+viz_mat_up <- viz_mat_up[, summary_df$SIGNATURE_NAME] 
+colnames(viz_mat_up) <- summary_df$number
+
 
 heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   viz_mat_up,
