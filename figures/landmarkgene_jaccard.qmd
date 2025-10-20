@@ -191,10 +191,10 @@ meta_df <- summary_df[1:35,] %>%
 
 # Create top and bottom annotations
 ha_bottom <- HeatmapAnnotation(
-  technology = meta_df$technology,
   tissue_cell = meta_df$tissue_short,
-  origin_type = meta_df$sample_origin,
   tb_type = meta_df$tb_status,
+  origin_type = meta_df$sample_origin,
+  technology = meta_df$technology,
   col = list(
     technology = tech_colors,
     tissue_cell = tissue_colors,
@@ -225,9 +225,9 @@ ha_bottom <- HeatmapAnnotation(
 
 ha_left <- rowAnnotation(
   technology = meta_df$technology,
-  tissue_cell = meta_df$tissue_short,
   origin_type = meta_df$sample_origin,
   tb_type = meta_df$tb_status,
+  tissue_cell = meta_df$tissue_short,
   col = list(technology = tech_colors,
              tissue_cell = tissue_colors,
              origin_type = origin_colors,
@@ -270,6 +270,8 @@ viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
 
 colnames(viz_mat_up) <- annotation_sorted$dataset_signature_ID
 row.names(viz_mat_up) <- annotation_sorted$dataset_signature_ID
+
+# diag(viz_mat_up) <- NA
 
 # define the output file path
 pdf(file = here("figures/up_samplesize_ordering_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
@@ -328,6 +330,8 @@ viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
 
 colnames(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
 row.names(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+
+# diag(viz_mat_dn) <- NA
 
 # define the output file path
 pdf(file = here("figures/dn_samplesize_ordering_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)

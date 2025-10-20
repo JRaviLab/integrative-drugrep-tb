@@ -96,7 +96,7 @@ dn_pathway_similarity_matrix = get_pathway_similarity_matrix(dn_pathway_list)
 ```
 
 ```{r set up color annotations}
-summary_df <- read.delim(here("figures/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 # Define tissue short names
 tissue_map <- c(
   "blood_pmbc"                         = "PBMC",
@@ -179,15 +179,18 @@ meta_df <- summary_df[1:35,] %>%
 
 # Create top and bottom annotations
 ha_bottom <- HeatmapAnnotation(
-  technology = meta_df$technology,
   tissue_cell = meta_df$tissue_short,
+  tb_type = meta_df$tb_status,
   origin_type = meta_df$sample_origin,
-  col = list(technology = tech_colors,
-             tissue_cell = tissue_colors,
-             origin_type = origin_colors),
+  technology = meta_df$technology,
+  col = list(
+    technology = tech_colors,
+    tissue_cell = tissue_colors,
+    origin_type = origin_colors,
+    tb_type = tb_colors
+  ),
   annotation_name_side = "right",
   annotation_name_gp = gpar(fontsize = 15),
-  
   annotation_legend_param = list(
     technology = list(
       title_gp = gpar(fontsize = 15),
@@ -200,17 +203,23 @@ ha_bottom <- HeatmapAnnotation(
     origin_type = list(
       title_gp = gpar(fontsize = 15),
       labels_gp = gpar(fontsize = 15)
+    ),
+    tb_type = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
     )
   )
 )
 
 ha_left <- rowAnnotation(
   technology = meta_df$technology,
-  tissue_cell = meta_df$tissue_short,
   origin_type = meta_df$sample_origin,
+  tb_type = meta_df$tb_status,
+  tissue_cell = meta_df$tissue_short,
   col = list(technology = tech_colors,
              tissue_cell = tissue_colors,
-             origin_type = origin_colors),
+             origin_type = origin_colors,
+             tb_type = tb_colors),
   annotation_name_side = "top",
   show_legend = FALSE,
   annotation_name_gp = gpar(fontsize = 15),
@@ -230,15 +239,15 @@ ha_left <- rowAnnotation(
     )
   )
 )
-
 ```
 
 ```{r}
 library(ComplexHeatmap)
 library(circlize)
 
-viz_mat_up <- up_pathway_similarity_matrix
 annotation_table <- meta_df
+viz_mat_up <- up_gene_jaccard_matrix
+
 
 common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
 annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
@@ -246,8 +255,10 @@ annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
 sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
 viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
 
-colnames(viz_mat_up) <- annotation_sorted$ID
-row.names(viz_mat_up) <- annotation_sorted$ID
+colnames(viz_mat_up) <- annotation_sorted$dataset_signature_ID
+row.names(viz_mat_up) <- annotation_sorted$dataset_signature_ID
+
+# diag(viz_mat_up) <- NA
 
 # define the output file path
 pdf(file = here("figures/up_pathway_similarity_matrix.pdf"), width = 35, height = 35)
@@ -295,8 +306,8 @@ dev.off()
 library(ComplexHeatmap)
 library(circlize)
 
-viz_mat_dn <- dn_pathway_similarity_matrix
 annotation_table <- meta_df
+viz_mat_dn <- dn_gene_jaccard_matrix
 
 common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["SIGNATURE_NAME"]])
 annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
@@ -304,8 +315,10 @@ annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
 sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
 viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
 
-colnames(viz_mat_dn) <- annotation_sorted$ID
-row.names(viz_mat_dn) <- annotation_sorted$ID
+colnames(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+row.names(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+
+#diag(viz_mat_dn) <- NA
 
 # define the output file path
 pdf(file = here("figures/dn_pathway_similarity_matrix.pdf"), width = 35, height = 35)
