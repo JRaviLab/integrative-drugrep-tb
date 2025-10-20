@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 10/01/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly
+# Last modified: 10/20/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -176,10 +176,7 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
 
 ```
 
-###### Individual signatures
-```{r}
-technologies <- c("microarray", "RNAseq")
-directions <- c("up", "dn")
+```{r set up pathway df}
 json_propagated_genes <- fromJSON(here("data/metadata/propagated_annotations.json"))
 # convert json_propagated_genes into a dataframe
 pathway_df <- data.frame(
@@ -189,6 +186,12 @@ pathway_df <- data.frame(
 )
 # add pathway_size column if needed by your function
 pathway_df$pathway_size <- sapply(pathway_df$pathway_genes, length)
+```
+
+###### Individual signatures
+```{r}
+technologies <- c("microarray", "RNAseq")
+directions <- c("up", "dn")
 
 up_significant_bps <- c()
 dn_significant_bps <- c()
@@ -354,58 +357,61 @@ for(technology in technologies){
 }
 ```
 
-```{r blood-only signatures}
+```{r origin-only signatures}
 technologies <- c("RNAseq")
 directions <- c("up","dn")
+tissue_origins <- c("blood","lung","mixed")
 for(technology in technologies){
   for(direction in directions){
-    bloodaggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/blood_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
+    for(tissue_origin in tissue_origins){
+      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/",tissue_origin,"_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
     
-    # define background genes
-    if(direction == "up"){
-      bg_genes <- bg_genes_combined_up
-    }else if(direction == "dn"){
-      bg_genes <- bg_genes_combined_dn
-    }
+      # define background genes
+      if(direction == "up"){
+        bg_genes <- bg_genes_combined_up
+      }else if(direction == "dn"){
+        bg_genes <- bg_genes_combined_dn
+      }
         
-    enrichGO_res_aggr <- enrichGO(gene = bloodaggr_gene_list,
-                             OrgDb = org.Hs.eg.db,
-                             readable = TRUE,
-                             ont = "BP",
-                             universe = bg_genes,
-                             pvalueCutoff = 1, # allows all terms
-                             qvalueCutoff = 1, # allows all terms
-                             minGSSize = 5,
-                             maxGSSize = 200)
+      enrichGO_res_aggr <- enrichGO(gene = originaggr_gene_list,
+                              OrgDb = org.Hs.eg.db,
+                              readable = TRUE,
+                              ont = "BP",
+                              universe = bg_genes,
+                              pvalueCutoff = 1, # allows all terms
+                              qvalueCutoff = 1, # allows all terms
+                              minGSSize = 5,
+                              maxGSSize = 200)
     
-    enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
+      enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
           
-    if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
+      if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
           
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
-      enrichGO_res_corrected <- calculate_asinh_enrichment(
-        enrichment_df = enrichGO_res_aggr,
-        signature_gene_list = bloodaggr_gene_list,
-        bg_genes = bg_genes,
-        pathway_df = pathway_df
-      )
+        # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+        enrichGO_res_corrected <- calculate_asinh_enrichment(
+          enrichment_df = enrichGO_res_aggr,
+          signature_gene_list = originaggr_gene_list,
+          bg_genes = bg_genes,
+          pathway_df = pathway_df
+        )
         
-      # merge with all go terms
-      blood_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
+        # merge with all go terms
+        origin_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
 
-      # replace NAs with 0 enrichment
-      blood_aggr_merged$pvalue[is.na(blood_aggr_merged$pvalue)] <- 1
-      blood_aggr_merged$p.adjust[is.na(blood_aggr_merged$p.adjust)] <- 1
-      blood_aggr_merged$qvalue[is.na(blood_aggr_merged$qvalue)] <- 1
-      blood_aggr_merged$geneID[is.na(blood_aggr_merged$geneID)] <- ""
-      blood_aggr_merged[is.na(blood_aggr_merged)] <- 0  
-      print(paste0("Final dimension: ", paste(dim(blood_aggr_merged), collapse = " x ")))
+        # replace NAs with 0 enrichment
+        origin_aggr_merged$pvalue[is.na(origin_aggr_merged$pvalue)] <- 1
+        origin_aggr_merged$p.adjust[is.na(origin_aggr_merged$p.adjust)] <- 1
+        origin_aggr_merged$qvalue[is.na(origin_aggr_merged$qvalue)] <- 1
+        origin_aggr_merged$geneID[is.na(origin_aggr_merged$geneID)] <- ""
+        origin_aggr_merged[is.na(origin_aggr_merged)] <- 0  
+        print(paste0("Final dimension: ", paste(dim(origin_aggr_merged), collapse = " x ")))
     
-      # save results
-      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_blood_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
+        # save results
+        output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_",tissue_origin,"_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
     
-      write_tsv(blood_aggr_merged, file = output_file_aggr)
-    }
+        write_tsv(origin_aggr_merged, file = output_file_aggr)
+      }
+    } 
   }
 }
 ```
