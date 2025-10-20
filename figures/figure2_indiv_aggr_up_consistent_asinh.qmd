@@ -12,7 +12,7 @@ library(grid)
 library(tibble)
 library(tidyr)
 library(tidyverse)
-
+library(ggsci)
 ```
 
 ### Up individual signatures
@@ -213,7 +213,6 @@ top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, top_by = "con", N =
 final_df_up_consistent = final_df_up[final_df_up$Description %in% top_terms_per_cluster$terms,]
 final_signi_df_up_consistent = final_signi_df_up[final_signi_df_up$Description %in% top_terms_per_cluster$terms,]
 write_tsv(final_df_up_consistent, here("figures/up_topconsistent_clusters_asinh_pathways.tsv"))
-
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -446,6 +445,8 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
 viz_mat_up <- viz_mat_up[, summary_df$SIGNATURE_NAME] 
 colnames(viz_mat_up) <- summary_df$number
+
+viz_mat_up <- viz_mat_up[top_terms_per_cluster$terms, ]
 
 final_signi_df_up_consistent$Description <- NULL
 final_signi_df_up_consistent <- as.matrix(final_signi_df_up_consistent)
