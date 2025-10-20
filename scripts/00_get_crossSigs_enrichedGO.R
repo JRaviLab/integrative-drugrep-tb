@@ -1,7 +1,8 @@
 # function to summarize pathways across disease signatures
-## add functions for pathway clusters and selecting the top terms based on variance
+## add functions for pathway clusters and selecting the top terms based on variance and consistency
+## add sim_cutoff to resolve heterogeneous clusters | enable ties for rep. terms
 
-# last modified: 10/14/25
+# last modified: 10/20/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -153,34 +154,42 @@ get_GO_annotation <- function(annotation_file='./data/metadata/direct-annotation
   return(GO_annotation)
 }
 
-get_GOterms_cl <- function(pathway_variance_df){
+get_GOterms_cl <- function(pathway_df, sim_cutoff = NULL){
   # map the GO descriptions to GO ids
-  GO_df <- merge(pathway_variance_df, GO_annotation, by.x="terms", by.y="Term", all.x=T, all.y=F)
+  GO_df <- merge(pathway_df, GO_annotation, by.x="terms", by.y="Term", all.x=T, all.y=F)
   GO_clean <- na.omit(GO_df)
   GOids_terms <- unique(GO_clean[,c("GOID","terms")])
   GOids <- GOids_terms$GOID
   # calculate similarity matrix
   simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = "org.Hs.eg.db",
-                          measure = "Rel",remove_orphan_terms = FALSE)
-  # for each GO term, select the highest variance
+                          measure = "Rel",remove_orphan_terms = FALSE) # “Wang”, “Resnik”, “Rel”, “Jiang”, “Lin”, “TCSS”
+  if(!is.null(sim_cutoff)){
+    if (!is.numeric(sim_cutoff) || length(sim_cutoff) != 1) {
+      stop("sim_cutoff must be a single numeric value (e.g., 0.4)")
+    }
+    simMat[simMat < sim_cutoff] <- 0
+  }
+
   cl = cluster_terms(simMat)
   GOids_terms$cluster = cl
-  cl_GOids_terms = merge(GOids_terms, pathway_variance_df,by="terms")
+  cl_GOids_terms = merge(GOids_terms, pathway_df,by="terms")
   cl_GOids_terms = cl_GOids_terms[order(cl_GOids_terms$cluster, decreasing = FALSE),]
 
   return(cl_GOids_terms)
 }
 
 get_topN_GOterms_cl <- function(cl_GOids_terms, top_by = "var", N = 1){
+  # select the cluster representative terms for all clusters based on highest variance
   if(top_by == "var"){
     top_terms_per_cluster <- cl_GOids_terms %>%
       group_by(cluster) %>%
       slice_max(order_by = variance, n = N, with_ties = FALSE) %>%
       ungroup()
+  # select the cluster representative terms for all clusters based on the highest consistency
   }else if(top_by == "con"){
     top_terms_per_cluster <- cl_GOids_terms %>%
       group_by(cluster) %>%
-      slice_max(order_by = consistent_count, n = N, with_ties = FALSE) %>%
+      slice_max(order_by = consistent_count, n = N, with_ties = TRUE) %>%
       ungroup()
   }
 
