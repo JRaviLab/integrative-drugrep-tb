@@ -42,7 +42,7 @@ annotation_table <- annotation_table %>%
 
 ```{r}
 sorted_annotation_table <- annotation_table %>%
-  arrange(desc(technology), sample_origin, tb_status, desc(n), tissue_cell_type)
+  arrange(desc(technology), sample_origin, tissue_category, study_id, tb_status, tissue_cell_type, desc(n))
 
 sorted_annotation_table <- sorted_annotation_table %>%
   arrange(str_detect(ID, "aggregated"))
@@ -57,6 +57,6 @@ signature_rows <- grepl("^signature_", sorted_annotation_table$signature_ID)
 sorted_annotation_table$signature_ID[signature_rows] <- paste0("s", seq_len(sum(signature_rows)))
 sorted_annotation_table <- sorted_annotation_table %>%
   mutate(dataset_ID = paste0("d", match(series_id, unique(series_id))))
-sorted_annotation_table$dataset_signature_ID <- paste(sorted_annotation_table$dataset_ID, sorted_annotation_table$signature_ID, sep = "_")
+sorted_annotation_table$dataset_signature_ID <- paste(sorted_annotation_table$signature_ID, sorted_annotation_table$dataset_ID, sep = "_")
 write_tsv(sorted_annotation_table, file=here("figures/annotation_table.tsv"))
 ```
