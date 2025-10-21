@@ -12,6 +12,7 @@ library(grid)
 library(tibble)
 library(tidyr)
 library(tidyverse)
+library(ggsci)
 ```
 
 ### dn individual signatures
@@ -39,7 +40,7 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 
 # combine pathways from both marray and rnaseq and perform clustering
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ```{r get statistically significant metrics -- positions for asterisk}
@@ -191,19 +192,19 @@ consistent_counts <- final_df_dn_indiv %>%
   apply(1, function(row) sum(!is.na(row) & row > 0))
 
 # Filter the full original dataframe using the counts
-N <- 30  # chosen threshold
+N <- 26  # chosen threshold
 final_df_dn <- final_df_dn[final_df_dn$Description %in% marray_rnaseq_signi_dn,]
 final_df_dn_consistent <- final_df_dn[consistent_counts >= N, ] # XX downregulated pathways
 selected_consistent_counts = consistent_counts[consistent_counts >= N]
 consistent_count_df <- data.frame(
-  terms = final_df_up_consistent$Description,
+  terms = final_df_dn_consistent$Description,
   consistent_count = selected_consistent_counts
 )
 ```
 
 ```{r cluster the consistent terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
-cl_GOids_terms = get_GOterms_cl(consistent_count_df)
+cl_GOids_terms = get_GOterms_cl(consistent_count_df, sim_cutoff = 0.6)
 write_tsv(cl_GOids_terms, here("figures/dn_consistent_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, top_by = "con", N = 1)
@@ -254,17 +255,6 @@ ordered_go_terms <- hc$labels[hc$order]
 
 # 3. Reorder matrix by GO semantic similarity
 sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[ordered_go_terms, , drop = FALSE]
-```
-
-```{r sort summary_df (metadata)}
-summary_indiv_df <- summary_df[1:35,]
-summary_df_sorted <- summary_indiv_df[order(summary_indiv_df$technology, summary_indiv_df$sample_origin, summary_indiv_df$tissue_category,summary_indiv_df$tissue_cell_type, summary_indiv_df$SIGNATURE_NAME),]
-
-summary_df_sorted <- rbind(summary_df_sorted, summary_df[36:37,])
-summary_df_sorted$number <- 1:nrow(summary_df_sorted)
-summary_df_sorted$ID <- paste0("signature_", seq_len(nrow(summary_df_sorted)))
-summary_df_sorted$ID[(nrow(summary_df_sorted) - 1):nrow(summary_df_sorted)] <- c("aggregated_microarray", "aggregated_RNAseq") 
-#write_tsv(summary_df_sorted, here("figures/figure2_annotation_table.tsv"))
 ```
 
 ```{r dn signature heatmap}
@@ -342,8 +332,19 @@ origin_colors <- c(
   "primary" = "#009E73"
 )
 
+tb_colors <- c(
+  "MTB" = "black",
+  "PTB" = "#785EF0",
+  "EPTB" = "#DC267F",
+  "LNTB" = "#FE6100"
+)
+
+cluster_colors = pal_d3("category20")(max(top_terms_per_cluster$cluster))
+names(cluster_colors) = unique(top_terms_per_cluster$cluster)
+cluster_colors <- cluster_colors
+
 # 3. Prepare metadata/matrix
-meta_df <- summary_df_sorted %>%
+meta_df <- summary_df %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -382,51 +383,68 @@ ha_top <- HeatmapAnnotation(
   technology = meta_df$technology,
   col = list(technology = tech_colors),
   annotation_name_side = "left",
-  annotation_name_gp = gpar(fontsize = 20),
+  annotation_name_gp = gpar(fontsize = 25),
   annotation_legend_param = list(
     technology = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     )
   )
 )
 
 ha_bottom <- HeatmapAnnotation(
   tissue_cell = meta_df$tissue_short,
-  TB = meta_df$TB,
   origin_type = meta_df$sample_origin,
+  TB_type = meta_df$tb_status,
   col = list(
     tissue_cell = tissue_colors,
-    technology = tech_colors,
-    origin_type = origin_colors
+    origin_type = origin_colors,
+    TB_type = tb_colors
   ),
   annotation_name_side = "left",
-  annotation_name_gp = gpar(fontsize = 20),
+  annotation_name_gp = gpar(fontsize = 25),
   annotation_legend_param = list(
     tissue_cell = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     ),
     origin_type = list(
-      title_gp = gpar(fontsize = 18),
-      labels_gp = gpar(fontsize = 18)
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
+    ),
+    TB_type = list(
+      title_gp = gpar(fontsize = 25),
+      labels_gp = gpar(fontsize = 25)
     )
   )
 )
+
+ha_right <- rowAnnotation(
+  clusters = top_terms_per_cluster$cluster,
+  annotation_name_side = "bottom",
+  annotation_name_gp = gpar(fontsize = 25),
+  col = list(
+    clusters = cluster_colors
+  ),
+  show_legend = FALSE
+)
+
 ```
 
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2a_dn_consistent_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 70, height = 30)
+pdf(here("figures/Figure2a_dn_clustered_consistent_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 70, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
 viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
-viz_mat_dn <- viz_mat_dn[, summary_df_sorted$SIGNATURE_NAME] 
-colnames(viz_mat_dn) <- summary_df_sorted$ID
+viz_mat_dn <- viz_mat_dn[, summary_df$SIGNATURE_NAME] 
+colnames(viz_mat_dn) <- summary_df$number
+
+viz_mat_dn <- viz_mat_dn[top_terms_per_cluster$terms, ]
 
 final_signi_df_dn_consistent$Description <- NULL
 final_signi_df_dn_consistent <- as.matrix(final_signi_df_dn_consistent)
@@ -450,23 +468,25 @@ heatmap_sig_dn_go <- Heatmap(
   col = col_fun,
   heatmap_legend_param = list(
     title = "sinh(observed/expected)",
-    title_gp = gpar(fontsize = 20),
-    labels_gp = gpar(fontsize = 20)
+    title_gp = gpar(fontsize = 25),
+    labels_gp = gpar(fontsize = 25)
   ),
   column_title = "Individual downregulated \n microarray & RNASeq TB signatures",
+  column_title_gp = gpar(fontsize = 25),
   row_title = "Enriched GO biological processes",
-  row_title_gp = gpar(fontsize = 20),
+  row_title_gp = gpar(fontsize = 25),
   rect_gp = gpar(col = "grey"),
   cluster_rows = FALSE,
   cluster_columns = FALSE,
   row_order = rownames(viz_mat_dn),
-  column_names_rot = 70,
+  column_names_rot = 0,
   top_annotation = ha_top,
   bottom_annotation = ha_bottom,
-  row_names_gp = gpar(fontsize = 20),
-  column_names_gp = gpar(fontsize = 20),
+  right_annotation = ha_right,
+  row_names_gp = gpar(fontsize = 25),
+  column_names_gp = gpar(fontsize = 25),
   width = unit(55, "cm"),
-  height = unit(25, "cm")
+  height = unit(35, "cm")
 )
 
 draw(heatmap_sig_dn_go,
