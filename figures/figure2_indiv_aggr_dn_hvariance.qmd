@@ -382,7 +382,7 @@ fifty_percentile <- quantile(actual_range, 0.50)
 fifth_percentile <- quantile(actual_range, 0.05)
 
 col_fun <- colorRamp2(
-  c(0, fifth_percentile ,fifty_percentile, ninetyfive_percentile),
+  c(0, fifth_percentile ,fifty_percentile, ninetyfifth_percentile),
   c("white", "indianred1", "firebrick2" , "firebrick4")
 )
 
@@ -408,7 +408,7 @@ ha_bottom <- HeatmapAnnotation(
     tissue_cell = tissue_colors,
     technology = tech_colors,
     origin_type = origin_colors,
-    tb_type = tb_colors
+    TB_type = tb_colors
   ),
   annotation_name_side = "left",
   annotation_name_gp = gpar(fontsize = 25),
