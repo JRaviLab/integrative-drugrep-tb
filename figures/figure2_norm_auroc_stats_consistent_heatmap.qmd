@@ -5,11 +5,19 @@ library(ComplexHeatmap)
 library(circlize)
 library(matrixStats)
 library(proxy)
+library(ggsci)
 ```
 
-```{r define highly variable pathways}
-up_consistent_asinh_pathways = read_tsv(here("figures/up_consistent_asinh_pathways.tsv"))$Description
-dn_consistent_asinh_pathways = read_tsv(here("figures/dn_consistent_asinh_pathways.tsv"))$Description
+```{r define highly consistent pathways}
+up_consistent_asinh_pathways = read_tsv(here("figures/up_topconsistent_clusters_asinh_pathways.tsv"))$Description
+dn_consistent_asinh_pathways = read_tsv(here("figures/dn_topconsistent_clusters_asinh_pathways.tsv"))$Description
+```
+
+```{r define clusters}
+up_consistent_clusters = read_tsv(here("figures/up_consistent_clusters_asinh_pathways.tsv"))
+up_top_consistent_clusters = up_consistent_asinh_clusters[up_consistent_asinh_clusters$terms %in% up_consistent_asinh_pathways,]
+dn_consistent_clusters = read_tsv(here("figures/dn_consistent_clusters_asinh_pathways.tsv"))
+dn_top_consistent_clusters = dn_consistent_asinh_clusters[dn_consistent_asinh_clusters$terms %in% dn_consistent_asinh_pathways,]
 ```
 
 ### Upregulated pathways
@@ -89,7 +97,33 @@ rownames(dn_norm_auroc_mat) <- dn_norm_auroc_df$dn_consistent_asinh_pathways
 storage.mode(dn_norm_auroc_mat) <- "numeric"
 ```
 
-```{r plot together}
+```{r clean up data for plotting}
+up_cluster_colors = pal_d3("category20")(max(up_top_consistent_clusters$cluster))
+names(up_cluster_colors) = unique(up_top_consistent_clusters$cluster)
+
+dn_cluster_colors = pal_d3("category20b")(max(dn_top_consistent_clusters$cluster))
+names(dn_cluster_colors) = unique(dn_top_consistent_clusters$cluster)
+
+ha_right_up <- rowAnnotation(
+  clusters = up_top_consistent_clusters$cluster,
+  annotation_name_side = "bottom",
+  annotation_name_gp = gpar(fontsize = 30),
+  col = list(
+    clusters = up_cluster_colors
+  ),
+  show_legend = FALSE,
+)
+
+ha_right_dn <- rowAnnotation(
+  clusters = dn_top_consistent_clusters$cluster,
+  annotation_name_side = "bottom",
+  annotation_name_gp = gpar(fontsize = 30),
+  col = list(
+    clusters = dn_cluster_colors
+  ),
+  show_legend = FALSE
+)
+
 # color scale: clamp to data range to avoid outlier washout
 lims <- range(dn_norm_auroc_mat, finite = TRUE)
 col_fun <- colorRamp2(c(-1, 0, 1), c("darkblue", "white", "darkred"))
@@ -101,7 +135,13 @@ common_cols <- common_cols[order(common_cols)]  # or your preferred order
 up_mat <- up_norm_auroc_mat[, common_cols, drop = FALSE]
 dn_mat <- dn_norm_auroc_mat[, common_cols, drop = FALSE]
 
-pdf(here("figures/Figure2_up_dn_consistent_asinh_by_contrasts.pdf"),
+up_mat <- up_norm_auroc_mat[up_top_consistent_clusters$terms,]
+dn_mat <- dn_norm_auroc_mat[dn_top_consistent_clusters$terms,]
+
+```
+
+```{r plot together}
+pdf(here("figures/Figure2_up_consistent_asinh_by_contrasts.pdf"),
     width = 80, height = 80)
 
 plot_up <- Heatmap(
@@ -111,14 +151,15 @@ plot_up <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(55, "cm"),
+  height = unit(65, "cm"),
   column_title = "Metadata comparison",
   column_title_gp = gpar(fontsize = 30),
-  row_title = "Top 20 dominant upregulated GO:BP",
+  row_title = "Top dominant upregulated GO:BP",
   row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(up_mat),
   column_names_rot = 45,
+  right_annotation = ha_right_up,
   row_names_gp = gpar(fontsize = 30),
   column_names_gp = gpar(fontsize = 30),
   heatmap_legend_param = list(   # legend defined once
@@ -130,6 +171,15 @@ plot_up <- Heatmap(
   )
 )
 
+draw(plot_up, heatmap_legend_side = "left")
+
+dev.off()
+```
+
+```{r plot dn}
+pdf(here("figures/Figure2_dn_consistent_asinh_by_contrasts.pdf"),
+    width = 80, height = 80)
+
 plot_dn <- Heatmap(
   dn_mat,
   name = "normalized AUROC",   
@@ -137,19 +187,26 @@ plot_dn <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(75, "cm"),
-  row_title = "Top 20 dominant downregulated GO:BP",
+  height = unit(30, "cm"),
+  row_title = "Top dominant downregulated GO:BP",
   row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(dn_mat),
   column_names_rot = 45,
+  right_annotation = ha_right_dn,
   row_names_gp = gpar(fontsize = 30),
-  column_names_gp = gpar(fontsize = 30)
+  column_names_gp = gpar(fontsize = 30),
+  heatmap_legend_param = list(   # legend defined once
+    title = "normalized AUROC",
+    title_gp = gpar(fontsize = 30),
+    labels_gp = gpar(fontsize = 30),
+    at = c(-1, -0.5, 0, 0.5, 1),
+    labels = c("-1", "-0.5", "0", "0.5", "1")
+  )
 )
 
-# stack vertically so columns align
-ht_list <- plot_up %v% plot_dn
-draw(ht_list, heatmap_legend_side = "left", merge_legends = TRUE)
+draw(plot_dn, heatmap_legend_side = "left")
 
 dev.off()
+
 ```
