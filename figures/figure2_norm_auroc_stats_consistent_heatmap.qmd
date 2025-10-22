@@ -15,9 +15,9 @@ dn_consistent_asinh_pathways = read_tsv(here("figures/dn_topconsistent_clusters_
 
 ```{r define clusters}
 up_consistent_clusters = read_tsv(here("figures/up_consistent_clusters_asinh_pathways.tsv"))
-up_top_consistent_clusters = up_consistent_asinh_clusters[up_consistent_asinh_clusters$terms %in% up_consistent_asinh_pathways,]
+up_top_consistent_clusters = up_consistent_clusters[up_consistent_clusters$terms %in% up_consistent_asinh_pathways,]
 dn_consistent_clusters = read_tsv(here("figures/dn_consistent_clusters_asinh_pathways.tsv"))
-dn_top_consistent_clusters = dn_consistent_asinh_clusters[dn_consistent_asinh_clusters$terms %in% dn_consistent_asinh_pathways,]
+dn_top_consistent_clusters = dn_consistent_clusters[dn_consistent_clusters$terms %in% dn_consistent_asinh_pathways,]
 ```
 
 ### Upregulated pathways
@@ -97,7 +97,7 @@ rownames(dn_norm_auroc_mat) <- dn_norm_auroc_df$dn_consistent_asinh_pathways
 storage.mode(dn_norm_auroc_mat) <- "numeric"
 ```
 
-```{r clean up data for plotting}
+```{r clean up/dn data for plotting}
 up_cluster_colors = pal_d3("category20")(max(up_top_consistent_clusters$cluster))
 names(up_cluster_colors) = unique(up_top_consistent_clusters$cluster)
 
@@ -111,7 +111,7 @@ ha_right_up <- rowAnnotation(
   col = list(
     clusters = up_cluster_colors
   ),
-  show_legend = FALSE,
+  show_legend = FALSE
 )
 
 ha_right_dn <- rowAnnotation(
@@ -187,7 +187,7 @@ plot_dn <- Heatmap(
   na_col = "lightgrey",
   cluster_rows = FALSE, cluster_columns = FALSE,
   width = unit(8, "cm"),
-  height = unit(30, "cm"),
+  height = unit(60, "cm"),
   row_title = "Top dominant downregulated GO:BP",
   row_title_gp = gpar(fontsize = 30),
   rect_gp = gpar(col = "grey"),
