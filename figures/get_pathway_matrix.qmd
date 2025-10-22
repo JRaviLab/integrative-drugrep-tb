@@ -47,9 +47,11 @@ summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", strin
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first
 colnames(marray_GO_mat_up) <- gsub("_up","",colnames(marray_GO_mat_up))
+colnames(marray_GO_mat_up) <- gsub("up_","",colnames(marray_GO_mat_up))
 df1 <- marray_GO_mat_up
 
 colnames(rnaseq_GO_mat_up) <- gsub("_up","",colnames(rnaseq_GO_mat_up))
+colnames(rnaseq_GO_mat_up) <- gsub("up_","",colnames(rnaseq_GO_mat_up))
 df2 <- rnaseq_GO_mat_up
 
 # Reshape from wide to long
@@ -117,10 +119,12 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first
 
-colnames(marray_GO_mat_dn) <- gsub("_up","",colnames(marray_GO_mat_dn))
+colnames(marray_GO_mat_dn) <- gsub("_dn","",colnames(marray_GO_mat_dn))
+colnames(marray_GO_mat_dn) <- gsub("dn_","",colnames(marray_GO_mat_dn))
 df1 <- marray_GO_mat_dn
 
-colnames(rnaseq_GO_mat_dn) <- gsub("_up","",colnames(rnaseq_GO_mat_dn))
+colnames(rnaseq_GO_mat_dn) <- gsub("_dn","",colnames(rnaseq_GO_mat_dn))
+colnames(rnaseq_GO_mat_dn) <- gsub("dn_","",colnames(rnaseq_GO_mat_dn))
 df2 <- rnaseq_GO_mat_dn
 
 # Reshape from wide to long
