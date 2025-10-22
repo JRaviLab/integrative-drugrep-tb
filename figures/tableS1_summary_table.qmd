@@ -12,7 +12,7 @@ library(here)
 ```
 
 ```{r load data}
-summary_df <- read.delim(here("data/v2/tableS1/figure2_annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/v2/tableS1/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 summary_df 
 ```
 
@@ -25,6 +25,7 @@ combined_df
 ```{r}
 library(dplyr)
 all_info <- left_join(summary_df, combined_df, by = "SIGNATURE_NAME")
+all_info$dataset_signature_ID[36:37] <- c("s36_aggregated_microarray", "s37_aggregated_RNAseq")
 all_info
 ```
 
@@ -40,7 +41,7 @@ all_info = all_info[all_info$signature.x == 1,]
 
 # Create the table
 my_gt_table <- all_info %>%
-  dplyr::select(ID, SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
+  dplyr::select(number, dataset_signature_ID, SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
   arrange(technology) %>%
   gt(groupname_col = "technology") %>%
   tab_header(
@@ -48,7 +49,8 @@ my_gt_table <- all_info %>%
     subtitle = "Grouped by technology"
   ) %>%
   cols_label(
-    ID = "ID",
+    number = "No.",
+    dataset_signature_ID = "Dataset-signature ID",
     SIGNATURE_NAME = "Signature",
     study_id = "Study",
     platform_id = "Platform",
