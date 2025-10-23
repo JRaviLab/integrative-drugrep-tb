@@ -1,0 +1,40 @@
+moa	n	novel 	doi	reference	note
+HMGCR inhibitor	4	0	https://doi.org/10.1093/infdis/jiz517	"Dutta et al., 2019"	
+tubulin polymerization inhibitor	4	0	https://doi.org/10.1128/mBio.01534-14	"Czyz et al., 2014"	
+calcium channel blocker	3	0	https://doi.org/10.1186/s40001-025-02443-4	"Tian et al., 2025"	
+glucocorticoid receptor agonist	3	0	https://doi.org/10.1080/17476348.2018.1515628	"Schutz et al., 2018"	
+dopamine receptor agonist|serotonin receptor antagonist	2	0	https://doi.org/10.1186/s40001-025-02443-4	"Tian et al., 2025"	
+dopamine receptor antagonist	2	0	https://doi.org/10.1186/s40001-025-02443-4	"Tian et al., 2025"	
+estrogen receptor antagonist|selective estrogen receptor modulator (SERM)	2	0	https://doi.org/10.1128/mbio.03024-22	"Boland et al., 2023"	
+Abl kinase inhibitor|Bcr-Abl kinase inhibitor	1	0	https://doi.org/10.1002/eji.201847656	"Wehrstedt et al., 2018"	
+DNA replication inhibitor|STAT inhibitor	1	1	NA	NA	
+EGFR inhibitor	1	0	https://doi.org/10.3389/fmed.2017.00171	"Kolloli et al., 2017"	
+GABA receptor antagonist	1	1	https://doi.org/10.3389/fimmu.2022.832015	"Kim et al., 2022"	
+HDAC inhibitor	1	0	https://doi.org/10.3389/fimmu.2020.00036	"Moreira et al., 2020"	
+KATP activator|Kir6 channel (KATP) activator|vasodilator	1	1	NA	NA	
+SYK inhibitor	1	0	https://doi.org/10.1016/j.biopha.2024.117798	"Song et al., 2025"	
+acetylcholine receptor antagonist	1	0	https://doi.org/10.3389/fimmu.2020.581911	"Islas-Weinstein et al., 2021"	
+adenylyl cyclase activator	1	0	https://doi.org/10.1111/mmi.13701	"Johnson et al., 2017"	
+adrenergic receptor antagonist|serotonin receptor antagonist|serotonin reuptake inhibitor	1	0	https://doi.org/10.7554/eLife.64834	"Shankaran et al., 2023"	
+angiotensin converting enzyme inhibitor	1	0	https://doi.org/10.1097/MD.0000000000003579	"Wu et al., 2016"	
+angiotensin receptor antagonist	1	1	NA	NA	
+antimalarial agent	1	0	https://doi.org/10.3389/fcimb.2022.905278	"Matteucci et al., 2022"	
+antineoplastic agent	1	1	NA	NA	
+benzodiazepine receptor agonist|HDAC inhibitor	1	1	NA	NA	
+carbonic anhydrase inhibitor	1	1	NA	NA	
+cyclooxygenase inhibitor	1	1	NA	NA	
+cyclooxygenase inhibitor|prostanoid receptor antagonist	1	1	NA	NA	
+cytochrome P450 inhibitor|SIRT activator	1	0	https://doi.org/10.1042/bst0310625; https://doi.org/10.1126/sciimmunol.aaj1789	"Munro et al., 2003; Cheng et al., 2017"	
+dehydrogenase inhibitor|inositol monophosphatase inhibitor	1	1	NA	NA	
+dehydropeptidase inhibitor	1	1	NA	NA	
+dopamine receptor agonist	1	1	NA	NA	
+glutamate receptor agonist	1	1	NA	NA	
+local anesthetic	1	1	NA	NA	
+mTOR inhibitor	1	0	https://doi.org/10.1128/aac.00253-21	"Tasneen et al., 2021"	
+mitochondrial DNA polymerase inhibitor|phosphatase inhibitor	1	1	NA	NA 	
+opioid receptor agonist	1	0	https://doi.org/10.3389/fimmu.2023.1265511	"Bataduwaarachchi et al., 2023"	Functional conflict
+protein synthesis inhibitor	1	1	NA	NA	
+serotonin receptor agonist	1	1	NA	NA	
+sodium channel blocker	1	0	https://doi.org/10.3389/fimmu.2021.665785	"Mitini-Nkhoma et al., 2021"	
+topoisomerase inhibitor	1	1	NA	NA	Antibiotic
+tumor necrosis factor production inhibitor	1	0	https://doi.org/10.1371/journal.pone.0039680	"Skerry et al., 2012"	

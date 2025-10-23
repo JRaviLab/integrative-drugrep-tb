@@ -1,0 +1,41 @@
+```{r}
+library(ggplot2)
+library(here)
+library(readr)
+```
+
+```{r}
+predicted_drugs = read.delim(here("data/v2/tableS2/final_high_confidence_drug_predictions.tsv"),sep="\t")
+moas_info <- read_csv(here("data/metadata/repurposing_drugs_20200324.csv"), skip = 9)
+```
+
+```{r}
+predicted_drugs_52 = predicted_drugs[predicted_drugs$combined_z_score > 0,]
+moas_drugs = merge(predicted_drugs_52, moas_info, by.x = "drug_name", by.y = "pert_iname", all.x = TRUE)
+#count_moa_drugs = moas_drugs %>% dplyr::count(moa, sort = TRUE)
+#write_tsv(count_moa_drugs, here("figures/moas_count_52_drugs.tsv"))
+moa_novel = read_tsv(here("figures/moas_count_52_drugs.tsv"))
+
+pdf(here("figures/FigureSX_moa_frequency.pdf"), width = 20, height = 15)
+
+ggplot(moas_drugs, aes(x = reorder(moa, -table(moa)[moa]))) +
+  geom_bar(fill = "gray30") +
+  labs(
+    title = "Frequency of MOAs associated with our 52 high confidence candidates",
+    x = "Mechanism of Action (MOA)",
+    y = "Count"
+  ) +
+  theme_bw(base_size = 20) +  # Increase base text size
+  theme(
+    plot.title = element_text(size = 28, hjust = 0.5),
+    axis.title.x = element_text(size = 22, margin = margin(t = 15)),
+    axis.title.y = element_text(size = 22, margin = margin(r = 15)),
+    axis.text.x = element_text(size = 14, angle = 60, hjust = 1, vjust = 1),
+    axis.text.y = element_text(size = 16),
+    panel.grid.major.x = element_blank(),
+    plot.margin = margin(20, 20, 20, 20)
+  )
+
+dev.off()
+
+```
