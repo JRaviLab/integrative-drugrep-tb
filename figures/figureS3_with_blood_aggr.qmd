@@ -116,19 +116,19 @@ p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Tec
   labs(
     title = "Upregulated",
     y = "Squared Deviation",
-    x = "Technology"
+    x = "Technology/Tissue origin"
   ) +
   #scale_fill_viridis_d(option = "D") +  # for discrete color
   coord_cartesian(clip = "off") +
   theme_minimal() +
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 20),
-    axis.text.y = element_text(size = 20),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 18),
+    axis.text.y = element_text(size = 18),
     axis.title.x = element_text(size = 20),
     axis.title.y = element_text(size = 20),
     plot.title = element_text(size = 20, hjust = 0.5),
-    strip.text = element_text(size = 20)
+    strip.text = element_text(size = 18)
   )
 
 # Plot for Downregulated
@@ -152,18 +152,18 @@ p_down <- ggplot(down_df, aes(x = Technology, y = SquaredDeviation_fixed, fill =
   labs(
     title = "Downregulated",
     y = NULL,
-    x = "Technology"
+    x = "Technology/Tissue origin"
   ) +
   coord_cartesian(clip = "off") +
   theme_minimal() +
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 20),
-    axis.text.y = element_text(size = 20),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 18),
+    axis.text.y = element_text(size = 18),
     axis.title.x = element_text(size = 20),
     axis.title.y = element_blank(),  # remove y-axis title for cleaner alignment
     plot.title = element_text(size = 20, hjust = 0.5),
-    strip.text = element_text(size = 20)
+    strip.text = element_text(size = 18)
   )
 
 # Combine with patchwork — show a visual separation
