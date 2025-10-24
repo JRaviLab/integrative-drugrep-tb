@@ -5,29 +5,8 @@ library(readr)
 library(tidyverse)
 ```
 
-```{r get drug predictions and moa info}
-predicted_drugs = read.delim(here("data/v2/tableS2/final_high_confidence_drug_predictions.tsv"),sep="\t")
-moas_info <- read_csv(here("data/metadata/repurposing_drugs_20200324.csv"), skip = 9)
-```
-
-```{r get novel info and merge with drug names}
-predicted_drugs_52 = predicted_drugs[predicted_drugs$combined_z_score > 0,]
-moas_drugs = merge(predicted_drugs_52, moas_info, by.x = "drug_name", by.y = "pert_iname", all.x = TRUE)
-moas_drugs_collapsed <- moas_drugs %>%
-  group_by(moa) %>%
-  summarise(
-    drugs = paste(unique(drug_name), collapse = ", "),
-    .groups = "drop"
-  )
-
-#count_moa_drugs = moas_drugs %>% dplyr::count(moa, sort = TRUE)
-#write_tsv(count_moa_drugs, here("figures/moas_count_52_drugs.tsv"))
+```{r}
 moa_novel = read_tsv(here("figures/moas_count_52_drugs.tsv"))
-
-merged_drug_moa_novel = merge(moa_novel, moas_drugs_collapsed, by='moa', all.x = TRUE)
-merged_drug_moa_novel <- merged_drug_moa_novel %>% arrange(desc(n)) %>%
-  relocate(drugs, .after = 1)
-write_tsv(merged_drug_moa_novel, here("figures/figureSX_novel_drugs_moas.tsv"))
 ```
 
 ```{r plot moa novelty freq}
