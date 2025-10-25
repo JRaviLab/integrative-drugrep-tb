@@ -1,0 +1,7 @@
+series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num
+GSE112482	GSE112482_MTB_control_lung_ILC1	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	0	0	0
+GSE112482	GSE112482_MTB_control_lung_ILC2	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	0	0	0
+GSE112482	GSE112482_MTB_control_lung_ILC3neg	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
+GSE112482	GSE112482_MTB_control_lung_ILC3pos	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	15	0
+GSE112482	GSE112482_MTB_control_lung_NK	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	0	0	0
+GSE112482	GSE112482_MTB_control_lung_susp	data/v2/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	0	0	0
