@@ -75,6 +75,11 @@ make_expression_matrix <- function(tbl) {
   mat
 }
 
+# global variables
+landmark_genes_df <- read_tsv(here("data/metadata/LINCSGeneSpaceSub.txt"))
+landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == "landmark", ]$`Entrez ID`)
+
+
 # 3.  Main loop
 for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
@@ -202,13 +207,10 @@ for (i in seq_len(nrow(study_df))) {
   }
 
   # ---- 3.9  Write outputs ----
-  dir.create(here("data/DE_results/RNAseq"), showWarnings = FALSE)
+  dir.create(here("data/DE_results/RNAseq"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
-
-  landmark_genes_df <- read_tsv(here("data/LINCSGeneSpaceSub.txt"))
-  landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == "landmark", ]$`Entrez ID`)
 
   today <- format(Sys.Date(), "%Y%m%d")
   base_fname <- study_df$SIGNATURE_NAME[i]
