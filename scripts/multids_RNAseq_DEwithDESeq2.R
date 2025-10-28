@@ -54,21 +54,19 @@ if (length(argv) < 1) {
 meta_class_file_path <- argv[1]
 padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
-#########------------ Example arguments ------------#########
+######### ------------ Example arguments ------------#########
+
 # meta_class_file_path <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
 # padj_cutoff <- 0.05
-# --------------------------------------------------------------------
+
 # 1.  Read the batch table
-# --------------------------------------------------------------------
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
 study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
 signature_boolean <- logical(nrow(study_df))
 up_genes_num <- integer(nrow(study_df))
 dn_genes_num <- integer(nrow(study_df))
 
-# --------------------------------------------------------------------
 # 2.  Helper to coerce expression table to integer matrix
-# --------------------------------------------------------------------
 make_expression_matrix <- function(tbl) {
   rn <- tbl[[1]]
   mat <- as.matrix(tbl[-1])
@@ -77,33 +75,37 @@ make_expression_matrix <- function(tbl) {
   mat
 }
 
-# --------------------------------------------------------------------
+# global variables
+landmark_genes_df <- read_tsv(here("data/metadata/LINCSGeneSpaceSub.txt"))
+landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == "landmark", ]$`Entrez ID`)
+
+
 # 3.  Main loop
-# --------------------------------------------------------------------
 for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
 
   tag <- study_df$series_id[i]
   expr_path <- study_df$EXPRMAT_PATH[i]
 
+  # get the current signature for this loop iteration
+  current_signature <- study_df$SIGNATURE_NAME[i]
+  message("  Study: ", tag, " | Signature: ", current_signature)
+
+
   # ---- 3.1  Load inputs ----
-  metadata <- meta_class_df
+  # filter metadata for *both* study AND signature
+  metadata <- meta_class_df %>%
+    filter(series_id == tag, SIGNATURE_NAME == current_signature) %>% # filters samples by signature
+    mutate(geo_accession = trimws(toupper(geo_accession))) # Standardize IDs
+
   expr_tbl <- read_tsv(here(expr_path), show_col_types = FALSE)
   expr_mat <- make_expression_matrix(expr_tbl)
 
   # Standardise GSM IDs: trim whitespace and set to upper‑case
   colnames(expr_mat) <- trimws(toupper(colnames(expr_mat)))
-  metadata$series_id <- trimws(toupper(metadata$series_id))
-
-  # ---- 3.1b  Pull in the classification column from args_df ----
-  class_df <- meta_class_df %>%
-    filter(series_id == tag) %>% # rows for this dataset
-    mutate(geo_accession = trimws(toupper(geo_accession))) # normalise case/space
-  # here we need a column for condition so that we can focus on case and control in the next step
-  class_df <- dplyr::select(class_df, geo_accession, CLASSIFICATION) # using the classification column here
-
-  # ---- 3.2  Attach classification and ensure matched GSMs ----
+  # 3.2  Attach classification and ensure matched GSMs
   # Keep only GSMs present in *both* metadata and matrix
+  # This line is now correct because 'metadata' is the filtered subset
   common_ids <- intersect(metadata$geo_accession, colnames(expr_mat))
 
   if (length(common_ids) < 4) {
@@ -116,7 +118,7 @@ for (i in seq_len(nrow(study_df))) {
   metadata <- metadata[match(common_ids, metadata$geo_accession), ]
   expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
-  # ---- 3.3  Build the condition factor (now classification exists!) ----
+  # 3.3  Build the condition factor (now classification exists!)
   metadata <- metadata %>%
     mutate(condition = dplyr::case_when(
       CLASSIFICATION == "disease without treatment" ~ "disease",
@@ -133,8 +135,8 @@ for (i in seq_len(nrow(study_df))) {
   }
 
   # Check for missing rownames
-  sum(is.na(rownames(expr_mat)))         # Should be 0
-  sum(rownames(expr_mat) == "")          # Should also be 0
+  sum(is.na(rownames(expr_mat))) # Should be 0
+  sum(rownames(expr_mat) == "") # Should also be 0
 
   # Drop rows with NA in rownames
   expr_mat <- expr_mat[!is.na(rownames(expr_mat)), ]
@@ -178,7 +180,7 @@ for (i in seq_len(nrow(study_df))) {
     dplyr::rename(Symbol = EnsemblID) %>%
     dplyr::filter(!is.na(EntrezID))
   # rename to uniform column names
-  colnames(res_df) <- c("Ensembl", "baseMean", "log2FoldChange",	"lfcSE", "stat", "P.Value",	"adj.P.Val",	"GeneID",	"Symbol")
+  colnames(res_df) <- c("Ensembl", "baseMean", "log2FoldChange", "lfcSE", "stat", "P.Value", "adj.P.Val", "GeneID", "Symbol")
 
   # ---- 3.6  Landmark genes filter ----
   sig_df <- dplyr::filter(res_df, GeneID %in% landmark_genes)
@@ -196,22 +198,19 @@ for (i in seq_len(nrow(study_df))) {
   up_df <- dplyr::filter(sig_df, log2FoldChange > 0)
   dn_df <- dplyr::filter(sig_df, log2FoldChange < 0)
 
-  if(nrow(up_df) > 0){
+  if (nrow(up_df) > 0) {
     up_genes_num[i] <- nrow(up_df)
   }
 
-  if(nrow(dn_df) > 0){
+  if (nrow(dn_df) > 0) {
     dn_genes_num[i] <- nrow(dn_df)
   }
 
   # ---- 3.9  Write outputs ----
-  dir.create(here("data/DE_results/RNAseq"), showWarnings = FALSE)
+  dir.create(here("data/DE_results/RNAseq"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
-
-  landmark_genes_df <- read_tsv(here("data/LINCSGeneSpaceSub.txt"))
-  landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == 'landmark',]$`Entrez ID`)
 
   today <- format(Sys.Date(), "%Y%m%d")
   base_fname <- study_df$SIGNATURE_NAME[i]
@@ -222,11 +221,11 @@ for (i in seq_len(nrow(study_df))) {
       file.path(here::here("data/DE_results/RNAseq"), paste0(base_fname, "_DESeq2.tsv"))
     )
   }
-  if (nrow(sig_df) > 0){
-  readr::write_tsv(
-    sig_df %>% arrange(desc(log2FoldChange)),
-    file.path(here("data/signatures/RNAseq/full"), paste0(base_fname, "_full.tsv"))
-  )
+  if (nrow(sig_df) > 0) {
+    readr::write_tsv(
+      sig_df %>% arrange(desc(log2FoldChange)),
+      file.path(here("data/signatures/RNAseq/full"), paste0(base_fname, "_full.tsv"))
+    )
   }
   if (nrow(up_df) > 0) {
     readr::write_tsv(
@@ -249,9 +248,7 @@ for (i in seq_len(nrow(study_df))) {
   signature_boolean[i] <- TRUE
 }
 
-# --------------------------------------------------------------------
 # 4.  Run summary
-# --------------------------------------------------------------------
 study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
@@ -262,4 +259,3 @@ run_info <- file.path(
 )
 readr::write_tsv(study_df, run_info)
 message("\nFinished.  Summary written to ", run_info)
-
