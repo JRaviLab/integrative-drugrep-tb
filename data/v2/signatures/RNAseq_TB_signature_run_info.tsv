@@ -2,17 +2,14 @@ series_id	 SIGNATURE_NAME                                          	 	 signature
 GSE84076 	 GSE84076_MTB_control_blood                              	 	         1	           17	            6
 GSE148171	 GSE148171_MTB_control_blood_PBMC                        	 	         1	          211	           28
 GSE198557	 GSE198557_MTB_control_blood_PBMC                        	 	         1	          252	           28
-
 GSE112482	 GSE112482_MTB_control_lung_ILC1                         	 	         1	            1	            2
 GSE112482	 GSE112482_MTB_control_lung_ILC2                         	 	         1	            1	            2
 GSE112482	 GSE112482_MTB_control_lung_ILC3neg                      	 	         1	            1	            2
 GSE112482	 GSE112482_MTB_control_lung_ILC3pos                      	 	         1	            1	            2
 GSE112482	 GSE112482_MTB_control_lung_NK                           	 	         1	            1	            2
 GSE112482	 GSE112482_MTB_control_lung_susp                         	 	         1	            1	            2
-
 GSE236156	 GSE236156_MTB_control_BALF_alveolar_macrophage          	 	         1	           98	           83
 GSE236156	 GSE236156_MTB_control_blood_monocyte_derived_macrophage 	 	         1	           98	           83
-
 GSE112483	 GSE112483_MTB_control_lung_AM                           	 	         0	            0	            0
 GSE112483	 GSE112483_MTB_control_lung_endo                         	 	         0	            0	            0
 GSE112483	 GSE112483_MTB_control_lung_gd                           	 	         0	            0	            0
@@ -20,7 +17,6 @@ GSE112483	 GSE112483_MTB_control_lung_mait                         	 	         0
 GSE112483	 GSE112483_MTB_control_lung_NK                           	 	         0	            0	            0
 GSE112483	 GSE112483_MTB_control_lung_NKT                          	 	         0	            0	            0
 GSE112483	 GSE112483_MTB_control_lung_epi                          	 	         0	            0	            0
-
 GSE132283	 GSE132283_MTB_control_blood_macrophage                  	 	         1	          165	           31
 GSE143627	 GSE143627_MTB_control_PBMC_macrophage                   	 	         1	           97	           81
 GSE148731	 GSE148731_MTB_control_blood_monocytes                   	 	         1	          206	           89
