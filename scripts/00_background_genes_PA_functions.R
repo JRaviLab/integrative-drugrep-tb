@@ -1,7 +1,8 @@
-# functions to obtain background genes for Pathway analyses and suchs -- Homo Sapiens
-# created date: 07/21/22
-# last modified: 04/11/23
+# functions to obtain background genes for Pathway analyses -- Homo Sapiens
+# last modified: 10/28/25
 # Kewalin Samart
+
+library(tidyverse)
 
 GO_genes <- function(){
   #' @description this function returns all human gene ids present in the GO db
@@ -35,7 +36,7 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   #' @returns bg_lincs_genes a character vector of the selected LINCS GeneID
   #' @author Kewalin Samart
 
-  lincs_genes <- read.delim("../data/metadata/LINCSGeneSpaceSub.txt", sep="\t")
+  lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep="\t")
 
   if(GeneType=="reference"){ # all genes in LINCS
     selected_lincs_genes <- lincs_genes$`Entrez.ID`
@@ -112,4 +113,46 @@ final_bg_genes <- function(gene_set, bg_source, GeneType=NULL){
   final_bg_genes = intersect(as.character(gene_set), bg_genes)
 
   return(final_bg_genes)
+}
+
+get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
+                                  metadata_path_microarray, data_path_microarray,
+                                  direction, GO_genes_vector, combine) {
+  #' @param metadata_path_rnaseq: metadata tsv for RNAseq
+  #' @param data_path_rnaseq: path to DE results for RNAseq
+  #' @param metadata_path_microarray: metadata tsv for microarray
+  #' @param data_path_microarray: path to DE results for microarray
+  #' @param direction: "up" or "dn"
+  #' @param GO_genes_vector: vector of GO-annotated gene IDs
+
+  extension_rnaseq <- paste0("_",direction, ".tsv")
+  extension_microarray <- paste0("_",direction, ".tsv")
+
+  # RNAseq background
+  bg_genes_rnaseq_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_rnaseq,
+    data_path = paste0(data_path_rnaseq,"/",direction),
+    extension = extension_rnaseq
+  )
+  bg_genes_rnaseq <- intersect(bg_genes_rnaseq_raw, GO_genes_vector)
+
+  # Microarray background
+  bg_genes_microarray_raw <- get_bg_genes(
+    bg_source = "input data",
+    metadata_path = metadata_path_microarray,
+    data_path = paste0(data_path_microarray,"/",direction),
+    extension = extension_microarray
+  )
+  bg_genes_microarray <- intersect(bg_genes_microarray_raw, GO_genes_vector)
+
+  if(combine == "intersect"){
+    # Combine across technologies (intersection)
+    bg_genes_combined <- intersect(bg_genes_rnaseq, bg_genes_microarray)
+  }else if(combine == "union"){
+    bg_genes_combined <- union(bg_genes_rnaseq, bg_genes_microarray)
+  }
+
+
+  return(bg_genes_combined)
 }
