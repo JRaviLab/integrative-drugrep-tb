@@ -246,7 +246,9 @@ for (i in 1:nrow(study_df)) {
     nrow(dn_df), " down‑regulated genes"
   )
 
-  signature_boolean[i] <- TRUE
+  if (nrow(up_df) > 0 && (nrow(dn_df) > 0)){
+    signature_boolean[i] <- TRUE
+  }
 }
 
 # 4.  Run summary
