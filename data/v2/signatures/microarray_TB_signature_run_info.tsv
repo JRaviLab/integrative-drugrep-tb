@@ -1,8 +1,8 @@
 series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num
-GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	data/v2/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	52	8
+GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	data/v2/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13
 GSE18794	GSE18794_GPL6244_MTB_Cpn60.1_control_2h_blood_monocytes	data/v2/microarray_data_forDE/expression_matrices/GSE18794.tsv	0	0	0
 GSE19491	GSE19491_GPL6947_PTB_control_blood_whole_blood	data/v2/microarray_data_forDE/expression_matrices/GSE19491.tsv	0	0	0
-GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	data/v2/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	51	43
+GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	data/v2/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237
 GSE39941	GSE39941_GPL10558_MTB_HIVneg_control_blood_whole_blood	data/v2/microarray_data_forDE/expression_matrices/GSE39941.tsv	0	0	0
 GSE39941	GSE39941_GPL10558_MTB_HIVpos_control_blood_whole_blood	data/v2/microarray_data_forDE/expression_matrices/GSE39941.tsv	0	0	0
 GSE42830	GSE42830_GPL10558_MTB_control_blood_whole_blood	data/v2/microarray_data_forDE/expression_matrices/GSE42830.tsv	0	0	0
@@ -12,10 +12,8 @@ GSE42834	GSE42834_GPL10558_MTB_control_blood_pbmc	data/v2/microarray_data_forDE/
 GSE42834	GSE42834_GPL10558_MTB_control_blood_cd8	data/v2/microarray_data_forDE/expression_matrices/GSE42834.tsv	0	0	0
 GSE42834	GSE42834_GPL10558_MTB_control_blood_cd15	data/v2/microarray_data_forDE/expression_matrices/GSE42834.tsv	0	0	0
 GSE42834	GSE42834_GPL10558_MTB_control_blood_cd14	data/v2/microarray_data_forDE/expression_matrices/GSE42834.tsv	0	0	0
-GSE57028	GSE57028_GPL16686_MTB_control_1d_thp1	data/v2/microarray_data_forDE/expression_matrices/GSE57028.tsv	0	0	0
-GSE57028	GSE57028_GPL16686_MTB_control_0w_thp1	data/v2/microarray_data_forDE/expression_matrices/GSE57028.tsv	0	0	0
-GSE63548	GSE63548_GPL10558_LNTB_control_lymphnode_lymphnode	data/v2/microarray_data_forDE/expression_matrices/GSE63548.tsv	1	79	55
-GSE83456	GSE83456_GPL10558_EPTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	59	75
-GSE83456	GSE83456_GPL10558_PTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	59	75
+GSE63548	GSE63548_GPL10558_LNTB_control_lymphnode_lymphnode	data/v2/microarray_data_forDE/expression_matrices/GSE63548.tsv	1	108	104
+GSE83456	GSE83456_GPL10558_EPTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	44	38
+GSE83456	GSE83456_GPL10558_PTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	54	91
 GSE119143	GSE119143_GPL17586_MTB_control_blood_pbmc	data/v2/microarray_data_forDE/expression_matrices/GSE119143.tsv	0	0	0
-GSE139871	GSE139871_GPL10558_MTB_control_blood_monocyte	data/v2/microarray_data_forDE/expression_matrices/GSE139871.tsv	1	15	24
+GSE139871	GSE139871_GPL10558_MTB_control_blood_monocyte	data/v2/microarray_data_forDE/expression_matrices/GSE139871.tsv	1	11	32
