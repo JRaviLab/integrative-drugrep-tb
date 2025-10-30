@@ -2,7 +2,7 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 07/15/25 - LT
+# last modified: 10/29/25 - KS
 # author: Kewalin Samart
 
 library(limma)
@@ -32,7 +32,7 @@ if (length(args) < 2) {
 # read in argument file
 meta_class_file_path <- args[1]
 padj_cutoff <- ifelse(length(args) >= 2, as.numeric(args[2]), 0.05) # default 0.05
-lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
+lincs_genes <- read.delim(here("data/v2/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
 
 signature_boolean <- list()
 platform_list <- list()
@@ -135,12 +135,12 @@ for (i in 1:nrow(study_df)) {
 
   ## add gene annotations
   # get gene annotation table
-  annot_path <- paste0(here("data/metadata/Homo_sapiens.gene_info.csv"))
-  annotdata <- read.delim(annot_path, sep = ",") # GeneID, Symbol, Ensembl
+  annot_path <- paste0(here("data/v2/metadata/Homo_sapiens.gene_info.tsv"))
+  annotdata <- read.delim(annot_path, sep = "\t") # GeneID, Symbol, Ensembl
   entrezids <- stats_df$Gene
   annotdata_subset <- annotdata %>% filter(as.character(annotdata$GeneID) %in% entrezids)
   annotdata_subset <- annotdata_subset[, c("GeneID", "Symbol", "Ensembl")]
-  res_df <- merge(stats_df, annotdata_subset, by.x = "Gene", by.y = "GeneID", all.x = TRUE, all.y = FALSE)
+  res_df <- merge(stats_df, annotdata_subset, by.x = "Gene", by.y = "Ensembl", all.x = TRUE, all.y = FALSE)
 
   # add mean expression values
   group_means <- as.data.frame(fit$coefficients) %>%
