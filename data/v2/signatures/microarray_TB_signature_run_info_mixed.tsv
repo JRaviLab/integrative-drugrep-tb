@@ -1,7 +1,0 @@
-series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num
-GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	data/v2/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	52	8
-GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	data/v2/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	51	43
-GSE63548	GSE63548_GPL10558_LNTB_control_lymphnode_lymphnode	data/v2/microarray_data_forDE/expression_matrices/GSE63548.tsv	1	79	55
-GSE83456	GSE83456_GPL10558_EPTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	59	75
-GSE83456	GSE83456_GPL10558_PTB_control_blood	data/v2/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	59	75
-GSE139871	GSE139871_GPL10558_MTB_control_blood_monocyte	data/v2/microarray_data_forDE/expression_matrices/GSE139871.tsv	1	15	24

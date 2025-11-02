@@ -1,9 +1,0 @@
-series_id	SIGNATURE_NAME	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num
-GSE112482	GSE112482_MTB_control_lung_ILC1	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE112482	GSE112482_MTB_control_lung_ILC2	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE112482	GSE112482_MTB_control_lung_ILC3neg	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE112482	GSE112482_MTB_control_lung_ILC3pos	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE112482	GSE112482_MTB_control_lung_NK	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE112482	GSE112482_MTB_control_lung_susp	data/RNAseq_data_forDE/expression_matrices/GSE112482.tsv	1	1	2
-GSE165708	GSE165708_MTB_control_BAL_bronchoalveolar_lavage	data/RNAseq_data_forDE/expression_matrices/GSE165708.tsv	1	23	1
-GSE236156	GSE236156_MTB_control_BALF_alveolar_macrophage	data/RNAseq_data_forDE/expression_matrices/GSE236156.tsv	1	98	83
