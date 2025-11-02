@@ -1,6 +1,6 @@
 # functions for aggregating multiple gene signatures
 # created date: 09/22/23
-# last modified: 06/13/25
+# last modified: 11/02/25
 # Kewalin Samart
 
 # import bg functions
@@ -67,6 +67,7 @@ compute_membership_matrix <- function(metadata_path,
   print(paste0("Number of background genes: ", length(bg_genes)))
 
   data_to_run <- read_tsv(metadata_path)
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
 
   for (i in 1:nrow(data_to_run)) {
     print(paste0("iteration ", i))
@@ -148,6 +149,7 @@ compute_jaccard_matrix <- function(metadata_path,
 
   # get data_to_run df
   data_to_run <- read_tsv(metadata_path)
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
 
   # initialize empty vectors for storage
   vec <- c()
