@@ -14,12 +14,12 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ##### Initialize arguments
 ```{r}
 # example argument
-metadata_path = here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
-data_path = here("data/v2/signatures/microarray")
+metadata_path = here("data/signatures/microarray_TB_signature_run_info.tsv")
+data_path = here("data/signatures/microarray")
 direction = "up"
 bg_source = "LINCS" # L1000 genes
 extra_arg= "landmark"
-output_dir = here("data/v2/signatures/microarray/aggregated_signatures")
+output_dir = here("data/signatures/microarray/aggregated_signatures")
 threshold_pct <- 0.90
 ```
 
@@ -55,9 +55,9 @@ threshold_pct <- 0.90
 for(technology in technologies){
   for(direction in directions){
     # set up paths
-    metadata_path = here(paste0("data/v2/signatures/",technology,"_TB_signature_run_info.tsv"))
-    data_path = here(paste0("data/v2/signatures/",technology))
-    output_dir = here(paste0("data/v2/signatures/",technology,"/aggregated_signatures"))
+    metadata_path = here(paste0("data/signatures/",technology,"_TB_signature_run_info.tsv"))
+    data_path = here(paste0("data/signatures/",technology))
+    output_dir = here(paste0("data/signatures/",technology,"/aggregated_signatures"))
     
     # get gene membership matrix and save it
     gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
