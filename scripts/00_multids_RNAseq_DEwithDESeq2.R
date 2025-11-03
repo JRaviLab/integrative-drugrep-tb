@@ -37,9 +37,7 @@ suppressPackageStartupMessages({
   library(here)
 })
 
-# --------------------------------------------------------------------
 # 0.  Parse command‑line arguments
-# --------------------------------------------------------------------
 argv <- commandArgs(trailingOnly = TRUE)
 
 if (length(argv) < 1) {
@@ -51,13 +49,13 @@ if (length(argv) < 1) {
   ")
 }
 
-meta_class_file_path <- argv[1]
-padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
-
 ######### ------------ Example arguments ------------#########
 
-# meta_class_file_path <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
-# padj_cutoff <- 0.05
+# argv[1] <- here("data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv")
+# argv[2] <- 0.05
+
+meta_class_file_path <- argv[1]
+padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
 # 1.  Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
@@ -208,6 +206,8 @@ for (i in seq_len(nrow(study_df))) {
 
   # ---- 3.9  Write outputs ----
   dir.create(here("data/DE_results/RNAseq"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/DE_results/RNAseq/up"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
+  dir.create(here("data/DE_results/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
   dir.create(here("data/signatures/RNAseq/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
@@ -219,6 +219,20 @@ for (i in seq_len(nrow(study_df))) {
       res_df %>%
         dplyr::arrange(dplyr::desc(log2FoldChange)),
       file.path(here::here("data/DE_results/RNAseq"), paste0(base_fname, "_DESeq2.tsv"))
+    )
+    # get DE results with positive logFC
+    res_df_up <- res_df[res_df$log2FoldChange > 0,]
+    readr::write_tsv(
+      res_df_up %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/RNAseq/up"), paste0(base_fname, "_up.tsv"))
+    )
+    # get DE results with negative logFC
+    res_df_dn <- res_df[res_df$log2FoldChange < 0,]
+    readr::write_tsv(
+      res_df_dn %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/RNAseq/dn"), paste0(base_fname, "_dn.tsv"))
     )
   }
   if (nrow(sig_df) > 0) {
@@ -258,7 +272,7 @@ study_df$dn_genes_num <- as.integer(dn_genes_num)
 
 run_info <- file.path(
   here("data/signatures"),
-  paste0("signature_run_info_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
+  paste0("RNAseq_TB_signature_run_info.tsv")
 )
 readr::write_tsv(study_df, run_info)
 message("\nFinished.  Summary written to ", run_info)

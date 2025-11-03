@@ -36,8 +36,8 @@ head(LINCS_genes_bg)
 ##### **Get background genes from data**
 
 ```{r}
-metadata_path <- here("data/v2/signatures/RNAseq_TB_signature_run_info_mixed.tsv")
-data_path <- here("data/v2/DE_results/RNAseq/up")
+metadata_path <- here("data/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path <- here("data/DE_results/RNAseq/up")
 extension <- "_up.tsv"
 data_genes_bg <- bg_from_data(metadata_path = metadata_path, data_path = data_path, extension = extension)
 head(data_genes_bg)
@@ -71,11 +71,11 @@ tryCatch(
 #### **Get combined background genes from microarray and RNAseq intersecting with genes annotated to GO ontology**
 
 ```{r define arguments}
-metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info_mixed.tsv")
-data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+metadata_path_rnaseq <- here("data/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/DE_results/RNAseq")
 
-metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info_mixed.tsv")
-data_path_microarray <- here("data/v2/DE_results/microarray")
+metadata_path_microarray <- here("data/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/DE_results/microarray")
 
 GO_genes_vector <- GO_genes()
 ```

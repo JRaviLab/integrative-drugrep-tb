@@ -2,7 +2,7 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 10/29/25 - KS
+# last modified: 11/02/25 - KS modified LT's edits
 # author: Kewalin Samart
 
 library(limma)
@@ -12,11 +12,8 @@ library(readr)
 library(stringr)
 library(here)
 
-## set up arguments
+# 0.  Parse command‑line arguments
 args <- commandArgs(TRUE)
-
-# args[1] <- "data/v2/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv"
-# args[2] <- 0.05
 
 # --- Check for args ---
 if (length(args) < 2) {
@@ -25,14 +22,18 @@ if (length(args) < 2) {
     Rscript microarray_DE_with_limma.R <metadata_file.tsv> <padj_cutoff>
 
   Example:
-    Rscript microarray_DE_with_limma.R data/v2/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
+    Rscript microarray_DE_with_limma.R data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
   ")
 }
+
+######### ------------ Example arguments ------------#########
+# args[1] <- here("data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv")
+# args[2] <- 0.05
 
 # read in argument file
 meta_class_file_path <- args[1]
 padj_cutoff <- ifelse(length(args) >= 2, as.numeric(args[2]), 0.05) # default 0.05
-lincs_genes <- read.delim(here("data/v2/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
+lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
 
 signature_boolean <- list()
 platform_list <- list()
@@ -135,7 +136,7 @@ for (i in 1:nrow(study_df)) {
 
   ## add gene annotations
   # get gene annotation table
-  annot_path <- paste0(here("data/v2/metadata/Homo_sapiens.gene_info.tsv"))
+  annot_path <- paste0(here("data/metadata/Homo_sapiens.gene_info_DE.tsv"))
   annotdata <- read.delim(annot_path, sep = "\t") # GeneID, Symbol, Ensembl
   entrezids <- stats_df$Gene
   annotdata_subset <- annotdata %>% filter(as.character(annotdata$GeneID) %in% entrezids)
@@ -209,35 +210,51 @@ for (i in 1:nrow(study_df)) {
   base_fname <- study_df$SIGNATURE_NAME[i]
 
   # Create output directories (added this for safety)
-  dir.create(here("data/v2/DE_results/microarray"), recursive = TRUE, showWarnings = FALSE)
-  dir.create(here("data/v2/signatures/microarray/full"), recursive = TRUE, showWarnings = FALSE)
-  dir.create(here("data/v2/signatures/microarray/up"), recursive = TRUE, showWarnings = FALSE)
-  dir.create(here("data/v2/signatures/microarray/dn"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/DE_results/microarray"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/DE_results/microarray/up"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
+  dir.create(here("data/DE_results/microarray/dn"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
+  dir.create(here("data/signatures/microarray/full"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/signatures/microarray/up"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/signatures/microarray/dn"), recursive = TRUE, showWarnings = FALSE)
 
 
   if (nrow(res_df) > 0) {
     readr::write_tsv(
       res_df %>%
         dplyr::arrange(dplyr::desc(log2FoldChange)),
-      file.path(here::here("data/v2/DE_results/microarray"), paste0(base_fname, "_limma.tsv"))
+      file.path(here::here("data/DE_results/microarray"), paste0(base_fname, "_limma.tsv"))
+    )
+    # get DE results with positive logFC
+    res_df_up <- dplyr::filter(res_df, log2FoldChange > 0)
+    readr::write_tsv(
+      res_df_up %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/microarray/up"), paste0(base_fname, "_up.tsv"))
+    )
+    # get DE results with negative logFC
+    res_df_dn <- dplyr::filter(res_df, log2FoldChange < 0)
+    readr::write_tsv(
+      res_df_dn %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/microarray/dn"), paste0(base_fname, "_dn.tsv"))
     )
   }
   if (nrow(sig_df) > 0) {
     readr::write_tsv(
       sig_df %>% arrange(desc(log2FoldChange)),
-      file.path(here("data/v2/signatures/microarray/full"), paste0(base_fname, "_full.tsv"))
+      file.path(here("data/signatures/microarray/full"), paste0(base_fname, "_full.tsv"))
     )
   }
   if (nrow(up_df) > 0) {
     readr::write_tsv(
       up_df %>% arrange(desc(log2FoldChange)),
-      file.path(here("data/v2/signatures/microarray/up"), paste0(base_fname, "_up.tsv"))
+      file.path(here("data/signatures/microarray/up"), paste0(base_fname, "_up.tsv"))
     )
   }
   if (nrow(dn_df) > 0) {
     readr::write_tsv(
       dn_df %>% arrange(desc(log2FoldChange)),
-      file.path(here("data/v2/signatures/microarray/dn"), paste0(base_fname, "_dn.tsv"))
+      file.path(here("data/signatures/microarray/dn"), paste0(base_fname, "_dn.tsv"))
     )
   }
 
@@ -257,7 +274,7 @@ study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
 
 run_info <- file.path(
-  here("data/v2/signatures"),
+  here("data/signatures"),
   paste0("microarray_TB_signature_run_info.tsv")
 )
 readr::write_tsv(study_df, run_info)
