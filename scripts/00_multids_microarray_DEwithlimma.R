@@ -5,12 +5,16 @@
 # last modified: 11/02/25 - KS modified LT's edits
 # author: Kewalin Samart
 
-library(limma)
-library(magrittr)
-library(dplyr)
-library(readr)
-library(stringr)
-library(here)
+suppressPackageStartupMessages({
+  library(limma)
+  library(magrittr)
+  library(dplyr)
+  library(readr)
+  library(stringr)
+  library(here)
+  library(AnnotationDbi)
+  library(org.Hs.eg.db)
+})
 
 # 0.  Parse command‑line arguments
 args <- commandArgs(TRUE)
@@ -136,12 +140,12 @@ for (i in 1:nrow(study_df)) {
 
   ## add gene annotations
   # get gene annotation table
-  annot_path <- paste0(here("data/metadata/Homo_sapiens.gene_info_DE.tsv"))
+  annot_path <- paste0(here("data/metadata/Homo_sapiens.gene_info.tsv"))
   annotdata <- read.delim(annot_path, sep = "\t") # GeneID, Symbol, Ensembl
   entrezids <- stats_df$Gene
   annotdata_subset <- annotdata %>% filter(as.character(annotdata$GeneID) %in% entrezids)
   annotdata_subset <- annotdata_subset[, c("GeneID", "Symbol", "Ensembl")]
-  res_df <- merge(stats_df, annotdata_subset, by.x = "Gene", by.y = "Ensembl", all.x = TRUE, all.y = FALSE)
+  res_df <- merge(stats_df, annotdata_subset, by.x = "Gene", by.y = "GeneID", all.x = TRUE, all.y = FALSE)
 
   # add mean expression values
   group_means <- as.data.frame(fit$coefficients) %>%
@@ -150,9 +154,9 @@ for (i in 1:nrow(study_df)) {
   res_df <- merge(res_df, group_means, by = "Gene")
 
   # Select and rename columns for the final results table.
-  res_df <- res_df[, c("Gene", "Symbol", "logFC", "AveExpr", "t", "P.Value", "adj.P.Val", "infected", "control")]
+  res_df <- res_df[, c("Gene", "Symbol", "Ensembl", "logFC", "AveExpr", "t", "P.Value", "adj.P.Val", "infected", "control")]
   colnames(res_df)[1] <- "GeneID"
-  colnames(res_df)[3] <- "log2FoldChange"
+  colnames(res_df)[4] <- "log2FoldChange"
 
   # identify duplicated genes (EntrezID)
   duplicates_booleans <- duplicated(res_df$GeneID)
@@ -263,7 +267,7 @@ for (i in 1:nrow(study_df)) {
     nrow(dn_df), " down‑regulated genes"
   )
 
-  if (nrow(up_df) > 0 && (nrow(dn_df) > 0)){
+  if (nrow(up_df) > 0 && (nrow(dn_df) > 0)) {
     signature_boolean[i] <- TRUE
   }
 }
