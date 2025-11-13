@@ -1,5 +1,5 @@
-# Compute blood aggregated signatures from individual signatures
-# Last modified: 08/21/25
+# Compute tissue-specific aggregated signatures from individual signatures
+# Last modified: 11/13/25
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -16,111 +16,70 @@ source(here("scripts/01_signature_aggregation_functions.R"))
 ##### Initialize arguments
 ```{r}
 # example argument
-metadata_path = here("data/v2/signatures/RNASeq_TB_signature_run_info_mixed.tsv")
+metadata_path = here("data/signatures/microarray_TB_signature_run_info.tsv")
+data_path = here("data/DE_results/microarray")
 direction = "up"
-bg_source = "input data" # L1000 genes
-extra_arg= "_up.tsv"
-output_dir = here("data/v2/signatures/RNAseq/mixed_aggregated_signatures")
-threshold_pct <- 0.90
+bg_source = "input data" # all genes across datasets
+extension = paste0("_",direction,".tsv")
+output_dir = here("data/DE_results/microarray/circulating_aggregated_DE_signatures")
+threshold_pct = 0
+tissue_category = "circulating"
 ```
 
-```{r get background genes}
-data_path = here("data/v2/DE_results/RNASeq/up")
-all_genes <- character(0)
-
-data_to_run <- readr::read_tsv(metadata_path)
-data_to_run <- data_to_run[data_to_run$signature == 1,]
-
-for (i in seq_len(nrow(data_to_run))) {
-  file_name <- data_to_run$SIGNATURE_NAME[i]
-  file_path <- paste0(data_path,"/",file_name,"_up.tsv")
-
-  if (!file.exists(file_path)) next
-
-  dataset <- readr::read_tsv(file_path) %>% tidyr::drop_na()
-
-  all_genes <- c(all_genes, as.character(dataset$GeneID))
-}
-bg_genes = all_genes
-```
 ##### Compute membership matrix
 ```{r}
-require(tidyverse)
-require(dplyr)
-require(readr)
-data_path = here("data/v2/DE_results/RNAseq")
-
-# 1) Make a clean, unique background table (character IDs, no dups)
-bg_genes_df <- tibble(GeneID = unique(as.character(bg_genes)))
-stopifnot(anyDuplicated(bg_genes_df$GeneID) == 0)
-
-cat("Number of UNIQUE background genes:", nrow(bg_genes_df), "\n")
-
-data_to_run <- read_tsv(metadata_path, show_col_types = FALSE)
-
-# 2) Start the membership matrix with ONLY the background gene IDs
-membership <- bg_genes_df
-
-for (i in seq_len(nrow(data_to_run))) {
-  cat("iteration", i, "\n")
-
-  signature_name <- data_to_run$SIGNATURE_NAME[i]
-  signature_filename <- paste0(signature_name, "_", direction, ".tsv")
-  signature_path <- file.path(data_path, direction, signature_filename)
-
-  cat("reading:", signature_path, "\n")
-  if (!file.exists(signature_path)) next
-
-  gene_signature <- read.delim(signature_path, sep = "\t", stringsAsFactors = FALSE)
-
-  # 3) Ensure ONE row per GeneID in the signature, keep only the column we need
-  to_merge_logFC <- gene_signature %>%
-    mutate(GeneID = as.character(GeneID)) %>%
-    distinct(GeneID, .keep_all = TRUE) %>%
-    dplyr::select(GeneID, log2FoldChange)
-
-  # 4) Prepare a single-column frame named by the signature
-  sig_col <- to_merge_logFC
-  colnames(sig_col)[2] <- signature_name
-
-  # 5) LEFT JOIN onto the fixed background (no row growth)
-  membership <- membership %>%
-    left_join(sig_col, by = "GeneID")
-
-  # 6) Replace NA only in the newly added column (do NOT touch GeneID)
-  membership[is.na(membership)] <- 0
-
-  # 7) Safety checks every loop
-  stopifnot(anyDuplicated(membership$GeneID) == 0)
-  stopifnot(nrow(membership) == nrow(bg_genes_df))
-  cat("rows:", nrow(membership), "cols:", ncol(membership), "\n")
-}
-
-final_sigval <- membership
-
-# Reorder columns (GeneID first)
-final_sigval <- final_sigval %>%
-  relocate(GeneID)
-
-if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
-save_result = TRUE
-if (save_result) {
-  saveRDS(final_sigval, file = file.path(output_dir, paste0(direction, "_membership_mat.rds")))
-  write_tsv(final_sigval, file = file.path(output_dir, paste0(direction, "_membership_mat.tsv")))
-  cat("Saved to", output_dir, "\n")
-}
-
-gene_membership_matrix <- final_sigval
+gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_source = bg_source, 
+                          output_dir = output_dir, lincs_genetype = NULL, extension = extension, 
+                          tissue_category = tissue_category, sample_origin = NULL, save_result=TRUE)
 ```
 
 ##### Compute jaccard matrix
 ```{r}
 jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
                        direction = direction, output_dir = output_dir, 
-                       extra_arg = extra_arg, save_result=TRUE) 
+                       tissue_category = tissue_category, sample_origin = NULL, save_result=TRUE) 
 ```
 
 ##### Compute aggregated signature
 ```{r}
 aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+```
+
+##### Getting up/dn tissue-specific microarray/RNAseq signatures 
+##### Note: Both microarray and RNAseq only have >1 blood signtures; not enough lung RNAseq signatures for aggregation
+```{r}
+# set up parameters
+technologies = c("microarray", "RNAseq")
+directions = c("up","dn")
+bg_source = "input data" # all genes across datasets
+threshold_pct <- 0
+tissue_categories = c("circulating")
+
+for(technology in technologies){
+  for(tissue_category in tissue_categories){
+    for(direction in directions){
+      # set up paths
+      metadata_path = here(paste0("data/signatures/",technology,"_TB_signature_run_info.tsv"))
+      data_path = here(paste0("data/DE_results/",technology))
+      output_dir = here(paste0("data/DE_results/",technology,"/",tissue_category,"_","aggregated_DE_signatures"))
+      extension = paste0("_",direction,".tsv")
+    
+      # get gene membership matrix and save it
+      gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                            direction = direction, bg_source = bg_source, 
+                            output_dir = output_dir, lincs_genetype = NULL, extension = extension, 
+                            tissue_category = tissue_category, sample_origin = NULL, save_result=TRUE)
+    
+      # get jaccard matrix and save it
+      jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                        direction = direction, output_dir = output_dir, 
+                        tissue_category = tissue_category, sample_origin = NULL, save_result=TRUE) 
+    
+      # compute aggregates signature and save it
+      aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+    }
+  }
+}
+
 ```

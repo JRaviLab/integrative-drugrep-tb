@@ -37,9 +37,10 @@ head(LINCS_genes_bg)
 
 ```{r}
 metadata_path <- here("data/signatures/RNAseq_TB_signature_run_info.tsv")
-data_path <- here("data/DE_results/RNAseq/up")
-extension <- "_up.tsv"
-data_genes_bg <- bg_from_data(metadata_path = metadata_path, data_path = data_path, extension = extension)
+data_path <- here("data/DE_results/RNAseq")
+direction <- "up"
+extension <- paste0("_",direction,".tsv")
+data_genes_bg <- bg_from_data(metadata_path = metadata_path, data_path = data_path, direction = direction, extension = extension)
 head(data_genes_bg)
 ```
 
@@ -59,7 +60,7 @@ tryCatch(
 
 		cat("\nRUNNING ON INPUT DATA...")
 
-        bg_genes_INPUT <- get_bg_genes(bg_source = "input data", metadata_path = metadata_path, data_path = data_path, extension = extension)
+        bg_genes_INPUT <- get_bg_genes(bg_source = "input data", metadata_path = metadata_path, data_path = data_path, lincs_genetype=NULL, extension=extension, direction_input_data=direction)
         cat("Input data genes background size:", length(bg_genes_INPUT), "\n")
     },
     error = function(e) {
