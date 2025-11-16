@@ -51,13 +51,13 @@ if (length(argv) < 1) {
   ")
 }
 
-meta_class_file_path <- argv[1]
-padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
-
 ######### ------------ Example arguments ------------#########
 
-# meta_class_file_path <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
-# padj_cutoff <- 0.05
+# argv[1] <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
+# argv[2] <- 0.05
+
+meta_class_file_path <- argv[1]
+padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
 # 1.  Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
@@ -258,7 +258,7 @@ study_df$dn_genes_num <- as.integer(dn_genes_num)
 
 run_info <- file.path(
   here("data/signatures"),
-  paste0("signature_run_info_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
+  paste0("RNAseq_TB_signature_run_info.tsv")
 )
 readr::write_tsv(study_df, run_info)
 message("\nFinished.  Summary written to ", run_info)
