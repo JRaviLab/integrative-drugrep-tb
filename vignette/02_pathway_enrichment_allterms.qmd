@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 10/20/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures
+# Last modified: 11/15/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures | correct qvalue using propagated gene set size not what provided by clusterProfiler
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -17,6 +17,7 @@ library(org.Hs.eg.db)
 library(GO.db)
 library(jsonlite)
 library(tidyr)
+library(qvalue)
 source(here("scripts/00_background_genes_PA_functions.R"))
 ```
 
@@ -123,23 +124,12 @@ go_terms <- data.frame(
 #
 #------------------------------------------------------------------------------
 
-calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_genes, pathway_df) {
-  # ensure GeneRatio is numeric
-  enrichment_df$GeneRatio <- sapply(
-    as.character(enrichment_df$GeneRatio),
-    function(x) {
-      parts <- as.numeric(unlist(strsplit(x, "/")))
-      parts[1] / parts[2]
-    }
-  )
-  
-  # merge enrichment_df with pathway_df to get pathway_size and pathway_genes
-  enrichment_df <- merge(enrichment_df, pathway_df, by = "ID", all.x = TRUE)
+calculate_asinh_enrichment <- function(signature_gene_list, bg_genes, pathway_df) {
   
   # ensure pathway_genes column is list-type (if it's character, split it)
-  if (is.character(enrichment_df$pathway_genes)) {
-    enrichment_df$pathway_genes <- lapply(
-      enrichment_df$pathway_genes,
+  if (is.character(pathway_df$pathway_genes)) {
+    pathway_df$pathway_genes <- lapply(
+      pathway_df$pathway_genes,
       function(x) {
         x <- gsub("^c\\(|\\)$", "", x)  # remove c( and )
         x <- gsub('\"', "", x)          # remove double quotes
@@ -150,12 +140,12 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
   }
 
   # calculate observed as actual intersection between pathway genes and signature genes
-  enrichment_df$observed_val <- sapply(
-    enrichment_df$pathway_genes,
+  pathway_df$observed_val <- sapply(
+    pathway_df$pathway_genes,
     function(genes) length(intersect(genes, signature_gene_list))
   )
   
-  enrichment_df$pathway_genes <- sapply(enrichment_df$pathway_genes, function(x) {
+  pathway_df$pathway_genes <- sapply(pathway_df$pathway_genes, function(x) {
     # remove "c(", ")", and double quotes
     x <- gsub('^c\\(|\\)$', '', x)       # remove leading c( and trailing )
     x <- gsub('""', '', x)               # remove double double-quotes
@@ -165,12 +155,43 @@ calculate_asinh_enrichment <- function(enrichment_df, signature_gene_list, bg_ge
   })
   
   # expected = (|P| / |U|) * |S|
-  enrichment_df$expected_val <- (enrichment_df$pathway_size / length(bg_genes)) * length(signature_gene_list)
+  pathway_df$expected_val <- (pathway_df$pathway_size / length(bg_genes)) * length(signature_gene_list)
   
   # calculate log and asinh enrichment
-  enrichment_df$log_observed_expected <- log(enrichment_df$observed_val / enrichment_df$expected_val)
-  enrichment_df$asinh_observed_expected <- asinh(enrichment_df$observed_val / enrichment_df$expected_val)
+  pathway_df$log_observed_expected <- log(pathway_df$observed_val / pathway_df$expected_val)
+  pathway_df$asinh_observed_expected <- asinh(pathway_df$observed_val / pathway_df$expected_val)
   
+  # hypergeometric p-values
+  pathway_df$pvalue <- mapply(
+    function(k, M) {
+      N <- length(bg_genes)                 # universe size
+      n <- length(signature_gene_list)      # signature size
+
+      phyper(k - 1,         # k successes - 1
+             M,             # successes in universe
+             N - M,         # failures in universe
+             n,             # number drawn
+             lower.tail = FALSE)  # P(X >= k)
+    },
+    k = pathway_df$observed_val,
+    M = pathway_df$pathway_size
+  )
+  
+  return(enrichment_df)
+}
+
+
+compute_multiple_testing <- function(enrichment_df) {
+  # BH adjusted p-values
+  enrichment_df$p.adjust <- p.adjust(enrichment_df$pvalue, method = "BH")
+
+  # Storey q-values (same meaning as clusterProfiler qvalue column)
+  if (!requireNamespace("qvalue", quietly = TRUE)) {
+    stop("Please install the qvalue package: install.packages('qvalue') or BiocManager::install('qvalue')")
+  }
+
+  enrichment_df$qvalue <- qvalue::qvalue(enrichment_df$pvalue)$qvalues
+
   return(enrichment_df)
 }
 
@@ -184,11 +205,13 @@ pathway_df <- data.frame(
   pathway_genes = I(unname(json_propagated_genes)),
   stringsAsFactors = FALSE
 )
-# add pathway_size column if needed by your function
+# add pathway_size column
 pathway_df$pathway_size <- sapply(pathway_df$pathway_genes, length)
+# only select pathways with minimum gene set size of 5 genes and maximum of 200 genes
+pathway_df <- pathway_df[pathway_df$pathway_size >= 5 | pathway_df$pathway_size <= 200, ]
 ```
 
-###### Individual signatures
+###### Individual signatures | needs to be tested and copy over to aggredgated chunk
 ```{r}
 technologies <- c("microarray", "RNAseq")
 directions <- c("up", "dn")
@@ -243,58 +266,38 @@ for (technology in technologies) {
       # run ORA
       print(paste0("Getting enriched GO pathways for ", file))
 
-      enrichGO_res <- enrichGO(gene = gene_list,
-                               OrgDb = org.Hs.eg.db,
-                               readable = TRUE,
-                               ont = "BP",
-                               universe = bg_genes,
-                               pvalueCutoff = 1, # allows all pathways
-                               qvalueCutoff = 1, # allows all pathways
-                               minGSSize = 5,
-                               maxGSSize = 200)
-
-      enrichGO_res <- as.data.frame(enrichGO_res)
+      BP_terms <- go_terms$GO_ID
       
-      if (!is.null(enrichGO_res) && nrow(enrichGO_res) > 0) {
+      # only care about biological processes (BP)
+      pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
       
-        # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
-        enrichGO_res_corrected <- calculate_asinh_enrichment(
-          enrichment_df = enrichGO_res,
-          signature_gene_list = gene_list,
-          bg_genes = bg_genes,
-          pathway_df = pathway_df
-        )
+      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+      enrichGO_res <- calculate_asinh_enrichment(
+        signature_gene_list = gene_list,
+        bg_genes = bg_genes,
+        pathway_df = pathway_df_BP
+      )
+      # multiple-testing correction: add qvalue
+      enrichGO_res_corrected <- compute_multiple_testing(enrichGO_res)
         
-        # check if the universal bp terms are valid
-        print("All BP terms are valid?")
-        print(unique(enrichGO_res_corrected$Description %in% go_terms$Description))
+      # check if the universal bp terms are valid
+      print("All BP terms are valid?")
+      print(unique(enrichGO_res_corrected$Description %in% go_terms$Description))
         
-        # merge with all go terms
-        merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
-
-        # replace NAs with 0 enrichment
-        merged$pvalue[is.na(merged$pvalue)] <- 1
-        merged$p.adjust[is.na(merged$p.adjust)] <- 1
-        merged$qvalue[is.na(merged$qvalue)] <- 1
-        merged$geneID[is.na(merged$geneID)] <- ""
-        merged[is.na(merged)] <- 0  
-        print(paste0("Final dimension: ", paste(dim(merged), collapse = " x ")))
-        
-        # get significant BP terms and save into up,dn sets separately
-        if(direction == "up"){
-          up_significant_bps <- c(up_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
-        }else if(direction == "dn"){
-          dn_significant_bps <- c(dn_significant_bps, merged$Description[merged$pvalue < 0.05 & merged$qvalue < 0.1])
-        }
-        
-        # save results
-        base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
-        output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
-
-        write_tsv(merged, file = output_file)
-      }else{
-        message("No enriched GO terms, skipping")
+      # get significant BP terms and save into up,dn sets separately
+      if(direction == "up"){
+        up_significant_bps <- c(up_significant_bps, enrichGO_res_corrected$Description[merged$pvalue < 0.05 & enrichGO_res_corrected$qvalue < 0.1])
+      }else if(direction == "dn"){
+        dn_significant_bps <- c(dn_significant_bps, enrichGO_res_corrected$Description[merged$pvalue < 0.05 & enrichGO_res_corrected$qvalue < 0.1])
       }
+        
+      # save results
+      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+      output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
+
+      write_tsv(enrichGO_res_corrected, file = output_file)
+    }else{
+      message("No enriched GO terms, skipping")
     }
   }
 }
