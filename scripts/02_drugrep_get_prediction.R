@@ -1,6 +1,6 @@
 # script to compute connectivity scores and get drug results given input individual disease signatures
 # method choices: "LINCS", "CMAP", "Cor_spearman", "Cor_pearson"
-# last modified: 07/15/25
+# last modified: 11/17/25
 # Kewalin Samart
 library(here)
 
@@ -10,24 +10,17 @@ source(here("scripts/02_signatureSearch_connectivity_scores_functions.R"))
 
 # set up arguments
 args <- commandArgs(TRUE)
-sig_metadata_path <- args[1] # e.g. "./inputs/TB_microarray_args.tsv"
-sig_data_path <- args[2] # e.g., "./data/uniformly_processed/microarray/signatures/"
+sig_metadata_path <- args[1] # e.g. "data/signatures/RNASeq_TB_signature_run_info.tsv"
+sig_data_path <- args[2] # e.g., "data/signatures/RNAseq"
 drugdb_name <- args[3] # "LINCS", "CMAP"
 score_method <- args[4] # "LINCS", "CMAP", "Cor_spearman", "Cor_pearson"
-output_dir <- args[5] # e.g., "./results/uniformly_processed/microarray/LINCS/"
-bg_source <- args[6] # name of the source for background genes to use: "LINCS", "KEGG", "GO", "input data"
-platform <- args[7] # "microarray" or "RNAseq"
-threshold <- args[8] # aggregated gene score cutoff; 0.4 by default
-extra_arg <- args[9] # extra argument; optional if "LINCS" is specified for bg_source; could be one of the options below or a combination of them as a single string with comma:
-# (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference" for examples: "landmark" or "landmark,inffered,best inferred"
-# if "input data" is specified for bg_source, this arg could be one of the followings: "up", "dn", "full", and "" (by default)
+output_dir <- args[5] # e.g., "results/RNAseq/LINCS"
 
-sig_metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
-sig_data_path <- "data/v2/signatures/microarray"
+sig_metadata_path <- "data/signatures/RNASeq_TB_signature_run_info.tsv"
+sig_data_path <- "data/signatures/RNAseq"
 drugdb_name <- "LINCS"
-output_dir <- "results/microarray/Cor_pearson"
-score_method <- "Cor_pearson"
-
+score_method <- "LINCS"
+output_dir <- "results/RNAseq/LINCS"
 
 # read in metadata file
 data_to_run <- read.delim(here(sig_metadata_path), sep = "\t")
@@ -82,6 +75,10 @@ for (i in 1:nrow(data_to_run)) {
         final_res <- compute_CMap2lincs_scores(up_genes, dn_genes, db_path)
     } else if (score_method %in% c("Cor_spearman", "Cor_pearson")) {
         final_res <- compute_Cor_based_scores(full_signature_matrix, score_method, db_path)
+    }
+
+    if (!dir.exists(here(output_dir))) {
+      dir.create(here(output_dir), recursive = TRUE)
     }
 
     write_tsv(final_res, file = here(paste0(output_dir, "/", score_method, "_", file_name, ".tsv")))
