@@ -12,7 +12,7 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 
 rank_drugs_by_connectivity <- function(technologies = c("microarray", "RNAseq"),
                                        scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson"),
-                                       run_info_dir = "data/v2/signatures",
+                                       run_info_dir = "data/signatures",
                                        results_dir = "results") {
   require(tidyverse)
   require(here)
@@ -46,14 +46,14 @@ rank_drugs_by_connectivity <- function(technologies = c("microarray", "RNAseq"),
                              "Cor_pearson" = "cor_score")
 
       min_score_df <- combined_drug_df %>%
-        select(unique_pert = pert, cell, score = !!sym(score_column)) %>%
+        dplyr::select(unique_pert = pert, cell, score = !!sym(score_column)) %>%
         group_by(unique_pert, cell) %>%
         summarise(median_score = median(score, na.rm = TRUE), .groups = "drop") %>%
         group_by(unique_pert) %>%
         filter(median_score == min(median_score, na.rm = TRUE)) %>%
-        slice(1) %>%
+        dplyr::slice(1) %>%
         ungroup() %>%
-        rename(min_score = median_score)
+        dplyr::rename(min_score = median_score)
 
       score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score = score, stats = "min")
 
