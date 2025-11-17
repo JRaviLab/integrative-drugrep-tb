@@ -1,0 +1,79 @@
+# High Confidence Drug Predictions Journal
+This script processes individual and aggregated drug prediction results to identify high-confidence drug candidates based on their rank scores. calls Functions from `scripts/05_HighConf_Drugpred.R` to perform the following steps:
+
+1. Load necessary libraries and source functions `read_pipeline_results()`
+2. Load individual and aggregated drug prediction results `process_pipeline()`
+3. Calculate mean rank scores for individual predictions `process_pipeline()`
+4. Convert mean rank scores to z-scores `convert_to_zscore()`
+5. Merge individual and aggregated results `get_high_confidence_predictions()`
+6. Calculate combined z-scores for high-confidence predictions `get_high_confidence_predictions()`
+
+## High Confidence Drug Predictions
+
+#### Last modified: 07/17/25 
+
+#### Author: Ling Thang
+
+
+```{r setup}
+library(here)
+source(here("scripts/05_high_confidence_drug_prediction.R"))
+```
+
+##### Define paths to the rank-aggregated results from the four pipelines
+```{r Initialize RA results}
+indivSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_indivSig_TB_microarray.tsv")
+aggSig_TB_microarray_path <- here("results/microarray/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_microarray.tsv")
+indivSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_indivSig_TB_RNAseq.tsv")
+aggSig_TB_RNAseq_path <- here("results/RNAseq/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.tsv")
+```
+
+##### Prepare the pipeline results
+```{r Read RA results}
+pipeline_results <- read_pipeline_results(
+    indivSig_TB_microarray_path,
+    aggSig_TB_microarray_path,
+    indivSig_TB_RNAseq_path,
+    aggSig_TB_RNAseq_path
+)
+
+indivSig_TB_microarray <- pipeline_results$indivSig_TB_microarray
+aggSig_TB_microarray <- pipeline_results$aggSig_TB_microarray
+indivSig_TB_RNAseq <- pipeline_results$indivSig_TB_RNAseq
+aggSig_TB_RNAseq <- pipeline_results$aggSig_TB_RNAseq
+
+head(indivSig_TB_microarray, 5)
+head(aggSig_TB_microarray, 5)
+head(indivSig_TB_RNAseq, 5)
+head(aggSig_TB_RNAseq, 5)
+```
+
+##### Get mean rank score of individual and aggregated drug predictions
+```{r Process pipeline results}
+pipeline_processed <- process_pipeline(
+    indivSig_TB_microarray,
+    indivSig_TB_RNAseq,
+    aggSig_TB_microarray,
+    aggSig_TB_RNAseq
+)
+
+indiv_results <- pipeline_processed$indiv_results
+agg_results <- pipeline_processed$agg_results
+
+head(indiv_results, 5)
+head(agg_results, 5)
+```
+
+##### Get High Confidence Drug Predictions
+```{r Get combined and high confidence predictions}
+combined_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[1]]
+high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[2]]
+```
+
+```{r Save and display predictions}
+output_path1 <- here("results/combined_drug_predictions.tsv")
+save_and_display_predictions(combined_predictions, output_path1)
+
+output_path2 <- here("results/final_high_confidence_drug_predictions.tsv")
+save_and_display_predictions(high_confidence_predictions, output_path2)
+```
