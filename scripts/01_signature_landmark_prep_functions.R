@@ -55,7 +55,7 @@ prepare_signature <- function(signature, L1000 = FALSE) {
   #' @author Kewalin Samart
 
   # read in gene info for gene conversion
-  gene_info <- read.delim(file = here("data/metadata/Homo_sapiens.gene_info.csv"), sep = ",")
+  gene_info <- read.delim(file = here("data/metadata/Homo_sapiens.gene_info.tsv"), sep = "\t")
   gene_info <- gene_info[, c("GeneID", "Symbol")]
   # check if the input signature contains all the required column names
   required_colnames <- c("Symbol", "GeneID", "P.Value", "adj.P.Val")
