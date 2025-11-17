@@ -13,3 +13,5 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
+data/microarray_data_forDE/expression_matrices/
+data/RNAseq_data_forDE/expression_matrices/
