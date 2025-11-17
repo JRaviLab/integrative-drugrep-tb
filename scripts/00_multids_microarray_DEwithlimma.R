@@ -2,7 +2,7 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 11/02/25 - KS modified LT's edits
+# last modified: 11/16/25 - KS modified LT's edits
 # author: Kewalin Samart
 
 suppressPackageStartupMessages({
@@ -48,6 +48,8 @@ study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT
 signature_boolean <- logical(nrow(study_df))
 up_genes_num <- integer(nrow(study_df))
 dn_genes_num <- integer(nrow(study_df))
+control_n <- integer(nrow(study_df))
+disease_n <- integer(nrow(study_df))
 
 for (i in 1:nrow(study_df)) {
   # define tag i.e., study id
@@ -78,9 +80,12 @@ for (i in 1:nrow(study_df)) {
   # Keep only GSMs present in *both* metadata and matrix
   common_ids_infected <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment", ]$geo_accession, colnames(expr_mat))
   common_ids_control <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment", ]$geo_accession, colnames(expr_mat))
+  # Record sample counts (even if insufficient)
+  control_n[i]  <- length(common_ids_control)
+  disease_n[i] <- length(common_ids_infected)
 
   if ((length(common_ids_infected) < 3) | (length(common_ids_control) < 3)) {
-    warning("  skipped: either infected or control condition has < 3 classified samples present in the count matrix")
+    message("  skipped: either infected or control condition has < 3 classified samples present in the count matrix")
     signature_boolean[i] <- FALSE
     next
   }
@@ -221,7 +226,6 @@ for (i in 1:nrow(study_df)) {
   dir.create(here("data/signatures/microarray/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/microarray/dn"), recursive = TRUE, showWarnings = FALSE)
 
-
   if (nrow(res_df) > 0) {
     readr::write_tsv(
       res_df %>%
@@ -276,6 +280,9 @@ for (i in 1:nrow(study_df)) {
 study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
+# add sample counts to summary
+study_df$control_samples  <- as.integer(control_n)
+study_df$disease_samples <- as.integer(disease_n)
 
 run_info <- file.path(
   here("data/signatures"),

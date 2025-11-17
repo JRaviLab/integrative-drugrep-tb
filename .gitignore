@@ -1,6 +1,5 @@
 2025Jun_refinebio_TB_datasets/
 .Rproj.user
-renv.lock
 .Rhistory
 .RData
 .Ruserdata
@@ -14,6 +13,4 @@ analysis/*html
 analysis/*_cache
 analysis/site_libs
 data/microarray_data_forDE/expression_matrices/
-data/microarray_data_forDE/metadata/
 data/RNAseq_data_forDE/expression_matrices/
-data/RNAseq_data_forDE/metadata/

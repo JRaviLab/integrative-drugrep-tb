@@ -1,5 +1,5 @@
 # functions to obtain background genes for Pathway analyses -- Homo Sapiens
-# last modified: 11/13/25
+# last modified: 11/16/25
 # Kewalin Samart
 
 library(tidyverse)
@@ -137,7 +137,7 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   bg_genes_rnaseq_raw <- get_bg_genes(
     bg_source = "input data",
     metadata_path = metadata_path_rnaseq,
-    data_path = paste0(data_path_rnaseq,"/",direction),
+    data_path = paste0(data_path_rnaseq),
     lincs_genetype=NULL,
     extension = extension_rnaseq,
     direction_input_data=direction
@@ -148,7 +148,7 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   bg_genes_microarray_raw <- get_bg_genes(
     bg_source = "input data",
     metadata_path = metadata_path_microarray,
-    data_path = paste0(data_path_microarray,"/",direction),
+    data_path = paste0(data_path_microarray),
     lincs_genetype=NULL,
     extension = extension_microarray,
     direction_input_data=direction
