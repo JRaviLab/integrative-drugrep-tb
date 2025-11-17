@@ -65,11 +65,15 @@ head(agg_results, 5)
 ```
 
 ##### Get High Confidence Drug Predictions
-```{r Get high confidence predictions}
-high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)
+```{r Get combined and high confidence predictions}
+combined_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[1]]
+high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[2]]
 ```
 
 ```{r Save and display predictions}
-output_path <- here("results/final_high_confidence_drug_predictions.tsv")
-save_and_display_predictions(high_confidence_predictions, output_path)
+output_path1 <- here("results/combined_drug_predictions.tsv")
+save_and_display_predictions(combined_predictions, output_path1)
+
+output_path2 <- here("results/final_high_confidence_drug_predictions.tsv")
+save_and_display_predictions(high_confidence_predictions, output_path2)
 ```

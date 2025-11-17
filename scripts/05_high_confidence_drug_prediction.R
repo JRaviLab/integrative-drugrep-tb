@@ -88,11 +88,20 @@ convert_to_zscore <- function(scores_vector) {
 get_high_confidence_predictions <- function(indiv_results, agg_results) {
   final_merged_df <- merge(indiv_results, agg_results, by = "drug_name", all = FALSE)
 
-  message(paste("Identified", nrow(final_merged_df), "high-confidence drug candidates."))
+  message(paste("Identified", nrow(final_merged_df), "combined drug candidates."))
 
   # Convert each pipeline's mean rank score to a z-score
   final_merged_df$z_score_indiv <- convert_to_zscore(final_merged_df$mean_rank_score_indiv)
   final_merged_df$z_score_agg <- convert_to_zscore(final_merged_df$mean_rank_score_agg)
+
+  # Calculate the combined z-score as per the formula in Figure 1c
+  combined_predictions <- final_merged_df %>%
+    mutate(
+      # Formula: (z1 + z2) / sqrt(2)
+      combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
+    ) %>%
+    dplyr::select(drug_name, combined_z_score) %>%
+    arrange(desc(combined_z_score))
 
   # Calculate the final combined z-score as per the formula in Figure 1c
   high_confidence_predictions <- final_merged_df %>%
@@ -100,11 +109,12 @@ get_high_confidence_predictions <- function(indiv_results, agg_results) {
       # Formula: (z1 + z2) / sqrt(2)
       combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
     ) %>%
-    dplyr::filter(z_score_indiv > 0, z_score_agg > 0) %>%
+    dplyr::filter(z_score_indiv > 0, z_score_agg > 0, combined_z_score > 0) %>%
     dplyr::select(drug_name, combined_z_score) %>%
     arrange(desc(combined_z_score))
+  message(paste("Identified", nrow(high_confidence_predictions), "high confidence drug candidates."))
 
-  return(high_confidence_predictions)
+  return(list(combined_predictions, high_confidence_predictions))
 }
 
 # Save and Display Results
