@@ -1,6 +1,6 @@
 # functions for aggregating multiple gene signatures
 # created date: 09/22/23
-# last modified: 06/13/25
+# last modified: 11/13/25
 # Kewalin Samart
 
 # import bg functions
@@ -26,7 +26,10 @@ compute_membership_matrix <- function(metadata_path,
                                       direction,
                                       bg_source,
                                       output_dir,
-                                      extra_arg = NULL,
+                                      lincs_genetype = NULL,
+                                      extension = ".tsv",
+                                      tissue_category = NULL,
+                                      sample_origin = NULL,
                                       save_result = TRUE) {
   #' @description Given a set of signatures and source name for background genes, this function compyte a membership matrix based on the set of background genes of choice
   #' @param metadata_path metadata of the input signatures
@@ -34,7 +37,7 @@ compute_membership_matrix <- function(metadata_path,
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
   #' @param bg_source name of the source for background genes to use: "LINCS", "KEGG", "GO", "input data"
   #' @param output_dir path to the output directory
-  #' @param extra_arg extra argument; optional if "LINCS" is specified for bg_source; could be one of the options below or a combination of them as a single string with comma:
+  #' @param lincs_genetype extra argument; optional if "LINCS" is specified for bg_source; could be one of the options below or a combination of them as a single string with comma:
   #' (i) "landmark" (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference" for examples: "landmark" or "landmark, inferred, best inferred"
   #' if "input data" is specified for bg_source, this arg could be one of the followings: "up", "dn", "full", and "" (by default)
   #' @param save_result a boolean indicating user's preference whether to automatically save the result
@@ -59,7 +62,9 @@ compute_membership_matrix <- function(metadata_path,
     bg_source = bg_source,
     metadata_path = metadata_path,
     data_path = data_path,
-    extra_arg = extra_arg
+    direction = direction,
+    lincs_genetype = lincs_genetype,
+    extension = extension
   )
   bg_genes_df <- as.data.frame(bg_genes)
   colnames(bg_genes_df)[1] <- "GeneID"
@@ -67,6 +72,16 @@ compute_membership_matrix <- function(metadata_path,
   print(paste0("Number of background genes: ", length(bg_genes)))
 
   data_to_run <- read_tsv(metadata_path)
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  # filter by any specify context
+  # tissue category
+  if(!is.null(tissue_category)){
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  }
+  # sample origin
+  if(!is.null(sample_origin)){
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  }
 
   for (i in 1:nrow(data_to_run)) {
     print(paste0("iteration ", i))
@@ -77,7 +92,6 @@ compute_membership_matrix <- function(metadata_path,
     print(paste0("reading in up and dn genes: ", signature_filename))
     signature_path <- paste0(data_path, "/", direction, "/", signature_filename)
 
-    print(signature_path)
     print(file.exists(signature_path))
     if (file.exists(signature_path)) {
       gene_signature <- read.delim(signature_path, sep = "\t")
@@ -111,6 +125,14 @@ compute_membership_matrix <- function(metadata_path,
     dir.create(output_dir, recursive = TRUE)
   }
 
+  # check output dimension
+  print(paste0("Number of DE results/signatures expected: ", nrow(data_to_run)))
+  print(paste0(
+    "Number of columns in membership matrix (excluding GeneID): ",
+    ncol(final_sigval[, !colnames(final_sigval) %in% "GeneID"])
+  ))
+  print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(final_sigval[, !colnames(final_sigval) %in% "GeneID"])))
+
   if (save_result) {
     saveRDS(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat_.rds"))
     write_tsv(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat.tsv"))
@@ -124,15 +146,14 @@ compute_jaccard_matrix <- function(metadata_path,
                                    data_path,
                                    direction,
                                    output_dir,
-                                   extra_arg = NULL,
+                                   tissue_category = NULL,
+                                   sample_origin = NULL,
                                    save_result = TRUE) {
   #' @description This function computes a jaccard similarity matrix of a given set of signatures
   #' @param data_to_run metadata of the input signatures
   #' @param data_path e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
   #' @param output_dir e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
-  #' @param extra_arg a tag string describing output file e.g., "full_none" (set to "" by default)
-  #'
   #' @returns mat resulting jaccard similarity matrix
   #' @author Kewalin Samart
 
@@ -148,6 +169,16 @@ compute_jaccard_matrix <- function(metadata_path,
 
   # get data_to_run df
   data_to_run <- read_tsv(metadata_path)
+  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  # filter by any specify context
+  # tissue category
+  if(!is.null(tissue_category)){
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  }
+  # sample origin
+  if(!is.null(sample_origin)){
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  }
 
   # initialize empty vectors for storage
   vec <- c()
@@ -208,6 +239,14 @@ compute_jaccard_matrix <- function(metadata_path,
   mat$names <- names(vec)
   mat <- mat[, c("names", names(vec))]
   mat[is.na(mat)] <- 0
+
+  # check output dimension
+  print(paste0("Number of DE results/signatures expected: ", nrow(data_to_run)))
+  print(paste0(
+    "Number of columns in membership matrix (excluding names): ",
+    ncol(mat[, !colnames(mat) %in% "names"])
+  ))
+  print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(mat[, !colnames(mat) %in% "names"])))
 
   if (save_result) {
     saveRDS(mat, file = paste0(output_dir, "/", direction, "_jaccard_mat.rds"))
