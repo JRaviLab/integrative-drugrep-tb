@@ -2,6 +2,7 @@
 # created date: 07/16/25
 # last modified: 07/16/25
 # Ling Thang
+# Kewalin Samart edited
 
 # Implements Figure 1c from Integrative transcriptome-based drug repurposing in tuberculosis
 # Key implementation (page 10) :
@@ -99,6 +100,7 @@ get_high_confidence_predictions <- function(indiv_results, agg_results) {
       # Formula: (z1 + z2) / sqrt(2)
       combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
     ) %>%
+    dplyr::filter(z_score_indiv > 0, z_score_agg > 0) %>%
     dplyr::select(drug_name, combined_z_score) %>%
     arrange(desc(combined_z_score))
 
