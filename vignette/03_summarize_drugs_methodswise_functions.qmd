@@ -17,17 +17,18 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
 
 ```{r}
-metadata_path <- "data/v2/signatures/RNAseq_TB_signature_run_info.tsv"
-res_list <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
-
-write_tsv(as.data.frame(res_list$count_df), file = here("results/RNAseq/03_methodwise/RNAseq_drug_score_occurrence.tsv"))
+metadata_path <- "data/signatures/RNAseq_TB_signature_run_info.tsv"
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
+if (!dir.exists(here("results/RNAseq/03_methodwise"))) {
+      dir.create(here("results/RNAseq/03_methodwise"), recursive = TRUE)
+    }
+write_tsv(as.data.frame(all_signi_drugs_df$count_df), file = here("results/RNAseq/03_methodwise/RNAseq_drug_score_occurrence.tsv"))
 ```
 
 2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
 
 ```{r}
-all_signi_drugs_df = res_list$binary_df
-methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "RNAseq", dirname = "results")
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, technology = "RNAseq", dirname = "results")
 ```
 
 ### microarray
@@ -35,15 +36,18 @@ methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = 
 1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
 
 ```{r}
-metadata_path <- "data/v2/signatures/microarray_TB_signature_run_info.tsv"
+metadata_path <- "data/signatures/microarray_TB_signature_run_info.tsv"
 all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.8, n = 3)
-all_signi_drugs_df
+if (!dir.exists(here("results/microarray/03_methodwise"))) {
+      dir.create(here("results/microarray/03_methodwise"), recursive = TRUE)
+    }
+write_tsv(as.data.frame(all_signi_drugs_df$count_df), file = here("results/microarray/03_methodwise/microarray_drug_score_occurrence.tsv"))
 ```
 
 2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
 
 ```{r}
-methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df, technology = "microarray", dirname = "results")
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, technology = "microarray", dirname = "results")
 methodwise_results 
 ```
 
