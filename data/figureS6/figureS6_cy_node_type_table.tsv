@@ -1,348 +1,174 @@
 node	type
-AARS1	dpgene
 ABHD4	dpgene
-ACAT2	dpgene
-ACKR1	target
 ACTC1	target
-ADRA1A	target
-ADRA1D	target
 ADRA2A	target
 AKR7A2	dpgene
 AKT1	target
-ANKRD10	dpgene
-ANKS1B	target
-ANXA1	target
 APOB	target
-ARAF	target
-ASS1	target
 ATP6V1D	dpgene
-Acetylcholine receptor antagonist	moa
-Adenosine reuptake inhibitor	moa
-Adrenergic receptor antagonist	moa
-Antimalarial	moa
-BIRC2	target
-BIRC5	dpgene
-BPHL	dpgene
-C2CD2	dpgene
-CACNA2D1	target
-CALY	target
 CAMK2A	target
-CANT1	dpgene
-CASP2	dpgene
-CAST	dpgene
 CCDC86	dpgene
-CCK	target
 CCNB1	target
-CCP110	dpgene
 CD34	target
-CD80	target
 CDC20	dpgene
 CDC25A	dpgene
 CDC25C	target
 CDC45	dpgene
-CDH4	target
-CDK1	dpgene
+CDK1	target
 CDK2	target
 CDKN1A	dpgene
 CEL	target
-CGB5	target
-CHAC1	dpgene
 CHEK1	target
 CHKA	target
 CHP1	dpgene
-CHRM1	target
-CHRM4	target
-CHRM5	target
-CHST3	target
-CNPY3	dpgene
-CNTN4	target
-COG2	dpgene
-COPS7A	dpgene
 CREBBP	target
 CRISPLD2	target
-CRK	target
 CTNNB1	target
 CYCS	dpgene
-Calcium channel blocker	moa
 Corticosteroid agonist	moa
 Cyclooxygenase inhibitor	moa
 Cytochrome P450 inhibitor	moa
 DDIT4	dpgene
 DFFB	target
 DLD	dpgene
-DNAJA3	dpgene
-DNMT1	target
 DNMT3B	target
-DRD2	target
-DRD4	target
-DRD5	target
 Dopamine receptor agonist	moa
 Dopamine receptor antagonist	moa
-EGFR	target
-EHF	target
-ENOPH1	dpgene
 EP300	target
-EPM2A	target
 ESR1	target
 Enoyl-[acyl-carrier-protein] reductase [NADH] inhibitor	moa
 Estrogen receptor antagonist	moa
 FABP1	target
-FBXO11	dpgene
-FBXO21	dpgene
 FDFT1	target
-FDFT1	dpgene
 FLT1	target
-FLT3 inhibitor	moa
 FMO1	target
 FOXO3	target
-Flavanone glycoside	moa
 GABPA	target
 GDF15	target
 GFER	target
 GMNN	dpgene
 GNAS	dpgene
-GNRHR2	target
-GPATCH8	dpgene
-GRB2	target
 Glucocorticoid receptor agonist	moa
 Glucocorticoid receptor modulator	moa
-Glucokinase inhibitor	moa
-H2BC12	dpgene
 HDAC1	target
 HERC6	dpgene
-HMG20B	dpgene
 HMGCR	target
 HMGCR	dpgene
 HMGCR inhibitor	moa
 HMGCS1	dpgene
 HMOX1	dpgene
-HOOK2	dpgene
-HPSE	target
 HSD17B3	target
 HSF1	target
 HSP90AA1	target
 HTR1A	target
 HTR2B	target
-HTR5A	target
 Histone acetyltransferase inhibitor	moa
 IAPP	target
 ICMT	target
 IER3	dpgene
 IGFBP3	dpgene
-IKBKB	target
 IKBKE	dpgene
-IKBKG	target
-IKZF1	dpgene
-IL5	target
 INSIG1	dpgene
 ITGAE	dpgene
-ITGB1BP1	dpgene
-KDM3A	dpgene
-KIF5C	dpgene
-KIT	dpgene
-KIT inhibitor	moa
-KLHL21	dpgene
 KRT19	target
-L-type calcium channel blocker	moa
 LAMA3	dpgene
 LEP	target
-LIPA	target
 LIPC	target
 LRMDA	target
 Lipoprotein lipase activator	moa
 Lipoxygenase inhibitor	moa
-MAML3	target
 MAP7	dpgene
-MAPK1	target
-MAPK4	target
-MAPK6	target
-MAPK7	target
-MBL2	target
-MBOAT7	dpgene
 MBP	target
-MCOLN1	dpgene
-MCPH1	target
-MDM2	target
-MECOM	target
-MICALL1	dpgene
 MT1F	target
-MTHFD2	dpgene
 MUC1	dpgene
 MVP	dpgene
-MYCBP	dpgene
-MYO9B	target
-NFKB2	dpgene
-NFKBIB	dpgene
 NFkB pathway inhibitor	moa
-NPDC1	dpgene
-NR1I2	target
-NTS	target
-NVL	dpgene
 OR2B11	target
-ORC2	target
 ORC5	target
-OXA1L	dpgene
-PAK1	dpgene
 PCNA	dpgene
 PDGFB	target
 PDGFR receptor inhibitor	moa
 PECAM1	target
-PEX11A	dpgene
-PIK3R1	target
 PIP	target
 PKN1	target
 PKN3	target
-PLCG1	target
 PLD1	target
 PLD2	target
-PLS1	dpgene
-PMM2	dpgene
 PON1	target
-PPP2R5E	dpgene
-PRPF4	dpgene
 PRSS23	dpgene
-PTK2	dpgene
-PTPN11	target
-Phosphodiesterase inhibitor	moa
 Polar auxin transport inhibitor	moa
-Progesterone receptor agonist	moa
-Protein synthesis inhibitor	moa
-RAC2	dpgene
-RAF inhibitor	moa
 RAF1	target
 RBM34	dpgene
-RET tyrosine kinase inhibitor	moa
-RGS2	dpgene
-RGS4	target
 RHOA	dpgene
 RIPK1	target
-RNF167	dpgene
 RRAS2	target
 RXRA	target
 S100A10	target
-SCAND1	dpgene
 SCAP	target
 SDS	target
 SIRT activator	moa
 SIRT3	dpgene
-SKOR2	target
 SKP2	target
 SLC15A1	target
-SLC15A2	target
-SLC1A4	dpgene
 SLC2A3	target
-SLC37A4	dpgene
-SLC6A4	target
 SMAD2	target
 SMAD4	target
-SNAP25	dpgene
-SNAP25	target
-SNAP91	target
-SNORD68	target
-SPG7	target
 SRC	dpgene
 SREBF1	target
 ST3GAL5	dpgene
 STUB1	dpgene
-SULT1C4	target
-SUPV3L1	dpgene
 SUV39H1	dpgene
 Selective estrogen receptor modulator (SERM)	moa
-Selective serotonin reuptake enhancer (SSRE)	moa
-Serotonin receptor antagonist	moa
-TCTN1	dpgene
 TEAD1	target
-TES	dpgene
 TFF3	target
-TGFBR2	dpgene
 THBD	target
 TIMELESS	dpgene
-TIMM9	dpgene
 TIPARP	dpgene
-TLR4	dpgene
-TMEM97	dpgene
-TNF production inhibitor	moa
 TNFRSF21	dpgene
-TNNC1	target
 TP53	target
 TPM1	dpgene
-TRIB3	dpgene
 TSC22D3	target
 TSC22D3	dpgene
-TSHR	target
 UBB	target
 UBC	target
-UBE2N	target
 UBR1	target
 UGDH	dpgene
-USP7	dpgene
-VAPB	dpgene
 VAV3	dpgene
 VEGFR inhibitor	moa
-WDR7	dpgene
-XBP1	target
-YWHAE	target
-YWHAZ	target
-ZHX2	target
 ZNF423	target
 ZNF542P	target
-amcinonide	drug
-amisulpride	drug
 axitinib	drug
-bepridil	drug
-chloroquine	drug
-chlorpromazine	drug
 chlorprothixene	drug
 curcumin	drug
+cytokine production involved in inflammatory response	pathway
 cytokine secretion involved in immune response	pathway
 cytokinetic process	pathway
-danazol	drug
+cytoskeleton-dependent cytokinesis	pathway
+dendritic cell cytokine production	pathway
 dexamethasone	drug
-domperidone	drug
 dopamine	drug
-felodipine	drug
 fluvastatin	drug
 gemfibrozil	drug
-hesperidin	drug
 lisuride	drug
-lonidamine	drug
 lovastatin	drug
 mast cell cytokine production	pathway
-methylprednisolone	drug
+mitotic cytokinesis	pathway
 mitotic cytokinetic process	pathway
 myeloid leukocyte cytokine production	pathway
-negative regulation of cytokine biosynthetic process	pathway
 negative regulation of cytokine production involved in immune response	pathway
 negative regulation of cytokine secretion	pathway
 negative regulation of cytokine secretion involved in immune response	pathway
 negative regulation of cytokine-mediated signaling pathway	pathway
 negative regulation of response to cytokine stimulus	pathway
-perphenazine	drug
-phenoxybenzamine	drug
-pimozide	drug
 positive regulation of T-helper 2 cell cytokine production	pathway
 positive regulation of cytokine biosynthetic process	pathway
 positive regulation of cytokinesis	pathway
-promazine	drug
-propentofylline	drug
 quercetin	drug
-regulation of cytokine activity	pathway
 regulation of cytokine biosynthetic process	pathway
 regulation of cytokine production involved in inflammatory response	pathway
 regulation of cytokine secretion involved in immune response	pathway
 regulation of cytokinesis	pathway
 resveratrol	drug
-rifabutin	drug
-ropinirole	drug
-scopolamine	drug
 simvastatin	drug
-sorafenib	drug
 tamoxifen	drug
-terguride	drug
-thalidomide	drug
-tianeptine	drug
 triclosan	drug
-trifluoperazine	drug
-urapidil	drug
-yohimbine	drug
-ziprasidone	drug
