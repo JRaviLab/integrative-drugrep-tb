@@ -9,7 +9,7 @@
 #      I suppose they only give intersecting MOA-target-genes when a drug is associated with >1 MOAs (code at the bottom)
 
 # created date: 01/16/24
-# last modified: 07/15/25 # fixed paths
+# last modified: 11/17/25 # fixed file format
 # Kewalin Samart
 
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
@@ -93,7 +93,7 @@ get_drug_perturbed_genes <- function(drug_names,
                                      time_point = "24 h",
                                      dosage = "10 µM",
                                      N = 5,
-                                     gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.csv")){
+                                     gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.tsv")){
   #' @description this function identifies significantly pertubed genes of given drug names based on LINCS level 5 signatures GSE70138
   #' @param drug_names a character vector containing drug names to identify enriched/perturbed drug genes
   #' @param signature_matrix a matrix of drug signatures where first col: rid represents gene ids and other columns are signature ids
@@ -134,7 +134,7 @@ get_drug_perturbed_genes <- function(drug_names,
     i = i + 1
   }
   # convert GeneID to Symbol
-  Homo_sapiens_gene_info <- read_csv(gene_conversion_file)
+  Homo_sapiens_gene_info <- read_tsv(gene_conversion_file)
   dp_genes_table <- Homo_sapiens_gene_info[which(Homo_sapiens_gene_info$GeneID %in% drug_genes_df$drug_gene),]
   drug_genes_symb_df <- merge(drug_genes_df, dp_genes_table, by.x = "drug_gene", by.y = "GeneID", all.x = TRUE, all.y = FALSE)
   drug_genes_df <- drug_genes_symb_df[c("drug_name","Symbol")]
