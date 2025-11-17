@@ -49,8 +49,6 @@ technologies = c("microarray", "RNAseq")
 directions = c("up","dn")
 bg_source = "input data" # all genes across datasets
 threshold_pct <- 0
-metadata_path = here("data/signatures/microarray_TB_signature_run_info.tsv")
-data_path = here("data/DE_results/microarray")
 
 for(technology in technologies){
   for(direction in directions){
