@@ -1,0 +1,570 @@
+from	to	type
+ACTC1	UBC	target-target
+ANKS1B	UBC	target-target
+ANXA1	EGFR	target-target
+ANXA1	UBC	target-target
+APOB	UBC	target-target
+ARAF	PIK3R1	target-target
+ARAF	YWHAE	target-target
+ARAF	YWHAZ	target-target
+ASS1	UBC	target-target
+CDC25C	ORC2	target-target
+CDC25C	ORC5	target-target
+CDC25C	YWHAZ	target-target
+CDC25C	CDK2	target-target
+CDC25C	CHEK1	target-target
+CDC25C	YWHAE	target-target
+CDC25C	CCNB1	target-target
+CDC25C	UBC	target-target
+CDH4	CTNNB1	target-target
+DFFB	UBC	target-target
+DNMT3B	UBC	target-target
+DNMT3B	DNMT1	target-target
+DNMT3B	HDAC1	target-target
+EPM2A	UBC	target-target
+FDFT1	UBB	target-target
+FDFT1	UBC	target-target
+FLT1	CRK	target-target
+FLT1	PLCG1	target-target
+FLT1	PTPN11	target-target
+FLT1	CTNNB1	target-target
+FLT1	PIK3R1	target-target
+FOXO3	UBC	target-target
+FOXO3	TP53	target-target
+FOXO3	MDM2	target-target
+FOXO3	AKT1	target-target
+FOXO3	ESR1	target-target
+FOXO3	CREBBP	target-target
+FOXO3	IKBKB	target-target
+FOXO3	SMAD4	target-target
+FOXO3	SKP2	target-target
+FOXO3	EP300	target-target
+GABPA	EP300	target-target
+GABPA	UBC	target-target
+HMGCR	UBC	target-target
+HSF1	HSP90AA1	target-target
+HSF1	YWHAE	target-target
+KRT19	UBC	target-target
+MBP	MAPK1	target-target
+MECOM	HDAC1	target-target
+NR1I2	UBC	target-target
+PLD1	UBC	target-target
+PLD2	UBC	target-target
+PLD2	GRB2	target-target
+RIPK1	UBC	target-target
+RIPK1	UBE2N	target-target
+RIPK1	IKBKG	target-target
+RIPK1	IKBKB	target-target
+RIPK1	HSP90AA1	target-target
+RIPK1	BIRC2	target-target
+S100A10	UBC	target-target
+SLC2A3	UBC	target-target
+SMAD2	UBC	target-target
+SMAD2	TP53	target-target
+SMAD2	CREBBP	target-target
+SMAD2	SMAD4	target-target
+SMAD2	EP300	target-target
+SMAD2	ESR1	target-target
+SMAD2	HDAC1	target-target
+SMAD2	CTNNB1	target-target
+SREBF1	EP300	target-target
+SREBF1	MAPK1	target-target
+SREBF1	UBC	target-target
+SREBF1	CREBBP	target-target
+TEAD1	UBC	target-target
+TNNC1	UBC	target-target
+TSC22D3	RAF1	target-target
+UBR1	UBC	target-target
+ZHX2	YWHAZ	target-target
+ZHX2	RAF1	target-target
+ZNF423	SMAD4	target-target
+chloroquine	TGFBR2	drug-dpgene
+chloroquine	ATP6V1D	drug-dpgene
+chloroquine	COG2	drug-dpgene
+chloroquine	SLC37A4	drug-dpgene
+dexamethasone	IER3	drug-dpgene
+dexamethasone	MUC1	drug-dpgene
+dexamethasone	TSC22D3	drug-dpgene
+dexamethasone	IGFBP3	drug-dpgene
+phenoxybenzamine	RAC2	drug-dpgene
+phenoxybenzamine	TES	drug-dpgene
+phenoxybenzamine	PRPF4	drug-dpgene
+phenoxybenzamine	MICALL1	drug-dpgene
+urapidil	HMOX1	drug-dpgene
+urapidil	SCAND1	drug-dpgene
+urapidil	PAK1	drug-dpgene
+urapidil	HMG20B	drug-dpgene
+dopamine	STUB1	drug-dpgene
+dopamine	SUV39H1	drug-dpgene
+dopamine	HMOX1	drug-dpgene
+dopamine	RBM34	drug-dpgene
+yohimbine	HERC6	drug-dpgene
+yohimbine	CNPY3	drug-dpgene
+yohimbine	GNAS	drug-dpgene
+yohimbine	ATP6V1D	drug-dpgene
+amisulpride	CASP2	drug-dpgene
+amisulpride	RGS2	drug-dpgene
+amisulpride	KDM3A	drug-dpgene
+amisulpride	MBOAT7	drug-dpgene
+amcinonide	RBM34	drug-dpgene
+amcinonide	CHP1	drug-dpgene
+amcinonide	MCOLN1	drug-dpgene
+amcinonide	ENOPH1	drug-dpgene
+quercetin	MVP	drug-dpgene
+quercetin	LAMA3	drug-dpgene
+quercetin	ATP6V1D	drug-dpgene
+quercetin	SIRT3	drug-dpgene
+sorafenib	MTHFD2	drug-dpgene
+sorafenib	FDFT1	drug-dpgene
+sorafenib	AARS1	drug-dpgene
+sorafenib	HMGCS1	drug-dpgene
+felodipine	PMM2	drug-dpgene
+felodipine	NVL	drug-dpgene
+felodipine	NFKB2	drug-dpgene
+felodipine	KLHL21	drug-dpgene
+trifluoperazine	MYCBP	drug-dpgene
+trifluoperazine	INSIG1	drug-dpgene
+trifluoperazine	HMGCS1	drug-dpgene
+trifluoperazine	CDC20	drug-dpgene
+curcumin	CDC45	drug-dpgene
+curcumin	AKR7A2	drug-dpgene
+curcumin	ABHD4	drug-dpgene
+curcumin	HMOX1	drug-dpgene
+chlorpromazine	PCNA	drug-dpgene
+chlorpromazine	HMGCS1	drug-dpgene
+chlorpromazine	CDK1	drug-dpgene
+chlorpromazine	INSIG1	drug-dpgene
+methylprednisolone	FBXO21	drug-dpgene
+methylprednisolone	TSC22D3	drug-dpgene
+methylprednisolone	USP7	drug-dpgene
+methylprednisolone	IGFBP3	drug-dpgene
+ziprasidone	BPHL	drug-dpgene
+ziprasidone	VAPB	drug-dpgene
+ziprasidone	PTK2	drug-dpgene
+ziprasidone	TLR4	drug-dpgene
+resveratrol	TIMELESS	drug-dpgene
+resveratrol	TIPARP	drug-dpgene
+resveratrol	CDC20	drug-dpgene
+resveratrol	CDKN1A	drug-dpgene
+danazol	TMEM97	drug-dpgene
+danazol	PCNA	drug-dpgene
+danazol	DDIT4	drug-dpgene
+danazol	HMOX1	drug-dpgene
+scopolamine	PPP2R5E	drug-dpgene
+scopolamine	KLHL21	drug-dpgene
+scopolamine	SLC1A4	drug-dpgene
+scopolamine	DNAJA3	drug-dpgene
+promazine	CDC20	drug-dpgene
+promazine	DLD	drug-dpgene
+promazine	INSIG1	drug-dpgene
+promazine	HMGCS1	drug-dpgene
+thalidomide	TSC22D3	drug-dpgene
+thalidomide	KIF5C	drug-dpgene
+thalidomide	KDM3A	drug-dpgene
+thalidomide	GNAS	drug-dpgene
+domperidone	H2BC12	drug-dpgene
+domperidone	HOOK2	drug-dpgene
+domperidone	CAST	drug-dpgene
+domperidone	C2CD2	drug-dpgene
+ropinirole	MCOLN1	drug-dpgene
+ropinirole	CHAC1	drug-dpgene
+ropinirole	IKZF1	drug-dpgene
+ropinirole	TRIB3	drug-dpgene
+pimozide	MYCBP	drug-dpgene
+pimozide	INSIG1	drug-dpgene
+pimozide	HMGCS1	drug-dpgene
+pimozide	BIRC5	drug-dpgene
+lovastatin	TSC22D3	drug-dpgene
+lovastatin	CDC25A	drug-dpgene
+lovastatin	CDKN1A	drug-dpgene
+lovastatin	CCDC86	drug-dpgene
+axitinib	HERC6	drug-dpgene
+axitinib	PCNA	drug-dpgene
+axitinib	UGDH	drug-dpgene
+axitinib	CHP1	drug-dpgene
+tamoxifen	HMGCS1	drug-dpgene
+tamoxifen	PRSS23	drug-dpgene
+tamoxifen	INSIG1	drug-dpgene
+tamoxifen	ITGAE	drug-dpgene
+simvastatin	CDC25A	drug-dpgene
+simvastatin	CCDC86	drug-dpgene
+simvastatin	HMGCR	drug-dpgene
+simvastatin	TSC22D3	drug-dpgene
+hesperidin	NFKBIB	drug-dpgene
+hesperidin	ACAT2	drug-dpgene
+hesperidin	CANT1	drug-dpgene
+hesperidin	PLS1	drug-dpgene
+lisuride	TNFRSF21	drug-dpgene
+lisuride	SRC	drug-dpgene
+lisuride	IKBKE	drug-dpgene
+lisuride	VAV3	drug-dpgene
+chlorprothixene	DLD	drug-dpgene
+chlorprothixene	INSIG1	drug-dpgene
+chlorprothixene	HMGCS1	drug-dpgene
+chlorprothixene	GNAS	drug-dpgene
+terguride	PRPF4	drug-dpgene
+terguride	PAK1	drug-dpgene
+terguride	SUPV3L1	drug-dpgene
+terguride	FBXO11	drug-dpgene
+gemfibrozil	CYCS	drug-dpgene
+gemfibrozil	GMNN	drug-dpgene
+gemfibrozil	ST3GAL5	drug-dpgene
+gemfibrozil	MAP7	drug-dpgene
+fluvastatin	TSC22D3	drug-dpgene
+fluvastatin	RHOA	drug-dpgene
+fluvastatin	PCNA	drug-dpgene
+fluvastatin	TPM1	drug-dpgene
+perphenazine	BIRC5	drug-dpgene
+perphenazine	HMGCS1	drug-dpgene
+perphenazine	CDC20	drug-dpgene
+perphenazine	INSIG1	drug-dpgene
+rifabutin	SNAP25	drug-dpgene
+rifabutin	TIMM9	drug-dpgene
+rifabutin	KIT	drug-dpgene
+rifabutin	ITGB1BP1	drug-dpgene
+propentofylline	KDM3A	drug-dpgene
+propentofylline	CCP110	drug-dpgene
+propentofylline	TGFBR2	drug-dpgene
+propentofylline	PPP2R5E	drug-dpgene
+triclosan	CDC25A	drug-dpgene
+triclosan	DDIT4	drug-dpgene
+triclosan	HMOX1	drug-dpgene
+triclosan	ITGAE	drug-dpgene
+tianeptine	CCDC86	drug-dpgene
+tianeptine	ATP6V1D	drug-dpgene
+tianeptine	WDR7	drug-dpgene
+tianeptine	TCTN1	drug-dpgene
+bepridil	ANKRD10	drug-dpgene
+bepridil	NPDC1	drug-dpgene
+bepridil	PEX11A	drug-dpgene
+bepridil	OXA1L	drug-dpgene
+lonidamine	FBXO11	drug-dpgene
+lonidamine	RNF167	drug-dpgene
+lonidamine	COPS7A	drug-dpgene
+lonidamine	GPATCH8	drug-dpgene
+chloroquine	ACKR1	drug-target
+dexamethasone	ACTC1	drug-target
+phenoxybenzamine	ADRA1A	drug-target
+urapidil	ADRA1D	drug-target
+dopamine	ADRA2A	drug-target
+yohimbine	ADRA2A	drug-target
+amisulpride	ANKS1B	drug-target
+amcinonide	ANXA1	drug-target
+quercetin	APOB	drug-target
+sorafenib	ARAF	drug-target
+chloroquine	ASS1	drug-target
+felodipine	CACNA2D1	drug-target
+trifluoperazine	CALY	drug-target
+curcumin	CAMK2A	drug-target
+chlorpromazine	CCK	drug-target
+quercetin	CD34	drug-target
+methylprednisolone	CD80	drug-target
+quercetin	CDC25C	drug-target
+ziprasidone	CDH4	drug-target
+resveratrol	CEL	drug-target
+danazol	CGB5	drug-target
+dexamethasone	CHKA	drug-target
+scopolamine	CHRM1	drug-target
+promazine	CHRM4	drug-target
+promazine	CHRM5	drug-target
+thalidomide	CHST3	drug-target
+ziprasidone	CNTN4	drug-target
+dexamethasone	CRISPLD2	drug-target
+curcumin	DFFB	drug-target
+curcumin	DNMT3B	drug-target
+domperidone	DRD2	drug-target
+ropinirole	DRD2	drug-target
+pimozide	DRD4	drug-target
+pimozide	DRD5	drug-target
+ziprasidone	EHF	drug-target
+chlorpromazine	EPM2A	drug-target
+dexamethasone	FABP1	drug-target
+lovastatin	FDFT1	drug-target
+axitinib	FLT1	drug-target
+tamoxifen	FMO1	drug-target
+resveratrol	FOXO3	drug-target
+quercetin	GABPA	drug-target
+resveratrol	GDF15	drug-target
+dopamine	GFER	drug-target
+danazol	GNRHR2	drug-target
+hesperidin	HPSE	drug-target
+curcumin	HSD17B3	drug-target
+quercetin	HSF1	drug-target
+lisuride	HTR1A	drug-target
+chlorprothixene	HTR2B	drug-target
+terguride	HTR2B	drug-target
+amisulpride	HTR5A	drug-target
+curcumin	IAPP	drug-target
+simvastatin	ICMT	drug-target
+methylprednisolone	IL5	drug-target
+dexamethasone	KRT19	drug-target
+gemfibrozil	LEP	drug-target
+trifluoperazine	LIPA	drug-target
+fluvastatin	LIPC	drug-target
+tamoxifen	LRMDA	drug-target
+perphenazine	MAML3	drug-target
+sorafenib	MAPK4	drug-target
+sorafenib	MAPK6	drug-target
+sorafenib	MAPK7	drug-target
+danazol	MBL2	drug-target
+quercetin	MBP	drug-target
+perphenazine	MCPH1	drug-target
+thalidomide	MECOM	drug-target
+dexamethasone	MT1F	drug-target
+felodipine	MYO9B	drug-target
+rifabutin	NR1I2	drug-target
+chlorpromazine	NTS	drug-target
+axitinib	OR2B11	drug-target
+axitinib	PDGFB	drug-target
+resveratrol	PECAM1	drug-target
+tamoxifen	PIP	drug-target
+quercetin	PKN1	drug-target
+quercetin	PKN3	drug-target
+tamoxifen	PLD1	drug-target
+tamoxifen	PLD2	drug-target
+simvastatin	PON1	drug-target
+quercetin	PON1	drug-target
+propentofylline	RGS4	drug-target
+resveratrol	RIPK1	drug-target
+tamoxifen	RRAS2	drug-target
+triclosan	RXRA	drug-target
+dexamethasone	S100A10	drug-target
+simvastatin	SCAP	drug-target
+dexamethasone	SDS	drug-target
+perphenazine	SKOR2	drug-target
+fluvastatin	SLC15A1	drug-target
+sorafenib	SLC15A2	drug-target
+resveratrol	SLC2A3	drug-target
+tianeptine	SLC6A4	drug-target
+curcumin	SMAD2	drug-target
+amisulpride	SNAP25	drug-target
+trifluoperazine	SNAP91	drug-target
+thalidomide	SNORD68	drug-target
+thalidomide	SPG7	drug-target
+fluvastatin	SREBF1	drug-target
+thalidomide	SULT1C4	drug-target
+dexamethasone	TEAD1	drug-target
+tamoxifen	TFF3	drug-target
+curcumin	THBD	drug-target
+bepridil	TNNC1	drug-target
+lonidamine	TSHR	drug-target
+dexamethasone	UBR1	drug-target
+pimozide	XBP1	drug-target
+sorafenib	ZHX2	drug-target
+tamoxifen	ZNF423	drug-target
+simvastatin	ZNF542P	drug-target
+chloroquine	negative regulation of cytokine secretion involved in immune response	drug-pathway
+chloroquine	cytokine secretion involved in immune response	drug-pathway
+chloroquine	negative regulation of cytokine secretion	drug-pathway
+chloroquine	negative regulation of cytokine production involved in immune response	drug-pathway
+chloroquine	regulation of cytokine secretion involved in immune response	drug-pathway
+chloroquine	regulation of cytokine biosynthetic process	drug-pathway
+chloroquine	positive regulation of cytokine biosynthetic process	drug-pathway
+dexamethasone	negative regulation of cytokine secretion	drug-pathway
+dexamethasone	regulation of cytokine production involved in inflammatory response	drug-pathway
+dexamethasone	regulation of cytokinesis	drug-pathway
+phenoxybenzamine	regulation of cytokinesis	drug-pathway
+urapidil	regulation of cytokine biosynthetic process	drug-pathway
+urapidil	negative regulation of cytokine secretion involved in immune response	drug-pathway
+urapidil	regulation of cytokine secretion involved in immune response	drug-pathway
+urapidil	negative regulation of cytokine production involved in immune response	drug-pathway
+urapidil	positive regulation of cytokine biosynthetic process	drug-pathway
+urapidil	cytokine secretion involved in immune response	drug-pathway
+urapidil	negative regulation of cytokine secretion	drug-pathway
+dopamine	regulation of cytokinesis	drug-pathway
+dopamine	positive regulation of cytokinesis	drug-pathway
+yohimbine	regulation of cytokinesis	drug-pathway
+yohimbine	positive regulation of cytokinesis	drug-pathway
+amisulpride	regulation of cytokinesis	drug-pathway
+amisulpride	positive regulation of cytokinesis	drug-pathway
+amcinonide	negative regulation of cytokine secretion	drug-pathway
+quercetin	myeloid leukocyte cytokine production	drug-pathway
+quercetin	regulation of cytokine biosynthetic process	drug-pathway
+sorafenib	mast cell cytokine production	drug-pathway
+sorafenib	myeloid leukocyte cytokine production	drug-pathway
+felodipine	regulation of cytokinesis	drug-pathway
+trifluoperazine	regulation of cytokinesis	drug-pathway
+curcumin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+curcumin	negative regulation of response to cytokine stimulus	drug-pathway
+curcumin	regulation of cytokine production involved in inflammatory response	drug-pathway
+chlorpromazine	positive regulation of cytokinesis	drug-pathway
+chlorpromazine	regulation of cytokinesis	drug-pathway
+methylprednisolone	negative regulation of cytokine biosynthetic process	drug-pathway
+methylprednisolone	negative regulation of cytokine secretion	drug-pathway
+methylprednisolone	negative regulation of response to cytokine stimulus	drug-pathway
+methylprednisolone	negative regulation of cytokine production involved in immune response	drug-pathway
+methylprednisolone	regulation of cytokine biosynthetic process	drug-pathway
+methylprednisolone	negative regulation of cytokine secretion involved in immune response	drug-pathway
+methylprednisolone	cytokine secretion involved in immune response	drug-pathway
+methylprednisolone	regulation of cytokine activity	drug-pathway
+methylprednisolone	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+methylprednisolone	positive regulation of T-helper 2 cell cytokine production	drug-pathway
+methylprednisolone	regulation of cytokine secretion involved in immune response	drug-pathway
+ziprasidone	positive regulation of cytokinesis	drug-pathway
+ziprasidone	regulation of cytokinesis	drug-pathway
+resveratrol	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+resveratrol	negative regulation of cytokine secretion	drug-pathway
+resveratrol	cytokine secretion involved in immune response	drug-pathway
+resveratrol	negative regulation of response to cytokine stimulus	drug-pathway
+resveratrol	negative regulation of cytokine secretion involved in immune response	drug-pathway
+resveratrol	negative regulation of cytokine production involved in immune response	drug-pathway
+resveratrol	myeloid leukocyte cytokine production	drug-pathway
+resveratrol	regulation of cytokine secretion involved in immune response	drug-pathway
+danazol	cytokine secretion involved in immune response	drug-pathway
+danazol	regulation of cytokine biosynthetic process	drug-pathway
+danazol	negative regulation of cytokine secretion involved in immune response	drug-pathway
+danazol	negative regulation of cytokine production involved in immune response	drug-pathway
+danazol	negative regulation of cytokine secretion	drug-pathway
+danazol	positive regulation of cytokine biosynthetic process	drug-pathway
+danazol	regulation of cytokine secretion involved in immune response	drug-pathway
+scopolamine	regulation of cytokine biosynthetic process	drug-pathway
+scopolamine	positive regulation of cytokine biosynthetic process	drug-pathway
+promazine	regulation of cytokinesis	drug-pathway
+promazine	positive regulation of cytokinesis	drug-pathway
+thalidomide	cytokine secretion involved in immune response	drug-pathway
+thalidomide	negative regulation of cytokine production involved in immune response	drug-pathway
+thalidomide	negative regulation of cytokine secretion	drug-pathway
+thalidomide	regulation of cytokine biosynthetic process	drug-pathway
+thalidomide	regulation of cytokine secretion involved in immune response	drug-pathway
+thalidomide	negative regulation of cytokine secretion involved in immune response	drug-pathway
+thalidomide	regulation of cytokine activity	drug-pathway
+thalidomide	negative regulation of cytokine biosynthetic process	drug-pathway
+thalidomide	positive regulation of cytokine biosynthetic process	drug-pathway
+domperidone	regulation of cytokinesis	drug-pathway
+domperidone	positive regulation of cytokinesis	drug-pathway
+ropinirole	regulation of cytokinesis	drug-pathway
+ropinirole	positive regulation of cytokinesis	drug-pathway
+pimozide	regulation of cytokinesis	drug-pathway
+pimozide	positive regulation of cytokinesis	drug-pathway
+lovastatin	negative regulation of response to cytokine stimulus	drug-pathway
+lovastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+lovastatin	negative regulation of cytokine secretion	drug-pathway
+lovastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+lovastatin	cytokinetic process	drug-pathway
+lovastatin	cytokine secretion involved in immune response	drug-pathway
+lovastatin	regulation of cytokinesis	drug-pathway
+lovastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+lovastatin	mitotic cytokinetic process	drug-pathway
+lovastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+lovastatin	positive regulation of cytokinesis	drug-pathway
+axitinib	mast cell cytokine production	drug-pathway
+axitinib	regulation of cytokinesis	drug-pathway
+axitinib	positive regulation of cytokinesis	drug-pathway
+axitinib	myeloid leukocyte cytokine production	drug-pathway
+tamoxifen	positive regulation of T-helper 2 cell cytokine production	drug-pathway
+tamoxifen	positive regulation of cytokinesis	drug-pathway
+tamoxifen	regulation of cytokinesis	drug-pathway
+simvastatin	cytokine secretion involved in immune response	drug-pathway
+simvastatin	negative regulation of cytokine secretion	drug-pathway
+simvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+simvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+simvastatin	negative regulation of response to cytokine stimulus	drug-pathway
+simvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+simvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+hesperidin	positive regulation of cytokinesis	drug-pathway
+hesperidin	regulation of cytokinesis	drug-pathway
+hesperidin	cytokinetic process	drug-pathway
+lisuride	regulation of cytokinesis	drug-pathway
+lisuride	positive regulation of cytokinesis	drug-pathway
+chlorprothixene	regulation of cytokinesis	drug-pathway
+chlorprothixene	positive regulation of cytokinesis	drug-pathway
+terguride	regulation of cytokinesis	drug-pathway
+terguride	positive regulation of cytokinesis	drug-pathway
+gemfibrozil	regulation of cytokine biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of response to cytokine stimulus	drug-pathway
+gemfibrozil	cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	positive regulation of cytokine biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	negative regulation of cytokine secretion	drug-pathway
+gemfibrozil	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+gemfibrozil	regulation of cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	negative regulation of cytokine production involved in immune response	drug-pathway
+fluvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+fluvastatin	negative regulation of response to cytokine stimulus	drug-pathway
+fluvastatin	negative regulation of cytokine secretion	drug-pathway
+fluvastatin	positive regulation of cytokinesis	drug-pathway
+fluvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+fluvastatin	mitotic cytokinetic process	drug-pathway
+fluvastatin	cytokine secretion involved in immune response	drug-pathway
+fluvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+fluvastatin	cytokinetic process	drug-pathway
+fluvastatin	regulation of cytokinesis	drug-pathway
+fluvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+perphenazine	regulation of cytokinesis	drug-pathway
+rifabutin	negative regulation of cytokine production involved in immune response	drug-pathway
+rifabutin	myeloid leukocyte cytokine production	drug-pathway
+rifabutin	mast cell cytokine production	drug-pathway
+propentofylline	cytokine secretion involved in immune response	drug-pathway
+propentofylline	negative regulation of cytokine secretion	drug-pathway
+propentofylline	regulation of cytokine secretion involved in immune response	drug-pathway
+propentofylline	regulation of cytokine biosynthetic process	drug-pathway
+propentofylline	negative regulation of cytokine production involved in immune response	drug-pathway
+propentofylline	negative regulation of cytokine secretion involved in immune response	drug-pathway
+propentofylline	positive regulation of cytokine biosynthetic process	drug-pathway
+triclosan	negative regulation of response to cytokine stimulus	drug-pathway
+triclosan	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+tianeptine	positive regulation of cytokinesis	drug-pathway
+tianeptine	regulation of cytokinesis	drug-pathway
+bepridil	regulation of cytokinesis	drug-pathway
+lonidamine	cytokine secretion involved in immune response	drug-pathway
+lonidamine	regulation of cytokine secretion involved in immune response	drug-pathway
+chloroquine	Antimalarial	drug-moa
+dexamethasone	Corticosteroid agonist	drug-moa
+dexamethasone	Glucocorticoid receptor agonist	drug-moa
+dexamethasone	Cytochrome P450 inhibitor	drug-moa
+dexamethasone	Glucocorticoid receptor modulator	drug-moa
+phenoxybenzamine	Adrenergic receptor antagonist	drug-moa
+urapidil	Adrenergic receptor antagonist	drug-moa
+dopamine	Dopamine receptor agonist	drug-moa
+yohimbine	Adrenergic receptor antagonist	drug-moa
+amisulpride	Dopamine receptor antagonist	drug-moa
+amcinonide	Glucocorticoid receptor agonist	drug-moa
+quercetin	Polar auxin transport inhibitor	drug-moa
+sorafenib	PDGFR receptor inhibitor	drug-moa
+sorafenib	RET tyrosine kinase inhibitor	drug-moa
+sorafenib	KIT inhibitor	drug-moa
+sorafenib	RAF inhibitor	drug-moa
+sorafenib	VEGFR inhibitor	drug-moa
+sorafenib	FLT3 inhibitor	drug-moa
+felodipine	Calcium channel blocker	drug-moa
+trifluoperazine	Dopamine receptor antagonist	drug-moa
+curcumin	Lipoxygenase inhibitor	drug-moa
+curcumin	Histone acetyltransferase inhibitor	drug-moa
+curcumin	NFkB pathway inhibitor	drug-moa
+curcumin	Cyclooxygenase inhibitor	drug-moa
+chlorpromazine	Dopamine receptor antagonist	drug-moa
+methylprednisolone	Glucocorticoid receptor agonist	drug-moa
+ziprasidone	Dopamine receptor antagonist	drug-moa
+ziprasidone	Serotonin receptor antagonist	drug-moa
+resveratrol	Cytochrome P450 inhibitor	drug-moa
+resveratrol	SIRT activator	drug-moa
+danazol	Estrogen receptor antagonist	drug-moa
+danazol	Progesterone receptor agonist	drug-moa
+scopolamine	Acetylcholine receptor antagonist	drug-moa
+promazine	Dopamine receptor antagonist	drug-moa
+thalidomide	TNF production inhibitor	drug-moa
+domperidone	Dopamine receptor antagonist	drug-moa
+ropinirole	Dopamine receptor agonist	drug-moa
+pimozide	Dopamine receptor antagonist	drug-moa
+lovastatin	HMGCR inhibitor	drug-moa
+axitinib	VEGFR inhibitor	drug-moa
+axitinib	PDGFR receptor inhibitor	drug-moa
+tamoxifen	Selective estrogen receptor modulator (SERM)	drug-moa
+tamoxifen	Estrogen receptor antagonist	drug-moa
+simvastatin	HMGCR inhibitor	drug-moa
+hesperidin	Flavanone glycoside	drug-moa
+lisuride	Dopamine receptor agonist	drug-moa
+chlorprothixene	Dopamine receptor antagonist	drug-moa
+terguride	Serotonin receptor antagonist	drug-moa
+terguride	Dopamine receptor agonist	drug-moa
+gemfibrozil	Lipoprotein lipase activator	drug-moa
+fluvastatin	HMGCR inhibitor	drug-moa
+perphenazine	Dopamine receptor antagonist	drug-moa
+rifabutin	Protein synthesis inhibitor	drug-moa
+propentofylline	Adenosine reuptake inhibitor	drug-moa
+propentofylline	Phosphodiesterase inhibitor	drug-moa
+triclosan	Enoyl-[acyl-carrier-protein] reductase [NADH] inhibitor	drug-moa
+tianeptine	Selective serotonin reuptake enhancer (SSRE)	drug-moa
+bepridil	Calcium channel blocker	drug-moa
+bepridil	L-type calcium channel blocker	drug-moa
+lonidamine	Glucokinase inhibitor	drug-moa

@@ -1,0 +1,241 @@
+# Obtain node and edge data for figure 3: disease-drug-target network
+### last modified: 11/17/25
+### Author: Kewalin Samart
+
+```{r load libraries and functions}
+library(readr)
+library(here)
+library(tidyverse)
+source(here("scripts/05_build_drugtarget_network_functions.R"))
+```
+
+```{r get disease genes}
+microarray_up_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+microarray_dn_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+
+rnaseq_up_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+
+up_aggr_genes = intersect(microarray_up_aggr_genes, rnaseq_up_aggr_genes)
+dn_aggr_genes = intersect(microarray_dn_aggr_genes, rnaseq_dn_aggr_genes)
+
+TB_aggregated_genes = unique(union(up_aggr_genes, dn_aggr_genes))
+
+write_tsv(as.data.frame(TB_aggregated_genes), file = here("data/figure3/TB_aggregated_genes.tsv"))
+```
+
+```{r map disease genes to symbols}
+# read mapping file
+mapping = read_tsv(here("data/metadata/Homo_sapiens.gene_info.tsv"))
+mapping_TB = mapping[mapping$GeneID %in% TB_aggregated_genes,]
+TB_aggregated_symbols = mapping_TB$Symbol
+```
+
+```{r get final drug list}
+RAresult_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/RAresult_indivSig_TB_RNAseq.rds"))
+RAresult_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/RAresult_indivSig_TB_microarray.rds"))
+RAresult_aggrSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.rds"))
+RAresult_aggrSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/RAresult_neg_left_0.9_aggrSig_TB_microarray.rds"))
+
+indiv_result <- union(RAresult_indivSig_TB_RNAseq, RAresult_indivSig_TB_microarray)
+aggr_result <- union(RAresult_aggrSig_TB_RNAseq, RAresult_aggrSig_TB_microarray)
+final_drugs <- intersect(indiv_result, aggr_result)
+final_drugs 
+```
+
+```{r get drug-interacting genes}
+DGIdb_targets_list = get_DTG_interactions_DGIdb(drug_names = final_drugs)
+DGIdb_targets_df = get_DGIdb_targets_table(DGIdb_targets_list)
+```
+
+```{r read in drug signature matrix}
+signature_matrix = read_tsv(here("data/drug_data/GSE92742_level5_signatures_lm.tsv"))
+```
+
+```{r read in drug signature metadata}
+library(data.table)
+signature_metadata <- fread(here("data/drug_data/GSE92742_Broad_LINCS_sig_info.txt"))
+```
+
+```{r get drug perturbed genes}
+drug_genes_df <- get_drug_perturbed_genes(drug_names = final_drugs,
+                         signature_matrix = signature_matrix,
+                         signature_metadata = signature_metadata,
+                         time_point = "24 h",
+                         dosage = "10 µM",
+                         N = 2,
+                         gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.tsv"))
+
+```
+#### get drug-gene table
+```{r}
+DGIdb_targets_df_ = DGIdb_targets_df[,c("drug_name","target")]
+colnames(DGIdb_targets_df_) <- gsub("target","drug_gene",colnames(DGIdb_targets_df_))
+DGIdb_targets_df_$type <- "DGIdb"
+drug_genes_df$type <- "LINCS"
+
+drug_gene_df_network = rbind(drug_genes_df, DGIdb_targets_df_)
+write_tsv(drug_gene_df_network, file=here("data/figure3/drug_gene_table.tsv"))
+```
+
+#### Create node_types.txt for figure 3
+```{r}
+# read in gene mapping
+gene_mapping = read_tsv(here("data/metadata/Homo_sapiens.gene_info.tsv"))
+gene_mapping = gene_mapping[,c('GeneID','Symbol')]
+TB_aggregated_genes = gene_mapping[gene_mapping$GeneID %in% TB_aggregated_genes,]$Symbol
+
+node_TB_genes <- TB_aggregated_genes
+type_TB_genes <- "source"
+
+TB_genes_df <- data.frame(node = node_TB_genes, type = type_TB_genes, stringsAsFactors = FALSE)
+
+node_drug_genes <- DGIdb_targets_df$target
+type_drug_genes <- "target"
+drug_perturbed_genes_df <- data.frame(node = node_drug_genes, type = type_drug_genes, stringsAsFactors = FALSE)
+
+node_type_df <- rbind(TB_genes_df, drug_perturbed_genes_df)
+write_tsv(node_type_df, file = here("data/figure3/node_types.tsv"))
+
+node_drug_genes_wperturbed <- union(drug_genes_df$drug_gene, DGIdb_targets_df$target)
+drug_perturbed_genes_df_wperturbed <- data.frame(node = node_drug_genes_wperturbed, type = type_drug_genes, stringsAsFactors = FALSE)
+
+node_type_df_ <- rbind(TB_genes_df, drug_perturbed_genes_df_wperturbed)
+write_tsv(node_type_df_, file = here("data/figure3/node_types_with_perturbed_genes.tsv"))
+```
+
+#### Create and save node/edge data for figure S3
+```{r obtain node data}
+node_data <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = c(),
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c())
+
+```
+
+```{r get pathway names}
+# get pathways containing the word 'cholesterol' (case-insensitive)
+cholesterol_pathways <- unique(node_data$enriched_pathway[grepl("cholesterol", node_data$enriched_pathway, ignore.case = TRUE)])
+cytokine_pathways <- unique(node_data$enriched_pathway[grepl("cytokine", node_data$enriched_pathway, ignore.case = TRUE)])
+```
+
+```{r add STRING genes to the node data for HMGCR inhibitor}
+node_data_hmgcr <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = c(),
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c("HMGCR inhibitor"))
+node_data_STRING_hmgcr <- add_STRING_genes(node_data_hmgcr,
+                                    STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
+                                    STRING_intscore = 0.7,
+                                    min_degree = 4,
+                                    disease_genes = TB_aggregated_symbols)
+
+```
+
+```{r get edge data from the node data for cholesterol-related pathways}
+edge_data_hmgcr = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_hmgcr)
+
+```
+
+```{r save network tables}
+write_tsv(node_data_STRING_hmgcr, file = here("data/figure3/figureS3_hmgcr_node_subnetwork.tsv"))
+write_tsv(edge_data_hmgcr, file = here("data/figure3/figureS3_hmgcr_edge_subnetwork.tsv"))
+```
+
+```{r save node type}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Split 'type' column into two separate columns
+edge_df <- edge_data_hmgcr %>%
+  separate(type, into = c("type_from", "type_to"), sep = "-")
+edge_df <- as_tibble(edge_df)
+# Create node-type pairs for 'from' nodes
+from_nodes <- edge_df %>%
+  dplyr::select(node = from, type = type_from)
+
+# Create node-type pairs for 'to' nodes
+to_nodes <- edge_df %>%
+  dplyr::select(node = to, type = type_to)
+
+# Combine both, remove duplicates
+node_table <- bind_rows(from_nodes, to_nodes) %>%
+  distinct() %>%
+  arrange(node)
+
+write_tsv(node_table, here("data/figure3/figureS3_hmgcr_node_type_table.tsv"))
+
+```
+
+```{r genes that are both disease and drug genes in the cholesterol subnetwork}
+node_table[node_table$node %in% TB_aggregated_symbols,]
+```
+
+```{r add STRING genes to the node data for cytokine-related pathways}
+node_data_cy <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
+                               drug_genes_df = drug_genes_df,
+                               disease_pathways = cytokine_pathways,
+                               N = 15,
+                               interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
+                               intscore_values = "all",
+                               intscore_tail = "right",
+                               intscore_pct = 0.9,
+                               moas = c())
+node_data_STRING_cy <- add_STRING_genes(node_data_cy,
+                                    STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
+                                    STRING_intscore = 0.7,
+                                    min_degree = 4,
+                                    disease_genes = TB_aggregated_symbols)
+
+```
+
+```{r get edge data from the node data for cytokine-related pathways}
+edge_data_cy = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_cy)
+
+```
+
+```{r save network tables}
+write_tsv(node_data_STRING_cy, file = here("data/figure3/figureS3_cytokine_node_subnetwork.tsv"))
+write_tsv(edge_data_cy, file = here("data/figure3/figureS3_cytokine_edge_subnetwork.tsv"))
+```
+
+```{r save node type}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+# Split 'type' column into two separate columns
+edge_df <- edge_data_cy %>%
+  separate(type, into = c("type_from", "type_to"), sep = "-")
+edge_df <- as_tibble(edge_df)
+# Create node-type pairs for 'from' nodes
+from_nodes <- edge_df %>%
+  dplyr::select(node = from, type = type_from)
+
+# Create node-type pairs for 'to' nodes
+to_nodes <- edge_df %>%
+  dplyr::select(node = to, type = type_to)
+
+# Combine both, remove duplicates
+node_table <- bind_rows(from_nodes, to_nodes) %>%
+  distinct() %>%
+  arrange(node)
+
+write_tsv(node_table, here("data/figure3/figureS3_cy_node_type_table.tsv"))
+
+```
+
+```{r genes that are both disease and drug genes in the cytokine subnetwork}
+node_table[node_table$node %in% TB_aggregated_symbols,]
+```

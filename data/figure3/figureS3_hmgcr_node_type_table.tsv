@@ -1,0 +1,663 @@
+node	type
+AMPA glutamate receptor clustering	pathway
+B cell mediated immunity	pathway
+CCDC86	dpgene
+CDC25A	dpgene
+CDKN1A	dpgene
+COQ2	target
+CSRP1	dpgene
+Cdc42 protein signal transduction	pathway
+EP300	target
+ER to Golgi vesicle-mediated transport	pathway
+FDFT1	target
+FOXA3	target
+HMGCR	target
+HMGCR	dpgene
+HMGCR inhibitor	moa
+HNF1A	target
+ICMT	target
+LIPC	target
+LPA	target
+MHC class II biosynthetic process	pathway
+NMDA glutamate receptor clustering	pathway
+PCNA	dpgene
+PON1	target
+RHOA	dpgene
+Roundabout signaling pathway	pathway
+SCAP	target
+SLC15A1	target
+SREBF1	target
+T cell activation involved in immune response	pathway
+T cell extravasation	pathway
+T cell lineage commitment	pathway
+T cell migration	pathway
+T cell selection	pathway
+TPM1	dpgene
+TSC22D3	dpgene
+UBC	target
+USP24	target
+Wnt signaling pathway, planar cell polarity pathway	pathway
+ZNF542P	target
+actin filament polymerization	pathway
+actin polymerization or depolymerization	pathway
+activation of adenylate cyclase activity	pathway
+acute-phase response	pathway
+acylglycerol biosynthetic process	pathway
+acylglycerol catabolic process	pathway
+acylglycerol homeostasis	pathway
+adhesion of symbiont to host	pathway
+adrenal gland development	pathway
+alkaloid catabolic process	pathway
+alkaloid metabolic process	pathway
+alpha-beta T cell lineage commitment	pathway
+amyloid fibril formation	pathway
+amyloid precursor protein catabolic process	pathway
+amyloid-beta clearance	pathway
+amyloid-beta formation	pathway
+androgen receptor signaling pathway	pathway
+angiogenesis involved in wound healing	pathway
+angiotensin-mediated vasoconstriction involved in regulation of systemic arterial blood pressure	pathway
+animal organ maturation	pathway
+antibiotic biosynthetic process	pathway
+apical junction assembly	pathway
+apolipoprotein A-I-mediated signaling pathway	pathway
+arachidonic acid metabolite production involved in inflammatory response	pathway
+artery development	pathway
+artery morphogenesis	pathway
+astrocyte activation	pathway
+axon regeneration	pathway
+behavioral defense response	pathway
+behavioral fear response	pathway
+behavioral response to ethanol	pathway
+beta selection	pathway
+bile acid and bile salt transport	pathway
+bone maturation	pathway
+cGMP-mediated signaling	pathway
+calcitriol biosynthetic process from calciol	pathway
+calcium-mediated signaling using intracellular calcium source	pathway
+carbohydrate derivative transport	pathway
+cardiac muscle cell apoptotic process	pathway
+cell adhesion molecule production	pathway
+cell migration involved in sprouting angiogenesis	pathway
+cell-cell adhesion involved in gastrulation	pathway
+cell-cell adhesion via plasma-membrane adhesion molecules	pathway
+cellular alcohol biosynthetic process	pathway
+cellular alcohol metabolic process	pathway
+cellular component maintenance	pathway
+cellular extravasation	pathway
+cellular response to alkaloid	pathway
+cellular response to angiotensin	pathway
+cellular response to chemokine	pathway
+cellular response to dexamethasone stimulus	pathway
+cellular response to dopamine	pathway
+cellular response to interleukin-6	pathway
+cellular response to lipoprotein particle stimulus	pathway
+cellular response to low-density lipoprotein particle stimulus	pathway
+cellular response to topologically incorrect protein	pathway
+cellular response to unfolded protein	pathway
+cellular response to very-low-density lipoprotein particle stimulus	pathway
+cerebral cortex cell migration	pathway
+cholesterol catabolic process	pathway
+cholesterol efflux	pathway
+cholesterol esterification	pathway
+cholesterol import	pathway
+cholesterol storage	pathway
+chromatin remodeling	pathway
+chromatin silencing	pathway
+chronological cell aging	pathway
+chylomicron assembly	pathway
+chylomicron remnant clearance	pathway
+chylomicron remodeling	pathway
+cleavage furrow formation	pathway
+coenzyme A metabolic process	pathway
+collagen biosynthetic process	pathway
+complement activation	pathway
+complement activation, classical pathway	pathway
+cytokine secretion involved in immune response	pathway
+cytokinetic process	pathway
+death-inducing signaling complex assembly	pathway
+defense response to Gram-negative bacterium	pathway
+demethylation	pathway
+dendritic spine development	pathway
+dendritic spine maintenance	pathway
+dentinogenesis	pathway
+drug export	pathway
+embryonic appendage morphogenesis	pathway
+embryonic limb morphogenesis	pathway
+endoderm development	pathway
+endoplasmic reticulum unfolded protein response	pathway
+endosome to lysosome transport	pathway
+endothelial cell apoptotic process	pathway
+endothelial tube lumen extension	pathway
+endothelial tube morphogenesis	pathway
+epiboly	pathway
+epiboly involved in wound healing	pathway
+epithelial to mesenchymal transition	pathway
+epoxygenase P450 pathway	pathway
+establishment of apical/basal cell polarity	pathway
+establishment of endothelial barrier	pathway
+establishment of epithelial cell apical/basal polarity	pathway
+establishment of epithelial cell polarity	pathway
+establishment of monopolar cell polarity	pathway
+establishment of planar polarity	pathway
+establishment of tissue polarity	pathway
+establishment or maintenance of actin cytoskeleton polarity	pathway
+establishment or maintenance of apical/basal cell polarity	pathway
+establishment or maintenance of bipolar cell polarity	pathway
+establishment or maintenance of cytoskeleton polarity	pathway
+establishment or maintenance of epithelial cell apical/basal polarity	pathway
+establishment or maintenance of monopolar cell polarity	pathway
+exogenous drug catabolic process	pathway
+exploration behavior	pathway
+face development	pathway
+fat-soluble vitamin biosynthetic process	pathway
+fat-soluble vitamin metabolic process	pathway
+fatty acid homeostasis	pathway
+fertilization	pathway
+fibrinolysis	pathway
+flagellated sperm motility	pathway
+fluvastatin	drug
+forebrain cell migration	pathway
+forebrain generation of neurons	pathway
+forebrain radial glial cell differentiation	pathway
+fungiform papilla development	pathway
+gastrulation	pathway
+glucocorticoid metabolic process	pathway
+glutamate receptor clustering	pathway
+glycerolipid catabolic process	pathway
+glycerophospholipid catabolic process	pathway
+heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules	pathway
+heterotypic cell-cell adhesion	pathway
+high-density lipoprotein particle assembly	pathway
+high-density lipoprotein particle clearance	pathway
+high-density lipoprotein particle remodeling	pathway
+histone H3 deacetylation	pathway
+histone H3-K9 methylation	pathway
+humoral immune response mediated by circulating immunoglobulin	pathway
+hydrogen peroxide biosynthetic process	pathway
+immunoglobulin mediated immune response	pathway
+innate immune response activating cell surface receptor signaling pathway	pathway
+insulin secretion involved in cellular response to glucose stimulus	pathway
+integrin-mediated signaling pathway	pathway
+interleukin-1 beta secretion	pathway
+interleukin-1 secretion	pathway
+interleukin-8 secretion	pathway
+intestinal absorption	pathway
+intestinal cholesterol absorption	pathway
+intestinal lipid absorption	pathway
+intracellular cholesterol transport	pathway
+intracellular sterol transport	pathway
+isoprenoid biosynthetic process	pathway
+leukocyte activation involved in inflammatory response	pathway
+leukocyte adhesion to vascular endothelial cell	pathway
+leukocyte mediated cytotoxicity	pathway
+leukocyte tethering or rolling	pathway
+leukotriene production involved in inflammatory response	pathway
+lipid digestion	pathway
+lipid hydroxylation	pathway
+lipid transport across blood brain barrier	pathway
+lipid transport involved in lipid storage	pathway
+lipoprotein biosynthetic process	pathway
+lipoprotein catabolic process	pathway
+lipoprotein localization	pathway
+lipoprotein metabolic process	pathway
+lipoprotein transport	pathway
+lipoxygenase pathway	pathway
+locomotory exploration behavior	pathway
+long-chain fatty acid biosynthetic process	pathway
+long-term memory	pathway
+lovastatin	drug
+low-density lipoprotein particle clearance	pathway
+low-density lipoprotein particle receptor catabolic process	pathway
+low-density lipoprotein particle remodeling	pathway
+low-density lipoprotein receptor particle metabolic process	pathway
+lymphocyte migration	pathway
+lysosomal protein catabolic process	pathway
+lysosomal transport	pathway
+maintenance of cell number	pathway
+maintenance of chromatin silencing	pathway
+maintenance of location in cell	pathway
+membrane invagination	pathway
+membrane protein ectodomain proteolysis	pathway
+membrane protein proteolysis	pathway
+membrane to membrane docking	pathway
+microglial cell activation	pathway
+mitotic cleavage furrow formation	pathway
+mitotic cytokinetic process	pathway
+modification of postsynaptic actin cytoskeleton	pathway
+modification of postsynaptic structure	pathway
+modification of synaptic structure	pathway
+modulation by host of viral process	pathway
+monocyte chemotaxis	pathway
+monoterpenoid metabolic process	pathway
+morphogenesis of a polarized epithelium	pathway
+morphogenesis of an endothelium	pathway
+morphogenesis of an epithelial sheet	pathway
+myoblast differentiation	pathway
+negative chemotaxis	pathway
+negative reguation of sterol biosynthetic process	pathway
+negative regulation of ATP metabolic process	pathway
+negative regulation of I-kappaB kinase/NF-kappaB signaling	pathway
+negative regulation of MAP kinase activity	pathway
+negative regulation of MHC class II biosynthetic process	pathway
+negative regulation of Wnt signaling pathway	pathway
+negative regulation of alcohol biosynthetic process	pathway
+negative regulation of amyloid fibril formation	pathway
+negative regulation of amyloid precursor protein catabolic process	pathway
+negative regulation of amyloid-beta formation	pathway
+negative regulation of astrocyte activation	pathway
+negative regulation of astrocyte differentiation	pathway
+negative regulation of axonogenesis	pathway
+negative regulation of blood vessel endothelial cell migration	pathway
+negative regulation of calcium ion transport	pathway
+negative regulation of canonical Wnt signaling pathway	pathway
+negative regulation of cardiac muscle hypertrophy	pathway
+negative regulation of cell adhesion mediated by integrin	pathway
+negative regulation of cell adhesion molecule production	pathway
+negative regulation of cell migration involved in sprouting angiogenesis	pathway
+negative regulation of cell morphogenesis involved in differentiation	pathway
+negative regulation of cell size	pathway
+negative regulation of cell-matrix adhesion	pathway
+negative regulation of cell-substrate adhesion	pathway
+negative regulation of cellular amide metabolic process	pathway
+negative regulation of cholesterol biosynthetic process	pathway
+negative regulation of cholesterol metabolic process	pathway
+negative regulation of cytokine production involved in immune response	pathway
+negative regulation of cytokine secretion	pathway
+negative regulation of cytokine secretion involved in immune response	pathway
+negative regulation of cytokine-mediated signaling pathway	pathway
+negative regulation of dendrite development	pathway
+negative regulation of dendritic spine development	pathway
+negative regulation of endothelial cell apoptotic process	pathway
+negative regulation of endothelial cell migration	pathway
+negative regulation of endothelial cell proliferation	pathway
+negative regulation of epithelial cell apoptotic process	pathway
+negative regulation of epithelial cell migration	pathway
+negative regulation of extrinsic apoptotic signaling pathway via death domain receptors	pathway
+negative regulation of fibrinolysis	pathway
+negative regulation of gene expression, epigenetic	pathway
+negative regulation of glial cell differentiation	pathway
+negative regulation of gliogenesis	pathway
+negative regulation of heterotypic cell-cell adhesion	pathway
+negative regulation of immune effector process	pathway
+negative regulation of insulin secretion	pathway
+negative regulation of insulin secretion involved in cellular response to glucose stimulus	pathway
+negative regulation of interleukin-1 beta production	pathway
+negative regulation of interleukin-1 beta secretion	pathway
+negative regulation of interleukin-1 production	pathway
+negative regulation of interleukin-1 secretion	pathway
+negative regulation of intracellular steroid hormone receptor signaling pathway	pathway
+negative regulation of lipase activity	pathway
+negative regulation of lipid biosynthetic process	pathway
+negative regulation of lipid storage	pathway
+negative regulation of long-term synaptic potentiation	pathway
+negative regulation of macrophage activation	pathway
+negative regulation of macrophage derived foam cell differentiation	pathway
+negative regulation of microglial cell activation	pathway
+negative regulation of muscle adaptation	pathway
+negative regulation of muscle cell apoptotic process	pathway
+negative regulation of muscle hypertrophy	pathway
+negative regulation of neuroinflammatory response	pathway
+negative regulation of nucleotide metabolic process	pathway
+negative regulation of oxidative phosphorylation	pathway
+negative regulation of peptide hormone secretion	pathway
+negative regulation of peptidyl-lysine acetylation	pathway
+negative regulation of plasminogen activation	pathway
+negative regulation of platelet activation	pathway
+negative regulation of presynaptic membrane organization	pathway
+negative regulation of production of molecular mediator of immune response	pathway
+negative regulation of protein maturation	pathway
+negative regulation of protein processing	pathway
+negative regulation of purine nucleotide metabolic process	pathway
+negative regulation of reactive oxygen species biosynthetic process	pathway
+negative regulation of response to cytokine stimulus	pathway
+negative regulation of smooth muscle cell migration	pathway
+negative regulation of smooth muscle cell-matrix adhesion	pathway
+negative regulation of sprouting angiogenesis	pathway
+negative regulation of steroid biosynthetic process	pathway
+negative regulation of steroid metabolic process	pathway
+negative regulation of striated muscle cell apoptotic process	pathway
+negative regulation of supramolecular fiber organization	pathway
+negative regulation of synapse organization	pathway
+negative regulation of triglyceride metabolic process	pathway
+negative regulation of tumor necrosis factor-mediated signaling pathway	pathway
+negative regulation of vascular wound healing	pathway
+negative regulation of very-low-density lipoprotein particle remodeling	pathway
+neural nucleus development	pathway
+neuroepithelial cell differentiation	pathway
+neuron projection regeneration	pathway
+neurotransmitter-gated ion channel clustering	pathway
+neutral lipid biosynthetic process	pathway
+neutral lipid catabolic process	pathway
+neutrophil chemotaxis	pathway
+neutrophil migration	pathway
+nitric oxide mediated signal transduction	pathway
+nitrogen cycle metabolic process	pathway
+non-canonical Wnt signaling pathway	pathway
+odontoblast differentiation	pathway
+omega-hydroxylase P450 pathway	pathway
+opsonization	pathway
+organophosphate ester transport	pathway
+ossification involved in bone maturation	pathway
+osteoblast proliferation	pathway
+ovarian follicle development	pathway
+oxidative demethylation	pathway
+peptidyl-methionine modification	pathway
+peripheral nervous system axon regeneration	pathway
+phagocytosis, engulfment	pathway
+phosphatidylcholine biosynthetic process	pathway
+phosphatidylcholine catabolic process	pathway
+phosphatidylcholine metabolic process	pathway
+phospholipid catabolic process	pathway
+phospholipid efflux	pathway
+phospholipid homeostasis	pathway
+phospholipid transport	pathway
+plasma lipoprotein particle assembly	pathway
+plasma lipoprotein particle clearance	pathway
+plasma lipoprotein particle remodeling	pathway
+plasma membrane invagination	pathway
+podosome assembly	pathway
+polarized epithelial cell differentiation	pathway
+positive regulation by host of viral process	pathway
+positive regulation of Ras protein signal transduction	pathway
+positive regulation of Rho protein signal transduction	pathway
+positive regulation of T cell differentiation	pathway
+positive regulation of T cell migration	pathway
+positive regulation of actin filament bundle assembly	pathway
+positive regulation of actin filament polymerization	pathway
+positive regulation of alpha-beta T cell activation	pathway
+positive regulation of alpha-beta T cell differentiation	pathway
+positive regulation of amyloid fibril formation	pathway
+positive regulation of amyloid-beta clearance	pathway
+positive regulation of axonogenesis	pathway
+positive regulation of blood coagulation	pathway
+positive regulation of blood pressure	pathway
+positive regulation of cardiac muscle cell apoptotic process	pathway
+positive regulation of cholesterol efflux	pathway
+positive regulation of cholesterol esterification	pathway
+positive regulation of cholesterol storage	pathway
+positive regulation of cholesterol transport	pathway
+positive regulation of coagulation	pathway
+positive regulation of collagen biosynthetic process	pathway
+positive regulation of collagen metabolic process	pathway
+positive regulation of cytokinesis	pathway
+positive regulation of dendrite development	pathway
+positive regulation of dendritic spine development	pathway
+positive regulation of dendritic spine maintenance	pathway
+positive regulation of epithelial cell differentiation	pathway
+positive regulation of epithelial to mesenchymal transition	pathway
+positive regulation of exocytosis	pathway
+positive regulation of glial cell differentiation	pathway
+positive regulation of hemostasis	pathway
+positive regulation of heparan sulfate binding	pathway
+positive regulation of heparan sulfate proteoglycan binding	pathway
+positive regulation of histone H3-K9 methylation	pathway
+positive regulation of histone methylation	pathway
+positive regulation of interleukin-1 production	pathway
+positive regulation of interleukin-6 production	pathway
+positive regulation of interleukin-8 production	pathway
+positive regulation of leukocyte adhesion to vascular endothelial cell	pathway
+positive regulation of leukotriene production involved in inflammatory response	pathway
+positive regulation of lipid storage	pathway
+positive regulation of lipid transport across blood brain barrier	pathway
+positive regulation of lipoprotein particle clearance	pathway
+positive regulation of low-density lipoprotein particle receptor catabolic process	pathway
+positive regulation of lymphocyte migration	pathway
+positive regulation of lysosomal protein catabolic process	pathway
+positive regulation of macrophage activation	pathway
+positive regulation of macrophage derived foam cell differentiation	pathway
+positive regulation of membrane protein ectodomain proteolysis	pathway
+positive regulation of monocyte chemotaxis	pathway
+positive regulation of mononuclear cell migration	pathway
+positive regulation of muscle cell apoptotic process	pathway
+positive regulation of neuroepithelial cell differentiation	pathway
+positive regulation of neuroinflammatory response	pathway
+positive regulation of neuron apoptotic process	pathway
+positive regulation of nitric-oxide synthase activity	pathway
+positive regulation of odontoblast differentiation	pathway
+positive regulation of oligodendrocyte differentiation	pathway
+positive regulation of organelle assembly	pathway
+positive regulation of phagocytosis	pathway
+positive regulation of phospholipid efflux	pathway
+positive regulation of phospholipid transport	pathway
+positive regulation of podosome assembly	pathway
+positive regulation of postsynaptic membrane organization	pathway
+positive regulation of protein catabolic process in the vacuole	pathway
+positive regulation of protein polymerization	pathway
+positive regulation of protein targeting to membrane	pathway
+positive regulation of receptor catabolic process	pathway
+positive regulation of receptor-mediated endocytosis	pathway
+positive regulation of regulated secretory pathway	pathway
+positive regulation of skeletal muscle tissue development	pathway
+positive regulation of small GTPase mediated signal transduction	pathway
+positive regulation of smooth muscle contraction	pathway
+positive regulation of steroid metabolic process	pathway
+positive regulation of sterol transport	pathway
+positive regulation of stress fiber assembly	pathway
+positive regulation of striated muscle cell apoptotic process	pathway
+positive regulation of substrate adhesion-dependent cell spreading	pathway
+positive regulation of superoxide anion generation	pathway
+positive regulation of systemic arterial blood pressure	pathway
+positive regulation of toll-like receptor signaling pathway	pathway
+positive regulation of translation	pathway
+positive regulation of triglyceride biosynthetic process	pathway
+positive regulation of triglyceride metabolic process	pathway
+positive regulation of tyrosine phosphorylation of STAT protein	pathway
+positive regulation of vascular smooth muscle contraction	pathway
+positive regulation of viral process	pathway
+postsynaptic membrane organization	pathway
+presynaptic membrane organization	pathway
+production of molecular mediator involved in inflammatory response	pathway
+protein catabolic process in the vacuole	pathway
+protein oxidation	pathway
+protein targeting to membrane	pathway
+protein-containing complex remodeling	pathway
+protein-lipid complex assembly	pathway
+protein-lipid complex remodeling	pathway
+quinone metabolic process	pathway
+radial glial cell differentiation	pathway
+receptor catabolic process	pathway
+receptor clustering	pathway
+receptor-mediated endocytosis involved in cholesterol transport	pathway
+regulation of Cdc42 protein signal transduction	pathway
+regulation of MHC class II biosynthetic process	pathway
+regulation of Rho protein signal transduction	pathway
+regulation of T cell migration	pathway
+regulation of actin filament length	pathway
+regulation of actin filament polymerization	pathway
+regulation of actin polymerization or depolymerization	pathway
+regulation of actomyosin structure organization	pathway
+regulation of alpha-beta T cell activation	pathway
+regulation of alpha-beta T cell differentiation	pathway
+regulation of amyloid fibril formation	pathway
+regulation of amyloid precursor protein catabolic process	pathway
+regulation of amyloid-beta clearance	pathway
+regulation of amyloid-beta formation	pathway
+regulation of astrocyte activation	pathway
+regulation of astrocyte differentiation	pathway
+regulation of axon extension	pathway
+regulation of behavioral fear response	pathway
+regulation of blood vessel diameter by renin-angiotensin	pathway
+regulation of blood volume by renin-angiotensin	pathway
+regulation of cardiac muscle adaptation	pathway
+regulation of cardiac muscle cell apoptotic process	pathway
+regulation of cardiac muscle hypertrophy in response to stress	pathway
+regulation of catecholamine metabolic process	pathway
+regulation of cell adhesion mediated by integrin	pathway
+regulation of cell adhesion molecule production	pathway
+regulation of cell migration involved in sprouting angiogenesis	pathway
+regulation of cell projection assembly	pathway
+regulation of cell-cell adhesion involved in gastrulation	pathway
+regulation of cellular response to very-low-density lipoprotein particle stimulus	pathway
+regulation of cholesterol efflux	pathway
+regulation of cholesterol esterification	pathway
+regulation of cholesterol storage	pathway
+regulation of cholesterol transport	pathway
+regulation of collagen biosynthetic process	pathway
+regulation of collagen metabolic process	pathway
+regulation of cytokine secretion involved in immune response	pathway
+regulation of cytokinesis	pathway
+regulation of dendritic spine development	pathway
+regulation of dendritic spine maintenance	pathway
+regulation of digestive system process	pathway
+regulation of dopamine metabolic process	pathway
+regulation of embryonic development	pathway
+regulation of endothelial cell apoptotic process	pathway
+regulation of epithelial to mesenchymal transition	pathway
+regulation of establishment of planar polarity	pathway
+regulation of extent of cell growth	pathway
+regulation of extrinsic apoptotic signaling pathway via death domain receptors	pathway
+regulation of fear response	pathway
+regulation of fibrinolysis	pathway
+regulation of gastrulation	pathway
+regulation of glomerular filtration	pathway
+regulation of heparan sulfate binding	pathway
+regulation of heparan sulfate proteoglycan binding	pathway
+regulation of heterotypic cell-cell adhesion	pathway
+regulation of histone H3-K9 methylation	pathway
+regulation of insulin secretion involved in cellular response to glucose stimulus	pathway
+regulation of integrin activation	pathway
+regulation of interleukin-1 beta production	pathway
+regulation of interleukin-1 beta secretion	pathway
+regulation of interleukin-1 secretion	pathway
+regulation of interleukin-8 production	pathway
+regulation of interleukin-8 secretion	pathway
+regulation of intestinal absorption	pathway
+regulation of intestinal cholesterol absorption	pathway
+regulation of intestinal lipid absorption	pathway
+regulation of leukocyte adhesion to vascular endothelial cell	pathway
+regulation of leukocyte mediated cytotoxicity	pathway
+regulation of leukotriene production involved in inflammatory response	pathway
+regulation of lipid transport across blood brain barrier	pathway
+regulation of lipoprotein particle clearance	pathway
+regulation of long-term synaptic potentiation	pathway
+regulation of low-density lipoprotein particle receptor catabolic process	pathway
+regulation of lymphocyte migration	pathway
+regulation of lysosomal protein catabolic process	pathway
+regulation of macrophage activation	pathway
+regulation of membrane protein ectodomain proteolysis	pathway
+regulation of microglial cell activation	pathway
+regulation of modification of postsynaptic actin cytoskeleton	pathway
+regulation of modification of postsynaptic structure	pathway
+regulation of modification of synaptic structure	pathway
+regulation of monocyte chemotaxis	pathway
+regulation of mononuclear cell migration	pathway
+regulation of neuroinflammatory response	pathway
+regulation of neuronal synaptic plasticity	pathway
+regulation of neutrophil degranulation	pathway
+regulation of odontoblast differentiation	pathway
+regulation of oligodendrocyte differentiation	pathway
+regulation of osteoblast proliferation	pathway
+regulation of phosphatidylcholine catabolic process	pathway
+regulation of phospholipid catabolic process	pathway
+regulation of phospholipid efflux	pathway
+regulation of phospholipid transport	pathway
+regulation of plasma membrane bounded cell projection assembly	pathway
+regulation of plasminogen activation	pathway
+regulation of platelet activation	pathway
+regulation of platelet-derived growth factor receptor signaling pathway	pathway
+regulation of podosome assembly	pathway
+regulation of postsynapse organization	pathway
+regulation of postsynaptic membrane organization	pathway
+regulation of presynaptic membrane organization	pathway
+regulation of protein catabolic process in the vacuole	pathway
+regulation of protein homooligomerization	pathway
+regulation of protein oligomerization	pathway
+regulation of protein targeting to membrane	pathway
+regulation of receptor biosynthetic process	pathway
+regulation of receptor catabolic process	pathway
+regulation of renal output by angiotensin	pathway
+regulation of renal system process	pathway
+regulation of skeletal muscle tissue development	pathway
+regulation of smooth muscle cell migration	pathway
+regulation of smooth muscle cell-matrix adhesion	pathway
+regulation of sprouting angiogenesis	pathway
+regulation of sterol transport	pathway
+regulation of stress fiber assembly	pathway
+regulation of striated muscle cell apoptotic process	pathway
+regulation of substrate adhesion-dependent cell spreading	pathway
+regulation of superoxide anion generation	pathway
+regulation of superoxide metabolic process	pathway
+regulation of systemic arterial blood pressure by renin-angiotensin	pathway
+regulation of toll-like receptor signaling pathway	pathway
+regulation of triglyceride biosynthetic process	pathway
+regulation of triglyceride metabolic process	pathway
+regulation of tumor necrosis factor-mediated signaling pathway	pathway
+regulation of tyrosine phosphorylation of STAT protein	pathway
+regulation of vascular smooth muscle contraction	pathway
+regulation of vascular wound healing	pathway
+regulation of very-low-density lipoprotein particle remodeling	pathway
+release of cytochrome c from mitochondria	pathway
+renal control of peripheral vascular resistance involved in regulation of systemic arterial blood pressure	pathway
+renal system process involved in regulation of blood volume	pathway
+renal system process involved in regulation of systemic arterial blood pressure	pathway
+replicative senescence	pathway
+response to angiotensin	pathway
+response to caffeine	pathway
+response to caloric restriction	pathway
+response to chemokine	pathway
+response to copper ion	pathway
+response to dietary excess	pathway
+response to diuretic	pathway
+response to dopamine	pathway
+response to hyperoxia	pathway
+response to increased oxygen levels	pathway
+response to interleukin-6	pathway
+response to lipoprotein particle	pathway
+response to mineralocorticoid	pathway
+response to muscle stretch	pathway
+response to selenium ion	pathway
+reverse cholesterol transport	pathway
+rosuvastatin	drug
+ruffle assembly	pathway
+ruffle organization	pathway
+secretion by tissue	pathway
+simvastatin	drug
+skeletal muscle satellite cell migration	pathway
+smooth muscle cell migration	pathway
+smooth muscle cell-matrix adhesion	pathway
+sodium-independent organic anion transport	pathway
+somatic stem cell population maintenance	pathway
+sperm motility	pathway
+stem cell population maintenance	pathway
+steroid catabolic process	pathway
+steroid esterification	pathway
+sterol catabolic process	pathway
+sterol esterification	pathway
+sterol import	pathway
+stimulatory C-type lectin receptor signaling pathway	pathway
+striated muscle adaptation	pathway
+striated muscle cell apoptotic process	pathway
+substantia nigra development	pathway
+substrate adhesion-dependent cell spreading	pathway
+superoxide anion generation	pathway
+synaptic transmission, cholinergic	pathway
+telencephalon cell migration	pathway
+thymus development	pathway
+toll-like receptor 4 signaling pathway	pathway
+tongue development	pathway
+tongue morphogenesis	pathway
+triglyceride biosynthetic process	pathway
+triglyceride catabolic process	pathway
+triglyceride homeostasis	pathway
+triglyceride mobilization	pathway
+triglyceride-rich lipoprotein particle clearance	pathway
+triglyceride-rich lipoprotein particle remodeling	pathway
+tyrosine phosphorylation of STAT protein	pathway
+ubiquinone metabolic process	pathway
+urea metabolic process	pathway
+vacuolar transport	pathway
+vascular smooth muscle contraction	pathway
+vascular wound healing	pathway
+vasodilation	pathway
+very-low-density lipoprotein particle assembly	pathway
+very-low-density lipoprotein particle clearance	pathway
+very-low-density lipoprotein particle remodeling	pathway
+virion assembly	pathway
+vitamin D biosynthetic process	pathway
+vitamin D metabolic process	pathway
+vitamin D3 metabolic process	pathway
+vitamin biosynthetic process	pathway
+vitamin transport	pathway
+wound healing, spreading of cells	pathway
+xenobiotic transport	pathway
