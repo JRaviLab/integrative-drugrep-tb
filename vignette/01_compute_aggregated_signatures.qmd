@@ -1,0 +1,77 @@
+# Compute aggregated signatures from individual signatures
+# Last modified: 11/13/25
+# Author: Kewalin Samart
+
+##### Load libraries and sort scripts
+```{r}
+library(readr)
+library(here)
+source(here("scripts/00_background_genes_PA_functions.R"))
+source(here("scripts/01_signature_aggregation_functions.R"))
+```
+
+### Testing each sigle function
+##### Initialize arguments
+```{r}
+# example argument
+metadata_path = here("data/signatures/microarray_TB_signature_run_info.tsv")
+data_path = here("data/signatures/microarray")
+direction = "up"
+bg_source = "LINCS" # L1000 genes
+extension = paste0("_",direction,".tsv")
+lincs_genetype= "landmark"
+output_dir = here("data/signatures/microarray/aggregated_signatures")
+threshold_pct <- 0.90
+```
+
+##### Compute membership matrix
+```{r}
+gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_source = bg_source, 
+                          output_dir = output_dir, lincs_genetype = lincs_genetype, extension = extension, save_result=TRUE)
+```
+
+##### Compute jaccard matrix
+```{r}
+jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                       direction = direction, output_dir = output_dir, save_result=TRUE) 
+```
+
+##### Compute aggregated signature
+```{r}
+aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+```
+
+
+### Getting up/dn microarray/RNAseq signatures
+```{r}
+# set up parameters
+technologies = c("microarray", "RNAseq")
+directions = c("up","dn")
+bg_source = "LINCS" # L1000 genes
+lincs_genetype= "landmark"
+threshold_pct <- 0.90
+
+for(technology in technologies){
+  for(direction in directions){
+    # set up paths
+    metadata_path = here(paste0("data/signatures/",technology,"_TB_signature_run_info.tsv"))
+    data_path = here(paste0("data/signatures/",technology))
+    output_dir = here(paste0("data/signatures/",technology,"/aggregated_signatures"))
+    extension = paste0("_",direction,".tsv")
+    
+    # get gene membership matrix and save it
+    gene_membership_matrix = compute_membership_matrix(metadata_path = metadata_path, data_path = data_path, 
+                          direction = direction, bg_source = bg_source, 
+                          output_dir = output_dir, lincs_genetype = lincs_genetype, extension = extension, save_result=TRUE)
+    
+    # get jaccard matrix and save it
+    jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path = data_path, 
+                       direction = direction, output_dir = output_dir, save_result=TRUE) 
+    
+    # compute aggregates signature and save it
+    aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
+  }
+}
+
+```
