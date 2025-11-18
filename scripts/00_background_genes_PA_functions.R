@@ -1,6 +1,8 @@
-# functions to obtain background genes for Pathway analyses and suchs -- Homo Sapiens
-# last modified: 08/27/25
+# functions to obtain background genes for Pathway analyses -- Homo Sapiens
+# last modified: 11/16/25
 # Kewalin Samart
+
+library(tidyverse)
 
 GO_genes <- function(){
   #' @description this function returns all human gene ids present in the GO db
@@ -46,11 +48,12 @@ bg_LINCS_genes <- function(GeneType="landmark"){
   return(bg_lincs_genes)
 }
 
-bg_from_data <- function(metadata_path, data_path, extension="") {
+bg_from_data <- function(metadata_path, data_path, direction, extension=".tsv") {
   #' @description Collect union of genes across all datasets (background genes)
   #' @param metadata_path Path to metadata file listing datasets
   #' @param data_path Path to DE result tables or signatures
-  #' @param extension String like "up_none", "dn_landmark", "full_none" (optional)
+  #' @param direction Path to DE result tables or signatures
+  #' @param extension String like "_up.tsv", "_dn.tsv" (optional)
   #' @return Character vector of unique genes across datasets
   #' @author Kewalin Samart
 
@@ -61,7 +64,8 @@ bg_from_data <- function(metadata_path, data_path, extension="") {
 
   for (i in seq_len(nrow(data_to_run))) {
     file_name <- data_to_run$SIGNATURE_NAME[i]
-    file_path <- paste0(data_path,"/",file_name,extension)
+    file_path <- paste0(data_path,"/",direction,"/",file_name,extension)
+    print(file_path)
 
     if (!file.exists(file_path)) next
 
@@ -73,41 +77,44 @@ bg_from_data <- function(metadata_path, data_path, extension="") {
   return(unique(all_genes))
 }
 
-get_bg_genes <- function(bg_source, metadata_path=NULL, data_path=NULL, extra_arg=NULL, extension=NULL){
+get_bg_genes <- function(bg_source, metadata_path=NULL, data_path=NULL, lincs_genetype=NULL, extension=".tsv", direction_input_data=NULL){
   #' @description get background genes by the given data source name
   #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
   #' @param metadata_path path to metadata file describing DE results/signatures details
   #' @example "./data/metadata/"
   #' @param data_path path to DE data table/ signatures
   #' @example "./data/uniformly_processed/microarray/DEresults/", "./data/uniformly_processed/microarray/signatures/dn/"
-  #' @param extra_arg a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
-  #' @param extension
+  #' @param lincs_genetype a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
+  #' @param extension a string indicating file extension e.g., "_up.tsv", "_dn.tsv"
   #' @returns bg_genes background genes (all genes present in the source database)
   #' @author Kewalin Samart
   if(bg_source == "LINCS"){
-    if(!(extra_arg %in% c("landmark", "inferred", "best inferred", "not inferred", "reference"))){
+    if(is.null(lincs_genetype)){
       bg_genes <- bg_LINCS_genes()
     }else{
-      bg_genes <- bg_LINCS_genes(GeneType=extra_arg)
+      bg_genes <- bg_LINCS_genes(GeneType = lincs_genetype)
     }
   }else if(bg_source == "KEGG"){
     bg_genes <- KEGG_genes()
   }else if(bg_source == "GO") {
     bg_genes <- GO_genes()
   }else if(bg_source == "input data") {
-    bg_genes <- bg_from_data(metadata_path,data_path,extension = extension)
+    if(is.null(direction_input_data)){
+      stop("need to spefify a valid direction if using input data as background genes")
+    }
+    bg_genes <- bg_from_data(metadata_path,data_path,direction = direction_input_data,extension = extension)
   }
   return(bg_genes)
 }
 
 final_bg_genes <- function(gene_set, bg_source, GeneType=NULL){
-   #' @description Given a gene set of interest (GeneID i.e., Entrezid) and name of database to perform analyses, this function gives back the intersecting genes as the final background genes.
-   #' @param gene_set a character vector of GeneIDs of interest
-   #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
-   #' @param GeneType (optional) a string indicating gene type(s) from the L1000 project: (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference"
-   #' @returns final_bg_genes a character vector containing the final backgroud genes
-   #' @author Kewalin Samart
-  bg_genes = get_bg_genes(bg_source, extra_arg=GeneType)
+  #' @description Given a gene set of interest (GeneID i.e., Entrezid) and name of database to perform analyses, this function gives back the intersecting genes as the final background genes.
+  #' @param gene_set a character vector of GeneIDs of interest
+  #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
+  #' @param GeneType (optional) a string indicating gene type(s) from the L1000 project: (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference"
+  #' @returns final_bg_genes a character vector containing the final backgroud genes
+  #' @author Kewalin Samart
+  bg_genes = get_bg_genes(bg_source, lincs_genetype=GeneType)
   final_bg_genes = intersect(as.character(gene_set), bg_genes)
 
   return(final_bg_genes)
@@ -130,8 +137,10 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   bg_genes_rnaseq_raw <- get_bg_genes(
     bg_source = "input data",
     metadata_path = metadata_path_rnaseq,
-    data_path = paste0(data_path_rnaseq,"/",direction),
-    extension = extension_rnaseq
+    data_path = paste0(data_path_rnaseq),
+    lincs_genetype=NULL,
+    extension = extension_rnaseq,
+    direction_input_data=direction
   )
   bg_genes_rnaseq <- intersect(bg_genes_rnaseq_raw, GO_genes_vector)
 
@@ -139,8 +148,10 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   bg_genes_microarray_raw <- get_bg_genes(
     bg_source = "input data",
     metadata_path = metadata_path_microarray,
-    data_path = paste0(data_path_microarray,"/",direction),
-    extension = extension_microarray
+    data_path = paste0(data_path_microarray),
+    lincs_genetype=NULL,
+    extension = extension_microarray,
+    direction_input_data=direction
   )
   bg_genes_microarray <- intersect(bg_genes_microarray_raw, GO_genes_vector)
 
