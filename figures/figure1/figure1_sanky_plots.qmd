@@ -10,11 +10,11 @@ library(dplyr)
 ```
 
 ```{r microarray signature info}
-microarray_signatures_df <- read_tsv(here("data/signatures/sankey_microarray_TB_signature_run_info.tsv"))
+microarray_signatures_df <- read_tsv(here("figures/figure1/sankey_microarray_TB_signature_run_info.tsv"))
 microarray_signatures_info <- microarray_signatures_df[microarray_signatures_df$signature == 1,]
 microarray_signatures_info$technology <- "microarray"
 
-rnaseq_signatures_df <- read_tsv(here("data/signatures/sankey_RNAseq_TB_signature_run_info.tsv"))
+rnaseq_signatures_df <- read_tsv(here("figures/figure1/sankey_RNAseq_TB_signature_run_info.tsv"))
 rnaseq_signatures_info <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1,]
 rnaseq_signatures_info$technology <- "RNAseq"
 ```
@@ -27,7 +27,7 @@ print(colnames(rnaseq_signatures_info))
 ```{r combine signature info}
 all_signatures_info = rbind(microarray_signatures_info, rnaseq_signatures_info)
 
-write_tsv(all_signatures_info, file = here("data/metadata/202506_TB_signatures_info.tsv"))
+write_tsv(all_signatures_info, file = here("data/signatures/202506_TB_signatures_info.tsv"))
 ```
 
 ```{r Sankey diagram}
@@ -84,7 +84,7 @@ nodes <- all_node_counts %>%
       "blood_macrophage" = "Macrophage",
       .default = label
     ),
-    label = paste0(label, " (", total, ")")   # Add count after shortening
+    label = paste0(label, " (", total, ")")   
   ) %>%
   dplyr::select(name, label)
 
