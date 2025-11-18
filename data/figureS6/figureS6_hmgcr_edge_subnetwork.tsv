@@ -1,1409 +1,263 @@
 from	to	type
+APOB	UBC	target-target
+CDC25C	CDK1	target-target
+CDC25C	CCNB1	target-target
+CDC25C	CHEK1	target-target
+CDC25C	CDK2	target-target
+CDC25C	ORC5	target-target
+CDC25C	UBC	target-target
+DFFB	UBC	target-target
+DNMT3B	UBC	target-target
+DNMT3B	HDAC1	target-target
+FDFT1	UBB	target-target
 FDFT1	UBC	target-target
+FOXO3	TP53	target-target
+FOXO3	EP300	target-target
+FOXO3	SKP2	target-target
+FOXO3	SMAD4	target-target
+FOXO3	UBC	target-target
+FOXO3	CREBBP	target-target
+FOXO3	ESR1	target-target
+GABPA	UBC	target-target
+GABPA	EP300	target-target
 HMGCR	UBC	target-target
+HNF1A	CREBBP	target-target
 HNF1A	EP300	target-target
+PLD1	UBC	target-target
+PLD2	UBC	target-target
+RIPK1	UBC	target-target
+SLC2A3	UBC	target-target
+SMAD2	TP53	target-target
+SMAD2	SMAD4	target-target
+SMAD2	HDAC1	target-target
+SMAD2	EP300	target-target
+SMAD2	ESR1	target-target
+SMAD2	UBC	target-target
+SMAD2	CREBBP	target-target
 SREBF1	EP300	target-target
 SREBF1	UBC	target-target
+SREBF1	CREBBP	target-target
 USP24	UBC	target-target
+ZNF423	SMAD4	target-target
+dopamine	RBM34	drug-dpgene
+dopamine	HMOX1	drug-dpgene
+dopamine	SUV39H1	drug-dpgene
+dopamine	STUB1	drug-dpgene
+quercetin	LAMA3	drug-dpgene
+quercetin	ATP6V1D	drug-dpgene
+quercetin	MVP	drug-dpgene
+quercetin	SIRT3	drug-dpgene
+curcumin	CDC45	drug-dpgene
+curcumin	ABHD4	drug-dpgene
+curcumin	HMOX1	drug-dpgene
+curcumin	AKR7A2	drug-dpgene
+resveratrol	CDC20	drug-dpgene
+resveratrol	CDKN1A	drug-dpgene
+resveratrol	TIMELESS	drug-dpgene
+resveratrol	TIPARP	drug-dpgene
 rosuvastatin	TPM1	drug-dpgene
-rosuvastatin	TSC22D3	drug-dpgene
 rosuvastatin	RHOA	drug-dpgene
 rosuvastatin	CSRP1	drug-dpgene
-lovastatin	CDKN1A	drug-dpgene
-lovastatin	CCDC86	drug-dpgene
+rosuvastatin	TSC22D3	drug-dpgene
 lovastatin	TSC22D3	drug-dpgene
+lovastatin	CDKN1A	drug-dpgene
 lovastatin	CDC25A	drug-dpgene
-simvastatin	HMGCR	drug-dpgene
-simvastatin	CDC25A	drug-dpgene
-simvastatin	TSC22D3	drug-dpgene
+lovastatin	CCDC86	drug-dpgene
+tamoxifen	ITGAE	drug-dpgene
+tamoxifen	PRSS23	drug-dpgene
+tamoxifen	HMGCS1	drug-dpgene
+tamoxifen	INSIG1	drug-dpgene
 simvastatin	CCDC86	drug-dpgene
-fluvastatin	TSC22D3	drug-dpgene
-fluvastatin	TPM1	drug-dpgene
+simvastatin	HMGCR	drug-dpgene
+simvastatin	TSC22D3	drug-dpgene
+simvastatin	CDC25A	drug-dpgene
+gemfibrozil	ST3GAL5	drug-dpgene
+gemfibrozil	GMNN	drug-dpgene
+gemfibrozil	MAP7	drug-dpgene
+gemfibrozil	CYCS	drug-dpgene
 fluvastatin	PCNA	drug-dpgene
 fluvastatin	RHOA	drug-dpgene
+fluvastatin	TSC22D3	drug-dpgene
+fluvastatin	TPM1	drug-dpgene
+triclosan	CDC25A	drug-dpgene
+triclosan	HMOX1	drug-dpgene
+triclosan	DDIT4	drug-dpgene
+triclosan	ITGAE	drug-dpgene
+dopamine	ADRA2A	drug-target
+quercetin	APOB	drug-target
+curcumin	CAMK2A	drug-target
+quercetin	CD34	drug-target
+quercetin	CDC25C	drug-target
+resveratrol	CEL	drug-target
 rosuvastatin	COQ2	drug-target
+curcumin	DFFB	drug-target
+curcumin	DNMT3B	drug-target
 lovastatin	FDFT1	drug-target
+tamoxifen	FMO1	drug-target
 rosuvastatin	FOXA3	drug-target
+resveratrol	FOXO3	drug-target
+quercetin	GABPA	drug-target
+resveratrol	GDF15	drug-target
+dopamine	GFER	drug-target
 rosuvastatin	HNF1A	drug-target
+curcumin	HSD17B3	drug-target
+quercetin	HSF1	drug-target
+curcumin	IAPP	drug-target
 simvastatin	ICMT	drug-target
+gemfibrozil	LEP	drug-target
 fluvastatin	LIPC	drug-target
 rosuvastatin	LPA	drug-target
+tamoxifen	LRMDA	drug-target
+quercetin	MBP	drug-target
+resveratrol	PECAM1	drug-target
+tamoxifen	PIP	drug-target
+quercetin	PKN1	drug-target
+quercetin	PKN3	drug-target
+tamoxifen	PLD1	drug-target
+tamoxifen	PLD2	drug-target
+quercetin	PON1	drug-target
 simvastatin	PON1	drug-target
+resveratrol	RIPK1	drug-target
+tamoxifen	RRAS2	drug-target
+triclosan	RXRA	drug-target
 simvastatin	SCAP	drug-target
 rosuvastatin	SCAP	drug-target
 fluvastatin	SLC15A1	drug-target
+resveratrol	SLC2A3	drug-target
+curcumin	SMAD2	drug-target
 fluvastatin	SREBF1	drug-target
+tamoxifen	TFF3	drug-target
+curcumin	THBD	drug-target
 rosuvastatin	USP24	drug-target
+tamoxifen	ZNF423	drug-target
 simvastatin	ZNF542P	drug-target
-rosuvastatin	lipoprotein transport	drug-pathway
-rosuvastatin	insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-rosuvastatin	cardiac muscle cell apoptotic process	drug-pathway
-rosuvastatin	lipoprotein localization	drug-pathway
-rosuvastatin	superoxide anion generation	drug-pathway
-rosuvastatin	negative regulation of MAP kinase activity	drug-pathway
-rosuvastatin	chylomicron remodeling	drug-pathway
-rosuvastatin	opsonization	drug-pathway
-rosuvastatin	regulation of interleukin-8 production	drug-pathway
-rosuvastatin	low-density lipoprotein particle remodeling	drug-pathway
-rosuvastatin	quinone metabolic process	drug-pathway
-rosuvastatin	protein-lipid complex assembly	drug-pathway
-rosuvastatin	thyroid hormone transport	drug-pathway
-rosuvastatin	negative regulation of peptide hormone secretion	drug-pathway
-rosuvastatin	plasma lipoprotein particle remodeling	drug-pathway
-rosuvastatin	B cell mediated immunity	drug-pathway
-rosuvastatin	regulation of interleukin-8 secretion	drug-pathway
-rosuvastatin	chylomicron remnant clearance	drug-pathway
-rosuvastatin	ubiquinone metabolic process	drug-pathway
-rosuvastatin	isoprenoid biosynthetic process	drug-pathway
+dopamine	negative regulation of cholesterol metabolic process	drug-pathway
+dopamine	negative regulation of cholesterol biosynthetic process	drug-pathway
+quercetin	positive regulation of cholesterol efflux	drug-pathway
+quercetin	cholesterol efflux	drug-pathway
+quercetin	regulation of cholesterol transport	drug-pathway
+quercetin	regulation of cholesterol efflux	drug-pathway
+quercetin	positive regulation of cholesterol transport	drug-pathway
+curcumin	regulation of cholesterol storage	drug-pathway
+curcumin	cholesterol storage	drug-pathway
+curcumin	regulation of cholesterol transport	drug-pathway
+curcumin	negative regulation of cholesterol storage	drug-pathway
+curcumin	regulation of cholesterol transporter activity	drug-pathway
+resveratrol	regulation of cholesterol transport	drug-pathway
+resveratrol	positive regulation of cholesterol esterification	drug-pathway
+resveratrol	reverse cholesterol transport	drug-pathway
+resveratrol	positive regulation of cholesterol efflux	drug-pathway
+resveratrol	regulation of cholesterol storage	drug-pathway
+resveratrol	cholesterol storage	drug-pathway
+resveratrol	regulation of cholesterol efflux	drug-pathway
+resveratrol	regulation of intestinal cholesterol absorption	drug-pathway
+resveratrol	positive regulation of cholesterol transport	drug-pathway
+resveratrol	cholesterol esterification	drug-pathway
+resveratrol	regulation of cholesterol transporter activity	drug-pathway
+resveratrol	negative regulation of cholesterol storage	drug-pathway
+resveratrol	cholesterol import	drug-pathway
+resveratrol	regulation of cholesterol esterification	drug-pathway
+resveratrol	cholesterol efflux	drug-pathway
+resveratrol	intestinal cholesterol absorption	drug-pathway
 rosuvastatin	positive regulation of cholesterol storage	drug-pathway
-rosuvastatin	chylomicron assembly	drug-pathway
-rosuvastatin	negative regulation of striated muscle cell apoptotic process	drug-pathway
-rosuvastatin	glycerolipid catabolic process	drug-pathway
-rosuvastatin	triglyceride-rich lipoprotein particle remodeling	drug-pathway
-rosuvastatin	positive regulation of superoxide anion generation	drug-pathway
-rosuvastatin	triglyceride mobilization	drug-pathway
-rosuvastatin	positive regulation of lipid storage	drug-pathway
-rosuvastatin	response to selenium ion	drug-pathway
-rosuvastatin	positive regulation of cardiac muscle cell apoptotic process	drug-pathway
-rosuvastatin	positive regulation of striated muscle cell apoptotic process	drug-pathway
-rosuvastatin	plasma lipoprotein particle clearance	drug-pathway
-rosuvastatin	negative regulation of lipid storage	drug-pathway
-rosuvastatin	negative regulation of macrophage derived foam cell differentiation	drug-pathway
-rosuvastatin	myoblast differentiation	drug-pathway
-rosuvastatin	positive regulation of muscle cell apoptotic process	drug-pathway
 rosuvastatin	cholesterol storage	drug-pathway
-rosuvastatin	striated muscle cell apoptotic process	drug-pathway
-rosuvastatin	very-low-density lipoprotein particle clearance	drug-pathway
-rosuvastatin	regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-rosuvastatin	interleukin-8 secretion	drug-pathway
-rosuvastatin	artery morphogenesis	drug-pathway
-rosuvastatin	immunoglobulin mediated immune response	drug-pathway
-rosuvastatin	negative regulation of muscle cell apoptotic process	drug-pathway
-rosuvastatin	fertilization	drug-pathway
-rosuvastatin	regulation of skeletal muscle tissue development	drug-pathway
-rosuvastatin	protein-lipid complex remodeling	drug-pathway
-rosuvastatin	humoral immune response mediated by circulating immunoglobulin	drug-pathway
-rosuvastatin	protein-containing complex remodeling	drug-pathway
-rosuvastatin	regulation of superoxide metabolic process	drug-pathway
-rosuvastatin	lipoprotein biosynthetic process	drug-pathway
-rosuvastatin	plasma lipoprotein particle assembly	drug-pathway
-rosuvastatin	coenzyme A metabolic process	drug-pathway
-rosuvastatin	low-density lipoprotein particle clearance	drug-pathway
-rosuvastatin	triglyceride catabolic process	drug-pathway
 rosuvastatin	cholesterol efflux	drug-pathway
 rosuvastatin	regulation of cholesterol storage	drug-pathway
-rosuvastatin	neutral lipid catabolic process	drug-pathway
-rosuvastatin	acylglycerol catabolic process	drug-pathway
-rosuvastatin	lipoprotein metabolic process	drug-pathway
-rosuvastatin	artery development	drug-pathway
-rosuvastatin	positive regulation of macrophage derived foam cell differentiation	drug-pathway
-rosuvastatin	negative regulation of insulin secretion	drug-pathway
-rosuvastatin	very-low-density lipoprotein particle assembly	drug-pathway
-rosuvastatin	triglyceride-rich lipoprotein particle clearance	drug-pathway
-rosuvastatin	regulation of superoxide anion generation	drug-pathway
-rosuvastatin	negative regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-rosuvastatin	flagellated sperm motility	drug-pathway
-rosuvastatin	sperm motility	drug-pathway
-rosuvastatin	acute-phase response	drug-pathway
-rosuvastatin	positive regulation of skeletal muscle tissue development	drug-pathway
-rosuvastatin	bile acid and bile salt transport	drug-pathway
-rosuvastatin	sodium-independent organic anion transport	drug-pathway
-rosuvastatin	regulation of striated muscle cell apoptotic process	drug-pathway
-rosuvastatin	lipoprotein catabolic process	drug-pathway
-rosuvastatin	regulation of cardiac muscle cell apoptotic process	drug-pathway
-lovastatin	cellular response to unfolded protein	drug-pathway
-lovastatin	protein-containing complex remodeling	drug-pathway
-lovastatin	plasma lipoprotein particle remodeling	drug-pathway
-lovastatin	regulation of amyloid-beta clearance	drug-pathway
-lovastatin	positive regulation of lipid storage	drug-pathway
-lovastatin	regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-lovastatin	cellular response to topologically incorrect protein	drug-pathway
-lovastatin	maintenance of chromatin silencing	drug-pathway
-lovastatin	regulation of embryonic development	drug-pathway
-lovastatin	protein-lipid complex remodeling	drug-pathway
-lovastatin	regulation of astrocyte differentiation	drug-pathway
-lovastatin	protein oxidation	drug-pathway
-lovastatin	cytokine secretion involved in immune response	drug-pathway
-lovastatin	epithelial to mesenchymal transition	drug-pathway
-lovastatin	actin polymerization or depolymerization	drug-pathway
-lovastatin	negative regulation of gene expression, epigenetic	drug-pathway
-lovastatin	regulation of alpha-beta T cell differentiation	drug-pathway
-lovastatin	mitotic spindle assembly	drug-pathway
-lovastatin	epiboly involved in wound healing	drug-pathway
-lovastatin	peptidyl-lysine acetylation	drug-pathway
-lovastatin	cytoskeleton-dependent cytokinesis	drug-pathway
-lovastatin	morphogenesis of a polarized epithelium	drug-pathway
-lovastatin	lysosomal transport	drug-pathway
-lovastatin	lymphocyte migration	drug-pathway
-lovastatin	renal system process involved in regulation of systemic arterial blood pressure	drug-pathway
-lovastatin	plasma membrane invagination	drug-pathway
-lovastatin	negative regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-lovastatin	T cell lineage commitment	drug-pathway
-lovastatin	glycerolipid catabolic process	drug-pathway
-lovastatin	lipid digestion	drug-pathway
-lovastatin	somatic stem cell population maintenance	drug-pathway
-lovastatin	eyelid development in camera-type eye	drug-pathway
-lovastatin	negative chemotaxis	drug-pathway
-lovastatin	positive regulation of skeletal muscle tissue development	drug-pathway
-lovastatin	morphogenesis of an epithelial sheet	drug-pathway
-lovastatin	negative regulation of insulin secretion	drug-pathway
-lovastatin	long-chain fatty acid biosynthetic process	drug-pathway
-lovastatin	oxidative phosphorylation	drug-pathway
-lovastatin	regulation of lymphocyte migration	drug-pathway
-lovastatin	cytokinetic process	drug-pathway
-lovastatin	negative regulation of muscle adaptation	drug-pathway
-lovastatin	skeletal muscle satellite cell migration	drug-pathway
-lovastatin	negative regulation of gliogenesis	drug-pathway
-lovastatin	acylglycerol homeostasis	drug-pathway
-lovastatin	low-density lipoprotein particle clearance	drug-pathway
-lovastatin	negative regulation of glial cell differentiation	drug-pathway
-lovastatin	regulation of histone H3-K9 methylation	drug-pathway
-lovastatin	regulation of modification of synaptic structure	drug-pathway
-lovastatin	monoterpenoid metabolic process	drug-pathway
-lovastatin	histone H3-K9 trimethylation	drug-pathway
-lovastatin	chromatin silencing	drug-pathway
-lovastatin	insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-lovastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
-lovastatin	myoblast differentiation	drug-pathway
-lovastatin	xenobiotic transport	drug-pathway
-lovastatin	positive regulation of lipoprotein particle clearance	drug-pathway
-lovastatin	positive regulation of neuron apoptotic process	drug-pathway
-lovastatin	death-inducing signaling complex assembly	drug-pathway
-lovastatin	triglyceride-rich lipoprotein particle clearance	drug-pathway
-lovastatin	cellular response to lipoprotein particle stimulus	drug-pathway
-lovastatin	drug export	drug-pathway
-lovastatin	lipoprotein transport	drug-pathway
-lovastatin	regulation of epithelial to mesenchymal transition	drug-pathway
-lovastatin	face development	drug-pathway
-lovastatin	alkaloid metabolic process	drug-pathway
-lovastatin	negative regulation of blood vessel endothelial cell migration	drug-pathway
-lovastatin	alkaloid catabolic process	drug-pathway
-lovastatin	peptidyl-lysine trimethylation	drug-pathway
-lovastatin	negative regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-lovastatin	negative regulation of epithelial cell migration	drug-pathway
-lovastatin	negative regulation of protein acetylation	drug-pathway
-lovastatin	negative regulation of cardiac muscle hypertrophy	drug-pathway
-lovastatin	positive regulation of axonogenesis	drug-pathway
-lovastatin	regulation of histone H3-K9 trimethylation	drug-pathway
-lovastatin	exogenous drug catabolic process	drug-pathway
-lovastatin	acylglycerol biosynthetic process	drug-pathway
-lovastatin	establishment of apical/basal cell polarity	drug-pathway
-lovastatin	regulation of neuroinflammatory response	drug-pathway
-lovastatin	negative regulation of ATP metabolic process	drug-pathway
-lovastatin	establishment of monopolar cell polarity	drug-pathway
-lovastatin	establishment or maintenance of monopolar cell polarity	drug-pathway
-lovastatin	positive regulation of glial cell differentiation	drug-pathway
-lovastatin	regulation of actin filament polymerization	drug-pathway
-lovastatin	phospholipid catabolic process	drug-pathway
-lovastatin	regulation of actin polymerization or depolymerization	drug-pathway
-lovastatin	regulation of actin filament length	drug-pathway
-lovastatin	Cdc42 protein signal transduction	drug-pathway
-lovastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
-lovastatin	triglyceride-rich lipoprotein particle remodeling	drug-pathway
-lovastatin	regulation of gastrulation	drug-pathway
-lovastatin	nitric oxide mediated signal transduction	drug-pathway
-lovastatin	alpha-beta T cell lineage commitment	drug-pathway
-lovastatin	histone lysine methylation	drug-pathway
-lovastatin	peptidyl-lysine methylation	drug-pathway
-lovastatin	negative regulation of cell morphogenesis involved in differentiation	drug-pathway
-lovastatin	regulation of microglial cell activation	drug-pathway
-lovastatin	heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules	drug-pathway
-lovastatin	positive regulation of triglyceride biosynthetic process	drug-pathway
-lovastatin	ossification involved in bone maturation	drug-pathway
-lovastatin	isoprenoid biosynthetic process	drug-pathway
-lovastatin	T cell selection	drug-pathway
-lovastatin	endoplasmic reticulum unfolded protein response	drug-pathway
-lovastatin	oxidative demethylation	drug-pathway
-lovastatin	negative regulation of extrinsic apoptotic signaling pathway via death domain receptors	drug-pathway
-lovastatin	reverse cholesterol transport	drug-pathway
-lovastatin	regulation of tyrosine phosphorylation of STAT protein	drug-pathway
-lovastatin	astrocyte activation	drug-pathway
-lovastatin	demethylation	drug-pathway
-lovastatin	negative regulation of peptidyl-lysine acetylation	drug-pathway
-lovastatin	receptor clustering	drug-pathway
-lovastatin	acylglycerol catabolic process	drug-pathway
-lovastatin	forebrain generation of neurons	drug-pathway
-lovastatin	peptidyl-methionine modification	drug-pathway
-lovastatin	response to increased oxygen levels	drug-pathway
-lovastatin	negative regulation of immune effector process	drug-pathway
-lovastatin	positive regulation of macrophage derived foam cell differentiation	drug-pathway
-lovastatin	regulation of digestive system process	drug-pathway
-lovastatin	regulation of striated muscle cell apoptotic process	drug-pathway
-lovastatin	endothelial tube morphogenesis	drug-pathway
-lovastatin	positive regulation of protein polymerization	drug-pathway
-lovastatin	telencephalon cell migration	drug-pathway
-lovastatin	morphogenesis of an endothelium	drug-pathway
-lovastatin	protein catabolic process in the vacuole	drug-pathway
-lovastatin	radial glial cell differentiation	drug-pathway
-lovastatin	intracellular lipid transport	drug-pathway
-lovastatin	regulation of cardiac muscle cell apoptotic process	drug-pathway
-lovastatin	establishment or maintenance of cytoskeleton polarity	drug-pathway
-lovastatin	intestinal cholesterol absorption	drug-pathway
-lovastatin	vitamin transport	drug-pathway
-lovastatin	regulation of interleukin-1 beta secretion	drug-pathway
-lovastatin	urea metabolic process	drug-pathway
-lovastatin	lipoprotein catabolic process	drug-pathway
-lovastatin	negative regulation of interleukin-1 secretion	drug-pathway
-lovastatin	positive regulation of Rho protein signal transduction	drug-pathway
-lovastatin	trabecula morphogenesis	drug-pathway
-lovastatin	negative regulation of DNA binding	drug-pathway
-lovastatin	negative regulation of MHC class II biosynthetic process	drug-pathway
-lovastatin	hair follicle placode formation	drug-pathway
-lovastatin	fungiform papilla morphogenesis	drug-pathway
-lovastatin	regulation of substrate adhesion-dependent cell spreading	drug-pathway
-lovastatin	regulation of sterol transport	drug-pathway
-lovastatin	regulation of cholesterol transport	drug-pathway
-lovastatin	actin filament polymerization	drug-pathway
-lovastatin	positive regulation of podosome assembly	drug-pathway
-lovastatin	intestinal lipid absorption	drug-pathway
-lovastatin	histone H3 deacetylation	drug-pathway
-lovastatin	forebrain radial glial cell differentiation	drug-pathway
-lovastatin	lipoprotein metabolic process	drug-pathway
-lovastatin	plasma lipoprotein particle clearance	drug-pathway
-lovastatin	androgen receptor signaling pathway	drug-pathway
-lovastatin	positive regulation of amyloid-beta clearance	drug-pathway
-lovastatin	animal organ maturation	drug-pathway
-lovastatin	positive regulation of histone H3-K9 methylation	drug-pathway
-lovastatin	positive regulation of blood pressure	drug-pathway
-lovastatin	regulation of lysosomal protein catabolic process	drug-pathway
-lovastatin	T cell migration	drug-pathway
-lovastatin	regulation of protein catabolic process in the vacuole	drug-pathway
-lovastatin	phospholipid transport	drug-pathway
-lovastatin	regulation of extrinsic apoptotic signaling pathway via death domain receptors	drug-pathway
-lovastatin	regulation of macrophage activation	drug-pathway
-lovastatin	bone maturation	drug-pathway
-lovastatin	chylomicron remodeling	drug-pathway
-lovastatin	negative regulation of cell adhesion molecule production	drug-pathway
-lovastatin	negative regulation of amyloid fibril formation	drug-pathway
-lovastatin	substantia nigra development	drug-pathway
-lovastatin	regulation of systemic arterial blood pressure by endothelin	drug-pathway
-lovastatin	regulation of cholesterol storage	drug-pathway
-lovastatin	membrane invagination	drug-pathway
-lovastatin	positive regulation of substrate adhesion-dependent cell spreading	drug-pathway
-lovastatin	negative regulation of interleukin-1 beta secretion	drug-pathway
-lovastatin	regulation of Cdc42 protein signal transduction	drug-pathway
-lovastatin	negative regulation of response to cytokine stimulus	drug-pathway
-lovastatin	positive regulation of muscle cell apoptotic process	drug-pathway
-lovastatin	organophosphate ester transport	drug-pathway
-lovastatin	cholesterol storage	drug-pathway
-lovastatin	negative regulation of heterotypic cell-cell adhesion	drug-pathway
-lovastatin	cell-cell adhesion involved in gastrulation	drug-pathway
-lovastatin	regulation of cell-cell adhesion involved in gastrulation	drug-pathway
-lovastatin	regulation of intestinal cholesterol absorption	drug-pathway
-lovastatin	regulation of intestinal absorption	drug-pathway
-lovastatin	regulation of intestinal lipid absorption	drug-pathway
-lovastatin	modification of postsynaptic structure	drug-pathway
-lovastatin	positive regulation of collagen metabolic process	drug-pathway
-lovastatin	positive regulation of collagen biosynthetic process	drug-pathway
-lovastatin	positive regulation of alpha-beta T cell differentiation	drug-pathway
-lovastatin	triglyceride biosynthetic process	drug-pathway
-lovastatin	negative regulation of macrophage activation	drug-pathway
-lovastatin	regulation of blood vessel diameter by renin-angiotensin	drug-pathway
-lovastatin	renal control of peripheral vascular resistance involved in regulation of systemic arterial blood pressure	drug-pathway
-lovastatin	negative regulation of interleukin-1 beta production	drug-pathway
-lovastatin	fertilization	drug-pathway
-lovastatin	lysosomal protein catabolic process	drug-pathway
-lovastatin	positive regulation of actin filament polymerization	drug-pathway
-lovastatin	negative regulation of sprouting angiogenesis	drug-pathway
-lovastatin	positive regulation of striated muscle cell apoptotic process	drug-pathway
-lovastatin	positive regulation of cardiac muscle cell apoptotic process	drug-pathway
-lovastatin	negative regulation of reactive oxygen species biosynthetic process	drug-pathway
-lovastatin	protein methylation	drug-pathway
-lovastatin	protein alkylation	drug-pathway
-lovastatin	positive regulation of alpha-beta T cell activation	drug-pathway
-lovastatin	regulation of vascular smooth muscle contraction	drug-pathway
-lovastatin	sterol esterification	drug-pathway
-lovastatin	lipoprotein localization	drug-pathway
-lovastatin	heterotypic cell-cell adhesion	drug-pathway
-lovastatin	response to lipoprotein particle	drug-pathway
-lovastatin	very-low-density lipoprotein particle clearance	drug-pathway
-lovastatin	positive regulation of Ras protein signal transduction	drug-pathway
-lovastatin	phosphatidylcholine biosynthetic process	drug-pathway
-lovastatin	lipid hydroxylation	drug-pathway
-lovastatin	positive regulation of cholesterol storage	drug-pathway
-lovastatin	epoxygenase P450 pathway	drug-pathway
-lovastatin	negative regulation of cytokine production involved in immune response	drug-pathway
-lovastatin	regulation of phosphatidylcholine catabolic process	drug-pathway
-lovastatin	negative regulation of striated muscle cell apoptotic process	drug-pathway
-lovastatin	negative regulation of endothelial cell migration	drug-pathway
-lovastatin	high-density lipoprotein particle remodeling	drug-pathway
-lovastatin	collagen biosynthetic process	drug-pathway
-lovastatin	lipoprotein biosynthetic process	drug-pathway
-lovastatin	regulation of systemic arterial blood pressure by renin-angiotensin	drug-pathway
-lovastatin	cellular response to dopamine	drug-pathway
-lovastatin	response to dopamine	drug-pathway
-lovastatin	histone H3-K9 methylation	drug-pathway
-lovastatin	negative regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-lovastatin	flagellated sperm motility	drug-pathway
-lovastatin	amyloid-beta clearance	drug-pathway
-lovastatin	positive regulation of small GTPase mediated signal transduction	drug-pathway
-lovastatin	interleukin-1 beta secretion	drug-pathway
-lovastatin	histone methylation	drug-pathway
-lovastatin	sperm motility	drug-pathway
-lovastatin	positive regulation of translation	drug-pathway
-lovastatin	vascular smooth muscle contraction	drug-pathway
-lovastatin	cardiac muscle cell apoptotic process	drug-pathway
-lovastatin	negative regulation of oxidative phosphorylation	drug-pathway
-lovastatin	negative regulation of nucleotide metabolic process	drug-pathway
-lovastatin	striated muscle cell apoptotic process	drug-pathway
-lovastatin	intracellular cholesterol transport	drug-pathway
-lovastatin	negative regulation of intracellular steroid hormone receptor signaling pathway	drug-pathway
-lovastatin	neuron projection regeneration	drug-pathway
-lovastatin	phospholipid homeostasis	drug-pathway
-lovastatin	regulation of actomyosin structure organization	drug-pathway
-lovastatin	artery development	drug-pathway
-lovastatin	response to selenium ion	drug-pathway
-lovastatin	apolipoprotein A-I-mediated signaling pathway	drug-pathway
-lovastatin	tongue development	drug-pathway
-lovastatin	establishment of planar polarity	drug-pathway
-lovastatin	glycerophospholipid catabolic process	drug-pathway
-lovastatin	ubiquinone metabolic process	drug-pathway
-lovastatin	positive regulation of lysosomal protein catabolic process	drug-pathway
-lovastatin	release of cytochrome c from mitochondria	drug-pathway
-lovastatin	establishment of tissue polarity	drug-pathway
-lovastatin	negative regulation of purine nucleotide metabolic process	drug-pathway
-lovastatin	phosphatidylcholine catabolic process	drug-pathway
-lovastatin	phospholipid efflux	drug-pathway
-lovastatin	cell adhesion molecule production	drug-pathway
-lovastatin	negative regulation of lipase activity	drug-pathway
-lovastatin	regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-lovastatin	maintenance of cell number	drug-pathway
-lovastatin	chromatin remodeling	drug-pathway
-lovastatin	cholesterol esterification	drug-pathway
-lovastatin	tyrosine phosphorylation of STAT protein	drug-pathway
-lovastatin	artery morphogenesis	drug-pathway
-lovastatin	negative regulation of interleukin-1 production	drug-pathway
-lovastatin	chylomicron assembly	drug-pathway
-lovastatin	high-density lipoprotein particle clearance	drug-pathway
-lovastatin	regulation of sprouting angiogenesis	drug-pathway
-lovastatin	intestinal absorption	drug-pathway
-lovastatin	positive regulation of organelle assembly	drug-pathway
-lovastatin	positive regulation of protein catabolic process in the vacuole	drug-pathway
-lovastatin	integrin-mediated signaling pathway	drug-pathway
-lovastatin	steroid esterification	drug-pathway
-lovastatin	negative regulation of I-kappaB kinase/NF-kappaB signaling	drug-pathway
-lovastatin	regulation of oligodendrocyte differentiation	drug-pathway
-lovastatin	T cell activation involved in immune response	drug-pathway
-lovastatin	omega-hydroxylase P450 pathway	drug-pathway
-lovastatin	regulation of Rho protein signal transduction	drug-pathway
-lovastatin	chylomicron remnant clearance	drug-pathway
-lovastatin	T cell activation via T cell receptor contact with antigen bound to MHC molecule on antigen presenting cell	drug-pathway
-lovastatin	coenzyme A metabolic process	drug-pathway
-lovastatin	negative regulation of dendritic spine development	drug-pathway
-lovastatin	positive regulation of cell aging	drug-pathway
 lovastatin	cholesterol efflux	drug-pathway
-lovastatin	interleukin-1 secretion	drug-pathway
-lovastatin	establishment of epithelial cell apical/basal polarity	drug-pathway
-lovastatin	regulation of T cell migration	drug-pathway
-lovastatin	establishment or maintenance of actin cytoskeleton polarity	drug-pathway
-lovastatin	regulation of histone methylation	drug-pathway
-lovastatin	osteoblast proliferation	drug-pathway
-lovastatin	regulation of osteoblast proliferation	drug-pathway
-lovastatin	cell migration involved in sprouting angiogenesis	drug-pathway
-lovastatin	regulation of phospholipid catabolic process	drug-pathway
-lovastatin	substrate adhesion-dependent cell spreading	drug-pathway
-lovastatin	negative regulation of neuroinflammatory response	drug-pathway
-lovastatin	positive regulation of cytokinesis	drug-pathway
-lovastatin	regulation of triglyceride metabolic process	drug-pathway
-lovastatin	negative regulation of MAP kinase activity	drug-pathway
-lovastatin	negative regulation of production of molecular mediator of immune response	drug-pathway
-lovastatin	negative regulation of supramolecular fiber organization	drug-pathway
-lovastatin	beta selection	drug-pathway
-lovastatin	regulation of modification of postsynaptic actin cytoskeleton	drug-pathway
-lovastatin	ATP-dependent chromatin remodeling	drug-pathway
-lovastatin	intermediate filament-based process	drug-pathway
-lovastatin	intermediate filament cytoskeleton organization	drug-pathway
-lovastatin	cellular response to ionizing radiation	drug-pathway
-lovastatin	striated muscle adaptation	drug-pathway
-lovastatin	positive regulation of epithelial to mesenchymal transition	drug-pathway
-lovastatin	mitotic cytokinesis	drug-pathway
-lovastatin	endosome to lysosome transport	drug-pathway
-lovastatin	regulation of MHC class II biosynthetic process	drug-pathway
-lovastatin	neutral lipid biosynthetic process	drug-pathway
-lovastatin	positive regulation of tyrosine phosphorylation of STAT protein	drug-pathway
-lovastatin	regulation of cytokine secretion involved in immune response	drug-pathway
-lovastatin	positive regulation of actin filament bundle assembly	drug-pathway
-lovastatin	negative regulation of muscle cell apoptotic process	drug-pathway
-lovastatin	regulation of interleukin-1 beta production	drug-pathway
-lovastatin	regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-lovastatin	podosome assembly	drug-pathway
-lovastatin	negative regulation of peptide hormone secretion	drug-pathway
-lovastatin	regulation of collagen metabolic process	drug-pathway
-lovastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
-lovastatin	negative regulation of microglial cell activation	drug-pathway
-lovastatin	peripheral nervous system axon regeneration	drug-pathway
-lovastatin	glucocorticoid metabolic process	drug-pathway
-lovastatin	triglyceride mobilization	drug-pathway
-lovastatin	regulation of amyloid fibril formation	drug-pathway
-lovastatin	positive regulation of cholesterol esterification	drug-pathway
-lovastatin	very-low-density lipoprotein particle assembly	drug-pathway
-lovastatin	sterol import	drug-pathway
-lovastatin	cholesterol import	drug-pathway
+lovastatin	cholesterol esterification	drug-pathway
 lovastatin	regulation of cholesterol esterification	drug-pathway
-lovastatin	triglyceride catabolic process	drug-pathway
-lovastatin	regulation of cell adhesion molecule production	drug-pathway
-lovastatin	neutral lipid catabolic process	drug-pathway
-lovastatin	forebrain cell migration	drug-pathway
-lovastatin	positive regulation of triglyceride metabolic process	drug-pathway
-lovastatin	negative regulation of cell-substrate adhesion	drug-pathway
-lovastatin	modification of postsynaptic actin cytoskeleton	drug-pathway
-lovastatin	positive regulation of interleukin-1 production	drug-pathway
-lovastatin	response to muscle stretch	drug-pathway
-lovastatin	embryonic limb morphogenesis	drug-pathway
-lovastatin	embryonic appendage morphogenesis	drug-pathway
-lovastatin	negative regulation of dendrite development	drug-pathway
-lovastatin	cleavage furrow formation	drug-pathway
-lovastatin	establishment of epithelial cell polarity	drug-pathway
-lovastatin	positive regulation of lymphocyte migration	drug-pathway
-lovastatin	mitotic cytokinetic process	drug-pathway
-lovastatin	negative regulation of cytokine secretion	drug-pathway
-lovastatin	histone H4 deacetylation	drug-pathway
-lovastatin	regulation of peptidyl-lysine acetylation	drug-pathway
-lovastatin	regulation of modification of postsynaptic structure	drug-pathway
-lovastatin	modification of synaptic structure	drug-pathway
-lovastatin	positive regulation of T cell migration	drug-pathway
-lovastatin	polarized epithelial cell differentiation	drug-pathway
-lovastatin	fungiform papilla formation	drug-pathway
-lovastatin	ectodermal placode formation	drug-pathway
-lovastatin	ectodermal placode morphogenesis	drug-pathway
-lovastatin	positive regulation of smooth muscle contraction	drug-pathway
-lovastatin	positive regulation of systemic arterial blood pressure	drug-pathway
-lovastatin	response to hyperoxia	drug-pathway
-lovastatin	gastrulation	drug-pathway
-lovastatin	long-term memory	drug-pathway
-lovastatin	regulation of triglyceride biosynthetic process	drug-pathway
-lovastatin	establishment or maintenance of apical/basal cell polarity	drug-pathway
-lovastatin	establishment or maintenance of bipolar cell polarity	drug-pathway
-lovastatin	regulation of collagen biosynthetic process	drug-pathway
-lovastatin	response to caloric restriction	drug-pathway
-lovastatin	nitrogen cycle metabolic process	drug-pathway
-lovastatin	plasma lipoprotein particle assembly	drug-pathway
-lovastatin	protein-lipid complex assembly	drug-pathway
-lovastatin	negative regulation of astrocyte differentiation	drug-pathway
-lovastatin	negative regulation of axonogenesis	drug-pathway
-lovastatin	stem cell population maintenance	drug-pathway
-lovastatin	non-canonical Wnt signaling pathway	drug-pathway
-lovastatin	phosphatidylcholine metabolic process	drug-pathway
-lovastatin	regulation of heterotypic cell-cell adhesion	drug-pathway
-lovastatin	positive regulation of stress fiber assembly	drug-pathway
-lovastatin	axon regeneration	drug-pathway
-lovastatin	negative regulation of cell migration involved in sprouting angiogenesis	drug-pathway
-lovastatin	response to caffeine	drug-pathway
-lovastatin	response to diuretic	drug-pathway
-lovastatin	amyloid fibril formation	drug-pathway
-lovastatin	regulation of dendritic spine development	drug-pathway
-lovastatin	regulation of stress fiber assembly	drug-pathway
-lovastatin	negative regulation of astrocyte activation	drug-pathway
-lovastatin	wound healing, spreading of cells	drug-pathway
-lovastatin	epiboly	drug-pathway
-lovastatin	negative regulation of cell size	drug-pathway
-lovastatin	dendritic spine development	drug-pathway
-lovastatin	Roundabout signaling pathway	drug-pathway
-lovastatin	regulation of release of cytochrome c from mitochondria	drug-pathway
-lovastatin	cellular response to low-density lipoprotein particle stimulus	drug-pathway
-lovastatin	positive regulation of histone methylation	drug-pathway
-lovastatin	vacuolar transport	drug-pathway
-lovastatin	regulation of oxidative phosphorylation	drug-pathway
-lovastatin	neural nucleus development	drug-pathway
-lovastatin	regulation of cell aging	drug-pathway
-lovastatin	adrenal gland development	drug-pathway
-lovastatin	MHC class II biosynthetic process	drug-pathway
-lovastatin	behavioral response to ethanol	drug-pathway
-lovastatin	regulation of alpha-beta T cell activation	drug-pathway
-lovastatin	regulation of interleukin-1 secretion	drug-pathway
-lovastatin	regulation of astrocyte activation	drug-pathway
-lovastatin	positive regulation of oligodendrocyte differentiation	drug-pathway
-lovastatin	cerebral cortex cell migration	drug-pathway
-lovastatin	triglyceride homeostasis	drug-pathway
-lovastatin	apical junction assembly	drug-pathway
-lovastatin	histone H3-K9 modification	drug-pathway
-lovastatin	very-low-density lipoprotein particle remodeling	drug-pathway
-lovastatin	negative regulation of muscle hypertrophy	drug-pathway
-lovastatin	regulation of cytokinesis	drug-pathway
-lovastatin	high-density lipoprotein particle assembly	drug-pathway
-lovastatin	activation of adenylate cyclase activity	drug-pathway
-lovastatin	angiotensin-mediated vasoconstriction involved in regulation of systemic arterial blood pressure	drug-pathway
-lovastatin	endothelial tube lumen extension	drug-pathway
-lovastatin	mitotic cleavage furrow formation	drug-pathway
-lovastatin	positive regulation of vascular smooth muscle contraction	drug-pathway
-lovastatin	establishment or maintenance of epithelial cell apical/basal polarity	drug-pathway
-lovastatin	regulation of skeletal muscle tissue development	drug-pathway
-lovastatin	regulation of podosome assembly	drug-pathway
-lovastatin	Wnt signaling pathway, planar cell polarity pathway	drug-pathway
-lovastatin	regulation of establishment of planar polarity	drug-pathway
-lovastatin	positive regulation of steroid metabolic process	drug-pathway
-lovastatin	regulation of lipoprotein particle clearance	drug-pathway
-lovastatin	low-density lipoprotein particle remodeling	drug-pathway
-lovastatin	microglial cell activation	drug-pathway
-lovastatin	leukocyte activation involved in inflammatory response	drug-pathway
-lovastatin	regulation of receptor biosynthetic process	drug-pathway
-lovastatin	cell-cell adhesion via plasma-membrane adhesion molecules	drug-pathway
-lovastatin	quinone metabolic process	drug-pathway
-lovastatin	intracellular sterol transport	drug-pathway
-lovastatin	regulation of cell migration involved in sprouting angiogenesis	drug-pathway
-lovastatin	positive regulation of T cell differentiation	drug-pathway
-simvastatin	lipoprotein metabolic process	drug-pathway
-simvastatin	insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-simvastatin	negative regulation of glial cell differentiation	drug-pathway
-simvastatin	long-term memory	drug-pathway
-simvastatin	positive regulation of Ras protein signal transduction	drug-pathway
-simvastatin	regulation of long-term synaptic potentiation	drug-pathway
-simvastatin	regulation of superoxide metabolic process	drug-pathway
-simvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
-simvastatin	regulation of phosphatidylcholine catabolic process	drug-pathway
-simvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
-simvastatin	formation of primary germ layer	drug-pathway
-simvastatin	positive regulation of myeloid leukocyte mediated immunity	drug-pathway
-simvastatin	negative regulation of amyloid fibril formation	drug-pathway
-simvastatin	regulation of astrocyte differentiation	drug-pathway
-simvastatin	regulation of heterotypic cell-cell adhesion	drug-pathway
-simvastatin	positive regulation of cholesterol efflux	drug-pathway
-simvastatin	vitamin transport	drug-pathway
-simvastatin	regulation of interleukin-1 beta secretion	drug-pathway
-simvastatin	positive regulation of small GTPase mediated signal transduction	drug-pathway
-simvastatin	positive regulation of regulated secretory pathway	drug-pathway
-simvastatin	regulation of actomyosin structure organization	drug-pathway
-simvastatin	positive regulation of phospholipid transport	drug-pathway
-simvastatin	AMPA glutamate receptor clustering	drug-pathway
-simvastatin	behavioral defense response	drug-pathway
-simvastatin	positive regulation of stress fiber assembly	drug-pathway
-simvastatin	axon regeneration	drug-pathway
-simvastatin	positive regulation of membrane protein ectodomain proteolysis	drug-pathway
-simvastatin	glycerophospholipid catabolic process	drug-pathway
-simvastatin	intestinal cholesterol absorption	drug-pathway
-simvastatin	positive regulation of amyloid fibril formation	drug-pathway
-simvastatin	alkaloid catabolic process	drug-pathway
-simvastatin	plasma lipoprotein particle clearance	drug-pathway
-simvastatin	phagocytosis, engulfment	drug-pathway
-simvastatin	reverse cholesterol transport	drug-pathway
-simvastatin	alkaloid metabolic process	drug-pathway
-simvastatin	phosphatidylcholine catabolic process	drug-pathway
-simvastatin	negative regulation of immune effector process	drug-pathway
-simvastatin	long-chain fatty acid biosynthetic process	drug-pathway
-simvastatin	lipid transport involved in lipid storage	drug-pathway
-simvastatin	astrocyte activation	drug-pathway
-simvastatin	cholesterol efflux	drug-pathway
-simvastatin	omega-hydroxylase P450 pathway	drug-pathway
-simvastatin	negative regulation of epithelial cell migration	drug-pathway
-simvastatin	exogenous drug catabolic process	drug-pathway
-simvastatin	vitamin D metabolic process	drug-pathway
-simvastatin	negative reguation of sterol biosynthetic process	drug-pathway
-simvastatin	demethylation	drug-pathway
-simvastatin	steroid catabolic process	drug-pathway
-simvastatin	cellular response to very-low-density lipoprotein particle stimulus	drug-pathway
-simvastatin	monoterpenoid metabolic process	drug-pathway
-simvastatin	regulation of presynaptic membrane organization	drug-pathway
-simvastatin	negative regulation of presynaptic membrane organization	drug-pathway
-simvastatin	negative regulation of blood vessel endothelial cell migration	drug-pathway
-simvastatin	positive regulation of lipid transport across blood brain barrier	drug-pathway
-simvastatin	negative regulation of endothelial cell migration	drug-pathway
-simvastatin	regulation of Rho protein signal transduction	drug-pathway
-simvastatin	negative regulation of interleukin-1 beta production	drug-pathway
-simvastatin	negative regulation of cholesterol biosynthetic process	drug-pathway
-simvastatin	negative regulation of cholesterol metabolic process	drug-pathway
-simvastatin	cellular response to low-density lipoprotein particle stimulus	drug-pathway
-simvastatin	presynaptic membrane organization	drug-pathway
-simvastatin	myoblast differentiation	drug-pathway
-simvastatin	glycerolipid catabolic process	drug-pathway
-simvastatin	artery morphogenesis	drug-pathway
-simvastatin	regulation of amyloid-beta formation	drug-pathway
-simvastatin	regulation of striated muscle cell apoptotic process	drug-pathway
-simvastatin	regulation of cardiac muscle cell apoptotic process	drug-pathway
-simvastatin	fatty acid homeostasis	drug-pathway
-simvastatin	triglyceride-rich lipoprotein particle remodeling	drug-pathway
-simvastatin	regulation of gastrulation	drug-pathway
-simvastatin	negative regulation of endothelial cell proliferation	drug-pathway
-simvastatin	epoxygenase P450 pathway	drug-pathway
-simvastatin	oxidative demethylation	drug-pathway
-simvastatin	positive regulation of dendrite development	drug-pathway
-simvastatin	high-density lipoprotein particle remodeling	drug-pathway
-simvastatin	positive regulation of lipoprotein particle clearance	drug-pathway
-simvastatin	fat-soluble vitamin biosynthetic process	drug-pathway
-simvastatin	vitamin D biosynthetic process	drug-pathway
-simvastatin	exploration behavior	drug-pathway
-simvastatin	T cell activation involved in immune response	drug-pathway
-simvastatin	low-density lipoprotein particle remodeling	drug-pathway
-simvastatin	negative regulation of muscle cell apoptotic process	drug-pathway
-simvastatin	neuron projection regeneration	drug-pathway
-simvastatin	phospholipid homeostasis	drug-pathway
-simvastatin	lipid hydroxylation	drug-pathway
-simvastatin	regulation of neuronal synaptic plasticity	drug-pathway
-simvastatin	very-low-density lipoprotein particle remodeling	drug-pathway
-simvastatin	low-density lipoprotein particle clearance	drug-pathway
-simvastatin	positive regulation of low-density lipoprotein particle receptor catabolic process	drug-pathway
-simvastatin	negative chemotaxis	drug-pathway
-simvastatin	NMDA glutamate receptor clustering	drug-pathway
-simvastatin	regulation of phospholipid efflux	drug-pathway
-simvastatin	positive regulation of phospholipid efflux	drug-pathway
-simvastatin	regulation of embryonic development	drug-pathway
-simvastatin	microglial cell activation	drug-pathway
-simvastatin	leukocyte activation involved in inflammatory response	drug-pathway
-simvastatin	cell-cell adhesion via plasma-membrane adhesion molecules	drug-pathway
-simvastatin	regulation of protein oligomerization	drug-pathway
-simvastatin	negative regulation of canonical Wnt signaling pathway	drug-pathway
-simvastatin	integrin-mediated signaling pathway	drug-pathway
-simvastatin	regulation of amyloid precursor protein catabolic process	drug-pathway
-simvastatin	regulation of cell-cell adhesion involved in gastrulation	drug-pathway
-simvastatin	regulation of intestinal cholesterol absorption	drug-pathway
-simvastatin	regulation of intestinal absorption	drug-pathway
-simvastatin	regulation of intestinal lipid absorption	drug-pathway
-simvastatin	phospholipid efflux	drug-pathway
-simvastatin	lipoprotein catabolic process	drug-pathway
-simvastatin	intestinal absorption	drug-pathway
-simvastatin	negative regulation of steroid biosynthetic process	drug-pathway
-simvastatin	positive regulation of protein catabolic process in the vacuole	drug-pathway
-simvastatin	negative regulation of amyloid precursor protein catabolic process	drug-pathway
-simvastatin	sterol catabolic process	drug-pathway
-simvastatin	nitric oxide mediated signal transduction	drug-pathway
-simvastatin	fat-soluble vitamin metabolic process	drug-pathway
-simvastatin	regulation of substrate adhesion-dependent cell spreading	drug-pathway
-simvastatin	regulation of phospholipid transport	drug-pathway
-simvastatin	response to lipoprotein particle	drug-pathway
-simvastatin	very-low-density lipoprotein particle clearance	drug-pathway
-simvastatin	negative regulation of lipid biosynthetic process	drug-pathway
-simvastatin	chylomicron remnant clearance	drug-pathway
-simvastatin	negative regulation of interleukin-1 secretion	drug-pathway
-simvastatin	positive regulation of Rho protein signal transduction	drug-pathway
-simvastatin	Cdc42 protein signal transduction	drug-pathway
-simvastatin	phospholipid transport	drug-pathway
-simvastatin	chylomicron remodeling	drug-pathway
-simvastatin	negative regulation of cell adhesion molecule production	drug-pathway
-simvastatin	low-density lipoprotein receptor particle metabolic process	drug-pathway
-simvastatin	negative regulation of lipase activity	drug-pathway
-simvastatin	regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-simvastatin	negative regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-simvastatin	plasma membrane invagination	drug-pathway
-simvastatin	membrane invagination	drug-pathway
-simvastatin	positive regulation of substrate adhesion-dependent cell spreading	drug-pathway
-simvastatin	negative regulation of interleukin-1 beta secretion	drug-pathway
-simvastatin	regulation of Cdc42 protein signal transduction	drug-pathway
-simvastatin	negative regulation of response to cytokine stimulus	drug-pathway
-simvastatin	positive regulation of muscle cell apoptotic process	drug-pathway
-simvastatin	organophosphate ester transport	drug-pathway
-simvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
-simvastatin	negative regulation of heterotypic cell-cell adhesion	drug-pathway
-simvastatin	cell-cell adhesion involved in gastrulation	drug-pathway
-simvastatin	negative regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-simvastatin	intestinal lipid absorption	drug-pathway
-simvastatin	striated muscle cell apoptotic process	drug-pathway
-simvastatin	cardiac muscle cell apoptotic process	drug-pathway
-simvastatin	regulation of interleukin-1 secretion	drug-pathway
-simvastatin	regulation of astrocyte activation	drug-pathway
-simvastatin	interleukin-1 beta secretion	drug-pathway
-simvastatin	regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-simvastatin	regulation of heparan sulfate binding	drug-pathway
-simvastatin	positive regulation of heparan sulfate binding	drug-pathway
-simvastatin	regulation of heparan sulfate proteoglycan binding	drug-pathway
-simvastatin	positive regulation of heparan sulfate proteoglycan binding	drug-pathway
-simvastatin	regulation of cellular response to very-low-density lipoprotein particle stimulus	drug-pathway
-simvastatin	lipid transport across blood brain barrier	drug-pathway
-simvastatin	negative regulation of striated muscle cell apoptotic process	drug-pathway
-simvastatin	protein oxidation	drug-pathway
-simvastatin	amyloid-beta formation	drug-pathway
-simvastatin	negative regulation of synapse organization	drug-pathway
-simvastatin	phosphatidylcholine metabolic process	drug-pathway
-simvastatin	triglyceride-rich lipoprotein particle clearance	drug-pathway
-simvastatin	phosphatidylcholine biosynthetic process	drug-pathway
-simvastatin	cellular response to lipoprotein particle stimulus	drug-pathway
-simvastatin	adrenal gland development	drug-pathway
-simvastatin	response to dietary excess	drug-pathway
-simvastatin	negative regulation of long-term synaptic potentiation	drug-pathway
-simvastatin	negative regulation of cytokine secretion	drug-pathway
-simvastatin	ubiquinone metabolic process	drug-pathway
-simvastatin	neurotransmitter-gated ion channel clustering	drug-pathway
-simvastatin	positive regulation of lysosomal protein catabolic process	drug-pathway
-simvastatin	regulation of microglial cell activation	drug-pathway
-simvastatin	heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules	drug-pathway
-simvastatin	plasma lipoprotein particle assembly	drug-pathway
-simvastatin	negative regulation of amyloid-beta formation	drug-pathway
-simvastatin	protein-lipid complex assembly	drug-pathway
-simvastatin	regulation of receptor catabolic process	drug-pathway
-simvastatin	negative regulation of gliogenesis	drug-pathway
-simvastatin	gastrulation	drug-pathway
-simvastatin	regulation of triglyceride biosynthetic process	drug-pathway
-simvastatin	membrane protein proteolysis	drug-pathway
-simvastatin	postsynaptic membrane organization	drug-pathway
-simvastatin	low-density lipoprotein particle receptor catabolic process	drug-pathway
-simvastatin	regulation of cholesterol efflux	drug-pathway
-simvastatin	positive regulation of postsynaptic membrane organization	drug-pathway
-simvastatin	positive regulation of nitric-oxide synthase activity	drug-pathway
-simvastatin	regulation of dendritic spine maintenance	drug-pathway
-simvastatin	regulation of lipid transport across blood brain barrier	drug-pathway
-simvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
-simvastatin	positive regulation of actin filament bundle assembly	drug-pathway
-simvastatin	negative regulation of cellular amide metabolic process	drug-pathway
-simvastatin	virion assembly	drug-pathway
-simvastatin	cholesterol catabolic process	drug-pathway
-simvastatin	negative regulation of astrocyte activation	drug-pathway
-simvastatin	dendritic spine development	drug-pathway
-simvastatin	quinone metabolic process	drug-pathway
-simvastatin	intracellular sterol transport	drug-pathway
+lovastatin	reverse cholesterol transport	drug-pathway
+lovastatin	cholesterol storage	drug-pathway
+lovastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+lovastatin	positive regulation of cholesterol storage	drug-pathway
+lovastatin	regulation of cholesterol transport	drug-pathway
+lovastatin	regulation of cholesterol storage	drug-pathway
+lovastatin	regulation of intestinal cholesterol absorption	drug-pathway
+lovastatin	cholesterol import	drug-pathway
+lovastatin	intestinal cholesterol absorption	drug-pathway
+lovastatin	positive regulation of cholesterol esterification	drug-pathway
+lovastatin	intracellular cholesterol transport	drug-pathway
+tamoxifen	cholesterol biosynthetic process via lathosterol	drug-pathway
+tamoxifen	cholesterol biosynthetic process via desmosterol	drug-pathway
+tamoxifen	cholesterol efflux	drug-pathway
 simvastatin	intracellular cholesterol transport	drug-pathway
-simvastatin	triglyceride biosynthetic process	drug-pathway
-simvastatin	positive regulation of sterol transport	drug-pathway
-simvastatin	positive regulation of cholesterol transport	drug-pathway
-simvastatin	regulation of interleukin-1 beta production	drug-pathway
-simvastatin	regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-simvastatin	neutral lipid biosynthetic process	drug-pathway
-simvastatin	acylglycerol biosynthetic process	drug-pathway
-simvastatin	regulation of neuroinflammatory response	drug-pathway
-simvastatin	membrane protein ectodomain proteolysis	drug-pathway
-simvastatin	regulation of protein homooligomerization	drug-pathway
-simvastatin	amyloid precursor protein catabolic process	drug-pathway
-simvastatin	regulation of membrane protein ectodomain proteolysis	drug-pathway
-simvastatin	cellular extravasation	drug-pathway
-simvastatin	phospholipid catabolic process	drug-pathway
-simvastatin	positive regulation of striated muscle cell apoptotic process	drug-pathway
-simvastatin	positive regulation of cardiac muscle cell apoptotic process	drug-pathway
-simvastatin	regulation of skeletal muscle tissue development	drug-pathway
-simvastatin	regulation of low-density lipoprotein particle receptor catabolic process	drug-pathway
-simvastatin	neutral lipid catabolic process	drug-pathway
-simvastatin	acylglycerol catabolic process	drug-pathway
-simvastatin	vasodilation	drug-pathway
-simvastatin	response to caloric restriction	drug-pathway
-simvastatin	chylomicron assembly	drug-pathway
-simvastatin	high-density lipoprotein particle clearance	drug-pathway
-simvastatin	cell adhesion molecule production	drug-pathway
-simvastatin	negative regulation of Wnt signaling pathway	drug-pathway
-simvastatin	lipid digestion	drug-pathway
-simvastatin	positive regulation of leukocyte degranulation	drug-pathway
-simvastatin	endoderm development	drug-pathway
-simvastatin	T cell activation via T cell receptor contact with antigen bound to MHC molecule on antigen presenting cell	drug-pathway
-simvastatin	regulation of neutrophil degranulation	drug-pathway
-simvastatin	response to fluoride	drug-pathway
-simvastatin	leukocyte migration involved in inflammatory response	drug-pathway
-simvastatin	endodermal cell differentiation	drug-pathway
-simvastatin	negative regulation of steroid metabolic process	drug-pathway
-simvastatin	high-density lipoprotein particle assembly	drug-pathway
-simvastatin	interleukin-1 secretion	drug-pathway
-simvastatin	artery development	drug-pathway
-simvastatin	peptidyl-methionine modification	drug-pathway
-simvastatin	regulation of sterol transport	drug-pathway
+simvastatin	regulation of cholesterol efflux	drug-pathway
 simvastatin	regulation of cholesterol transport	drug-pathway
-simvastatin	negative regulation of triglyceride metabolic process	drug-pathway
-simvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
-simvastatin	calcitriol biosynthetic process from calciol	drug-pathway
-simvastatin	vitamin D3 metabolic process	drug-pathway
-simvastatin	cellular alcohol metabolic process	drug-pathway
-simvastatin	cellular alcohol biosynthetic process	drug-pathway
-simvastatin	peripheral nervous system axon regeneration	drug-pathway
-simvastatin	glucocorticoid metabolic process	drug-pathway
-simvastatin	synaptic transmission, cholinergic	drug-pathway
-simvastatin	regulation of amyloid fibril formation	drug-pathway
-simvastatin	positive regulation of cholesterol esterification	drug-pathway
-simvastatin	sterol import	drug-pathway
-simvastatin	cholesterol import	drug-pathway
+simvastatin	reverse cholesterol transport	drug-pathway
+simvastatin	positive regulation of cholesterol transport	drug-pathway
 simvastatin	regulation of cholesterol esterification	drug-pathway
-simvastatin	triglyceride catabolic process	drug-pathway
-simvastatin	regulation of cell adhesion molecule production	drug-pathway
-simvastatin	cGMP-mediated signaling	drug-pathway
-simvastatin	glutamate receptor clustering	drug-pathway
-simvastatin	steroid esterification	drug-pathway
-simvastatin	sterol esterification	drug-pathway
+simvastatin	cholesterol import	drug-pathway
+simvastatin	cholesterol efflux	drug-pathway
+simvastatin	cholesterol catabolic process	drug-pathway
+simvastatin	positive regulation of cholesterol esterification	drug-pathway
+simvastatin	negative regulation of cholesterol metabolic process	drug-pathway
+simvastatin	negative regulation of cholesterol biosynthetic process	drug-pathway
+simvastatin	regulation of intestinal cholesterol absorption	drug-pathway
 simvastatin	cholesterol esterification	drug-pathway
-simvastatin	heterotypic cell-cell adhesion	drug-pathway
-simvastatin	lipoprotein biosynthetic process	drug-pathway
-simvastatin	modulation by host of viral process	drug-pathway
-simvastatin	regulation of superoxide anion generation	drug-pathway
-simvastatin	acylglycerol homeostasis	drug-pathway
-simvastatin	triglyceride homeostasis	drug-pathway
-simvastatin	positive regulation of steroid metabolic process	drug-pathway
-simvastatin	regulation of lipoprotein particle clearance	drug-pathway
-simvastatin	vitamin biosynthetic process	drug-pathway
-simvastatin	positive regulation by host of viral process	drug-pathway
-simvastatin	amyloid fibril formation	drug-pathway
-simvastatin	positive regulation of dendritic spine maintenance	drug-pathway
-simvastatin	regulation of dendritic spine development	drug-pathway
-simvastatin	regulation of stress fiber assembly	drug-pathway
-simvastatin	positive regulation of exocytosis	drug-pathway
-simvastatin	lipoxygenase pathway	drug-pathway
-simvastatin	receptor clustering	drug-pathway
-simvastatin	negative regulation of peptide hormone secretion	drug-pathway
-simvastatin	regulation of protein targeting to membrane	drug-pathway
-simvastatin	positive regulation of viral process	drug-pathway
-simvastatin	positive regulation of neuroinflammatory response	drug-pathway
-simvastatin	regulation of extent of cell growth	drug-pathway
-simvastatin	cellular component maintenance	drug-pathway
-simvastatin	regulation of lysosomal protein catabolic process	drug-pathway
-simvastatin	regulation of axon extension	drug-pathway
-simvastatin	regulation of phospholipid catabolic process	drug-pathway
-simvastatin	protein-lipid complex remodeling	drug-pathway
-simvastatin	negative regulation of neuroinflammatory response	drug-pathway
-simvastatin	positive regulation of receptor catabolic process	drug-pathway
-simvastatin	regulation of neutrophil activation	drug-pathway
-simvastatin	positive regulation of protein targeting to membrane	drug-pathway
-simvastatin	negative regulation of astrocyte differentiation	drug-pathway
-simvastatin	plasma lipoprotein particle remodeling	drug-pathway
-simvastatin	protein-containing complex remodeling	drug-pathway
-simvastatin	regulation of leukocyte degranulation	drug-pathway
-simvastatin	lysosomal protein catabolic process	drug-pathway
-simvastatin	receptor catabolic process	drug-pathway
-simvastatin	regulation of macrophage activation	drug-pathway
-simvastatin	regulation of digestive system process	drug-pathway
-simvastatin	regulation of protein catabolic process in the vacuole	drug-pathway
-simvastatin	positive regulation of skeletal muscle tissue development	drug-pathway
-simvastatin	positive regulation of triglyceride biosynthetic process	drug-pathway
-simvastatin	positive regulation of triglyceride metabolic process	drug-pathway
-simvastatin	protein catabolic process in the vacuole	drug-pathway
-simvastatin	positive regulation of amyloid-beta clearance	drug-pathway
-simvastatin	coenzyme A metabolic process	drug-pathway
-simvastatin	negative regulation of supramolecular fiber organization	drug-pathway
-simvastatin	amyloid-beta clearance	drug-pathway
-simvastatin	isoprenoid biosynthetic process	drug-pathway
-simvastatin	dendritic spine maintenance	drug-pathway
-simvastatin	negative regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-simvastatin	negative regulation of interleukin-1 production	drug-pathway
-simvastatin	cytokine secretion involved in immune response	drug-pathway
-simvastatin	regulation of postsynaptic membrane organization	drug-pathway
-simvastatin	endoderm formation	drug-pathway
-simvastatin	regulation of behavioral fear response	drug-pathway
-simvastatin	protein targeting to membrane	drug-pathway
-simvastatin	locomotory exploration behavior	drug-pathway
-simvastatin	maintenance of location in cell	drug-pathway
-simvastatin	negative regulation of alcohol biosynthetic process	drug-pathway
-simvastatin	negative regulation of production of molecular mediator of immune response	drug-pathway
-simvastatin	positive regulation of dendritic spine development	drug-pathway
-simvastatin	regulation of amyloid-beta clearance	drug-pathway
-simvastatin	behavioral fear response	drug-pathway
-simvastatin	neutrophil chemotaxis	drug-pathway
-simvastatin	negative regulation of macrophage activation	drug-pathway
-simvastatin	negative regulation of insulin secretion	drug-pathway
-simvastatin	regulation of fear response	drug-pathway
-simvastatin	intracellular lipid transport	drug-pathway
-simvastatin	positive regulation of superoxide anion generation	drug-pathway
-simvastatin	regulation of triglyceride metabolic process	drug-pathway
-simvastatin	regulation of platelet activation	drug-pathway
-simvastatin	negative regulation of MAP kinase activity	drug-pathway
-simvastatin	toll-like receptor 4 signaling pathway	drug-pathway
-simvastatin	positive regulation of microglial cell activation	drug-pathway
-simvastatin	negative regulation of microglial cell activation	drug-pathway
-simvastatin	negative regulation of platelet activation	drug-pathway
-simvastatin	regulation of dopamine metabolic process	drug-pathway
-simvastatin	regulation of catecholamine metabolic process	drug-pathway
-simvastatin	superoxide anion generation	drug-pathway
-simvastatin	neutrophil migration	drug-pathway
-simvastatin	substrate adhesion-dependent cell spreading	drug-pathway
-simvastatin	regulation of postsynapse organization	drug-pathway
+simvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+simvastatin	positive regulation of cholesterol efflux	drug-pathway
+simvastatin	intestinal cholesterol absorption	drug-pathway
+gemfibrozil	cholesterol catabolic process	drug-pathway
+gemfibrozil	intestinal cholesterol absorption	drug-pathway
+gemfibrozil	cholesterol efflux	drug-pathway
+gemfibrozil	cholesterol import	drug-pathway
+gemfibrozil	positive regulation of cholesterol efflux	drug-pathway
+gemfibrozil	negative regulation of cholesterol import	drug-pathway
+gemfibrozil	regulation of cholesterol esterification	drug-pathway
+gemfibrozil	cholesterol storage	drug-pathway
+gemfibrozil	regulation of intestinal cholesterol absorption	drug-pathway
+gemfibrozil	positive regulation of cholesterol esterification	drug-pathway
+gemfibrozil	negative regulation of cholesterol transporter activity	drug-pathway
+gemfibrozil	regulation of cholesterol efflux	drug-pathway
+gemfibrozil	positive regulation of cholesterol transport	drug-pathway
+gemfibrozil	negative regulation of cholesterol biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of cholesterol metabolic process	drug-pathway
+gemfibrozil	positive regulation of cholesterol storage	drug-pathway
+gemfibrozil	negative regulation of cholesterol storage	drug-pathway
+gemfibrozil	reverse cholesterol transport	drug-pathway
+gemfibrozil	regulation of cholesterol storage	drug-pathway
+gemfibrozil	cholesterol esterification	drug-pathway
+gemfibrozil	regulation of cholesterol import	drug-pathway
+gemfibrozil	regulation of cholesterol transporter activity	drug-pathway
+gemfibrozil	regulation of cholesterol transport	drug-pathway
+fluvastatin	intracellular cholesterol transport	drug-pathway
+fluvastatin	positive regulation of cholesterol transport	drug-pathway
+fluvastatin	reverse cholesterol transport	drug-pathway
+fluvastatin	intestinal cholesterol absorption	drug-pathway
+fluvastatin	cholesterol efflux	drug-pathway
+fluvastatin	regulation of cholesterol efflux	drug-pathway
+fluvastatin	cholesterol esterification	drug-pathway
+fluvastatin	regulation of cholesterol transport	drug-pathway
+fluvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+fluvastatin	positive regulation of cholesterol efflux	drug-pathway
 fluvastatin	negative regulation of cholesterol biosynthetic process	drug-pathway
 fluvastatin	negative regulation of cholesterol metabolic process	drug-pathway
-fluvastatin	negative regulation of alcohol biosynthetic process	drug-pathway
-fluvastatin	positive regulation of receptor catabolic process	drug-pathway
-fluvastatin	regulation of triglyceride metabolic process	drug-pathway
-fluvastatin	regulation of platelet activation	drug-pathway
-fluvastatin	negative regulation of MAP kinase activity	drug-pathway
-fluvastatin	negative regulation of production of molecular mediator of immune response	drug-pathway
-fluvastatin	positive regulation of dendritic spine development	drug-pathway
-fluvastatin	regulation of amyloid-beta clearance	drug-pathway
-fluvastatin	low-density lipoprotein receptor particle metabolic process	drug-pathway
-fluvastatin	regulation of toll-like receptor signaling pathway	drug-pathway
-fluvastatin	sterol import	drug-pathway
+fluvastatin	regulation of intestinal cholesterol absorption	drug-pathway
+fluvastatin	cholesterol catabolic process	drug-pathway
+fluvastatin	positive regulation of cholesterol storage	drug-pathway
+fluvastatin	cholesterol storage	drug-pathway
+fluvastatin	positive regulation of cholesterol esterification	drug-pathway
 fluvastatin	cholesterol import	drug-pathway
 fluvastatin	regulation of cholesterol esterification	drug-pathway
 fluvastatin	regulation of cholesterol storage	drug-pathway
-fluvastatin	negative reguation of sterol biosynthetic process	drug-pathway
-fluvastatin	omega-hydroxylase P450 pathway	drug-pathway
-fluvastatin	regulation of Rho protein signal transduction	drug-pathway
-fluvastatin	negative regulation of endothelial cell proliferation	drug-pathway
-fluvastatin	negative regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-fluvastatin	plasma membrane invagination	drug-pathway
-fluvastatin	positive regulation of cytokinesis	drug-pathway
-fluvastatin	negative regulation of purine nucleotide metabolic process	drug-pathway
-fluvastatin	positive regulation of phospholipid efflux	drug-pathway
-fluvastatin	regulation of endothelial cell apoptotic process	drug-pathway
-fluvastatin	regulation of embryonic development	drug-pathway
-fluvastatin	ovarian follicle development	drug-pathway
-fluvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
-fluvastatin	lipid hydroxylation	drug-pathway
-fluvastatin	oxidative demethylation	drug-pathway
-fluvastatin	demethylation	drug-pathway
-fluvastatin	negative regulation of intracellular steroid hormone receptor signaling pathway	drug-pathway
-fluvastatin	neuron projection regeneration	drug-pathway
-fluvastatin	establishment of endothelial barrier	drug-pathway
-fluvastatin	regulation of cell projection assembly	drug-pathway
-fluvastatin	leukocyte mediated cytotoxicity	drug-pathway
-fluvastatin	regulation of plasminogen activation	drug-pathway
-fluvastatin	negative regulation of immune effector process	drug-pathway
-fluvastatin	plasma lipoprotein particle clearance	drug-pathway
-fluvastatin	androgen receptor signaling pathway	drug-pathway
-fluvastatin	lipoprotein localization	drug-pathway
-fluvastatin	epoxygenase P450 pathway	drug-pathway
-fluvastatin	cholesterol catabolic process	drug-pathway
-fluvastatin	cellular response to low-density lipoprotein particle stimulus	drug-pathway
-fluvastatin	steroid catabolic process	drug-pathway
-fluvastatin	response to lipoprotein particle	drug-pathway
-fluvastatin	very-low-density lipoprotein particle clearance	drug-pathway
-fluvastatin	negative regulation of lipid biosynthetic process	drug-pathway
-fluvastatin	regulation of modification of postsynaptic structure	drug-pathway
-fluvastatin	acylglycerol biosynthetic process	drug-pathway
-fluvastatin	establishment of apical/basal cell polarity	drug-pathway
-fluvastatin	regulation of neuroinflammatory response	drug-pathway
-fluvastatin	very-low-density lipoprotein particle assembly	drug-pathway
-fluvastatin	positive regulation of cholesterol storage	drug-pathway
-fluvastatin	positive regulation of Ras protein signal transduction	drug-pathway
-fluvastatin	interleukin-1 secretion	drug-pathway
-fluvastatin	regulation of sprouting angiogenesis	drug-pathway
-fluvastatin	regulation of striated muscle cell apoptotic process	drug-pathway
-fluvastatin	regulation of cardiac muscle cell apoptotic process	drug-pathway
-fluvastatin	fatty acid homeostasis	drug-pathway
-fluvastatin	regulation of cell migration involved in sprouting angiogenesis	drug-pathway
-fluvastatin	negative regulation of synapse organization	drug-pathway
-fluvastatin	arachidonic acid metabolite production involved in inflammatory response	drug-pathway
-fluvastatin	regulation of interleukin-1 beta secretion	drug-pathway
-fluvastatin	positive regulation of protein polymerization	drug-pathway
-fluvastatin	positive regulation of organelle assembly	drug-pathway
-fluvastatin	regulation of cellular response to very-low-density lipoprotein particle stimulus	drug-pathway
-fluvastatin	lipid transport across blood brain barrier	drug-pathway
-fluvastatin	negative regulation of striated muscle cell apoptotic process	drug-pathway
-fluvastatin	regulation of lymphocyte migration	drug-pathway
-fluvastatin	heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules	drug-pathway
-fluvastatin	forebrain cell migration	drug-pathway
-fluvastatin	leukocyte tethering or rolling	drug-pathway
-fluvastatin	regulation of interleukin-1 secretion	drug-pathway
-fluvastatin	monocyte chemotaxis	drug-pathway
-fluvastatin	positive regulation of macrophage derived foam cell differentiation	drug-pathway
-fluvastatin	regulation of cytokinesis	drug-pathway
-fluvastatin	negative regulation of peptide hormone secretion	drug-pathway
-fluvastatin	vascular wound healing	drug-pathway
-fluvastatin	striated muscle cell apoptotic process	drug-pathway
-fluvastatin	intracellular cholesterol transport	drug-pathway
-fluvastatin	negative regulation of cell size	drug-pathway
-fluvastatin	receptor clustering	drug-pathway
-fluvastatin	negative regulation of steroid metabolic process	drug-pathway
-fluvastatin	calcium-mediated signaling using intracellular calcium source	drug-pathway
-fluvastatin	regulation of smooth muscle cell-matrix adhesion	drug-pathway
-fluvastatin	regulation of low-density lipoprotein particle receptor catabolic process	drug-pathway
-fluvastatin	negative regulation of Wnt signaling pathway	drug-pathway
-fluvastatin	intestinal lipid absorption	drug-pathway
-fluvastatin	secretion by tissue	drug-pathway
-fluvastatin	negative regulation of cell morphogenesis involved in differentiation	drug-pathway
-fluvastatin	triglyceride biosynthetic process	drug-pathway
-fluvastatin	positive regulation of interleukin-8 production	drug-pathway
-fluvastatin	cardiac muscle cell apoptotic process	drug-pathway
-fluvastatin	negative regulation of gliogenesis	drug-pathway
-fluvastatin	regulation of actin polymerization or depolymerization	drug-pathway
-fluvastatin	actin polymerization or depolymerization	drug-pathway
-fluvastatin	positive regulation of cholesterol transport	drug-pathway
-fluvastatin	regulation of skeletal muscle tissue development	drug-pathway
-fluvastatin	skeletal muscle satellite cell migration	drug-pathway
-fluvastatin	gastrulation	drug-pathway
-fluvastatin	regulation of actin filament length	drug-pathway
-fluvastatin	regulation of receptor catabolic process	drug-pathway
-fluvastatin	negative regulation of cell adhesion mediated by integrin	drug-pathway
-fluvastatin	positive regulation of sterol transport	drug-pathway
-fluvastatin	Wnt signaling pathway, planar cell polarity pathway	drug-pathway
-fluvastatin	regulation of establishment of planar polarity	drug-pathway
-fluvastatin	regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-fluvastatin	negative regulation of interleukin-1 secretion	drug-pathway
-fluvastatin	positive regulation of Rho protein signal transduction	drug-pathway
-fluvastatin	T cell selection	drug-pathway
-fluvastatin	negative regulation of plasminogen activation	drug-pathway
-fluvastatin	oxidative phosphorylation	drug-pathway
-fluvastatin	nitric oxide mediated signal transduction	drug-pathway
-fluvastatin	regulation of substrate adhesion-dependent cell spreading	drug-pathway
-fluvastatin	positive regulation of vascular smooth muscle contraction	drug-pathway
-fluvastatin	establishment or maintenance of epithelial cell apical/basal polarity	drug-pathway
-fluvastatin	intracellular sterol transport	drug-pathway
-fluvastatin	regulation of astrocyte activation	drug-pathway
-fluvastatin	interleukin-1 beta secretion	drug-pathway
-fluvastatin	lipoprotein catabolic process	drug-pathway
-fluvastatin	triglyceride-rich lipoprotein particle remodeling	drug-pathway
-fluvastatin	negative regulation of epithelial cell apoptotic process	drug-pathway
-fluvastatin	Cdc42 protein signal transduction	drug-pathway
-fluvastatin	phospholipid transport	drug-pathway
-fluvastatin	regulation of long-term synaptic potentiation	drug-pathway
-fluvastatin	regulation of superoxide metabolic process	drug-pathway
-fluvastatin	apical junction assembly	drug-pathway
-fluvastatin	regulation of extent of cell growth	drug-pathway
-fluvastatin	T cell lineage commitment	drug-pathway
-fluvastatin	cellular component maintenance	drug-pathway
-fluvastatin	modification of postsynaptic structure	drug-pathway
-fluvastatin	defense response to Gram-negative bacterium	drug-pathway
-fluvastatin	positive regulation of alpha-beta T cell differentiation	drug-pathway
-fluvastatin	negative regulation of macrophage activation	drug-pathway
-fluvastatin	regulation of blood vessel diameter by renin-angiotensin	drug-pathway
-fluvastatin	renal control of peripheral vascular resistance involved in regulation of systemic arterial blood pressure	drug-pathway
-fluvastatin	negative regulation of insulin secretion	drug-pathway
-fluvastatin	negative regulation of tumor necrosis factor-mediated signaling pathway	drug-pathway
-fluvastatin	presynaptic membrane organization	drug-pathway
-fluvastatin	lipid transport involved in lipid storage	drug-pathway
-fluvastatin	cellular response to very-low-density lipoprotein particle stimulus	drug-pathway
-fluvastatin	positive regulation of postsynaptic membrane organization	drug-pathway
-fluvastatin	regulation of presynaptic membrane organization	drug-pathway
-fluvastatin	negative regulation of presynaptic membrane organization	drug-pathway
-fluvastatin	intestinal cholesterol absorption	drug-pathway
-fluvastatin	vitamin transport	drug-pathway
-fluvastatin	cholesterol efflux	drug-pathway
-fluvastatin	reverse cholesterol transport	drug-pathway
-fluvastatin	positive regulation of triglyceride biosynthetic process	drug-pathway
-fluvastatin	ossification involved in bone maturation	drug-pathway
-fluvastatin	positive regulation of triglyceride metabolic process	drug-pathway
-fluvastatin	regulation of vascular wound healing	drug-pathway
-fluvastatin	positive regulation of phospholipid transport	drug-pathway
-fluvastatin	glycerolipid catabolic process	drug-pathway
-fluvastatin	negative regulation of astrocyte differentiation	drug-pathway
-fluvastatin	establishment or maintenance of apical/basal cell polarity	drug-pathway
-fluvastatin	establishment or maintenance of bipolar cell polarity	drug-pathway
-fluvastatin	low-density lipoprotein particle receptor catabolic process	drug-pathway
-fluvastatin	regulation of cholesterol efflux	drug-pathway
-fluvastatin	regulation of vascular smooth muscle contraction	drug-pathway
-fluvastatin	positive regulation of lipid storage	drug-pathway
-fluvastatin	Roundabout signaling pathway	drug-pathway
-fluvastatin	membrane protein ectodomain proteolysis	drug-pathway
-fluvastatin	regulation of protein homooligomerization	drug-pathway
-fluvastatin	positive regulation of lymphocyte migration	drug-pathway
-fluvastatin	mitotic cytokinetic process	drug-pathway
-fluvastatin	establishment of planar polarity	drug-pathway
-fluvastatin	regulation of phospholipid efflux	drug-pathway
-fluvastatin	membrane to membrane docking	drug-pathway
-fluvastatin	regulation of systemic arterial blood pressure by renin-angiotensin	drug-pathway
-fluvastatin	negative regulation of extrinsic apoptotic signaling pathway via death domain receptors	drug-pathway
-fluvastatin	regulation of plasma membrane bounded cell projection assembly	drug-pathway
-fluvastatin	regulation of monocyte chemotaxis	drug-pathway
-fluvastatin	endothelial cell apoptotic process	drug-pathway
-fluvastatin	positive regulation of actin filament bundle assembly	drug-pathway
-fluvastatin	negative regulation of muscle cell apoptotic process	drug-pathway
-fluvastatin	positive regulation of interleukin-6 production	drug-pathway
-fluvastatin	regulation of leukocyte mediated cytotoxicity	drug-pathway
-fluvastatin	regulation of oxidative phosphorylation	drug-pathway
-fluvastatin	telencephalon cell migration	drug-pathway
-fluvastatin	regulation of digestive system process	drug-pathway
-fluvastatin	urea metabolic process	drug-pathway
-fluvastatin	neural nucleus development	drug-pathway
-fluvastatin	regulation of blood volume by renin-angiotensin	drug-pathway
-fluvastatin	renal system process involved in regulation of systemic arterial blood pressure	drug-pathway
-fluvastatin	regulation of renal system process	drug-pathway
-fluvastatin	positive regulation of leukocyte adhesion to vascular endothelial cell	drug-pathway
-fluvastatin	T cell extravasation	drug-pathway
-fluvastatin	substantia nigra development	drug-pathway
-fluvastatin	regulation of systemic arterial blood pressure by endothelin	drug-pathway
-fluvastatin	regulation of toll-like receptor 2 signaling pathway	drug-pathway
-fluvastatin	respiratory burst	drug-pathway
-fluvastatin	negative regulation of cell-substrate adhesion	drug-pathway
-fluvastatin	modification of postsynaptic actin cytoskeleton	drug-pathway
-fluvastatin	postsynaptic membrane organization	drug-pathway
-fluvastatin	artery morphogenesis	drug-pathway
-fluvastatin	negative regulation of interleukin-1 production	drug-pathway
-fluvastatin	cytokine secretion involved in immune response	drug-pathway
-fluvastatin	regulation of postsynaptic membrane organization	drug-pathway
-fluvastatin	regulation of fear response	drug-pathway
-fluvastatin	regulation of behavioral fear response	drug-pathway
-fluvastatin	cytoskeleton-dependent cytokinesis	drug-pathway
-fluvastatin	mitotic spindle assembly	drug-pathway
-fluvastatin	trabecula morphogenesis	drug-pathway
-fluvastatin	mucus secretion	drug-pathway
-fluvastatin	regulation of mucus secretion	drug-pathway
-fluvastatin	replicative senescence	drug-pathway
-fluvastatin	cellular response to interleukin-6	drug-pathway
-fluvastatin	positive regulation of mucus secretion	drug-pathway
-fluvastatin	positive regulation of lipoprotein particle clearance	drug-pathway
-fluvastatin	positive regulation of nitric-oxide synthase activity	drug-pathway
-fluvastatin	glutamate receptor clustering	drug-pathway
-fluvastatin	steroid esterification	drug-pathway
-fluvastatin	sterol esterification	drug-pathway
-fluvastatin	cholesterol esterification	drug-pathway
-fluvastatin	heterotypic cell-cell adhesion	drug-pathway
-fluvastatin	regulation of odontoblast differentiation	drug-pathway
-fluvastatin	microglial cell activation	drug-pathway
-fluvastatin	leukocyte activation involved in inflammatory response	drug-pathway
-fluvastatin	cell-cell adhesion via plasma-membrane adhesion molecules	drug-pathway
-fluvastatin	regulation of protein oligomerization	drug-pathway
-fluvastatin	regulation of neuronal synaptic plasticity	drug-pathway
-fluvastatin	regulation of macrophage activation	drug-pathway
-fluvastatin	protein catabolic process in the vacuole	drug-pathway
-fluvastatin	establishment or maintenance of cytoskeleton polarity	drug-pathway
-fluvastatin	radial glial cell differentiation	drug-pathway
-fluvastatin	negative regulation of smooth muscle cell-matrix adhesion	drug-pathway
-fluvastatin	positive regulation of skeletal muscle tissue development	drug-pathway
-fluvastatin	positive regulation of amyloid-beta clearance	drug-pathway
-fluvastatin	regulation of stress fiber assembly	drug-pathway
-fluvastatin	negative regulation of astrocyte activation	drug-pathway
-fluvastatin	wound healing, spreading of cells	drug-pathway
-fluvastatin	regulation of leukocyte adhesion to vascular endothelial cell	drug-pathway
-fluvastatin	carbohydrate derivative transport	drug-pathway
-fluvastatin	cellular response to ionizing radiation	drug-pathway
-fluvastatin	cell migration involved in sprouting angiogenesis	drug-pathway
-fluvastatin	regulation of cholesterol transport	drug-pathway
-fluvastatin	positive regulation of smooth muscle contraction	drug-pathway
-fluvastatin	negative regulation of triglyceride metabolic process	drug-pathway
-fluvastatin	axon regeneration	drug-pathway
-fluvastatin	response to dietary excess	drug-pathway
-fluvastatin	negative regulation of long-term synaptic potentiation	drug-pathway
-fluvastatin	negative regulation of cytokine secretion	drug-pathway
-fluvastatin	positive regulation of podosome assembly	drug-pathway
-fluvastatin	negative regulation of smooth muscle cell migration	drug-pathway
-fluvastatin	amyloid precursor protein catabolic process	drug-pathway
-fluvastatin	establishment of monopolar cell polarity	drug-pathway
-fluvastatin	establishment or maintenance of monopolar cell polarity	drug-pathway
-fluvastatin	regulation of membrane protein ectodomain proteolysis	drug-pathway
-fluvastatin	regulation of actin filament polymerization	drug-pathway
-fluvastatin	cellular extravasation	drug-pathway
-fluvastatin	antibiotic biosynthetic process	drug-pathway
-fluvastatin	negative regulation of endothelial cell apoptotic process	drug-pathway
-fluvastatin	phospholipid catabolic process	drug-pathway
-fluvastatin	positive regulation of striated muscle cell apoptotic process	drug-pathway
-fluvastatin	positive regulation of cardiac muscle cell apoptotic process	drug-pathway
-fluvastatin	negative regulation of reactive oxygen species biosynthetic process	drug-pathway
-fluvastatin	smooth muscle cell migration	drug-pathway
-fluvastatin	cellular response to alkaloid	drug-pathway
-fluvastatin	lymphocyte migration	drug-pathway
-fluvastatin	intracellular lipid transport	drug-pathway
-fluvastatin	positive regulation of alpha-beta T cell activation	drug-pathway
-fluvastatin	alpha-beta T cell lineage commitment	drug-pathway
-fluvastatin	regulation of mononuclear cell migration	drug-pathway
-fluvastatin	regulation of cell adhesion mediated by integrin	drug-pathway
-fluvastatin	regulation of postsynapse organization	drug-pathway
-fluvastatin	regulation of lipid transport across blood brain barrier	drug-pathway
-fluvastatin	positive regulation of lipid transport across blood brain barrier	drug-pathway
-fluvastatin	regulation of heparan sulfate binding	drug-pathway
-fluvastatin	positive regulation of heparan sulfate binding	drug-pathway
-fluvastatin	regulation of heparan sulfate proteoglycan binding	drug-pathway
-fluvastatin	positive regulation of heparan sulfate proteoglycan binding	drug-pathway
-fluvastatin	epiboly	drug-pathway
-fluvastatin	epiboly involved in wound healing	drug-pathway
-fluvastatin	dendritic spine development	drug-pathway
-fluvastatin	protein oxidation	drug-pathway
-fluvastatin	phosphatidylcholine metabolic process	drug-pathway
-fluvastatin	regulation of heterotypic cell-cell adhesion	drug-pathway
-fluvastatin	positive regulation of stress fiber assembly	drug-pathway
-fluvastatin	ruffle organization	drug-pathway
-fluvastatin	adhesion of symbiont to host	drug-pathway
-fluvastatin	regulation of cell killing	drug-pathway
-fluvastatin	negative regulation of steroid biosynthetic process	drug-pathway
-fluvastatin	positive regulation of protein catabolic process in the vacuole	drug-pathway
-fluvastatin	negative regulation of amyloid precursor protein catabolic process	drug-pathway
-fluvastatin	response to selenium ion	drug-pathway
-fluvastatin	coenzyme A metabolic process	drug-pathway
-fluvastatin	forebrain radial glial cell differentiation	drug-pathway
-fluvastatin	cytokinetic process	drug-pathway
-fluvastatin	negative regulation of glial cell differentiation	drug-pathway
-fluvastatin	lipoprotein metabolic process	drug-pathway
-fluvastatin	insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-fluvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
-fluvastatin	amyloid-beta formation	drug-pathway
-fluvastatin	T cell activation via T cell receptor contact with antigen bound to MHC molecule on antigen presenting cell	drug-pathway
-fluvastatin	positive regulation of neuron apoptotic process	drug-pathway
-fluvastatin	cellular response to dexamethasone stimulus	drug-pathway
-fluvastatin	negative regulation of amyloid fibril formation	drug-pathway
-fluvastatin	animal organ maturation	drug-pathway
-fluvastatin	regulation of astrocyte differentiation	drug-pathway
-fluvastatin	endothelial tube morphogenesis	drug-pathway
-fluvastatin	behavioral fear response	drug-pathway
-fluvastatin	behavioral defense response	drug-pathway
-fluvastatin	odontoblast differentiation	drug-pathway
-fluvastatin	protein-lipid complex remodeling	drug-pathway
-fluvastatin	plasma lipoprotein particle remodeling	drug-pathway
-fluvastatin	protein-containing complex remodeling	drug-pathway
-fluvastatin	bone maturation	drug-pathway
-fluvastatin	positive regulation of membrane protein ectodomain proteolysis	drug-pathway
-fluvastatin	glycerophospholipid catabolic process	drug-pathway
-fluvastatin	positive regulation of cholesterol efflux	drug-pathway
-fluvastatin	ubiquinone metabolic process	drug-pathway
-fluvastatin	neurotransmitter-gated ion channel clustering	drug-pathway
-fluvastatin	chronological cell aging	drug-pathway
-fluvastatin	positive regulation of lysosomal protein catabolic process	drug-pathway
-fluvastatin	regulation of microglial cell activation	drug-pathway
-fluvastatin	mitotic cytokinesis	drug-pathway
-fluvastatin	positive regulation of monocyte chemotaxis	drug-pathway
-fluvastatin	negative regulation of fibrinolysis	drug-pathway
-fluvastatin	positive regulation of receptor-mediated endocytosis	drug-pathway
-fluvastatin	angiogenesis involved in wound healing	drug-pathway
-fluvastatin	leukocyte adhesion to vascular endothelial cell	drug-pathway
-fluvastatin	positive regulation of axonogenesis	drug-pathway
-fluvastatin	positive regulation of mononuclear cell migration	drug-pathway
-fluvastatin	very-low-density lipoprotein particle remodeling	drug-pathway
-fluvastatin	negative regulation of canonical Wnt signaling pathway	drug-pathway
-fluvastatin	integrin-mediated signaling pathway	drug-pathway
-fluvastatin	regulation of amyloid precursor protein catabolic process	drug-pathway
-fluvastatin	neuroepithelial cell differentiation	drug-pathway
-fluvastatin	myoblast differentiation	drug-pathway
-fluvastatin	high-density lipoprotein particle assembly	drug-pathway
-fluvastatin	quinone metabolic process	drug-pathway
-fluvastatin	regulation of dendritic spine maintenance	drug-pathway
-fluvastatin	exploration behavior	drug-pathway
-fluvastatin	T cell activation involved in immune response	drug-pathway
-fluvastatin	negative regulation of cell migration involved in sprouting angiogenesis	drug-pathway
-fluvastatin	low-density lipoprotein particle remodeling	drug-pathway
-fluvastatin	leukotriene production involved in inflammatory response	drug-pathway
-fluvastatin	response to copper ion	drug-pathway
-fluvastatin	hydrogen peroxide biosynthetic process	drug-pathway
-fluvastatin	production of molecular mediator involved in inflammatory response	drug-pathway
-fluvastatin	angiotensin-mediated vasoconstriction involved in regulation of systemic arterial blood pressure	drug-pathway
-fluvastatin	endothelial tube lumen extension	drug-pathway
-fluvastatin	regulation of amyloid-beta formation	drug-pathway
-fluvastatin	regulation of triglyceride biosynthetic process	drug-pathway
-fluvastatin	regulation of intestinal absorption	drug-pathway
-fluvastatin	regulation of intestinal lipid absorption	drug-pathway
-fluvastatin	phospholipid efflux	drug-pathway
-fluvastatin	positive regulation of dendritic spine maintenance	drug-pathway
-fluvastatin	regulation of dendritic spine development	drug-pathway
-fluvastatin	regulation of interleukin-1 beta production	drug-pathway
-fluvastatin	regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-fluvastatin	low-density lipoprotein particle clearance	drug-pathway
-fluvastatin	positive regulation of low-density lipoprotein particle receptor catabolic process	drug-pathway
-fluvastatin	podosome assembly	drug-pathway
-fluvastatin	regulation of podosome assembly	drug-pathway
-fluvastatin	regulation of sterol transport	drug-pathway
-fluvastatin	mitotic cleavage furrow formation	drug-pathway
-fluvastatin	membrane protein proteolysis	drug-pathway
-fluvastatin	nitrogen cycle metabolic process	drug-pathway
-fluvastatin	plasma lipoprotein particle assembly	drug-pathway
-fluvastatin	negative regulation of amyloid-beta formation	drug-pathway
-fluvastatin	protein-lipid complex assembly	drug-pathway
-fluvastatin	intestinal absorption	drug-pathway
-fluvastatin	regulation of interleukin-8 production	drug-pathway
-fluvastatin	positive regulation of small GTPase mediated signal transduction	drug-pathway
-fluvastatin	lipid digestion	drug-pathway
-fluvastatin	negative chemotaxis	drug-pathway
-fluvastatin	NMDA glutamate receptor clustering	drug-pathway
-fluvastatin	positive regulation of amyloid fibril formation	drug-pathway
-fluvastatin	phosphatidylcholine catabolic process	drug-pathway
-fluvastatin	negative regulation of I-kappaB kinase/NF-kappaB signaling	drug-pathway
-fluvastatin	regulation of gastrulation	drug-pathway
-fluvastatin	astrocyte activation	drug-pathway
-fluvastatin	positive regulation of dendrite development	drug-pathway
-fluvastatin	high-density lipoprotein particle remodeling	drug-pathway
-fluvastatin	regulation of phospholipid transport	drug-pathway
-fluvastatin	actin filament polymerization	drug-pathway
-fluvastatin	artery development	drug-pathway
-fluvastatin	chylomicron remnant clearance	drug-pathway
-fluvastatin	positive regulation of actin filament polymerization	drug-pathway
-fluvastatin	negative regulation of sprouting angiogenesis	drug-pathway
-fluvastatin	neutral lipid biosynthetic process	drug-pathway
-fluvastatin	exogenous drug catabolic process	drug-pathway
-fluvastatin	monoterpenoid metabolic process	drug-pathway
-fluvastatin	negative regulation of oxidative phosphorylation	drug-pathway
-fluvastatin	negative regulation of insulin secretion involved in cellular response to glucose stimulus	drug-pathway
-fluvastatin	positive regulation of neuroepithelial cell differentiation	drug-pathway
-fluvastatin	regulation of phospholipid catabolic process	drug-pathway
-fluvastatin	negative regulation of nucleotide metabolic process	drug-pathway
-fluvastatin	dendritic spine maintenance	drug-pathway
-fluvastatin	regulation of axon extension	drug-pathway
-fluvastatin	response to caloric restriction	drug-pathway
-fluvastatin	chylomicron assembly	drug-pathway
-fluvastatin	acylglycerol catabolic process	drug-pathway
-fluvastatin	superoxide anion generation	drug-pathway
-fluvastatin	apolipoprotein A-I-mediated signaling pathway	drug-pathway
-fluvastatin	negative regulation of platelet activation	drug-pathway
-fluvastatin	regulation of protein catabolic process in the vacuole	drug-pathway
-fluvastatin	vasodilation	drug-pathway
-fluvastatin	cell adhesion molecule production	drug-pathway
-fluvastatin	regulation of extrinsic apoptotic signaling pathway via death domain receptors	drug-pathway
-fluvastatin	maintenance of location in cell	drug-pathway
-fluvastatin	long-chain fatty acid biosynthetic process	drug-pathway
-fluvastatin	regulation of modification of postsynaptic actin cytoskeleton	drug-pathway
-fluvastatin	regulation of modification of synaptic structure	drug-pathway
-fluvastatin	morphogenesis of a polarized epithelium	drug-pathway
-fluvastatin	negative regulation of microglial cell activation	drug-pathway
-fluvastatin	regulation of T cell migration	drug-pathway
-fluvastatin	establishment or maintenance of actin cytoskeleton polarity	drug-pathway
-fluvastatin	osteoblast proliferation	drug-pathway
-fluvastatin	high-density lipoprotein particle clearance	drug-pathway
-fluvastatin	regulation of alpha-beta T cell activation	drug-pathway
-fluvastatin	response to mineralocorticoid	drug-pathway
-fluvastatin	regulation of cell adhesion molecule production	drug-pathway
-fluvastatin	regulation of smooth muscle cell migration	drug-pathway
-fluvastatin	neutral lipid catabolic process	drug-pathway
-fluvastatin	forebrain generation of neurons	drug-pathway
-fluvastatin	positive regulation of blood pressure	drug-pathway
-fluvastatin	peripheral nervous system axon regeneration	drug-pathway
-fluvastatin	glucocorticoid metabolic process	drug-pathway
-fluvastatin	amyloid-beta clearance	drug-pathway
-fluvastatin	isoprenoid biosynthetic process	drug-pathway
-fluvastatin	phospholipid homeostasis	drug-pathway
-fluvastatin	negative regulation of cellular amide metabolic process	drug-pathway
-fluvastatin	negative regulation of epithelial cell migration	drug-pathway
-fluvastatin	regulation of lysosomal protein catabolic process	drug-pathway
-fluvastatin	triglyceride catabolic process	drug-pathway
-fluvastatin	cGMP-mediated signaling	drug-pathway
-fluvastatin	beta selection	drug-pathway
-fluvastatin	positive regulation of substrate adhesion-dependent cell spreading	drug-pathway
-fluvastatin	T cell migration	drug-pathway
-fluvastatin	regulation of leukotriene production involved in inflammatory response	drug-pathway
-fluvastatin	positive regulation of leukotriene production involved in inflammatory response	drug-pathway
-fluvastatin	triglyceride mobilization	drug-pathway
-fluvastatin	synaptic transmission, cholinergic	drug-pathway
-fluvastatin	regulation of amyloid fibril formation	drug-pathway
-fluvastatin	negative regulation of interleukin-1 beta production	drug-pathway
-fluvastatin	regulation of osteoblast proliferation	drug-pathway
-fluvastatin	negative regulation of blood vessel endothelial cell migration	drug-pathway
-fluvastatin	negative regulation of endothelial cell migration	drug-pathway
-fluvastatin	negative regulation of supramolecular fiber organization	drug-pathway
-fluvastatin	membrane invagination	drug-pathway
-fluvastatin	cerebral cortex cell migration	drug-pathway
-fluvastatin	flagellated sperm motility	drug-pathway
-fluvastatin	sperm motility	drug-pathway
-fluvastatin	positive regulation of translation	drug-pathway
-fluvastatin	negative regulation of vascular wound healing	drug-pathway
-fluvastatin	positive regulation of odontoblast differentiation	drug-pathway
-fluvastatin	cholesterol storage	drug-pathway
-fluvastatin	positive regulation of cholesterol esterification	drug-pathway
-fluvastatin	negative regulation of heterotypic cell-cell adhesion	drug-pathway
-fluvastatin	receptor catabolic process	drug-pathway
-fluvastatin	lysosomal protein catabolic process	drug-pathway
-fluvastatin	negative regulation of ATP metabolic process	drug-pathway
-fluvastatin	regulation of alpha-beta T cell differentiation	drug-pathway
-fluvastatin	regulation of actomyosin structure organization	drug-pathway
-fluvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
-fluvastatin	modification of synaptic structure	drug-pathway
-fluvastatin	positive regulation of T cell migration	drug-pathway
-fluvastatin	polarized epithelial cell differentiation	drug-pathway
-fluvastatin	establishment of epithelial cell apical/basal polarity	drug-pathway
-fluvastatin	negative regulation of cell adhesion molecule production	drug-pathway
-fluvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
-fluvastatin	negative regulation of lipase activity	drug-pathway
-fluvastatin	fertilization	drug-pathway
-fluvastatin	lipoprotein transport	drug-pathway
-fluvastatin	vascular smooth muscle contraction	drug-pathway
-fluvastatin	virion assembly	drug-pathway
-fluvastatin	morphogenesis of an epithelial sheet	drug-pathway
-fluvastatin	sterol catabolic process	drug-pathway
-fluvastatin	morphogenesis of an endothelium	drug-pathway
-fluvastatin	cell-cell adhesion involved in gastrulation	drug-pathway
-fluvastatin	regulation of cell-cell adhesion involved in gastrulation	drug-pathway
-fluvastatin	regulation of intestinal cholesterol absorption	drug-pathway
-fluvastatin	peptidyl-methionine modification	drug-pathway
-fluvastatin	positive regulation of systemic arterial blood pressure	drug-pathway
-fluvastatin	locomotory exploration behavior	drug-pathway
-fluvastatin	dentinogenesis	drug-pathway
-fluvastatin	positive regulation of epithelial cell differentiation	drug-pathway
-fluvastatin	positive regulation of T cell differentiation	drug-pathway
-fluvastatin	smooth muscle cell-matrix adhesion	drug-pathway
-fluvastatin	non-canonical Wnt signaling pathway	drug-pathway
-fluvastatin	cleavage furrow formation	drug-pathway
-fluvastatin	establishment of epithelial cell polarity	drug-pathway
-fluvastatin	regulation of very-low-density lipoprotein particle remodeling	drug-pathway
-fluvastatin	negative regulation of cell-matrix adhesion	drug-pathway
-fluvastatin	negative regulation of axonogenesis	drug-pathway
-fluvastatin	triglyceride-rich lipoprotein particle clearance	drug-pathway
-fluvastatin	phosphatidylcholine biosynthetic process	drug-pathway
-fluvastatin	cellular response to lipoprotein particle stimulus	drug-pathway
-fluvastatin	adrenal gland development	drug-pathway
-fluvastatin	chylomicron remodeling	drug-pathway
-fluvastatin	positive regulation of superoxide anion generation	drug-pathway
-fluvastatin	long-term memory	drug-pathway
-fluvastatin	positive regulation of viral process	drug-pathway
-fluvastatin	substrate adhesion-dependent cell spreading	drug-pathway
-fluvastatin	negative regulation of neuroinflammatory response	drug-pathway
-fluvastatin	establishment of tissue polarity	drug-pathway
-fluvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
-fluvastatin	regulation of phosphatidylcholine catabolic process	drug-pathway
-fluvastatin	AMPA glutamate receptor clustering	drug-pathway
-fluvastatin	negative regulation of interleukin-1 beta secretion	drug-pathway
-fluvastatin	regulation of Cdc42 protein signal transduction	drug-pathway
-fluvastatin	negative regulation of response to cytokine stimulus	drug-pathway
-fluvastatin	positive regulation of muscle cell apoptotic process	drug-pathway
-fluvastatin	organophosphate ester transport	drug-pathway
-fluvastatin	lipoprotein biosynthetic process	drug-pathway
-fluvastatin	modulation by host of viral process	drug-pathway
-fluvastatin	regulation of superoxide anion generation	drug-pathway
-fluvastatin	acylglycerol homeostasis	drug-pathway
-fluvastatin	triglyceride homeostasis	drug-pathway
-fluvastatin	positive regulation of steroid metabolic process	drug-pathway
-fluvastatin	regulation of lipoprotein particle clearance	drug-pathway
-fluvastatin	positive regulation by host of viral process	drug-pathway
-fluvastatin	amyloid fibril formation	drug-pathway
-fluvastatin	positive regulation of phagocytosis	drug-pathway
+triclosan	negative regulation of cholesterol storage	drug-pathway
+triclosan	regulation of cholesterol transport	drug-pathway
+triclosan	regulation of cholesterol storage	drug-pathway
+triclosan	regulation of cholesterol transporter activity	drug-pathway
+triclosan	cholesterol storage	drug-pathway
+dopamine	Dopamine receptor agonist	drug-moa
+quercetin	Polar auxin transport inhibitor	drug-moa
+curcumin	Cyclooxygenase inhibitor	drug-moa
+curcumin	Lipoxygenase inhibitor	drug-moa
+curcumin	NFkB pathway inhibitor	drug-moa
+curcumin	Histone acetyltransferase inhibitor	drug-moa
+resveratrol	SIRT activator	drug-moa
+resveratrol	Cytochrome P450 inhibitor	drug-moa
 rosuvastatin	HMGCR inhibitor	drug-moa
 lovastatin	HMGCR inhibitor	drug-moa
+tamoxifen	Selective estrogen receptor modulator (SERM)	drug-moa
+tamoxifen	Estrogen receptor antagonist	drug-moa
 simvastatin	HMGCR inhibitor	drug-moa
+gemfibrozil	Lipoprotein lipase activator	drug-moa
 fluvastatin	HMGCR inhibitor	drug-moa
+triclosan	Enoyl-[acyl-carrier-protein] reductase [NADH] inhibitor	drug-moa

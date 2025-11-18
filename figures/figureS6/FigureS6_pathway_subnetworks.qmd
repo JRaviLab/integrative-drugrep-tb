@@ -119,13 +119,13 @@ cytokine_pathways <- unique(node_data$enriched_pathway[grepl("cytokine", node_da
 ```{r add STRING genes to the node data for HMGCR inhibitor}
 node_data_hmgcr <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
                                drug_genes_df = drug_genes_df,
-                               disease_pathways = c(),
+                               disease_pathways = cholesterol_pathways,
                                N = 15,
                                interaction_file = here("data/metadata/interactions_DGIdb.tsv"),
                                intscore_values = "all",
                                intscore_tail = "right",
                                intscore_pct = 0.9,
-                               moas = c("HMGCR inhibitor"))
+                               moas = c())
 node_data_STRING_hmgcr <- add_STRING_genes(node_data_hmgcr,
                                     STRING_path = here("data/metadata/STRING_hs_interactions.txt"),
                                     STRING_intscore = 0.7,
