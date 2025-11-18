@@ -1,0 +1,29 @@
+series_id	SIGNATURE_NAME	tb_status	tissue_category	tissue_cell_type	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples	technology
+GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	MTB	circulating	blood_PBMC	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3	microarray
+GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	MTB	circulating	blood_dendritic_cells	primary	data/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237	129	130	microarray
+GSE63548	GSE63548_GPL10558_LNTB_control_lymphnode_lymphnode	LNTB	other	lymphnode	primary	data/microarray_data_forDE/expression_matrices/GSE63548.tsv	1	108	104	4	22	microarray
+GSE83456	GSE83456_GPL10558_EPTB_control_blood	EPTB	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	44	38	30	47	microarray
+GSE83456	GSE83456_GPL10558_PTB_control_blood	PTB	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	54	91	31	45	microarray
+GSE139871	GSE139871_GPL10558_MTB_control_blood_monocyte	MTB	circulating	blood_monocyte	primary	data/microarray_data_forDE/expression_matrices/GSE139871.tsv	1	11	32	4	20	microarray
+GSE84076	GSE84076_MTB_control_blood	MTB	circulating	blood	primary	data/RNAseq_data_forDE/expression_matrices/GSE84076.tsv	1	20	8	4	6	RNAseq
+GSE148171	GSE148171_MTB_control_blood_PBMC	MTB	circulating	blood_PBMC	primary	data/RNAseq_data_forDE/expression_matrices/GSE148171.tsv	1	176	52	4	5	RNAseq
+GSE198557	GSE198557_MTB_control_blood_PBMC	MTB	circulating	blood_PBMC	primary	data/RNAseq_data_forDE/expression_matrices/GSE198557.tsv	1	156	48	6	6	RNAseq
+GSE132283	GSE132283_MTB_control_2h_blood_macrophage	MTB	circulating	blood_macrophage	primary	data/RNAseq_data_forDE/expression_matrices/GSE132283.tsv	1	170	54	3	3	RNAseq
+GSE132283	GSE132283_MTB_control_48h_blood_macrophage	MTB	circulating	blood_macrophage	primary	data/RNAseq_data_forDE/expression_matrices/GSE132283.tsv	1	336	243	3	3	RNAseq
+GSE143627	GSE143627_MTB_control_blood_PBMC_macrophage	MTB	circulating	blood_PBMC_macrophage	primary	data/RNAseq_data_forDE/expression_matrices/GSE143627.tsv	1	102	83	3	3	RNAseq
+GSE148731	GSE148731_MTB_control_4h_blood_CD14plus_monocyte_derived_macrophages_MF1	MTB	circulating	blood_CD14plus_monocyte_derived_macrophages_MF1	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	50	7	3	3	RNAseq
+GSE148731	GSE148731_MTB_control_24h_blood_CD14plus_monocyte_derived_macrophages_MF2	MTB	circulating	blood_CD14plus_monocyte_derived_macrophages_MF2	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	286	219	4	3	RNAseq
+GSE148731	GSE148731_MTB_control_24h_blood_CD14plus_monocyte_derived_macrophages_MF1	MTB	circulating	blood_CD14plus_monocyte_derived_macrophages_MF1	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	212	147	3	3	RNAseq
+GSE174566	GSE174566_MTB_control_blood_PBMC	MTB	circulating	blood_PBMC	primary	data/RNAseq_data_forDE/expression_matrices/GSE174566.tsv	1	209	95	18	18	RNAseq
+GSE193777	GSE193777_MTB_control_blood	MTB	circulating	blood	primary	data/RNAseq_data_forDE/expression_matrices/GSE193777.tsv	1	215	108	36	10	RNAseq
+GSE256184	GSE256184_MTB_control_0h_HEPG2_HepG2	MTB	other	HepG2	cell line	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	167	124	4	4	RNAseq
+GSE256184	GSE256184_MTB_control_48h_HEPG2_HepG2	MTB	other	HepG2	cell line	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	410	277	4	4	RNAseq
+GSE64179	GSE64179_MTB_control_blood_dendritic_cells	MTB	circulating	blood_dendritic_cells	primary	data/RNAseq_data_forDE/expression_matrices/GSE64179.tsv	1	271	243	6	6	RNAseq
+GSE64182	GSE64182_MTB_control_blood_dendritic_cells	MTB	circulating	blood_dendritic_cells	primary	data/RNAseq_data_forDE/expression_matrices/GSE64182.tsv	1	235	88	3	3	RNAseq
+GSE141656	GSE141656_MTB_control_blood_blood	MTB	circulating	blood	primary	data/RNAseq_data_forDE/expression_matrices/GSE141656.tsv	1	267	157	3	3	RNAseq
+GSE143731	GSE143731_MTB_control_blood_monocyte_derived_macrophages	MTB	circulating	blood_monocyte_derived_macrophages	primary	data/RNAseq_data_forDE/expression_matrices/GSE143731.tsv	1	6	7	4	4	RNAseq
+GSE164287	GSE164287_MTB_control_blood_monocyte_derived_macrophages	MTB	circulating	blood_monocyte_derived_macrophages	primary	data/RNAseq_data_forDE/expression_matrices/GSE164287.tsv	1	81	84	4	4	RNAseq
+GSE165708	GSE165708_MTB_control_BAL_bronchoalveolar_lavage	MTB	other	BAL_bronchoalveolar_lavage	primary	data/RNAseq_data_forDE/expression_matrices/GSE165708.tsv	1	23	2	16	16	RNAseq
+GSE183912	GSE183912_MTB_control_blood_marcophages	MTB	circulating	blood_macrophage	primary	data/RNAseq_data_forDE/expression_matrices/GSE183912.tsv	1	25	2	4	4	RNAseq
+GSE211974	GSE211974_MTB_control_blood_THP-1	MTB	circulating	THP-1	cell line	data/RNAseq_data_forDE/expression_matrices/GSE211974.tsv	1	67	46	3	3	RNAseq
+GSE236156	GSE236156_MTB_control_blood_monocyte_derived_macrophage	MTB	circulating	blood_monocyte_derived_macrophages	primary	data/RNAseq_data_forDE/expression_matrices/GSE236156.tsv	1	213	161	11	6	RNAseq
