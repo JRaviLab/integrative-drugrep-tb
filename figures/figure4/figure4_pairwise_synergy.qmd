@@ -1,22 +1,11 @@
 ### Figure 5. Pairwise drug synergy found in the prediction
 
-#### Individual signatures
-
 ```{r}
 library(readr)
 library(tidyverse)
 library(here)
 
-## Aggregated signatures' drug results
-RAresult_aggrSig_RNAseq <- readRDS(here("results/figure4_synergy/RAresult_neg_left_0.9_aggrSig_TB_RNAseq.rds"))
-RAresult_aggrSig_marray <- readRDS(here("results/figure4_synergy/RAresult_neg_left_0.9_aggrSig_TB_microarray.rds"))
-predicted_aggr_drugs = union(RAresult_aggrSig_RNAseq, RAresult_aggrSig_marray) # 216 drugs
-##Individual signatures' drug results
-RAresult_indivSig_RNAseq <- readRDS(here("results/figure4_synergy/RAresult_indivSig_TB_RNAseq.rds"))
-RAresult_indivSig_marray <- readRDS(here("results/figure4_synergy/RAresult_indivSig_TB_microarray.rds"))
-predicted_indiv_drugs = union(RAresult_indivSig_RNAseq, RAresult_indivSig_marray) # 227 drugs ---- z-score the full distribution then select the drugs we care about (flip) |  the moas including all the drugs and see if the | similar perturbations were assumed | what fraction has high/low synergy | then plot for my drugs and see the distributions | more synergistic pairs or not? 
-# overlapping drugs between aggr and indiv 's drug predictions
-predicted_drugs = intersect(predicted_aggr_drugs,predicted_indiv_drugs) # 108 drugs
+predicted_drugs = read_tsv(here("results/final_high_confidence_drug_predictions.tsv"))$drug_name
 
 # list of Antitubercular Medications - ncbi.nlm.nih.gov (last updated June 2023)
 tbmedications <- c("rifampin","isoniazid",
@@ -49,30 +38,29 @@ synergy_z_sorted <- drugs_synergy_drugs %>%
 ```
 
 ```{r}
-# Step 1: Duplicate with swapped Drug1 and Drug2
+# 1. duplicate with swapped Drug1 and Drug2
 drug_df = synergy_z_sorted
 drug_df_swapped <- drug_df %>%
-  rename(Drug1_orig = Drug1, Drug2_orig = Drug2) %>%
+  dplyr::rename(Drug1_orig = Drug1, Drug2_orig = Drug2) %>%
   mutate(Drug1 = Drug2_orig, Drug2 = Drug1_orig) %>%
-  select(Drug1, Drug2, everything())
+  dplyr::select(Drug1, Drug2, everything())
 
-# Step 2: Combine original and swapped
+# 2. combine original and swapped
 drug_df_full <- bind_rows(drug_df, drug_df_swapped)
 
-# Step 3: Standardize drug pair (alphabetical order)
+# 3. standardize drug pair (alphabetical order)
 drug_df_full_std <- drug_df_full %>%
   mutate(
     DrugA = pmin(Drug1, Drug2),  # alphabetically first
     DrugB = pmax(Drug1, Drug2)   # alphabetically second
   )
 
-# Step 4: Group by standardized pair and select highest synergy
-# 37 drugs with synergy with another drug
+# 4. group by standardized pair and select highest synergy
 final_drugcomb_df <- drug_df_full_std %>%
   group_by(DrugA, DrugB) %>%
-  slice_max(order_by = combined_zscore, n = 1, with_ties = FALSE) %>%
+  dplyr::slice_max(order_by = combined_zscore, n = 1, with_ties = FALSE) %>%
   ungroup() %>%
-  select(DrugA, DrugB, combined_zscore)
+  dplyr::select(DrugA, DrugB, combined_zscore)
 
 final_drugcomb_df2 = tibble(
   "DrugA" = final_drugcomb_df$DrugB,
@@ -85,12 +73,12 @@ final_drugcomb_symm = rbind(final_drugcomb_df, final_drugcomb_df2)
 
 ```{r moa mapping}
 drug_moa_df = read_csv(here("data/metadata/repurposing_drugs_20200324.csv"), skip=9)
-# Map DrugA and DrugB
+# map DrugA and DrugB
 moa_mapped_df <- final_drugcomb_symm %>%
   left_join(drug_moa_df, by = c("DrugA" = "pert_iname")) %>%
-  rename(MOA1 = moa) %>%
+  dplyr::rename(MOA1 = moa) %>%
   left_join(drug_moa_df, by = c("DrugB" = "pert_iname")) %>%
-  rename(MOA2 = moa)
+  dplyr::rename(MOA2 = moa)
 
 moa_mapped_df_std <- moa_mapped_df %>%
   mutate(
@@ -115,9 +103,7 @@ final_moa_pair_synergy$mean_combined_zscore = as.numeric(final_moa_pair_synergy$
 ```{r}
 library(tidyverse)
 
-# Assuming your dataframe is called `final_moa_pair_synergy`
-
-# Step 1: Expand MOA_B values (split by "|")
+# expand MOA_B values (split by "|")
 final_moa_pair_synergy_expanded <- final_moa_pair_synergy %>%
   mutate(
     MOA_A = str_replace_all(MOA_A, " *\\| *", "|"),
@@ -126,24 +112,24 @@ final_moa_pair_synergy_expanded <- final_moa_pair_synergy %>%
   separate_rows(MOA_A, sep = "\\|") %>%
   separate_rows(MOA_B, sep = "\\|")
 
-# Step 2: (Optional) Remove self-pairs
+# remove self-pairs
 final_moa_pair_synergy_expanded <- final_moa_pair_synergy_expanded %>%
   filter(MOA_A != MOA_B)
 
-# Step 3: Duplicate to make symmetric
+# duplicate to make symmetric
 final_moa_pair_synergy_symm <- bind_rows(
   final_moa_pair_synergy_expanded,
   final_moa_pair_synergy_expanded %>%
-    rename(MOA_temp = MOA_A, MOA_A = MOA_B) %>%
-    rename(MOA_B = MOA_temp)
+    dplyr::rename(MOA_temp = MOA_A, MOA_A = MOA_B) %>%
+    dplyr::rename(MOA_B = MOA_temp)
 )
 
-# Step 4: Re-aggregate in case expansion created duplicates
+# re-aggregate in case expansion created duplicates
 final_moa_pair_synergy_symm_avg <- final_moa_pair_synergy_symm %>%
   group_by(MOA_A, MOA_B) %>%
   summarise(score = mean(mean_combined_zscore), .groups = "drop")
 
-# Step 5: Convert to matrix
+# convert to matrix
 moa_synergy_mat <- final_moa_pair_synergy_symm_avg %>%
   pivot_wider(
     names_from = MOA_B,
@@ -153,24 +139,24 @@ moa_synergy_mat <- final_moa_pair_synergy_symm_avg %>%
   column_to_rownames("MOA_A") %>%
   as.matrix()
 
-# Get consistent MOA order (e.g., alphabetical or your own vector)
+# get consistent MOA order (e.g., alphabetical or your own vector)
 moa_order <- sort(unique(c(final_moa_pair_synergy_symm_avg$MOA_A,
                            final_moa_pair_synergy_symm_avg$MOA_B)))
 
-# Reorder rows and columns of matrix
+# reorder rows and columns of matrix
 moa_synergy_mat <- moa_synergy_mat[moa_order, moa_order]
 
-# Make a copy of the matrix
+# make a copy of the matrix
 moa_synergy_upper <- moa_synergy_mat
 
-# Set lower triangle (including diagonal) to NA
+# set lower triangle (including diagonal) to NA
 moa_synergy_upper[lower.tri(moa_synergy_upper, diag = TRUE)] <- NA
 ```
 
 ```{r MOA synergy heatmap | full}
 library(ComplexHeatmap)
 library(circlize)
-library(tidyverse) # Added for string manipulation and filtering
+library(tidyverse) 
 
 # same drugs as above but now categorized -- defined by NIH
 first_line_drugs <- c("rifampin", "isoniazid", "pyrazinamide", "ethambutol")
@@ -178,8 +164,8 @@ second_line_drugs <- c("kanamycin", "streptomycin", "capreomycin", "amikacin",
                        "levofloxacin", "moxifloxacin", "gatifloxacin")
 mdr_tb_drugs <- c("bedaquiline", "delamanid", "linezolid", "pretomanid")
 
-# Get the MOAs for each drug category from 'drug_moa_df'
-# This function helps split MOAs that are joined by "|"
+# get the MOAs for each drug category from 'drug_moa_df'
+# this function helps split MOAs that are joined by "|"
 get_unique_moas <- function(drug_list, moa_df) {
   moa_df %>%
     filter(pert_iname %in% drug_list) %>%
@@ -208,17 +194,17 @@ new_labels <- tibble(moa = current_labels) %>%
   ) %>%
   pull(new_label)
 
-# Apply the new labels to your matrix
+# apply the new labels to your matrix
 rownames(moa_synergy_mat) <- new_labels
 colnames(moa_synergy_mat) <- new_labels
 
-# Define color function
+# define color function
 col_fun <- colorRamp2(
   c(-0.18, 0, 0.22),
   c("firebrick3", "white", "dodgerblue3")
 )
 
-# Create the custom legend for the asterisks
+# create the custom legend for the asterisks
 asterisk_legend <- Legend(
   labels = c("* First Line", "** Second Line", "*** MDR-TB"),
   title = "TB Medication MOA",
@@ -227,20 +213,22 @@ asterisk_legend <- Legend(
 )
 
 
-# Define the output file path
-pdf(file = here("figures/withnewdrugs_Figure4_MOA_synnergy_heatmap_full_zscore.pdf"), width = 25, height = 25)
+# define the output file path
+pdf(file = here("figures/figure4/Figure4_MOA_synnergy_heatmap_full_zscore.pdf"), width = 25, height = 25)
 
-# Generate Heatmap for MOA Synergy (no changes to this part)
+# generate heatmap for MOA synergy and antagonism 
 ht <- Heatmap(
   moa_synergy_mat,
   cluster_rows = TRUE,
   cluster_columns = TRUE,
+  show_row_dend = FALSE,
+  show_column_dend = FALSE,
   name = "Combined synergy \n z-score",
   col = col_fun,
   column_names_rot = 45,
   column_names_side = "top",
-  column_names_gp = gpar(fontsize = 10),
-  row_names_gp = gpar(fontsize = 10),
+  column_names_gp = gpar(fontsize = 12),
+  row_names_gp = gpar(fontsize = 12),
   na_col = "white",
   heatmap_legend_param = list(
     title_gp = gpar(fontsize = 12),
@@ -250,11 +238,9 @@ ht <- Heatmap(
   height = unit(30, "cm")
 )
 
-# Draw the heatmap AND the custom legend
-# The 'annotation_legend_list' argument adds new legend
+# draw the heatmap and the custom legend
 draw(ht, heatmap_legend_side = "right", annotation_legend_list = list(asterisk_legend))
 
-# Close the PDF device
 dev.off()
 ```
 
@@ -270,7 +256,7 @@ tb_drug_categories_df <- bind_rows(
 # Join with the main MOA dataframe to find the MOA for each drug
 verification_table <- tb_drug_categories_df %>%
   left_join(drug_moa_df, by = "pert_iname") %>%
-  select(Category = category, Drug = pert_iname, MOA = moa) %>%
+  dplyr::select(Category = category, Drug = pert_iname, MOA = moa) %>%
   arrange(Category, Drug) # Sort for clarity
 
 print(verification_table)
