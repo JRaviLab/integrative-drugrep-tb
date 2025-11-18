@@ -1,3 +1,5 @@
+GSE92742_level5_signatures_lm.tsv
+GSE92742_Broad_LINCS_sig_info.txt
 .Rproj.user
 .Rhistory
 .RData
@@ -11,3 +13,5 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
+data/microarray_data_forDE/expression_matrices/
+data/RNAseq_data_forDE/expression_matrices/
