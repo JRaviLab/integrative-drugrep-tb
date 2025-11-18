@@ -4,7 +4,7 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 11/15/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures | correct qvalue using propagated gene set size not what provided by clusterProfiler
+# Last modified: 11/18/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures | correct qvalue using propagated gene set size not what provided by clusterProfiler
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
@@ -24,11 +24,11 @@ source(here("scripts/00_background_genes_PA_functions.R"))
 ##### Get background genes
 ```{r}
 # define input paths
-metadata_path_rnaseq <- here("data/v2/signatures/RNAseq_TB_signature_run_info.tsv")
-data_path_rnaseq <- here("data/v2/DE_results/RNAseq")
+metadata_path_rnaseq <- here("data/signatures/RNAseq_TB_signature_run_info.tsv")
+data_path_rnaseq <- here("data/DE_results/RNAseq")
 
-metadata_path_microarray <- here("data/v2/signatures/microarray_TB_signature_run_info.tsv")
-data_path_microarray <- here("data/v2/DE_results/microarray")
+metadata_path_microarray <- here("data/signatures/microarray_TB_signature_run_info.tsv")
+data_path_microarray <- here("data/DE_results/microarray")
 GO_genes_vector <- GO_genes()
 
 # get upregulated combined background
@@ -163,36 +163,35 @@ calculate_asinh_enrichment <- function(signature_gene_list, bg_genes, pathway_df
   
   # hypergeometric p-values
   pathway_df$pvalue <- mapply(
-    function(k, M) {
-      N <- length(bg_genes)                 # universe size
-      n <- length(signature_gene_list)      # signature size
+  function(k, pathway_genes_i) {
 
-      phyper(k - 1,         # k successes - 1
-             M,             # successes in universe
-             N - M,         # failures in universe
-             n,             # number drawn
-             lower.tail = FALSE)  # P(X >= k)
-    },
-    k = pathway_df$observed_val,
-    M = pathway_df$pathway_size
-  )
+    N <- length(bg_genes)                           # total universe
+    n <- length(signature_gene_list)                # signature size
+    M <- length(intersect(pathway_genes_i, bg_genes))  # pathway size in universe
+
+    phyper(k - 1, M, N - M, n, lower.tail = FALSE)
+  },
+  k = pathway_df$observed_val,
+  pathway_genes_i = pathway_df$pathway_genes       # row-by-row list input
+)
+
   
-  return(enrichment_df)
+  return(pathway_df)
 }
 
 
-compute_multiple_testing <- function(enrichment_df) {
+compute_multiple_testing <- function(pathway_df) {
   # BH adjusted p-values
-  enrichment_df$p.adjust <- p.adjust(enrichment_df$pvalue, method = "BH")
+  pathway_df$p.adjust <- p.adjust(pathway_df$pvalue, method = "BH")
 
   # Storey q-values (same meaning as clusterProfiler qvalue column)
   if (!requireNamespace("qvalue", quietly = TRUE)) {
     stop("Please install the qvalue package: install.packages('qvalue') or BiocManager::install('qvalue')")
   }
 
-  enrichment_df$qvalue <- qvalue::qvalue(enrichment_df$pvalue)$qvalues
+  pathway_df$qvalue <- qvalue::qvalue(pathway_df$pvalue)$qvalues
 
-  return(enrichment_df)
+  return(pathway_df)
 }
 
 ```
@@ -209,25 +208,23 @@ pathway_df <- data.frame(
 pathway_df$pathway_size <- sapply(pathway_df$pathway_genes, length)
 # only select pathways with minimum gene set size of 5 genes and maximum of 200 genes
 pathway_df <- pathway_df[pathway_df$pathway_size >= 5 | pathway_df$pathway_size <= 200, ]
+pathway_df  <- merge(pathway_df, go_terms, by.x = "ID", by.y = "GO_ID", all.x = TRUE)[c("Description","ID","pathway_genes","pathway_size")]
 ```
 
-###### Individual signatures | needs to be tested and copy over to aggredgated chunk
+###### Individual signatures 
 ```{r}
 technologies <- c("microarray", "RNAseq")
 directions <- c("up", "dn")
 
-up_significant_bps <- c()
-dn_significant_bps <- c()
-
 for (technology in technologies) {
 
-  metadata_path <- here(paste0("data/v2/signatures/", technology, "_TB_signature_run_info.tsv"))
-  data_path <- here(paste0("data/v2/DE_results/",technology))
+  metadata_path <- here(paste0("data/signatures/", technology, "_TB_signature_run_info.tsv"))
+  data_path <- here(paste0("data/DE_results/",technology))
 
   for (direction in directions) {
 
     # set output directory
-    dirname <- here(paste0("data/v2/", technology, "_pathways/", direction))
+    dirname <- here(paste0("data/", technology, "_pathways/", direction))
     if (!dir.exists(dirname)) {
       dir.create(dirname, recursive = TRUE)
     }
@@ -282,22 +279,13 @@ for (technology in technologies) {
         
       # check if the universal bp terms are valid
       print("All BP terms are valid?")
-      print(unique(enrichGO_res_corrected$Description %in% go_terms$Description))
-        
-      # get significant BP terms and save into up,dn sets separately
-      if(direction == "up"){
-        up_significant_bps <- c(up_significant_bps, enrichGO_res_corrected$Description[merged$pvalue < 0.05 & enrichGO_res_corrected$qvalue < 0.1])
-      }else if(direction == "dn"){
-        dn_significant_bps <- c(dn_significant_bps, enrichGO_res_corrected$Description[merged$pvalue < 0.05 & enrichGO_res_corrected$qvalue < 0.1])
-      }
+      print(unique(enrichGO_res_corrected$ID %in% go_terms$GO_ID))
         
       # save results
       base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
       output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
 
       write_tsv(enrichGO_res_corrected, file = output_file)
-    }else{
-      message("No enriched GO terms, skipping")
     }
   }
 }
@@ -309,7 +297,13 @@ technologies <- c("microarray", "RNAseq")
 directions <- c("up","dn")
 for(technology in technologies){
   for(direction in directions){
-    aggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
+    # set output directory
+    dirname <- here(paste0("data/", technology, "_pathways/", direction))
+    if (!dir.exists(dirname)) {
+      dir.create(dirname, recursive = TRUE)
+    }
+    
+    aggr_gene_list <- as.character(read_tsv(here(paste0("data/DE_results/",technology,"/aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
     
     # define background genes
     if(direction == "up"){
@@ -318,163 +312,83 @@ for(technology in technologies){
       bg_genes <- bg_genes_combined_dn
     }
         
-    enrichGO_res_aggr <- enrichGO(gene = aggr_gene_list,
-                             OrgDb = org.Hs.eg.db,
-                             readable = TRUE,
-                             ont = "BP",
-                             universe = bg_genes,
-                             pvalueCutoff = 1, # allows all terms
-                             qvalueCutoff = 1, # allows all terms
-                             minGSSize = 5,
-                             maxGSSize = 200)
+    # run ORA
+    print(paste0("Getting enriched GO pathways for data/DE_results/",technology,"/aggregated_DE_signatures/",direction,"_aggregated_signature.tsv"))
+
+    BP_terms <- go_terms$GO_ID
+      
+    # only care about biological processes (BP)
+    pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
+      
+    # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+    enrichGO_res_aggr <- calculate_asinh_enrichment(
+      signature_gene_list = aggr_gene_list,
+      bg_genes = bg_genes,
+      pathway_df = pathway_df_BP
+    )
+      # multiple-testing correction: add qvalue
+    enrichGO_res_aggr_corrected <- compute_multiple_testing(enrichGO_res_aggr)
+        
+    # check if the universal bp terms are valid
+    print("All BP terms are valid?")
+    print(unique(enrichGO_res_aggr_corrected$ID %in% go_terms$GO_ID))
+        
+    # save results
+    output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_signature.tsv"))
+
+    write_tsv(enrichGO_res_aggr_corrected, file = output_file)
+  }
+}
+```
+
+```{r microarray and RNAseq origin-only signatures}
+technologies <- c("microarray","RNAseq")
+directions <- c("up","dn")
+tissue_origins <- c("circulating")
+for(technology in technologies){
+  for(direction in directions){
+    for(tissue_origin in tissue_origins){
+      # set output directory
+      dirname <- here(paste0("data/", technology, "_pathways/", direction))
+      if (!dir.exists(dirname)) {
+        dir.create(dirname, recursive = TRUE)
+      }
+      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
     
-    enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
-          
-    if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
-          
+      # define background genes
+      if(direction == "up"){
+        bg_genes <- bg_genes_combined_up
+      }else if(direction == "dn"){
+        bg_genes <- bg_genes_combined_dn
+      }
+        
+      # run ORA
+      print(paste0("Getting enriched GO pathways for data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature.tsv"))
+
+      BP_terms <- go_terms$GO_ID
+      
+      # only care about biological processes (BP)
+      pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
+      
       # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
-      enrichGO_res_corrected <- calculate_asinh_enrichment(
-        enrichment_df = enrichGO_res_aggr,
-        signature_gene_list = aggr_gene_list,
+      enrichGO_res_originaggr <- calculate_asinh_enrichment(
+        signature_gene_list = originaggr_gene_list,
         bg_genes = bg_genes,
-        pathway_df = pathway_df
+        pathway_df = pathway_df_BP
       )
+      # multiple-testing correction: add qvalue
+      enrichGO_res_originaggr_corrected <- compute_multiple_testing(enrichGO_res_originaggr)
         
-      # merge with all go terms
-      aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
-
-      # replace NAs with 0 enrichment
-      aggr_merged$pvalue[is.na(aggr_merged$pvalue)] <- 1
-      aggr_merged$p.adjust[is.na(aggr_merged$p.adjust)] <- 1
-      aggr_merged$qvalue[is.na(aggr_merged$qvalue)] <- 1
-      aggr_merged$geneID[is.na(aggr_merged$geneID)] <- ""
-      aggr_merged[is.na(aggr_merged)] <- 0  
-      print(paste0("Final dimension: ", paste(dim(aggr_merged), collapse = " x ")))
-    
+      # check if the universal bp terms are valid
+      print("All BP terms are valid?")
+      print(unique(enrichGO_res_originaggr_corrected$ID %in% go_terms$GO_ID))
+        
       # save results
-      output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,".tsv"))
-    
-      write_tsv(aggr_merged, file = output_file_aggr)
-    }
-  }
-}
-```
+      output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_",direction,"_",tissue_origin,"_aggregated_signature.tsv"))
 
-```{r RNAseq origin-only signatures}
-technologies <- c("RNAseq")
-directions <- c("up","dn")
-tissue_origins <- c("blood","lung","mixed")
-for(technology in technologies){
-  for(direction in directions){
-    for(tissue_origin in tissue_origins){
-      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/",tissue_origin,"_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
-    
-      # define background genes
-      if(direction == "up"){
-        bg_genes <- bg_genes_combined_up
-      }else if(direction == "dn"){
-        bg_genes <- bg_genes_combined_dn
-      }
-        
-      enrichGO_res_aggr <- enrichGO(gene = originaggr_gene_list,
-                              OrgDb = org.Hs.eg.db,
-                              readable = TRUE,
-                              ont = "BP",
-                              universe = bg_genes,
-                              pvalueCutoff = 1, # allows all terms
-                              qvalueCutoff = 1, # allows all terms
-                              minGSSize = 5,
-                              maxGSSize = 200)
-    
-      enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
-          
-      if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
-          
-        # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
-        enrichGO_res_corrected <- calculate_asinh_enrichment(
-          enrichment_df = enrichGO_res_aggr,
-          signature_gene_list = originaggr_gene_list,
-          bg_genes = bg_genes,
-          pathway_df = pathway_df
-        )
-        
-        # merge with all go terms
-        origin_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
-
-        # replace NAs with 0 enrichment
-        origin_aggr_merged$pvalue[is.na(origin_aggr_merged$pvalue)] <- 1
-        origin_aggr_merged$p.adjust[is.na(origin_aggr_merged$p.adjust)] <- 1
-        origin_aggr_merged$qvalue[is.na(origin_aggr_merged$qvalue)] <- 1
-        origin_aggr_merged$geneID[is.na(origin_aggr_merged$geneID)] <- ""
-        origin_aggr_merged[is.na(origin_aggr_merged)] <- 0  
-        print(paste0("Final dimension: ", paste(dim(origin_aggr_merged), collapse = " x ")))
-    
-        # save results
-        output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,"_",tissue_origin,".tsv"))
-    
-        write_tsv(origin_aggr_merged, file = output_file_aggr)
-      }
+      write_tsv(enrichGO_res_originaggr_corrected, file = output_file)
     } 
   }
 }
 ```
 
-```{r microarray origin-only signatures}
-technologies <- c("microarray")
-directions <- c("up","dn")
-tissue_origins <- c("blood","mixed")
-for(technology in technologies){
-  for(direction in directions){
-    for(tissue_origin in tissue_origins){
-      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/v2/signatures/",technology,"/",tissue_origin,"_aggregated_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
-    
-      # define background genes
-      if(direction == "up"){
-        bg_genes <- bg_genes_combined_up
-      }else if(direction == "dn"){
-        bg_genes <- bg_genes_combined_dn
-      }
-        
-      enrichGO_res_aggr <- enrichGO(gene = originaggr_gene_list,
-                              OrgDb = org.Hs.eg.db,
-                              readable = TRUE,
-                              ont = "BP",
-                              universe = bg_genes,
-                              pvalueCutoff = 1, # allows all terms
-                              qvalueCutoff = 1, # allows all terms
-                              minGSSize = 5,
-                              maxGSSize = 200)
-    
-      enrichGO_res_aggr <- as.data.frame(enrichGO_res_aggr)
-          
-      if (!is.null(enrichGO_res_aggr) && nrow(enrichGO_res_aggr) > 0) {
-          
-        # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
-        enrichGO_res_corrected <- calculate_asinh_enrichment(
-          enrichment_df = enrichGO_res_aggr,
-          signature_gene_list = originaggr_gene_list,
-          bg_genes = bg_genes,
-          pathway_df = pathway_df
-        )
-        
-        # merge with all go terms
-        origin_aggr_merged <- merge(go_terms, enrichGO_res_corrected, by.x = c("GO_ID","Description"), by.y = c("ID","Description"), all.x = TRUE)
-
-        # replace NAs with 0 enrichment
-        origin_aggr_merged$pvalue[is.na(origin_aggr_merged$pvalue)] <- 1
-        origin_aggr_merged$p.adjust[is.na(origin_aggr_merged$p.adjust)] <- 1
-        origin_aggr_merged$qvalue[is.na(origin_aggr_merged$qvalue)] <- 1
-        origin_aggr_merged$geneID[is.na(origin_aggr_merged$geneID)] <- ""
-        origin_aggr_merged[is.na(origin_aggr_merged)] <- 0  
-        print(paste0("Final dimension: ", paste(dim(origin_aggr_merged), collapse = " x ")))
-    
-        # save results
-        output_file_aggr <- file.path(here(paste0("data/v2/",technology,"_pathways/",direction)), paste0("allterms_GO_ORA_BGcorrected_",direction,"_aggregated_",technology,"_",tissue_origin,".tsv"))
-    
-        write_tsv(origin_aggr_merged, file = output_file_aggr)
-      }
-    } 
-  }
-}
-
-```
