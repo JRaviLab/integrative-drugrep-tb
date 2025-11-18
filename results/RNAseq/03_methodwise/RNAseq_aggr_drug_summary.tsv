@@ -1,0 +1,405 @@
+significant_drug	CMAP	LINCS	Cor	occurrence	clinical_phase	moa	target	disease_area	indication
+atorvastatin	1	3	2	6	Launched	HMGCR inhibitor	AHR|DPP4|HMGCR	neurology/psychiatry|cardiology	stroke|heart attack
+benzonatate	1	3	2	6	Launched	local anesthetic	SCN5A	pulmonary	cough suppressant
+chlorphenamine	1	3	2	6	Launched	histamine receptor antagonist		allergy	allergic rhinitis|urticaria
+clonidine	1	3	2	6	Launched	adrenergic receptor agonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C	cardiology|neurology/psychiatry	hypertension|attention-deficit/hyperactivity disorder (ADHD)
+dantrolene	1	3	2	6	Launched	calcium channel blocker	RYR1|RYR3	neurology/psychiatry|endocrinology	spasms|malignant hyperthermia (MH)
+dasatinib	1	3	2	6	Launched	Bcr-Abl kinase inhibitor|ephrin inhibitor|KIT inhibitor|PDGFR tyrosine kinase receptor inhibitor|SRC inhibitor|tyrosine kinase inhibitor	ABL1|ABL2|BLK|EPHA2|FGR|FRK|FYN|HCK|KIT|LCK|LYN|PDGFRB|SRC|SRMS|STAT5B|YES1	hematologic malignancy	chronic myeloid leukemia (CML)|acute lymphoblastic leukemia (ALL)
+dexamethasone	1	3	2	6	Launched	glucocorticoid receptor agonist	ANXA1|NOS2|NR0B1|NR3C1|NR3C2	endocrinology|rheumatology|allergy|gastroenterology|hematology|neurology/psychiatry|dermatology	hypercalcemia|rheumatoid arthritis|psoriatic arthritis|osteoarthritis|allergic rhinitis|ulcerative colitis|anemia|multiple sclerosis|enteritis|lupus|dermatitis herpetiformis (DH)|nephrotic syndrome|psoriasis
+ethinyl-estradiol	1	3	2	6	Launched	estrogen receptor agonist|estrogenic hormone	ESR1|ESR2|NR1I2	endocrinology	contraceptive
+fluvastatin	1	3	2	6	Launched	HMGCR inhibitor	HMGCR	endocrinology|cardiology	hypercholesterolemia|congenital heart defects
+forskolin	1	3	2	6	Launched	adenylyl cyclase activator	ADCY2|ADCY5|GNAS		
+fostamatinib	1	3	2	6	Launched	SYK inhibitor	SYK	hematology	chronic immune thrombocytopenia (ITP)
+gemfibrozil	1	3	2	6	Launched	lipoprotein lipase activator	LPL|PPARA|SLCO1B1|SLCO1B3|SLCO2B1	endocrinology|cardiology	hyperlipidemia|coronary heart disease
+iloperidone	1	3	2	6	Launched	dopamine receptor antagonist|serotonin receptor antagonist	ADRA1A|ADRA2C|DRD1|DRD2|DRD3|DRD4|HRH1|HTR1A|HTR2A|HTR6|HTR7	neurology/psychiatry	schizophrenia
+itraconazole	1	3	2	6	Launched	cytochrome P450 inhibitor		infectious disease	onychomycosis|histoplasmosis|blastomycosis|aspergillosis
+levocabastine	1	3	2	6	Launched	histamine receptor antagonist	HRH1|NTSR2	ophthalmology	conjunctivitis
+lovastatin	1	3	2	6	Launched	HMGCR inhibitor	HDAC2|HMGCR|ITGAL|NR1I2	cardiology|endocrinology	coronary heart disease|myocardial infarction|hypercholesterolemia
+methoxsalen	1	3	2	6	Launched	DNA synthesis inhibitor	CYP1A1|CYP1A2|CYP2A13|CYP2A6|CYP3A4	dermatology	psoriasis
+mometasone	1	3	2	6	Launched	glucocorticoid receptor agonist	NR3C1	dermatology	corticosteroid-responsive dermatoses
+NECA	1	3	2	6	Launched	adenosine receptor agonist	ADORA1|ADORA2A|ADORA2B|ADORA3		
+norepinephrine	1	3	2	6	Launched	adrenergic receptor agonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|ADRB1|ADRB2|ADRB3|PAH|SLC18A1|SLC18A2	cardiology|allergy|neurology/psychiatry	hypertension|urticaria|headache|seasonal affective disorder
+oxybenzone	1	3	2	6	Launched	lipase inhibitor	LIPE	dermatology	sunscreen lotion
+panobinostat	1	3	2	6	Launched	HDAC inhibitor	HDAC1|HDAC2|HDAC3|HDAC4|HDAC6|HDAC7|HDAC8|HDAC9	hematologic malignancy	multiple myeloma
+quercetin	1	3	2	6	Launched	polar auxin transport inhibitor	ATP5A1|ATP5B|ATP5C1|HCK|HIBCH|PIK3CG|PIM1|STK17B|UGT3A1	neurology/psychiatry|allergy	fatigue|allergic rhinitis|drowsiness
+resveratrol	1	3	2	6	Launched	cytochrome P450 inhibitor|SIRT activator	CSNK2A1|NQO2|PTGS1|PTGS2		
+rosuvastatin	1	3	2	6	Launched	HMGCR inhibitor	HMGCR	endocrinology|cardiology	hyperlipidemia|dyslipidemia|hypertriglyceridemia|hypercholesterolemia|atherosclerosis
+tamoxifen	1	3	2	6	Launched	estrogen receptor antagonist|selective estrogen receptor modulator (SERM)	EBP|ESR1|ESR2|GPER1|PRKCA|PRKCB|PRKCD|PRKCE|PRKCG|PRKCI|PRKCQ|PRKCZ	oncology	breast cancer
+tofacitinib	1	3	2	6	Launched	JAK inhibitor	JAK1|JAK2|JAK3	rheumatology	rheumatoid arthritis
+toremifene	1	3	2	6	Launched	estrogen receptor antagonist|selective estrogen receptor modulator (SERM)	ESR1	oncology	breast cancer
+trapidil	1	3	2	6	Launched	PDGFR tyrosine kinase receptor inhibitor	PDGFRA	cardiology	coronary artery disease (CAD)
+vorinostat	1	3	2	6	Launched	HDAC inhibitor	HDAC1|HDAC10|HDAC11|HDAC2|HDAC3|HDAC5|HDAC6|HDAC8|HDAC9	hematologic malignancy	cutaneous T-cell lymphoma (CTCL)
+alprenolol	0	3	2	5	Launched	adrenergic receptor antagonist	ADRB1|ADRB2	cardiology	angina pectoris
+amantadine	0	3	2	5	Launched	glutamate receptor antagonist	DRD2|GRIN2A|GRIN2B|GRIN2C|GRIN2D|GRIN3A	infectious disease|neurology/psychiatry	influenza A virus infection|Parkinson's Disease
+amcinonide	0	3	2	5	Launched	glucocorticoid receptor agonist	NR3C1	dermatology	corticosteroid-responsive dermatoses
+bendroflumethiazide	1	2	2	5	Launched	sodium/potassium/chloride transporter inhibitor	SLC12A1|SLC12A3	cardiology	hypertension
+brompheniramine	1	3	1	5	Launched	histamine receptor antagonist	HRH1	allergy|otolaryngology	allergic rhinitis|common cold
+bumetanide	0	3	2	5	Launched	solute carrier family member inhibitor	CFTR|GPR35|SLC12A1|SLC12A2|SLC12A4|SLC12A5	cardiology	edema|congestive heart failure
+cabergoline	0	3	2	5	Launched	dopamine receptor agonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|ADRB1|ADRB2|DRD1|DRD2|DRD3|DRD4|DRD5|HTR1A|HTR1B|HTR1D|HTR2A|HTR2B|HTR2C|HTR7	endocrinology	hyperprolactinemia
+celecoxib	1	2	2	5	Launched	cyclooxygenase inhibitor	CA12|PDPK1|PTGS2	rheumatology|endocrinology	osteoarthritis|rheumatoid arthritis|ankylosing spondylitis|primary dysmenorrhea (PD)
+chlorprothixene	1	3	1	5	Launched	dopamine receptor antagonist	CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|HRH1|HTR2A|HTR2B|HTR2C	neurology/psychiatry	schizophrenia|bipolar disorder
+clarithromycin	0	3	2	5	Launched	bacterial 50S ribosomal subunit inhibitor	CYP3A4	otolaryngology|pulmonary|infectious disease	pharyngitis|tonsillitis|sinusitis|bronchitis|pneumonia|skin infections|otitis
+clopidogrel	0	3	2	5	Launched	purinergic receptor antagonist	P2RY12	cardiology|neurology/psychiatry	myocardial infarction|stroke|peripheral artery disease (PAD)|acute coronary syndrome (ACS)
+curcumin	1	2	2	5	Launched	cyclooxygenase inhibitor|histone acetyltransferase inhibitor|lipoxygenase inhibitor|NFkB pathway inhibitor	APP|CA1|CA12|CA14|CA2|CA4|CA6|CA9|CHRM3|CYP3A4|DNMT3B|EP300|MMP13|MMP9|NOS2|PTGS1|PTGS2|XDH		
+diclofenac	1	2	2	5	Launched	cyclooxygenase inhibitor	AKR1C3|ALOX5|ASIC1|ASIC3|KCNQ2|KCNQ3|PLA2G2A|PPARG|PTGS1|PTGS2|SCN4A	rheumatology|neurology/psychiatry	rheumatoid arthritis|osteoarthritis|migraine headache
+diethylcarbamazine	0	3	2	5	Launched	lipoxygenase inhibitor	ALOX5|PTGS1	infectious disease	filariasis
+diltiazem	0	3	2	5	Launched	calcium channel blocker	CACNA1C|CACNA1S|CACNA2D1|CACNG1|HTR3A|KCNA5	cardiology	hypertension|angina pectoris
+disopyramide	0	3	2	5	Launched	sodium channel blocker	CHRM1|CHRM2|CHRM3|KCND2|KCND3|KCNH2|SCN5A	cardiology	ventricular tachycardia (VT)|ventricular arrhythmias
+docetaxel	0	3	2	5	Launched	tubulin polymerization inhibitor	BCL2|MAP2|MAP4|MAPT|NR1I2|TUBA1A|TUBA1B|TUBA1C|TUBA3C|TUBA3D|TUBA3E|TUBA4A|TUBB|TUBB1|TUBB2A|TUBB2B|TUBB3|TUBB4A|TUBB4B|TUBB6|TUBB8	oncology	breast cancer|non-small cell lung cancer (NSCLC)|prostate cancer|gastric adenocarcinoma|head and neck squamous cell carcinoma (HNSCC)
+dopamine	0	3	2	5	Launched	dopamine receptor agonist	DBH|DRD1|DRD2|DRD3|DRD4|DRD5|HTR1A|HTR7|SLC6A2|SLC6A3|SLC6A4	cardiology|neurology/psychiatry	ventricular arrhythmias|depression|headache|tremors
+ephedrine	0	3	2	5	Launched	adrenergic receptor agonist	ACHE|ADRA1A|ADRB2|SLC18A2|SLC6A2	cardiology|pulmonary|neurology/psychiatry|endocrinology	hypotension|asthma|narcolepsy|obesity
+estradiol	1	3	1	5	Launched	estrogen receptor agonist	ESR1|ESR2|GPER1|KCNMA1|NR1I2	endocrinology	contraceptive
+fenoldopam	0	3	2	5	Launched	dopamine receptor agonist	DRD1|DRD4	cardiology	hypertension
+flutamide	1	3	1	5	Launched	androgen receptor antagonist	AHR|AR	oncology	prostate cancer
+haloperidol	0	3	2	5	Launched	dopamine receptor antagonist	DRD1|DRD2|DRD3|DRD4|DRD5|GRIN2B|HRH1|HTR1A|HTR1D|HTR2A|HTR2B|HTR7|KCNH1	neurology/psychiatry	schizophrenia|Tourette's disorder
+hexylresorcinol	0	3	2	5	Launched	local anesthetic	TYR	infectious disease	skin infections|first-aid antiseptic
+ipratropium	1	3	1	5	Launched	acetylcholine receptor antagonist	CHRM1|CHRM2|CHRM3|CHRM4|CHRM5	pulmonary	bronchospasm|chronic obstructive pulmonary disease (COPD)|bronchitis|emphysema
+isradipine	0	3	2	5	Launched	calcium channel blocker	CACNA1D|CACNA1F|CACNA2D1	cardiology	hypertension
+ketotifen	1	2	2	5	Launched	histamine receptor agonist|leukotriene receptor antagonist|phosphodiesterase inhibitor	HRH1	neurology/psychiatry	itching
+labetalol	0	3	2	5	Launched	adrenergic receptor antagonist	ADRA1D|ADRB1|ADRB2	cardiology	hypertension
+lapatinib	1	3	1	5	Launched	EGFR inhibitor	EGFR|ERBB2	oncology	breast cancer
+levomepromazine	0	3	2	5	Launched	dopamine receptor antagonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|DRD4|DRD5|HRH1|HTR2A|HTR2C	neurology/psychiatry|gastroenterology	psychosis|schizophrenia|bipolar disorder|nausea|insomnia
+lofexidine	0	3	2	5	Launched	adrenergic receptor agonist		neurology/psychiatry	opioid withdrawal
+mepacrine	1	3	1	5	Launched	cytokine production inhibitor|NFkB pathway inhibitor|TP53 activator	PLA2G1B	infectious disease	giardiasis
+methylergometrine	0	3	2	5	Launched	dopamine receptor antagonist|serotonin receptor antagonist	DRD1|HTR1E|HTR1F|HTR2A|HTR2B|HTR2C	hematology|neurology/psychiatry	postpartum hemorrhage (PPH)|migraine headache
+mosapride	0	3	2	5	Launched	serotonin receptor agonist	HTR4	gastroenterology	hypertrophic gastritis (GHG)|gastroesophageal reflux disease (GERD)|dyspepsia|irritable bowel syndrome
+nabumetone	1	3	1	5	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2	rheumatology	rheumatoid arthritis|osteoarthritis
+naftopidil	0	3	2	5	Launched	adrenergic receptor antagonist	ADRA1A	urology	benign prostatic hyperplasia (BPH)
+naltrexone	1	3	1	5	Launched	opioid receptor antagonist	OPRD1|OPRK1|OPRM1|SIGMAR1	neurology/psychiatry	abstinence from alcohol
+nitrendipine	0	3	2	5	Launched	calcium channel blocker	CACNA1D|CACNA2D1|KCNN4	cardiology	hypertension
+piperidolate	0	3	2	5	Launched	acetylcholine receptor antagonist	CHRM1	neurology/psychiatry	spasms
+rilmenidine	1	2	2	5	Launched	adrenergic receptor agonist|imidazoline receptor agonist	ADRA2A	cardiology	hypertension
+salmeterol	1	2	2	5	Launched	adrenergic receptor agonist	ADRB2	pulmonary	asthma|chronic obstructive pulmonary disease (COPD)|bronchospasm
+stiripentol	0	3	2	5	Launched	GABA uptake inhibitor	GABRA3	neurology/psychiatry	epilepsy
+temsirolimus	1	3	1	5	Launched	mTOR inhibitor	MTOR	oncology	renal cell carcinoma (RCC)
+tianeptine	1	2	2	5	Launched	selective serotonin reuptake enhancer (SSRE)	OPRD1|OPRK1|OPRM1	neurology/psychiatry|pulmonary|gastroenterology	depression|asthma|irritable bowel syndrome
+tolbutamide	0	3	2	5	Launched	ATP channel blocker	ABCC8|KCNJ1|KCNJ11|KCNJ8	endocrinology	diabetes mellitus
+treprostinil	0	3	2	5	Launched	prostanoid receptor agonist	P2RY12|PPARD|PTGIR	pulmonary	pulmonary arterial hypertension (PAH)
+trifluoperazine	1	3	1	5	Launched	dopamine receptor antagonist	ADRA1A|CALM1|CALY|DRD2|DRD4|HRH1|HTR2A|HTR2C|S100A4|TNNC1	neurology/psychiatry	schizophrenia
+verapamil	1	2	2	5	Launched	calcium channel blocker	CACNA1A|CACNA1B|CACNA1C|CACNA1D|CACNA1F|CACNA1G|CACNA1I|CACNA1S|CACNB1|CACNB2|CACNB3|CACNB4|CYP3A4|KCNA10|KCNA7|KCNH2|KCNJ11|NALCN|SCN5A|SLC29A4|SLC6A4	cardiology	hypertension
+zolmitriptan	0	3	2	5	Launched	serotonin receptor agonist	HTR1A|HTR1B|HTR1D|HTR1E|HTR1F	neurology/psychiatry	migraine headache
+albendazole	0	3	1	4	Launched	tubulin polymerization inhibitor	TUBA1A|TUBB|TUBB4B	infectious disease	cystic hydatid disease|parenchymal neurocysticercosis
+anastrozole	0	2	2	4	Launched	aromatase inhibitor	CYP19A1	oncology	breast cancer
+chloroquine	1	1	2	4	Launched	antimalarial agent	MRGPRX1	infectious disease	malaria|amebiasis
+dydrogesterone	1	2	1	4	Launched	progesterone receptor agonist	PGR	obstetrics/gynecology	infertility
+escitalopram	0	3	1	4	Launched	selective serotonin reuptake inhibitor (SSRI)	SLC6A4	neurology/psychiatry	depression|generalized anxiety disorder (GAD)
+felbamate	0	3	1	4	Launched	glutamate receptor antagonist	GRIN1|GRIN2A|GRIN2B|GRIN2C|GRIN2D|GRIN3A|GRIN3B	neurology/psychiatry	epilepsy
+fulvestrant	1	3	0	4	Launched	estrogen receptor antagonist	ESR1|ESR2|GPER1	oncology	breast cancer
+granisetron	1	2	1	4	Launched	serotonin receptor antagonist	HTR3A	gastroenterology	nausea|vomiting
+hesperidin	1	3	0	4	Launched	flavanone glycoside	AURKB|CACNA1B		
+icosapent	1	3	0	4	Launched	platelet aggregation inhibitor	ACSL3|ACSL4|FADS1|FFAR1|PPARD|PPARG|PTGS1|PTGS2|SLC8A1|TRPV1	endocrinology	hypertriglyceridemia
+indapamide	0	2	2	4	Launched	thiazide diuretic	CA2|HTR3A|KCNQ1	cardiology	hypertension|congestive heart failure
+ketanserin	0	2	2	4	Launched	serotonin receptor antagonist	ADRA1A|ADRA1B|ADRA1D|DRD1|DRD5|HTR1A|HTR1B|HTR1D|HTR2A|HTR2B|HTR2C|HTR5A|HTR7|SLC18A1|SLC18A2	cardiology	hypertension
+lisuride	0	3	1	4	Launched	dopamine receptor agonist	ADRA1A|ADRA2A|ADRA2B|ADRA2C|DRD1|DRD2|DRD3|DRD4|DRD5|HTR1A|HTR1B|HTR1D|HTR2A|HTR2B|HTR2C|HTR6	neurology/psychiatry	Parkinson's Disease
+mitotane	1	2	1	4	Launched	antineoplastic agent	CYP11A1|CYP11B1|ESR1	oncology	adrenal cortical carcinoma
+moexipril	0	3	1	4	Launched	angiotensin converting enzyme inhibitor	ACE|ACE2	cardiology	hypertension
+molsidomine	0	3	1	4	Launched	guanylate cyclase stimulant	GUCY1A3	cardiology	coronary artery disease (CAD)
+nelfinavir	0	3	1	4	Launched	HIV protease inhibitor	CYP1A2|CYP2B6|CYP2C19|CYP2C9|CYP2D6|CYP3A4|CYP3A7	infectious disease	human immunodeficiency virus (HIV-1)
+oxyphenonium	1	1	2	4	Launched	cholinergic receptor antagonist	CHRM1|CHRM3	gastroenterology	peptic ulcer disease (PUD)
+ozagrel	0	3	1	4	Launched	thromboxane synthase inhibitor	TBXAS1	neurology/psychiatry	stroke
+phenoxybenzamine	0	3	1	4	Launched	adrenergic receptor antagonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C	cardiology|endocrinology	hypertension|pheochromocytoma
+pioglitazone	1	2	1	4	Launched	insulin sensitizer|PPAR receptor agonist	PPARG|TRPM3	endocrinology	diabetes mellitus
+procaterol	0	2	2	4	Launched	adrenergic receptor agonist	ADRB2	pulmonary	asthma
+promazine	1	1	2	4	Launched	dopamine receptor antagonist	ADRA1A|ADRA1B|ADRA1D|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|DRD4|HRH1|HTR2A|HTR2C	neurology/psychiatry	schizophrenia
+protriptyline	0	3	1	4	Launched	tricyclic antidepressant	SLC6A2|SLC6A4	neurology/psychiatry	depression
+quinidine	0	2	2	4	Launched	sodium channel blocker	KCNA5|KCNA7|KCNH1|KCNH2|KCNH5|KCNK1|KCNK6|SCN5A|SLC29A4	infectious disease|cardiology	malaria|atrial fibrillation (AF)|ventricular arrhythmias
+rifabutin	1	3	0	4	Launched	protein synthesis inhibitor		infectious disease	human immunodeficiency virus (HIV-1)
+simvastatin	1	1	2	4	Launched	HMGCR inhibitor	HMGCR|ITGB2	endocrinology|cardiology|neurology/psychiatry	hypercholesterolemia|coronary heart disease|myocardial infarction|stroke|hyperlipidemia
+tolazamide	1	1	2	4	Launched	ATP channel blocker	ABCC8|KCNJ1|KCNJ10|KCNJ11	endocrinology	diabetes mellitus
+triclosan	0	3	1	4	Launched	antibacterial agent	DNMT1	infectious disease	first-aid antiseptic
+tubocurarine	0	2	2	4	Launched	acetylcholine receptor antagonist	ACHE|CHRNA2|HTR3A|HTR3B|KCNN1|KCNN2|KCNN3|ZACN	neurology/psychiatry	anesthetic
+vecuronium	0	2	2	4	Launched	acetylcholine receptor antagonist	CHRNA2	neurology/psychiatry	muscle relaxant
+vemurafenib	1	3	0	4	Launched	RAF inhibitor	BRAF|RAF1	oncology	melanoma
+yohimbine	0	3	1	4	Launched	adrenergic receptor antagonist	ADRA2A|ADRA2B|ADRA2C|DRD2|DRD3|HTR1A|HTR1B|HTR1D|HTR1E|HTR1F|HTR2A|HTR2B|HTR2C|HTR5A|HTR7|KCNJ1|KCNJ10|KCNJ11|KCNJ12|KCNJ14|KCNJ15|KCNJ8	cardiology	cardiac arrythmia|bradycardia
+acetyl-farnesyl-cysteine	0	1	2	3	Launched	methyltransferase inhibitor	PPARG	dermatology	acne vulgaris (AV)
+alfuzosin	0	3	0	3	Launched	adrenergic receptor antagonist	ADRA1A|ADRA1B|ADRA1D|SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A	urology	benign prostatic hyperplasia (BPH)
+amiodarone	0	2	1	3	Launched	potassium channel blocker	ADRB1|CACNA1H|CACNA2D2|KCNA7|KCNH2	cardiology	ventricular arrhythmias
+atovaquone	0	1	2	3	Launched	mitochondrial electron transport inhibitor		infectious disease	pneumonia
+axitinib	0	3	0	3	Launched	PDGFR tyrosine kinase receptor inhibitor|VEGFR inhibitor	CSF1|FLT1|FLT4|KDR|PLK4	oncology	renal cell carcinoma (RCC)
+azathioprine	0	3	0	3	Launched	dehydrogenase inhibitor	HPRT1|IMPDH1|PPAT	transplant|rheumatology	renal homotransplantation|rheumatoid arthritis
+belinostat	0	3	0	3	Launched	HDAC inhibitor	HDAC1|HDAC10|HDAC11|HDAC2|HDAC3|HDAC4|HDAC5|HDAC6|HDAC7|HDAC8|HDAC9	hematologic malignancy	peripheral T-cell lymphoma (PTCL)
+benzthiazide	0	1	2	3	Launched	carbonic anhydrase inhibitor	CA2	cardiology	hypertension|edema
+bezafibrate	0	1	2	3	Launched	PPAR receptor agonist	PPARA|PPARD|PPARG	cardiology	cholesterol
+bifemelane	0	1	2	3	Launched	acetylcholine release enhancer	MAOA|MAOB	ophthalmology|neurology/psychiatry	glaucoma|senile dementia
+calcitriol	0	1	2	3	Launched	vitamin D receptor agonist	VDR	endocrinology|orthopedics	hypocalcemia|hypoparathyroidism|osteoporosis
+carbamazepine	0	2	1	3	Launched	carboxamide antiepileptic	SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A	neurology/psychiatry	seizures
+carbetocin	0	1	2	3	Launched	oxytocin receptor agonist	OXTR	hematology	hemorrhage
+carbinoxamine	1	0	2	3	Launched	histamine receptor antagonist	HRH1	allergy|ophthalmology|otolaryngology|dermatology	allergic rhinitis|conjunctivitis|vasomotor rhinitis|dermatographism
+clomifene	0	1	2	3	Launched	estrogen receptor antagonist	ESR1	obstetrics/gynecology	infertility
+deferiprone	1	1	1	3	Launched	chelating agent	UGT1A6	hematology	transfusional hemosiderosis|thalassemia|iron overload
+deoxycholic-acid	0	1	2	3	Launched	biliverdin reductase A activator|G protein-coupled receptor agonist	FPR1|GPBAR1	endocrinology	submental fat
+dienestrol	1	0	2	3	Launched	estrogen receptor agonist	ESR1	endocrinology	menopause
+dilazep	1	2	0	3	Launched	adenosine reuptake inhibitor	SLC29A1	cardiology	coronary heart disease
+econazole	0	3	0	3	Launched	lanosterol demethylase inhibitor|sterol demethylase inhibitor	NPY1R|NPY2R|TRPM2|TRPV5	infectious disease	tinea pedis|tinea cruris|tinea corporis|tinea versicolor|cutaneous candidiasis
+etacrynic-acid	0	3	0	3	Launched	sodium/potassium/chloride transporter inhibitor	ATP1A1|SLC12A1	cardiology|gastroenterology|nephrology|rheumatology	hypertension|congestive heart failure|edema|hepatic cirrhosis|chronic renal failure|nephrotic syndrome
+ethisterone	0	3	0	3	Launched	progestogen hormone	TYR	endocrinology	amenorrhea
+felodipine	0	1	2	3	Launched	calcium channel blocker	CFTR	cardiology	hypertension
+fenbendazole	0	3	0	3	Launched	tubulin polymerization inhibitor	TUBB	infectious disease	gastrointestinal parasites|gastrointestinal roundworms
+fexofenadine	0	3	0	3	Launched	histamine receptor antagonist	HRH1	allergy	allergic rhinitis|urticaria
+fluspirilene	0	3	0	3	Launched	dopamine receptor antagonist	CACNG1|DRD2|HRH1|HTR1A|HTR1D|HTR1E|HTR2A	neurology/psychiatry	schizophrenia
+halcinonide	1	1	1	3	Launched	glucocorticoid receptor agonist	NR3C1	dermatology	corticosteroid-responsive dermatoses
+hydrocortisone	0	1	2	3	Launched	glucocorticoid receptor agonist	ANXA1|NOS2|NR3C1|NR3C2	dermatology|neurology/psychiatry	eczema|psoriasis|seborrheic dermatitis|itching
+ibuprofen	1	1	1	3	Launched	cyclooxygenase inhibitor		neurology/psychiatry|rheumatology|otolaryngology|obstetrics/gynecology|endocrinology|dental	headache|muscle pain|rheumatoid arthritis|backache|common cold|menstrual pain|fever|toothache
+ketorolac	0	1	2	3	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2	neurology/psychiatry	pain relief
+medetomidine	0	2	1	3	Launched	adrenergic receptor agonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C	neurology/psychiatry	sedative
+meloxicam	0	2	1	3	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2	rheumatology	osteoarthritis|rheumatoid arthritis
+methantheline	0	1	2	3	Launched	acetylcholine receptor antagonist	CHRM1|HRH2	gastroenterology|neurology/psychiatry|urology	peptic ulcer disease (PUD)|irritable bowel syndrome|pancreatitis|dyskinesia|neurogenic bladder
+methylprednisolone	1	0	2	3	Launched	glucocorticoid receptor agonist	NR3C1	endocrinology|rheumatology|dermatology|infectious disease|allergy|hematology|neurology/psychiatry|gastroenterology	hypercalcemia|thyroiditis|ankylosing spondylitis|bursitis|osteoarthritis|psoriatic arthritis|seborrheic dermatitis|mycosis|allergic rhinitis|psoriasis|anemia|multiple sclerosis|ulcerative colitis|enteritis
+metolazone	0	3	0	3	Launched	carbonic anhydrase inhibitor	SLC12A3	cardiology	edema|hypertension
+mexiletine	0	3	0	3	Launched	sodium channel blocker	PLAU|SCN4A|SCN5A	cardiology	ventricular arrhythmias|ventricular tachycardia (VT)
+mifepristone	0	3	0	3	Launched	glucocorticoid receptor antagonist|progesterone receptor antagonist	AR|NR1I2|NR3C1|PGR	endocrinology	hyperglycemia|diabetes mellitus
+minoxidil	0	1	2	3	Launched	KATP activator|Kir6 channel (KATP) activator|vasodilator	ABCC9|KCNJ1|KCNJ10|KCNJ11|KCNJ8|PTGS1	endocrinology	androgenetic alopecia
+nizatidine	1	2	0	3	Launched	histamine receptor antagonist	HRH2	gastroenterology	duodenal ulcer disease|erosive esophagitis (EE)|ulcerative esophagitis (UE)|gastroesophageal reflux disease (GERD)
+olaparib	0	1	2	3	Launched	PARP inhibitor	PARP1|PARP2	oncology	ovarian cancer
+pancuronium	0	1	2	3	Launched	acetylcholine receptor antagonist	CHRM2|CHRM3|CHRNA1|CHRNA2	critical care|neurology/psychiatry	endotracheal intubation|muscle relaxant
+pimozide	0	1	2	3	Launched	dopamine receptor antagonist	CACNA1I|CALM1|DRD1|DRD2|DRD3|DRD4|DRD5|HRH1|HTR1A|HTR2A|KCNA10|KCNH2	neurology/psychiatry	Tourette's disorder
+piroxicam	1	0	2	3	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2	rheumatology	osteoarthritis|rheumatoid arthritis
+raltitrexed	0	2	1	3	Launched	thymidylate synthase inhibitor	FPGS|TYMS	oncology	mesothelioma
+ramipril	0	2	1	3	Launched	angiotensin converting enzyme inhibitor	ACE	cardiology	hypertension
+reboxetine	0	3	0	3	Launched	adrenergic receptor antagonist	SLC6A2	neurology/psychiatry	depression
+ropinirole	0	2	1	3	Launched	dopamine receptor agonist	ADRA2A|ADRA2B|ADRA2C|DRD1|DRD2|DRD3|DRD4|DRD5|HTR1A|HTR1B|HTR1D|HTR2A|HTR2B|HTR2C	neurology/psychiatry	Parkinson's Disease|restless leg syndrome
+sertraline	1	2	0	3	Launched	selective serotonin reuptake inhibitor (SSRI)	SLC6A3|SLC6A4	neurology/psychiatry|obstetrics/gynecology	depression|obsessive compulsive disorder (OCD)|panic disorders|posttraumatic stress disorder|premenstrual syndrome|social anxiety disorder
+sorafenib	0	1	2	3	Launched	FLT3 inhibitor|KIT inhibitor|PDGFR tyrosine kinase receptor inhibitor|RAF inhibitor|RET tyrosine kinase inhibitor|VEGFR inhibitor	BRAF|DDR2|FGFR1|FLT1|FLT3|FLT4|KDR|KIT|PDGFRB|RAF1|RET	oncology	renal cell carcinoma (RCC)|thyroid cancer|hepatocellular carcinoma (HCC)
+thalidomide	1	0	2	3	Launched	tumor necrosis factor production inhibitor	TNF	oncology	myeloma
+topotecan	0	3	0	3	Launched	topoisomerase inhibitor	TOP1|TOP1MT	oncology	small cell lung cancer|cervical cancer
+triamcinolone	0	3	0	3	Launched	glucocorticoid receptor agonist	NR3C1	dermatology	corticosteroid-responsive dermatoses
+urapidil	0	1	2	3	Launched	adrenergic receptor antagonist	HTR1A	cardiology	hypertension
+valsartan	0	3	0	3	Launched	angiotensin receptor antagonist	AGTR1	cardiology	hypertension|congestive heart failure|congestive heart failure
+varenicline	1	1	1	3	Launched	acetylcholine receptor agonist	CHRNA3|CHRNA4|CHRNA6|CHRNA7	neurology/psychiatry	smoking cessation
+vidarabine	0	3	0	3	Launched	antiviral	ADA	infectious disease	virus herpes simplex (HSV)|varicella-zoster virus (VZV)
+xylazine	0	2	1	3	Launched	adrenergic receptor agonist	ADRA2A|ADRA2B|ADRA2C	neurology/psychiatry	anesthetic
+ziprasidone	0	2	1	3	Launched	dopamine receptor antagonist|serotonin receptor antagonist	ADRA1A|ADRA1B|ADRA2A|ADRA2B|ADRA2C|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|DRD4|DRD5|HRH1|HTR1A|HTR1B|HTR1D|HTR1E|HTR2A|HTR2C|HTR3A|HTR6|HTR7|SLC6A4	neurology/psychiatry	schizophrenia|bipolar disorder
+acitretin	0	0	2	2	Launched	retinoid receptor agonist	RARA|RARB|RARG|RBP1|RXRA|RXRB|RXRG|STAT3	dermatology	psoriasis
+alimemazine	0	0	2	2	Launched	histamine receptor agonist|histamine receptor antagonist	HRH1	neurology/psychiatry|allergy|pulmonary	sedative|urticaria|itching|cough suppressant
+amiloride	0	0	2	2	Launched	sodium channel blocker	AOC1|ASIC1|ASIC2|ASIC3|PKD2|PKD2L1|PLAU|SCNN1A|SCNN1B|SCNN1D|SCNN1G|SLC9A1|TRPC7|TRPV2	cardiology	hypertension|congestive heart failure
+benidipine	0	2	0	2	Launched	calcium channel blocker	CACNA1C|CACNA1G	cardiology	hypertension
+benzbromarone	0	0	2	2	Launched	chloride channel blocker	ABCC1	rheumatology	gout
+bepridil	0	2	0	2	Launched	calcium channel blocker	KCNQ4	cardiology	angina pectoris
+betahistine	0	0	2	2	Launched	histamine receptor agonist|histamine receptor antagonist	HRH1|HRH3	neurology/psychiatry	Meniere's disease
+betamethasone	0	0	2	2	Launched	glucocorticoid receptor agonist	NR3C1	dermatology	corticosteroid-responsive dermatoses
+bicalutamide	0	0	2	2	Launched	androgen receptor antagonist	AR	oncology	prostate cancer
+biotin	0	0	2	2	Launched	vitamin B	ACACA|ACACB|HLCS|MCCC1|MCCC2|PC|PCCA|PCCB|SLC5A6		
+biperiden	0	0	2	2	Launched	acetylcholine receptor antagonist	CHRM1|CHRM2|CHRM3|CHRM4|CHRM5	neurology/psychiatry	Parkinson's Disease
+bucladesine	0	0	2	2	Launched	adenosine receptor agonist|cAMP stimulant	PRKACA	dermatology	skin ulcer
+buflomedil	0	0	2	2	Launched	adrenergic receptor antagonist|calcium channel blocker	ADRA1A	cardiology	peripheral artery disease (PAD)
+capecitabine	0	0	2	2	Launched	DNA synthesis inhibitor|thymidylate synthase inhibitor	TYMS	oncology	breast cancer|colorectal cancer
+cefdinir	0	0	2	2	Launched	bacterial cell wall synthesis inhibitor	MPO	infectious disease|otolaryngology|pulmonary	pneumonia|tonsillitis|pharyngitis|bronchitis|skin infections|otitis|sinusitis
+chenodeoxycholic-acid	0	0	2	2	Launched	11-beta hydroxysteroid dehydrogenase inhibitor|FXR agonist	HSD11B1|NR1H4	cardiology|gastroenterology	cerebral cholesterosis|gallstones
+cilastatin	0	1	1	2	Launched	dehydropeptidase inhibitor	DPEP1		
+cilostazol	0	0	2	2	Launched	phosphodiesterase inhibitor	PDE3A|PDE3B	cardiology	claudication
+cinacalcet	0	0	2	2	Launched	calcium channel activator	CASR	endocrinology|nephrology|oncology	hyperparathyroidism|chronic kidney disease (CKD)|parathyroid carcinoma|hypercalcemia
+clemastine	0	2	0	2	Launched	histamine receptor antagonist	HRH1	allergy	allergic rhinitis|urticaria
+clofibric-acid	0	0	2	2	Launched	PPAR receptor agonist	PPARA	endocrinology	hyperlipidemia
+clomipramine	0	1	1	2	Launched	serotonin transporter (SERT) inhibitor	GSTP1|HTR2A|HTR2B|HTR2C|SLC6A2|SLC6A3|SLC6A4	neurology/psychiatry	obsessive compulsive disorder (OCD)
+decitabine	0	0	2	2	Launched	DNA methyltransferase inhibitor	DNMT1|DNMT3A	hematologic malignancy|hematology	myelodysplastic diseases (MDS)|anemia|chronic myeloid leukemia (CML)
+desoximetasone	0	2	0	2	Launched	glucocorticoid receptor agonist	NR3C1|PLA2G1B	dermatology	corticosteroid-responsive dermatoses
+diclofenamide	0	0	2	2	Launched	carbonic anhydrase inhibitor	CA1|CA12|CA2|CA4|CA7	ophthalmology|neurology/psychiatry	glaucoma|epilepsy
+equol	0	2	0	2	Launched	estrogen receptor agonist	ESR1|ESR2		
+fasudil	1	0	1	2	Launched	rho associated kinase inhibitor	PKIA|PRKACA|ROCK1|ROCK2	neurology/psychiatry	cerebral vasospasm
+fipronil	0	0	2	2	Launched	chloride channel blocker|GABA gated chloride channel blocker		infectious disease	flea control
+flavoxate	0	0	2	2	Launched	acetylcholine receptor antagonist	CHRM1|CHRM2	urology	urinary incontinence|interstitial cystitis (IC)|urethritis|prostatitis
+fluconazole	0	0	2	2	Launched	sterol demethylase inhibitor	CYP51A1	infectious disease	esophageal candidiasis|meningitis
+fludarabine	0	2	0	2	Launched	ribonucleotide reductase inhibitor	ADA|DCK|POLA1|RRM1|RRM2	hematologic malignancy	chronic lymphocytic leukemia (CLL)
+flunarizine	0	0	2	2	Launched	calcium channel blocker	CACNA1G|CACNA1H|CACNA1I|CALM1|HRH1	neurology/psychiatry|cardiology	migraine headache|vertigo|peripheral artery disease (PAD)
+flupentixol	0	2	0	2	Launched	dopamine receptor antagonist	ADRA1A|CHRM1|DRD1|DRD2|DRD3|DRD5|HTR2A	neurology/psychiatry	schizophrenia|depression
+flupirtine	0	0	2	2	Launched	glutamate receptor antagonist	ADRA2A|KCNQ1|KCNQ2	neurology/psychiatry	pain relief
+fluvoxamine	0	2	0	2	Launched	selective serotonin reuptake inhibitor (SSRI)	SLC6A4	neurology/psychiatry	obsessive compulsive disorder (OCD)
+formestane	0	1	1	2	Launched	aromatase inhibitor	CYP19A1	oncology	breast cancer
+gabexate	0	0	2	2	Launched	serine protease inhibitor	PRSS1|TPSAB1	gastroenterology	pancreatitis
+galantamine	0	0	2	2	Launched	acetylcholinesterase inhibitor	ACHE|BCHE|CHRNA1|CHRNA10|CHRNA2|CHRNA3|CHRNA4|CHRNA5|CHRNA6|CHRNA7|CHRNA9|CHRNB1|CHRNB2|CHRNB3|CHRNB4|CHRND|CHRNE|CHRNG	neurology/psychiatry	senile dementia
+gefitinib	0	0	2	2	Launched	EGFR inhibitor	EGFR	oncology	non-small cell lung cancer (NSCLC)
+gliquidone	0	0	2	2	Launched	sulfonylurea	ABCC8|KCNJ10|KCNJ8	endocrinology	diabetes mellitus
+hyoscyamine	0	1	1	2	Launched	acetylcholine receptor antagonist	CHRM1|CHRM2|CHRM3|CHRM4	gastroenterology|urology|neurology/psychiatry|allergy	peptic ulcer disease (PUD)|acute abdominal visceral spasm|ulcerative colitis|interstitial cystitis (IC)|enterocolitis|irritable bowel syndrome|tremors|allergic rhinitis
+isoxsuprine	0	0	2	2	Launched	adrenergic receptor agonist	ADRB2	rheumatology|cardiology	Raynaud's disease|arteriosclerosis|Buerger's disease
+ketoprofen	0	0	2	2	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2|SLC5A8	rheumatology	rheumatoid arthritis|osteoarthritis
+leflunomide	0	0	2	2	Launched	dihydroorotate dehydrogenase inhibitor|PDGFR tyrosine kinase receptor inhibitor	AHR|DHODH|PTK2B	rheumatology	rheumatoid arthritis
+letrozole	0	0	2	2	Launched	aromatase inhibitor	CYP19A1	oncology	breast cancer
+levetiracetam	0	0	2	2	Launched	calcium channel blocker	CACNA1B|SCN1A|SV2A	neurology/psychiatry	seizures
+levonorgestrel	0	2	0	2	Launched	estrogen receptor agonist|glucocorticoid receptor antagonist|progesterone receptor agonist|progesterone receptor antagonist	PGR	endocrinology	contraceptive
+lidoflazine	0	2	0	2	Launched	calcium channel blocker	SCN1A|SCN3A|SLC29A1	cardiology	coronary artery disease (CAD)
+liothyronine	0	2	0	2	Launched	thyroid hormone stimulant	THRA|THRB	endocrinology	hypothyroidism|myxedema coma
+lofepramine	0	0	2	2	Launched	norepinephrine reuptake inhibitor|serotonin–norepinephrine reuptake inhibitor (SNRI)	HTR1A|SLC6A2|SLC6A4	neurology/psychiatry	depression
+lomerizine	0	0	2	2	Launched	calcium channel blocker	CACNA1B|SCN5A	neurology/psychiatry	migraine headache
+lonidamine	0	1	1	2	Launched	glucokinase inhibitor	GCK		
+loxapine	0	2	0	2	Launched	dopamine receptor antagonist|serotonin receptor antagonist	ADRA1A|ADRA1B|ADRA2A|ADRA2B|ADRA2C|ADRB1|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|DRD4|DRD5|HRH1|HRH2|HRH4|HTR1A|HTR1B|HTR1D|HTR1E|HTR2A|HTR2C|HTR3A|HTR5A|HTR6|HTR7|SLC6A2|SLC6A3|SLC6A4	neurology/psychiatry	schizophrenia
+maraviroc	1	0	1	2	Launched	CC chemokine receptor antagonist	CCR5	infectious disease	human immunodeficiency virus (HIV-1)
+mefenamic-acid	0	0	2	2	Launched	cyclooxygenase inhibitor	KCNQ1|PTGS1|PTGS2|TRPM3	endocrinology	primary dysmenorrhea (PD)
+mepivacaine	0	0	2	2	Launched	potassium channel blocker|sodium channel blocker		neurology/psychiatry	local anesthetic
+methazolamide	0	0	2	2	Launched	carbonic anhydrase inhibitor	CA1|CA12|CA14|CA2|CA4|CA7	ophthalmology	glaucoma|intraocular pressure
+mianserin	0	0	2	2	Launched	serotonin receptor antagonist	ADRA1A|ADRA1B|ADRA1D|HRH1|HRH2|HTR2A|HTR2B|HTR2C|HTR6|HTR7	neurology/psychiatry	depression
+midostaurin	0	2	0	2	Launched	FLT3 inhibitor|KIT inhibitor|PKC inhibitor	FLT3|PRKCG	hematologic malignancy	acute myeloid leukemia (AML)
+milrinone	0	0	2	2	Launched	phosphodiesterase inhibitor	PDE2A|PDE3A|PDE3B|PDE5A	cardiology	congestive heart failure
+mirtazapine	0	0	2	2	Launched	adrenergic receptor antagonist|serotonin receptor antagonist	ADRA2A|ADRA2B|ADRA2C|HTR2A|HTR2C	neurology/psychiatry	depression
+naproxen	0	0	2	2	Launched	cyclooxygenase inhibitor	PTGS1|PTGS2	neurology/psychiatry|rheumatology|dental|otolaryngology|endocrinology	pain relief|rheumatoid arthritis|headache|toothache|backache|muscle pain|common cold|fever
+nevirapine	0	0	2	2	Launched	non-nucleoside reverse transcriptase inhibitor	CYP1A2|CYP2A6|CYP2B6|CYP2C9|CYP2D6|CYP3A4|CYP3A5	infectious disease	human immunodeficiency virus (HIV-1)
+nicotinamide	0	0	2	2	Launched	protein synthesis stimulant	BST1|LDHA|PARP1|SIRT5	dermatology	acne vulgaris (AV)
+nifedipine	0	0	2	2	Launched	calcium channel blocker	CACNA1C|CACNA1D|CACNA1F|CACNA1H|CACNA1S|CACNA2D1|CACNB2|CALM1|GLRA1|GLRA3|GLRB|KCNA1|KCNA5|NR1I2|TRPM3	cardiology	vasospastic angina|chronic stable angina
+nimesulide	0	0	2	2	Launched	cyclooxygenase inhibitor	LTF|PLA2G2E|PTGS1|PTGS2	rheumatology|obstetrics/gynecology	osteoarthritis|menstrual pain
+nimodipine	0	0	2	2	Launched	calcium channel blocker	CFTR|NR3C2	hematology	hemorrhage
+olanzapine	0	0	2	2	Launched	dopamine receptor antagonist|serotonin receptor antagonist	ADRA1A|ADRA1B|ADRA2A|ADRA2B|ADRA2C|ADRB1|ADRB2|ADRB3|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD1|DRD2|DRD3|DRD4|DRD5|GABRA1|GABRA2|GABRA3|GABRA4|GABRA5|GABRA6|GABRB1|GABRB2|GABRB3|GABRD|GABRE|GABRG1|GABRG2|GABRG3|GABRP|GABRQ|HRH1|HRH2|HRH4|HTR1A|HTR1B|HTR1D|HTR1E|HTR1F|HTR2A|HTR2B|HTR2C|HTR3A|HTR5A|HTR6|HTR7	neurology/psychiatry	schizophrenia|bipolar disorder
+oxybuprocaine	0	0	2	2	Launched	local anesthetic	SCN10A	neurology/psychiatry	local anesthetic
+palonosetron	0	0	2	2	Launched	serotonin receptor antagonist	HTR3A	gastroenterology	nausea|vomiting
+pantoprazole	0	0	2	2	Launched	ATPase inhibitor	ATP4A	gastroenterology	gastroesophageal reflux disease (GERD)|erosive esophagitis (EE)|Zollinger-Ellison syndrome
+parecoxib	0	2	0	2	Launched	cyclooxygenase inhibitor	LTF	neurology/psychiatry	pain relief
+phenazopyridine	1	0	1	2	Launched	local anesthetic	SCN1A	infectious disease	urinary tract infections
+pinacidil	0	0	2	2	Launched	ATP channel activator|potassium channel activator	ABCC8|ABCC9	cardiology	hypertension
+pindolol	0	2	0	2	Launched	adrenergic receptor antagonist	ADRB1|ADRB2|HTR1A|HTR2A|HTR2B	cardiology	hypertension
+pirfenidone	0	0	2	2	Launched	TGF beta receptor inhibitor	FURIN|TNF	pulmonary	idiopathic pulmonary fibrosis (IPF)
+pizotifen	0	1	1	2	Launched	serotonin receptor antagonist	HTR1A|HTR2A|HTR2C	neurology/psychiatry	migraine headache
+prednisolone	0	0	2	2	Launched	glucocorticoid receptor agonist	NR3C1|NR3C2|SERPINA6	ophthalmology|dermatology|infectious disease	conjunctivitis|rosacea|punctate keratitis|shingles|iritis|cyclitis
+prilocaine	0	0	2	2	Launched	local anesthetic	SCN5A	neurology/psychiatry	anesthetic
+primidone	0	0	2	2	Launched	GABA receptor antagonist	CHRNA4|CHRNA7|GABRA1|GABRA2|GABRA3|GABRA4|GABRA5|GABRA6|GABRB1|GABRB2|GABRB3|GABRD|GABRE|GABRG1|GABRG2|GABRG3|GABRP|GABRQ|GRIA2|GRIK2|SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A	neurology/psychiatry	seizures
+probucol	0	2	0	2	Launched	atherogenesis inhibitor	ABCA1|ABCB11|CES1	cardiology	coronary artery disease (CAD)
+propafenone	0	0	2	2	Launched	antiarrhythmic	ADRB1|ADRB2|KCNA5|KCNH2	cardiology	atrial fibrillation (AF)|ventricular tachycardia (VT)|ventricular arrhythmias
+quinine	0	0	2	2	Launched	hemozoin biocrystallization inhibitor	GP9|KCNB2|KCNN4|SLC29A4	infectious disease	malaria
+ruxolitinib	0	0	2	2	Launched	JAK inhibitor	JAK1|JAK2|JAK3|TYK2	hematologic malignancy|hematology	myelofibrosis|polycythemia vera
+scopolamine	1	1	0	2	Launched	acetylcholine receptor antagonist	CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|SI	neurology/psychiatry|gastroenterology	motion sickness|vomiting|nausea
+sirolimus	0	0	2	2	Launched	mTOR inhibitor	FKBP1A|MTOR	transplant|pulmonary	organ rejection|lymphangioleiomyomatosis
+sitagliptin	0	0	2	2	Launched	dipeptidyl peptidase inhibitor	DPP4	endocrinology	diabetes mellitus
+spiperone	0	0	2	2	Launched	dopamine receptor antagonist	ADRA1A|ADRA1B|ADRA1D|DRD1|DRD2|DRD3|DRD4|DRD5|HTR1A|HTR1D|HTR2A|HTR2B|HTR2C|HTR6|HTR7	neurology/psychiatry	schizophrenia
+sulfacetamide	0	0	2	2	Launched	PABA antagonist		ophthalmology	conjunctivitis
+tacrolimus	1	0	1	2	Launched	calcineurin inhibitor	FKBP1A	transplant	organ rejection
+talipexole	0	0	2	2	Launched	adrenergic receptor agonist|dopamine receptor agonist	ADRA2A|DRD2|HTR3A	infectious disease	genitial herpes
+temozolomide	0	0	2	2	Launched	DNA alkylating agent	MGMT	oncology	glioblastoma|astrocytoma
+terguride	0	1	1	2	Launched	dopamine receptor agonist|serotonin receptor antagonist	ADRA1A|ADRA2A|ADRA2B|ADRA2C|DRD2|DRD3|DRD4|HTR1A|HTR1B|HTR1D|HTR2A|HTR2B|HTR2C	neurology/psychiatry	Parkinson's Disease
+tetrabenazine	0	0	2	2	Launched	vesicular monoamine transporter inhibitor	SLC18A1|SLC18A2	infectious disease|neurology/psychiatry	cholera|Huntington's disease
+thiethylperazine	0	2	0	2	Launched	dopamine receptor antagonist	DRD1|DRD2|DRD4	gastroenterology	nausea
+thiocolchicoside	1	1	0	2	Launched	GABA receptor antagonist	GABRA1|GABRB2|GABRG2|GLRA1|GLRB	neurology/psychiatry	muscle relaxant
+thioproperazine	0	0	2	2	Launched	dopamine receptor antagonist	ADRA1A|ADRA1B|DRD1|DRD2|HTR1A|HTR2A	neurology/psychiatry	schizophrenia
+tibolone	0	0	2	2	Launched	androgen receptor agonist|estrogen receptor agonist|progesterone receptor agonist	ESR1	obstetrics/gynecology	endometriosis
+tizanidine	0	0	2	2	Launched	adrenergic receptor agonist	ADRA2A|ADRA2B|ADRA2C|NISCH	neurology/psychiatry	spasms
+triamterene	0	0	2	2	Launched	sodium channel blocker	SCNN1A|SCNN1B|SCNN1D|SCNN1G	endocrinology|cardiology	hypokalemia|hypertension|edema
+tropicamide	0	0	2	2	Launched	acetylcholine receptor antagonist	CHRM3|CHRM4	ophthalmology	mydriasis diagnostic|cycloplegia diagnostic
+venlafaxine	0	0	2	2	Launched	adrenergic inhibitor|norepinephrine reuptake inhibitor|serotonin–norepinephrine reuptake inhibitor (SNRI)	SLC6A2|SLC6A4	neurology/psychiatry	depression|generalized anxiety disorder (GAD)|panic disorders|social anxiety disorder
+warfarin	0	1	1	2	Launched	vitamin K antagonist	VKORC1	hematology|cardiology	deep vein thrombosis (DVT)|pulmonary embolism (PE)|atrial fibrillation (AF)|myocardial infarction
+zuclopenthixol	0	0	2	2	Launched	dopamine receptor antagonist	ADRA1A|ADRA2A|DRD1|DRD2|DRD5|HRH1|HTR2A	neurology/psychiatry	schizophrenia|bipolar disorder
+abiraterone	0	0	1	1	Launched	androgen biosynthesis inhibitor	CYP11B1|CYP17A1	oncology	prostate cancer
+acepromazine	0	0	1	1	Launched	dopamine receptor antagonist	ADRA1A|ADRA1B|DRD1|DRD2|HTR1A|HTR2A	neurology/psychiatry	sedative
+ambroxol	0	0	1	1	Launched	sodium channel blocker	CYP3A4	pulmonary	bronchitis
+amperozide	0	0	1	1	Launched	dopamine receptor antagonist	FAAH|HTR2A	neurology/psychiatry	psychosis
+aniracetam	0	0	1	1	Launched	glutamate receptor agonist	DRD2|GRIA1|GRIA2|GRIA3|GRIA4|HTR2A		
+ascorbic-acid	0	0	1	1	Launched	antioxidant	SLC23A1|SLC23A2	endocrinology	scurvy
+azaperone	0	1	0	1	Launched	dopamine receptor antagonist	DRD2|DRD3	neurology/psychiatry	sedative
+azithromycin	0	0	1	1	Launched	bacterial 50S ribosomal subunit inhibitor	MLNR	infectious disease	pelvic inflammatory disease|pneumonia
+budesonide	0	0	1	1	Launched	glucocorticoid receptor agonist	NR3C1	gastroenterology	Crohn's disease
+buphenine	0	1	0	1	Launched	adrenergic receptor agonist	ADRB2	rheumatology	Raynaud's disease
+capsaicin	0	0	1	1	Launched	TRPV agonist	CFTR|TRPV1	neurology/psychiatry|rheumatology	muscle pain|rheumatoid arthritis
+carteolol	1	0	0	1	Launched	adrenergic receptor antagonist	ADRB1|ADRB2|ADRB3	ophthalmology	intraocular pressure|glaucoma|ocular hypertension
+cefotaxime	0	0	1	1	Launched	bacterial cell wall synthesis inhibitor		infectious disease	respiratory tract infections|bone and joint infections|pelvic inflammatory disease|intra-abdominal infections|skin infections|meningitis|urinary tract infections|bacterial septicemia|gynecologic infections
+cetirizine	0	1	0	1	Launched	histamine receptor antagonist	HRH1	allergy	allergic rhinitis
+cholic-acid	0	0	1	1	Launched	bile acid	ADH1C|CES1|COX4I1|COX5A|COX5B|COX6A2|COX6B1|COX6C|COX7A1|COX7B|COX7C|COX8A|ESRRG|FABP6|FECH|GPBAR1|MT-CO1|MT-CO2|MT-CO3|PLA2G1B	gastroenterology|neurology/psychiatry|genetics	bile acid synthesis disorders|peroxisomal disorders|Zellweger syndrome
+cimetidine	0	1	0	1	Launched	histamine receptor antagonist	HRH2|SLC29A4|SLC47A1|SLC47A2	gastroenterology|hematologic malignancy|endocrinology	duodenal ulcer disease|peptic ulcer disease (PUD)|gastroesophageal reflux disease (GERD)|aggressive systemic mastocytosis (ASM)|Zollinger-Ellison syndrome|endocrine adenoma
+citalopram	0	0	1	1	Launched	selective serotonin reuptake inhibitor (SSRI)	ADRA1A|CHRM1|HRH1|SLC6A2|SLC6A3|SLC6A4	neurology/psychiatry	depression
+clofibrate	0	0	1	1	Launched	PPAR receptor agonist	LPL|PPARA	endocrinology|cardiology	hyperlipidemia|cholesterol
+coumarin	1	0	0	1	Launched	vitamin K antagonist	CA1|CA12|CA14|CA2|CA4|CA6|CA9|CYP2A6	gastroenterology|pulmonary	ulcerative colitis|asthma|celiac disease
+dactinomycin	1	0	0	1	Launched	RNA polymerase inhibitor	POLR2A	oncology	testicular carcinoma|Wilm's tumor|rhabdomyosarcoma|Ewing's sarcoma|gestational trophoblastic disease (GTD)
+dapsone	0	0	1	1	Launched	bacterial antifolate	DHFR	dermatology|infectious disease	dermatitis herpetiformis (DH)|leprosy
+diflunisal	0	1	0	1	Launched	prostanoid receptor antagonist	PTGS1|PTGS2	rheumatology	rheumatoid arthritis|osteoarthritis
+digitoxin	0	0	1	1	Launched	ATPase inhibitor	ATP1A1|ATP1A2|ATP1A3|ATP1A4|ATP1B1|ATP1B2|ATP1B3|FXYD2	cardiology	congestive heart failure|cardiac arrythmia
+diphenhydramine	0	0	1	1	Launched	histamine receptor antagonist	HRH1	neurology/psychiatry	headache
+diphenidol	0	1	0	1	Launched	acetylcholine receptor agonist	CHRM1|CHRM2|CHRM3|CHRM4	neurology/psychiatry	vertigo
+domperidone	0	0	1	1	Launched	dopamine receptor antagonist	DRD2|DRD3	infectious disease	fescue toxicosis
+doxepin	0	0	1	1	Launched	histamine receptor antagonist	HRH1|SLC6A2|SLC6A4	neurology/psychiatry	depression|anxiety
+doxercalciferol	0	0	1	1	Launched	vitamin D receptor agonist	VDR	nephrology|endocrinology	chronic kidney disease (CKD)|hyperparathyroidism
+doxorubicin	0	1	0	1	Launched	topoisomerase inhibitor	TOP2A	hematologic malignancy|oncology	acute lymphoblastic leukemia (ALL)|acute myeloid leukemia (AML)|Wilm's tumor|breast cancer|ovarian cancer|Hodgkin's lymphoma|bladder cancer|multiple myeloma
+doxycycline	0	0	1	1	Launched	bacterial 30S ribosomal subunit inhibitor|metalloproteinase inhibitor	MMP8	dental	periodontitis
+edrophonium	0	0	1	1	Launched	acetylcholinesterase inhibitor	ACHE|BCHE	neurology/psychiatry	myasthenia gravis
+efavirenz	0	0	1	1	Launched	HIV protease inhibitor	CYP1A2|CYP2B6|CYP2C19|CYP2C9|CYP2D6|CYP3A4	infectious disease	human immunodeficiency virus (HIV-1)
+enalapril	0	0	1	1	Launched	angiotensin converting enzyme inhibitor	ACE	cardiology	hypertension|congestive heart failure|left ventricular systolic dysfunction (LVSD)
+enalaprilat	0	1	0	1	Launched	angiotensin converting enzyme inhibitor	ACE	cardiology	hypertension
+esomeprazole	0	0	1	1	Launched	ATPase inhibitor	ATP4A	gastroenterology	gastroesophageal reflux disease (GERD)|Zollinger-Ellison syndrome|peptic ulcer disease (PUD)
+estropipate	0	0	1	1	Launched	estrogen receptor agonist	ESR1|ESR2	orthopedics|endocrinology|obstetrics/gynecology	osteoporosis|menopause|vaginal atrophy|hypoestrogenism
+ethotoin	0	0	1	1	Launched	hydantoin antiepileptic	SCN5A	neurology/psychiatry	seizures
+febuxostat	0	1	0	1	Launched	xanthine oxidase inhibitor	XDH	nephrology	hyperuricemia
+finasteride	0	0	1	1	Launched	5 alpha reductase inhibitor	AKR1D1|SRD5A1|SRD5A2	endocrinology	androgenetic alopecia
+fluorometholone	0	0	1	1	Launched	glucocorticoid receptor agonist	NR3C1	ophthalmology	eye inflammation
+fluphenazine	0	0	1	1	Launched	dopamine receptor antagonist	CALM1|DRD1|DRD2|DRD5|HRH1|HTR2A|HTR6|HTR7	neurology/psychiatry	schizophrenia
+glipizide	0	0	1	1	Launched	sulfonylurea	ABCC8|KCNJ10|KCNJ11|PPARG	endocrinology	diabetes mellitus|hyperglycemia
+guanfacine	0	0	1	1	Launched	adrenergic receptor agonist	ADRA2A|ADRA2B|ADRA2C	cardiology	hypertension
+hydroflumethiazide	0	1	0	1	Launched	sodium/potassium/chloride transporter inhibitor	ATP1A1|CA1|CA12|CA2|CA4|CA9|KCNMA1|SLC12A1|SLC12A3	cardiology|gastroenterology|rheumatology|nephrology	edema|congestive heart failure|hepatic cirrhosis|nephrotic syndrome|chronic renal failure|acute glomerulonephritis (AGN)|hypertension
+hydroquinidine	0	0	1	1	Launched	antiarrhythmic		cardiology	cardiac arrythmia
+ibudilast	0	0	1	1	Launched	leukotriene receptor antagonist|phosphodiesterase inhibitor	IL1B|IL6|PDE3A|PDE4A|PDE4B|PDE4C|PDE4D|PDE5A	pulmonary|neurology/psychiatry	asthma|stroke
+imatinib	0	0	1	1	Launched	Bcr-Abl kinase inhibitor|KIT inhibitor|PDGFR tyrosine kinase receptor inhibitor	ABL1|CSF1R|DDR1|KIT|NTRK1|PDGFRA|PDGFRB|RET	hematologic malignancy|oncology	chronic myeloid leukemia (CML)|acute lymphoblastic leukemia (ALL)|myelodysplastic diseases (MDS)|aggressive systemic mastocytosis (ASM)|hypereosinophilic syndrome (HES)|chronic eosinophilic leukemia (CEL)|dermatofibrosarcoma protuberans (DFSP)|gastrointestinal stromal tumors (GIST)
+imiquimod	0	0	1	1	Launched	interferon inducer|toll-like receptor agonist	TLR7|TLR8	dermatology|infectious disease|oncology	actinic keratosis (AK)|genital warts|basal cell carcinoma (BCC)
+irbesartan	0	0	1	1	Launched	angiotensin receptor antagonist	AGTR1|JUN|SLC10A1	cardiology|nephrology	hypertension|diabetic nephropathy
+irsogladine	0	0	1	1	Launched	phosphodiesterase inhibitor	PDE4A	gastroenterology	peptic ulcer disease (PUD)
+lamotrigine	0	0	1	1	Launched	serotonin receptor antagonist|sodium channel blocker	SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A	neurology/psychiatry	epilepsy|bipolar disorder
+loteprednol	0	1	0	1	Launched	glucocorticoid receptor agonist|phospholipase inhibitor	NR3C1	ophthalmology	conjunctivitis
+mebeverine	0	1	0	1	Launched	acetylcholine receptor antagonist	CHRM1	gastroenterology	irritable bowel syndrome
+medrysone	0	1	0	1	Launched	glucocorticoid receptor agonist	NR3C1	ophthalmology	conjunctivitis|episcleritis
+mephentermine	0	0	1	1	Launched	adrenergic receptor agonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|ADRB1|ADRB2|ADRB3	cardiology	hypotension
+metformin	1	0	0	1	Launched	insulin sensitizer	ACACB|PRKAB1	endocrinology	diabetes mellitus
+methysergide	0	0	1	1	Launched	serotonin receptor antagonist	HTR1B|HTR1D|HTR1E|HTR1F|HTR2A|HTR2B|HTR2C|HTR5A|HTR6|HTR7	neurology/psychiatry	headache
+metoclopramide	0	0	1	1	Launched	dopamine receptor antagonist|serotonin receptor antagonist	CHRM1|DRD2|HTR3A|HTR3B|HTR4	gastroenterology	gastroparesis|nausea|vomiting
+metyrapone	0	1	0	1	Launched	cytochrome P450 inhibitor	CYP11B1	nephrology	adrenal diagnostic agent
+milnacipran	0	1	0	1	Launched	serotonin–norepinephrine reuptake inhibitor (SNRI)	SLC6A2|SLC6A4	rheumatology	fibromyalgia
+mitoxantrone	0	1	0	1	Launched	topoisomerase inhibitor	TOP2A	neurology/psychiatry|oncology|hematologic malignancy	multiple sclerosis|prostate cancer|acute myeloid leukemia (AML)
+molindone	0	0	1	1	Launched	dopamine receptor antagonist	DRD2|HRH1|HTR2A	neurology/psychiatry	schizophrenia
+montelukast	0	1	0	1	Launched	leukotriene receptor antagonist	ALOX5|CYSLTR1	pulmonary|allergy	asthma|allergic rhinitis|exercise-induced bronchoconstriction (EIB)
+moxonidine	0	0	1	1	Launched	imidazoline receptor agonist	ADRA2A|ADRA2B|ADRA2C	cardiology	hypertension
+mupirocin	0	0	1	1	Launched	isoleucyl-tRNA synthetase inhibitor		infectious disease	impetigo
+mycophenolic-acid	1	0	0	1	Launched	dehydrogenase inhibitor|inositol monophosphatase inhibitor	IMPDH1|IMPDH2	transplant	organ rejection
+nadolol	0	0	1	1	Launched	adrenergic receptor antagonist	ADRB1|ADRB2|ADRB3	cardiology	angina pectoris|hypertension
+nafcillin	0	0	1	1	Launched	bacterial cell wall synthesis inhibitor	CYP1A2|CYP3A4|SLC22A6	infectious disease	gram-positive bacterial infections
+nalbuphine	1	0	0	1	Launched	opioid receptor agonist|opioid receptor antagonist	OPRD1|OPRK1|OPRM1	neurology/psychiatry	pain relief
+naphazoline	0	0	1	1	Launched	adrenergic receptor agonist	ADRA1A|ADRA2A	ophthalmology	eye irritation
+nateglinide	0	0	1	1	Launched	insulin secretagogue	ABCC8|KCNJ10|KCNJ11|PPARG	endocrinology	diabetes mellitus
+niacin	0	0	1	1	Launched	NAD precursor|vitamin B	DGAT2|HCAR1|HCAR2|HCAR3|NNMT|QPRT	endocrinology	hypertriglyceridemia
+nicergoline	0	0	1	1	Launched	adrenergic receptor antagonist	ADRA1A	rheumatology|neurology/psychiatry|cardiology|hematology	Raynaud's disease|migraine headache|atherosclerosis|thrombosis
+nicorandil	0	1	0	1	Launched	nitric oxide donor|potassium channel activator	KCNJ11	cardiology	angina pectoris
+nilutamide	0	0	1	1	Launched	androgen receptor antagonist	AR	oncology	prostate cancer
+norgestrel	0	1	0	1	Launched	progesterone receptor agonist	AR|ESR1|PGR|SRD5A1	endocrinology	contraceptive
+nortriptyline	0	1	0	1	Launched	tricyclic antidepressant	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|ADRB1|ADRB2|ADRB3|CHRM1|CHRM2|CHRM3|CHRM4|CHRM5|DRD2|HRH1|HTR1A|HTR2A|HTR2C|HTR6|KCNJ10|PGRMC1|SIGMAR1|SLC6A2|SLC6A4	neurology/psychiatry	depression
+noscapine	0	0	1	1	Launched	bradykinin receptor antagonist|tubulin polymerization inhibitor	SIGMAR1	pulmonary	cough suppressant
+olmesartan	0	0	1	1	Launched	angiotensin receptor antagonist	AGTR1	cardiology	hypertension
+oxibendazole	0	0	1	1	Launched	tubulin polymerization inhibitor	TUBB|TUBB4B	infectious disease	strongyles
+oxprenolol	0	1	0	1	Launched	adrenergic receptor antagonist	ADRB1	cardiology	angina pectoris|hypertension|cardiac arrythmia
+paclitaxel	0	0	1	1	Launched	tubulin polymerization inhibitor	BCL2|MAP2|MAP4|MAPT|NR1I2|TLR4|TUBA1A|TUBA1B|TUBA1C|TUBA3C|TUBA3D|TUBA3E|TUBA4A|TUBB|TUBB1|TUBB2A|TUBB2B|TUBB3|TUBB4A|TUBB4B|TUBB6|TUBB8	oncology	ovarian cancer|breast cancer|non-small cell lung cancer (NSCLC)
+palmitoylethanolamide	1	0	0	1	Launched	cannabinoid receptor agonist	CNR2|GPR119|GPR55		
+pazopanib	0	1	0	1	Launched	KIT inhibitor|PDGFR tyrosine kinase receptor inhibitor|VEGFR inhibitor	CSF1R|FGF1|FGFR1|FGFR3|FLT1|FLT4|ITK|KDR|KIT|PDGFRA|PDGFRB|SH2B3	oncology	renal cell carcinoma (RCC)|soft tissue sarcoma (STS)
+pefloxacin	0	0	1	1	Launched	bacterial DNA gyrase inhibitor	TOP2A	infectious disease|urology	gastrointestinal infections|urethritis|gonorrhea|urinary tract infections
+pentoxifylline	0	0	1	1	Launched	phosphodiesterase inhibitor	ADORA1|ADORA2A|ADORA2B|ADRA2B|NT5E|PDE10A|PDE1A|PDE1B|PDE1C|PDE2A|PDE3A|PDE3B|PDE4A|PDE4B|PDE4C|PDE4D|PDE5A|PDE6A|PDE6B|PDE6C|PDE6D|PDE6G|PDE6H|PDE7A|PDE7B|PDE8A|PDE8B|PDE9A|TNF	cardiology	claudication
+perphenazine	1	0	0	1	Launched	dopamine receptor antagonist	CALM1|DRD1|DRD2|HRH1|HTR2A|HTR2C|HTR6|HTR7	neurology/psychiatry|gastroenterology	schizophrenia|nausea|vomiting
+physostigmine	0	0	1	1	Launched	acetylcholinesterase inhibitor|cholinesterase inhibitor	ACHE|BCHE	cardiology|neurology/psychiatry|ophthalmology|gastroenterology	hypotension|Alzheimer's disease|glaucoma|gastroparesis
+piretanide	1	0	0	1	Launched	glucocorticoid receptor agonist	SLC12A1|SLC12A2	cardiology	hypertension|edema
+pirlindole	0	1	0	1	Launched	monoamine oxidase inhibitor	MAOA	neurology/psychiatry	depression
+pravastatin	0	0	1	1	Launched	HMGCR inhibitor	HMGCR|SLCO1B1	endocrinology|cardiology	hypercholesterolemia|myocardial infarction|hyperlipidemia
+prazosin	0	1	0	1	Launched	adrenergic receptor antagonist	ADRA1A|ADRA1B|ADRA1D|ADRA2A|ADRA2B|ADRA2C|KCNH2|KCNH6|KCNH7	cardiology	hypertension
+prednicarbate	1	0	0	1	Launched	phospholipase activator	PLA2G1B	dermatology|ophthalmology|neurology/psychiatry	eczema|contact dermatitis|itching
+pregnenolone	0	0	1	1	Launched	glutamate receptor modulator	SULT2B1	rheumatology	rheumatoid arthritis
+probenecid	0	1	0	1	Launched	uricosuric blocker	PANX1|SLC22A11|SLC22A6|SLC22A8|SLCO1C1	nephrology|rheumatology	hyperuricemia|gout
+procainamide	0	0	1	1	Launched	sodium channel blocker	DNMT1|SCN5A	cardiology	ventricular arrhythmias|ventricular tachycardia (VT)
+prochlorperazine	0	0	1	1	Launched	dopamine receptor antagonist	DRD1|DRD2|DRD3|DRD4	gastroenterology	nausea|vomiting
+profenamine	0	0	1	1	Launched	butyrylcholinesterase inhibitor|cholinergic receptor antagonist	CHRM1	neurology/psychiatry	Parkinson's Disease
+propranolol	0	0	1	1	Launched	adrenergic receptor antagonist	ADRB1|ADRB2	cardiology|neurology/psychiatry	hypertension|angina pectoris|migraine headache
+proxymetacaine	0	0	1	1	Launched	sodium channel blocker	SCN10A|SCN5A	neurology/psychiatry	anesthetic
+pyrazinamide	0	0	1	1	Launched	fatty acid synthase inhibitor	FASN	infectious disease	tuberculosis
+quinethazone	0	1	0	1	Launched	thiazide diuretic		cardiology	hypertension
+racecadotril	0	0	1	1	Launched	enkephalinase inhibitor	MME	gastroenterology	diarrhea
+repaglinide	0	0	1	1	Launched	insulin secretagogue	ABCC8|KCNJ11|PPARG	endocrinology	diabetes mellitus
+riluzole	0	1	0	1	Launched	glutamate inhibitor	KCNK10|KCNK2|KCNK4|KCNN4|SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A|SLC7A11	neurology/psychiatry	amyotrophic lateral sclerosis (ALS)
+rimexolone	0	1	0	1	Launched	glucocorticoid receptor agonist	NR3C1|SERPINA6	ophthalmology	anterior uveitis
+ropivacaine	0	0	1	1	Launched	sodium channel blocker	SCN10A	neurology/psychiatry	anesthetic
+rosmarinic-acid	0	0	1	1	Launched	GABA transaminase inhibitor	MCL1|TYR		
+safinamide	0	0	1	1	Launched	dopamine reuptake inhibitor|glutamate inhibitor|monoamine oxidase inhibitor	MAOB	neurology/psychiatry	Parkinson's Disease
+sertaconazole	0	0	1	1	Launched	sterol demethylase inhibitor		infectious disease	tinea pedis
+sildenafil	0	0	1	1	Launched	phosphodiesterase inhibitor	PDE5A|PDE6G|PDE6H|SLCO1B1|SLCO1B3	urology	erectile dysfunction
+somatostatin	0	0	1	1	Launched	somatostatin receptor agonist	OPRD1|OPRM1|SSTR1|SSTR2|SSTR3|SSTR4|SSTR5	hematology	hemorrhage
+spironolactone	0	0	1	1	Launched	mineralocorticoid receptor antagonist	AR|CACNA1A|CACNA1B|CACNA1C|CACNA1D|CACNA1F|CACNA1G|CACNA1H|CACNA1I|CACNA1S|CACNA2D1|CACNA2D2|CACNA2D3|CACNB1|CACNB2|CACNB3|CACNB4|CACNG1|CYP11B2|NR3C1|NR3C2|PGR|SHBG	endocrinology|cardiology|gastroenterology|rheumatology	hyperaldosteronism|congestive heart failure|hepatic cirrhosis|nephrotic syndrome|hypertension|hypokalemia
+streptozotocin	0	0	1	1	Launched	DNA alkylating agent		oncology	pancreatic cancer
+sulindac	0	0	1	1	Launched	cyclooxygenase inhibitor	AKR1B1	rheumatology	osteoarthritis|rheumatoid arthritis|ankylosing spondylitis
+sumatriptan	0	0	1	1	Launched	serotonin receptor agonist	HTR1A|HTR1B|HTR1D|HTR1E|HTR1F|HTR5A|HTR6|HTR7	neurology/psychiatry	migraine headache
+synephrine	0	0	1	1	Launched	adrenergic receptor agonist	ADRA1A	otolaryngology	sinusitis
+talniflumate	0	0	1	1	Launched	cyclooxygenase inhibitor	CLCA1	neurology/psychiatry	pain relief
+telmisartan	0	0	1	1	Launched	angiotensin receptor antagonist	AGTR1|PPARG	cardiology	hypertension
+terazosin	0	1	0	1	Launched	adrenergic receptor antagonist	ADRA1A|ADRA1B|ADRA1D	urology|cardiology	benign prostatic hyperplasia (BPH)|hypertension
+thiotepa	1	0	0	1	Launched	cytochrome P450 inhibitor	CYP2B6|CYP3A4	oncology	breast cancer|ovarian cancer|bladder cancer
+thiothixene	1	0	0	1	Launched	dopamine receptor antagonist	DRD1|DRD2|HRH1|HTR2A	neurology/psychiatry	schizophrenia
+ticlopidine	0	1	0	1	Launched	purinergic receptor antagonist	P2RY12	hematology|neurology/psychiatry	thrombosis|stroke
+topiramate	0	0	1	1	Launched	carbonic anhydrase inhibitor|glutamate receptor antagonist|kainate receptor antagonist	CA1|CA12|CA2|CA4|CA7|GABRA1|GABRA2|GABRA3|GABRA4|GABRA5|GABRA6|GABRB1|GABRB2|GABRB3|GABRD|GABRE|GABRG1|GABRG2|GABRG3|GABRP|GABRQ|GRIA1|GRIA2|GRIA3|GRIA4|GRIK1|GRIK2|GRIK3|GRIK4|GRIK5|SCN10A|SCN11A|SCN1A|SCN2A|SCN3A|SCN4A|SCN5A|SCN7A|SCN8A|SCN9A	neurology/psychiatry	epilepsy|migraine headache
+tretinoin	0	0	1	1	Launched	retinoid receptor agonist|retinoid receptor ligand	ALDH1A1|ALDH1A2|GPRC5A|NR0B1|NR2C2|PPARD|RARA|RARB|RARG|RARRES1|RORB|RORC|RXRB|RXRG	hematologic malignancy	acute promyelocytic leukemia (APL)
+triprolidine	0	0	1	1	Launched	histamine receptor antagonist	HRH1	allergy	allergic rhinitis
+ubenimex	0	0	1	1	Launched	leukotriene synthesis inhibitor	LTA4H|RNPEP	hematologic malignancy	acute myeloid leukemia (AML)
+valproic-acid	0	0	1	1	Launched	benzodiazepine receptor agonist|HDAC inhibitor	ABAT|ACADSB|ALDH5A1|HDAC1|HDAC2|HDAC9|OGDH|SCN10A|SCN11A|SCN1A|SCN1B|SCN2A|SCN2B|SCN3A|SCN3B|SCN4A|SCN4B|SCN5A|SCN7A|SCN8A|SCN9A	neurology/psychiatry	epilepsy|seizures|seizures
+vinpocetine	0	1	0	1	Launched	phosphodiesterase inhibitor|sodium channel blocker	PDE1A|PDE1C	neurology/psychiatry	stroke|senile dementia
+voriconazole	0	0	1	1	Launched	cytochrome P450 inhibitor	CYP2C19|CYP2C9|CYP3A4|CYP3A5|PTGS1	infectious disease	esophageal candidiasis|aspergillosis|skin infections
