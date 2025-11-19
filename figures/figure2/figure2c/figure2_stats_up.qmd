@@ -2,7 +2,6 @@
 library(here)
 library(ComplexHeatmap)
 library(colorRamp2)
-#library(ReactomePA) # can't install this
 library(clusterProfiler)
 library(DOSE)
 library(readr)
@@ -16,43 +15,41 @@ library(knitr)
 ```
 
 ```{r}
-marray_path_dn <- here("data/v2/microarray_pathways/dn")
-rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
+marray_path_up <- here("data/microarray_pathways/up")
+rnaseq_path_up <- here("data/RNAseq_pathways/up")
 ```
 
 ```{r}
 pattern <- "allterms_GO_ORA_BGcorrected"
 prefix_sub <- "allterms_GO_ORA_BGcorrected"
-suffix_sub <- "dn.tsv"
+suffix_sub <- "up.tsv"
 annotation_file = here('data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv')
 ```
 
 ```{r read in summary table}
-summary_df <- read.delim(here("data/metadata/202506_all_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("data/signatures/202506_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
 summary_df
 ```
 
-### dnregulated genes' pathways
+### Upregulated genes' pathways
 
-```{r microarray dn pathway}
-marray_GO_mat_dn = get_GO_testStat_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
-colnames(marray_GO_mat_dn) <- gsub("_dn.tsv", "", colnames(marray_GO_mat_dn))
-colnames(marray_GO_mat_dn) <- gsub(".tsv", "", colnames(marray_GO_mat_dn))
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray"))
-marray_GO_mat_dn <- marray_GO_mat_dn[, cols_to_keep_marray]
+```{r microarray up pathway}
+marray_GO_mat_up = get_GO_testStat_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+colnames(marray_GO_mat_up) <- gsub(".tsv", "", colnames(marray_GO_mat_up))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME))
+marray_GO_mat_up <- marray_GO_mat_up[, cols_to_keep_marray]
 ```
 
-```{r RNAseq dn pathway}
-rnaseq_GO_mat_dn = get_GO_testStat_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
-colnames(rnaseq_GO_mat_dn) <- gsub("_dn.tsv", "", colnames(rnaseq_GO_mat_dn))
-colnames(rnaseq_GO_mat_dn) <- gsub(".tsv", "", colnames(rnaseq_GO_mat_dn))
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq"))
-rnaseq_GO_mat_dn <- rnaseq_GO_mat_dn[, cols_to_keep_rnaseq]
+```{r RNAseq up pathway}
+rnaseq_GO_mat_up = get_GO_testStat_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+colnames(rnaseq_GO_mat_up) <- gsub(".tsv", "", colnames(rnaseq_GO_mat_up))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME))
+rnaseq_GO_mat_up <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
 ```
 
 ```{r combine microarray and RNAseq}
-df1 <- marray_GO_mat_dn
-df2 <- rnaseq_GO_mat_dn
+df1 <- marray_GO_mat_up
+df2 <- rnaseq_GO_mat_up
 
 # Reshape from wide to long
 library(tidyr)
@@ -69,27 +66,18 @@ combined_long <- bind_rows(long1, long2) %>%
 )
 
 # Reshape back to wide format
-final_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
-colnames(final_df_dn) <- gsub("\\.", "-", colnames(final_df_dn))
+final_df_up <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+colnames(final_df_up) <- gsub("\\.", "-", colnames(final_df_up))
 
-# Identify columns with "aggregated" in their names
-agg_cols <- grep("aggregated", names(final_df_dn), value = TRUE)
-
-# Identify columns that do not contain "aggregated"
-non_agg_cols <- setdiff(names(final_df_dn), agg_cols)
-
-# Reorder the dataframe
-final_df_dn <- final_df_dn[, c(non_agg_cols, agg_cols)]
 # Identify columns
-desc_col <- grep("Description", names(final_df_dn), value = TRUE)
-gpl_cols <- grep("GPL", names(final_df_dn), value = TRUE)
-rnaseq_col <- grep("RNAseq", names(final_df_dn), value = TRUE)
-other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
+desc_col <- grep("Description", names(final_df_up), value = TRUE)
+gpl_cols <- grep("GPL", names(final_df_up), value = TRUE)
+rnaseq_col <- grep("RNAseq", names(final_df_up), value = TRUE)
+other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 
 # Reorder dataframe
-final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
-final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
-final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
+final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
+final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 ```
 
 ```{r}
@@ -97,14 +85,14 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r prepare matrix}
-rnaseq_marray_GO_mat_dn <- final_df_dn
-go_mat = rnaseq_marray_GO_mat_dn
+rnaseq_marray_GO_mat_up <- final_df_up
+go_mat = rnaseq_marray_GO_mat_up
 # set rownames to GO term descriptions and remove Description column
 go_mat_filtered <- go_mat %>%
   column_to_rownames("Description")
 
-# clean up column names (remove "_dn")
-colnames(go_mat_filtered) <- gsub("_dn$", "", colnames(go_mat_filtered))
+# clean up column names (remove "_up")
+colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
 
 # keep only columns present in the summary
 common_sigs <- intersect(colnames(go_mat_filtered), summary_df$SIGNATURE_NAME)
@@ -132,7 +120,6 @@ calculate_median_diff <- function(values, group1, group2, group_vec) {
   return(diff)
 }
 
-# Mann-Whitney test
 # Mann-Whitney test
 Mann_Whitney_test <- function(values, group1, group2, group_vec) {
   group_1_vals <- as.numeric(values[names(group_vec[group_vec == group1])])
@@ -171,13 +158,14 @@ Mann_Whitney_test <- function(values, group1, group2, group_vec) {
 
   return(out)
 }
+
 ```
 
-```{r circulating vs. lung}
+```{r circulating vs. other}
 summary_df_tissue = summary_df %>% filter(!is.na(signature), !is.na(tissue_category)) %>%
             dplyr::select(SIGNATURE_NAME, tissue_category)
 circulating_num = length(summary_df$tissue_category[summary_df_tissue$tissue_category == "circulating"])
-lung_num = length(summary_df$tissue_category[summary_df_tissue$tissue_category == "lung"])
+other_num = length(summary_df$tissue_category[summary_df_tissue$tissue_category == "other"])
 
 # build group vector
 group_vec_tissue <- summary_df_tissue %>%
@@ -188,9 +176,9 @@ group_vec_tissue <- summary_df_tissue %>%
 tissue_median_diffs_df <- apply(
   go_mat_filtered,
   1,
-  calculate_median_diff, 
-  group1 = "circulating", 
-  group2 = "lung",
+  calculate_median_diff, # Pass the function name
+  group1 = "circulating",  # Pass the additional arguments
+  group2 = "other",
   group_vec = group_vec_tissue
 )
 
@@ -203,7 +191,7 @@ tissue_MW_test <- do.call(
     Mann_Whitney_test(
       values    = go_mat_filtered[i, ],
       group1    = "circulating",
-      group2    = "lung",
+      group2    = "other",
       group_vec = group_vec_tissue
     )
   })
@@ -215,12 +203,12 @@ tissue_MW_results <- tissue_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(tissue_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-tissue_MW_results$auroc <- tissue_MW_results$statistic / (circulating_num * lung_num)
+tissue_MW_results$auroc <- tissue_MW_results$statistic / (circulating_num * other_num)
 tissue_MW_results$norm_auroc <- (2 * tissue_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(tissue_MW_results, here("figures/dn_allvals_circulating_lung_MW.tsv"))
+write_tsv(tissue_MW_results, here("figures/figure2/figure2c/up_allvals_circulating_other_MW.tsv"))
 ```
 
 ```{r differentiating terms in gt format}
@@ -235,7 +223,7 @@ gt_top10_positive_tissue <- top10_positive_tissue %>%
   tab_header(title = "Top 10 GO terms enriched in circulating") %>%
   cols_label(
     GO_term = "GO term",
-    median_diff = "Median difference (circulating - lung)",
+    median_diff = "Median difference (circulating - other)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
   ) %>%
@@ -244,10 +232,10 @@ gt_top10_positive_tissue <- top10_positive_tissue %>%
 gt_top10_negative_tissue <- top10_negative_tissue %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 GO terms enriched in lung") %>%
+  tab_header(title = "Top 10 GO terms enriched in other") %>%
   cols_label(
     GO_term = "GO term",
-    median_diff = "Median difference (circulating - lung)",
+    median_diff = "Median difference (circulating - other)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
   ) %>%
@@ -256,25 +244,25 @@ gt_top10_negative_tissue <- top10_negative_tissue %>%
 # Combine top 10 positive and negative as a single dataframe first
 top_combined_df_tissue <- bind_rows(
   top10_positive_tissue %>% mutate(Enriched_in = "Circulating"),
-  top10_negative_tissue %>% mutate(Enriched_in = "Lung")
+  top10_negative_tissue %>% mutate(Enriched_in = "Other")
 )
 
 # Create one combined gt table
 gt_top_bottom_tissue <- top_combined_df_tissue %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO terms more enriched in circulating or lung") %>%
+  tab_header(title = "Top upregulated GO terms more enriched in circulating or other") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched in",
-    median_diff = "Median difference (circulating - lung)",
+    median_diff = "Median difference (circulating - other)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
   ) %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tissue, "dn_allvals_variance_circulating_lung_signiGO_terms.html")
+gtsave(gt_top_bottom_tissue, here("figures/figure2/figure2c/up_allvals_variance_circulating_other_signiGO_terms.html"))
 
 ```
 
@@ -317,12 +305,12 @@ technology_MW_results <- technology_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(technology_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-technology_MW_results$auroc <- technology_MW_results$statistic / (circulating_num * lung_num)
+technology_MW_results$auroc <- technology_MW_results$statistic / (circulating_num * other_num)
 technology_MW_results$norm_auroc <- (2 * technology_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(technology_MW_results, here("figures/dn_allvals_microarray_rnaseq_MW.tsv"))
+write_tsv(technology_MW_results, here("figures/figure2/figure2c/up_allvals_microarray_rnaseq_MW.tsv"))
 ```
 
 ```{r}
@@ -363,7 +351,7 @@ top_combined_df_microarray_rnaseq <- bind_rows(
 gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO terms more enriched in microarray or RNAseq") %>%
+  tab_header(title = "Top upregulated GO terms more enriched in microarray or RNAseq") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
@@ -374,7 +362,7 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tech, "dn_allvals_variance_microarray_rnaseq_signiGO_terms.html")
+gtsave(gt_top_bottom_tech, here("figures/figure2/figure2c/up_allvals_variance_microarray_rnaseq_signiGO_terms.html"))
 ```
 
 ```{r cell line vs. primary}
@@ -416,12 +404,12 @@ origin_MW_results <- origin_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(origin_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-origin_MW_results$auroc <- origin_MW_results$statistic / (circulating_num * lung_num)
+origin_MW_results$auroc <- origin_MW_results$statistic / (circulating_num * other_num)
 origin_MW_results$norm_auroc <- (2 * origin_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(origin_MW_results, here("figures/dn_allvals_primary_cellline_MW.tsv"))
+write_tsv(origin_MW_results, here("figures/figure2/figure2c/up_allvals_primary_cellline_MW.tsv"))
 ```
 
 ```{r}
@@ -462,7 +450,7 @@ top_combined_df_microarray_rnaseq <- bind_rows(
 gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO terms more enriched in primary or cell line signatures") %>%
+  tab_header(title = "Top upregulated GO terms more enriched in primary or cell line signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
@@ -473,7 +461,7 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_origin, "dn_allvals_variance_primary_cellline_signiGO_terms.html")
+gtsave(gt_top_bottom_origin, here("figures/figure2/figure2c/up_allvals_variance_primary_cellline_signiGO_terms.html"))
 ```
 
 
@@ -483,7 +471,7 @@ gtsave(gt_top_bottom_origin, "dn_allvals_variance_primary_cellline_signiGO_terms
 group_1_sigs <- summary_df %>% filter(grepl("aggregated", SIGNATURE_NAME)) %>% pull(SIGNATURE_NAME)
 group_2_sigs <- summary_df %>% filter(!grepl("aggregated", SIGNATURE_NAME)) %>% pull(SIGNATURE_NAME)
 
-colnames(go_mat) <- gsub("dn_", "", colnames(go_mat))
+colnames(go_mat) <- gsub("up_", "", colnames(go_mat))
 
 # Filter GO matrix
 go_mat_filtered <- go_mat %>%
@@ -527,12 +515,12 @@ sig_MW_results <- sig_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(sig_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-sig_MW_results$auroc <- sig_MW_results$statistic / (circulating_num * lung_num)
+sig_MW_results$auroc <- sig_MW_results$statistic / (circulating_num * other_num)
 sig_MW_results$norm_auroc <- (2 * sig_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(sig_MW_results, here("figures/dn_indiv_aggr_MW.tsv"))
+write_tsv(sig_MW_results, here("figures/up_allvals_indiv_aggr_MW.tsv"))
 ```
 
 ```{r}
@@ -544,7 +532,7 @@ top10_negative_sig <- sig_MW_results %>% filter(p_adj < 0.05) %>% filter(median_
 gt_top10_positive_sig <- top10_positive_sig %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 dnregulated GO terms enriched in individual signatures") %>%
+  tab_header(title = "Top 10 upregulated GO terms enriched in individual signatures") %>%
   cols_label(
     GO_term = "GO Term",
     median_diff = "Median difference (individual - aggregated)",
@@ -573,7 +561,7 @@ top_combined_df_sig <- bind_rows(
 gt_top_bottom_sig <- top_combined_df_sig %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
+  tab_header(title = "Top Upregulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched in",
@@ -584,5 +572,5 @@ gt_top_bottom_sig <- top_combined_df_sig %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_sig, "dn_variance_indiv_aggr_signiGO_terms.html")
+gtsave(gt_top_bottom_sig, "up_allvals_variance_indiv_aggr_signiGO_terms.html")
 ```
