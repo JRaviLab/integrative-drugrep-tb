@@ -16,13 +16,13 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("figures/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ### dn individual and aggregated signatures
 ```{r define indiv file paths}
-marray_path_dn <- here("data/v2/microarray_pathways/dn")
-rnaseq_path_dn <- here("data/v2/RNAseq_pathways/dn")
+marray_path_dn <- here("data/microarray_pathways/dn")
+rnaseq_path_dn <- here("data/RNAseq_pathways/dn")
 ```
 
 ```{r define accessory variables/paths}
@@ -73,15 +73,24 @@ marray_rnaseq_signi_dn = unique(c(marray_signi_dn, rnaseq_signi_dn))
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first
 
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray"))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME,
+"dn_aggregated_signature"))
 df1 <- marray_GO_mat_dn[, cols_to_keep_marray]
+colnames(df1) <- gsub(
+  pattern = "dn_aggregated_signature",
+  replacement = "dn_aggregated_microarray",
+  x = colnames(df1)
+)
 colnames(df1) <- gsub("^dn_", "", colnames(df1))
-colnames(df1) <- gsub("_DE", "", colnames(df1))
 
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_signature"))
 df2 <- rnaseq_GO_mat_dn[, cols_to_keep_rnaseq]
+colnames(df2) <- gsub(
+  pattern = "dn_aggregated_signature",
+  replacement = "dn_aggregated_RNAseq",
+  x = colnames(df2)
+)
 colnames(df2) <- gsub("^dn_", "", colnames(df2))
-colnames(df2) <- gsub("_DE", "", colnames(df2))
 
 # Reshape from wide to long
 library(tidyr)
@@ -133,7 +142,7 @@ other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
 final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
 final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
-write_tsv(final_df_dn, here("figures/marray_rnaseq_asinh_dn_pathways.tsv"))
+write_tsv(final_df_dn, here("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv"))
 ```
 
 ```{r process significant matrices}
@@ -141,16 +150,24 @@ write_tsv(final_df_dn, here("figures/marray_rnaseq_asinh_dn_pathways.tsv"))
 # If it's a column instead, set it as rownames first
 
 marray_signi_GO_mat_dn$Description <- row.names(marray_signi_GO_mat_dn)
-cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_microarray"))
+cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_signature"))
 df1 <- marray_signi_GO_mat_dn[, cols_to_keep_marray]
+colnames(df1) <- gsub(
+  pattern = "dn_aggregated_signature",
+  replacement = "dn_aggregated_microarray",
+  x = colnames(df1)
+)
 colnames(df1) <- gsub("^dn_", "", colnames(df1))
-colnames(df1) <- gsub("_DE", "", colnames(df1))
 
 rnaseq_signi_GO_mat_dn$Description <- rownames(rnaseq_signi_GO_mat_dn)
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_RNAseq"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_signature"))
 df2 <- rnaseq_signi_GO_mat_dn[, cols_to_keep_rnaseq]
+colnames(df2) <- gsub(
+  pattern = "dn_aggregated_signature",
+  replacement = "dn_aggregated_RNAseq",
+  x = colnames(df2)
+)
 colnames(df2) <- gsub("^dn_", "", colnames(df2))
-colnames(df2) <- gsub("_DE", "", colnames(df2))
 
 # Reshape from wide to long
 long1 <- pivot_longer(as.data.frame(df1), -Description, names_to = "Signature", values_to = "Value")
@@ -210,21 +227,21 @@ var_pathway_df <- data.frame(
   variance = final_df_dn_variances[sorted_indices]
 )
 
-variance_p90 = quantile(var_pathway_df$variance, probs = 0.9, na.rm = TRUE)
-top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
+variance_p70 = quantile(var_pathway_df$variance, probs = 0.70, na.rm = TRUE)
+top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p70,]
 ```
 
 ```{r cluster the highly variable terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
-write_tsv(cl_GOids_terms, here("figures/dn_hv_clusters_asinh_pathways.tsv"))
-cl_GOids_terms = read_tsv(here("figures/dn_hv_clusters_asinh_pathways.tsv"))
+write_tsv(cl_GOids_terms, here("figures/figure2/figure2b/dn_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms = read_tsv(here("figures/figure2/figure2b/dn_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
 final_df_dn_variable = final_df_dn[final_df_dn$Description %in% top_terms_per_cluster$terms,]
 final_signi_df_dn_variable = final_signi_df_dn[final_signi_df_dn$Description %in% top_terms_per_cluster$terms,]
-write_tsv(final_df_dn_variable, here("figures/dn_tophv_clusters_asinh_pathways.tsv"))
+write_tsv(final_df_dn_variable, here("figures/figure2/figure2b/dn_tophv_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -273,62 +290,48 @@ sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[ordered_go_terms, , drop 
 ```{r dn signature heatmap}
 # 1. Define tissue short names
 tissue_map <- c(
-  "blood_pmbc"                         = "PBMC",
-  "blood_pbmc"                         = "PBMC",
   "blood_PBMC"                         = "PBMC",
-  "blood_whole_blood"                  = "whole_blood",
-  "blood_monocytes"                    = "monocyte",
+  "blood_PBMC_macrophage"             = "PBMC macrophage",
   "blood_monocyte"                     = "monocyte",
-  "blood_monocyte_derived_macrophages" = "mono_macro",
-  "blood_monocyte_derived_macrophage"  = "mono_macro",
-  "blood_macrophage"                   = "macro_blood",
-  "PBMC_macrophage"                    = "PBMC_macro",
-  "blood_dendritic_cells"              = "DC_blood",
-  "blood_dcs"                          = "DC_blood",
-  "blood_lymphatic_endothelial_cell"   = "endo_blood",
-  "blood_THP-1"                        = "THP1_macro",
-  "THP-1"                              = "THP1_macro",
-  "blood_marcophages"                  = "macro_blood",  # assuming typo for "macrophages"
-  "blood_blood"                        = "blood",
+  "blood_monocyte_derived_macrophages" = "MDMs",
+  "blood_dendritic_cells"              = "dendritic cells",
+  "THP-1"                              = "THP1 macrophage",
+  "blood_macrophage"                  = "macrophage",  # assuming typo for "macrophages"
   "blood"                              = "blood",
-  "lymphnode_lymphnode"                = "lymphnode",
+  "lymphnode"                          = "lymphnode",
   "BAL_bronchoalveolar_lavage"         = "BAL",
-  "BALF_alveolar_macrophage"           = "alveolar_macro_BALF",
-  "lung_ILC1"                          = "ILC1_lung",
-  "lung_ILC2"                          = "ILC2_lung",
-  "lung_ILC3neg"                       = "ILC3neg_lung",
-  "lung_ILC3pos"                       = "ILC3pos_lung",
-  "lung_NK"                            = "NK_lung",
-  "lung_susp"                          = "lung_cells",
-  "HEPG2_HepG2"                        = "HepG2_cells"
+  "HepG2"                        = "HepG2 epithelial",
+  "blood_CD14plus_monocyte_derived_macrophages_MF1" = "CD14+ MDMs MF1",
+  "blood_CD14plus_monocyte_derived_macrophages_MF2" = "CD14+ MDMs MF2"
 )
 
 # 2. Define tissue & technology colors
 tissue_colors <- c(
   # Blood-related (red/orange tones)
   "PBMC"                  = "#E41A1C",
-  "whole_blood"           = "#B22222",
+  "MDMs"           = "#B22222",
   "monocyte"              = "#FF4500",
-  "mono_macro"            = "#FF6347",
-  "macro_blood"           = "#FF7F50",
-  "PBMC_macro"            = "#FF8C00",
-  "DC_blood"              = "#CD5C5C",
-  "endo_blood"            = "#FA8072",
+  "macrophage"            = "#FF6347",
+  "CD14+ MDMs MF1"           = "#FF7F50",
+  "CD14+ MDMs MF2"            = "#FF8C00",
+  "dendritic cells"              = "#CD5C5C",
+  "THP1 macrophage"            = "#FA8072",
   "blood"                 = "#DC143C",
-
+  "PBMC macrophage" = "#800000",
+  
   # Lung-related (blue/green tones)
-  "alveolar_macro_BALF"   = "#009E73",
-  "ILC1_lung"             = "#1F78B4",
-  "ILC2_lung"             = "#33A02C",
-  "ILC3neg_lung"          = "#66C2A5",
-  "ILC3pos_lung"          = "#A6D854",
-  "NK_lung"               = "#377EB8",
-  "lung_cells"            = "#5CA8C8",
+  #"alveolar_macro_BALF"   = "#009E73",
+  #"ILC1_lung"             = "#1F78B4",
+  #"ILC2_lung"             = "#33A02C",
+  #"ILC3neg_lung"          = "#66C2A5",
+  #"ILC3pos_lung"          = "#A6D854",
+  #"NK_lung"               = "#377EB8",
+  #"lung_cells"            = "#5CA8C8",
   "BAL"                   = "#41B6C4",
 
   # Cell lines (grey/purple tones)
-  "THP1_macro"            = "#7F7F7F",  # grey
-  "HepG2_cells"           = "#BC80BD",  # muted purple
+  "THP1 macrophage"            = "#7F7F7F",  # grey
+  "HepG2 epithelial"           = "#BC80BD",  # muted purple
 
   # Other tissues
   "lymphnode"             = "#FDB462"
@@ -360,20 +363,14 @@ meta_df <- summary_df %>%
 
 # Ensure matrix is a data frame
 sig_mat_indiv_aggr_dn <- as.data.frame(sig_mat_indiv_aggr_dn)
-
-# Identify missing signatures
-missing_signatures <- setdiff(meta_df$SIGNATURE_NAME, colnames(sig_mat_indiv_aggr_dn))
-
-# Add missing columns filled with NA
-if(length(missing_signatures) > 0){
-  for(sig in missing_signatures){
-    sig_mat_indiv_aggr_dn[[sig]] <- NA  # use [[]] to safely assign in data.frame
-  }
-}
+aggregated_pathways <- sig_mat_indiv_aggr_dn[c("aggregated_microarray","aggregated_RNAseq")]
 
 # Reorder columns according to metadata
-sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[, meta_df$SIGNATURE_NAME, drop = FALSE]
-
+sig_mat_indiv_dn_ordered <- sig_mat_indiv_aggr_dn[, head(meta_df$SIGNATURE_NAME, -2), drop = FALSE]
+sig_mat_indiv_aggr_dn_ordered <- cbind(
+  sig_mat_indiv_dn_ordered,
+  aggregated_pathways[rownames(sig_mat_indiv_dn_ordered), , drop = FALSE]
+)
 
 # 4. Set rownames 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_dn_ordered)), na.rm = TRUE)
@@ -432,15 +429,14 @@ ha_bottom <- HeatmapAnnotation(
 ```{r}
 # 6. Plot heatmap and save
 
-pdf(here("figures/Figure2b_dn_clustered_allvals_fixedexpected_hvariance_asinh_indiv_aggr_rnaseq_marray_GOterms_technology.pdf"), width = 60, height = 30)
+pdf(here("figures/figure2/figure2b/Figure2b_dn_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
   as.matrix()
 
 viz_mat_dn <- sig_mat_indiv_aggr_dn_ordered_mat
-viz_mat_dn <- viz_mat_dn[, summary_df$SIGNATURE_NAME] 
-colnames(viz_mat_dn) <- summary_df$number
+colnames(viz_mat_dn) <- summary_df$dataset_signature_ID
 
 heatmap_sig_dn_go <- Heatmap(
   viz_mat_dn,
@@ -466,19 +462,19 @@ heatmap_sig_dn_go <- Heatmap(
   ),
   column_title = "Individual dnregulated \n microarray & RNASeq TB signatures",
   column_title_gp = gpar(fontsize = 25),
-  row_title = "Enriched GO biological processes",
+  row_title = "Enriched GO \n biological processes",
   row_title_gp = gpar(fontsize = 25),
   rect_gp = gpar(col = "grey"),
   cluster_rows = FALSE,
   cluster_columns = FALSE,
   row_order = rownames(viz_mat_dn),
-  column_names_rot = 0,
+  column_names_rot = 60,
   top_annotation = ha_top,
   bottom_annotation = ha_bottom,
   row_names_gp = gpar(fontsize = 25),
   column_names_gp = gpar(fontsize = 25),
   width = unit(55, "cm"),
-  height = unit(18, "cm")
+  height = unit(12, "cm")
 )
 
 draw(heatmap_sig_dn_go,
