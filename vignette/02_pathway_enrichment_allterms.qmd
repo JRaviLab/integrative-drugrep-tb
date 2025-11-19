@@ -217,9 +217,10 @@ technologies <- c("microarray", "RNAseq")
 directions <- c("up", "dn")
 
 for (technology in technologies) {
-
-  metadata_path <- here(paste0("data/signatures/", technology, "_TB_signature_run_info.tsv"))
+  
   data_path <- here(paste0("data/DE_results/",technology))
+  data_to_read <- read_tsv(here(paste0("data/signatures/", technology, "_TB_signature_run_info.tsv")))
+  data_to_read = data_to_read[data_to_read$signature == 1,]
 
   for (direction in directions) {
 
@@ -245,11 +246,13 @@ for (technology in technologies) {
 
     # iterate through each file
     itr <- 1
-    for (file in filenames) {
+    for (i in 1:nrow(data_to_read)) {
       
       print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
       itr <- itr + 1
-
+      
+      signature_name = data_to_read$SIGNATURE_NAME[i]
+      file = paste0(signature_name,"_",direction,".tsv")
       genes_df <- read_tsv(file.path(dirname_read, file))
       # only use differentially expressed genes with adjusted p-val < 0.05
       genes_df_filtered <- genes_df[genes_df$adj.P.Val < 0.05,]
