@@ -1,8 +1,9 @@
 # function to summarize pathways across disease signatures
 ## add functions for pathway clusters and selecting the top terms based on variance and consistency
 ## add sim_cutoff to resolve heterogeneous clusters | enable ties for rep. terms
+## now using simplfyEnrichment version 2.0
 
-# last modified: 10/20/25
+# last modified: 11/18/25
 # Kewalin Samart
 
 library(rrvgo)
@@ -162,7 +163,7 @@ get_GOterms_cl <- function(pathway_df, sim_cutoff = NULL){
   GOids <- GOids_terms$GOID
   # calculate similarity matrix
   simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = "org.Hs.eg.db",
-                          measure = "Rel",remove_orphan_terms = FALSE) # “Wang”, “Resnik”, “Rel”, “Jiang”, “Lin”, “TCSS”
+                          measure = "Sim_Relevance_2006")
   if(!is.null(sim_cutoff)){
     if (!is.numeric(sim_cutoff) || length(sim_cutoff) != 1) {
       stop("sim_cutoff must be a single numeric value (e.g., 0.4)")
