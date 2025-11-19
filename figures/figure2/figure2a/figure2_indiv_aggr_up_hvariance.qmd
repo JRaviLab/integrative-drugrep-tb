@@ -16,7 +16,7 @@ library(tidyverse)
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("figures/figure2/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ### Up individual signatures
@@ -121,7 +121,7 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
-write_tsv(final_df_up, here("figures/marray_rnaseq_asinh_up_pathways.tsv"))
+write_tsv(final_df_up, here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
 ```
 
 ```{r process significant matrices}
@@ -206,14 +206,14 @@ top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
 ```{r cluster the highly variable terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
-write_tsv(cl_GOids_terms, here("figures/up_hv_clusters_asinh_pathways.tsv"))
-cl_GOids_terms <- read_tsv(here("figures/up_hv_clusters_asinh_pathways.tsv"))
+write_tsv(cl_GOids_terms, here("figures/figure2/figure2a/up_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms <- read_tsv(here("figures/figure2/figure2a/up_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
 final_df_up_variable = final_df_up[final_df_up$Description %in% top_terms_per_cluster$terms,]
 final_signi_df_up_variable = final_signi_df_up[final_signi_df_up$Description %in% top_terms_per_cluster$terms,]
-write_tsv(final_df_up_variable, here("figures/up_tophv_clusters_asinh_pathways.tsv"))
+write_tsv(final_df_up_variable, here("figures/figure2/figure2a/up_tophv_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -339,7 +339,10 @@ aggregated_pathways <- sig_mat_indiv_aggr_up[c("aggregated_microarray","aggregat
 
 # Reorder columns according to metadata
 sig_mat_indiv_up_ordered <- sig_mat_indiv_aggr_up[, head(meta_df$SIGNATURE_NAME, -2), drop = FALSE]
-sig_mat_indiv_aggr_up_ordered
+sig_mat_indiv_aggr_up_ordered <- cbind(
+  sig_mat_indiv_up_ordered,
+  aggregated_pathways[rownames(sig_mat_indiv_up_ordered), , drop = FALSE]
+)
 
 # 4. Set rownames 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_up_ordered)), na.rm = TRUE)
