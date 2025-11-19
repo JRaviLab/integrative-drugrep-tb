@@ -1,0 +1,65 @@
+terms	GOID	cluster	variance
+cellular response to interleukin-6	GO:0071354	1	0.4284507089827302
+cellular response to type I interferon	GO:0071357	1	0.4358839805173306
+interleukin-10-mediated signaling pathway	GO:0140105	1	0.6044739749573693
+interleukin-15-mediated signaling pathway	GO:0035723	1	0.4921639408287599
+interleukin-2-mediated signaling pathway	GO:0038110	1	0.5683792700777781
+interleukin-33-mediated signaling pathway	GO:0038172	1	0.4965345912792843
+interleukin-6-mediated signaling pathway	GO:0070102	1	0.4458534736895593
+interleukin-9-mediated signaling pathway	GO:0038113	1	0.4071935007050535
+regulation of interleukin-1-mediated signaling pathway	GO:2000659	1	0.7221862988579267
+response to interferon-alpha	GO:0035455	1	0.5509686871116309
+response to interferon-beta	GO:0035456	1	0.43286153539167954
+response to interleukin-15	GO:0070672	1	0.4921639408287599
+response to interleukin-2	GO:0070669	1	0.5683792700777781
+response to interleukin-6	GO:0070741	1	0.4086331049036169
+response to interleukin-9	GO:0071104	1	0.4071935007050535
+response to type I interferon	GO:0034340	1	0.3969185457202938
+type I interferon-mediated signaling pathway	GO:0060337	1	0.40280178976706904
+cellular response to misfolded protein	GO:0071218	2	0.5283943091130167
+nuclear protein quality control by the ubiquitin-proteasome system	GO:0071630	2	0.7080901859390095
+centrosome separation	GO:0051299	3	0.46962357596676135
+COPII-coated vesicle budding	GO:0090114	3	0.466777906480747
+microvillus assembly	GO:0030033	3	0.44389079763495914
+NLS-bearing protein import into nucleus	GO:0006607	3	0.57602005356173
+phagosome maturation	GO:0090382	3	0.43515124791972076
+phagosome-lysosome fusion	GO:0090385	3	0.7631797608742885
+positive regulation of exosomal secretion	GO:1903543	3	0.44666876976198033
+positive regulation of telomere maintenance via telomerase	GO:0032212	3	0.4033986871204679
+protein localization to endosome	GO:0036010	3	0.6143980940607889
+stress granule assembly	GO:0034063	3	0.3968142468049908
+detection of molecule of bacterial origin	GO:0032490	4	0.5244802750760248
+growth hormone receptor signaling pathway via JAK-STAT	GO:0060397	4	0.6000660712254164
+positive regulation of TORC2 signaling	GO:1904515	4	0.630744762834246
+response to exogenous dsRNA	GO:0043330	4	0.3885191222439069
+response to muramyl dipeptide	GO:0032495	4	0.4409348182802269
+retinoic acid receptor signaling pathway	GO:0048384	4	0.470622142514663
+DNA strand elongation involved in DNA replication	GO:0006271	5	0.5003312663707438
+establishment of endothelial barrier	GO:0061028	6	0.38677146368999993
+establishment of endothelial intestinal barrier	GO:0090557	6	0.5056167139220618
+ISG15-protein conjugation	GO:0032020	7	0.6907384786932822
+positive regulation of protein K63-linked ubiquitination	GO:1902523	7	0.5698674338734776
+negative regulation by host of viral genome replication	GO:0044828	8	0.4276011984857437
+negative regulation of viral genome replication	GO:0045071	8	0.46773931175268896
+viral budding from plasma membrane	GO:0046761	8	0.3940715499952088
+viral budding via host ESCRT complex	GO:0039702	8	0.38489195034486134
+negative regulation of activated T cell proliferation	GO:0046007	9	0.5242474713787265
+negative regulation of neutrophil activation	GO:1902564	9	0.4220909049482812
+negative regulation of vitamin D biosynthetic process	GO:0010957	9	0.6306031246585422
+peptide antigen assembly with MHC class I protein complex	GO:0002502	9	0.585121621001533
+regulation of establishment of T cell polarity	GO:1903903	9	0.7681102474568223
+regulation of nuclear-transcribed mRNA catabolic process, nonsense-mediated decay	GO:2000622	9	0.48549661044600834
+T cell mediated cytotoxicity directed against tumor cell target	GO:0002419	9	0.5189234492209184
+toll-like receptor TLR6:TLR2 signaling pathway	GO:0038124	9	0.7541869657567624
+negative regulation of ferroptosis	GO:0110076	10	0.5443808888024285
+positive regulation of leukocyte apoptotic process	GO:2000108	10	0.45259039515338523
+regulation of ferroptosis	GO:0110075	10	0.3836965385178223
+Notch receptor processing	GO:0007220	11	0.46363985960065823
+platelet formation	GO:0030220	12	0.4419047994505978
+platelet morphogenesis	GO:0036344	12	0.4419047994505978
+positive regulation of syncytium formation by plasma membrane fusion	GO:0060143	12	0.42912726604651935
+positive regulation of interferon-alpha production	GO:0032727	13	0.48843592962292515
+positive regulation of smooth muscle contraction	GO:0045987	13	0.40388387204135023
+positive regulation of leukocyte adhesion to vascular endothelial cell	GO:1904996	14	0.3889412558395708
+regulation of translation in response to endoplasmic reticulum stress	GO:0036490	15	0.6725002958083708
+regulation of translation in response to stress	GO:0043555	15	0.4260521116310309
