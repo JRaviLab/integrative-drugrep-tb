@@ -103,7 +103,8 @@ get_gene_jaccard_matrix <- function(gene_lists){
 up_gene_jaccard_matrix = get_gene_jaccard_matrix(up_gene_list)
 dn_gene_jaccard_matrix = get_gene_jaccard_matrix(dn_gene_list)
 
-print("Any NaNs in the up_gene_jaccard_matrix: ", any(is.nan(up_gene_jaccard_matrix))) # must return false
+print(paste0("Any NaNs in the up_gene_jaccard_matrix: ", any(is.nan(up_gene_jaccard_matrix)))) # must return false
+print(paste0("Any NaNs in the dn_gene_jaccard_matrix: ", any(is.nan(dn_gene_jaccard_matrix)))) # must return false
 ```
 
 ```{r set up color annotations}
