@@ -1,0 +1,367 @@
+# Gene overalps via jaccard index
+
+```{r}
+library(here)
+library(readr)
+library(tidyverse)
+library(ComplexHeatmap)
+
+summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+
+# read in up TB signatures
+microarray_up_signatures <- summary_df$SIGNATURE_NAME[
+  summary_df$technology == "microarray" & 
+  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+]
+
+microarray_dn_signatures <- summary_df$SIGNATURE_NAME[
+  summary_df$technology == "microarray" & 
+  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+]
+  
+rnaseq_up_signatures <- summary_df$SIGNATURE_NAME[
+  summary_df$technology == "RNAseq" & 
+  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+]
+
+rnaseq_dn_signatures <- summary_df$SIGNATURE_NAME[
+  summary_df$technology == "RNAseq" & 
+  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+]
+
+# read in landmark genes
+LINCS_df = read_tsv(here("data/metadata/LINCSGeneSpaceSub.txt"))
+landmark_genes = LINCS_df[LINCS_df$Type == "landmark",]$`Entrez ID`
+
+microarray_up_genes_list <- list()
+for (up_sig_micro in microarray_up_signatures) {
+  # construct path using the current signature name
+  up_sig_genes_df <- read_tsv(here(paste0("data/DE_results/microarray/up/", up_sig_micro,"_up.tsv")))
+  up_sig_genes_df <- up_sig_genes_df[up_sig_genes_df$adj.P.Val < 0.05,]
+  up_sig_genes <- up_sig_genes_df$GeneID[up_sig_genes_df$GeneID %in% landmark_genes]
+  # store the gene vector in a named list
+  up_sig_micro = gsub("_up.tsv", "", up_sig_micro)
+  microarray_up_genes_list[[up_sig_micro]] <- up_sig_genes
+}
+
+microarray_dn_genes_list <- list()
+for (dn_sig_micro in microarray_dn_signatures) {
+  # construct path using the current signature name
+  dn_sig_genes_df <- read_tsv(here(paste0("data/DE_results/microarray/dn/", dn_sig_micro,"_dn.tsv")))
+  dn_sig_genes_df <- dn_sig_genes_df[dn_sig_genes_df$adj.P.Val < 0.05,]
+  dn_sig_genes <- dn_sig_genes_df$GeneID[dn_sig_genes_df$GeneID %in% landmark_genes]
+  # store the gene vector in a named list
+  dn_sig_micro = gsub("_dn.tsv", "", dn_sig_micro)
+  microarray_dn_genes_list[[dn_sig_micro]] <- dn_sig_genes
+}
+
+rnaseq_up_genes_list <- list()
+for (up_sig_rnaseq in rnaseq_up_signatures) {
+  # construct path using the current signature name
+  up_sig_genes_df <- read_tsv(here(paste0("data/DE_results/RNAseq/up/", up_sig_rnaseq,"_up.tsv")))
+  up_sig_genes_df <- up_sig_genes_df[up_sig_genes_df$adj.P.Val < 0.05,]
+  rows_with_all_na <- rowSums(is.na(up_sig_genes_df)) == ncol(up_sig_genes_df)
+  up_sig_genes_df_clean <- up_sig_genes_df[!rows_with_all_na, ]
+  up_sig_genes <- up_sig_genes_df_clean$GeneID[up_sig_genes_df_clean$GeneID %in% landmark_genes]
+  # store the gene vector in a named list
+  up_sig_rnaseq = gsub("_up.tsv", "", up_sig_rnaseq)
+  rnaseq_up_genes_list[[up_sig_rnaseq]] <- up_sig_genes
+}
+
+rnaseq_dn_genes_list <- list()
+for (dn_sig_rnaseq in rnaseq_dn_signatures) {
+  # construct path using the current signature name
+  dn_sig_genes_df <- read_tsv(here(paste0("data/DE_results/RNAseq/dn/", dn_sig_rnaseq,"_dn.tsv")))
+  dn_sig_genes_df <- dn_sig_genes_df[dn_sig_genes_df$adj.P.Val < 0.05,]
+  rows_with_all_na <- rowSums(is.na(dn_sig_genes_df)) == ncol(dn_sig_genes_df)
+  dn_sig_genes_df_clean <- dn_sig_genes_df[!rows_with_all_na, ]
+  dn_sig_genes <- dn_sig_genes_df_clean$GeneID[dn_sig_genes_df_clean$GeneID %in% landmark_genes]
+  # store the gene vector in a named list
+  dn_sig_rnaseq = gsub("_dn.tsv", "", dn_sig_rnaseq)
+  rnaseq_dn_genes_list[[dn_sig_rnaseq]] <- dn_sig_genes
+}
+
+up_gene_list = c(microarray_up_genes_list, rnaseq_up_genes_list)
+dn_gene_list = c(microarray_dn_genes_list, rnaseq_dn_genes_list)
+
+get_gene_jaccard_matrix <- function(gene_lists){
+  # initialize an empty matrix
+  n <- length(gene_lists)
+  jaccard_matrix <- matrix(0, nrow = n, ncol = n)
+  rownames(jaccard_matrix) <- colnames(jaccard_matrix) <- names(gene_lists)
+
+  # fill in the matrix with intersection sizes
+  for (i in 1:n) {
+    for (j in 1:n) {
+      jaccard_matrix[i, j] <- length(intersect(gene_lists[[i]], gene_lists[[j]])) / length(union(gene_lists[[i]], gene_lists[[j]]))
+    }
+  }
+
+  return(jaccard_matrix)
+}
+
+up_gene_jaccard_matrix = get_gene_jaccard_matrix(up_gene_list)
+dn_gene_jaccard_matrix = get_gene_jaccard_matrix(dn_gene_list)
+
+print("Any NaNs in the up_gene_jaccard_matrix: ", any(is.nan(up_gene_jaccard_matrix))) # must return false
+```
+
+```{r set up color annotations}
+# 1. Define tissue short names
+tissue_map <- c(
+  "blood_PBMC"                         = "PBMC",
+  "blood_PBMC_macrophage"             = "PBMC macrophage",
+  "blood_monocyte"                     = "monocyte",
+  "blood_monocyte_derived_macrophages" = "MDMs",
+  "blood_dendritic_cells"              = "dendritic cells",
+  "THP-1"                              = "THP1 macrophage",
+  "blood_macrophage"                  = "macrophage",  # assuming typo for "macrophages"
+  "blood"                              = "blood",
+  "lymphnode"                          = "lymphnode",
+  "BAL_bronchoalveolar_lavage"         = "BAL",
+  "HepG2"                        = "HepG2 epithelial",
+  "blood_CD14plus_monocyte_derived_macrophages_MF1" = "CD14+ MDMs MF1",
+  "blood_CD14plus_monocyte_derived_macrophages_MF2" = "CD14+ MDMs MF2"
+)
+
+# 2. Define tissue & technology colors
+tissue_colors <- c(
+  # Blood-related (red/orange tones)
+  "PBMC"                  = "#E41A1C",
+  "MDMs"           = "#B22222",
+  "monocyte"              = "#FF4500",
+  "macrophage"            = "#FF6347",
+  "CD14+ MDMs MF1"           = "#FF7F50",
+  "CD14+ MDMs MF2"            = "#FF8C00",
+  "dendritic cells"              = "#CD5C5C",
+  "THP1 macrophage"            = "#FA8072",
+  "blood"                 = "#DC143C",
+  "PBMC macrophage" = "#800000",
+
+  # Lung-related (blue/green tones)
+  #"alveolar_macro_BALF"   = "#009E73",
+  #"ILC1_lung"             = "#1F78B4",
+  #"ILC2_lung"             = "#33A02C",
+  #"ILC3neg_lung"          = "#66C2A5",
+  #"ILC3pos_lung"          = "#A6D854",
+  #"NK_lung"               = "#377EB8",
+  #"lung_cells"            = "#5CA8C8",
+  "BAL"                   = "#41B6C4",
+
+  # Cell lines (grey/purple tones)
+  "THP1 macrophage"            = "#7F7F7F",  # grey
+  "HepG2 epithelial"           = "#BC80BD",  # muted purple
+
+  # Other tissues
+  "lymphnode"             = "#FDB462"
+)
+
+
+tech_colors <- c(
+  "RNAseq" = "#E69F00",
+  "microarray" = "#56B4E9"
+)
+
+origin_colors <- c(
+  "cell line" = "#D55E00",
+  "primary" = "#009E73"
+)
+
+tb_colors <- c(
+  "MTB" = "black",
+  "PTB" = "#785EF0",
+  "EPTB" = "#DC267F",
+  "LNTB" = "#FE6100"
+)
+
+# Prepare metadata/matrix
+meta_df <- summary_df[!grepl("aggregated", summary_df$SIGNATURE_NAME),] %>%
+  mutate(
+    tissue_short = recode(tissue_cell_type, !!!tissue_map)
+  )
+
+# Create top and bottom annotations
+ha_bottom <- HeatmapAnnotation(
+  tissue_cell = meta_df$tissue_short,
+  tb_type = meta_df$tb_status,
+  origin_type = meta_df$sample_origin,
+  technology = meta_df$technology,
+  col = list(
+    technology = tech_colors,
+    tissue_cell = tissue_colors,
+    origin_type = origin_colors,
+    tb_type = tb_colors
+  ),
+  annotation_name_side = "right",
+  annotation_name_gp = gpar(fontsize = 15),
+  annotation_legend_param = list(
+    technology = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    ),
+    tissue_cell = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    ),
+    origin_type = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    ),
+    tb_type = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    )
+  )
+)
+
+ha_left <- rowAnnotation(
+  technology = meta_df$technology,
+  origin_type = meta_df$sample_origin,
+  tb_type = meta_df$tb_status,
+  tissue_cell = meta_df$tissue_short,
+  col = list(technology = tech_colors,
+             tissue_cell = tissue_colors,
+             origin_type = origin_colors,
+             tb_type = tb_colors),
+  annotation_name_side = "top",
+  show_legend = FALSE,
+  annotation_name_gp = gpar(fontsize = 15),
+  
+  annotation_legend_param = list(
+    technology = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    ),
+    tissue_cell = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    ),
+    origin_type = list(
+      title_gp = gpar(fontsize = 15),
+      labels_gp = gpar(fontsize = 15)
+    )
+  )
+)
+
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+
+annotation_table <- meta_df
+viz_mat_up <- up_gene_jaccard_matrix
+
+
+common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
+
+colnames(viz_mat_up) <- annotation_sorted$dataset_signature_ID
+row.names(viz_mat_up) <- annotation_sorted$dataset_signature_ID
+
+# diag(viz_mat_up) <- NA
+
+# define the output file path
+pdf(file = here("figures/figureS1/FigureS1a_up_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
+
+up_gene_jaccard_vector <- as.vector(up_gene_jaccard_matrix)
+ninetyfive_percentile <- quantile(up_gene_jaccard_vector, probs = 0.90)
+five_percentile <- quantile(up_gene_jaccard_vector, probs = 0.05)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightgreen" , "darkgreen")
+)
+ht <- Heatmap(
+  viz_mat_up,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Jaccard index",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  bottom_annotation = ha_bottom,
+  column_names_gp = gpar(fontsize = 15),
+  row_names_gp = gpar(fontsize = 15),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 15),
+    labels_gp = gpar(fontsize = 15)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ha_left + ht, 
+     heatmap_legend_side = "left",
+     annotation_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+
+annotation_table <- meta_df
+viz_mat_dn <- dn_gene_jaccard_matrix
+
+common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["SIGNATURE_NAME"]])
+annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
+sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
+
+colnames(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+row.names(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
+
+# diag(viz_mat_dn) <- NA
+
+# define the output file path
+pdf(file = here("figures/figureS1/FigureS1b_dn_landmarkgene_jaccard_matrix.pdf"), width = 35, height = 35)
+
+dn_gene_jaccard_vector <- as.vector(dn_gene_jaccard_matrix)
+ninetyfive_percentile <- quantile(dn_gene_jaccard_vector, probs = 0.90)
+five_percentile <- quantile(dn_gene_jaccard_vector, probs = 0.05)
+# Define color function
+col_fun <- colorRamp2(
+  c(0, five_percentile, ninetyfive_percentile),
+  c("white","lightblue" , "blue")
+)
+ht <- Heatmap(
+  viz_mat_dn,
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  name = "Jaccard index",
+  col = col_fun,
+  column_names_rot = 45,
+  column_names_side = "top",
+  bottom_annotation = ha_bottom,
+  column_names_gp = gpar(fontsize = 15),
+  row_names_gp = gpar(fontsize = 15),
+  na_col = "white",
+  heatmap_legend_param = list(
+    title_gp = gpar(fontsize = 15),
+    labels_gp = gpar(fontsize = 15)
+  ),
+  width = unit(30, "cm"),
+  height = unit(30, "cm")
+)
+
+# Draw the heatmap AND the custom legend
+# The 'annotation_legend_list' argument adds new legend
+draw(ha_left + ht, 
+     heatmap_legend_side = "left",
+     annotation_legend_side = "left")
+
+# Close the PDF device
+dev.off()
+
+```
