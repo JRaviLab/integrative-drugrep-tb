@@ -1,0 +1,60 @@
+moa	n_drugs	drugs
+HMGCR inhibitor	5	atorvastatin, fluvastatin, lovastatin, rosuvastatin, simvastatin
+PDGFR tyrosine kinase receptor inhibitor	3	axitinib, dasatinib, trapidil
+adrenergic receptor agonist	3	clonidine, ephedrine, rilmenidine
+adrenergic receptor antagonist	3	labetalol, naftopidil, nicergoline
+cyclooxygenase inhibitor	3	curcumin, diclofenac, nabumetone
+estrogen receptor antagonist	3	raloxifene, tamoxifen, toremifene
+selective estrogen receptor modulator (SERM)	3	raloxifene, tamoxifen, toremifene
+cytochrome P450 inhibitor	2	itraconazole, resveratrol
+dopamine receptor agonist	2	dopamine, lisuride
+dopamine receptor antagonist	2	chlorprothixene, methylergometrine
+estrogen receptor agonist	2	estradiol, ethinyl-estradiol
+glucocorticoid receptor agonist	2	dexamethasone, mometasone
+histamine receptor antagonist	2	brompheniramine, chlorphenamine
+phosphodiesterase inhibitor	2	ketotifen, papaverine
+serotonin receptor antagonist	2	granisetron, methylergometrine
+11-beta hydroxysteroid dehydrogenase inhibitor	1	chenodeoxycholic-acid
+Bcr-Abl kinase inhibitor	1	dasatinib
+DNA synthesis inhibitor	1	methoxsalen
+EGFR inhibitor	1	lapatinib
+FXR agonist	1	chenodeoxycholic-acid
+HDAC inhibitor	1	panobinostat
+HIV protease inhibitor	1	nelfinavir
+JAK inhibitor	1	tofacitinib
+KIT inhibitor	1	dasatinib
+NFkB pathway inhibitor	1	curcumin
+RAF inhibitor	1	vemurafenib
+SIRT activator	1	resveratrol
+SRC inhibitor	1	dasatinib
+SYK inhibitor	1	fostamatinib
+VEGFR inhibitor	1	axitinib
+acetylcholine receptor antagonist	1	tubocurarine
+adenosine receptor agonist	1	NECA
+adenylyl cyclase activator	1	forskolin
+antibacterial agent	1	triclosan
+antineoplastic agent	1	mitotane
+atherogenesis inhibitor	1	probucol
+bacterial 50S ribosomal subunit inhibitor	1	clarithromycin
+calcium channel blocker	1	nitrendipine
+carboxamide antiepileptic	1	carbamazepine
+ephrin inhibitor	1	dasatinib
+estrogenic hormone	1	ethinyl-estradiol
+histamine receptor agonist	1	ketotifen
+histone acetyltransferase inhibitor	1	curcumin
+imidazoline receptor agonist	1	rilmenidine
+leukotriene receptor antagonist	1	ketotifen
+lipase inhibitor	1	oxybenzone
+lipoprotein lipase activator	1	gemfibrozil
+lipoxygenase inhibitor	1	curcumin
+local anesthetic	1	benzonatate
+mTOR inhibitor	1	temsirolimus
+opioid receptor antagonist	1	naltrexone
+platelet aggregation inhibitor	1	icosapent
+polar auxin transport inhibitor	1	quercetin
+potassium channel blocker	1	amiodarone
+selective serotonin reuptake inhibitor (SSRI)	1	sertraline
+serotonin receptor agonist	1	zolmitriptan
+sodium/potassium/chloride transporter inhibitor	1	bendroflumethiazide
+tubulin polymerization inhibitor	1	albendazole
+tyrosine kinase inhibitor	1	dasatinib
