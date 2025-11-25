@@ -1,60 +1,60 @@
-moa	n_drugs	drugs
-HMGCR inhibitor	5	atorvastatin, fluvastatin, lovastatin, rosuvastatin, simvastatin
-PDGFR tyrosine kinase receptor inhibitor	3	axitinib, dasatinib, trapidil
-adrenergic receptor agonist	3	clonidine, ephedrine, rilmenidine
-adrenergic receptor antagonist	3	labetalol, naftopidil, nicergoline
-cyclooxygenase inhibitor	3	curcumin, diclofenac, nabumetone
-estrogen receptor antagonist	3	raloxifene, tamoxifen, toremifene
-selective estrogen receptor modulator (SERM)	3	raloxifene, tamoxifen, toremifene
-cytochrome P450 inhibitor	2	itraconazole, resveratrol
-dopamine receptor agonist	2	dopamine, lisuride
-dopamine receptor antagonist	2	chlorprothixene, methylergometrine
-estrogen receptor agonist	2	estradiol, ethinyl-estradiol
-glucocorticoid receptor agonist	2	dexamethasone, mometasone
-histamine receptor antagonist	2	brompheniramine, chlorphenamine
-phosphodiesterase inhibitor	2	ketotifen, papaverine
-serotonin receptor antagonist	2	granisetron, methylergometrine
-11-beta hydroxysteroid dehydrogenase inhibitor	1	chenodeoxycholic-acid
-Bcr-Abl kinase inhibitor	1	dasatinib
-DNA synthesis inhibitor	1	methoxsalen
-EGFR inhibitor	1	lapatinib
-FXR agonist	1	chenodeoxycholic-acid
-HDAC inhibitor	1	panobinostat
-HIV protease inhibitor	1	nelfinavir
-JAK inhibitor	1	tofacitinib
-KIT inhibitor	1	dasatinib
-NFkB pathway inhibitor	1	curcumin
-RAF inhibitor	1	vemurafenib
-SIRT activator	1	resveratrol
-SRC inhibitor	1	dasatinib
-SYK inhibitor	1	fostamatinib
-VEGFR inhibitor	1	axitinib
-acetylcholine receptor antagonist	1	tubocurarine
-adenosine receptor agonist	1	NECA
-adenylyl cyclase activator	1	forskolin
-antibacterial agent	1	triclosan
-antineoplastic agent	1	mitotane
-atherogenesis inhibitor	1	probucol
-bacterial 50S ribosomal subunit inhibitor	1	clarithromycin
-calcium channel blocker	1	nitrendipine
-carboxamide antiepileptic	1	carbamazepine
-ephrin inhibitor	1	dasatinib
-estrogenic hormone	1	ethinyl-estradiol
-histamine receptor agonist	1	ketotifen
-histone acetyltransferase inhibitor	1	curcumin
-imidazoline receptor agonist	1	rilmenidine
-leukotriene receptor antagonist	1	ketotifen
-lipase inhibitor	1	oxybenzone
-lipoprotein lipase activator	1	gemfibrozil
-lipoxygenase inhibitor	1	curcumin
-local anesthetic	1	benzonatate
-mTOR inhibitor	1	temsirolimus
-opioid receptor antagonist	1	naltrexone
-platelet aggregation inhibitor	1	icosapent
-polar auxin transport inhibitor	1	quercetin
-potassium channel blocker	1	amiodarone
-selective serotonin reuptake inhibitor (SSRI)	1	sertraline
-serotonin receptor agonist	1	zolmitriptan
-sodium/potassium/chloride transporter inhibitor	1	bendroflumethiazide
-tubulin polymerization inhibitor	1	albendazole
-tyrosine kinase inhibitor	1	dasatinib
+moa	n_drugs	drugs.x	drugs.y	n	novel	doi	reference	note
+11-beta hydroxysteroid dehydrogenase inhibitor	1	chenodeoxycholic-acid	NA	NA	NA	NA	NA	NA
+acetylcholine receptor antagonist	1	tubocurarine	dicycloverine	1	0	https://doi.org/10.3389/fimmu.2020.581911	Islas-Weinstein et al., 2021	NA
+adenosine receptor agonist	1	NECA	NA	NA	NA	NA	NA	NA
+adenylyl cyclase activator	1	forskolin	forskolin	1	0	https://doi.org/10.1111/mmi.13701	Johnson et al., 2017	NA
+adrenergic receptor agonist	3	clonidine, ephedrine, rilmenidine	NA	NA	NA	NA	NA	NA
+adrenergic receptor antagonist	3	labetalol, naftopidil, nicergoline	NA	NA	NA	NA	NA	NA
+antibacterial agent	1	triclosan	NA	NA	NA	NA	NA	NA
+antineoplastic agent	1	mitotane	mitotane	1	1	NA	NA	NA
+atherogenesis inhibitor	1	probucol	NA	NA	NA	NA	NA	NA
+bacterial 50S ribosomal subunit inhibitor	1	clarithromycin	NA	NA	NA	NA	NA	NA
+Bcr-Abl kinase inhibitor	1	dasatinib	NA	NA	NA	NA	NA	NA
+calcium channel blocker	1	nitrendipine	amlodipine, nimodipine, verapamil	3	0	https://doi.org/10.1186/s40001-025-02443-4	Tian et al., 2025	NA
+carboxamide antiepileptic	1	carbamazepine	NA	NA	NA	NA	NA	NA
+cyclooxygenase inhibitor	3	curcumin, diclofenac, nabumetone	ketorolac	1	1	NA	NA	NA
+cytochrome P450 inhibitor	2	itraconazole, resveratrol	NA	NA	NA	NA	NA	NA
+DNA synthesis inhibitor	1	methoxsalen	NA	NA	NA	NA	NA	NA
+dopamine receptor agonist	2	dopamine, lisuride	dopamine	1	0	NA	NA	NA
+dopamine receptor antagonist	2	chlorprothixene, methylergometrine	azaperone, thiothixene	2	0	https://doi.org/10.1186/s40001-025-02443-4	Tian et al., 2025	NA
+EGFR inhibitor	1	lapatinib	lapatinib	1	0	https://doi.org/10.3389/fmed.2017.00171	Kolloli et al., 2017	NA
+ephrin inhibitor	1	dasatinib	NA	NA	NA	NA	NA	NA
+estrogen receptor agonist	2	estradiol, ethinyl-estradiol	NA	NA	NA	NA	NA	NA
+estrogen receptor antagonist	3	raloxifene, tamoxifen, toremifene	NA	NA	NA	NA	NA	NA
+estrogenic hormone	1	ethinyl-estradiol	NA	NA	NA	NA	NA	NA
+FXR agonist	1	chenodeoxycholic-acid	NA	NA	NA	NA	NA	NA
+glucocorticoid receptor agonist	2	dexamethasone, mometasone	fludroxycortide, mometasone, triamcinolone	3	0	https://doi.org/10.1080/17476348.2018.1515628	Schutz et al., 2018	NA
+HDAC inhibitor	1	panobinostat	panobinostat	1	0	https://doi.org/10.3389/fimmu.2020.00036	Moreira et al., 2020	NA
+histamine receptor agonist	1	ketotifen	NA	NA	NA	NA	NA	NA
+histamine receptor antagonist	2	brompheniramine, chlorphenamine	NA	NA	NA	NA	NA	NA
+histone acetyltransferase inhibitor	1	curcumin	NA	NA	NA	NA	NA	NA
+HIV protease inhibitor	1	nelfinavir	NA	NA	NA	NA	NA	NA
+HMGCR inhibitor	5	atorvastatin, fluvastatin, lovastatin, rosuvastatin, simvastatin	atorvastatin, fluvastatin, rosuvastatin, simvastatin	4	0	https://doi.org/10.1093/infdis/jiz517	Dutta et al., 2019	NA
+imidazoline receptor agonist	1	rilmenidine	NA	NA	NA	NA	NA	NA
+JAK inhibitor	1	tofacitinib	NA	NA	NA	NA	NA	NA
+KIT inhibitor	1	dasatinib	NA	NA	NA	NA	NA	NA
+leukotriene receptor antagonist	1	ketotifen	NA	NA	NA	NA	NA	NA
+lipase inhibitor	1	oxybenzone	NA	NA	NA	NA	NA	NA
+lipoprotein lipase activator	1	gemfibrozil	NA	NA	NA	NA	NA	NA
+lipoxygenase inhibitor	1	curcumin	NA	NA	NA	NA	NA	NA
+local anesthetic	1	benzonatate	phenazopyridine	1	1	NA	NA	NA
+mTOR inhibitor	1	temsirolimus	sirolimus	1	0	https://doi.org/10.1128/aac.00253-21	Tasneen et al., 2021	NA
+NFkB pathway inhibitor	1	curcumin	NA	NA	NA	NA	NA	NA
+opioid receptor antagonist	1	naltrexone	NA	NA	NA	NA	NA	NA
+PDGFR tyrosine kinase receptor inhibitor	3	axitinib, dasatinib, trapidil	NA	NA	NA	NA	NA	NA
+phosphodiesterase inhibitor	2	ketotifen, papaverine	NA	NA	NA	NA	NA	NA
+platelet aggregation inhibitor	1	icosapent	NA	NA	NA	NA	NA	NA
+polar auxin transport inhibitor	1	quercetin	NA	NA	NA	NA	NA	NA
+potassium channel blocker	1	amiodarone	NA	NA	NA	NA	NA	NA
+RAF inhibitor	1	vemurafenib	NA	NA	NA	NA	NA	NA
+selective estrogen receptor modulator (SERM)	3	raloxifene, tamoxifen, toremifene	NA	NA	NA	NA	NA	NA
+selective serotonin reuptake inhibitor (SSRI)	1	sertraline	NA	NA	NA	NA	NA	NA
+serotonin receptor agonist	1	zolmitriptan	rizatriptan	1	1	NA	NA	NA
+serotonin receptor antagonist	2	granisetron, methylergometrine	NA	NA	NA	NA	NA	NA
+SIRT activator	1	resveratrol	NA	NA	NA	NA	NA	NA
+sodium/potassium/chloride transporter inhibitor	1	bendroflumethiazide	NA	NA	NA	NA	NA	NA
+SRC inhibitor	1	dasatinib	NA	NA	NA	NA	NA	NA
+SYK inhibitor	1	fostamatinib	fostamatinib	1	0	https://doi.org/10.1016/j.biopha.2024.117798	Song et al., 2025	NA
+tubulin polymerization inhibitor	1	albendazole	fenbendazole, mebendazole, oxibendazole, paclitaxel	4	0	https://doi.org/10.1128/mBio.01534-14	Czyz et al., 2014	NA
+tyrosine kinase inhibitor	1	dasatinib	NA	NA	NA	NA	NA	NA
+VEGFR inhibitor	1	axitinib	NA	NA	NA	NA	NA	NA
