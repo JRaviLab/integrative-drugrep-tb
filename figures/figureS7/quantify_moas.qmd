@@ -1,0 +1,66 @@
+```{r}
+library(ggplot2)
+library(here)
+library(readr)
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+final_drugs = read_tsv(here("results/final_high_confidence_drug_predictions.tsv"))
+moa_info = read_csv(here("data/metadata/repurposing_drugs_20200324.csv"),skip = 9)
+merged_moa_drugs = merge(final_drugs, moa_info, by.x="drug_name", by.y="pert_iname")
+
+moa_summary <- merged_moa_drugs %>%
+  separate_rows(moa, sep = "\\|") %>%        # split multiple MOAs
+  mutate(moa = trimws(moa)) %>%             # clean spaces
+  group_by(moa) %>%
+  summarise(
+    n_drugs = n_distinct(drug_name),
+    drugs = paste(sort(unique(drug_name)), collapse = ", ")
+  ) %>%
+  arrange(desc(n_drugs))
+
+# read in previous result
+previous_res = read_tsv(here("figures/figureS7/figureSX_novel_drugs_moas.tsv"))
+merged_novel = merge(moa_summary, previous_res, by="moa", all.x = TRUE)
+
+write_tsv(merged_novel, here("figures/figureS7/moa_counts_final_predictions.tsv"))
+```
+
+```{r define moa_novel}
+# moa_novel
+moa_novel = read_tsv(here("figures/figureS7/novel_moa_counts_final_predictions.tsv"))
+```
+
+```{r plot moa novelty freq}
+pdf(here("figures/figureS7/FigureS7_moa_frequency.pdf"), width = 20, height = 15)
+
+ggplot(moa_novel, aes(x = reorder(moa, -n_drugs), y = n_drugs, fill = factor(novel))) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Frequency of MOAs associated with our 64 high confidence candidates",
+    x = "Mechanism of Action (MOA)",
+    y = "Count",
+    fill = "Novelty"
+  ) +
+  scale_fill_manual(
+    values = c("0" = "steelblue", "1" = "orange"),
+    labels = c("0" = "Known", "1" = "Novel")
+  ) +
+  theme_bw(base_size = 20) +
+  theme(
+    plot.title = element_text(size = 28, hjust = 0.5),
+    axis.title.x = element_text(size = 22, margin = margin(t = 15)),
+    axis.title.y = element_text(size = 22, margin = margin(r = 15)),
+    axis.text.x = element_text(size = 14, angle = 60, hjust = 1, vjust = 1),
+    axis.text.y = element_text(size = 16),
+    panel.grid.major.x = element_blank(),
+    plot.margin = margin(20, 20, 20, 20)
+  )
+
+
+
+dev.off()
+
+```
