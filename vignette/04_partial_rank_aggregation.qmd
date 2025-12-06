@@ -22,7 +22,7 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 ```{r define arguments for functions}
 technologies = c("microarray", "RNAseq")
 scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
-run_info_dir = "data/v2/signatures"
+run_info_dir = "data/signatures"
 results_dir = "results"
 ```
 

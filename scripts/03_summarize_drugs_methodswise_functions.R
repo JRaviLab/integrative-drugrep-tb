@@ -1,5 +1,5 @@
 # functions to finalize drug results from individual and aggregated disease signatures
-# last modified: 07/11/25
+# last modified: 07/23/25
 # Kewalin Samart
 
 get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
@@ -422,7 +422,7 @@ summarize_significant_drugs <- function(
   ))
 }
 
-create_drug_method_table <- function(metadata_path, stats = "min", score_percentile = 0.8, percent_reverse = NA, n = 3){
+create_drug_method_table <- function(metadata_path, stats = "min", score_percentile = 0.8, percent_reverse = NA, n = 3, values = "neg", tail = "left") {
   #' @description Build a table of significant drugs from RNA-seq or microarray for a given score with occurrences of reversal across scores
   #' @param metadata_path path to signature detail table starting at a first-level folder within the project repository
   #' @param stats a string indicating the stats of score to include in the matrix: "median", "min", max".; "min" by default.
@@ -431,52 +431,88 @@ create_drug_method_table <- function(metadata_path, stats = "min", score_percent
   #' @param n An integer: the number of top occurrences to include (ties allowed)
   #' @returns all_signi_drugs_df: a table of significant drugs from RNA-seq or microarray for a given score with occurrences of reversal across scores
 
-  # define input metadata and parameters
   scores_list <- list(
-    CMAP = "CMAP",
-    WCS = "WCS",
-    NCS = "NCS",
-    Tau = "Tau",
-    Cor_pearson = "Cor_pearson",
-    Cor_spearman = "Cor_spearman"
+    CMAP = "CMAP", WCS = "WCS", NCS = "NCS", Tau = "Tau",
+    Cor_pearson = "Cor_pearson", Cor_spearman = "Cor_spearman"
   )
 
   score_method_map <- list(
-    CMAP = "CMAP",
-    WCS = "LINCS",
-    NCS = "LINCS",
-    Tau = "LINCS",
-    Cor_pearson = "Cor",
-    Cor_spearman = "Cor"
+    CMAP = "CMAP", WCS = "LINCS", NCS = "LINCS", Tau = "LINCS",
+    Cor_pearson = "Cor", Cor_spearman = "Cor"
   )
 
-  # collect all significant drugs into a named list
+  metadata_df <- readr::read_tsv(here::here(metadata_path), show_col_types = FALSE)
+  data_to_run <- metadata_df %>% dplyr::filter(signature == 1)
+  technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
+
   all_signi <- list()
+  all_occurrence_list <- list()
+  all_sig_pairs <- list()
 
   for (score in names(scores_list)) {
-    result <- summarize_significant_drugs(
-      metadata_path = metadata_path,
-      score_method = score_method_map[[score]],
-      score = score,
-      stats = stats,
-      score_percentile = score_percentile,
-      percent_reverse = NA,
-      n = n
+    score_method <- score_method_map[[score]]
+
+    combined_drug_df <- get_drug_results(
+      data_to_run,
+      drug_res_path = file.path("results", technology, score_method),
+      score_method = score_method,
+      score = score
     )
-    if (!is.null(result$significant_drugs) && nrow(result$significant_drugs) > 0) {
-      all_signi[[score]] <- result$significant_drugs$unique_pert
+
+    score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
+    score_vec <- unlist(score_matrix[,-1])
+    threshold <- determine_threshold(score_vec, values = values, tail = tail, score_percentile = score_percentile)
+
+    # Get (drug, signature) pairs that pass threshold
+    long_df <- score_matrix %>%
+      pivot_longer(-unique_pert, names_to = "signature", values_to = "score") %>%
+      filter(
+        (values == "neg" & score < threshold) |
+          (values == "pos" & score > threshold) |
+          (values == "zero" & abs(score) < threshold)
+      ) %>%
+      dplyr::select(unique_pert, signature) %>%
+      dplyr::distinct()
+
+    # Save for total unique signature reversal count later
+    all_sig_pairs[[score]] <- long_df
+
+    # Count unique signatures reversed per drug
+    occ_df <- long_df %>%
+      dplyr::count(unique_pert, name = score)
+
+    all_occurrence_list[[score]] <- occ_df
+
+    # Determine significant drugs (n or more reversals)
+    signi_drugs <- occ_df %>% filter(!!sym(score) >= n)
+    if (!is.null(signi_drugs) && nrow(signi_drugs) > 0) {
+      all_signi[[score]] <- signi_drugs$unique_pert
     }
   }
 
-  # create all_signi_drugs_df: wide-format binary matrix
-  all_drugs <- unique(unlist(all_signi))
-  all_signi_drugs_df <- data.frame(significant_drug = all_drugs)
-
+  # Binary matrix
+  all_drugs_binary <- unique(unlist(all_signi))
+  binary_df <- data.frame(significant_drug = all_drugs_binary)
   for (score in names(scores_list)) {
-    all_signi_drugs_df[[score]] <- as.integer(all_signi_drugs_df$significant_drug %in% all_signi[[score]])
+    binary_df[[score]] <- as.integer(binary_df$significant_drug %in% all_signi[[score]])
   }
-  return(all_signi_drugs_df)
+
+  # Count matrix
+  count_df <- Reduce(function(x, y) full_join(x, y, by = "unique_pert"), all_occurrence_list)
+  count_df[is.na(count_df)] <- 0
+  colnames(count_df)[1] <- "significant_drug"
+
+  # Group counts
+  lincs_scores <- intersect(c("WCS", "NCS", "Tau"), names(count_df))
+  cor_scores <- intersect(c("Cor_spearman", "Cor_pearson"), names(count_df))
+
+  # Unique signature reversals across all methods
+  all_reversals_df <- bind_rows(all_sig_pairs) %>%
+    dplyr::distinct(unique_pert, signature)
+
+  return(list(binary_df = binary_df, count_df = count_df))
 }
+
 
 summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = "results") {
   #' @description Summarizes final significant drugs based on CMAP, LINCS (WCS, NCS, Tau), and Cor (Cor_spearman, Cor_pearson)
