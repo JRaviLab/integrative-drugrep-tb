@@ -1,3 +1,4 @@
+2025Jun_refinebio_TB_datasets/
 .Rproj.user
 .Rhistory
 .RData
@@ -12,3 +13,4 @@ analysis/*html
 analysis/*_cache
 analysis/site_libs
 data/v2/microarray_data_forDE/expression_matrices/
+data/v2/microarray_data_forDE/metadata/
