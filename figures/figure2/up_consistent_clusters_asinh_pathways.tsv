@@ -1,0 +1,41 @@
+terms	GOID	cluster	consistent_count
+calcium-mediated signaling	GO:0019722	1	35
+cytoplasmic translation	GO:0002181	2	33
+innate immune response-activating signaling pathway	GO:0002758	3	34
+pattern recognition receptor signaling pathway	GO:0002221	3	34
+positive regulation of endothelial cell migration	GO:0010595	3	35
+positive regulation of leukocyte migration	GO:0002687	3	35
+positive regulation of mononuclear cell migration	GO:0071677	3	34
+regulation of endothelial cell migration	GO:0010594	3	35
+macrophage activation	GO:0042116	4	33
+negative regulation of leukocyte activation	GO:0002695	4	34
+negative regulation of T cell activation	GO:0050868	4	34
+regulation of T cell differentiation	GO:0045580	4	33
+mRNA stabilization	GO:0048255	5	33
+negative regulation of mRNA catabolic process	GO:1902373	5	33
+regulation of mRNA stability	GO:0043488	5	34
+RNA stabilization	GO:0043489	5	33
+negative regulation of cell growth	GO:0030308	6	34
+negative regulation of cell-cell adhesion	GO:0022408	7	34
+negative regulation of leukocyte cell-cell adhesion	GO:1903038	7	34
+positive regulation of cytosolic calcium ion concentration	GO:0007204	8	33
+positive regulation of inflammatory response	GO:0050729	9	35
+toll-like receptor signaling pathway	GO:0002224	9	33
+positive regulation of interleukin-6 production	GO:0032755	10	35
+positive regulation of interleukin-8 production	GO:0032757	10	34
+positive regulation of tumor necrosis factor production	GO:0032760	10	35
+regulation of chemokine production	GO:0032642	10	34
+regulation of interleukin-1 beta production	GO:0032651	10	34
+regulation of interleukin-6 production	GO:0032675	10	35
+regulation of interleukin-8 production	GO:0032677	10	35
+regulation of tumor necrosis factor production	GO:0032680	10	35
+positive regulation of organelle assembly	GO:1902117	11	33
+positive regulation of protein-containing complex assembly	GO:0031334	11	35
+regulation of microtubule cytoskeleton organization	GO:0070507	11	33
+positive regulation of smooth muscle cell proliferation	GO:0048661	12	34
+regulation of smooth muscle cell proliferation	GO:0048660	12	35
+regulation of heart contraction	GO:0008016	13	34
+regulation of muscle contraction	GO:0006937	13	33
+regulation of interleukin-12 production	GO:0032655	14	34
+regulation of JNK cascade	GO:0046328	15	33
+regulation of lymphocyte apoptotic process	GO:0070228	16	33
