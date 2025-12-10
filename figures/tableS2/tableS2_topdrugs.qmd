@@ -5,7 +5,7 @@ library(dplyr)
 library(here)
 library(purrr)
 
-predicted_drugs = read.delim(here("data/v2/tableS2/final_high_confidence_drug_predictions.tsv"),sep="\t")
+predicted_drugs = read.delim(here("figures/tableS2/final_high_confidence_drug_predictions.tsv"),sep="\t")
 predicted_drugs
 ```
 
@@ -17,8 +17,8 @@ predicted_drugs
 
 library(tidyverse)
 
-all_scores_marray_df <- read_tsv(here("data/v2/tableS2/microarray_drug_score_occurrence.tsv"))
-all_scores_rnaseq_df <- read_tsv(here("data/v2/tableS2/rnaseq_drug_score_occurrence.tsv"))
+all_scores_marray_df <- read_tsv(here("figures/tableS2/microarray_drug_score_occurrence.tsv"))
+all_scores_rnaseq_df <- read_tsv(here("figures/tableS2/RNAseq_drug_score_occurrence.tsv"))
 
 ```
 
