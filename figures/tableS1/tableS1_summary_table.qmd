@@ -12,21 +12,8 @@ library(here)
 ```
 
 ```{r load data}
-summary_df <- read.delim(here("data/v2/tableS1/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
-summary_df 
-```
-
-```{r read in microarray and RNAseq}
-microarray_df <- read.delim(here("data/v2/tableS1/microarray_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
-rnaseq_df <- read.delim(here("data/v2/tableS1/RNAseq_TB_signature_run_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
-combined_df <- rbind(microarray_df, rnaseq_df)
-combined_df
-```
-```{r}
-library(dplyr)
-all_info <- left_join(summary_df, combined_df, by = "SIGNATURE_NAME")
-all_info$dataset_signature_ID[36:37] <- c("s36_aggregated_microarray", "s37_aggregated_RNAseq")
-all_info
+summary_df <- read.delim(here("data/signatures/202506_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df
 ```
 
 ```{r gt table}
@@ -34,14 +21,10 @@ library(gt)
 library(readr)
 library(dplyr)
 
-# Reorder 'technology' to prioritize 'microarray' first
-all_info$technology <- factor(all_info$technology, levels = c("microarray", setdiff(unique(all_info$technology), "microarray")))
-
-all_info = all_info[all_info$signature.x == 1,]
 
 # Create the table
-my_gt_table <- all_info %>%
-  dplyr::select(number, dataset_signature_ID, SIGNATURE_NAME, study_id, platform_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num.x, dn_genes_num.x) %>%
+my_gt_table <- summary_df %>%
+  dplyr::select(number, dataset_signature_ID, SIGNATURE_NAME, series_id, tb_status, sample_origin, tissue_category, tissue_cell_type, technology, up_genes_num, dn_genes_num, control_samples, disease_samples) %>%
   arrange(technology) %>%
   gt(groupname_col = "technology") %>%
   tab_header(
@@ -52,15 +35,16 @@ my_gt_table <- all_info %>%
     number = "No.",
     dataset_signature_ID = "Dataset-signature ID",
     SIGNATURE_NAME = "Signature",
-    study_id = "Study",
-    platform_id = "Platform",
+    series_id = "Study",
     tb_status = "TB Status",
     tissue_category = "Tissue origin",
     sample_origin = "Origin type",
     tissue_cell_type = "Cell/tissue type",
     technology = "Technology",
-    up_genes_num.x = "Upregulated genes",
-    dn_genes_num.x = "Downregulated genes"
+    up_genes_num = "Upregulated genes",
+    dn_genes_num = "Downregulated genes",
+    control_samples = "Control samples",
+    disease_samples = "Disease samples"
   ) %>%
   fmt_missing(
     columns = everything(),
@@ -91,7 +75,7 @@ my_gt_table <- all_info %>%
   )
 
 # Save the table as HTML
-gtsave(my_gt_table, here("figures/tableS1_signature_summary_table.html"))
+gtsave(my_gt_table, here("figures/tableS1/tableS1_signature_summary_table.html"))
 
 ```
 
