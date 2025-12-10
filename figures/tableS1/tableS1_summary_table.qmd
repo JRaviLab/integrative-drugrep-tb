@@ -21,7 +21,6 @@ library(gt)
 library(readr)
 library(dplyr)
 
-
 summary_df$technology <- factor(
   summary_df$technology,
   levels = c("microarray", "RNAseq")
@@ -56,9 +55,9 @@ my_gt_table <- summary_df %>%
   ) %>%
   fmt_missing(columns = everything(), missing_text = "-") %>%
   tab_options(
-    table.font.size = "small",
-    heading.title.font.size = 16,
-    heading.subtitle.font.size = 12
+    table.font.size = "medium",
+    heading.title.font.size = 20,
+    heading.subtitle.font.size = 16
   )
 
 
