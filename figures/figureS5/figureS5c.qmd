@@ -97,7 +97,9 @@ lowest_sd_paths <- combined_plot_df %>%
 ```{r}
 lowest_sd_paths_all <- combined_plot_df %>%
   group_by(Direction, Technology) %>%
-  slice_min(order_by = SquaredDeviation, with_ties = TRUE) %>%
+  filter(
+    SquaredDeviation < quantile(SquaredDeviation, 0.25, na.rm = TRUE)
+  ) %>%
   ungroup()
 
 
@@ -105,6 +107,205 @@ print(dim(combined_plot_df))
 print(dim(lowest_sd_paths_all))
 print(dim(lowest_sd_paths_all)[1]/dim(combined_plot_df)[1]*100) # percentage of pathways with zero squared deviation
 ```
+
+```{r}
+lowest_sd_paths_microarray <- combined_plot_df %>%
+  filter(Technology == "Microarray") %>%
+  group_by(Direction) %>%
+  filter(
+    SquaredDeviation <= quantile(SquaredDeviation, 0.25, na.rm = TRUE)
+  ) %>%
+  ungroup()
+print(dim(lowest_sd_paths_microarray)[1]/dim(combined_plot_df[combined_plot_df$Technology == "Microarray",])[1]*100) # percentage of pathways with zero squared deviation
+
+lowest_sd_paths_rnaseq <- combined_plot_df %>%
+  filter(Technology == "RNAseq") %>%
+  group_by(Direction) %>%
+  filter(
+    SquaredDeviation <= quantile(SquaredDeviation, 0.25, na.rm = TRUE)
+  ) %>%
+  ungroup()
+print(dim(lowest_sd_paths_rnaseq)[1]/dim(combined_plot_df[combined_plot_df$Technology == "RNAseq",])[1]*100) # percentage of pathways with zero squared deviation
+
+
+```
+
+```{r pathway enrichment matrices}
+marray_rnaseq_asinh_up_mat = read_tsv(here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
+marray_rnaseq_asinh_dn_mat = read_tsv(here("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv"))
+
+marray_up_not_captured = marray_rnaseq_asinh_up_mat$Description[marray_rnaseq_asinh_up_mat$aggregated_microarray == 0]
+rnaseq_up_not_captured = marray_rnaseq_asinh_up_mat$Description[marray_rnaseq_asinh_up_mat$aggregated_RNAseq == 0]
+
+marray_dn_not_captured = marray_rnaseq_asinh_dn_mat$Description[marray_rnaseq_asinh_dn_mat$aggregated_microarray == 0]
+rnaseq_dn_not_captured = marray_rnaseq_asinh_dn_mat$Description[marray_rnaseq_asinh_dn_mat$aggregated_RNAseq == 0]
+```
+
+```{r}
+library(dplyr)
+
+dominant_pathways <- marray_rnaseq_asinh_up_mat %>%
+  mutate(
+    nonzero_count = rowSums(
+      across(2:(ncol(.) - 2), ~ . != 0),
+      na.rm = TRUE
+    ),
+    nonzero_prop = nonzero_count / (ncol(.) - 3)
+  ) %>%
+  filter(nonzero_prop >= 0.9)
+
+The first 6 are microarray and the rest is RNAseq (exclude "Description" col and aggregated_microarray and aggregated_RNAseq)
+I want to make a plot that prove that pathways enriched in 90% of the signatures (microrray and rnaseq separately) tend to have lower "SquaredDeviation" indicated in combined_plot_df
+names(combined_plot_df)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+# column indices
+micro_cols <- 2:7
+rnaseq_cols <- 8:(ncol(marray_rnaseq_asinh_up_mat) - 2)
+
+
+dominant_microarray <- marray_rnaseq_asinh_up_mat %>%
+  mutate(
+    nonzero_prop = rowMeans(across(all_of(micro_cols), ~ . != 0), na.rm = TRUE)
+  ) %>%
+  filter(nonzero_prop >= 0.9) %>%
+  pull(1)   # pathway names
+
+dominant_rnaseq <- marray_rnaseq_asinh_up_mat %>%
+  mutate(
+    nonzero_prop = rowMeans(across(all_of(rnaseq_cols), ~ . != 0), na.rm = TRUE)
+  ) %>%
+  filter(nonzero_prop >= 0.9) %>%
+  pull(1)
+
+combined_plot_df_up <- combined_plot_df %>%
+  filter(Direction == "Upregulated") %>%
+  mutate(
+    dominant_90 = case_when(
+      Technology == "Microarray" & Pathway %in% dominant_microarray ~ "≥90% enriched",
+      Technology == "RNAseq"     & Pathway %in% dominant_rnaseq     ~ "≥90% enriched",
+      TRUE ~ "<90% enriched"
+    )
+  )
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(
+  combined_plot_df_up %>% filter(Direction == "Upregulated"),
+  aes(x = dominant_90, y = SquaredDeviation)
+) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.6) +
+  #geom_jitter(width = 0.2, alpha = 0.3, size = 0.8) +
+  facet_wrap(~ Technology, scales = "free_y") +
+  scale_y_continuous(trans = "log10") +
+  labs(
+    x = "Upregulated GO:BP terms prevalence across signatures",
+    y = "Squared deviation from aggregated signature",
+    title = "Upregulated GO:BP terms consistently enriched across signatures show lower deviation"
+  ) +
+  theme_classic(base_size = 13)
+
+
+
+```
+```{r}
+library(ggplot2)
+
+ggplot(
+  combined_plot_df_dn %>% filter(Direction == "Downregulated"),
+  aes(x = dominant_90, y = SquaredDeviation)
+) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.6) +
+  #geom_jitter(width = 0.2, alpha = 0.3, size = 0.8) +
+  facet_wrap(~ Technology, scales = "free_y") +
+  scale_y_continuous(trans = "log10") +
+  labs(
+    x = "Downregulated GO:BP terms prevalence across signatures",
+    y = "Squared deviation from aggregated signature",
+    title = "Downregulated GO:BP consistently enriched \n across signatures show lower deviation"
+  ) +
+  theme_classic(base_size = 13)
+
+
+
+```
+
+```{r}
+micro_cols <- 2:7
+rnaseq_cols <- 8:(ncol(marray_rnaseq_asinh_dn_mat) - 2)
+
+
+dominant_microarray <- marray_rnaseq_asinh_dn_mat %>%
+  mutate(
+    nonzero_prop = rowMeans(across(all_of(micro_cols), ~ . != 0), na.rm = TRUE)
+  ) %>%
+  filter(nonzero_prop >= 0.9) %>%
+  pull(1)   # pathway names
+
+dominant_rnaseq <- marray_rnaseq_asinh_dn_mat %>%
+  mutate(
+    nonzero_prop = rowMeans(across(all_of(rnaseq_cols), ~ . != 0), na.rm = TRUE)
+  ) %>%
+  filter(nonzero_prop >= 0.9) %>%
+  pull(1)
+
+combined_plot_df_dn <- combined_plot_df %>%
+  filter(Direction == "Downregulated") %>%
+  mutate(
+    dominant_90 = case_when(
+      Technology == "Microarray" & Pathway %in% dominant_microarray ~ "≥90% enriched",
+      Technology == "RNAseq"     & Pathway %in% dominant_rnaseq     ~ "≥90% enriched",
+      TRUE ~ "<90% enriched"
+    )
+  )
+
+```
+
+```{r combine plots}
+combined_plot_df_dom <- combined_plot_df_dom %>%
+  mutate(
+    Direction = factor(Direction, levels = c("Upregulated", "Downregulated")),
+    dominant_90 = factor(dominant_90, levels = c("<90% enriched", "≥90% enriched")),
+    Technology = factor(Technology, levels = c("Microarray", "RNAseq"))
+  )
+
+
+library(ggplot2)
+
+ggplot(
+  combined_plot_df_dom,
+  aes(x = Direction, y = SquaredDeviation)
+) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.65) +
+  facet_grid(
+    . ~ Technology + dominant_90,
+    scales = "free_y"
+  ) +
+  scale_y_continuous(trans = "log10") +
+  labs(
+    x = "Regulation direction",
+    y = "Squared deviation from aggregated signature",
+    title = "Dominant pathways exhibit lower deviation across Up/Down regulation and technologies"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 0),
+    panel.spacing.x = unit(1.2, "lines")
+  )
+
+
+
+```
+
 
 ```{r figure S3b; plotting}
 library(ggplot2)
@@ -139,8 +340,8 @@ highest_sd_paths <- combined_plot_df %>%
 ```{r figure S3c; plotting}
 library(ggplot2)
 
-pdf(here("figures/figureS5/FigureS5c_squared_deviation_less_captured.pdf"),
-    width = 16, height = 8)  
+#pdf(here("figures/figureS5/FigureS5c_squared_deviation_less_captured.pdf"),
+#    width = 16, height = 8)  
 
 ggplot(highest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = SquaredDeviation, fill = Technology)) +
   scale_fill_brewer(palette = "Set2") +
@@ -162,5 +363,5 @@ ggplot(highest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = Squared
     strip.text = element_text(size = 15)
   )
 
-dev.off()
+#dev.off()
 ```
