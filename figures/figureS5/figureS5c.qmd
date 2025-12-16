@@ -195,6 +195,96 @@ combined_plot_df_up <- combined_plot_df %>%
 ```
 
 ```{r}
+library(dplyr)
+combined_plot_df_dom <- combined_plot_df %>%
+  mutate(
+    dominant_90 = case_when(
+      Technology == "Microarray" & Pathway %in% dominant_microarray ~ "≥90% enriched",
+      Technology == "RNAseq"     & Pathway %in% dominant_rnaseq     ~ "≥90% enriched",
+      TRUE ~ "<90% enriched"
+    )
+  )
+
+stat_results <- combined_plot_df_dom %>%
+  group_by(Technology, Direction) %>%
+  summarise(
+    n_dominant = sum(dominant_90 == "≥90% enriched"),
+    n_nondominant = sum(dominant_90 == "<90% enriched"),
+    p_value = wilcox.test(
+      SquaredDeviation ~ dominant_90,
+      exact = FALSE
+    )$p.value,
+    .groups = "drop"
+  )
+stat_results <- stat_results %>%
+  mutate(
+    p_adj = p.adjust(p_value, method = "BH")
+  )
+
+stat_results
+```
+
+```{r}
+library(dplyr)
+
+stat_table <- stat_results %>%
+  mutate(
+    Direction = recode(Direction,
+                       "Upregulated" = "Upregulated",
+                       "Downregulated" = "Downregulated"),
+    Technology = recode(Technology,
+                        "Microarray" = "Microarray",
+                        "RNAseq" = "RNAseq"),
+    p_adj_label = case_when(
+      p_adj < 0.001 ~ "<0.001",
+      TRUE ~ sprintf("%.3f", p_adj)
+    )
+  ) %>%
+  dplyr::select(
+    Technology,
+    Direction,
+    n_dominant,
+    n_nondominant,
+    p_adj_label
+  )
+
+library(gt)
+
+stat_table %>%
+  gt(
+    groupname_col = "Technology"
+  ) %>%
+  cols_label(
+    Direction = "Regulation",
+    n_dom = html("≥90% enriched<br>(n)"),
+    n_nondom = html("&lt;90% enriched<br>(n)"),
+    p_adj_label = html("FDR-adjusted<br><i>p</i>-value")
+  ) %>%
+  tab_header(
+    title = md("**Dominant pathways exhibit lower deviation across technologies**"),
+    subtitle = md("Wilcoxon rank-sum tests comparing ≥90% vs <90% enriched pathways")
+  ) %>%
+  fmt_markdown(columns = everything()) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(
+      columns = p_adj_label,
+      rows = p_adj_label < "0.05"
+    )
+  ) %>%
+  tab_source_note(
+    source_note = md(
+      "Wilcoxon rank-sum tests performed separately for each technology and regulation direction; p-values adjusted using Benjamini–Hochberg FDR."
+    )
+  )
+
+```
+
+```{r}
 library(ggplot2)
 
 ggplot(
