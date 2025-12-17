@@ -106,12 +106,15 @@ def get_disease_controls():
                     pass
     return np.unique(np.array(control_samples))
 
-def read_dis_data(landmark_genes, control_samples=get_disease_controls()):
+def read_dis_data(landmark_genes, control_samples=get_disease_controls(), rnaseq_symbol=False):
     dis_meta = pd.read_csv('data/annotation/Homo_sapiens.gene_info.csv', header=[0], index_col=[0])
     dis_meta = dis_meta[[element in landmark_genes for element in dis_meta['GeneID'].values]]
     # generate maps from Ensembl and Symbol
     ma_map = dis_meta.drop_duplicates(subset='Ensembl').set_index('Ensembl')['GeneID'] # microarray
-    rn_map = dis_meta.drop_duplicates(subset='Symbol').set_index('Symbol')['GeneID'] # rnaseq
+    if rnaseq_symbol:
+        rn_map = dis_meta.drop_duplicates(subset='Symbol').set_index('Symbol')['GeneID'] # rnaseq
+    else:
+        rn_map = ma_map
     # inputs a data file and return an expression df with GeneIDs of landmark genes
     def disease_prep(filename, ma=True):
         dis_exp = pd.read_csv(filename, delimiter='\t', low_memory=False, dtype={'GeneID': 'int32'})
