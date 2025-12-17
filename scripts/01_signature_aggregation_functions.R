@@ -321,7 +321,7 @@ aggregate_signatures <- function(gene_membership_matrix,
 
   # compute average jaccard scores across signatures
   ## specified disease
-  jaccard_mean_vec <- rowMeans(jaccard_matrix)
+  jaccard_mean_vec <- colMeans(jaccard_matrix)
 
   ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
   aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec / sum(jaccard_mean_vec)))
