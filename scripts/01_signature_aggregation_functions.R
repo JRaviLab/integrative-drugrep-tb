@@ -72,15 +72,15 @@ compute_membership_matrix <- function(metadata_path,
   print(paste0("Number of background genes: ", length(bg_genes)))
 
   data_to_run <- read_tsv(metadata_path)
-  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  data_to_run <- data_to_run[data_to_run$signature == 1, ]
   # filter by any specify context
   # tissue category
-  if(!is.null(tissue_category)){
-    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  if (!is.null(tissue_category)) {
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category, ]
   }
   # sample origin
-  if(!is.null(sample_origin)){
-    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  if (!is.null(sample_origin)) {
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin, ]
   }
 
   for (i in 1:nrow(data_to_run)) {
@@ -141,7 +141,6 @@ compute_membership_matrix <- function(metadata_path,
   final_sigval <- as.matrix(final_sigval)
 
   if (save_result) {
-
     saveRDS(
       final_sigval,
       file = file.path(output_dir, paste0(direction, "_membership_mat.rds"))
@@ -193,15 +192,15 @@ compute_jaccard_matrix <- function(metadata_path,
 
   # get data_to_run df
   data_to_run <- read_tsv(metadata_path)
-  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  data_to_run <- data_to_run[data_to_run$signature == 1, ]
   # filter by any specify context
   # tissue category
-  if(!is.null(tissue_category)){
-    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  if (!is.null(tissue_category)) {
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category, ]
   }
   # sample origin
-  if(!is.null(sample_origin)){
-    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  if (!is.null(sample_origin)) {
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin, ]
   }
 
   # initialize empty vectors for storage
@@ -265,7 +264,7 @@ compute_jaccard_matrix <- function(metadata_path,
   mat[is.na(mat)] <- 0
 
   n_expected <- nrow(data_to_run)
-  n_actual   <- length(vec)
+  n_actual <- length(vec)
 
   message("Number of signatures expected (metadata): ", n_expected)
   message("Number of signatures loaded: ", n_actual)

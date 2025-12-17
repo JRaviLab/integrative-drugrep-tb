@@ -81,7 +81,7 @@ for (i in 1:nrow(study_df)) {
   common_ids_infected <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment", ]$geo_accession, colnames(expr_mat))
   common_ids_control <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment", ]$geo_accession, colnames(expr_mat))
   # Record sample counts (even if insufficient)
-  control_n[i]  <- length(common_ids_control)
+  control_n[i] <- length(common_ids_control)
   disease_n[i] <- length(common_ids_infected)
 
   if ((length(common_ids_infected) < 3) | (length(common_ids_control) < 3)) {
@@ -281,7 +281,7 @@ study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
 # add sample counts to summary
-study_df$control_samples  <- as.integer(control_n)
+study_df$control_samples <- as.integer(control_n)
 study_df$disease_samples <- as.integer(disease_n)
 
 run_info <- file.path(
