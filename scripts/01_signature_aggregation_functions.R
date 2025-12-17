@@ -314,8 +314,8 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
   #' @param output_dir path to the output directory
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
-  #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
-  #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
+  #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.9 by default meaning the selected genes are present in at least 40% of the signatures
+  #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores
   #' @author Kewalin Samart
 
   # compute average jaccard scores across signatures
