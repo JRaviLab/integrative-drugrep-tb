@@ -235,23 +235,42 @@ compute_jaccard_matrix <- function(metadata_path,
     }
   }
   # add a column of signature names
-  mat <- as.data.frame(mat)
-  mat$names <- names(vec)
-  mat <- mat[, c("names", names(vec))]
+  # mat <- as.data.frame(mat)
+  # mat$names <- names(vec)
+  # mat <- mat[, c("names", names(vec))]
   mat[is.na(mat)] <- 0
 
-  # check output dimension
-  print(paste0("Number of DE results/signatures expected: ", nrow(data_to_run)))
-  print(paste0(
-    "Number of columns in membership matrix (excluding names): ",
-    ncol(mat[, !colnames(mat) %in% "names"])
-  ))
-  print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(mat[, !colnames(mat) %in% "names"])))
+  n_expected <- nrow(data_to_run)
+  n_actual   <- length(vec)
+
+  message("Number of signatures expected (metadata): ", n_expected)
+  message("Number of signatures loaded: ", n_actual)
+  message("Jaccard matrix dimensions: ", nrow(mat), " x ", ncol(mat))
+
+  if (nrow(mat) != ncol(mat)) {
+    stop("Jaccard matrix is not square — this should never happen.")
+  }
+
+  if (n_actual != n_expected) {
+    warning(
+      "Not all signatures in metadata were found on disk. ",
+      "Expected: ", n_expected,
+      ", loaded: ", n_actual
+    )
+  }
 
   if (save_result) {
-    saveRDS(mat, file = paste0(output_dir, "/", direction, "_jaccard_mat.rds"))
-    write_tsv(mat, file = paste0(output_dir, "/", direction, "_jaccard_mat.tsv"))
-    print(paste0("The computed Jaccard matrix ", paste0(direction, "_jaccard_mat.rds"), " was saved at ", output_dir))
+    saveRDS(
+      mat,
+      file = file.path(output_dir, paste0(direction, "_jaccard_mat.rds"))
+    )
+
+    write_tsv(
+      tibble::rownames_to_column(as.data.frame(mat), "signature"),
+      file = file.path(output_dir, paste0(direction, "_jaccard_mat.tsv"))
+    )
+
+    message("Saved Jaccard matrix (", direction, ") to ", output_dir)
   }
 
   return(mat)
@@ -283,9 +302,7 @@ aggregate_signatures <- function(gene_membership_matrix,
 
   # read in jaccard matrices
   jaccard_df <- jaccard_matrix
-  # set row names to GeneID
-  row.names(jaccard_df) <- jaccard_df$names
-  jaccard_df$names <- NULL
+
   # reorder columns
   jaccard_df <- jaccard_df[, order(colnames(jaccard_df))]
   jaccard_mat <- as.matrix(jaccard_df)
