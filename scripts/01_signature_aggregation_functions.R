@@ -133,10 +133,34 @@ compute_membership_matrix <- function(metadata_path,
   ))
   print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(final_sigval[, !colnames(final_sigval) %in% "GeneID"])))
 
+  # set row names to GeneID
+  row.names(final_sigval) <- final_sigval$GeneID
+  final_sigval$GeneID <- NULL
+  # reorder columns
+  final_sigval <- final_sigval[, order(colnames(final_sigval))]
+  final_sigval <- as.matrix(final_sigval)
+
   if (save_result) {
-    saveRDS(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat_.rds"))
-    write_tsv(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat.tsv"))
-    print(paste0("The computed Gene Membership matrix", paste0(direction, "_membership_mat.rds"), " was saved at ", output_dir))
+
+    saveRDS(
+      final_sigval,
+      file = file.path(output_dir, paste0(direction, "_membership_mat.rds"))
+    )
+
+    df_out <- tibble::rownames_to_column(
+      as.data.frame(final_sigval),
+      var = "GeneID"
+    )
+
+    readr::write_tsv(
+      df_out,
+      file.path(output_dir, paste0(direction, "_membership_mat.tsv"))
+    )
+
+    message(
+      "The computed Gene Membership matrix (", direction,
+      ") was saved at ", output_dir
+    )
   }
 
   return(final_sigval)
@@ -273,6 +297,10 @@ compute_jaccard_matrix <- function(metadata_path,
     message("Saved Jaccard matrix (", direction, ") to ", output_dir)
   }
 
+  # reorder columns
+  mat <- mat[, order(colnames(mat))]
+
+
   return(mat)
 }
 
@@ -291,25 +319,9 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
   #' @author Kewalin Samart
 
-  # read in gene membership matrix
-  gene_membership_df <- gene_membership_matrix
-  # set row names to GeneID
-  row.names(gene_membership_df) <- gene_membership_df$GeneID
-  gene_membership_df$GeneID <- NULL
-  # reorder columns
-  gene_membership_df <- gene_membership_df[, order(colnames(gene_membership_df))]
-  gene_membership_mat <- as.matrix(gene_membership_df)
-
-  # read in jaccard matrices
-  jaccard_df <- jaccard_matrix
-
-  # reorder columns
-  jaccard_df <- jaccard_df[, order(colnames(jaccard_df))]
-  jaccard_mat <- as.matrix(jaccard_df)
-
   # compute average jaccard scores across signatures
   ## specified disease
-  jaccard_mean_vec <- rowMeans(jaccard_mat)
+  jaccard_mean_vec <- rowMeans(jaccard_matrix)
 
   ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
   aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec / sum(jaccard_mean_vec)))
