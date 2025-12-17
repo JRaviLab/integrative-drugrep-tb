@@ -1,5 +1,5 @@
-# functions for drug search by CMap1.0, CMap2.0, and Correlation-based connectvity scores
-# last modified: 06/17/25
+# functions for drug search by CMap1.0, CMap2.0, and Correlation-based connectivity scores
+# last modified: 12/17/25
 # Kewalin Samart
 
 # loading the needed libraries
@@ -58,6 +58,7 @@ get_updn_signature <- function(updn_sig_path, L1000 = TRUE) {
   #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @returns updn_genes
   #' @author Kewalin Samart
+
   input_updn_sig <- read.delim(updn_sig_path, sep = "\t")
   clean_input_updn_sig <- prepare_signature(signature = input_updn_sig, L1000 = L1000)
   updn_genes <- as.character(clean_input_updn_sig$GeneID)
@@ -74,8 +75,6 @@ setup_cmap1db <- function() {
   #' @returns cmap_path path to CMAP database
   #' @author Kewalin Samart
 
-  require(rhdf5)
-  require(ExperimentHub)
   eh <- ExperimentHub()
   query(eh, c("signatureSearchData", "cmap"))
   cmap_path <- eh[["EH3223"]]
@@ -92,8 +91,6 @@ setup_lincsdb <- function() {
   #' @returns lincs_path path to LINCS database
   #' @author Kewalin Samart
 
-  require(rhdf5)
-  require(ExperimentHub)
   eh <- ExperimentHub()
   query(eh, c("signatureSearchData", "lincs"))
   lincs_path <- eh[["EH3226"]]
@@ -110,7 +107,6 @@ compute_CMap1_scores <- function(up_genes, dn_genes, db_path) {
   #' @returns final_res a data frame of drug candidates prioritized by cmap1
   #' @author Kewalin Samart
 
-  require(signatureSearch)
   # get CMap 1.0 connectivity scores
   qsig <- qSig(
     query = list(
@@ -135,7 +131,6 @@ compute_CMap2lincs_scores <- function(up_genes, dn_genes, db_path) {
   #' @returns final_res a data frame of drug candidates prioritized by WCS, NCS, or Tau
   #' @author Kewalin Samart
 
-  require(signatureSearch)
   # get CMap 2.0 connectivity scores
   qsig <- qSig(
     query = list(
@@ -160,8 +155,6 @@ compute_Cor_based_scores <- function(full_signature_matrix, score_method, db_pat
   #' @param db_path obtained form either setup_cmap1db() or setup_lincsdb() functions
   #' @returns final_res a data frame of drug candidates prioritized by XCor, XSpe
   #' @author Kewalin Samart
-
-  require(signatureSearch)
 
   # input validation
   stopifnot(
