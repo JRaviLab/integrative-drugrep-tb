@@ -1,4 +1,6 @@
 # multids_RNAseq_DEwithDESeq2.R
+# last modified: 11/16/25 - KS modified LT's edits
+# author: Kewalin Samart
 # ------------------------------------------------------------
 # Batch differential‑expression analysis for multiple RNA‑seq
 # datasets using DESeq2.
@@ -51,13 +53,13 @@ if (length(argv) < 1) {
   ")
 }
 
-meta_class_file_path <- argv[1]
-padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
-
 ######### ------------ Example arguments ------------#########
 
-# meta_class_file_path <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
-# padj_cutoff <- 0.05
+# argv[1] <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
+# argv[2] <- 0.05
+
+meta_class_file_path <- argv[1]
+padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
 # 1.  Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
@@ -65,6 +67,8 @@ study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT
 signature_boolean <- logical(nrow(study_df))
 up_genes_num <- integer(nrow(study_df))
 dn_genes_num <- integer(nrow(study_df))
+control_n <- integer(nrow(study_df))
+disease_n <- integer(nrow(study_df))
 
 # 2.  Helper to coerce expression table to integer matrix
 make_expression_matrix <- function(tbl) {
@@ -130,6 +134,21 @@ for (i in seq_len(nrow(study_df))) {
 
   if (dplyr::n_distinct(metadata$condition) != 2) {
     warning("  skipped: both groups not present after filtering")
+    signature_boolean[i] <- FALSE
+    next
+  }
+
+  # Require >= 3 disease and >= 3 control samples
+  n_control <- sum(metadata$condition == "control")
+  n_disease <- sum(metadata$condition == "disease")
+  control_n[i] <- n_control
+  disease_n[i] <- n_disease
+
+  if (n_control < 3 | n_disease < 3) {
+    message(
+      "  skipped: insufficient replicates (control = ", n_control,
+      ", disease = ", n_disease, "; need >= 3 each)"
+    )
     signature_boolean[i] <- FALSE
     next
   }
@@ -208,17 +227,32 @@ for (i in seq_len(nrow(study_df))) {
 
   # ---- 3.9  Write outputs ----
   dir.create(here("data/DE_results/RNAseq"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(here("data/DE_results/RNAseq/up"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
+  dir.create(here("data/DE_results/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
   dir.create(here("data/signatures/RNAseq/up"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
 
-  today <- format(Sys.Date(), "%Y%m%d")
   base_fname <- study_df$SIGNATURE_NAME[i]
   if (nrow(res_df) > 0) {
     readr::write_tsv(
       res_df %>%
         dplyr::arrange(dplyr::desc(log2FoldChange)),
       file.path(here::here("data/DE_results/RNAseq"), paste0(base_fname, "_DESeq2.tsv"))
+    )
+    # get DE results with positive logFC
+    res_df_up <- dplyr::filter(res_df, log2FoldChange > 0)
+    readr::write_tsv(
+      res_df_up %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/RNAseq/up"), paste0(base_fname, "_up.tsv"))
+    )
+    # get DE results with negative logFC
+    res_df_dn <- dplyr::filter(res_df, log2FoldChange < 0)
+    readr::write_tsv(
+      res_df_dn %>%
+        dplyr::arrange(dplyr::desc(log2FoldChange)),
+      file.path(here::here("data/DE_results/RNAseq/dn"), paste0(base_fname, "_dn.tsv"))
     )
   }
   if (nrow(sig_df) > 0) {
@@ -245,20 +279,21 @@ for (i in seq_len(nrow(study_df))) {
     nrow(dn_df), " down‑regulated genes"
   )
 
-  if (nrow(up_df) > 0 && (nrow(dn_df) > 0)){
+  if (nrow(up_df) > 0 && (nrow(dn_df) > 0)) {
     signature_boolean[i] <- TRUE
   }
-
 }
 
 # 4.  Run summary
 study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
+study_df$control_samples <- as.integer(control_n)
+study_df$disease_samples <- as.integer(disease_n)
 
 run_info <- file.path(
   here("data/signatures"),
-  paste0("signature_run_info_", format(Sys.time(), "%Y%m%d_%H%M%S"), ".tsv")
+  paste0("RNAseq_TB_signature_run_info.tsv")
 )
 readr::write_tsv(study_df, run_info)
 message("\nFinished.  Summary written to ", run_info)
