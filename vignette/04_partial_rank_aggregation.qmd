@@ -1,0 +1,113 @@
+# Functions to perform partial rank aggregation
+
+## method-wise summarization
+
+#### Last modified: 07/16/25
+
+#### Author: Kewalin Samart
+
+```{r}
+library(here)
+source(here("scripts/04_BiG_RankAggregation_functions.R"))
+source(here("scripts/04_RankAggregation_utilities.R"))
+source(here("scripts/04_data_generation_RankAggregation_functions.R"))
+source(here("scripts/04_partial_druglists_RankAggregation_functions.R"))
+source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+```
+
+### Individual signatures
+
+#### generate intermediate data objects for rank aggregation
+
+```{r define arguments for functions}
+technologies = c("microarray", "RNAseq")
+scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
+run_info_dir = "data/signatures"
+results_dir = "results"
+```
+
+```{r}
+# save <score>_indivSig_TB_<technology>.rds
+rank_drugs_by_connectivity(technologies = technologies, 
+                           scores = scores, 
+                           run_info_dir = run_info_dir, 
+                           results_dir = results_dir)
+# save full_ranked_drugs_indivSig_<technology>_list.rds
+rank_individual_signature_drugs(technologies = technologies, 
+                                scores = scores) 
+# save ranked_topdrugs_indivSig_<technology>_list.rds
+generate_topdrug_lists_from_percentile(technologies = technologies, 
+                                       scores = scores) 
+```
+
+#### perform partial rank aggregation using BiG method
+```{r define arguments for functions}
+technologies = c("microarray", "RNAseq")
+n_p1_params = c(4, 4)
+n_iter = 2000
+burnin = 1000
+prior = "IG"
+```
+
+```{r}
+# perform rank aggregation and save RAresult_indivSig_TB_<technology>.tsv at "results/<technology>/04_rank_aggregation"
+run_BiG_diffuse_indivSig(technologies = technologies,
+                          n_p1_params = n_p1_params,
+                          n_iter = n_iter,
+                          burnin = burnin,
+                          prior = prior)
+```
+
+### Aggregated signatures
+
+#### generate intermediate data objects for rank aggregation
+
+```{r define arguments for functions}
+technologies = c("microarray", "RNAseq")
+score_order = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
+values = "neg"
+tail = "left"
+score_percentile = 0.9
+base_dir = "results"
+```
+
+```{r}
+# create and save full_ranked_drugs_aggrSig_TB_<technology>.rds 
+# & ranked_aggrSig_drugs_scores_neg_left_0.9_<technology>_list.rds --- filtered by the methodwise prediction "top drugs"
+rank_aggregated_signature_drugs(technologies = technologies,
+                                score_order = score_order,
+                                values = values,
+                                tail = tail,
+                                score_percentile = score_percentile,
+                                base_dir = base_dir)
+```
+
+```{r}
+# define arguments for the rank aggregation function 
+technologies = c("microarray", "RNAseq")
+n_p1_params = c(4, 4)
+base_dir = "results"
+values = "neg"
+tail = "left"
+score_percentile = 0.9
+M = 2000
+burnin = 1000
+prior = "IG"
+```
+
+```{r}
+# perform rank aggregation and save RAresult_<values>_<tail>_<score_percentile>_aggrSig_TB_<technology>.tsv at "results/<technology>/04_rank_aggregation"
+run_BiG_diffuse_aggrSig(technologies = technologies,
+                        n_p1_params = n_p1_params,
+                        base_dir = base_dir,
+                        values = values,
+                        tail = tail,
+                        score_percentile = score_percentile,
+                        M = M,
+                        burnin = burnin,
+                        prior = prior)
+```
+
+
+
+
