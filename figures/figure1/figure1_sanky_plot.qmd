@@ -1,5 +1,5 @@
 # Figure 1a: Sankey diagram showing information of all the TB signatures up to June 2025
-# last modified: 11/18/25
+# last modified: 12/18/25
 # author: Kewalin Samart
 
 ```{r load libraries}
@@ -10,18 +10,13 @@ library(dplyr)
 ```
 
 ```{r microarray signature info}
-microarray_signatures_df <- read_tsv(here("figures/figure1/sankey_microarray_TB_signature_run_info.tsv"))
+microarray_signatures_df <- read_tsv(here("data/signatures/microarray_TB_signature_run_info.tsv"))
 microarray_signatures_info <- microarray_signatures_df[microarray_signatures_df$signature == 1,]
 microarray_signatures_info$technology <- "microarray"
 
-rnaseq_signatures_df <- read_tsv(here("figures/figure1/sankey_RNAseq_TB_signature_run_info.tsv"))
+rnaseq_signatures_df <- read_tsv(here("data/signatures/RNAseq_TB_signature_run_info.tsv"))
 rnaseq_signatures_info <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1,]
 rnaseq_signatures_info$technology <- "RNAseq"
-```
-
-```{r}
-print(colnames(microarray_signatures_info))
-print(colnames(rnaseq_signatures_info))
 ```
 
 ```{r combine signature info}
@@ -72,7 +67,7 @@ nodes <- all_node_counts %>%
   dplyr::select(name, label)
 
 nodes <- all_node_counts %>%
-  mutate(label = name) %>%   # Start with the raw name
+  mutate(label = name) %>%   
   mutate(
     label = dplyr::recode(
       label,
@@ -92,7 +87,7 @@ nodes <- all_node_counts %>%
 links_all$source_id <- match(links_all$source, nodes$name) - 1
 links_all$target_id <- match(links_all$target, nodes$name) - 1
 
-sankeyNetwork(Links = links_all,
+sankey <- sankeyNetwork(Links = links_all,
               Nodes = nodes,
               Source = "source_id",
               Target = "target_id",
@@ -102,4 +97,20 @@ sankeyNetwork(Links = links_all,
               nodeWidth = 30,
               nodePadding = 15,
               sinksRight = TRUE)
+```
+
+```{r save output}
+library(htmlwidgets)
+library(webshot2)
+
+saveWidget(sankey, "figure1a_sankey_plot.html", selfcontained = TRUE)
+
+webshot(
+  "figure1a_sankey_plot.html",
+  "figure1a_sankey_plot.pdf",
+  zoom = 2,
+  vwidth = 900,
+  vheight = 600
+)
+
 ```
