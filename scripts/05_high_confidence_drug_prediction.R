@@ -1,25 +1,16 @@
-# utility functions for #drugrep_tb project
-# created date: 07/16/25
-# last modified: 07/16/25
-# Ling Thang
+# Getting high confidence drug candidates
+# last modified: 12/18/25
+# Author: Ling Thang
 # Kewalin Samart edited
-
-# Implements Figure 1c from Integrative transcriptome-based drug repurposing in tuberculosis
-# Key implementation (page 10) :
-# "(c) Drug prioritization pipeline applied to microarray and RNA-seq signatures, including both individual and aggregated
-# versions. Drugs reversing ≥50% of the disease signature with scores in the top 10% most negative values were selected,
-# and only those supported by ≥2 of 3 metric subgroups (CMAP 1.0, LINCS, correlation-based) were retained. Final drug rankings
-# were generated using Bayesian Latent Variable Approach for partial rank aggregation; “BiG” method [44], and high-confidence predictions
-# were obtained by intersecting results across signature types."
 
 # import libraries
 library(here)
 library(dplyr)
 library(readr)
 
-# Function to read rank-aggregated results from four pipelines with input validation
+# function to read rank-aggregated results from four pipelines with input validation
 read_pipeline_results <- function(microarray_indiv_path, microarray_agg_path, rnaseq_indiv_path, rnaseq_agg_path) {
-  # Helper to check file existence
+  # helper to check file existence
   check_file <- function(path) {
     if (!file.exists(path)) {
       stop(paste("File does not exist:", path))
@@ -30,13 +21,13 @@ read_pipeline_results <- function(microarray_indiv_path, microarray_agg_path, rn
   check_file(rnaseq_indiv_path)
   check_file(rnaseq_agg_path)
 
-  # Read files
+  # read files
   microarray_indiv <- read_tsv(microarray_indiv_path, show_col_types = FALSE)
   microarray_agg <- read_tsv(microarray_agg_path, show_col_types = FALSE)
   rnaseq_indiv <- read_tsv(rnaseq_indiv_path, show_col_types = FALSE)
   rnaseq_agg <- read_tsv(rnaseq_agg_path, show_col_types = FALSE)
 
-  # Validate required columns
+  # validate required columns
   required_cols <- c("drug_name", "rank_score")
   for (df in list(microarray_indiv, microarray_agg, rnaseq_indiv, rnaseq_agg)) {
     missing <- setdiff(required_cols, colnames(df))
@@ -53,10 +44,9 @@ read_pipeline_results <- function(microarray_indiv_path, microarray_agg_path, rn
   ))
 }
 
-# Process Individual and Aggregated Pipelines Separately
-
+# process individual and aggregated pipelines separately
 process_pipeline <- function(indiv_microarray, indiv_rnaseq, agg_microarray, agg_rnaseq) {
-  # --- Individual Signatures Pipeline ---
+  # individual signatures pipeline
   indiv_merged_df <- dplyr::full_join(indiv_microarray, indiv_rnaseq, by = "drug_name")
   indiv_results <- indiv_merged_df %>%
     rowwise() %>%
@@ -64,7 +54,7 @@ process_pipeline <- function(indiv_microarray, indiv_rnaseq, agg_microarray, agg
     dplyr::select(drug_name, mean_rank_score_indiv)
   message("Processed individual signatures pipeline.")
 
-  # --- Aggregated Signatures Pipeline ---
+  # aggregated signatures pipeline
   agg_merged_df <- dplyr::full_join(agg_microarray, agg_rnaseq, by = "drug_name")
   agg_results <- agg_merged_df %>%
     rowwise() %>%
@@ -84,29 +74,29 @@ convert_to_zscore <- function(scores_vector) {
   return(z_scores)
 }
 
-# Identify High-Confidence Drugs and Calculate Final Score
+# identify high-confidence drugs and calculate final score
 get_high_confidence_predictions <- function(indiv_results, agg_results) {
   final_merged_df <- merge(indiv_results, agg_results, by = "drug_name", all = FALSE)
 
   message(paste("Identified", nrow(final_merged_df), "combined drug candidates."))
 
-  # Convert each pipeline's mean rank score to a z-score
+  # convert each pipeline's mean rank score to a z-score
   final_merged_df$z_score_indiv <- convert_to_zscore(final_merged_df$mean_rank_score_indiv)
   final_merged_df$z_score_agg <- convert_to_zscore(final_merged_df$mean_rank_score_agg)
 
-  # Calculate the combined z-score as per the formula in Figure 1c
+  # calculate the combined z-score as per the formula in Figure 1c
   combined_predictions <- final_merged_df %>%
     mutate(
-      # Formula: (z1 + z2) / sqrt(2)
+      # formula: (z1 + z2) / sqrt(2)
       combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
     ) %>%
     dplyr::select(drug_name, combined_z_score) %>%
     arrange(desc(combined_z_score))
 
-  # Calculate the final combined z-score as per the formula in Figure 1c
+  # calculate the final combined z-score as per the formula in Figure 1c
   high_confidence_predictions <- final_merged_df %>%
     mutate(
-      # Formula: (z1 + z2) / sqrt(2)
+      # formula: (z1 + z2) / sqrt(2)
       combined_z_score = (z_score_indiv + z_score_agg) / sqrt(2)
     ) %>%
     dplyr::filter(z_score_indiv > 0, z_score_agg > 0, combined_z_score > 0) %>%
@@ -117,7 +107,7 @@ get_high_confidence_predictions <- function(indiv_results, agg_results) {
   return(list(combined_predictions, high_confidence_predictions))
 }
 
-# Save and Display Results
+# save and display results
 save_and_display_predictions <- function(predictions, output_path) {
   write_tsv(predictions, output_path)
   message(paste("Final high-confidence drug predictions saved to:", output_path))
