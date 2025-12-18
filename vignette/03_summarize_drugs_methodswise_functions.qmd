@@ -1,0 +1,79 @@
+# Functions to summarize drug results prioritized by multiple methods
+
+## method-wise summarization
+
+#### Last modified: 07/23/25
+
+#### Author: Kewalin Samart
+
+```{r}
+library(here)
+source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
+```
+
+## Individual signatures
+### RNAseq
+
+1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
+
+```{r}
+metadata_path <- "data/signatures/RNAseq_TB_signature_run_info.tsv"
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.80, n = 3)
+if (!dir.exists(here("results/RNAseq/03_methodwise"))) {
+      dir.create(here("results/RNAseq/03_methodwise"), recursive = TRUE)
+    }
+write_tsv(as.data.frame(all_signi_drugs_df$count_df), file = here("results/RNAseq/03_methodwise/RNAseq_drug_score_occurrence.tsv"))
+```
+
+2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
+
+```{r}
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, technology = "RNAseq", dirname = "results")
+```
+
+### microarray
+
+1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
+
+```{r}
+metadata_path <- "data/signatures/microarray_TB_signature_run_info.tsv"
+all_signi_drugs_df <- create_drug_method_table(metadata_path, stats = "min", score_percentile = 0.8, n = 3)
+if (!dir.exists(here("results/microarray/03_methodwise"))) {
+      dir.create(here("results/microarray/03_methodwise"), recursive = TRUE)
+    }
+write_tsv(as.data.frame(all_signi_drugs_df$count_df), file = here("results/microarray/03_methodwise/microarray_drug_score_occurrence.tsv"))
+```
+
+2.  Summarize drugs by method categories: only select drugs that come up in two out of the three method categories (CMAP, LINCS, Cor)
+
+```{r}
+methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, technology = "microarray", dirname = "results")
+methodwise_results 
+```
+
+
+## Aggregated signatures
+### RNAseq
+1.  Obtain drugs passing 90% reversal for all the six connectivity scores
+```{r}
+technologies = c("microarray", "RNAseq")
+scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")
+values = "neg"
+tail = "left"
+score_percentile = 0.9
+base_dir = "results"
+```
+
+```{r}
+aggr_res = extract_aggrSig_significant_drugs(technologies = technologies,
+                                             scores = scores,
+                                             values = values,
+                                             tail = tail,
+                                             score_percentile = score_percentile,
+                                             base_dir = base_dir)
+```
+
+```{r}
+aggr_methodwise_res = summarize_methodwise_aggrSig(aggr_res)
+head(aggr_methodwise_res)
+```

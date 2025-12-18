@@ -1,5 +1,5 @@
 # Compute aggregated signatures from individual signatures
-# Last modified: 12/17/25
+# Last modified: 11/13/25
 # Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
