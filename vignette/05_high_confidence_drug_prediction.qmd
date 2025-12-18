@@ -1,5 +1,5 @@
-# High Confidence Drug Predictions Journal
-This script processes individual and aggregated drug prediction results to identify high-confidence drug candidates based on their rank scores. calls Functions from `scripts/05_HighConf_Drugpred.R` to perform the following steps:
+# High confidence drug predictions
+This script processes individual and aggregated drug prediction results to identify high-confidence drug candidates based on their rank scores. calls Functions from `05_high_confidence_drug_prediction.R` to perform the following steps:
 
 1. Load necessary libraries and source functions `read_pipeline_results()`
 2. Load individual and aggregated drug prediction results `process_pipeline()`
@@ -10,7 +10,7 @@ This script processes individual and aggregated drug prediction results to ident
 
 ## High Confidence Drug Predictions
 
-#### Last modified: 07/17/25 
+#### Last modified: 12/18/25 
 
 #### Author: Ling Thang
 
