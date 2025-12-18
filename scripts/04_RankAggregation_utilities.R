@@ -1,5 +1,4 @@
-# utility functions for #drugrep_tb project
-# created date: 01/02/24
+# utility functions for rank aggregation
 # last modified: 09/14/24
 # Kewalin Samart
 

@@ -1,5 +1,4 @@
 # functions to generate intermediate data objects for rank aggregation (for results from both indiv and aggr signatures)
-# created date: 01/02/24
 # last modified: 07/10/24
 # Kewalin Samart
 

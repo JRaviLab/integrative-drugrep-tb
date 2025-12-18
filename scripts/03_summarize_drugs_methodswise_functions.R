@@ -1,5 +1,5 @@
 # functions to finalize drug results from individual and aggregated disease signatures
-# last modified: 07/23/25
+# last modified: 12/18/25
 # Kewalin Samart
 
 get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
@@ -360,66 +360,6 @@ get_signi_info <- function(combined_drug_df, signi_drug_df){
   signi_info_df <- combined_drug_df[which(combined_drug_df$pert %in% signi_drug_df$unique_pert),]
 
   return(signi_info_df)
-}
-
-summarize_significant_drugs <- function(
-    metadata_path,
-    drug_res_base = "results",
-    score_method = "Cor",
-    score = "Cor_pearson",
-    stats = "median",
-    score_percentile = 0.9,
-    percent_reverse = NA,
-    n = 3,
-    values = "neg",
-    tail = "left"
-) {
-  #' @description Summarizes significant drugs from RNA-seq or microarray for a given score
-  #' @param metadata_path path to signature detail table starting at a first-level folder within the project repository
-  #' @param drug_res_base drug result directory; default is "results"
-  #' @param score_method a string indicating a method categories: "CMAP", "LINCS", "Cor"
-  #' @param score a string indicating a connectivity score name: "CMAP", "WCS", "NCS", "Tau", "Cor_pearson", "Cor_spearman"
-  #' @param percent_reverse A float in [0,1] indicating the percentage of signatures reversed
-  #' @param n An integer: the number of top occurrences to include (ties allowed)
-  #' @param score_percentile a numeric indicating percentile of choice e.g. 0.75 representing a threshold being the 75th percentile of the flipped score distribution (dist x-axis: positive <---> negative, as negative score preferred for disease-drug reversal)
-  #' @param values a string indicating which non-zero values to include in the distribution: "neg", "pos", if other values specified for this argument, it means including all values.
-  #' @param tail a string indicating which side of the distribution to get the indicated top percentile from
-  #' @returns A named list containing all intermediate and final results
-
-  require(readr)
-
-  # load metadata and filter by signature ID
-  metadata_df <- read_tsv(here::here(metadata_path), show_col_types = FALSE)
-  data_to_run <- metadata_df[metadata_df$signature == 1, ]
-
-  # build drug results path
-  technology <- ifelse(grepl("RNAseq", metadata_path), "RNAseq", "microarray")
-  drug_res_path <- file.path(drug_res_base, technology, score_method)
-
-  # get drug scores
-  combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
-
-  score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
-  score_vector <- as.numeric(unlist(combined_drug_df[1]))
-
-  # compute threshold and occurrences
-  threshold <- determine_threshold(score_vector, values = values, tail = tail, score_percentile = score_percentile)
-
-  message(glue::glue("Processing: {technology} | {score_method} | {score} | threshold: {round(threshold, 3)}"))
-
-  pert_occurrence <- get_reversing_drugs_freq(score_matrix, threshold = threshold, values = values)
-
-  # get top significant drugs
-  significant_drugs <- get_significant_drugs(pert_occurrence, score_matrix, percent_reverse = percent_reverse, n = n)
-
-  # return all intermediate objects
-  return(list(
-    combined_drug_df = combined_drug_df,
-    score_matrix = score_matrix,
-    threshold = threshold,
-    pert_occurrence = pert_occurrence,
-    significant_drugs = significant_drugs
-  ))
 }
 
 create_drug_method_table <- function(metadata_path, stats = "min", score_percentile = 0.8, percent_reverse = NA, n = 3, values = "neg", tail = "left") {
