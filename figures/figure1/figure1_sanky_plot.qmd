@@ -11,16 +11,16 @@ library(dplyr)
 
 ```{r microarray signature info}
 microarray_signatures_df <- read_tsv(here("data/signatures/microarray_TB_signature_run_info.tsv"))
-microarray_signatures_info <- microarray_signatures_df[microarray_signatures_df$signature == 1,]
+microarray_signatures_info <- microarray_signatures_df[microarray_signatures_df$signature == 1, ]
 microarray_signatures_info$technology <- "microarray"
 
 rnaseq_signatures_df <- read_tsv(here("data/signatures/RNAseq_TB_signature_run_info.tsv"))
-rnaseq_signatures_info <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1,]
+rnaseq_signatures_info <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1, ]
 rnaseq_signatures_info$technology <- "RNAseq"
 ```
 
 ```{r combine signature info}
-all_signatures_info = rbind(microarray_signatures_info, rnaseq_signatures_info)
+all_signatures_info <- rbind(microarray_signatures_info, rnaseq_signatures_info)
 
 write_tsv(all_signatures_info, file = here("data/signatures/202506_TB_signatures_info.tsv"))
 ```
@@ -29,26 +29,35 @@ write_tsv(all_signatures_info, file = here("data/signatures/202506_TB_signatures
 library(networkD3)
 
 df_unique <- all_signatures_info %>%
-  mutate(signature = SIGNATURE_NAME,
-         tissue_cell_type = tissue_cell_type,
-         origin = sample_origin,
-         origin_type = tissue_category,
-         TB = tb_status) %>%
+  mutate(
+    signature = SIGNATURE_NAME,
+    tissue_cell_type = tissue_cell_type,
+    origin = sample_origin,
+    origin_type = tissue_category,
+    TB = tb_status
+  ) %>%
   dplyr::select(signature, tissue_cell_type, origin, origin_type, TB, technology)
 
 cell_counts <- df_unique %>% dplyr::count(tissue_cell_type)
-keep_types <- cell_counts %>% filter(n >= 2) %>% pull(tissue_cell_type)
+keep_types <- cell_counts %>%
+  filter(n >= 2) %>%
+  pull(tissue_cell_type)
 df_unique$tissue_cell_type <- ifelse(df_unique$tissue_cell_type %in% keep_types,
-                                     df_unique$tissue_cell_type,
-                                     "Other tissue/cell types")
+  df_unique$tissue_cell_type,
+  "Other tissue/cell types"
+)
 
-link1 <- df_unique %>% dplyr::count(tissue_cell_type, origin) %>%
+link1 <- df_unique %>%
+  dplyr::count(tissue_cell_type, origin) %>%
   dplyr::rename(source = tissue_cell_type, target = origin, value = n)
-link2 <- df_unique %>% dplyr::count(origin, origin_type) %>%
+link2 <- df_unique %>%
+  dplyr::count(origin, origin_type) %>%
   dplyr::rename(source = origin, target = origin_type, value = n)
-link3 <- df_unique %>% dplyr::count(origin_type, TB) %>%
+link3 <- df_unique %>%
+  dplyr::count(origin_type, TB) %>%
   dplyr::rename(source = origin_type, target = TB, value = n)
-link4 <- df_unique %>% dplyr::count(TB, technology) %>%
+link4 <- df_unique %>%
+  dplyr::count(TB, technology) %>%
   dplyr::rename(source = TB, target = technology, value = n)
 
 links_all <- bind_rows(link1, link2, link3, link4)
@@ -67,7 +76,7 @@ nodes <- all_node_counts %>%
   dplyr::select(name, label)
 
 nodes <- all_node_counts %>%
-  mutate(label = name) %>%   
+  mutate(label = name) %>%
   mutate(
     label = dplyr::recode(
       label,
@@ -79,7 +88,7 @@ nodes <- all_node_counts %>%
       "blood_macrophage" = "Macrophage",
       .default = label
     ),
-    label = paste0(label, " (", total, ")")   
+    label = paste0(label, " (", total, ")")
   ) %>%
   dplyr::select(name, label)
 
@@ -87,16 +96,18 @@ nodes <- all_node_counts %>%
 links_all$source_id <- match(links_all$source, nodes$name) - 1
 links_all$target_id <- match(links_all$target, nodes$name) - 1
 
-sankey <- sankeyNetwork(Links = links_all,
-              Nodes = nodes,
-              Source = "source_id",
-              Target = "target_id",
-              Value = "value",
-              NodeID = "label",
-              fontSize = 15,
-              nodeWidth = 30,
-              nodePadding = 15,
-              sinksRight = TRUE)
+sankey <- sankeyNetwork(
+  Links = links_all,
+  Nodes = nodes,
+  Source = "source_id",
+  Target = "target_id",
+  Value = "value",
+  NodeID = "label",
+  fontSize = 15,
+  nodeWidth = 30,
+  nodePadding = 15,
+  sinksRight = TRUE
+)
 ```
 
 ```{r save output}
@@ -112,5 +123,4 @@ webshot(
   vwidth = 900,
   vheight = 600
 )
-
 ```
