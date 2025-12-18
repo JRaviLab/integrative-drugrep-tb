@@ -15,10 +15,10 @@ source(here("scripts/04_RankAggregation_utilities.R"))
 source(here("scripts/04_BiG_RankAggregation_functions.R"))
 
 run_BiG_diffuse_indivSig <- function(technologies = c("microarray", "RNAseq"),
-                                                 n_p1_params = c(4, 4),
-                                                 n_iter = 2000,
-                                                 burnin = 1000,
-                                                 prior = "IG") {
+                                     n_p1_params = c(4, 4),
+                                     n_iter = 2000,
+                                     burnin = 1000,
+                                     prior = "IG") {
   require(here)
   require(readr)
 
@@ -39,8 +39,10 @@ run_BiG_diffuse_indivSig <- function(technologies = c("microarray", "RNAseq"),
     NTlength <- sapply(rank_matrix, length)
 
     # run BiG diffuse aggregation
-    result <- BiG_diffuse(r = rank_matrix, n_T = NTlength, n_p1 = n_p1,
-                          M = n_iter, burnin = burnin, prior = prior)
+    result <- BiG_diffuse(
+      r = rank_matrix, n_T = NTlength, n_p1 = n_p1,
+      M = n_iter, burnin = burnin, prior = prior
+    )
 
     # extract ranked drug entities
     entities <- rownames(rank_matrix)
@@ -57,14 +59,14 @@ run_BiG_diffuse_indivSig <- function(technologies = c("microarray", "RNAseq"),
 }
 
 run_BiG_diffuse_aggrSig <- function(technologies = c("microarray", "RNAseq"),
-                                       n_p1_params = c(4, 4),
-                                       base_dir = "results",
-                                       values = "neg",
-                                       tail = "left",
-                                       score_percentile = 0.9,
-                                       M = 2000,
-                                       burnin = 1000,
-                                       prior = "IG") {
+                                    n_p1_params = c(4, 4),
+                                    base_dir = "results",
+                                    values = "neg",
+                                    tail = "left",
+                                    score_percentile = 0.9,
+                                    M = 2000,
+                                    burnin = 1000,
+                                    prior = "IG") {
   require(readr)
 
   suffix <- paste0(values, "_", tail, "_", score_percentile)
@@ -76,8 +78,10 @@ run_BiG_diffuse_aggrSig <- function(technologies = c("microarray", "RNAseq"),
     message("Running BiG rank aggregation for: ", technology)
 
     dirname <- file.path(base_dir, technology)
-    rank_file <- here(dirname, "04_rank_aggregation",
-                           paste0("ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds"))
+    rank_file <- here(
+      dirname, "04_rank_aggregation",
+      paste0("ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds")
+    )
 
     if (!file.exists(here(rank_file))) {
       warning("Ranked drug list missing for: ", technology)
@@ -97,12 +101,14 @@ run_BiG_diffuse_aggrSig <- function(technologies = c("microarray", "RNAseq"),
     NTlength <- sapply(seq_len(ncol(rank_matrix_adjusted)), function(i) length(rank_matrix_adjusted[, i]))
 
     # Run BiG Diffuse aggregation
-    result <- BiG_diffuse(r = rank_matrix_adjusted,
-                          n_T = NTlength,
-                          n_p1 = n_p1,
-                          M = M,
-                          burnin = burnin,
-                          prior = prior)
+    result <- BiG_diffuse(
+      r = rank_matrix_adjusted,
+      n_T = NTlength,
+      n_p1 = n_p1,
+      M = M,
+      burnin = burnin,
+      prior = prior
+    )
 
     # Rank drugs
     entities <- rownames(rank_matrix_adjusted)
@@ -114,9 +120,13 @@ run_BiG_diffuse_aggrSig <- function(technologies = c("microarray", "RNAseq"),
     save_dir <- here(dirname, "04_rank_aggregation")
     dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
 
-    write_tsv(RA_result_df,
-              file.path(save_dir, paste0("RAresult_", suffix, "_aggrSig_TB_", technology, ".tsv")))
-    saveRDS(rankedEntities,
-            file.path(save_dir, paste0("RAresult_", suffix, "_aggrSig_TB_", technology, ".rds")))
+    write_tsv(
+      RA_result_df,
+      file.path(save_dir, paste0("RAresult_", suffix, "_aggrSig_TB_", technology, ".tsv"))
+    )
+    saveRDS(
+      rankedEntities,
+      file.path(save_dir, paste0("RAresult_", suffix, "_aggrSig_TB_", technology, ".rds"))
+    )
   }
 }

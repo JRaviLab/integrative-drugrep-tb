@@ -56,7 +56,7 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
 }
 
 
-get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
+get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min") {
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drugs and cols: disease signatures
   #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param score a string indicating a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman", "Cor_pearson"
@@ -70,88 +70,86 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
 
   transformed_combined_drug_df <- data.frame(unique_pert = unique_pert, stringsAsFactors = FALSE)
 
-  col_idx = 1
-  for(sig in unique_signature){
-    col_idx = col_idx + 1
+  col_idx <- 1
+  for (sig in unique_signature) {
+    col_idx <- col_idx + 1
     # get tau vector for each signature
-    score_vec = c()
-    for(pert in unique_pert){
-
-      pert_df = combined_drug_df[which(combined_drug_df$pert == pert & combined_drug_df$GSE_platform == sig),]
+    score_vec <- c()
+    for (pert in unique_pert) {
+      pert_df <- combined_drug_df[which(combined_drug_df$pert == pert & combined_drug_df$GSE_platform == sig), ]
 
       if (nrow(pert_df) == 0) {
         score_vec <- append(score_vec, NA)
         next
       }
 
-      if(score == "Tau"){
-        if(stats == "min"){
-          index = which.min(pert_df$Tau)
+      if (score == "Tau") {
+        if (stats == "min") {
+          index <- which.min(pert_df$Tau)
           score_vec <- append(score_vec, pert_df$Tau[index])
-        }else if(stats == "median"){
+        } else if (stats == "median") {
           if (nrow(pert_df) == 0 || all(is.na(pert_df$Tau))) {
-          score_vec <- append(score_vec, NA)
-        } else {
-          score_vec <- append(score_vec, median(pert_df$Tau, na.rm = TRUE))
-        }
-
-        }else if(stats == "max"){
+            score_vec <- append(score_vec, NA)
+          } else {
+            score_vec <- append(score_vec, median(pert_df$Tau, na.rm = TRUE))
+          }
+        } else if (stats == "max") {
           score_vec <- append(score_vec, max(pert_df$Tau))
         }
       }
-      if(score == "NCS"){
-        if(stats == "min"){
-          index = which.min(pert_df$NCS)
+      if (score == "NCS") {
+        if (stats == "min") {
+          index <- which.min(pert_df$NCS)
           score_vec <- append(score_vec, pert_df$NCS[index])
-        }else if(stats == "median"){
+        } else if (stats == "median") {
           if (nrow(pert_df) == 0 || all(is.na(pert_df$NCS))) {
             score_vec <- append(score_vec, NA)
           } else {
             score_vec <- append(score_vec, median(pert_df$NCS, na.rm = TRUE))
           }
-        }else if(stats == "max"){
+        } else if (stats == "max") {
           score_vec <- append(score_vec, max(pert_df$NCS))
         }
       }
-      if(score == "WCS"){
-        if(stats == "min"){
-          index = which.min(pert_df$WTCS)
+      if (score == "WCS") {
+        if (stats == "min") {
+          index <- which.min(pert_df$WTCS)
           score_vec <- append(score_vec, pert_df$WTCS[index])
-        }else if(stats == "median"){
+        } else if (stats == "median") {
           if (nrow(pert_df) == 0 || all(is.na(pert_df$WTCS))) {
             score_vec <- append(score_vec, NA)
           } else {
             score_vec <- append(score_vec, median(pert_df$WTCS, na.rm = TRUE))
           }
-        }else if(stats == "max"){
+        } else if (stats == "max") {
           score_vec <- append(score_vec, max(pert_df$WTCS))
         }
       }
-      if(score == "CMAP"){
-        if(stats == "min"){
-          index = which.min(pert_df$scaled_score)
+      if (score == "CMAP") {
+        if (stats == "min") {
+          index <- which.min(pert_df$scaled_score)
           score_vec <- append(score_vec, pert_df$scaled_score[index])
-        }else if(stats == "median"){
+        } else if (stats == "median") {
           if (nrow(pert_df) == 0 || all(is.na(pert_df$scaled_score))) {
             score_vec <- append(score_vec, NA)
           } else {
             score_vec <- append(score_vec, median(pert_df$scaled_score, na.rm = TRUE))
           }
-        }else if(stats == "max"){
+        } else if (stats == "max") {
           score_vec <- append(score_vec, max(pert_df$scaled_score))
         }
       }
-      if(score == "Cor_spearman" | score == "Cor_pearson"){
-        if(stats == "min"){
-          index = which.min(pert_df$cor_score)
+      if (score == "Cor_spearman" | score == "Cor_pearson") {
+        if (stats == "min") {
+          index <- which.min(pert_df$cor_score)
           score_vec <- append(score_vec, pert_df$cor_score[index])
-        }else if(stats == "median"){
+        } else if (stats == "median") {
           if (nrow(pert_df) == 0 || all(is.na(pert_df$cor_score))) {
             score_vec <- append(score_vec, NA)
           } else {
             score_vec <- append(score_vec, median(pert_df$cor_score, na.rm = TRUE))
           }
-        }else if(stats == "max"){
+        } else if (stats == "max") {
           score_vec <- append(score_vec, max(pert_df$cor_score))
         }
       }
@@ -165,7 +163,7 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min"){
   return(transformed_combined_drug_df)
 }
 
-get_DrugCellDis_ScoreMatrix <- function(combined_drug_df, score){
+get_DrugCellDis_ScoreMatrix <- function(combined_drug_df, score) {
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drug-cell combinations and cols: disease signatures
   #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param score a string indicating a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman", "Cor_pearson"
@@ -176,46 +174,48 @@ get_DrugCellDis_ScoreMatrix <- function(combined_drug_df, score){
   unique_pert_cell <- unique(combined_drug_df$pert_cell)
   unique_signature <- unique(combined_drug_df$GSE_platform)
 
-  transformed_combined_drugcell_mat = matrix(NA, nrow = length(unique_pert_cell), ncol = length(unique_signature),
-                                             dimnames = list(unique_pert_cell, unique_signature))
-  col_idx = 1
-  for(sig in unique_signature){
-    row_idx = 1
-    for(pert_cell in unique_pert_cell){
-      pert_cell_df = combined_drug_df[which(combined_drug_df$pert_cell == pert_cell & combined_drug_df$GSE_platform == sig),]
-      if(nrow(pert_cell_df) != 0){
-        if(score == "Tau"){
-          score_val = pert_cell_df$Tau[1]
+  transformed_combined_drugcell_mat <- matrix(NA,
+    nrow = length(unique_pert_cell), ncol = length(unique_signature),
+    dimnames = list(unique_pert_cell, unique_signature)
+  )
+  col_idx <- 1
+  for (sig in unique_signature) {
+    row_idx <- 1
+    for (pert_cell in unique_pert_cell) {
+      pert_cell_df <- combined_drug_df[which(combined_drug_df$pert_cell == pert_cell & combined_drug_df$GSE_platform == sig), ]
+      if (nrow(pert_cell_df) != 0) {
+        if (score == "Tau") {
+          score_val <- pert_cell_df$Tau[1]
         }
-        if(score == "NCS"){
-          score_val = pert_cell_df$NCS[1]
+        if (score == "NCS") {
+          score_val <- pert_cell_df$NCS[1]
         }
-        if(score == "WCS"){
-          score_val = pert_cell_df$WTCS[1]
+        if (score == "WCS") {
+          score_val <- pert_cell_df$WTCS[1]
         }
-        if(score == "CMAP"){
-          score_val = pert_cell_df$scaled_score[1]
+        if (score == "CMAP") {
+          score_val <- pert_cell_df$scaled_score[1]
         }
-        if(score == "Cor_spearman" | score == "Cor_pearson"){
-          score_val = pert_cell_df$cor_score[1]
+        if (score == "Cor_spearman" | score == "Cor_pearson") {
+          score_val <- pert_cell_df$cor_score[1]
         }
-        transformed_combined_drugcell_mat[row_idx,col_idx] = score_val
-      }else{
-        transformed_combined_drugcell_mat[row_idx,col_idx] = 0
+        transformed_combined_drugcell_mat[row_idx, col_idx] <- score_val
+      } else {
+        transformed_combined_drugcell_mat[row_idx, col_idx] <- 0
       }
-      row_idx = row_idx + 1
+      row_idx <- row_idx + 1
     }
-    col_idx = col_idx + 1
+    col_idx <- col_idx + 1
   }
   transformed_combined_drugcell_df <- as.data.frame(transformed_combined_drugcell_mat)
   transformed_combined_drugcell_df$unique_pert <- row.names(transformed_combined_drugcell_df)
-  transformed_combined_drugcell_df <- transformed_combined_drugcell_df[c("unique_pert",unique_signature)]
+  transformed_combined_drugcell_df <- transformed_combined_drugcell_df[c("unique_pert", unique_signature)]
   row.names(transformed_combined_drugcell_df) <- NULL
 
   return(transformed_combined_drugcell_df)
 }
 
-determine_threshold <- function(score_vec, values, tail,  score_percentile=0.90){
+determine_threshold <- function(score_vec, values, tail, score_percentile = 0.90) {
   #' @description this function computes a threshold for getting top drugs by a predefined score percentile
   #' @param score_vec a numeric vector of disease-drug scores
   #' @param score_percentile a numeric indicating percentile of choice e.g. 0.75 representing a threshold being the 75th percentile of the flipped score distribution (dist x-axis: positive <---> negative, as negative score preferred for disease-drug reversal)
@@ -227,10 +227,10 @@ determine_threshold <- function(score_vec, values, tail,  score_percentile=0.90)
   # set scores of zero to NA as they are meaningless
   score_vec[score_vec == 0] <- NA
   # considerations of what non-zero values to include in threshold calculation
-  if(values == "neg"){
+  if (values == "neg") {
     print("Only consider negative values")
     score_vec[score_vec > 0] <- NA # set positive values to NAs so they would be removed later
-  }else if(values == "pos"){
+  } else if (values == "pos") {
     print("Only consider positive values")
     score_vec[score_vec < 0] <- NA # set positive values to NAs so they would be removed later
   }
@@ -238,18 +238,18 @@ determine_threshold <- function(score_vec, values, tail,  score_percentile=0.90)
   score_vec <- score_vec[!is.na(score_vec)] # remove NAs
 
   # compute threshold based on a given percentile and tail direction
-  if(tail == "left"){
-    threshold <- round(unname(quantile(score_vec, 1-score_percentile)[paste0((1-score_percentile)*100,"%")])[1],3)
-  }else if(tail == "right"){
-    threshold <- round(unname(quantile(score_vec, score_percentile)[paste0((score_percentile)*100,"%")])[1],3)
+  if (tail == "left") {
+    threshold <- round(unname(quantile(score_vec, 1 - score_percentile)[paste0((1 - score_percentile) * 100, "%")])[1], 3)
+  } else if (tail == "right") {
+    threshold <- round(unname(quantile(score_vec, score_percentile)[paste0((score_percentile) * 100, "%")])[1], 3)
   }
 
-  print(paste0("threshold:",threshold))
+  print(paste0("threshold:", threshold))
 
   return(threshold)
 }
 
-get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, values){
+get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, values) {
   #' @description this function counts how often the drug got prioritized by the input disease signatures based on a given score threshold
   #' @param transformed_combined_drug_df a dataframe with rows: drugs, columns: disease signatures, entries: scores
   #' @param threshold a negative numeric indicating the threshold for reversal
@@ -267,20 +267,20 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
 
   # loop through each drug and disease signatures to get occurrence counts
   pert_above_occurrence <- list()
-  for(row in 1:nrow(transformed_combined_drug_df)){
+  for (row in 1:nrow(transformed_combined_drug_df)) {
     above_count <- 0
-    for(col in 1:ncol(transformed_combined_drug_df)){
-      if(values == 'neg'){
-        if(transformed_combined_drug_df[row,col] < threshold){
-          above_count = above_count + 1
+    for (col in 1:ncol(transformed_combined_drug_df)) {
+      if (values == "neg") {
+        if (transformed_combined_drug_df[row, col] < threshold) {
+          above_count <- above_count + 1
         }
-      }else if(values == 'pos'){
-        if(transformed_combined_drug_df[row,col] > threshold){
-          above_count = above_count + 1
+      } else if (values == "pos") {
+        if (transformed_combined_drug_df[row, col] > threshold) {
+          above_count <- above_count + 1
         }
-      }else if(values == 'zero'){
-        if(abs(transformed_combined_drug_df[row,col]) < threshold){
-          above_count = above_count + 1
+      } else if (values == "zero") {
+        if (abs(transformed_combined_drug_df[row, col]) < threshold) {
+          above_count <- above_count + 1
         }
       }
     }
@@ -292,18 +292,18 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
   # add drug info to the occurrence dataframe
   # "moa","disease_area","t_gn_sym","target","indication"
   # read in drug info from drug repurposing hub (treat this as a extdata)
-  drug_metadata <- read.csv(file=here("data/metadata/repurposing_drugs_20200324.csv"),skip = 9)
-  pert_occurrence_df <- merge(x=pert_occurrence_df, y=drug_metadata, by.x = "unique_pert", by.y = "pert_iname", all.x=TRUE, all.y=FALSE)
+  drug_metadata <- read.csv(file = here("data/metadata/repurposing_drugs_20200324.csv"), skip = 9)
+  pert_occurrence_df <- merge(x = pert_occurrence_df, y = drug_metadata, by.x = "unique_pert", by.y = "pert_iname", all.x = TRUE, all.y = FALSE)
   # select drugs with at least 1 occurrence
-  pert_occurrence_df <- pert_occurrence_df[pert_occurrence_df$occurrence > 0,]
+  pert_occurrence_df <- pert_occurrence_df[pert_occurrence_df$occurrence > 0, ]
   # sort drugs by their occurrence in decreasing order
-  pert_occurrence_df = pert_occurrence_df[order(pert_occurrence_df$occurrence, decreasing = TRUE),]
+  pert_occurrence_df <- pert_occurrence_df[order(pert_occurrence_df$occurrence, decreasing = TRUE), ]
 
   return(pert_occurrence_df)
 }
 
 
-get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_df, percent_reverse = NA, n = NA){
+get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_df, percent_reverse = NA, n = NA) {
   #' @description Identifies significant drugs based on either a reversal percentage threshold or the top n most frequent occurrences (including ties).
   #' @param pert_occurrence_df A sorted dataframe with drug names and their occurrences.
   #' @param transformed_combined_drug_df A dataframe with drug vs. disease signature scores.
@@ -336,7 +336,7 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
       n <- min(n, length(u))
       # Define cutoff: lowest occurrence value to include
       cutoff_occurrence <- u[n]
-      print(paste0("occurrence cutoffs: ",cutoff_occurrence))
+      print(paste0("occurrence cutoffs: ", cutoff_occurrence))
       signi_drug_df <- pert_occurrence_df[pert_occurrence_df$occurrence >= cutoff_occurrence, ]
     } else {
       signi_drug_df <- pert_occurrence_df
@@ -351,13 +351,13 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
   return(signi_drug_df)
 }
 
-get_signi_info <- function(combined_drug_df, signi_drug_df){
+get_signi_info <- function(combined_drug_df, signi_drug_df) {
   #' @description this function grabs the LINCS signatures information of identified significant drugs from the original combined drug dataframe
   #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param signi_drug_df a dataframe containing the drugs prioritized "significant" based on either the given percent_reverse or (top) n
   #' @returns  signi_info_df: a dataframe with significant drugs and their LINCS signatures information
   #' @author Kewalin Samart
-  signi_info_df <- combined_drug_df[which(combined_drug_df$pert %in% signi_drug_df$unique_pert),]
+  signi_info_df <- combined_drug_df[which(combined_drug_df$pert %in% signi_drug_df$unique_pert), ]
 
   return(signi_info_df)
 }
@@ -400,7 +400,7 @@ create_drug_method_table <- function(metadata_path, stats = "min", score_percent
     )
 
     score_matrix <- get_DrugDis_ScoreMatrix(combined_drug_df, score, stats = stats)
-    score_vec <- unlist(score_matrix[,-1])
+    score_vec <- unlist(score_matrix[, -1])
     threshold <- determine_threshold(score_vec, values = values, tail = tail, score_percentile = score_percentile)
 
     # Get (drug, signature) pairs that pass threshold
@@ -474,11 +474,15 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   # add LINCS and Cor group summary columns
   all_signi_drugs_df$LINCS <- if (length(lincs_scores) > 0) {
     rowSums(all_signi_drugs_df[, lincs_scores, drop = FALSE], na.rm = TRUE)
-  } else 0
+  } else {
+    0
+  }
 
   all_signi_drugs_df$Cor <- if (length(cor_scores) > 0) {
     rowSums(all_signi_drugs_df[, cor_scores, drop = FALSE], na.rm = TRUE)
-  } else 0
+  } else {
+    0
+  }
 
   if (!("CMAP" %in% colnames(all_signi_drugs_df))) {
     all_signi_drugs_df$CMAP <- 0
@@ -495,15 +499,16 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   if (file.exists(drug_info_path)) {
     drug_info_df <- read.csv(drug_info_path, skip = 9)
     summary_df <- merge(summary_df, drug_info_df,
-                        by.x = "significant_drug", by.y = "pert_iname",
-                        all.x = TRUE, all.y = FALSE)
+      by.x = "significant_drug", by.y = "pert_iname",
+      all.x = TRUE, all.y = FALSE
+    )
   }
 
   # sort and write full summary
   summary_df <- summary_df[order(-summary_df$occurrence), ]
   rownames(summary_df) <- NULL
 
-  full_summary_path <- here::here(dirname,technology,"03_methodwise", paste0(technology, "_indiv_drug_summary.tsv"))
+  full_summary_path <- here::here(dirname, technology, "03_methodwise", paste0(technology, "_indiv_drug_summary.tsv"))
   if (!dir.exists(here::here(dirname))) dir.create(here::here(dirname), recursive = TRUE)
   write_tsv(summary_df, file = full_summary_path)
 
@@ -515,7 +520,7 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   indiv_drugs_res_top <- summary_df[bin_mat$method_freq >= 2, ]
   rownames(indiv_drugs_res_top) <- NULL
 
-  top_summary_path <- here::here(dirname,technology,"03_methodwise", paste0(technology, "_indiv_top_drugs.tsv"))
+  top_summary_path <- here::here(dirname, technology, "03_methodwise", paste0(technology, "_indiv_top_drugs.tsv"))
   write_tsv(indiv_drugs_res_top, file = top_summary_path)
 
   return(indiv_drugs_res_top)
@@ -574,12 +579,12 @@ extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RN
       drug_df <- read.delim(file_path, sep = "\t")
 
       score_col <- switch(score,
-                          Tau = "Tau",
-                          NCS = "NCS",
-                          WCS = "WTCS",
-                          CMAP = "scaled_score",
-                          Cor_spearman = "cor_score",
-                          Cor_pearson = "cor_score"
+        Tau = "Tau",
+        NCS = "NCS",
+        WCS = "WTCS",
+        CMAP = "scaled_score",
+        Cor_spearman = "cor_score",
+        Cor_pearson = "cor_score"
       )
 
       score_vec <- drug_df[[score_col]]
@@ -621,8 +626,8 @@ extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RN
 }
 
 summarize_methodwise_aggrSig <- function(res,
-                                          base_dir = "results",
-                                          metadata_path = here("data/metadata/repurposing_drugs_20200324.csv")) {
+                                         base_dir = "results",
+                                         metadata_path = here("data/metadata/repurposing_drugs_20200324.csv")) {
   #' @description this function summarize drugs from aggregated signatures based on methodwise approach (selecting drugs showing up in 2/3 method categories)
   #' @param res the output of extract_aggrSig_significant_drugs function
   #' @param base_dir a string indicating the output directory name (first level inside the project directory)
@@ -673,8 +678,9 @@ summarize_methodwise_aggrSig <- function(res,
 
     # merge with metadata
     merged_df <- merge(summary_df, drug_info_df,
-                       by.x = "significant_drug", by.y = "pert_iname",
-                       all.x = TRUE)
+      by.x = "significant_drug", by.y = "pert_iname",
+      all.x = TRUE
+    )
     merged_df <- merged_df[order(-merged_df$occurrence), ]
     rownames(merged_df) <- NULL
 
@@ -683,11 +689,11 @@ summarize_methodwise_aggrSig <- function(res,
     rownames(top_df) <- NULL
 
     # save to disk
-    output_dir <- here(base_dir,tech, "03_methodwise")
+    output_dir <- here(base_dir, tech, "03_methodwise")
     dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
-    write_tsv(merged_df, file.path(output_dir, paste0(tech,"_aggr_drug_summary.tsv")))
-    write_tsv(top_df, file.path(output_dir, paste0(tech,"_aggr_top_drugs.tsv")))
+    write_tsv(merged_df, file.path(output_dir, paste0(tech, "_aggr_drug_summary.tsv")))
+    write_tsv(top_df, file.path(output_dir, paste0(tech, "_aggr_top_drugs.tsv")))
 
     results[[tech]] <- list(all_summary = merged_df, top_drugs = top_df)
   }

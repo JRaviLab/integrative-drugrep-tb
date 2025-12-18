@@ -37,12 +37,13 @@ rank_drugs_by_connectivity <- function(technologies = c("microarray", "RNAseq"),
       combined_drug_df <- get_drug_results(data_to_run, drug_res_path, score_method, score)
 
       score_column <- switch(score,
-                             "CMAP" = "scaled_score",
-                             "WCS" = "WTCS",
-                             "NCS" = "NCS",
-                             "Tau" = "Tau",
-                             "Cor_spearman" = "cor_score",
-                             "Cor_pearson" = "cor_score")
+        "CMAP" = "scaled_score",
+        "WCS" = "WTCS",
+        "NCS" = "NCS",
+        "Tau" = "Tau",
+        "Cor_spearman" = "cor_score",
+        "Cor_pearson" = "cor_score"
+      )
 
       min_score_df <- combined_drug_df %>%
         dplyr::select(unique_pert = pert, cell, score = !!sym(score_column)) %>%
@@ -88,7 +89,7 @@ rank_drugs_by_connectivity <- function(technologies = c("microarray", "RNAseq"),
 }
 
 rank_individual_signature_drugs <- function(technologies = c("microarray", "RNAseq"),
-                                            scores = c("CMAP","WCS","NCS","Tau","Cor_spearman","Cor_pearson")) {
+                                            scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")) {
   require(here)
   for (technology in technologies) {
     dirname <- here("results", technology, "04_rank_aggregation")
@@ -110,7 +111,7 @@ rank_individual_signature_drugs <- function(technologies = c("microarray", "RNAs
 }
 
 generate_topdrug_lists_from_percentile <- function(technologies = c("microarray", "RNAseq"),
-                                                   scores = c("CMAP","WCS","NCS","Tau","Cor_spearman","Cor_pearson")) {
+                                                   scores = c("CMAP", "WCS", "NCS", "Tau", "Cor_spearman", "Cor_pearson")) {
   require(here)
   for (technology in technologies) {
     dirname <- here("results", technology, "04_rank_aggregation")
@@ -130,7 +131,8 @@ generate_topdrug_lists_from_percentile <- function(technologies = c("microarray"
           drugs_score_mean_med_added$ranked_pert %in% top_drugs_tech_df$significant_drug
         ],
         min_score_df = drugs_score_mean_med_added$min_score_df[
-          drugs_score_mean_med_added$min_score_df$unique_pert %in% top_drugs_tech_df$significant_drug, ]
+          drugs_score_mean_med_added$min_score_df$unique_pert %in% top_drugs_tech_df$significant_drug,
+        ]
       )
 
       score_ranked_drugs <- topdrugs_score_mean_med_added$ranked_pert
@@ -216,12 +218,16 @@ rank_aggregated_signature_drugs <- function(technologies = c("microarray", "RNAs
     save_dir <- file.path(here(base_dir, technology, "04_rank_aggregation"))
     dir.create(save_dir, recursive = TRUE, showWarnings = FALSE)
 
-    saveRDS(score_ranked_drugs_df,
-            file.path(save_dir, paste0("full_ranked_drugs_aggrSig_TB_", technology, ".rds")))
+    saveRDS(
+      score_ranked_drugs_df,
+      file.path(save_dir, paste0("full_ranked_drugs_aggrSig_TB_", technology, ".rds"))
+    )
     print(paste0("Succesfully saved full_ranked_drugs_aggrSig_TB_", technology, ".rds", " at ", save_dir))
 
-    saveRDS(score_ranked_drugs_list,
-            file.path(save_dir, paste0("ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds")))
+    saveRDS(
+      score_ranked_drugs_list,
+      file.path(save_dir, paste0("ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds"))
+    )
     print(paste0("Succesfully saved ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds", " at ", save_dir))
   }
 }
