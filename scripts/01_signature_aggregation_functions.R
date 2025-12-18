@@ -72,15 +72,15 @@ compute_membership_matrix <- function(metadata_path,
   print(paste0("Number of background genes: ", length(bg_genes)))
 
   data_to_run <- read_tsv(metadata_path)
-  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  data_to_run <- data_to_run[data_to_run$signature == 1, ]
   # filter by any specify context
   # tissue category
-  if(!is.null(tissue_category)){
-    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  if (!is.null(tissue_category)) {
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category, ]
   }
   # sample origin
-  if(!is.null(sample_origin)){
-    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  if (!is.null(sample_origin)) {
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin, ]
   }
 
   for (i in 1:nrow(data_to_run)) {
@@ -133,10 +133,33 @@ compute_membership_matrix <- function(metadata_path,
   ))
   print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(final_sigval[, !colnames(final_sigval) %in% "GeneID"])))
 
+  # set row names to GeneID
+  row.names(final_sigval) <- final_sigval$GeneID
+  final_sigval$GeneID <- NULL
+  # reorder columns
+  final_sigval <- final_sigval[, order(colnames(final_sigval))]
+  final_sigval <- as.matrix(final_sigval)
+
   if (save_result) {
-    saveRDS(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat_.rds"))
-    write_tsv(final_sigval, file = paste0(output_dir, "/", direction, "_membership_mat.tsv"))
-    print(paste0("The computed Gene Membership matrix", paste0(direction, "_membership_mat.rds"), " was saved at ", output_dir))
+    saveRDS(
+      final_sigval,
+      file = file.path(output_dir, paste0(direction, "_membership_mat.rds"))
+    )
+
+    df_out <- tibble::rownames_to_column(
+      as.data.frame(final_sigval),
+      var = "GeneID"
+    )
+
+    readr::write_tsv(
+      df_out,
+      file.path(output_dir, paste0(direction, "_membership_mat.tsv"))
+    )
+
+    message(
+      "The computed Gene Membership matrix (", direction,
+      ") was saved at ", output_dir
+    )
   }
 
   return(final_sigval)
@@ -169,15 +192,15 @@ compute_jaccard_matrix <- function(metadata_path,
 
   # get data_to_run df
   data_to_run <- read_tsv(metadata_path)
-  data_to_run <- data_to_run[data_to_run$signature == 1,]
+  data_to_run <- data_to_run[data_to_run$signature == 1, ]
   # filter by any specify context
   # tissue category
-  if(!is.null(tissue_category)){
-    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category,]
+  if (!is.null(tissue_category)) {
+    data_to_run <- data_to_run[data_to_run$tissue_category == tissue_category, ]
   }
   # sample origin
-  if(!is.null(sample_origin)){
-    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin,]
+  if (!is.null(sample_origin)) {
+    data_to_run <- data_to_run[data_to_run$sample_origin == sample_origin, ]
   }
 
   # initialize empty vectors for storage
@@ -235,24 +258,47 @@ compute_jaccard_matrix <- function(metadata_path,
     }
   }
   # add a column of signature names
-  mat <- as.data.frame(mat)
-  mat$names <- names(vec)
-  mat <- mat[, c("names", names(vec))]
+  # mat <- as.data.frame(mat)
+  # mat$names <- names(vec)
+  # mat <- mat[, c("names", names(vec))]
   mat[is.na(mat)] <- 0
 
-  # check output dimension
-  print(paste0("Number of DE results/signatures expected: ", nrow(data_to_run)))
-  print(paste0(
-    "Number of columns in membership matrix (excluding names): ",
-    ncol(mat[, !colnames(mat) %in% "names"])
-  ))
-  print(paste0("The expected output dimension matches: ", nrow(data_to_run) == ncol(mat[, !colnames(mat) %in% "names"])))
+  n_expected <- nrow(data_to_run)
+  n_actual <- length(vec)
+
+  message("Number of signatures expected (metadata): ", n_expected)
+  message("Number of signatures loaded: ", n_actual)
+  message("Jaccard matrix dimensions: ", nrow(mat), " x ", ncol(mat))
+
+  if (nrow(mat) != ncol(mat)) {
+    stop("Jaccard matrix is not square — this should never happen.")
+  }
+
+  if (n_actual != n_expected) {
+    warning(
+      "Not all signatures in metadata were found on disk. ",
+      "Expected: ", n_expected,
+      ", loaded: ", n_actual
+    )
+  }
 
   if (save_result) {
-    saveRDS(mat, file = paste0(output_dir, "/", direction, "_jaccard_mat.rds"))
-    write_tsv(mat, file = paste0(output_dir, "/", direction, "_jaccard_mat.tsv"))
-    print(paste0("The computed Jaccard matrix ", paste0(direction, "_jaccard_mat.rds"), " was saved at ", output_dir))
+    saveRDS(
+      mat,
+      file = file.path(output_dir, paste0(direction, "_jaccard_mat.rds"))
+    )
+
+    write_tsv(
+      tibble::rownames_to_column(as.data.frame(mat), "signature"),
+      file = file.path(output_dir, paste0(direction, "_jaccard_mat.tsv"))
+    )
+
+    message("Saved Jaccard matrix (", direction, ") to ", output_dir)
   }
+
+  # reorder columns
+  mat <- mat[, order(colnames(mat))]
+
 
   return(mat)
 }
@@ -268,31 +314,13 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
   #' @param output_dir path to the output directory
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
-  #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.4 by default meaning the selected genes are present in at least 40% of the signatures
-  #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores (greater than 0.4)
+  #' @param threshold a thershold for selecting a set of significantly aggregated genes; set to 0.9 by default meaning the selected genes are present in at least 40% of the signatures
+  #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores
   #' @author Kewalin Samart
-
-  # read in gene membership matrix
-  gene_membership_df <- gene_membership_matrix
-  # set row names to GeneID
-  row.names(gene_membership_df) <- gene_membership_df$GeneID
-  gene_membership_df$GeneID <- NULL
-  # reorder columns
-  gene_membership_df <- gene_membership_df[, order(colnames(gene_membership_df))]
-  gene_membership_mat <- as.matrix(gene_membership_df)
-
-  # read in jaccard matrices
-  jaccard_df <- jaccard_matrix
-  # set row names to GeneID
-  row.names(jaccard_df) <- jaccard_df$names
-  jaccard_df$names <- NULL
-  # reorder columns
-  jaccard_df <- jaccard_df[, order(colnames(jaccard_df))]
-  jaccard_mat <- as.matrix(jaccard_df)
 
   # compute average jaccard scores across signatures
   ## specified disease
-  jaccard_mean_vec <- rowMeans(jaccard_mat)
+  jaccard_mean_vec <- colMeans(jaccard_matrix)
 
   ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
   aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec / sum(jaccard_mean_vec)))
