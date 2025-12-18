@@ -259,7 +259,7 @@ tissue_map <- c(
 
 # define tissue & technology colors
 tissue_colors <- c(
-  # Blood-related (red/orange tones)
+  # blood-related (red/orange tones)
   "PBMC"                  = "#E41A1C",
   "MDMs"           = "#B22222",
   "monocyte"              = "#FF4500",
@@ -271,21 +271,14 @@ tissue_colors <- c(
   "blood"                 = "#DC143C",
   "PBMC macrophage" = "#800000",
 
-  # Lung-related (blue/green tones)
-  #"alveolar_macro_BALF"   = "#009E73",
-  #"ILC1_lung"             = "#1F78B4",
-  #"ILC2_lung"             = "#33A02C",
-  #"ILC3neg_lung"          = "#66C2A5",
-  #"ILC3pos_lung"          = "#A6D854",
-  #"NK_lung"               = "#377EB8",
-  #"lung_cells"            = "#5CA8C8",
+  # lung-related (blue/green tones)
   "BAL"                   = "#41B6C4",
 
-  # Cell lines (grey/purple tones)
+  # cell lines (grey/purple tones)
   "THP1 macrophage"            = "#7F7F7F",  # grey
   "HepG2 epithelial"           = "#BC80BD",  # muted purple
 
-  # Other tissues
+  # other tissues
   "lymphnode"             = "#FDB462"
 )
 
@@ -379,7 +372,6 @@ ha_bottom <- HeatmapAnnotation(
 ```
 
 ```{r plot heatmap and save}
-
 pdf(here("figures/figure2/figure2a/Figure2a_up_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%

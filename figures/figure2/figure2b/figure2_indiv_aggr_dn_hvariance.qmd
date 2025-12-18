@@ -1,17 +1,17 @@
+# Figure 2b: Enrichment of highly variable downregulated pathways in individual and aggregated TB signatures
+# last modified: 12/18/25
+# author: Kewalin Samart
+
 ```{r setup, include=FALSE}
 library(ComplexHeatmap)
-library(colorRamp2)
 library(clusterProfiler)
-library(DOSE)
+library(GOSemSim)
 library(org.Hs.eg.db)
-library(readr)
+library(circlize)
+library(grid)
+library(tidyverse)
 library(here)
 source(here("scripts/00_get_crossSigs_enrichedGO.R"))
-library(gridExtra)
-library(grid)
-library(tibble)
-library(tidyr)
-library(tidyverse)
 ```
 
 # add aggregated signatures to the signature info table
@@ -19,7 +19,6 @@ library(tidyverse)
 summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
-### dn individual and aggregated signatures
 ```{r define indiv file paths}
 marray_path_dn <- here("data/microarray_pathways/dn")
 rnaseq_path_dn <- here("data/RNAseq_pathways/dn")
@@ -37,6 +36,7 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 ```
 
 ```{r microarray and RNAseq dn pathways}
+# get asinh matrix with all available pathways
 marray_GO_mat_dn = get_GO_asinh_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
 rnaseq_GO_mat_dn = get_GO_asinh_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 ```
@@ -69,10 +69,7 @@ rnaseq_signi_dn <- row.names(
 marray_rnaseq_signi_dn = unique(c(marray_signi_dn, rnaseq_signi_dn))
 ```
 
-```{r}
-# Assuming both data frames have Description as row names
-# If it's a column instead, set it as rownames first
-
+```{r process all terms matrices}
 cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME,
 "dn_aggregated_signature"))
 df1 <- marray_GO_mat_dn[, cols_to_keep_marray]
@@ -92,12 +89,11 @@ colnames(df2) <- gsub(
 )
 colnames(df2) <- gsub("^dn_", "", colnames(df2))
 
-# Reshape from wide to long
-library(tidyr)
+# reshape from wide to long
 long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
 long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
 
-# Ensure both have correct types even if empty
+# ensure both have correct types even if empty
 long1 <- long1 %>%
   mutate(
     Description = as.character(Description),
@@ -112,7 +108,7 @@ long2 <- long2 %>%
     Value = as.numeric(Value)
   )
 
-# Then safely combine and summarise
+# then safely combine and summarise
 combined_long <- bind_rows(long1, long2) %>%
   group_by(Description, Signature) %>%
   summarise(
@@ -120,25 +116,25 @@ combined_long <- bind_rows(long1, long2) %>%
     .groups = "drop"
   )
 
-# Reshape back to wide format
+# reshape back to wide format
 final_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
 colnames(final_df_dn) <- gsub("\\.", "-", colnames(final_df_dn))
 
-# Identify columns with "aggregated" in their names
+# identify columns with "aggregated" in their names
 agg_cols <- grep("aggregated", names(final_df_dn), value = TRUE)
 
-# Identify columns that do not contain "aggregated"
+# identify columns that do not contain "aggregated"
 non_agg_cols <- setdiff(names(final_df_dn), agg_cols)
 
-# Reorder the dataframe
+# reorder the dataframe
 final_df_dn <- final_df_dn[, c(non_agg_cols, agg_cols)]
-# Identify columns
+# identify columns
 desc_col <- grep("Description", names(final_df_dn), value = TRUE)
 gpl_cols <- grep("GPL", names(final_df_dn), value = TRUE)
 rnaseq_col <- grep("RNAseq", names(final_df_dn), value = TRUE)
 other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
 
-# Reorder dataframe
+# reorder dataframe
 final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
 final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
@@ -146,9 +142,6 @@ write_tsv(final_df_dn, here("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pat
 ```
 
 ```{r process significant matrices}
-# Assuming both data frames have Description as row names
-# If it's a column instead, set it as rownames first
-
 marray_signi_GO_mat_dn$Description <- row.names(marray_signi_GO_mat_dn)
 cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$SIGNATURE_NAME, "dn_aggregated_signature"))
 df1 <- marray_signi_GO_mat_dn[, cols_to_keep_marray]
@@ -169,12 +162,11 @@ colnames(df2) <- gsub(
 )
 colnames(df2) <- gsub("^dn_", "", colnames(df2))
 
-# Reshape from wide to long
+# reshape from wide to long
 long1 <- pivot_longer(as.data.frame(df1), -Description, names_to = "Signature", values_to = "Value")
 long2 <- pivot_longer(as.data.frame(df2), -Description, names_to = "Signature", values_to = "Value")
 
-# Combine long formats and sum values where matching
-library(dplyr)
+# combine long formats and sum values where matching
 combined_long <- bind_rows(long1, long2) %>%
   group_by(Description, Signature) %>%
   summarise(
@@ -182,32 +174,32 @@ combined_long <- bind_rows(long1, long2) %>%
   .groups = "drop"
 )
 
-# Reshape back to wide format
+# reshape back to wide format
 final_signi_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
 colnames(final_signi_df_dn) <- gsub("\\.", "-", colnames(final_signi_df_dn))
 
-# Identify columns with "aggregated" in their names
+# identify columns with "aggregated" in their names
 agg_cols <- grep("aggregated", names(final_signi_df_dn), value = TRUE)
 
-# Identify columns that do not contain "aggregated"
+# identify columns that do not contain "aggregated"
 non_agg_cols <- setdiff(names(final_signi_df_dn), agg_cols)
 
-# Reorder the dataframe
+# reorder the dataframe
 final_signi_df_dn <- final_signi_df_dn[, c(non_agg_cols, agg_cols)]
-# Identify columns
+
+# identify columns
 desc_col <- grep("Description", names(final_signi_df_dn), value = TRUE)
 gpl_cols <- grep("GPL", names(final_signi_df_dn), value = TRUE)
 rnaseq_col <- grep("RNAseq", names(final_signi_df_dn), value = TRUE)
 other_cols <- setdiff(names(final_signi_df_dn), c(gpl_cols, rnaseq_col))
 
-# Reorder dataframe
+# reorder dataframe
 final_signi_df_dn <- final_signi_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_signi_df_dn <- final_signi_df_dn[, !duplicated(colnames(final_signi_df_dn))]
 final_signi_df_dn <- final_signi_df_dn[, !grepl("HIV", colnames(final_signi_df_dn))]
 ```
 
-### dn pathways that are highly variable
-```{r}
+```{r define highly variable pathways}
 final_df_dn_indiv <- final_df_dn[, !grepl("aggregated", colnames(final_df_dn))] # get pathway matrix for only individual signatures
 # only visualize terms at least significantly enriched in one signature
 final_df_dn_indiv <- final_df_dn_indiv[final_df_dn_indiv$Description %in% marray_rnaseq_signi_dn,]
@@ -216,7 +208,7 @@ descriptions <- final_df_dn_indiv$Description
 numeric_mat <- as.matrix(
   final_df_dn_indiv[ , sapply(final_df_dn_indiv, is.numeric)]
 )
-### variance calculation
+
 # compute term variance (row variance)
 final_df_dn_variances <- apply(numeric_mat, MARGIN = 1, FUN = var, na.rm = TRUE)
 # sort by variance
@@ -249,24 +241,15 @@ hv_GO_terms <- final_df_dn_variable$Description
 final_df_dn_variable$Description <- NULL
 sig_mat_indiv_aggr_dn <- as.matrix(final_df_dn_variable)
 colnames(sig_mat_indiv_aggr_dn) <- gsub("\\.", "-", colnames(sig_mat_indiv_aggr_dn))
-#sig_mat_indiv_aggr_dn[is.na(sig_mat_indiv_aggr_dn)] <- 0
 row.names(sig_mat_indiv_aggr_dn) <- hv_GO_terms
 ```
 
 ```{r heatmap | order the GO terms by their semantic similarity}
-library(ComplexHeatmap)
-library(circlize)
-library(grid)
-library(dplyr)
-library(stringr)
-library(GOSemSim)
-
-
-# Define vector of individual GO terms (character vector)
-# Must match rownames of your matrix exactly
+# define vector of individual GO terms (character vector)
+# must match rownames of your matrix exactly
 go_terms <- rownames(sig_mat_indiv_aggr_dn)
 
-# 1. Compute semantic similarity matrix
+# compute semantic similarity matrix
 hsGO <- godata('org.Hs.eg.db', ont = "BP")
 
 n <- length(go_terms)
@@ -279,16 +262,16 @@ for (i in seq_len(n)) {
   }
 }
 
-# 2. Hierarchical clustering and reordering
+# hierarchical clustering and reordering
 hc <- hclust(as.dist(1 - sim_matrix), method = "average")
 ordered_go_terms <- hc$labels[hc$order]
 
-# 3. Reorder matrix by GO semantic similarity
+# reorder matrix by GO semantic similarity
 sig_mat_indiv_aggr_dn_ordered <- sig_mat_indiv_aggr_dn[ordered_go_terms, , drop = FALSE]
 ```
 
-```{r dn signature heatmap}
-# 1. Define tissue short names
+```{r define details for signature heatmap}
+# define tissue short names
 tissue_map <- c(
   "blood_PBMC"                         = "PBMC",
   "blood_PBMC_macrophage"             = "PBMC macrophage",
@@ -305,7 +288,7 @@ tissue_map <- c(
   "blood_CD14plus_monocyte_derived_macrophages_MF2" = "CD14+ MDMs MF2"
 )
 
-# 2. Define tissue & technology colors
+# define tissue & technology colors
 tissue_colors <- c(
   # Blood-related (red/orange tones)
   "PBMC"                  = "#E41A1C",
@@ -319,21 +302,14 @@ tissue_colors <- c(
   "blood"                 = "#DC143C",
   "PBMC macrophage" = "#800000",
   
-  # Lung-related (blue/green tones)
-  #"alveolar_macro_BALF"   = "#009E73",
-  #"ILC1_lung"             = "#1F78B4",
-  #"ILC2_lung"             = "#33A02C",
-  #"ILC3neg_lung"          = "#66C2A5",
-  #"ILC3pos_lung"          = "#A6D854",
-  #"NK_lung"               = "#377EB8",
-  #"lung_cells"            = "#5CA8C8",
+  # lung-related (blue/green tones)
   "BAL"                   = "#41B6C4",
 
-  # Cell lines (grey/purple tones)
+  # cell lines (grey/purple tones)
   "THP1 macrophage"            = "#7F7F7F",  # grey
   "HepG2 epithelial"           = "#BC80BD",  # muted purple
 
-  # Other tissues
+  # other tissues
   "lymphnode"             = "#FDB462"
 )
 
@@ -355,24 +331,24 @@ tb_colors <- c(
   "LNTB" = "#FE6100"
 )
 
-# 3. Prepare metadata/matrix
+# prepare metadata/matrix
 meta_df <- summary_df %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
 
-# Ensure matrix is a data frame
+# ensure matrix is a data frame
 sig_mat_indiv_aggr_dn <- as.data.frame(sig_mat_indiv_aggr_dn)
 aggregated_pathways <- sig_mat_indiv_aggr_dn[c("aggregated_microarray","aggregated_RNAseq")]
 
-# Reorder columns according to metadata
+# reorder columns according to metadata
 sig_mat_indiv_dn_ordered <- sig_mat_indiv_aggr_dn[, head(meta_df$SIGNATURE_NAME, -2), drop = FALSE]
 sig_mat_indiv_aggr_dn_ordered <- cbind(
   sig_mat_indiv_dn_ordered,
   aggregated_pathways[rownames(sig_mat_indiv_dn_ordered), , drop = FALSE]
 )
 
-# 4. Set rownames 
+# set color range 
 actual_range <- range(as.numeric(unlist(sig_mat_indiv_aggr_dn_ordered)), na.rm = TRUE)
 ninetyfifth_percentile <- quantile(actual_range, 0.95)
 fifty_percentile <- quantile(actual_range, 0.50)
@@ -383,7 +359,7 @@ col_fun <- colorRamp2(
   c("white", "indianred1", "firebrick2" , "firebrick4")
 )
 
-# 5. Create top and bottom annotations
+# create top and bottom annotations
 ha_top <- HeatmapAnnotation(
   technology = meta_df$technology,
   col = list(technology = tech_colors),
@@ -426,9 +402,7 @@ ha_bottom <- HeatmapAnnotation(
 )
 ```
 
-```{r}
-# 6. Plot heatmap and save
-
+```{r plot heatmap and save}
 pdf(here("figures/figure2/figure2b/Figure2b_dn_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
