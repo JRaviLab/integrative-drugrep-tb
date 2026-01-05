@@ -1,6 +1,6 @@
 # Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotic
 # Kewalin Samart
-# Last modified: 12/30/2025
+# Last modified: 01/05/2026
 
 ```{r load libraries}
 library(readr)
@@ -208,6 +208,19 @@ ht_tmp <- Heatmap(
 )
 ht_tmp <- draw(ht_tmp)
 row_ord <- row_order(ht_tmp)
+```
+```{r extract synergy pairs}
+idx <- which(moa_synergy_mat == 1, arr.ind = TRUE)
+
+result <- data.frame(
+  row = rownames(moa_synergy_mat)[idx[, "row"]],
+  col = colnames(moa_synergy_mat)[idx[, "col"]]
+)
+
+tmp <- t(apply(result, 1, sort))
+result_unique <- unique(as.data.frame(tmp))
+colnames(result_unique) <- c("row", "col")
+result_unique
 ```
 
 ```{r plotting}
