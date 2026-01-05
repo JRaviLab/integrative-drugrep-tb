@@ -9,20 +9,8 @@ library(readr)
 library(dplyr)
 ```
 
-```{r microarray signature info}
-microarray_signatures_df <- read_tsv(here("data/signatures/microarray_TB_signature_run_info.tsv"))
-microarray_signatures_info <- microarray_signatures_df[microarray_signatures_df$signature == 1, ]
-microarray_signatures_info$technology <- "microarray"
-
-rnaseq_signatures_df <- read_tsv(here("data/signatures/RNAseq_TB_signature_run_info.tsv"))
-rnaseq_signatures_info <- rnaseq_signatures_df[rnaseq_signatures_df$signature == 1, ]
-rnaseq_signatures_info$technology <- "RNAseq"
-```
-
-```{r combine signature info}
-all_signatures_info <- rbind(microarray_signatures_info, rnaseq_signatures_info)
-
-write_tsv(all_signatures_info, file = here("data/signatures/202506_TB_signatures_info.tsv"))
+```{r read in signature info}
+all_signatures_info = read_tsv(here("data/signatures/202506_TB_signatures_info.tsv"))
 ```
 
 ```{r Sankey diagram}
@@ -40,7 +28,7 @@ df_unique <- all_signatures_info %>%
 
 cell_counts <- df_unique %>% dplyr::count(tissue_cell_type)
 keep_types <- cell_counts %>%
-  filter(n >= 2) %>%
+  filter(n >= 1) %>%
   pull(tissue_cell_type)
 df_unique$tissue_cell_type <- ifelse(df_unique$tissue_cell_type %in% keep_types,
   df_unique$tissue_cell_type,
@@ -84,8 +72,8 @@ nodes <- all_node_counts %>%
       "blood_CD14plus_monocyte_derived_macrophages_MF2" = "CD14+ MDMs MF2",
       "blood_monocyte_derived_macrophages" = "MDMs",
       "blood_PBMC" = "PBMC",
-      "blood_dendritic_cells" = "Dendritic cells",
-      "blood_macrophage" = "Macrophage",
+      "blood_dendritic_cells" = "dendritic cells",
+      "blood_macrophage" = "macrophage",
       .default = label
     ),
     label = paste0(label, " (", total, ")")
@@ -120,7 +108,7 @@ webshot(
   "figure1a_sankey_plot.html",
   "figure1a_sankey_plot.pdf",
   zoom = 2,
-  vwidth = 900,
+  vwidth = 1000,
   vheight = 600
 )
 ```
