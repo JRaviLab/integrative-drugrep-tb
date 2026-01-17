@@ -60,8 +60,18 @@ pipeline_processed <- process_pipeline(
 indiv_results <- pipeline_processed$indiv_results
 agg_results <- pipeline_processed$agg_results
 
-head(indiv_results, 5)
-head(agg_results, 5)
+# individual results
+indiv_results_sorted <- indiv_results[
+  order(indiv_results$mean_rank_score_indiv, decreasing = TRUE),
+]
+head(indiv_results_sorted, 5)
+
+# aggregated results
+agg_results_sorted <- agg_results[
+  order(agg_results$mean_rank_score_agg, decreasing = TRUE),
+]
+head(agg_results_sorted, 5)
+
 ```
 
 ##### Get High Confidence Drug Predictions
