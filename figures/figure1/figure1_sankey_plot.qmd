@@ -1,6 +1,4 @@
 # Figure 1a: Sankey diagram showing information of all the TB signatures up to June 2025
-# last modified: 12/18/25
-# author: Kewalin Samart
 
 ```{r load libraries}
 library(tidyverse)
@@ -73,7 +71,7 @@ nodes <- all_node_counts %>%
       "blood_monocyte_derived_macrophages" = "MDMs",
       "blood_PBMC" = "PBMC",
       "blood_dendritic_cells" = "dendritic cells",
-      "blood_macrophage" = "macrophage",
+      "blood_macrophage" = "macrophages",
       .default = label
     ),
     label = paste0(label, " (", total, ")")
