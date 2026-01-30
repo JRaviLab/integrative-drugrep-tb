@@ -1,0 +1,266 @@
+# Figure 3: Biology of dominant pathways and squared deviation of dominant vs. non-dominant pathways
+# last modified: 01/30/26
+# author: Kewalin Samart
+
+```{r setup, include=FALSE}
+library(clusterProfiler)
+library(GOSemSim)
+library(tidyverse)
+library(here)
+```
+
+```{r}
+summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv"
+summary_df = read_tsv(here(summary_path)) 
+
+# read in upregulated microarray-RNAseq pathway matrix (data for figure 2a)
+up_pathway_df = read_tsv(here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
+pathways = up_pathway_df$Description
+up_pathway_df$Description = NULL
+
+# microarray upregulated signatures
+microarray_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "microarray" &                                                                               summary_df$signature_ID != "aggregated_microarray"]]
+# get pathways (row names) that are enriched (cell != 0) in at least 90% of the signatures in the following matrix
+up_micro_mat <- as.matrix(up_pathway_df[, microarray_cols, drop = FALSE])
+row.names(up_micro_mat) = pathways
+# ensure numeric
+storage.mode(up_micro_mat) <- "numeric"
+# proportion of non-zero entries per pathway (row)
+prop_nonzero <- rowMeans(up_micro_mat != 0, na.rm = TRUE)
+# pathways enriched in at least 90% of signatures
+up_micro_dominant_pathways <- rownames(up_micro_mat)[prop_nonzero >= 0.9]
+          
+# microarray upregulated signatures          
+rnaseq_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "RNAseq" & 
+                                                                                summary_df$signature_ID != "aggregated_RNAseq"]]
+# get pathways (row names) that are enriched (cell != 0) in at least 90% of the signatures in the following matrix
+up_rnaseq_mat <- as.matrix(up_pathway_df[, rnaseq_cols, drop = FALSE])
+row.names(up_rnaseq_mat) = pathways
+# ensure numeric
+storage.mode(up_rnaseq_mat) <- "numeric"
+# proportion of non-zero entries per pathway (row)
+prop_nonzero <- rowMeans(up_rnaseq_mat != 0, na.rm = TRUE)
+# pathways enriched in at least 90% of signatures
+up_rnaseq_dominant_pathways <- rownames(up_rnaseq_mat)[prop_nonzero >= 0.9]
+
+up_dominant_pathways = intersect(up_micro_dominant_pathways, up_rnaseq_dominant_pathways)
+
+# read in downregulated microarray-RNAseq pathway matrix (data for figure 2b)
+
+
+```
+
+```{r}
+library(GO.db)
+library(AnnotationDbi)
+
+go_descriptions <- unique(up_dominant_pathways) 
+
+# Map TERM → GOID
+term2go <- AnnotationDbi::select(
+  GO.db,
+  keys = go_descriptions,
+  columns = c("GOID", "TERM", "ONTOLOGY"),
+  keytype = "TERM"
+)
+
+# Keep only Biological Process (usually what you want)
+term2go <- term2go[term2go$ONTOLOGY == "BP", ]
+
+# Drop unmatched terms
+term2go <- term2go[!is.na(term2go$GOID), ]
+
+
+library(GO.db)
+library(AnnotationDbi)
+
+bp_parents <- AnnotationDbi::as.list(GO.db::GOBPPARENTS)
+get_parents <- function(go_id) {
+  unique(bp_parents[[go_id]])
+}
+parent_map <- lapply(term2go$GOID, get_parents)
+
+# drop empty mappings
+parent_map <- parent_map[!sapply(parent_map, is.null)]
+parent_counts <- sort(table(unlist(parent_map)), decreasing = TRUE)
+
+parent_df <- data.frame(
+  GOID = names(parent_counts),
+  count = as.integer(parent_counts)
+)
+
+parent_df <- merge(
+  parent_df,
+  AnnotationDbi::select(
+    GO.db,
+    keys = parent_df$GOID,
+    columns = "TERM",
+    keytype = "GOID"
+  ),
+  by = "GOID"
+)
+
+parent_df <- parent_df[order(-parent_df$count), ]
+
+```
+
+```{r}
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# GO → gene mapping
+go2gene <- AnnotationDbi::select(
+  org.Hs.eg.db,
+  keys = parent_df$GOID,
+  columns = "ENTREZID",
+  keytype = "GOALL"
+)
+
+# remove NAs
+go2gene <- go2gene[!is.na(go2gene$ENTREZID), ]
+
+# gene counts per GO term
+gene_counts <- as.data.frame(table(go2gene$GOALL))
+colnames(gene_counts) <- c("GOID", "n_genes")
+
+parent_df <- merge(
+  parent_df,
+  gene_counts,
+  by = "GOID",
+  all.x = TRUE
+)
+
+# GO terms with zero mapped genes → drop
+parent_df$n_genes[is.na(parent_df$n_genes)] <- 0
+
+parent_df_filt <- subset(
+  parent_df,
+  n_genes >= 5 & n_genes <= 200
+)
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(head(parent_df, 20),
+       aes(x = reorder(TERM, count), y = count)) +
+  geom_col(fill = "#0072B2") +
+  coord_flip() +
+  labs(
+    title = "Parent GO Biological Processes",
+    x = "",
+    y = "Number of enriched child GO terms"
+  ) +
+  theme_minimal(base_size = 13)
+
+```
+
+```{r}
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+library(dplyr)
+
+keep_go <- parent_df_filt$GOID
+
+go2gene <- AnnotationDbi::select(
+  org.Hs.eg.db,
+  keys = keep_go,
+  columns = "ENTREZID",
+  keytype = "GOALL"
+)
+
+go2gene <- go2gene %>%
+  filter(!is.na(ENTREZID)) %>%
+  distinct(GOID = GOALL, ENTREZID)
+go_gene_sets <- split(go2gene$ENTREZID, go2gene$GOID)
+
+```
+
+```{r}
+go_ids <- names(go_gene_sets)
+
+jaccard <- function(a, b) {
+  length(intersect(a, b)) / length(union(a, b))
+}
+
+edges <- combn(go_ids, 2, simplify = FALSE, FUN = function(x) {
+  g1 <- x[1]; g2 <- x[2]
+  inter <- intersect(go_gene_sets[[g1]], go_gene_sets[[g2]])
+  
+  data.frame(
+    from = g1,
+    to   = g2,
+    overlap = length(inter),
+    jaccard = jaccard(go_gene_sets[[g1]], go_gene_sets[[g2]])
+  )
+})
+
+edges <- bind_rows(edges)
+
+```
+
+```{r}
+edges_filt <- edges %>%
+  filter(overlap >= 50, jaccard >= 0)
+
+
+```
+
+```{r}
+library(dplyr)
+
+go_similarity <- bind_rows(
+  edges_filt %>%
+    transmute(
+      GOID = from,
+      jaccard = jaccard
+    ),
+  edges_filt %>%
+    transmute(
+      GOID = to,
+      jaccard = jaccard
+    )
+) %>%
+  group_by(GOID) %>%
+  summarise(
+    mean_jaccard = mean(jaccard),
+    n_neighbors  = n(),
+    .groups = "drop"
+  )
+
+keep_go <- go_similarity %>%
+  filter(
+    mean_jaccard >= 0.08,
+    n_neighbors  >= 2
+  ) %>%
+  pull(GOID)
+
+edges_core <- edges_filt %>%
+  filter(from %in% keep_go & to %in% keep_go)
+
+
+```
+
+```{r}
+set.seed(42)
+
+lay <- layout_with_fr(
+  edges_core,
+  niter = 2000
+)
+
+plot(
+  edges_core,
+  layout = lay,
+  vertex.size = scales::rescale(V(edges_core)$n_genes, c(6, 14)),
+  vertex.label = V(edges_core)$TERM,
+  vertex.label.cex = 0.5,
+  vertex.label.color = "black",
+  edge.width = scales::rescale(E(edges_core)$jaccard, c(0.5, 3)),
+  edge.color = "grey60"
+)
+
+
+
+
+```
