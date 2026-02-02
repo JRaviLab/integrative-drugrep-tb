@@ -17,12 +17,14 @@ library(networkD3)
 df_unique <- all_signatures_info %>%
   mutate(
     signature = SIGNATURE_NAME,
+    experimental_platform = experimental_platform,
+    time_point = time_point,
     tissue_cell_type = tissue_cell_type,
     origin = sample_origin,
     origin_type = tissue_category,
     TB = tb_status
   ) %>%
-  dplyr::select(signature, tissue_cell_type, origin, origin_type, TB, technology)
+  dplyr::select(signature, experimental_platform, time_point, tissue_cell_type, origin, origin_type, TB, technology)
 
 cell_counts <- df_unique %>% dplyr::count(tissue_cell_type)
 keep_types <- cell_counts %>%
@@ -32,6 +34,16 @@ df_unique$tissue_cell_type <- ifelse(df_unique$tissue_cell_type %in% keep_types,
   df_unique$tissue_cell_type,
   "Other tissue/cell types"
 )
+
+df_unique <- df_unique %>%
+  mutate(
+    time_point = ifelse(is.na(time_point),
+                        "not indicated",
+                        time_point),
+    experimental_platform = ifelse(is.na(experimental_platform),
+                                   "not applicable",
+                                   experimental_platform),
+  )
 
 link1 <- df_unique %>%
   dplyr::count(tissue_cell_type, origin) %>%
@@ -43,13 +55,19 @@ link3 <- df_unique %>%
   dplyr::count(origin_type, TB) %>%
   dplyr::rename(source = origin_type, target = TB, value = n)
 link4 <- df_unique %>%
-  dplyr::count(TB, technology) %>%
-  dplyr::rename(source = TB, target = technology, value = n)
+  dplyr::count(TB, time_point) %>%
+  dplyr::rename(source = TB, target = time_point, value = n)
+link5 <- df_unique %>%
+  dplyr::count(time_point, experimental_platform) %>%
+  dplyr::rename(source = time_point, target = experimental_platform, value = n)
+link6 <- df_unique %>%
+  dplyr::count(experimental_platform, technology) %>%
+  dplyr::rename(source = experimental_platform, target = technology, value = n)
 
-links_all <- bind_rows(link1, link2, link3, link4)
+links_all <- bind_rows(link1, link2, link3, link4, link5, link6)
 
 sig_paths <- df_unique %>%
-  dplyr::select(signature, tissue_cell_type, origin, origin_type, TB, technology) %>%
+  dplyr::select(signature, tissue_cell_type, origin, origin_type, TB, time_point, experimental_platform, technology) %>%
   pivot_longer(-signature, names_to = "layer", values_to = "name") %>%
   distinct(signature, name)
 
@@ -72,6 +90,9 @@ nodes <- all_node_counts %>%
       "blood_PBMC" = "PBMC",
       "blood_dendritic_cells" = "dendritic cells",
       "blood_macrophage" = "macrophages",
+      "blood_PBMC_macrophage" = "PBMC macrophages",
+      "BAL_bronchoalveolar_lavage" = "bronchoalveolar lavage (BAL)",
+      "blood_monocyte" = "monocytes",
       .default = label
     ),
     label = paste0(label, " (", total, ")")
@@ -89,7 +110,7 @@ sankey <- sankeyNetwork(
   Target = "target_id",
   Value = "value",
   NodeID = "label",
-  fontSize = 15,
+  fontSize = 38,
   nodeWidth = 30,
   nodePadding = 15,
   sinksRight = TRUE
@@ -105,8 +126,8 @@ saveWidget(sankey, "figure1a_sankey_plot.html", selfcontained = TRUE)
 webshot(
   "figure1a_sankey_plot.html",
   "figure1a_sankey_plot.pdf",
-  zoom = 2,
-  vwidth = 1000,
-  vheight = 600
+  zoom = 5,
+  vwidth = 2600,
+  vheight = 1200
 )
 ```
