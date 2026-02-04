@@ -16,7 +16,6 @@ summary_df = read_tsv(here(summary_path))
 # read in upregulated microarray-RNAseq pathway matrix (data for figure 2a)
 up_pathway_df = read_tsv(here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
 pathways = up_pathway_df$Description
-up_pathway_df$Description = NULL
 
 # microarray upregulated signatures
 microarray_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "microarray" &                                                                               summary_df$signature_ID != "aggregated_microarray"]]
@@ -44,10 +43,208 @@ prop_nonzero <- rowMeans(up_rnaseq_mat != 0, na.rm = TRUE)
 up_rnaseq_dominant_pathways <- rownames(up_rnaseq_mat)[prop_nonzero >= 0.9]
 
 up_dominant_pathways = intersect(up_micro_dominant_pathways, up_rnaseq_dominant_pathways)
+```
+```{r}
+compute_pathway_deviation <- function(mat, agg_col) {
 
-# read in downregulated microarray-RNAseq pathway matrix (data for figure 2b)
+  # r_p^aggr : aggregated pathway ratios
+  r_aggr <- mat[, agg_col]
 
+  # r_{p,i} : individual pathway ratios
+  indiv_mat <- mat[, setdiff(colnames(mat), agg_col), drop = FALSE]
 
+  # number of individual signatures (n)
+  n <- ncol(indiv_mat)
+
+  tibble(
+    pathway = rownames(mat),
+
+    # med(r_p) across ALL individual signatures (zeros included)
+    median_individual = apply(
+      indiv_mat,
+      1,
+      function(x) median(x, na.rm = TRUE)
+    ),
+
+    # r_p^aggr
+    aggregated = r_aggr,
+
+    # D_p = (1 / n) * (r_p^aggr - med(r_p))^2
+    deviation_score = (1 / n) * (r_aggr - median_individual)^2
+  )
+}
+```
+
+```{r}
+# Upregulated
+# matrix of individual microarray signatures
+up_micro_indiv <- as.matrix(up_pathway_df[, microarray_cols, drop = FALSE])
+rownames(up_micro_indiv) <- up_pathway_df$Description
+storage.mode(up_micro_indiv) <- "numeric"
+
+# proportion non-zero
+micro_prop <- rowMeans(up_micro_indiv != 0, na.rm = TRUE)
+micro_ge90 <- names(micro_prop[micro_prop >= 0.9])
+
+# add aggregated column ONLY for sq dev computation
+up_micro_mat <- cbind(
+  up_micro_indiv,
+  aggregated_microarray = up_pathway_df$aggregated_microarray
+)
+
+micro_sq_up <- compute_pathway_deviation(
+  up_micro_mat,
+  agg_col = "aggregated_microarray"
+) %>%
+  mutate(
+    technology = "Microarray",
+    enrichment = ifelse(
+      pathway %in% micro_ge90,
+      "Dominant\nGO:BP terms",
+      "Non-dominant\nGO:BP terms"
+    ),
+    direction = "Upregulated"
+  )
+
+# RNA-seq
+up_rna_indiv <- as.matrix(up_pathway_df[, rnaseq_cols, drop = FALSE])
+rownames(up_rna_indiv) <- up_pathway_df$Description
+storage.mode(up_rna_indiv) <- "numeric"
+
+rna_prop <- rowMeans(up_rna_indiv != 0, na.rm = TRUE)
+rna_ge90 <- names(rna_prop[rna_prop >= 0.9])
+
+up_rna_mat <- cbind(
+  up_rna_indiv,
+  aggregated_RNAseq = up_pathway_df$aggregated_RNAseq
+)
+
+rna_sq_up <- compute_pathway_deviation(
+  up_rna_mat,
+  agg_col = "aggregated_RNAseq"
+) %>%
+  mutate(
+    technology = "RNA-seq",
+    enrichment = ifelse(
+      pathway %in% rna_ge90,
+      "Dominant\nGO:BP terms",
+      "Non-dominant\nGO:BP terms"
+    ),
+    direction = "Upregulated"
+  )
+
+sq_dev_up <- bind_rows(micro_sq_up, rna_sq_up)
+
+```
+
+```{r}
+dn_pathway_df <- read_tsv(
+  here("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv")
+)
+
+# Microarray
+dn_micro_indiv <- as.matrix(dn_pathway_df[, microarray_cols, drop = FALSE])
+rownames(dn_micro_indiv) <- dn_pathway_df$Description
+storage.mode(dn_micro_indiv) <- "numeric"
+
+micro_prop_dn <- rowMeans(dn_micro_indiv != 0, na.rm = TRUE)
+micro_ge90_dn <- names(micro_prop_dn[micro_prop_dn >= 0.9])
+
+dn_micro_mat <- cbind(
+  dn_micro_indiv,
+  aggregated_microarray = dn_pathway_df$aggregated_microarray
+)
+
+micro_sq_dn <- compute_pathway_deviation(
+  dn_micro_mat,
+  agg_col = "aggregated_microarray"
+) %>%
+  mutate(
+    technology = "Microarray",
+    enrichment = ifelse(
+      pathway %in% micro_ge90_dn,
+      "Dominant\nGO:BP terms",
+      "Non-dominant\nGO:BP terms"
+    ),
+    direction = "Downregulated"
+  )
+
+# RNA-seq
+dn_rna_indiv <- as.matrix(dn_pathway_df[, rnaseq_cols, drop = FALSE])
+rownames(dn_rna_indiv) <- dn_pathway_df$Description
+storage.mode(dn_rna_indiv) <- "numeric"
+
+rna_prop_dn <- rowMeans(dn_rna_indiv != 0, na.rm = TRUE)
+rna_ge90_dn <- names(rna_prop_dn[rna_prop_dn >= 0.9])
+
+dn_rna_mat <- cbind(
+  dn_rna_indiv,
+  aggregated_RNAseq = dn_pathway_df$aggregated_RNAseq
+)
+
+rna_sq_dn <- compute_pathway_deviation(
+  dn_rna_mat,
+  agg_col = "aggregated_RNAseq"
+) %>%
+  mutate(
+    technology = "RNA-seq",
+    enrichment = ifelse(
+      pathway %in% rna_ge90_dn,
+      "Dominant\nGO:BP terms",
+      "Non-dominant\nGO:BP terms"
+    ),
+    direction = "Downregulated"
+  )
+
+sq_dev_dn <- bind_rows(micro_sq_dn, rna_sq_dn)
+```
+
+```{r}
+
+sq_dev_df <- bind_rows(
+  sq_dev_up,
+  sq_dev_dn
+)
+
+sq_dev_df <- sq_dev_df %>%
+  mutate(
+    direction = recode(
+      direction,
+      "Downregulated" = "Down-regulated"
+    ),
+    direction = factor(
+      direction,
+      levels = c("Upregulated", "Down-regulated")
+    )
+  )
+
+pdf(here("figures/figure3/Figure3_squared_deviation_dominant_pathways.pdf"),
+    width = 10, height = 8)
+
+ggplot(
+  sq_dev_df,
+  aes(x = enrichment, y = deviation_score, fill = enrichment)
+) +
+  geom_boxplot(alpha = 0.8) +
+  scale_y_log10() +
+  facet_grid(
+    direction ~ technology,
+    scales = "free_y"
+  ) +
+  labs(
+    x = "Enrichment",
+    y = "Log squared deviation",
+  ) +
+  theme_bw(base_size = 14) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black"),
+    legend.position = "none",
+    strip.text = element_text(size = 14, face = "bold"),
+    strip.background = element_rect(fill = "grey95", color = NA)
+  )
+
+dev.off()
 ```
 
 ```{r}
