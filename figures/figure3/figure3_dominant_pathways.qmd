@@ -106,7 +106,7 @@ micro_sq_up <- compute_pathway_deviation(
     direction = "Upregulated"
   )
 
-# RNA-seq
+# RNAseq
 up_rna_indiv <- as.matrix(up_pathway_df[, rnaseq_cols, drop = FALSE])
 rownames(up_rna_indiv) <- up_pathway_df$Description
 storage.mode(up_rna_indiv) <- "numeric"
@@ -124,7 +124,7 @@ rna_sq_up <- compute_pathway_deviation(
   agg_col = "aggregated_RNAseq"
 ) %>%
   mutate(
-    technology = "RNA-seq",
+    technology = "RNAseq",
     enrichment = ifelse(
       pathway %in% rna_ge90,
       "Dominant\nGO:BP terms",
@@ -169,7 +169,7 @@ micro_sq_dn <- compute_pathway_deviation(
     direction = "Downregulated"
   )
 
-# RNA-seq
+# RNAseq
 dn_rna_indiv <- as.matrix(dn_pathway_df[, rnaseq_cols, drop = FALSE])
 rownames(dn_rna_indiv) <- dn_pathway_df$Description
 storage.mode(dn_rna_indiv) <- "numeric"
@@ -187,7 +187,7 @@ rna_sq_dn <- compute_pathway_deviation(
   agg_col = "aggregated_RNAseq"
 ) %>%
   mutate(
-    technology = "RNA-seq",
+    technology = "RNAseq",
     enrichment = ifelse(
       pathway %in% rna_ge90_dn,
       "Dominant\nGO:BP terms",
