@@ -1,6 +1,6 @@
-# Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotic
+# Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotics
 # Kewalin Samart
-# Last modified: 01/05/2026
+# Last modified: 03/10/2026
 
 ```{r load libraries}
 library(readr)
@@ -227,17 +227,17 @@ result_unique
 # plot synergy heatmap
 col_fun <- colorRamp2(
   c(0, 0.5, 1),
-  c("firebrick3", "grey80", "dodgerblue3")
+  c("#F4A259", "grey80", "#2F6DAA")
 )
 
 pdf(
-  here("figures/figure4/Figure5_MOA_synergy_fraction_heatmap.pdf"),
+  here("figures/figure5/Figure5_MOA_synergy_fraction_heatmap.pdf"),
   width = 18, height = 18
 )
 
 ht <- Heatmap(
   moa_synergy_mat,
-  name = "Fraction synergistic\n(≥3/4 metrics)",
+  name = "Fractional synergistic score\n(≥3/4 metrics)",
   col = col_fun,
   na_col = "grey95",
   cluster_rows = FALSE,
