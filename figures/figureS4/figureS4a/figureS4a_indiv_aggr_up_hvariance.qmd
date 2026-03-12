@@ -115,7 +115,7 @@ other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
 final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
 final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
-write_tsv(final_df_up, here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
+write_tsv(final_df_up, here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv"))
 ```
 
 ```{r process significant matrices}
@@ -195,14 +195,14 @@ top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p90,]
 ```{r cluster the highly variable terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
-write_tsv(cl_GOids_terms, here("figures/figure2/figure2a/up_hv_clusters_asinh_pathways.tsv"))
-cl_GOids_terms <- read_tsv(here("figures/figure2/figure2a/up_hv_clusters_asinh_pathways.tsv"))
+write_tsv(cl_GOids_terms, here("figures/figureS4/figureS4a/up_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms <- read_tsv(here("figures/figureS4/figureS4a/up_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
 final_df_up_variable = final_df_up[final_df_up$Description %in% top_terms_per_cluster$terms,]
 final_signi_df_up_variable = final_signi_df_up[final_signi_df_up$Description %in% top_terms_per_cluster$terms,]
-write_tsv(final_df_up_variable, here("figures/figure2/figure2a/up_tophv_clusters_asinh_pathways.tsv"))
+write_tsv(final_df_up_variable, here("figures/figureS4/figureS4a/up_tophv_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -372,7 +372,7 @@ ha_bottom <- HeatmapAnnotation(
 ```
 
 ```{r plot heatmap and save}
-pdf(here("figures/figure2/figure2a/Figure2a_up_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
+pdf(here("figures/figureS4/figureS4a/FigureS4a_up_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
   mutate(across(everything(), as.numeric)) %>%
