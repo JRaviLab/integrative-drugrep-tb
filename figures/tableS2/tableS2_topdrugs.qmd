@@ -102,7 +102,7 @@ final_gt_table <- final_table_df %>%
   tab_spanner(label = "Correlation", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_corr") %>%
   tab_spanner(label = "Enrichment-based", columns = c(RS_CMAP, RS_NCS, RS_Tau, RS_WCS), id = "rs_enrich") %>%
   tab_spanner(label = "Correlation-based", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_correlation") %>%
-  tab_spanner(label = "RNAseq (29 signatures)", columns = starts_with("RS_"), id = "rs_main") %>%
+  tab_spanner(label = "RNAseq (22 signatures)", columns = starts_with("RS_"), id = "rs_main") %>%
   
   data_color(
     columns = starts_with("MA_"),
