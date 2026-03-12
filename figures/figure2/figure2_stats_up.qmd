@@ -208,7 +208,7 @@ tissue_MW_results$norm_auroc <- (2 * tissue_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(tissue_MW_results, here("figures/figure2/figure2c/up_allvals_circulating_other_MW.tsv"))
+write_tsv(tissue_MW_results, here("figures/figure2/up_allvals_circulating_other_MW.tsv"))
 ```
 
 ```{r differentiating terms in gt format}

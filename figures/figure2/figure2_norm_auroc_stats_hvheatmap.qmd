@@ -8,8 +8,8 @@ library(proxy)
 ```
 
 ```{r define highly variable pathways}
-up_hv_pathway_pathways = read_tsv(here("figures/figure2/figure2a/up_tophv_clusters_asinh_pathways.tsv"))$Description
-dn_hv_pathway_pathways = read_tsv(here("figures/figure2/figure2b/dn_tophv_clusters_asinh_pathways.tsv"))$Description
+up_hv_pathway_pathways = read_tsv(here("figures/figureS4/figureS4a/up_tophv_clusters_asinh_pathways.tsv"))$Description
+dn_hv_pathway_pathways = read_tsv(here("figures/figureS4/figureS4b/dn_tophv_clusters_asinh_pathways.tsv"))$Description
 ```
 
 ### Upregulated pathways
@@ -35,12 +35,6 @@ colnames(up_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnam
 up_norm_auroc_df = merge(up_norm_auroc_df, up_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="up_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
-
-#up_indiv_aggr_MW = read_tsv(here("figures/up_indiv_aggr_MW.tsv"))
-#colnames(up_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(up_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-#up_norm_auroc_df = merge(up_norm_auroc_df, up_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-#      by.x="up_hv_pathway_pathways", 
-#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r up plot prep}
@@ -72,12 +66,6 @@ colnames(dn_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnam
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="dn_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
-
-#dn_indiv_aggr_MW = read_tsv(here("figures/dn_indiv_aggr_MW.tsv"))
-#colnames(dn_indiv_aggr_MW) = gsub("norm_auroc", "individual-aggregated", colnames(dn_indiv_aggr_MW), ignore.case = FALSE, fixed = FALSE)
-#dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_indiv_aggr_MW[c("GO_term","individual-aggregated")], 
-#      by.x="dn_hv_pathway_pathways", 
-#      by.y="GO_term", all.x=TRUE)
 ```
 
 ```{r dn plot prep}
