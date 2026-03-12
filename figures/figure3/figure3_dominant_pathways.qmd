@@ -14,7 +14,7 @@ summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv"
 summary_df = read_tsv(here(summary_path)) 
 
 # read in upregulated microarray-RNAseq pathway matrix (data for figure 2a)
-up_pathway_df = read_tsv(here("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv"))
+up_pathway_df = read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv"))
 pathways = up_pathway_df$Description
 
 # microarray upregulated signatures
@@ -140,7 +140,7 @@ sq_dev_up <- bind_rows(micro_sq_up, rna_sq_up)
 
 ```{r}
 dn_pathway_df <- read_tsv(
-  here("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv")
+  here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv")
 )
 
 # Microarray
@@ -265,7 +265,7 @@ term2go <- AnnotationDbi::select(
   keytype = "TERM"
 )
 
-# Keep only Biological Process (usually what you want)
+# Keep only Biological Process
 term2go <- term2go[term2go$ONTOLOGY == "BP", ]
 
 # Drop unmatched terms
@@ -309,7 +309,7 @@ parent_df <- parent_df[order(-parent_df$count), ]
 library(org.Hs.eg.db)
 library(AnnotationDbi)
 
-# GO → gene mapping
+# GO gene mapping
 go2gene <- AnnotationDbi::select(
   org.Hs.eg.db,
   keys = parent_df$GOID,
