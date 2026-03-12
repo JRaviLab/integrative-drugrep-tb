@@ -27,8 +27,8 @@ process_file_variance <- function(filepath, direction_label) {
 ```
 
 ```{r figure S2 plotting}
-plot_var_df_up <- process_file_variance("figures/figure2/figure2a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
-plot_var_df_dn <- process_file_variance("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
+plot_var_df_up <- process_file_variance("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
+plot_var_df_dn <- process_file_variance("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_var_plot_df <- bind_rows(plot_var_df_up, plot_var_df_dn) %>%
@@ -42,7 +42,7 @@ med_var_labels <- combined_var_plot_df %>%
     .groups = "drop"
   )
 
-pdf(here("figures/figure3/FigureS3_variance_across_signatures.pdf"),
+pdf(here("figures/figureS3/FigureS3_variance_across_signatures.pdf"),
     width = 16, height = 12)  
 
 ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology)) +
