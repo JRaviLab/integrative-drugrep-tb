@@ -42,7 +42,7 @@ med_var_labels <- combined_var_plot_df %>%
     .groups = "drop"
   )
 
-pdf(here("figures/figureS4/FigureS4_variance_across_signatures.pdf"),
+pdf(here("figures/figure3/FigureS3_variance_across_signatures.pdf"),
     width = 16, height = 12)  
 
 ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology)) +
