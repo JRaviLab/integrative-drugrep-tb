@@ -87,7 +87,7 @@ down_df <- subset(combined_plot_df, Direction == "Downregulated")
 up_labels <- subset(med_labels, Direction == "Upregulated")
 down_labels <- subset(med_labels, Direction == "Downregulated")
 
-pdf(here("figures/figureS5/FigureS5ab_origin_squared_deviation.pdf"),
+pdf(here("figures/figureS6/FigureS6_origin_squared_deviation.pdf"),
     width = 15, height = 10)
 # Plot for Upregulated
 p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Technology)) +
