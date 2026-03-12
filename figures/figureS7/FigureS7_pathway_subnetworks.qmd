@@ -1,4 +1,4 @@
-# Obtain node and edge data for figure 3: disease-drug-target network
+# Obtain node and edge data for figure 4: disease-drug-target network
 ### last modified: 11/17/25
 ### Author: Kewalin Samart
 
@@ -19,9 +19,7 @@ rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggreg
 up_aggr_genes = intersect(microarray_up_aggr_genes, rnaseq_up_aggr_genes)
 dn_aggr_genes = intersect(microarray_dn_aggr_genes, rnaseq_dn_aggr_genes)
 
-TB_aggregated_genes = unique(union(up_aggr_genes, dn_aggr_genes))
-
-write_tsv(as.data.frame(TB_aggregated_genes), file = here("data/figure3/TB_aggregated_genes.tsv"))
+TB_aggregated_genes = unique(union(up_aggr_genes, dn_aggr_genes)) # same as here("figures/figure4/TB_aggregated_genes.tsv")
 ```
 
 ```{r map disease genes to symbols}
@@ -67,7 +65,7 @@ DGIdb_targets_df_$type <- "DGIdb"
 drug_genes_df$type <- "LINCS"
 
 drug_gene_df_network = rbind(drug_genes_df, DGIdb_targets_df_)
-write_tsv(drug_gene_df_network, file=here("data/figure3/drug_gene_table.tsv"))
+write_tsv(drug_gene_df_network, file=here("figures/figure4/drug_gene_table.tsv"))
 ```
 
 #### Create node_types.txt for figure 3
@@ -87,13 +85,13 @@ type_drug_genes <- "target"
 drug_perturbed_genes_df <- data.frame(node = node_drug_genes, type = type_drug_genes, stringsAsFactors = FALSE)
 
 node_type_df <- rbind(TB_genes_df, drug_perturbed_genes_df)
-write_tsv(node_type_df, file = here("data/figure3/node_types.tsv"))
+write_tsv(node_type_df, file = here("figures/figure4/node_types.tsv"))
 
 node_drug_genes_wperturbed <- union(drug_genes_df$drug_gene, DGIdb_targets_df$target)
 drug_perturbed_genes_df_wperturbed <- data.frame(node = node_drug_genes_wperturbed, type = type_drug_genes, stringsAsFactors = FALSE)
 
 node_type_df_ <- rbind(TB_genes_df, drug_perturbed_genes_df_wperturbed)
-write_tsv(node_type_df_, file = here("data/figure3/node_types_with_perturbed_genes.tsv"))
+write_tsv(node_type_df_, file = here("figures/figure4/node_types_with_perturbed_genes.tsv"))
 ```
 
 #### Create and save node/edge data for figure S6
@@ -140,8 +138,8 @@ edge_data_hmgcr = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRIN
 ```
 
 ```{r save network tables}
-write_tsv(node_data_STRING_hmgcr, file = here("data/figureS6/figureS6_hmgcr_node_subnetwork.tsv"))
-write_tsv(edge_data_hmgcr, file = here("data/figureS6/figureS6_hmgcr_edge_subnetwork.tsv"))
+write_tsv(node_data_STRING_hmgcr, file = here("figures/figureS6/figureS6_hmgcr_node_subnetwork.tsv"))
+write_tsv(edge_data_hmgcr, file = here("figures/figureS6/figureS6_hmgcr_edge_subnetwork.tsv"))
 ```
 
 ```{r save node type}
@@ -166,7 +164,7 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-write_tsv(node_table, here("data/figureS6/figureS6_hmgcr_node_type_table.tsv"))
+write_tsv(node_table, here("figures/figureS6/figureS6_hmgcr_node_type_table.tsv"))
 
 ```
 
@@ -198,8 +196,8 @@ edge_data_cy = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_c
 ```
 
 ```{r save network tables}
-write_tsv(node_data_STRING_cy, file = here("data/figureS6/figureS6_cytokine_node_subnetwork.tsv"))
-write_tsv(edge_data_cy, file = here("data/figureS6/figureS6_cytokine_edge_subnetwork.tsv"))
+write_tsv(node_data_STRING_cy, file = here("figures/figureS6/figureS6_cytokine_node_subnetwork.tsv"))
+write_tsv(edge_data_cy, file = here("figures/figureS6/figureS6_cytokine_edge_subnetwork.tsv"))
 ```
 
 ```{r save node type}
@@ -224,7 +222,7 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-write_tsv(node_table, here("data/figureS6/figureS6_cy_node_type_table.tsv"))
+write_tsv(node_table, here("figures/figureS6/figureS6_cy_node_type_table.tsv"))
 
 ```
 
