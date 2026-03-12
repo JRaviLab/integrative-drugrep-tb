@@ -138,8 +138,8 @@ edge_data_hmgcr = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRIN
 ```
 
 ```{r save network tables}
-write_tsv(node_data_STRING_hmgcr, file = here("figures/figureS6/figureS6_hmgcr_node_subnetwork.tsv"))
-write_tsv(edge_data_hmgcr, file = here("figures/figureS6/figureS6_hmgcr_edge_subnetwork.tsv"))
+write_tsv(node_data_STRING_hmgcr, file = here("figures/figureS7/figureS7_hmgcr_node_subnetwork.tsv"))
+write_tsv(edge_data_hmgcr, file = here("figures/figureS7/figureS7_hmgcr_edge_subnetwork.tsv"))
 ```
 
 ```{r save node type}
@@ -164,7 +164,7 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-write_tsv(node_table, here("figures/figureS6/figureS6_hmgcr_node_type_table.tsv"))
+write_tsv(node_table, here("figures/figureS7/figureS7_hmgcr_node_type_table.tsv"))
 
 ```
 
@@ -196,8 +196,8 @@ edge_data_cy = get_drugtarget_NetworkEdgeData(network_nodes = node_data_STRING_c
 ```
 
 ```{r save network tables}
-write_tsv(node_data_STRING_cy, file = here("figures/figureS6/figureS6_cytokine_node_subnetwork.tsv"))
-write_tsv(edge_data_cy, file = here("figures/figureS6/figureS6_cytokine_edge_subnetwork.tsv"))
+write_tsv(node_data_STRING_cy, file = here("figures/figureS7/figureS7_cytokine_node_subnetwork.tsv"))
+write_tsv(edge_data_cy, file = here("figures/figureS7/figureS7_cytokine_edge_subnetwork.tsv"))
 ```
 
 ```{r save node type}
@@ -222,7 +222,7 @@ node_table <- bind_rows(from_nodes, to_nodes) %>%
   distinct() %>%
   arrange(node)
 
-write_tsv(node_table, here("figures/figureS6/figureS6_cy_node_type_table.tsv"))
+write_tsv(node_table, here("figures/figureS7/figureS7_cy_node_type_table.tsv"))
 
 ```
 
