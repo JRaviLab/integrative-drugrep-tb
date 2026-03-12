@@ -1,6 +1,6 @@
 # Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotics
 # Kewalin Samart
-# Last modified: 03/10/2026
+# Last modified: 03/12/2026
 
 ```{r load libraries}
 library(readr)
@@ -30,7 +30,7 @@ predicted_drugs <- union(predicted_drugs, tbmedications)
 
 ```{r obtain DrugCombDB voting-based synergy scores}
 drugs_synergy_df <- read.csv(
-  here("data/metadata/20240724DrugCombDB_Syner&Antag_voting.csv")
+  here("figures/figure5/20240724DrugCombDB_Syner&Antag_voting.csv")
 ) %>%
   mutate(
     Drug1 = tolower(Drug1),
