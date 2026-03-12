@@ -1,4 +1,4 @@
-```{r Figure S3a function}
+```{r Figure S5 function}
 library(readr)
 library(here)
 library(dplyr)
@@ -34,10 +34,10 @@ process_file <- function(filepath, direction_label) {
 }
 ```
 
-```{r Figure S3a plot}
+```{r Figure S5 plot}
 # process both up- and dn-regulated pathways files
-plot_df_up <- process_file("figures/figure2/figure2a//marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
-plot_df_dn <- process_file("figures/figure2/figure2b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
+plot_df_up <- process_file("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
+plot_df_dn <- process_file("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_plot_df <- bind_rows(plot_df_up, plot_df_dn) %>%
@@ -81,7 +81,7 @@ ggplot(combined_plot_df, aes(x = Technology, y = SquaredDeviation, fill = Techno
 
 ```
 
-```{r figure S3b data}
+```{r figure S5 data}
 library(dplyr)
 
 # choose how many lowest SD pathways you want to plot per group
@@ -106,26 +106,8 @@ print(dim(lowest_sd_paths_all))
 print(dim(lowest_sd_paths_all)[1]/dim(combined_plot_df)[1]*100) # percentage of pathways with zero squared deviation
 ```
 
-```{r figure S3b; plotting}
-library(ggplot2)
 
-ggplot(lowest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = SquaredDeviation, fill = Technology)) +
-  geom_col(position = position_dodge(width = 0.8)) +
-  facet_wrap(~ Direction, scales = "free_x") +
-  coord_flip() +
-  labs(
-    title = "Pathways well-captured by aggregated sigatures (lowest squared deviation)",
-    x = "Pathway",
-    y = "Squared deviation"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "bottom",
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  )
-```
-
-```{r figure S3c data}
+```{r figure S5 data}
 # choose how many highest SD pathways you want to plot per group
 top_n <- 10
 
@@ -136,10 +118,10 @@ highest_sd_paths <- combined_plot_df %>%
 
 ```
 
-```{r figure S3c; plotting}
+```{r figure S5; plotting}
 library(ggplot2)
 
-pdf(here("figures/figureS5/FigureS5c_squared_deviation_less_captured.pdf"),
+pdf(here("figures/figureS5/FigureS5_squared_deviation_less_captured.pdf"),
     width = 16, height = 8)  
 
 ggplot(highest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = SquaredDeviation, fill = Technology)) +
