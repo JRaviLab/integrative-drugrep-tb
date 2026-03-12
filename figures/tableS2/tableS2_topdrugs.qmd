@@ -11,7 +11,7 @@ predicted_drugs
 
 ```{r get fraction of signatures each drug reverses}
 # read in result files from different scores
-# microarray (6 signatures) and RNAseq (29 signatures) separately
+# microarray (6 signatures) and RNAseq (22 signatures) separately
 # but we have many connectivity scores; take median?
 # report signature fractions for all scores
 
@@ -36,7 +36,6 @@ library(tidyverse)
 library(gt)
 library(stringr)
 
-# join first (without replace_na)
 # Combine microarray and RNA-seq results by union of drugs
 combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
 
@@ -59,7 +58,7 @@ score_cols <- c(
 # Step 1: Prepare the data
 # The select() call now only includes significant_drug as the identifier.
 filtered_df <- combined_with_rank_df %>%
-  select(significant_drug, combined_z_score, all_of(score_cols)) %>%
+  dplyr::select(significant_drug, combined_z_score, all_of(score_cols)) %>%
   filter(!is.na(combined_z_score)) %>%
   arrange(desc(combined_z_score)) %>%
   mutate(rank = row_number()) %>%
@@ -82,7 +81,7 @@ label_list$RS_Cor_spearman <- "XSpe"
 
 # Step 3: Build the gt table with explicit widths and alignment
 final_gt_table <- final_table_df %>%
-  select(rank, combined_z_score, significant_drug, everything()) %>%
+  dplyr::select(rank, combined_z_score, significant_drug, everything()) %>%
   gt(rowname_col = "rank") %>%
   tab_stubhead(label = "Rank") %>%
   
@@ -90,7 +89,7 @@ final_gt_table <- final_table_df %>%
     .list = label_list
   ) %>%
 
-  # --- Spanners with UNIQUE IDs --- #
+  # Spanners with unique IDs
   tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "ma_cmap1.0") %>%
   tab_spanner(label = "CMAP2.0", columns = c(MA_NCS, MA_Tau, MA_WCS), id = "ma_cmap2.0") %>%
   tab_spanner(label = "Correlation", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "ma_corr") %>%
@@ -145,8 +144,8 @@ final_gt_table <- final_table_df %>%
     locations = cells_column_labels(columns = everything())
   )
 
-# Now, save directly without modifying the table options
-gtsave(final_gt_table, here("drugs_methodwise_final_table_count.html"))
+# save directly without modifying the table options
+gtsave(final_gt_table, here("figures/tableS2/drugs_methodwise_final_table_count.html"))
 
 # resize to fit into png
 final_gt_table <- final_gt_table %>%
@@ -159,388 +158,11 @@ final_gt_table <- final_gt_table %>%
 
 gtsave(
   final_gt_table,
-  "final_drugs_methodwise_final_table_count.png",
-  vwidth = 2500, # Adjust as needed
+  here("figures/tableS2/final_drugs_methodwise_final_table_count.png"),
+  vwidth = 2500, 
   expand = 10
-) # Must manually convert to pdf
+) 
 
 final_gt_table
 ```
 
-```{r union --> intersect indiv and aggr}
-# unique_pert matches drug_name
-combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
-replace_list <- as.list(setNames(rep(0, ncol(combined_scores_df) - 1), names(combined_scores_df)[-1]))
-combined_scores_df <- replace_na(combined_scores_df, replace_list)
-combined_with_rank_df <- combined_scores_df %>%
-  left_join(predicted_drugs, by = c("significant_drug" = "drug_name"))
-
-combined_with_rank_df  <- combined_with_rank_df  %>%
-  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
-
-# read in 140 drugs
-drugs140 = read_delim("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/intersect_RAresult_drugs.tsv",delim = '\t')
-combined_with_rank_df = combined_with_rank_df[combined_with_rank_df$unique_pert %in% drugs140$intersect_RAresult_drugs,]
-
-library(tidyverse)
-library(gt)
-
-# Step 1: Manually specify the exact columns to keep
-score_cols <- c(
-  "microarray_CMAP", "microarray_NCS", "microarray_Tau", "microarray_WCS", "microarray_Cor_pearson", "microarray_Cor_spearman"
-  ,
-  "RNAseq_CMAP", "RNAseq_NCS", "RNAseq_Tau", "RNAseq_WCS", "RNAseq_Cor_pearson", "RNAseq_Cor_spearman"
-  
-)
-
-# Step 2: Select only those columns + MeanRank and unique_pert
-filtered_df <- combined_with_rank_df %>%
-  select(MeanRank, unique_pert, all_of(score_cols)) %>%
-  arrange(desc(MeanRank))  # Show higher ranks first
-
-
-filtered_df <- filtered_df %>%
-  gt(rowname_col = "unique_pert") %>%
-  
-  ### Microarray nested spanners
-  # CMAP1.0 (classic CMAP score)
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = c(microarray_CMAP),
-    id = "marray_cmap1"
-  ) %>%
-  
-  # CMAP2.0 (connectivity scores)
-  tab_spanner(
-    label = "LINCS",
-    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_cmap2"
-  ) %>%
-  
-  # Correlation scores
-  tab_spanner(
-    label = "Correlation",
-    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_corr"
-  ) %>%
-  
-  # Method class (enrichment-based includes CMAP1.0 + CMAP2.0)
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = c(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_correlation"
-  ) %>%
-  
-  # Platform
-  tab_spanner(
-    label = "Microarray (16 signatures)",
-    columns = starts_with("microarray_"),
-    id = "marray"
-  ) %>%
-  
-  ### RNAseq nested spanners
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = c(RNAseq_CMAP),
-    id = "rna_cmap1"
-  ) %>%
-  tab_spanner(
-    label = "LINCS",
-    columns = c(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_cmap2"
-  ) %>%
-  tab_spanner(
-    label = "Correlation",
-    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_corr"
-  ) %>%
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = c(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_correlation"
-  ) %>%
-  tab_spanner(
-    label = "RNAseq (9 signatures)",
-    columns = starts_with("RNAseq_"),
-    id = "rna"
-  ) %>%
-
-  ### Color formatting
-  data_color(
-    columns = starts_with("microarray_"),
-    colors = scales::col_numeric(
-      palette = c("mistyrose", "red"),
-      domain = c(0, max(filtered_df %>% select(starts_with("microarray_")), na.rm = TRUE))
-    )
-  ) %>%
-  data_color(
-    columns = starts_with("RNAseq_"),
-    colors = scales::col_numeric(
-      palette = c("lightblue", "blue"),
-      domain = c(0, max(filtered_df %>% select(starts_with("RNAseq_")), na.rm = TRUE))
-    )
-  )
-
-gtsave(filtered_df, "~/Documents/GitHub/drugrep_tb/figures/drugs_methodwise_indiv_aggr_intersection_table.png", expand = 5, vwidth = 2000, vheight = 1200 )
-filtered_df
-
-```
-
-```{r mark overlapping drugs}
-# Step 1: Load the intersect_RAresult_drugs.tsv file
-intersect_drugs <- read.delim("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/intersect_RAresult_drugs.tsv", stringsAsFactors = FALSE, sep="\t")
-
-# Step 1: Add the color column to the raw dataframe (before converting to gt_tbl)
-filtered_df_raw <- filtered_df %>%
-  as.data.frame() %>%
-  mutate(marked_in_intersect = ifelse(unique_pert %in% intersect_drugs$drug_name, "Yes", "No"))
-
-# Step 2: Convert to gt_tbl and apply color formatting
-filtered_df <- filtered_df_raw %>%
-  gt(rowname_col = "unique_pert") %>%
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = c(microarray_CMAP),
-    id = "marray_cmap1"
-  ) %>%
-  # CMAP2.0 (connectivity scores)
-  tab_spanner(
-    label = "CMAP2.0",
-    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_cmap2"
-  ) %>%
-
-
-```
-
-```{r either microarray or rnaseq}
-# Define score groupings
-score_groups <- combined_with_rank_df %>%
-  rowwise() %>%
-  mutate(
-    microarray_CMAP1.0 = any(c_across(c(microarray_CMAP)) != 0),
-    microarray_CMAP2.0 = any(c_across(c(microarray_NCS, microarray_Tau, microarray_WCS)) != 0),
-    microarray_Correlation = any(c_across(c(microarray_Cor_pearson, microarray_Cor_spearman)) != 0),
-    
-    rnaseq_CMAP1.0 = any(c_across(c(RNAseq_CMAP)) != 0),
-    rnaseq_CMAP2.0 = any(c_across(c(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS)) != 0),
-    rnaseq_Correlation = any(c_across(c(RNAseq_Cor_pearson, RNAseq_Cor_spearman)) != 0),
-    
-    n_pass_microarray = sum(c(microarray_CMAP1.0, microarray_CMAP2.0, microarray_Correlation)),
-    n_pass_rnaseq = sum(c(rnaseq_CMAP1.0, rnaseq_CMAP2.0, rnaseq_Correlation))
-  ) %>%
-  ungroup() %>%
-  filter(n_pass_microarray >= 2 | n_pass_rnaseq >= 2)
-
-# Keep only the columns of interest
-filtered_either_df <- score_groups %>%
-  select(MeanRank, unique_pert, all_of(score_cols)) %>%
-  arrange(desc(MeanRank))
-
-filtered_either_df <- filtered_either_df %>%
-  gt(rowname_col = "unique_pert") %>%
-  
-  ### Microarray nested spanners
-  # CMAP1.0 (classic CMAP score)
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = c(microarray_CMAP),
-    id = "marray_cmap1"
-  ) %>%
-  
-  # CMAP2.0 (connectivity scores)
-  tab_spanner(
-    label = "CMAP2.0",
-    columns = c(microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_cmap2"
-  ) %>%
-  
-  # Correlation scores
-  tab_spanner(
-    label = "Correlation",
-    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_corr"
-  ) %>%
-  
-  # Method class (enrichment-based includes CMAP1.0 + CMAP2.0)
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = c(microarray_CMAP, microarray_NCS, microarray_Tau, microarray_WCS),
-    id = "marray_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = c(microarray_Cor_pearson, microarray_Cor_spearman),
-    id = "marray_correlation"
-  ) %>%
-  
-  # Platform
-  tab_spanner(
-    label = "Microarray (16 signatures)",
-    columns = starts_with("microarray_"),
-    id = "marray"
-  ) %>%
-  
-  ### RNAseq nested spanners
-  tab_spanner(
-    label = "CMAP1.0",
-    columns = c(RNAseq_CMAP),
-    id = "rna_cmap1"
-  ) %>%
-  tab_spanner(
-    label = "CMAP2.0",
-    columns = c(RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_cmap2"
-  ) %>%
-  tab_spanner(
-    label = "Correlation",
-    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_corr"
-  ) %>%
-  tab_spanner(
-    label = "Enrichment-based",
-    columns = c(RNAseq_CMAP, RNAseq_NCS, RNAseq_Tau, RNAseq_WCS),
-    id = "rna_enrich"
-  ) %>%
-  tab_spanner(
-    label = "Correlation-based",
-    columns = c(RNAseq_Cor_pearson, RNAseq_Cor_spearman),
-    id = "rna_correlation"
-  ) %>%
-  tab_spanner(
-    label = "RNAseq (9 signatures)",
-    columns = starts_with("RNAseq_"),
-    id = "rna"
-  ) %>%
-
-  ### Color formatting
-  data_color(
-    columns = starts_with("microarray_"),
-    colors = scales::col_numeric(
-      palette = c("mistyrose", "red"),
-      domain = c(0, max(filtered_either_df %>% select(starts_with("microarray_")), na.rm = TRUE))
-    )
-  ) %>%
-  data_color(
-    columns = starts_with("RNAseq_"),
-    colors = scales::col_numeric(
-      palette = c("lightblue", "blue"),
-      domain = c(0, max(filtered_either_df %>% select(starts_with("RNAseq_")), na.rm = TRUE))
-    )
-  )
-
-gtsave(filtered_either_df, here("figureS2/drugs_methodwise_either_table_binary.html"))
-filtered_either_df
-```
-
-```{r gt  table}
-predicted_drugs %>%
-  select(drug_name, moa, disease_area, indication) %>%
-  arrange(origin) %>%
-  gt(groupname_col = "moa") %>%
-  tab_header(
-    title = "Predicted drug candidates across technologies by our workflow",
-    subtitle = "Grouped by Mechanism of Action (MoA)"
-  ) %>%
-  cols_label(
-    drug_name = "Drug Name",
-    moa = "MoA",
-    disease_area = "Disease Area",
-    indication = "Indication",
-  ) %>%
-  fmt_missing(
-    columns = everything(),
-    missing_text = "-"
-  ) %>%
-  tab_options(
-    table.font.size = "small",
-    heading.title.font.size = 16,
-    heading.subtitle.font.size = 12
-  ) 
-
-my_gt_table <- predicted_drugs %>%
-  select(drug_name, moa, disease_area, indication) %>%
-  arrange(moa) %>%
-  gt(groupname_col = "moa") # (same as above...)
-gtsave(my_gt_table, "/Users/kewalinsamart/Documents/GitHub/drugrep_tb/figures/predicted_drugs_table.html")
-```
-
-```{r count occurrences of indications}
-library(ComplexHeatmap)
-library(tidyverse)
-library(readr)
-
-# load original data
-union_drugs_df <- read_tsv("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/annotated_RAresult_TB_union.tsv")
-intersecting_drugs <- readLines("~/Documents/GitHub/drugrep_tb/results/uniformly_processed/intersect_RAresult_drugs.tsv")
-final_drugs_df <- union_drugs_df[union_drugs_df$drug_name %in% intersecting_drugs,]
-
-# remove rows with missing indication or drug_name
-final_drugs_df <- final_drugs_df %>%
-  filter(!is.na(drug_name), !is.na(indication))
-
-# split multi-label indications and expand rows
-final_drugs_df_expanded <- final_drugs_df %>%
-  separate_rows(indication, sep = "\\|")
-
-# count occurrences of each drug × indication pair
-drug_indication_counts <- final_drugs_df_expanded %>%
-  count(drug_name, indication, name = "count")
-
-# pivot to wide matrix format
-drug_indication_matrix <- drug_indication_counts %>%
-  pivot_wider(names_from = indication, values_from = count, values_fill = 0)
-
-# Save to TSV
-write_tsv(drug_indication_matrix, "~/Documents/GitHub/drugrep_tb/results/uniformly_processed/drug_indication_matrix.tsv")
-
-drug_indication_matrix = as.matrix(column_to_rownames(drug_indication_matrix, "drug_name"))
-
-Heatmap(drug_indication_matrix,
-        name = "Count",
-        column_title = "Indication",
-        row_title = "Drug",
-        cluster_rows = TRUE,
-        cluster_columns = TRUE)
-
-hist(drug_indication_counts$count, breaks=5)
-
-```
-
-```{r count occurrences of disease area}
-# split multi-label disease areas and expand rows
-final_drugs_df_expanded <- final_drugs_df %>%
-  separate_rows(disease_area, sep = "\\|")
-
-# count occurrences of each drug × disease area pair
-drug_disarea_counts <- final_drugs_df_expanded %>%
-  count(drug_name, disease_area, name = "count")
-
-# pivot to wide matrix format
-drug_disarea_matrix <- drug_disarea_counts %>%
-  pivot_wider(names_from = disease_area, values_from = count, values_fill = 0)
-
-# Save to TSV
-write_tsv(drug_disarea_matrix, "~/Documents/GitHub/drugrep_tb/results/uniformly_processed/drug_disarea_matrix.tsv")
-
-drug_disarea_matrix = as.matrix(column_to_rownames(drug_disarea_matrix, "drug_name"))
-
-Heatmap(drug_disarea_matrix,
-        name = "Count",
-        column_title = "Disease Area",
-        row_title = "Drug",
-        cluster_rows = TRUE,
-        cluster_columns = TRUE)
-
-hist(drug_disarea_counts$count, breaks=9)
-```
