@@ -1,4 +1,4 @@
-# Figure 2a: Enrichment of highly variable upregulated pathways in individual and aggregated TB signatures
+# Figure S4a: Enrichment of highly variable upregulated pathways in individual and aggregated TB signatures
 # last modified: 12/18/25
 # author: Kewalin Samart
 
