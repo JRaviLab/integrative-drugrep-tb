@@ -1,5 +1,5 @@
 # Figure 3: Biology of dominant pathways and squared deviation of dominant vs. non-dominant pathways
-# last modified: 01/30/26
+# last modified: 03/10/26
 # author: Kewalin Samart
 
 ```{r setup, include=FALSE}
@@ -44,6 +44,7 @@ up_rnaseq_dominant_pathways <- rownames(up_rnaseq_mat)[prop_nonzero >= 0.9]
 
 up_dominant_pathways = intersect(up_micro_dominant_pathways, up_rnaseq_dominant_pathways)
 ```
+
 ```{r}
 compute_pathway_deviation <- function(mat, agg_col) {
 
@@ -219,21 +220,24 @@ sq_dev_df <- sq_dev_df %>%
   )
 
 pdf(here("figures/figure3/Figure3_squared_deviation_dominant_pathways.pdf"),
-    width = 10, height = 8)
+    width = 6, height = 8)
 
 ggplot(
   sq_dev_df,
   aes(x = enrichment, y = deviation_score, fill = enrichment)
 ) +
   geom_boxplot(alpha = 0.8) +
-  scale_y_log10() +
+  scale_y_log10(
+    breaks = 10^seq(-10, 0, by = 2),
+    labels = seq(-10, 0, by = 2)
+  ) +
   facet_grid(
     direction ~ technology,
     scales = "free_y"
   ) +
   labs(
     x = "Enrichment",
-    y = "Log squared deviation",
+    y = "Squared deviation (log scale)"
   ) +
   theme_bw(base_size = 14) +
   theme(
