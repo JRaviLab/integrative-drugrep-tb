@@ -1,31 +1,35 @@
+# identify genes consistently showing up in aggregated signatures
+# Last modified: 03/12/2026
+# Kewalin Samart
+
 ```{r}
 library(here)
 ```
 
-```{r}
+```{r read in microarray up/dn aggr signatures}
 micro_up_aggregated_signature <- readRDS(here("data/signatures/microarray/aggregated_signatures/up_aggregated_signature.rds"))
 
 micro_dn_aggregated_signature <- readRDS(here("data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.rds"))
 ```
 
-```{r}
+```{r read in RNAseq up/dn aggr signatures}
 rnaseq_up_aggregated_signature <- readRDS(here("data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.rds"))
 
 rnaseq_dn_aggregated_signature <- readRDS(here("data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.rds"))
 ```
 
-```{r}
+```{r get up/dn intersection}
 intersect_up = intersect(micro_up_aggregated_signature$GeneID, rnaseq_up_aggregated_signature$GeneID)
 intersect_dn = intersect(micro_dn_aggregated_signature$GeneID, rnaseq_dn_aggregated_signature$GeneID)
 ```
 
-```{r}
+```{r combine consistent genes into one set (up+dn)}
 up_dn_aggr_genes = union(intersect_up, intersect_dn)
 out_df <- data.frame(TB_aggregated_genes = up_dn_aggr_genes)
 
 write.table(
   out_df,
-  file = here("data/figure3/TB_aggregated_genes.tsv"),
+  file = here("figures/figure4/TB_aggregated_genes.tsv"),
   sep = "\t",
   quote = FALSE,
   row.names = FALSE,
