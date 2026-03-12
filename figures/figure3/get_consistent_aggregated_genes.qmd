@@ -1,0 +1,34 @@
+```{r}
+library(here)
+```
+
+```{r}
+micro_up_aggregated_signature <- readRDS(here("data/signatures/microarray/aggregated_signatures/up_aggregated_signature.rds"))
+
+micro_dn_aggregated_signature <- readRDS(here("data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.rds"))
+```
+
+```{r}
+rnaseq_up_aggregated_signature <- readRDS(here("data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.rds"))
+
+rnaseq_dn_aggregated_signature <- readRDS(here("data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.rds"))
+```
+
+```{r}
+intersect_up = intersect(micro_up_aggregated_signature$GeneID, rnaseq_up_aggregated_signature$GeneID)
+intersect_dn = intersect(micro_dn_aggregated_signature$GeneID, rnaseq_dn_aggregated_signature$GeneID)
+```
+
+```{r}
+up_dn_aggr_genes = union(intersect_up, intersect_dn)
+out_df <- data.frame(TB_aggregated_genes = up_dn_aggr_genes)
+
+write.table(
+  out_df,
+  file = here("data/figure3/TB_aggregated_genes.tsv"),
+  sep = "\t",
+  quote = FALSE,
+  row.names = FALSE,
+  col.names = TRUE
+)
+```
