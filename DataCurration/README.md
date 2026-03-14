@@ -24,7 +24,7 @@ Preprocessed transcriptomic datasets were retrieved from ARCHS4 and their respec
 
 - Ensures that every study has at least 3 samples in both disease and control groups
 
-[Make Contrasts for DESEQ](Stage1.5_MakeContrast.ipynb)
+[Make Contrasts for DESEQ](Stage1.4_MakeContrast.ipynb)
 
 - This contains the logic for creating the contrast for DESEQ as well as the input file used for the Differential Gene Expression (DGE) analysis.
 
