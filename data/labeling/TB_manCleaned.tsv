@@ -1,0 +1,521 @@
+GSE_ID	GSM_ID	CLASSIFICATION	CLASSIFICATION_STANDARDIZED	SAMPLE_TYPE	CELL_SOURCE	CELL_SOURCE_CLEAN	TISSUE_SOURCE	TISSUE_SOURCE_CLEAN	CL:CODE	UBERON:CODE	CONTEXT
+GSE84076	GSM2226808	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226809	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226817	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226825	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226829	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226832	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226840	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226841	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226842	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE84076	GSM2226843	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE148171	GSM4455458	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455459	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455460	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455461	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455462	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455463	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455464	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455465	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE148171	GSM4455466	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952180	Disease without treatment	Disease without treatment	blood_sample	PBMCs (Peripheral Blood Mononuclear Cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952181	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952182	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952183	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952184	Disease without treatment	Disease without treatment	blood_sample	PBMCs (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952185	Disease without treatment	Disease without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952186	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952187	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952188	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952189	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952190	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE198557	GSM5952191	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMCs	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE112482	GSM3070964	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070965	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070966	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070967	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070968	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070969	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070970	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070971	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070972	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070973	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070974	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3070975	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3070976	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070977	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070978	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070979	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070980	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070981	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070982	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070983	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070984	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070985	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070986	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3070987	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3070988	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070989	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3070990	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070991	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3070992	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070993	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3070994	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070995	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3070996	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070997	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3070998	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3070999	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071000	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071001	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071002	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071003	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071004	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071005	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071006	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071007	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071008	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071009	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071010	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071011	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071012	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071013	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071014	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071015	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071016	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071017	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071018	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071019	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071020	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071021	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071022	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071023	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071024	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071025	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071026	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071027	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071028	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071029	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071030	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071031	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071032	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071033	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071034	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071035	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071036	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071037	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071038	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071039	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071040	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071041	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071042	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071043	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071044	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071045	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071046	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071047	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071048	Disease without treatment	Disease without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071049	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC1	ILC1	LUNG_TISSUE_GENERAL	Lung	ILC1	UBERON:0002048
+GSE112482	GSM3071050	Disease without treatment	Disease without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071051	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC2	ILC2	LUNG_TISSUE_GENERAL	Lung	ILC2	UBERON:0002048
+GSE112482	GSM3071052	Disease without treatment	Disease without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071053	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3neg	ILC3neg	LUNG_TISSUE_GENERAL	Lung	ILC3neg	UBERON:0002048
+GSE112482	GSM3071054	Disease without treatment	Disease without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071055	Healthy Control without treatment	Healthy Control without treatment	primary_sample	ILC3pos	ILC3pos	LUNG_TISSUE_GENERAL	Lung	ILC3pos	UBERON:0002048
+GSE112482	GSM3071056	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071057	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112482	GSM3071058	Disease without treatment	Disease without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112482	GSM3071059	Healthy Control without treatment	Healthy Control without treatment	primary_sample	susp	susp	LUNG_TISSUE_GENERAL	Lung	susp	UBERON:0002048
+GSE112483	GSM3071060	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071061	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071062	Disease without treatment	Disease without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071063	Healthy Control without treatment	Healthy Control without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071064	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071065	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071066	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071067	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071068	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071069	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071070	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071071	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071072	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071073	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071074	Disease without treatment	Disease without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071075	Healthy Control without treatment	Healthy Control without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071076	Disease without treatment	Disease without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071077	Healthy Control without treatment	Healthy Control without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071078	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071079	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071080	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071081	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071082	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071083	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071084	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071085	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071086	Disease without treatment	Disease without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071087	Healthy Control without treatment	Healthy Control without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071088	Disease without treatment	Disease without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071089	Healthy Control without treatment	Healthy Control without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071090	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071091	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071092	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071093	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071094	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071095	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071096	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071097	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071098	Disease without treatment	Disease without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071099	Healthy Control without treatment	Healthy Control without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071100	Disease without treatment	Disease without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071101	Healthy Control without treatment	Healthy Control without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071102	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071103	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071104	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071105	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071106	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071107	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071108	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071109	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071110	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071111	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071112	Disease without treatment	Disease without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071113	Healthy Control without treatment	Healthy Control without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071114	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071115	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071116	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071117	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071118	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071119	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071120	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071121	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071122	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071123	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071124	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071125	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071126	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071127	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071128	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071129	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071130	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071131	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071132	Healthy Control without treatment	Healthy Control without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071133	Disease without treatment	Disease without treatment	primary_sample	endo	endo	LUNG_TISSUE_GENERAL	Lung	endo	UBERON:0002048
+GSE112483	GSM3071134	Healthy Control without treatment	Healthy Control without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071135	Disease without treatment	Disease without treatment	primary_sample	epi	epi	LUNG_TISSUE_GENERAL	Lung	epi	UBERON:0002048
+GSE112483	GSM3071136	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071137	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071138	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071139	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071140	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071141	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071142	Healthy Control without treatment	Healthy Control without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071143	Disease without treatment	Disease without treatment	primary_sample	AM	AM	LUNG_TISSUE_GENERAL	Lung	AM	UBERON:0002048
+GSE112483	GSM3071144	Healthy Control without treatment	Healthy Control without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071145	Disease without treatment	Disease without treatment	primary_sample	gd	gd	LUNG_TISSUE_GENERAL	Lung	gd	UBERON:0002048
+GSE112483	GSM3071146	Healthy Control without treatment	Healthy Control without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071147	Disease without treatment	Disease without treatment	primary_sample	mait	mait	LUNG_TISSUE_GENERAL	Lung	mait	UBERON:0002048
+GSE112483	GSM3071148	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071149	Disease without treatment	Disease without treatment	primary_sample	NK	NK	LUNG_TISSUE_GENERAL	Lung	NK	UBERON:0002048
+GSE112483	GSM3071150	Healthy Control without treatment	Healthy Control without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE112483	GSM3071151	Disease without treatment	Disease without treatment	primary_sample	NKT	NKT	LUNG_TISSUE_GENERAL	Lung	NKT	UBERON:0002048
+GSE132283	GSM3855590	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855591	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855593	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE132283	GSM3855594	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE132283	GSM3855596	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855597	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855599	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE132283	GSM3855600	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE132283	GSM3855602	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855603	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	2hr
+GSE132283	GSM3855605	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE132283	GSM3855606	Disease without treatment	Disease without treatment	primary_sample	Human stem cell-derived macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages	48hr
+GSE143627	GSM4263940	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE143627	GSM4263941	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE143627	GSM4263942	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE143627	GSM4263943	Disease without treatment	Disease without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE143627	GSM4263944	Disease without treatment	Disease without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE143627	GSM4263945	Disease without treatment	Disease without treatment	blood_sample	blood mononuclear cells	Monocytes	PBMC	Blood	CL:0000576	UBERON:0000178
+GSE148731	GSM4478016	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478017	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478018	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478019	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478020	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478021	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478022	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478023	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478024	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478025	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478026	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478027	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	4hr
+GSE148731	GSM4478028	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478029	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478030	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478031	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478032	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478033	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478034	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478035	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478036	Disease without treatment	Disease without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478037	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478038	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE148731	GSM4478039	Healthy Control without treatment	Healthy Control without treatment	blood_sample	CD14+ monocytes	CD14+ Monocytes	MACROPHAGES_GENERAL	Macrophages	CD14+Monocytes	Macrophages	24hr
+GSE174566	GSM5319713	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319714	Disease without treatment	Disease without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319715	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319716	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319717	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319718	Disease without treatment	Disease without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319719	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319720	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319721	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319722	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319723	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319724	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319725	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319726	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319727	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319728	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319729	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319730	Disease without treatment	Disease without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319731	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319732	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319733	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319734	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319735	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319736	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319737	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319738	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319739	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319740	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319741	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319742	Disease without treatment	Disease without treatment	blood_sample	PBMC (Peripheral Blood Mononuclear Cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319743	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319744	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319745	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319746	Disease without treatment	Disease without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319747	Healthy Control without treatment	Healthy Control without treatment	blood_sample	PBMC	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE174566	GSM5319748	Disease without treatment	Disease without treatment	blood_sample	PBMC (peripheral blood mononuclear cells)	PBMCs	PBMC	Blood	CL:2000001	UBERON:0000178
+GSE193777	GSM5820828	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820829	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820830	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820831	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820832	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820833	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820834	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820835	Disease without treatment	Disease without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820836	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820837	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820838	Disease without treatment	Disease without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820933	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820934	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820935	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820936	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820937	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820938	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820939	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820940	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820941	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820942	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820943	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820944	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820945	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820946	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820947	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820948	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820949	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820950	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820951	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820952	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820953	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820954	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820955	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820956	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820957	Healthy Control without treatment	Healthy Control without treatment	blood_sample	whole blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820958	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820959	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820960	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820961	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820962	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820963	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820964	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820965	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820966	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820967	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820968	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820969	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820970	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE193777	GSM5820971	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Whole Blood	Blood Cells	WHOLE_BLOOD	Blood	CL:0000081	UBERON:0000178
+GSE223863	GSM6998084	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998085	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998086	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998087	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998088	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998089	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998090	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998091	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998092	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998093	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998094	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998095	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998096	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998097	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998098	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998099	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998100	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998101	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998102	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998103	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998104	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998105	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998106	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	24hr
+GSE223863	GSM6998107	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998108	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998109	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998110	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE223863	GSM6998111	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998112	Healthy Control without treatment	Healthy Control without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	72hr
+GSE223863	GSM6998113	Disease without treatment	Disease without treatment	primary_sample	Bronchoalveolar lavage fluid	BALF	BALF_BRONCHOALVEOLAR_LAVAGE_FLUID	BALF	BALF	BALF	2hr
+GSE256184	GSM8087241	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087242	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087243	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087244	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087245	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087246	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087247	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087248	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	0hr
+GSE256184	GSM8087249	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087250	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087251	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087252	Healthy Control without treatment	Healthy Control without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087254	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087253	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087255	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE256184	GSM8087256	Disease without treatment	Disease without treatment	primary_sample	HepG2	HepG2	CELL_LINE_HEPG2	HepG2	HepG2	HepG2	48hr
+GSE64179	GSM1565955	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565956	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565957	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565958	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565959	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565960	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565961	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565962	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565963	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565964	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565965	Disease without treatment	Disease without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64179	GSM1565966	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	Dendritic Cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1565997	Disease without treatment	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1565998	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1565999	Disease without treatment	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1566000	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1566001	Disease without treatment	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE64182	GSM1566002	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	monocyte-derived dendritic cells	MONOCYTES_GENERAL	Monocytes	CL:0000451	Monocytes
+GSE121049	GSM3425229	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE121049	GSM3425232	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE121049	GSM3425235	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE121049	GSM3425238	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE121049	GSM3425241	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE121049	GSM3425244	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	MACROPHAGES_GENERAL	Macrophages	CL:0000081	Macrophages
+GSE141656	GSM4210635	Disease without treatment	Disease without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE141656	GSM4210636	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE141656	GSM4210639	Disease without treatment	Disease without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE141656	GSM4210640	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE141656	GSM4210643	Disease without treatment	Disease without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE141656	GSM4210644	Healthy Control without treatment	Healthy Control without treatment	blood_sample	Blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE143731	GSM4273334	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273341	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273348	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273355	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273362	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273369	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273376	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE143731	GSM4273383	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005789	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005790	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005791	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005792	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005793	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005794	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005795	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE164287	GSM5005796	Disease without treatment	Disease without treatment	blood_sample	macrophages	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE165708	GSM5048552	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048553	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048554	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048555	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048556	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048557	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048558	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048559	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048560	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048561	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048562	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048563	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048564	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048565	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048566	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048567	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048568	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048569	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048570	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048571	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048572	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048573	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048574	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048575	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048576	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048577	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048578	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048579	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048580	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048581	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048582	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE165708	GSM5048583	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE183912	GSM5573709	Disease without treatment	Disease without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573712	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573714	Disease without treatment	Disease without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573717	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573719	Disease without treatment	Disease without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573722	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573724	Disease without treatment	Disease without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE183912	GSM5573727	Healthy Control without treatment	Healthy Control without treatment	blood_sample	macrophage	macrophage	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506628	Healthy Control without treatment	Healthy Control without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506629	Healthy Control without treatment	Healthy Control without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506634	Disease without treatment	Disease without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506635	Disease without treatment	Disease without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506640	Healthy Control without treatment	Healthy Control without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE211974	GSM6506643	Disease without treatment	Disease without treatment	primary_sample	macrophage	macrophages	MACROPHAGES_GENERAL	Macrophages	CL:0000235	Macrophages
+GSE236156	GSM7518958	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518959	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518960	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518961	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518962	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518963	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518964	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518965	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518966	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518967	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518968	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518969	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518970	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518971	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518972	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518973	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518974	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518975	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518976	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518977	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518978	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518979	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7518980	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518981	Disease without treatment	Disease without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518986	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518991	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7518996	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7519001	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7519006	Healthy Control without treatment	Healthy Control without treatment	blood_sample	blood	Blood Cells	BLOOD_GENERAL	Blood	CL:0000081	UBERON:0000178
+GSE236156	GSM7519007	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7519008	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7519009	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7519010	Healthy Control without treatment	Healthy Control without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7519011	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
+GSE236156	GSM7519012	Disease without treatment	Disease without treatment	primary_sample	bronchoalveolar lavage	bronchoalveolar lavage	BAL_BRONCHOALVEOLAR_LAVAGE_GENERAL	BALF	BALF	BALF
