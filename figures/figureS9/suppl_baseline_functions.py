@@ -427,6 +427,7 @@ def plot_heatmap(
     ax.set_ylabel(ylabel, fontsize=14)
     ax.set_title(title, fontsize=15, pad=20)
 
+    plt.savefig(f'{title}.png', dpi=300, bbox_inches='tight')
     plt.tight_layout()
     plt.show()
 
