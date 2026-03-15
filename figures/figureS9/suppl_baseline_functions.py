@@ -128,7 +128,8 @@ def stouffer_aggregate(drug_data: pd.DataFrame) -> pd.DataFrame:
 def load_disease_data(
     rnaseq_dir: str,
     micro_dir: str,
-    meta_path: str,
+    rna_meta_path: str,
+    micro_meta_path: str,
     gene_info_path: str,
     landmark_genes: pd.Index,
     drug_reference_col: pd.Series,
@@ -145,7 +146,9 @@ def load_disease_data(
     tissue       : pd.Series    tissue label per sample
     cell         : pd.Series    cell label per sample
     """
-    meta     = pd.read_csv(meta_path, sep='\t')
+    rna_meta = pd.read_csv(rna_meta_path, sep='\t')
+    micro_meta = pd.read_csv(micro_meta_path, sep='\t')
+    meta = pd.concat([rna_meta, micro_meta])
     controls = meta.loc[meta['CLASSIFICATION'] == 'healthy control without treatment', 'geo_accession'].values
 
     gene_info = pd.read_csv(gene_info_path, sep='\t', header=0, index_col=0)
