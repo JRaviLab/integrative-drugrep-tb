@@ -20,7 +20,7 @@ RNA_SEQ	GSE141656	PRESENT	Sufficent information in GEO and Archs4 (remove sample
 RNA_SEQ	GSE143627	PRESENT	sample infection status known	see title for infection status and all samples untreated
 RNA_SEQ	GSE143731	PRESENT	Sufficent information in GEO and Archs4	selected only untreated samples infected labeled as treated with MTB, uninfected labeled as untreated
 RNA_SEQ	GSE148171	PRESENT	Sufficent information in GEO and Archs4	sample 58-62 tagged as active TB patients, sample 63-66 tagged as active TB patients and PBMC in 'Sample_Title' in GEO
-RNA_SEQ	GSE148731	PRESENT	Sufficent information in GEO and Archs4	3 infected and 3 uninfected samples alternating (see ncbi.nlm.nih.gov), tissue is consistent throughout study
+RNA_SEQ	GSE148731	PRESENT	Partially sufficent information in GEO and Archs4	3 infected and 3 uninfected samples alternating (see ncbi.nlm.nih.gov), tissue is consistent throughout study; GSM4478022, GSM4478023, GSM4478024,GSM4478025, GSM4478026 were dropped due to insufficient control samples for GSE148731_MTB_4h_blood_CD14plus_monocyte_derived_macrophages_MF2 contrast.
 RNA_SEQ	GSE152218	DROP	Only contains one classification type	na
 RNA_SEQ	GSE158767	DROP	Only contains one classification type	na
 RNA_SEQ	GSE162725	DROP	Stimulated Samples, ambigious study	na
