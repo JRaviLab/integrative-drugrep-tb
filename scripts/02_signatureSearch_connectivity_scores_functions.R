@@ -1,6 +1,4 @@
 # functions for drug search by CMap1.0, CMap2.0, and Correlation-based connectivity scores
-# last modified: 12/17/25
-# Kewalin Samart
 
 # loading the needed libraries
 library(signatureSearch)
@@ -19,7 +17,6 @@ combine_signatures <- function(up_signature, dn_signature, L1000 = TRUE) {
   #' @param dn_signature dn signature dataframe containing genes and other statistics from DE analysis
   #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @returns full_signature
-  #' @author Kewalin Samart
   full_signature_ <- rbind(up_signature, dn_signature)
   clean_full_sig <- prepare_signature(signature = full_signature_, L1000 = L1000)
   full_signature <- clean_full_sig %>% arrange(-clean_full_sig$log2FoldChange)
@@ -32,7 +29,6 @@ get_full_signature <- function(full_sig_path, L1000 = TRUE) {
   #' @param full_sig_path path to a full signature (up+dn genes)
   #' @returns full_signature input for gess_cor methods; signature in the format with row names: GeneID (Entrezid) and a column of log2FoldChange
   #' @param L1000 a boolean indicating whether to keep only L1000 genes
-  #' @author Kewalin Samart
 
   # read the full signature
   input_full_sig <- read.delim(full_sig_path, sep = "\t")
@@ -57,7 +53,6 @@ get_updn_signature <- function(updn_sig_path, L1000 = TRUE) {
   #' @param sig_path path to either up/dn signatures to get genes from
   #' @param L1000 a boolean indicating whether to keep only L1000 genes
   #' @returns updn_genes
-  #' @author Kewalin Samart
 
   input_updn_sig <- read.delim(updn_sig_path, sep = "\t")
   clean_input_updn_sig <- prepare_signature(signature = input_updn_sig, L1000 = L1000)
@@ -73,7 +68,6 @@ setup_cmap1db <- function() {
   #' @source  https://bioconductor.org/packages/release/data/experiment/manuals/signatureSearchData/man/signatureSearchData.pdf
   #' @details CMap2 LFC (log2 fold change) Signature Database
   #' @returns cmap_path path to CMAP database
-  #' @author Kewalin Samart
 
   eh <- ExperimentHub()
   query(eh, c("signatureSearchData", "cmap"))
@@ -89,7 +83,6 @@ setup_lincsdb <- function() {
   #' @source https://bioconductor.org/packages/release/data/experiment/manuals/signatureSearchData/man/signatureSearchData.pdf
   #' @details LINCS Z-score Signature Database
   #' @returns lincs_path path to LINCS database
-  #' @author Kewalin Samart
 
   eh <- ExperimentHub()
   query(eh, c("signatureSearchData", "lincs"))
@@ -105,7 +98,6 @@ compute_CMap1_scores <- function(up_genes, dn_genes, db_path) {
   #' @param dn_genes dn GeneID (Entrezid; character vector)
   #' @param db_path obtained form either setup_cmap1db() or setup_lincsdb() functions
   #' @returns final_res a data frame of drug candidates prioritized by cmap1
-  #' @author Kewalin Samart
 
   # get CMap 1.0 connectivity scores
   qsig <- qSig(
@@ -129,7 +121,6 @@ compute_CMap2lincs_scores <- function(up_genes, dn_genes, db_path) {
   #' @param dn_genes dn GeneID (Entrezid; character vector)
   #' @param db_path obtained form either setup_cmap1db() or setup_lincsdb() functions
   #' @returns final_res a data frame of drug candidates prioritized by WCS, NCS, or Tau
-  #' @author Kewalin Samart
 
   # get CMap 2.0 connectivity scores
   qsig <- qSig(
@@ -151,10 +142,9 @@ compute_CMap2lincs_scores <- function(up_genes, dn_genes, db_path) {
 compute_Cor_based_scores <- function(full_signature_matrix, score_method, db_path) {
   #' @description This function quantifies drug candidates for a given disgenes_values prioritized by Cor methods: XCor, XSpe
   #' @param full_signature_matrix a dataframe of expression values with associated disease genes as row names
-  #' @param score_method types of correlatin e.g. "Cor_spearman", "Cor_pearson"
+  #' @param score_method types of correlation e.g. "Cor_spearman", "Cor_pearson"
   #' @param db_path obtained form either setup_cmap1db() or setup_lincsdb() functions
   #' @returns final_res a data frame of drug candidates prioritized by XCor, XSpe
-  #' @author Kewalin Samart
 
   # input validation
   stopifnot(
@@ -184,9 +174,8 @@ combine_res_meta <- function(final_res) {
   #' @description This function merge final_res with drug metadata
   #' @param final_res a data frame of drug candidates
   #' @returns final_res a data frame of drug candidates with drug info
-  #' @author Kewalin Samart
 
-  # get perturbation metdata
+  # get perturbation metadata
   pert_meta <- read.csv(file = here("data/metadata/repurposing_drugs_20200324.csv"), skip = 9)
   pert_meta <- pert_meta[c("pert_iname", "clinical_phase")]
   # merge metadata with the final result
@@ -199,7 +188,6 @@ get_FDAapproved_drugs <- function(final_res) {
   #' @description This function filters out non FDA-approved drugs from final_res
   #' @param final_res a data frame of drug candidates with drug info
   #' @returns final_res a data frame of FDA-approved drug candidates with drug info
-  #' @author Kewalin Samart
 
   # filter only FDA-approved drugs
   final_res <- final_res[final_res$clinical_phase == "Launched", ]
@@ -217,9 +205,8 @@ finalize_result <- function(final_res) {
   #' @detail combine metadata, filter FDA-approved drugs, remove rows with NAs
   #' @param final_res a data frame of drug candidates
   #' @returns final_res a complete data frame of drug candidates
-  #' @author Kewalin Samart
 
-  # get perturbation metdata and merge with the final result
+  # get perturbation metadata and merge with the final result
   final_res <- combine_res_meta(final_res)
   final_res <- get_FDAapproved_drugs(final_res)
   final_res <- na.omit(final_res)

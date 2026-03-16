@@ -1,6 +1,4 @@
 # multids_RNAseq_DEwithDESeq2.R
-# last modified: 11/16/25 - KS modified LT's edits
-# author: Kewalin Samart
 # ------------------------------------------------------------
 # Batch differential‑expression analysis for multiple RNA‑seq
 # datasets using DESeq2.
@@ -83,7 +81,6 @@ make_expression_matrix <- function(tbl) {
 landmark_genes_df <- read_tsv(here("data/metadata/LINCSGeneSpaceSub.txt"))
 landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == "landmark", ]$`Entrez ID`)
 
-
 # 3.  Main loop
 for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
@@ -94,7 +91,6 @@ for (i in seq_len(nrow(study_df))) {
   # get the current signature for this loop iteration
   current_signature <- study_df$SIGNATURE_NAME[i]
   message("  Study: ", tag, " | Signature: ", current_signature)
-
 
   # ---- 3.1  Load inputs ----
   # filter metadata for *both* study AND signature
@@ -162,7 +158,6 @@ for (i in seq_len(nrow(study_df))) {
 
   # Drop duplicated gene names, keeping the first occurrence
   expr_mat <- expr_mat[!duplicated(rownames(expr_mat)), ]
-
 
   # ---- 3.4  Differential expression ----
   dds <- DESeq2::DESeqDataSetFromMatrix(

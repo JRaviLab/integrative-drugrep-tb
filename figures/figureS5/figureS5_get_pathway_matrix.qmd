@@ -42,7 +42,6 @@ GO_annotation = get_GO_annotation(here(annotation_file))
 summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
-
 ```{r}
 # Assuming both data frames have Description as row names
 # If it's a column instead, set it as rownames first

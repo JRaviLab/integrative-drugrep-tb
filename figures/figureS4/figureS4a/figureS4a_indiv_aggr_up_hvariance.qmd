@@ -1,6 +1,4 @@
 # Figure S4a: Enrichment of highly variable upregulated pathways in individual and aggregated TB signatures
-# last modified: 12/18/25
-# author: Kewalin Samart
 
 ```{r setup, include=FALSE}
 library(ComplexHeatmap)
@@ -282,7 +280,6 @@ tissue_colors <- c(
   "lymphnode"             = "#FDB462"
 )
 
-
 tech_colors <- c(
   "RNAseq" = "#E69F00",
   "microarray" = "#56B4E9"
@@ -380,7 +377,6 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
 
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
 colnames(viz_mat_up) <- summary_df$dataset_signature_ID
-
 
 heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   viz_mat_up,

@@ -1,6 +1,4 @@
 # script to extract expression data of all untreated samples in LINCS data
-# last modified: 03/13/26
-# Kewalin Samart
 
 from cmapPy.pandasGEXpress import parse
 import pandas as pd

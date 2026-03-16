@@ -1,6 +1,4 @@
 # Compute aggregated signatures from individual signatures
-# Last modified: 11/13/25
-# Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
 ```{r}
@@ -41,7 +39,6 @@ jaccard_matrix = compute_jaccard_matrix(metadata_path = metadata_path, data_path
 ```{r}
 aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, direction, threshold_pct = threshold_pct, save_result=TRUE)
 ```
-
 
 ### Getting up/dn microarray/RNAseq signatures
 ```{r}

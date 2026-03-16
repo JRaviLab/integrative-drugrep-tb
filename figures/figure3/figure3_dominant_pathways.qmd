@@ -1,6 +1,4 @@
 # Figure 3: Biology of dominant pathways and squared deviation of dominant vs. non-dominant pathways
-# last modified: 03/10/26
-# author: Kewalin Samart
 
 ```{r setup, include=FALSE}
 library(clusterProfiler)
@@ -271,7 +269,6 @@ term2go <- term2go[term2go$ONTOLOGY == "BP", ]
 # Drop unmatched terms
 term2go <- term2go[!is.na(term2go$GOID), ]
 
-
 library(GO.db)
 library(AnnotationDbi)
 
@@ -404,7 +401,6 @@ edges <- bind_rows(edges)
 edges_filt <- edges %>%
   filter(overlap >= 50, jaccard >= 0)
 
-
 ```
 
 ```{r}
@@ -439,7 +435,6 @@ keep_go <- go_similarity %>%
 edges_core <- edges_filt %>%
   filter(from %in% keep_go & to %in% keep_go)
 
-
 ```
 
 ```{r}
@@ -460,8 +455,5 @@ plot(
   edge.width = scales::rescale(E(edges_core)$jaccard, c(0.5, 3)),
   edge.color = "grey60"
 )
-
-
-
 
 ```

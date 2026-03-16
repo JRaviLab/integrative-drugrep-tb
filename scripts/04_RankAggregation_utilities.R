@@ -1,6 +1,4 @@
 # utility functions for rank aggregation
-# last modified: 09/14/24
-# Kewalin Samart
 
 get_full_ranked_drugs <- function(score, drugscore_matrix, ranked_by = "median") {
   #' @description this function summarize drugscore_matrix into a full-ranked drug list for a given score sorted by a statistics value of choice
@@ -8,7 +6,6 @@ get_full_ranked_drugs <- function(score, drugscore_matrix, ranked_by = "median")
   #' @param drugscore_matrix a drug score matrix in data frame format with first column: unique_pert (drug names), other column names: disease signatures, entries filled with disease-drug scores
   #' @param ranked_by a string indicating the statistics to be used for ranking the drugs
   #' @returns score_ranked_drugs a dataframe of ranked drug names by the chosen ranked_by parameter; column name: score
-  #' @author Kewalin Samart
 
   if (ranked_by == "median") {
     drugscore_matrix_wstats <- drugscore_matrix %>%
@@ -33,7 +30,6 @@ get_partial_ranked_druglists <- function(full_ranked_drugs_matrix, top_pct_drugs
   #' @param full_ranked_drugs_matrix a dataframe
   #' @param top_pct_drugs_list list of character vectors
   #' @returns partial_ranked_drug_lists a list of vectors of ranked-top drugs by score
-  #' @author Kewalin Samart
 
   partial_ranked_drug_list <- list()
   scores <- colnames(full_ranked_drugs_matrix)
@@ -53,7 +49,6 @@ matrix_transfer <- function(ranked_drug_list, full = FALSE) {
   #' @param full a boolean indicating whether to aggregate the full list or just partial (allows nonoverlapping elements)
   #' @returns rank_mat a matrix containing rank of each element (drug names on the row names)
   #' @source https://github.com/baillielab/comparison_of_RA_methods
-  #' @author Kewalin Samart (contribution: modified input arguments)
 
   unique_nammes <- unique(c(ranked_drug_list, recursive = TRUE))
 
@@ -81,10 +76,9 @@ apply_BiG_RankAggregation <- function(ranked_drug_list, full = FALSE, n_p1 = 0, 
   #' @param n_p1 number of studies belong to platform 1
   #' @param M number of MCMC iterations
   #' @param burnin number of burn-in iterations
-  #' @param prior BiG mthod arguments
+  #' @param prior BiG method arguments
   #' @returns RA_result_df a dataframe with drug names (drug_name) and their rank scores (rank_score)
   #' @source https://github.com/baillielab/comparison_of_RA_methods/blob/main/algorithms/useBiG.R
-  #' @author Kewalin Samart (contribution: combining results and entities into data frame)
 
   # transform to a rank matrix
   rank_matrix <- matrix_transfer(ranked_drug_list, full)

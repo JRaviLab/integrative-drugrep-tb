@@ -99,7 +99,6 @@ nodes <- all_node_counts %>%
   ) %>%
   dplyr::select(name, label)
 
-
 links_all$source_id <- match(links_all$source, nodes$name) - 1
 links_all$target_id <- match(links_all$target, nodes$name) - 1
 

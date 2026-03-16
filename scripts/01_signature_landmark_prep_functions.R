@@ -1,6 +1,4 @@
 # functions to filter genes with L1000 genes
-# latest modified: 06/17/24
-# Kewalin Samart
 
 # load the needed libraries
 library(readr)
@@ -13,7 +11,6 @@ getL1000 <- function(LINCSGenes_path = here("data/metadata/LINCSGeneSpaceSub.txt
   #' @source: http://amp.pharm.mssm.edu/l1000fwd/download_page
   #' @param LINCSGenes_path path to file containing all the LINCS genes including landmarks, best inferred, and inferred
   #' @returns L1000_gene_symbols a list of L1000 gene symbols (978 in total)
-  #' @author Kewalin Samart
 
   # aborts if file does not exist
   stopifnot("Lincs gene file does not exist" = file.exists(LINCSGenes_path))
@@ -32,7 +29,6 @@ filterSig_withL1000 <- function(signature, L1000_genes = getL1000()) {
   #' @param signature output from get_signature()
   #' @param L1000_genes list of L1000 gene ids; default val set to the output from getL1000()
   #' @returns L1000_filtered_sig signature with only L1000 genes
-  #' @author Kewalin Samart
 
   # filter the signature dataframe with L1000 genes
   signature$GeneID <- as.character(signature$GeneID)
@@ -50,9 +46,8 @@ filterSig_withL1000 <- function(signature, L1000_genes = getL1000()) {
 prepare_signature <- function(signature, L1000 = FALSE) {
   #' @description checks column names of the signature before proceeding down stream analyses
   #' @param signature
-  #' @param L1000 a boolean indicating whether to suset only L1000 genes
+  #' @param L1000 a boolean indicating whether to subset only L1000 genes
   #' @returns signature with 'Ensembl', 'Symbol', 'GeneID', 'P.Value', 'adj.P.Val', 'log2FoldChange', and other columns of stats values
-  #' @author Kewalin Samart
 
   # read in gene info for gene conversion
   gene_info <- read.delim(file = here("data/metadata/Homo_sapiens.gene_info.tsv"), sep = "\t")

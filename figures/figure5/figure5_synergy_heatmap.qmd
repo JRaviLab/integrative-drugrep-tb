@@ -1,6 +1,4 @@
 # Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotics
-# Kewalin Samart
-# Last modified: 03/12/2026
 
 ```{r load libraries}
 library(readr)

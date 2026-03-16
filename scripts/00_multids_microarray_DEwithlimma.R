@@ -2,8 +2,6 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 11/16/25 - KS modified LT's edits
-# author: Kewalin Samart
 
 suppressPackageStartupMessages({
   library(limma)
@@ -37,6 +35,7 @@ if (length(args) < 2) {
 # read in argument file
 meta_class_file_path <- args[1]
 padj_cutoff <- ifelse(length(args) >= 2, as.numeric(args[2]), 0.05) # default 0.05
+# note: read.delim() converts "Entrez ID" (space) to "Entrez.ID" (period) via check.names=TRUE
 lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
 
 signature_boolean <- list()

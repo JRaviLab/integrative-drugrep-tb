@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso
 from rbo import RankingSimilarity as rbo_rank
 
-
 mpl.rcParams['font.family'] = 'Arial'
 
 # ///// Constants 
@@ -29,7 +28,6 @@ DRUG_TISSUE_NAME_MAP = {
     'haematopoietic and lymphoid tissue': 'haematopoietic\n& lymphoid',
     'central nervous system'            : 'central nervous\nsystem',
 }
-
 
 # ///// Data loading & preprocessing
 
@@ -60,7 +58,6 @@ def load_drug_data(path: str, time_filter: str = '24H') -> tuple[pd.DataFrame, p
 
     return drug_data, split
 
-
 def average_replicates(drug_data: pd.DataFrame, split_drug: pd.DataFrame) -> pd.DataFrame:
     """
     Average expression across technical replicates that share the same
@@ -81,7 +78,6 @@ def average_replicates(drug_data: pd.DataFrame, split_drug: pd.DataFrame) -> pd.
 
     return pd.DataFrame(averaged)
 
-
 def quantile_normalize(df: pd.DataFrame) -> pd.DataFrame:
     """Quantile-normalize all columns to the same distribution."""
     sorted_vals = np.sort(df.values, axis=0)
@@ -91,7 +87,6 @@ def quantile_normalize(df: pd.DataFrame) -> pd.DataFrame:
         ranks = np.searchsorted(np.sort(df[col]), df[col])
         result[col] = rank_means[ranks]
     return result
-
 
 def stouffer_aggregate(drug_data: pd.DataFrame) -> pd.DataFrame:
     """
@@ -123,7 +118,6 @@ def stouffer_aggregate(drug_data: pd.DataFrame) -> pd.DataFrame:
         )
 
     return aggregated
-
 
 def load_disease_data(
     rnaseq_dir: str,
@@ -194,8 +188,6 @@ def load_disease_data(
 
     return dis_qn.astype(float), tissue, cell
 
-
-
 # ///// Correlation computation
 
 def get_correlations(
@@ -256,7 +248,6 @@ def get_correlations(
 
     return output
 
-
 def compute_correlation_matrix(
     drug_data: pd.DataFrame,
     dis_data: pd.DataFrame,
@@ -285,8 +276,6 @@ def compute_correlation_matrix(
         )
     return results
 
-
-
 # ///// Tissue-level aggregation
 
 def build_tissue_groups(
@@ -304,7 +293,6 @@ def build_tissue_groups(
         if counts[tissue] > min_count:
             groups[tissue].append(item)
     return dict(groups)
-
 
 def build_tissue_matrix(
     corr_matrix: pd.DataFrame,
@@ -345,8 +333,6 @@ def build_tissue_matrix(
 
     return result
 
-
-
 # ///// Visualization
 
 def safe_zscore(matrix: np.ndarray, axis: int) -> np.ndarray:
@@ -354,11 +340,9 @@ def safe_zscore(matrix: np.ndarray, axis: int) -> np.ndarray:
     std  = np.nanstd(matrix,  axis=axis, ddof=1, keepdims=True)
     return (matrix - mean) / std
 
-
 def combined_zscore(matrix: np.ndarray) -> np.ndarray:
     """Row + column z-scores averaged (scaled by √2)."""
     return (safe_zscore(matrix, axis=1) + safe_zscore(matrix, axis=0)) / np.sqrt(2)
-
 
 def make_axis_labels(
     tissues: list[str],
@@ -377,7 +361,6 @@ def make_axis_labels(
         count  = count_source[t] if count_source else len(groups[t])
         labels.append(f"{pretty} ({count})")
     return labels
-
 
 def plot_heatmap(
     matrix: np.ndarray,
@@ -433,7 +416,6 @@ def plot_heatmap(
     plt.savefig(f'{title}.png', dpi=300, bbox_inches='tight')
     plt.tight_layout()
     plt.show()
-
 
 def plot_tissue_heatmaps(
     tissue_matrix: pd.DataFrame,

@@ -37,8 +37,6 @@ ggplot(moa_novel, aes(x = reorder(moa, -n_drugs), y = n_drugs, fill = factor(nov
     plot.margin = margin(20, 20, 20, 20)
   )
 
-
-
 dev.off()
 
 ```

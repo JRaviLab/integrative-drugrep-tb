@@ -1,6 +1,4 @@
 # Compute tissue-specific aggregated signatures from individual signatures
-# Last modified: 11/13/25
-# Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
 ```{r}

@@ -1,6 +1,4 @@
 # Figure 2b: Enrichment of highly variable downregulated pathways in individual and aggregated TB signatures
-# last modified: 12/18/25
-# author: Kewalin Samart
 
 ```{r setup, include=FALSE}
 library(ComplexHeatmap)
@@ -312,7 +310,6 @@ tissue_colors <- c(
   # other tissues
   "lymphnode"             = "#FDB462"
 )
-
 
 tech_colors <- c(
   "RNAseq" = "#E69F00",

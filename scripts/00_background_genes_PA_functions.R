@@ -1,6 +1,4 @@
 # functions to obtain background genes for Pathway analyses -- Homo Sapiens
-# last modified: 11/16/25
-# Kewalin Samart
 
 library(tidyverse)
 
@@ -9,7 +7,6 @@ GO_genes <- function() {
   #' @param None
   #' @returns all GO human gene ids
   #' @source https://support.bioconductor.org/p/124061/
-  #' @author Kewalin Samart
   require(org.Hs.eg.db)
   df <- as.data.frame(org.Hs.egGO)
   go_genes <- unique(sort(df$gene_id))
@@ -22,7 +19,6 @@ KEGG_genes <- function() {
   #' @param None
   #' @returns all KEGG human gene ids
   #' @source https://support.bioconductor.org/p/124061/
-  #' @author Kewalin Samart
   require(org.Hs.eg.db)
   df <- as.data.frame(org.Hs.egPATH)
   kegg_genes <- unique(sort(df$gene_id))
@@ -34,7 +30,6 @@ bg_LINCS_genes <- function(GeneType = "landmark") {
   #' @description select background genes from LINCS
   #' @param GeneType a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
   #' @returns bg_lincs_genes a character vector of the selected LINCS GeneID
-  #' @author Kewalin Samart
 
   lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
 
@@ -55,7 +50,6 @@ bg_from_data <- function(metadata_path, data_path, direction, extension = ".tsv"
   #' @param direction Path to DE result tables or signatures
   #' @param extension String like "_up.tsv", "_dn.tsv" (optional)
   #' @return Character vector of unique genes across datasets
-  #' @author Kewalin Samart
 
   all_genes <- character(0)
 
@@ -87,7 +81,6 @@ get_bg_genes <- function(bg_source, metadata_path = NULL, data_path = NULL, linc
   #' @param lincs_genetype a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
   #' @param extension a string indicating file extension e.g., "_up.tsv", "_dn.tsv"
   #' @returns bg_genes background genes (all genes present in the source database)
-  #' @author Kewalin Samart
   if (bg_source == "LINCS") {
     if (is.null(lincs_genetype)) {
       bg_genes <- bg_LINCS_genes()
@@ -100,7 +93,7 @@ get_bg_genes <- function(bg_source, metadata_path = NULL, data_path = NULL, linc
     bg_genes <- GO_genes()
   } else if (bg_source == "input data") {
     if (is.null(direction_input_data)) {
-      stop("need to spefify a valid direction if using input data as background genes")
+      stop("need to specify a valid direction if using input data as background genes")
     }
     bg_genes <- bg_from_data(metadata_path, data_path, direction = direction_input_data, extension = extension)
   }
@@ -113,7 +106,6 @@ final_bg_genes <- function(gene_set, bg_source, GeneType = NULL) {
   #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
   #' @param GeneType (optional) a string indicating gene type(s) from the L1000 project: (i) "landmark" (by default) (ii) "inferred" (iii) "best inferred" (iv) "not inferred" (v) "reference"
   #' @returns final_bg_genes a character vector containing the final backgroud genes
-  #' @author Kewalin Samart
   bg_genes <- get_bg_genes(bg_source, lincs_genetype = GeneType)
   final_bg_genes <- intersect(as.character(gene_set), bg_genes)
 
@@ -161,7 +153,6 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   } else if (combine == "union") {
     bg_genes_combined <- union(bg_genes_rnaseq, bg_genes_microarray)
   }
-
 
   return(bg_genes_combined)
 }

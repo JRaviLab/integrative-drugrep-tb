@@ -100,12 +100,10 @@ lowest_sd_paths_all <- combined_plot_df %>%
   slice_min(order_by = SquaredDeviation, with_ties = TRUE) %>%
   ungroup()
 
-
 print(dim(combined_plot_df))
 print(dim(lowest_sd_paths_all))
 print(dim(lowest_sd_paths_all)[1]/dim(combined_plot_df)[1]*100) # percentage of pathways with zero squared deviation
 ```
-
 
 ```{r figure S5 data}
 # choose how many highest SD pathways you want to plot per group

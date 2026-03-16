@@ -8,9 +8,6 @@
 # P.S. MOA-genes not included as drugrep hub data does not provide unique sets of MOA-genes for each MOA
 #      I suppose they only give intersecting MOA-target-genes when a drug is associated with >1 MOAs (code at the bottom)
 
-# last modified: 03/12/2026
-# Kewalin Samart
-
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 library(signatureSearch)
 
@@ -25,7 +22,6 @@ get_DTG_interactions_DGIdb <- function(drug_names,
   #' @param tail a string indicating which side of the distribution to get the indicated top percentile from: "right", "left"
   #' @param percentile a numeric indicating top percentile scale for grabbing top drug-gene interactions; set to 0.9 by default
   #' @returns  DGIdb_targets_list a list of character vectors of drug-target interactions after filtering out interactions with scores lower than the given percentile threshold
-  #' @author Kewalin Samart
 
   require(readr)
 
@@ -73,7 +69,6 @@ get_DGIdb_targets_table <- function(DGIdb_targets_list){
   #' @description this function convert list of drug targets (DGIdb_targets_list) to data frame
   #' @param DGIdb_targets_list a list of character vectors of drug-target interactions after filtering out interactions with scores lower than the given percentile threshold
   #' @returns DGIdb_targets_df a data frame with drug-target information; columns: "drug.target","drug_name","target","avg_interaction_score"
-  #' @author Kewalin Samart
 
   require(tidyverse)
   DGIdb_targets_df <- as.data.frame(unlist(DGIdb_targets_list))
@@ -93,7 +88,7 @@ get_drug_perturbed_genes <- function(drug_names,
                                      dosage = "10 µM",
                                      N = 5,
                                      gene_conversion_file = here("data/metadata/Homo_sapiens.gene_info.tsv")){
-  #' @description this function identifies significantly pertubed genes of given drug names based on LINCS level 5 signatures GSE70138
+  #' @description this function identifies significantly perturbed genes of given drug names based on LINCS level 5 signatures GSE70138
   #' @param drug_names a character vector containing drug names to identify enriched/perturbed drug genes
   #' @param signature_matrix a matrix of drug signatures where first col: rid represents gene ids and other columns are signature ids
   #' @example  signature_matrix = read_tsv("./data/drug_data/GSE92742_level5_signatures_lm.tsv")
@@ -103,7 +98,6 @@ get_drug_perturbed_genes <- function(drug_names,
   #' @param dosage a string indicating drug concentration
   #' @param N a positive integer indicating number of top drug perturbed genes for both up- and downregulated
   #' @returns drug_gene_df a dataframe containing columns: "drug_name", "drug_gene"
-  #' @author Kewalin Samart
 
   i = 1
   for(drug_name in drug_names){
@@ -162,7 +156,6 @@ get_drugtarget_NetworkNodeData <- function(drug_names,
   #' @param intscore_pct a numeric indicating top percentile scale for grabbing top drug-gene interactions; set to 0.9 by default
   #' @param moas a subset of moa to generate subnetwork of interest
   #' @returns drug_dpgene_tg_pw_moas a data frame containing node data for building a drug-target network with columns: "drug_name","moa","disease_pathway","enriched_pathway","target" or without "disease_pathway"
-  #' @author Kewalin Samart
 
   require(signatureSearch)
   require(tidyverse)
@@ -254,7 +247,6 @@ add_STRING_genes <- function(drug_dpgene_tg_pw_moas,
   #' @param disease_genes a character vector of disease-associated genes; these can be disease differentially expressed genes or other sources
   #' @returns network_nodes a data frame with columns: "drug_target1", "drug_name", "drug_gene", "moa", "enriched_pathway", "drug_target2", "tg_int_weight", "disease_target1",
   #' "disease_target2"
-  #' @author Kewalin Samart
   #'
   print(" ======= Getting gene-gene interaction information from STRING =======")
 
@@ -308,14 +300,12 @@ add_STRING_genes <- function(drug_dpgene_tg_pw_moas,
   return(network_nodes)
 }
 
-
 get_drugtarget_NetworkEdgeData <- function(network_nodes){
   #' @description this functions take node data and convert it to edge data with interaction types
   #' @param network_node_df a data frame consisting of the following column names:
   #' "drug_name","drug_gene","moa","enriched_pathway","drug_target1","drug_target2","edge_weight"
   #' @returns network_edges a data frame with "from", "to", and "type" indicating
   #' undirected and unweighted interactions with their interaction types for a given network node data frame.
-  #' @author Kewalin Samart
 
   # target-target
   target_target <- network_nodes[c("drug_target1","drug_target2")]

@@ -3,9 +3,6 @@
 # **for partial and top ranked lists; incorporating the effect of clustering**
 # ref1: https://doi.org/10.1002%2Fsim.7920
 # ref2: https://github.com/baillielab/comparison_of_RA_methods/blob/main/algorithms/useBiG.R
-# created date: 01/02/24
-# last modified: 07/16/25
-# Kewalin Samart
 
 library(tidyverse)
 library(readr)

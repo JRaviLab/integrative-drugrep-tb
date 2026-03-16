@@ -1,9 +1,5 @@
 # Get background genes
 
-# Last modified: 10/28/2025
-
-# Author: Kewalin Samart
-
 ##### **Load libraries and sort scripts**
 
 ```{r}

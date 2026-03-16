@@ -1,7 +1,4 @@
 # Getting high confidence drug candidates
-# last modified: 12/18/25
-# Author: Ling Thang
-# Kewalin Samart edited
 
 # import libraries
 library(here)

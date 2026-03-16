@@ -2,10 +2,6 @@
 
 ## method-wise summarization
 
-#### Last modified: 07/23/25
-
-#### Author: Kewalin Samart
-
 ```{r}
 library(here)
 source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
@@ -50,7 +46,6 @@ write_tsv(as.data.frame(all_signi_drugs_df$count_df), file = here("results/micro
 methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, technology = "microarray", dirname = "results")
 methodwise_results 
 ```
-
 
 ## Aggregated signatures
 ### RNAseq

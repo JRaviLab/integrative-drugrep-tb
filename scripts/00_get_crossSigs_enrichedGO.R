@@ -3,9 +3,6 @@
 ## add sim_cutoff to resolve heterogeneous clusters | enable ties for rep. terms
 ## now using simplfyEnrichment version 2.0
 
-# last modified: 11/18/25
-# Kewalin Samart
-
 library(rrvgo)
 library(pheatmap)
 library(readr)

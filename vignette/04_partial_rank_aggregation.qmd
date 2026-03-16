@@ -2,10 +2,6 @@
 
 ## method-wise summarization
 
-#### Last modified: 07/16/25
-
-#### Author: Kewalin Samart
-
 ```{r}
 library(here)
 source(here("scripts/04_BiG_RankAggregation_functions.R"))
@@ -107,7 +103,4 @@ run_BiG_diffuse_aggrSig(technologies = technologies,
                         burnin = burnin,
                         prior = prior)
 ```
-
-
-
 

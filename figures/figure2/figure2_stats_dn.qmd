@@ -463,7 +463,6 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
 gtsave(gt_top_bottom_origin, here("figures/figure2/figure2c/dn_allvals_variance_primary_cellline_signiGO_terms.html"))
 ```
 
-
 #### NOT ENOUGH POWER FOR a MW test
 ```{r platform aggregated vs individual signatures}
 # Separate the group with signatures that partially match "aggregated"

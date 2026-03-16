@@ -4,8 +4,6 @@
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
 # aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
-# Last modified: 11/18/25 ;  get values for all pathways (removed statistical significance criteria) + fix calculation of 'expected' + sinh_observed_expected instead of pseudocount + compute observed from intersection directly | add chunck for tissue-origin-specific aggregated signatures | correct qvalue using propagated gene set size not what provided by clusterProfiler
-# Author: Kewalin Samart
 
 ##### Load libraries and sort scripts
 ```{r}
@@ -178,7 +176,6 @@ calculate_asinh_enrichment <- function(signature_gene_list, bg_genes, pathway_df
   
   return(pathway_df)
 }
-
 
 compute_multiple_testing <- function(pathway_df) {
   # BH adjusted p-values

@@ -1,6 +1,4 @@
 # identify genes consistently showing up in aggregated signatures
-# Last modified: 03/12/2026
-# Kewalin Samart
 
 ```{r}
 library(here)

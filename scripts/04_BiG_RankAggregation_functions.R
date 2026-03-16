@@ -291,7 +291,6 @@ BiG_DA <- function(r, n_T, n_p1, M = 20000, burnin, a = 0.0202, b = 98.5025, dp 
   return(post.mean.mu)
 }
 
-
 #' Simulate rank data from latent variable model
 #'
 #' Simulate rank data from latent variable model

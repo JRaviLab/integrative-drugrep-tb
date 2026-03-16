@@ -1,6 +1,4 @@
 # functions to generate intermediate data objects for rank aggregation (for results from both indiv and aggr signatures)
-# last modified: 07/10/24
-# Kewalin Samart
 
 library(tidyverse)
 library(readr)
@@ -222,12 +220,12 @@ rank_aggregated_signature_drugs <- function(technologies = c("microarray", "RNAs
       score_ranked_drugs_df,
       file.path(save_dir, paste0("full_ranked_drugs_aggrSig_TB_", technology, ".rds"))
     )
-    print(paste0("Succesfully saved full_ranked_drugs_aggrSig_TB_", technology, ".rds", " at ", save_dir))
+    print(paste0("Successfully saved full_ranked_drugs_aggrSig_TB_", technology, ".rds", " at ", save_dir))
 
     saveRDS(
       score_ranked_drugs_list,
       file.path(save_dir, paste0("ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds"))
     )
-    print(paste0("Succesfully saved ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds", " at ", save_dir))
+    print(paste0("Successfully saved ranked_aggrSig_drugs_scores_", suffix, "_", technology, "_list.rds", " at ", save_dir))
   }
 }

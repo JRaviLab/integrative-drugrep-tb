@@ -60,7 +60,6 @@ my_gt_table <- summary_df %>%
     heading.subtitle.font.size = 16
   )
 
-
 # Save the table as HTML
 gtsave(my_gt_table, here("figures/tableS1/tableS1_signature_summary_table.html"))
 

@@ -1,6 +1,4 @@
 # functions to finalize drug results from individual and aggregated disease signatures
-# last modified: 12/18/25
-# Kewalin Samart
 
 get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   #' @description this function obtains all the drug results prioritized by a connectivity scores for a set of individual signatures
@@ -8,8 +6,7 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   #' @param drug_res_path a path to the drug results (start with a first-level folder name inside the project repository)
   #' @param score_method a string indicating a method category: "CMAP", "LINCS", "Cor"
   #' @param score a string indicating a connectivity score name: "CMAP", "WCS", "NCS", "Tau", "Cor_pearson", "Cor_spearman"
-  #' @returns combined_drug_df: a dataframe combining all srug results across individual signatures and the six connectivity scores
-  #' @author Kewalin Samart
+  #' @returns combined_drug_df: a dataframe combining all drug results across individual signatures and the six connectivity scores
   require(stringr)
 
   for (i in 1:nrow(data_to_run)) {
@@ -55,14 +52,12 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   return(combined_drug_df)
 }
 
-
 get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min") {
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drugs and cols: disease signatures
-  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
+  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbagens; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param score a string indicating a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman", "Cor_pearson"
   #' @param stats a string indicating the stats of score to include in the matrix: "median", "min", max".; "min" by default.
   #' @returns transformed_combined_drug_df: a dataframe with rows: drugs, columns: disease signatures, entries: scores
-  #' @author Kewalin Samart
 
   # modify the dataframe for filtering significant drugs
   unique_pert <- unique(combined_drug_df$pert)
@@ -165,10 +160,9 @@ get_DrugDis_ScoreMatrix <- function(combined_drug_df, score, stats = "min") {
 
 get_DrugCellDis_ScoreMatrix <- function(combined_drug_df, score) {
   #' @description this function converts the combined_drug_df to a dataframe (matrix filled with scores) where rows: drug-cell combinations and cols: disease signatures
-  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
+  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbagens; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param score a string indicating a string indicating a choice of connectivity scores: "CMAP","WCS","NCS","Tau","Cor_spearman", "Cor_pearson"
   #' @returns transformed_combined_drug_df: a dataframe with rows: drug-cell combinations, columns: disease signatures, entries: scores
-  #' @author Kewalin Samart
 
   # modify the dataframe for filtering significant drugs; considering cell types
   unique_pert_cell <- unique(combined_drug_df$pert_cell)
@@ -222,7 +216,6 @@ determine_threshold <- function(score_vec, values, tail, score_percentile = 0.90
   #' @param values a string indicating which non-zero values to include in the distribution: "neg", "pos", if other values specified for this argument, it means including all values.
   #' @param tail a string indicating which side of the distribution to get the indicated top percentile from
   #' @returns threshold
-  #' @author Kewalin Samart
 
   # set scores of zero to NA as they are meaningless
   score_vec[score_vec == 0] <- NA
@@ -255,7 +248,6 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
   #' @param threshold a negative numeric indicating the threshold for reversal
   #' @param values a string indicating which non-zero values to include in the distribution: "neg", "pos", if other values specified for this argument, it means including all values.
   #' @returns pert_occurrence_df: a sorted dataframe with drug names and their occurrences across the input signatures
-  #' @author Kewalin Samart
 
   # get unique drug names and initialize a dataframe for output
   unique_pert <- unique(transformed_combined_drug_df$unique_pert)
@@ -301,7 +293,6 @@ get_reversing_drugs_freq <- function(transformed_combined_drug_df, threshold, va
 
   return(pert_occurrence_df)
 }
-
 
 get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_df, percent_reverse = NA, n = NA) {
   #' @description Identifies significant drugs based on either a reversal percentage threshold or the top n most frequent occurrences (including ties).
@@ -353,10 +344,9 @@ get_significant_drugs <- function(pert_occurrence_df, transformed_combined_drug_
 
 get_signi_info <- function(combined_drug_df, signi_drug_df) {
   #' @description this function grabs the LINCS signatures information of identified significant drugs from the original combined drug dataframe
-  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbageons; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
+  #' @param combined_drug_df a dataframe (from multiple disease signatures) with scores, drug names (perturbagens; pert), cell lines of the drug profiles, moas (mechanism of actions), disease areas, and drug target genes
   #' @param signi_drug_df a dataframe containing the drugs prioritized "significant" based on either the given percent_reverse or (top) n
   #' @returns  signi_info_df: a dataframe with significant drugs and their LINCS signatures information
-  #' @author Kewalin Samart
   signi_info_df <- combined_drug_df[which(combined_drug_df$pert %in% signi_drug_df$unique_pert), ]
 
   return(signi_info_df)
@@ -453,7 +443,6 @@ create_drug_method_table <- function(metadata_path, stats = "min", score_percent
   return(list(binary_df = binary_df, count_df = count_df))
 }
 
-
 summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = "results") {
   #' @description Summarizes final significant drugs based on CMAP, LINCS (WCS, NCS, Tau), and Cor (Cor_spearman, Cor_pearson)
   #' @param all_signi_drugs_df A dataframe with binary indicators per score and column "significant_drug"
@@ -461,7 +450,6 @@ summarize_drugs_bymethods <- function(all_signi_drugs_df, technology, dirname = 
   #' @param dirname Output directory; default is "results"
   #' @return indiv_drugs_res_top: Dataframe of top drugs in ≥2 of the 3 method groups
   #'        Note: the output is also written to dirname
-  #' @author Kewalin Samart
 
   require(readr)
   require(here)
@@ -543,7 +531,6 @@ extract_aggrSig_significant_drugs <- function(technologies = c("microarray", "RN
   #'          score_df_list is a list of <technology>_<score> dataframes of the drugs passing the score threshold with 3 columns: pert, cell, and score (ranked by score in descending order)
   #'          score_drug_list is a list of character vectors containing ranked drug names (pert in score_df_list)
   #'          Note: the function writes <score>_aggrSig_ranked_<values>_<tail>_<score_percentile>.tsv which is the dataframes in score_df_list for all scores
-  #' @author Kewalin Samart
 
   require(dplyr)
   require(readr)
@@ -636,7 +623,6 @@ summarize_methodwise_aggrSig <- function(res,
   #'          all_summary contain multiple lists storing significant_drugs, CMAP, LINCS, Cor, occurrence, and other drug info
   #'          top_drugs contain multiple lists storing same piece of info as all_summary but only for the drugs passing 2/3 method categories
   #'          Note: <technology>_aggr_drug_summary.tsv and <technology>_aggr_top_drugs.tsv are written to the base_dir/<technology>
-  #' @author Kewalin Samart
 
   require(dplyr)
   require(readr)

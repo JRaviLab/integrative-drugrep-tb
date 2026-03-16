@@ -1,26 +1,18 @@
 # script to compute connectivity scores and get drug results given input individual disease signatures
 # method choices: "LINCS", "CMAP", "Cor_spearman", "Cor_pearson"
-# last modified: 11/17/25
-# Kewalin Samart
 library(here)
 
 # import needed functions
 source(here("scripts/01_signature_aggregation_functions.R"))
 source(here("scripts/02_signatureSearch_connectivity_scores_functions.R"))
 
-# set up arguments
+# set up arguments (defaults to RNAseq/LINCS if not specified)
 args <- commandArgs(TRUE)
-sig_metadata_path <- args[1] # e.g. "data/signatures/RNASeq_TB_signature_run_info.tsv"
-sig_data_path <- args[2] # e.g., "data/signatures/RNAseq"
-drugdb_name <- args[3] # "LINCS", "CMAP"
-score_method <- args[4] # "LINCS", "CMAP", "Cor_spearman", "Cor_pearson"
-output_dir <- args[5] # e.g., "results/RNAseq/LINCS"
-
-sig_metadata_path <- "data/signatures/RNASeq_TB_signature_run_info.tsv"
-sig_data_path <- "data/signatures/RNAseq"
-drugdb_name <- "LINCS"
-score_method <- "LINCS"
-output_dir <- "results/RNAseq/LINCS"
+sig_metadata_path <- ifelse(length(args) >= 1, args[1], "data/signatures/RNASeq_TB_signature_run_info.tsv")
+sig_data_path     <- ifelse(length(args) >= 2, args[2], "data/signatures/RNAseq")
+drugdb_name       <- ifelse(length(args) >= 3, args[3], "LINCS") # "LINCS", "CMAP"
+score_method      <- ifelse(length(args) >= 4, args[4], "LINCS") # "LINCS", "CMAP", "Cor_spearman", "Cor_pearson"
+output_dir        <- ifelse(length(args) >= 5, args[5], "results/RNAseq/LINCS")
 
 # read in metadata file
 data_to_run <- read.delim(here(sig_metadata_path), sep = "\t")

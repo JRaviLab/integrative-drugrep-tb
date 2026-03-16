@@ -1,6 +1,4 @@
 # Obtain node and edge data for figure 4: disease-drug-target network
-### last modified: 11/17/25
-### Author: Kewalin Samart
 
 ```{r load libraries and functions}
 library(readr)

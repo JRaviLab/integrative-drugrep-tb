@@ -1,9 +1,5 @@
 # Compute disease-drug connectivity scores via signatureSearch
 
-#### Last modified: 11/13/25
-
-#### Author: Kewalin Samart
-
 ```{r import functions/libraries}
 library(signatureSearch)
 library(here)

@@ -149,7 +149,6 @@ tissue_colors <- c(
   "lymphnode"             = "#FDB462"
 )
 
-
 tech_colors <- c(
   "RNAseq" = "#E69F00",
   "microarray" = "#56B4E9"
@@ -243,7 +242,6 @@ library(circlize)
 
 annotation_table <- meta_df
 viz_mat_up <- up_gene_jaccard_matrix
-
 
 common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
 annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
