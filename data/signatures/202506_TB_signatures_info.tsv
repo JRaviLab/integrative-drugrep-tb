@@ -1,6 +1,6 @@
 series_id	SIGNATURE_NAME	experimental_platform	tb_status	time_point	tissue_category	tissue_cell_type	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples	technology
-GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	GPL16250	MTB	NA	circulating	blood_PBMC	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3	microarray
-GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	GPL10558	MTB	NA	circulating	blood_dendritic_cells	primary	data/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237	129	130	microarray
+GSE16250	GSE16250_GPL570_MTB_control_blood_PBMC	GPL16250	MTB	NA	circulating	blood_PBMC	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3	microarray
+GSE34151	GSE34151_GPL10558_MTB_control_blood_dendritic_cells	GPL10558	MTB	NA	circulating	blood_dendritic_cells	primary	data/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237	129	130	microarray
 GSE63548	GSE63548_GPL10558_LNTB_control_lymphnode_lymphnode	GPL10558	LNTB	NA	other	lymphnode	primary	data/microarray_data_forDE/expression_matrices/GSE63548.tsv	1	108	104	4	22	microarray
 GSE83456	GSE83456_GPL10558_EPTB_control_blood	GPL10558	EPTB	NA	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	44	38	30	47	microarray
 GSE83456	GSE83456_GPL10558_PTB_control_blood	GPL10558	PTB	NA	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	54	91	31	45	microarray

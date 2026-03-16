@@ -1,8 +1,8 @@
 series_id	SIGNATURE_NAME	tissue_category	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples
-GSE16250	GSE16250_GPL570_MTB_control_blood_pmbc	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3
+GSE16250	GSE16250_GPL570_MTB_control_blood_PBMC	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3
 GSE18794	GSE18794_GPL6244_MTB_Cpn60.1_control_2h_blood_monocytes	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE18794.tsv	0	0	0	6	3
 GSE19491	GSE19491_GPL6947_PTB_control_blood_whole_blood	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE19491.tsv	0	2	0	3	13
-GSE34151	GSE34151_GPL10558_MTB_control_blood_dcs	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237	129	130
+GSE34151	GSE34151_GPL10558_MTB_control_blood_dendritic_cells	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE34151.tsv	1	179	237	129	130
 GSE42830	GSE42830_GPL10558_MTB_control_blood_whole_blood	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE42830.tsv	0	0	0	4	3
 GSE42834	GSE42834_GPL10558_MTB_control_blood_whole_blood	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE42834.tsv	0	0	0	0	0
 GSE42834	GSE42834_GPL10558_MTB_control_blood_cd4	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE42834.tsv	0	0	0	0	0
