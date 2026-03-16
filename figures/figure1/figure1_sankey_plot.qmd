@@ -1,0 +1,133 @@
+# Figure 1a: Sankey diagram showing information of all the TB signatures up to June 2025
+
+```{r load libraries}
+library(tidyverse)
+library(here)
+library(readr)
+library(dplyr)
+```
+
+```{r read in signature info}
+all_signatures_info = read_tsv(here("data/signatures/202506_TB_signatures_info.tsv"))
+```
+
+```{r Sankey diagram}
+library(networkD3)
+
+df_unique <- all_signatures_info %>%
+  mutate(
+    signature = SIGNATURE_NAME,
+    experimental_platform = experimental_platform,
+    time_point = time_point,
+    tissue_cell_type = tissue_cell_type,
+    origin = sample_origin,
+    origin_type = tissue_category,
+    TB = tb_status
+  ) %>%
+  dplyr::select(signature, experimental_platform, time_point, tissue_cell_type, origin, origin_type, TB, technology)
+
+cell_counts <- df_unique %>% dplyr::count(tissue_cell_type)
+keep_types <- cell_counts %>%
+  filter(n >= 1) %>%
+  pull(tissue_cell_type)
+df_unique$tissue_cell_type <- ifelse(df_unique$tissue_cell_type %in% keep_types,
+  df_unique$tissue_cell_type,
+  "Other tissue/cell types"
+)
+
+df_unique <- df_unique %>%
+  mutate(
+    time_point = ifelse(is.na(time_point),
+                        "not indicated",
+                        time_point),
+    experimental_platform = ifelse(is.na(experimental_platform),
+                                   "not applicable",
+                                   experimental_platform),
+  )
+
+link1 <- df_unique %>%
+  dplyr::count(tissue_cell_type, origin) %>%
+  dplyr::rename(source = tissue_cell_type, target = origin, value = n)
+link2 <- df_unique %>%
+  dplyr::count(origin, origin_type) %>%
+  dplyr::rename(source = origin, target = origin_type, value = n)
+link3 <- df_unique %>%
+  dplyr::count(origin_type, TB) %>%
+  dplyr::rename(source = origin_type, target = TB, value = n)
+link4 <- df_unique %>%
+  dplyr::count(TB, time_point) %>%
+  dplyr::rename(source = TB, target = time_point, value = n)
+link5 <- df_unique %>%
+  dplyr::count(time_point, experimental_platform) %>%
+  dplyr::rename(source = time_point, target = experimental_platform, value = n)
+link6 <- df_unique %>%
+  dplyr::count(experimental_platform, technology) %>%
+  dplyr::rename(source = experimental_platform, target = technology, value = n)
+
+links_all <- bind_rows(link1, link2, link3, link4, link5, link6)
+
+sig_paths <- df_unique %>%
+  dplyr::select(signature, tissue_cell_type, origin, origin_type, TB, time_point, experimental_platform, technology) %>%
+  pivot_longer(-signature, names_to = "layer", values_to = "name") %>%
+  distinct(signature, name)
+
+all_node_counts <- sig_paths %>%
+  dplyr::count(name) %>%
+  dplyr::rename(total = n)
+
+nodes <- all_node_counts %>%
+  mutate(label = paste0(name, " (", total, ")")) %>%
+  dplyr::select(name, label)
+
+nodes <- all_node_counts %>%
+  mutate(label = name) %>%
+  mutate(
+    label = dplyr::recode(
+      label,
+      "blood_CD14plus_monocyte_derived_macrophages_MF1" = "CD14+ MDMs MF1",
+      "blood_CD14plus_monocyte_derived_macrophages_MF2" = "CD14+ MDMs MF2",
+      "blood_monocyte_derived_macrophages" = "MDMs",
+      "blood_PBMC" = "PBMC",
+      "blood_dendritic_cells" = "dendritic cells",
+      "blood_macrophage" = "macrophages",
+      "blood_PBMC_macrophage" = "PBMC macrophages",
+      "BAL_bronchoalveolar_lavage" = "bronchoalveolar lavage (BAL)",
+      "blood_monocyte" = "monocytes",
+      .default = label
+    ),
+    label = paste0(label, " (", total, ")")
+  ) %>%
+  dplyr::select(name, label)
+
+
+links_all$source_id <- match(links_all$source, nodes$name) - 1
+links_all$target_id <- match(links_all$target, nodes$name) - 1
+
+sankey <- sankeyNetwork(
+  Links = links_all,
+  Nodes = nodes,
+  Source = "source_id",
+  Target = "target_id",
+  Value = "value",
+  NodeID = "label",
+  fontSize = 38,
+  nodeWidth = 30,
+  nodePadding = 15,
+  sinksRight = TRUE
+)
+```
+
+```{r save output}
+library(htmlwidgets)
+library(webshot2)
+
+saveWidget(sankey, "figure1a_sankey_plot.html", selfcontained = TRUE)
+
+webshot(
+  "figure1a_sankey_plot.html",
+  "figure1a_sankey_plot.pdf",
+  zoom = 5,
+  vwidth = 2600,
+  vheight = 1200
+)
+```

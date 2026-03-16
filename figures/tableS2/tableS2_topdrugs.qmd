@@ -1,0 +1,168 @@
+```{r plot top drug across technologies}
+library(gt)
+library(readr)
+library(dplyr)
+library(here)
+library(purrr)
+
+predicted_drugs = read.delim(here("figures/tableS2/final_high_confidence_drug_predictions.tsv"),sep="\t")
+predicted_drugs
+```
+
+```{r get fraction of signatures each drug reverses}
+# read in result files from different scores
+# microarray (6 signatures) and RNAseq (22 signatures) separately
+# but we have many connectivity scores; take median?
+# report signature fractions for all scores
+
+library(tidyverse)
+
+all_scores_marray_df <- read_tsv(here("figures/tableS2/microarray_drug_score_occurrence.tsv"))
+all_scores_rnaseq_df <- read_tsv(here("figures/tableS2/RNAseq_drug_score_occurrence.tsv"))
+
+```
+
+```{r clean up}
+# add prefixes to distinguish columns
+all_scores_marray_df <- all_scores_marray_df %>%
+  rename_with(~ paste0("microarray_", .x), .cols = -significant_drug)
+
+all_scores_rnaseq_df <- all_scores_rnaseq_df %>%
+  rename_with(~ paste0("RNAseq_", .x), .cols = -significant_drug)
+```
+
+```{r combined signature fractions & scores | 2/3 for both technologies}
+library(tidyverse)
+library(gt)
+library(stringr)
+
+# Combine microarray and RNA-seq results by union of drugs
+combined_scores_df <- full_join(all_scores_marray_df, all_scores_rnaseq_df, by = "significant_drug")
+
+# now safely apply replace_na() on all columns except unique_pert
+replace_list <- as.list(setNames(rep(0, ncol(combined_scores_df) - 1), names(combined_scores_df)[-1]))
+combined_scores_df <- replace_na(combined_scores_df, replace_list)
+
+# unique_pert matches drug_name
+combined_with_rank_df <- combined_scores_df %>%
+  left_join(predicted_drugs, by = c("significant_drug" = "drug_name"))
+
+# Step 1: Manually specify the exact columns to keep
+score_cols <- c(
+  "microarray_CMAP", "microarray_NCS", "microarray_Tau", "microarray_WCS", "microarray_Cor_pearson", "microarray_Cor_spearman"
+  ,
+  "RNAseq_CMAP", "RNAseq_NCS", "RNAseq_Tau", "RNAseq_WCS", "RNAseq_Cor_pearson", "RNAseq_Cor_spearman"
+  
+)
+
+# Step 1: Prepare the data
+# The select() call now only includes significant_drug as the identifier.
+filtered_df <- combined_with_rank_df %>%
+  dplyr::select(significant_drug, combined_z_score, all_of(score_cols)) %>%
+  filter(!is.na(combined_z_score)) %>%
+  arrange(desc(combined_z_score)) %>%
+  mutate(rank = row_number()) %>%
+  relocate(rank, .before = everything())
+
+# Step 2: Rename columns to use shorthand *before* creating the gt table.
+final_table_df <- filtered_df %>%
+  rename_with(~ str_replace(.x, "microarray_", "MA_")) %>%
+  rename_with(~ str_replace(.x, "RNAseq_", "RS_"))
+
+# Names for clean visualization
+score_cols_short <- names(final_table_df)[grepl("^(MA_|RS_)", names(final_table_df))]
+label_list <- purrr::set_names(str_remove_all(score_cols_short, "MA_|RS_"), score_cols_short)
+
+# update names for correlations
+label_list$MA_Cor_pearson <- "XCor"
+label_list$MA_Cor_spearman <- "XSpe"
+label_list$RS_Cor_pearson <- "XCor"
+label_list$RS_Cor_spearman <- "XSpe"
+
+# Step 3: Build the gt table with explicit widths and alignment
+final_gt_table <- final_table_df %>%
+  dplyr::select(rank, combined_z_score, significant_drug, everything()) %>%
+  gt(rowname_col = "rank") %>%
+  tab_stubhead(label = "Rank") %>%
+  
+  cols_label(
+    .list = label_list
+  ) %>%
+
+  # Spanners with unique IDs
+  tab_spanner(label = "CMAP1.0", columns = c(MA_CMAP), id = "ma_cmap1.0") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(MA_NCS, MA_Tau, MA_WCS), id = "ma_cmap2.0") %>%
+  tab_spanner(label = "Correlation", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "ma_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(MA_CMAP, MA_NCS, MA_Tau, MA_WCS), id = "ma_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(MA_Cor_pearson, MA_Cor_spearman), id = "ma_correlation") %>%
+  tab_spanner(label = "Microarray (6 signatures)", columns = starts_with("MA_"), id = "ma_main") %>%
+  
+  tab_spanner(label = "CMAP1.0", columns = c(RS_CMAP), id = "rs_cmap1.0") %>%
+  tab_spanner(label = "CMAP2.0", columns = c(RS_NCS, RS_Tau, RS_WCS), id = "rs_cmap2.0") %>%
+  tab_spanner(label = "Correlation", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_corr") %>%
+  tab_spanner(label = "Enrichment-based", columns = c(RS_CMAP, RS_NCS, RS_Tau, RS_WCS), id = "rs_enrich") %>%
+  tab_spanner(label = "Correlation-based", columns = c(RS_Cor_pearson, RS_Cor_spearman), id = "rs_correlation") %>%
+  tab_spanner(label = "RNAseq (22 signatures)", columns = starts_with("RS_"), id = "rs_main") %>%
+  
+  data_color(
+    columns = starts_with("MA_"),
+    colors = scales::col_numeric(
+      palette = c("mistyrose", "firebrick"),
+      domain = NULL
+    )
+  ) %>%
+  data_color(
+    columns = starts_with("RS_"),
+    colors = scales::col_numeric(
+      palette = c("lightblue", "blue"),
+      domain = NULL
+    )
+  ) %>%
+  
+  fmt_number(
+    columns = combined_z_score,
+    decimals = 2
+  ) %>%
+  
+  # 1. Set uniform widths
+  cols_width(
+    stub() ~ px(50), 
+    significant_drug ~ px(180),
+    combined_z_score ~ px(100),
+    starts_with(c("MA_", "RS_")) ~ px(150) 
+  ) %>%
+  
+  # 2. Center all data cells
+  cols_align(
+    align = "center",
+    columns = c(combined_z_score, starts_with("MA_"), starts_with("RS_"))
+  ) %>%
+  
+  # 3. Center column labels using the backward-compatible tab_style()
+  tab_style(
+    style = cell_text(align = "center"),
+    locations = cells_column_labels(columns = everything())
+  )
+
+# save directly without modifying the table options
+gtsave(final_gt_table, here("figures/tableS2/drugs_methodwise_final_table_count.html"))
+
+# resize to fit into png
+final_gt_table <- final_gt_table %>%
+  tab_options(
+    # Set a smaller font size for the entire table
+    table.font.size = px(16),
+    # Reduce the vertical padding in data rows to make them shorter
+    data_row.padding = px(10)
+  )
+
+gtsave(
+  final_gt_table,
+  here("figures/tableS2/final_drugs_methodwise_final_table_count.png"),
+  vwidth = 2500, 
+  expand = 10
+) 
+
+final_gt_table
+```
+

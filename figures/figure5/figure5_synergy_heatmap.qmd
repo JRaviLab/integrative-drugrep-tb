@@ -1,0 +1,262 @@
+# Figure 5: MOA–MOA synergy heatmap between our predicted TB HDTs and current TB antibiotics
+# Kewalin Samart
+# Last modified: 03/12/2026
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(here)
+library(ComplexHeatmap)
+library(circlize)
+library(grid)
+```
+
+```{r define predicted drugs + TB antibiotics}
+predicted_drugs <- read_tsv(
+  here("results/final_high_confidence_drug_predictions.tsv"),
+  show_col_types = FALSE
+)$drug_name |>
+  tolower()
+
+tbmedications <- c(
+  "rifampin","isoniazid","pyrazinamide","ethambutol",
+  "kanamycin","streptomycin","capreomycin","amikacin",
+  "levofloxacin","moxifloxacin","gatifloxacin",
+  "bedaquiline","delamanid","linezolid","pretomanid"
+)
+
+predicted_drugs <- union(predicted_drugs, tbmedications)
+```
+
+```{r obtain DrugCombDB voting-based synergy scores}
+drugs_synergy_df <- read.csv(
+  here("figures/figure5/20240724DrugCombDB_Syner&Antag_voting.csv")
+) %>%
+  mutate(
+    Drug1 = tolower(Drug1),
+    Drug2 = tolower(Drug2),
+    vote_sum = ZIPclassification +
+               blissclassification +
+               loeweclassification +
+               hsaclassification,
+    final_call = case_when(
+      vote_sum >=  3 ~ "Synergy",
+      vote_sum <= -3 ~ "Antagonism",
+      TRUE           ~ "Mixed"
+    )
+  )
+```
+
+```{r get unique unordered drug pairs}
+drug_pair_summary <- drugs_synergy_df %>%
+  mutate(
+    DrugA = pmin(Drug1, Drug2),
+    DrugB = pmax(Drug1, Drug2)
+  ) %>%
+  filter(
+    DrugA %in% predicted_drugs,
+    DrugB %in% predicted_drugs
+  ) %>%
+  group_by(DrugA, DrugB) %>%
+  summarise(
+    final_pair_call = case_when(
+      mean(final_call == "Synergy")    >= 0.5 ~ "Synergy",
+      mean(final_call == "Antagonism") >= 0.5 ~ "Antagonism",
+      TRUE                                   ~ "Mixed"
+    ),
+    .groups = "drop"
+  ) %>%
+  mutate(pair_id = paste(DrugA, DrugB, sep = "||"))
+```
+
+```{r map drugs to MOAs}
+drug_moa_df <- read_csv(
+  here("data/metadata/repurposing_drugs_20200324.csv"),
+  skip = 9,
+  show_col_types = FALSE
+) %>%
+  mutate(pert_iname = tolower(pert_iname))
+
+split_moas <- function(x) {
+  if (is.na(x) || x == "") return(character(0))
+  str_split(x, "\\|")[[1]] |> str_trim()
+}
+
+drug_to_moas <- drug_moa_df %>%
+  distinct(pert_iname, moa) %>%
+  group_by(pert_iname) %>%
+  summarise(
+    moas = list(unique(unlist(lapply(moa, split_moas)))),
+    .groups = "drop"
+  )
+
+# attach MOA sets to drug pairs
+pairs_with_moas <- drug_pair_summary %>%
+  left_join(drug_to_moas, by = c("DrugA" = "pert_iname")) %>%
+  rename(MOAs_A = moas) %>%
+  left_join(drug_to_moas, by = c("DrugB" = "pert_iname")) %>%
+  rename(MOAs_B = moas) %>%
+  filter(lengths(MOAs_A) > 0, lengths(MOAs_B) > 0)
+```
+
+```{r make sure each drug pair contributes once per unordered MOA–MOA}
+moa_edges_from_pairs <- pairs_with_moas %>%
+  rowwise() %>%
+  mutate(
+    moa_pairs = list({
+      expand_grid(MOA1 = MOAs_A, MOA2 = MOAs_B) %>%
+        filter(MOA1 != MOA2) %>%
+        mutate(
+          MOA_A = pmin(MOA1, MOA2),
+          MOA_B = pmax(MOA1, MOA2)
+        ) %>%
+        distinct(MOA_A, MOA_B)
+    })
+  ) %>%
+  ungroup() %>%
+  select(pair_id, final_pair_call, moa_pairs) %>%
+  unnest(moa_pairs)
+
+# unify MOA labels
+canonicalize_moa <- function(x) {
+  x %>%
+    str_trim() %>%
+    str_squish()
+}
+
+moa_pair_summary <- moa_edges_from_pairs %>%
+  mutate(
+    MOA_A = canonicalize_moa(MOA_A),
+    MOA_B = canonicalize_moa(MOA_B)
+  ) %>%
+  group_by(MOA_A, MOA_B) %>%
+  summarise(
+    n_drug_pairs = n_distinct(pair_id),
+    n_synergy    = sum(final_pair_call == "Synergy"),
+    n_antagonism = sum(final_pair_call == "Antagonism"),
+    frac_synergy    = n_synergy    / n_drug_pairs,
+    frac_antagonism = n_antagonism / n_drug_pairs,
+    .groups = "drop"
+  )
+```
+
+```{r define symmetric matrix builder (A–B == B–A)}
+build_sym_mat <- function(df, value_col, fill = 0) {
+
+  df_sym <- df %>%
+    mutate(
+      M1 = pmin(MOA_A, MOA_B),
+      M2 = pmax(MOA_A, MOA_B)
+    ) %>%
+    group_by(M1, M2) %>%
+    summarise(value = mean(.data[[value_col]], na.rm = TRUE),
+              .groups = "drop")
+
+  all_moas <- sort(unique(c(df_sym$M1, df_sym$M2)))
+
+  mat <- expand_grid(M1 = all_moas, M2 = all_moas) %>%
+    left_join(df_sym, by = c("M1", "M2")) %>%
+    left_join(df_sym, by = c("M1" = "M2", "M2" = "M1"),
+              suffix = c("", "_rev")) %>%
+    mutate(value = coalesce(value, value_rev, fill)) %>%
+    select(M1, M2, value) %>%
+    pivot_wider(names_from = M2, values_from = value) %>%
+    column_to_rownames("M1") %>%
+    as.matrix()
+
+  stopifnot(all.equal(mat, t(mat)))
+  mat
+}
+
+moa_synergy_mat <- build_sym_mat(moa_pair_summary, "frac_synergy", 0)
+```
+
+```{r mask current TB antibiotics}
+# identify TB-related MOAs
+tb_moas <- drug_to_moas %>%
+  filter(pert_iname %in% tbmedications) %>%
+  pull(moas) %>%
+  unlist() %>%
+  canonicalize_moa() %>%
+  unique()
+
+# build MOA labels of current TB antibiotics with asterisk
+all_moas <- rownames(moa_synergy_mat)
+
+moa_labels <- ifelse(
+  all_moas %in% tb_moas,
+  paste0(all_moas, "*"),
+  all_moas
+)
+names(moa_labels) <- all_moas
+```
+
+```{r define rows/columns order}
+# clusting row and columns of the matrix
+mat_for_clustering <- moa_synergy_mat
+mat_for_clustering[is.na(mat_for_clustering)] <- 0.5
+diag(mat_for_clustering) <- 0.5
+diag(moa_synergy_mat) <- NA
+
+# get clustering order
+ht_tmp <- Heatmap(
+  mat_for_clustering,
+  cluster_rows = TRUE,
+  cluster_columns = TRUE,
+  show_row_names = FALSE,
+  show_column_names = FALSE
+)
+ht_tmp <- draw(ht_tmp)
+row_ord <- row_order(ht_tmp)
+```
+```{r extract synergy pairs}
+idx <- which(moa_synergy_mat == 1, arr.ind = TRUE)
+
+result <- data.frame(
+  row = rownames(moa_synergy_mat)[idx[, "row"]],
+  col = colnames(moa_synergy_mat)[idx[, "col"]]
+)
+
+tmp <- t(apply(result, 1, sort))
+result_unique <- unique(as.data.frame(tmp))
+colnames(result_unique) <- c("row", "col")
+result_unique
+```
+
+```{r plotting}
+# plot synergy heatmap
+col_fun <- colorRamp2(
+  c(0, 0.5, 1),
+  c("#F4A259", "grey80", "#2F6DAA")
+)
+
+pdf(
+  here("figures/figure5/Figure5_MOA_synergy_fraction_heatmap.pdf"),
+  width = 18, height = 18
+)
+
+ht <- Heatmap(
+  moa_synergy_mat,
+  name = "Fractional synergistic score\n(≥3/4 metrics)",
+  col = col_fun,
+  na_col = "grey95",
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  row_order = row_ord,
+  column_order = row_ord,
+  row_labels = moa_labels[row_ord],
+  column_labels = moa_labels[row_ord],
+  column_names_rot = 45,
+  row_names_gp = gpar(fontsize = 9),
+  column_names_gp = gpar(fontsize = 9),
+  width  = unit(20, "cm"),
+  height = unit(20, "cm"),
+  heatmap_legend_param = list(
+    at = c(0, 0.5, 1),
+    labels = c("0 - Antagonism", "0.5 - Mixed", "1 - Synergy")
+  )
+)
+
+draw(ht, heatmap_legend_side = "right")
+dev.off()
+```

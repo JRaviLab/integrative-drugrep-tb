@@ -1,0 +1,80 @@
+```{r figure S2 function}
+library(tidyverse)
+library(data.table)
+library(here)
+library(dplyr)
+
+process_file_variance <- function(filepath, direction_label) {
+  df <- as_tibble(fread(here(filepath)))
+
+  # define microarray and RNAseq individual signature columns
+  microarray_cols <- colnames(df)[2:7]
+  rnaseq_cols <- setdiff(colnames(df)[2:(ncol(df) - 2)], microarray_cols)
+
+  # compute row-wise variance for each technology
+  df <- df %>%
+  mutate(
+    Microarray = apply(as.matrix(dplyr::select(., all_of(microarray_cols))), 1, var, na.rm = TRUE),
+    RNAseq     = apply(as.matrix(dplyr::select(., all_of(rnaseq_cols))), 1, var, na.rm = TRUE),
+    Direction  = direction_label
+  )
+
+  # reshape to tidy format
+  df %>%
+    dplyr::select(Description, Microarray, RNAseq, Direction) %>%
+    pivot_longer(cols = c(Microarray, RNAseq), names_to = "Technology", values_to = "Variance")
+}
+```
+
+```{r figure S2 plotting}
+plot_var_df_up <- process_file_variance("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
+plot_var_df_dn <- process_file_variance("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
+
+# combine both into one dataframe
+combined_var_plot_df <- bind_rows(plot_var_df_up, plot_var_df_dn) %>%
+  mutate(Direction = factor(Direction, levels = c("Upregulated", "Downregulated")))
+
+# compute medians for label annotations
+med_var_labels <- combined_var_plot_df %>%
+  group_by(Direction, Technology) %>%
+  summarise(
+    Variance = median(Variance, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+pdf(here("figures/figureS3/FigureS3_variance_across_signatures.pdf"),
+    width = 16, height = 12)  
+
+ggplot(combined_var_plot_df, aes(x = Technology, y = Variance, fill = Technology)) +
+  geom_boxplot() +
+  stat_summary(
+    fun = median,
+    geom = "text",
+    aes(label = after_stat(format(y, scientific = TRUE, digits = 3))),
+    vjust = -0.5,
+    size = 6,   
+    color = "black"
+  ) +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_log10() + 
+  labs(
+    title = "Log-transformed variance across individual signatures",
+    y = "Variance (log10 scale)",
+    x = "Technology"
+  ) +
+  facet_wrap(~Direction) +
+  theme_minimal(base_size = 20) +   
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 24, hjust = 0.5), 
+    axis.title = element_text(size = 22),
+    axis.text = element_text(size = 18),
+    strip.text = element_text(size = 20)  
+  ) +
+  coord_cartesian(clip = "off")
+
+dev.off()
+
+```
+
+

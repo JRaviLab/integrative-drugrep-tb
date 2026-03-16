@@ -1,0 +1,71 @@
+```{r setup, include=FALSE}
+library(ComplexHeatmap)
+library(colorRamp2)
+library(clusterProfiler)
+library(DOSE)
+library(readr)
+library(gridExtra)
+library(grid)
+library(tibble)
+library(tidyr)
+library(here)
+```
+
+```{r load data}
+summary_df <- read.delim(here("data/signatures/202506_TB_signatures_info.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df
+```
+
+```{r gt table}
+library(gt)
+library(readr)
+library(dplyr)
+
+summary_df$technology <- factor(
+  summary_df$technology,
+  levels = c("microarray", "RNAseq")
+)
+
+my_gt_table <- summary_df %>%
+  arrange(technology) %>%      # now uses your custom order
+  dplyr::select(
+    number, dataset_signature_ID, SIGNATURE_NAME, series_id, tb_status,
+    sample_origin, tissue_category, tissue_cell_type, technology,
+    up_genes_num, dn_genes_num, control_samples, disease_samples
+  ) %>%
+  gt(groupname_col = "technology") %>%
+  tab_header(
+    title = "TB Signature Metadata",
+    subtitle = "Grouped by technology"
+  ) %>%
+  cols_label(
+    number = "No.",
+    dataset_signature_ID = "Dataset-signature ID",
+    SIGNATURE_NAME = "Signature",
+    series_id = "Study",
+    tb_status = "TB Status",
+    tissue_category = "Tissue origin",
+    sample_origin = "Origin type",
+    tissue_cell_type = "Cell/tissue type",
+    technology = "Technology",
+    up_genes_num = "Upregulated genes",
+    dn_genes_num = "Downregulated genes",
+    control_samples = "Control samples",
+    disease_samples = "Disease samples"
+  ) %>%
+  fmt_missing(columns = everything(), missing_text = "-") %>%
+  tab_options(
+    table.font.size = "medium",
+    heading.title.font.size = 20,
+    heading.subtitle.font.size = 16
+  )
+
+
+# Save the table as HTML
+gtsave(my_gt_table, here("figures/tableS1/tableS1_signature_summary_table.html"))
+
+```
+
+```{r check output}
+my_gt_table
+```
