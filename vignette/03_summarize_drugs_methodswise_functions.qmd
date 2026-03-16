@@ -10,7 +10,7 @@ source(here("scripts/03_summarize_drugs_methodswise_functions.R"))
 ## Individual signatures
 ### RNAseq
 
-1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
+1.  Select drugs reversing at least three individual disease signatures at the 80th percentile reversal threshold for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/signatures/RNAseq_TB_signature_run_info.tsv"
@@ -29,7 +29,7 @@ methodwise_results = summarize_drugs_bymethods(all_signi_drugs_df$binary_df, tec
 
 ### microarray
 
-1.  Obtain drugs within top 3 occurrences passing 80% reversal for all the six connectivity scores
+1.  Select drugs reversing at least three individual disease signatures at the 80th percentile reversal threshold for all the six connectivity scores
 
 ```{r}
 metadata_path <- "data/signatures/microarray_TB_signature_run_info.tsv"
