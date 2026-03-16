@@ -1,6 +1,4 @@
 # multids_RNAseq_DEwithDESeq2.R
-# last modified: 11/16/25 - KS modified LT's edits
-# author: Kewalin Samart
 # ------------------------------------------------------------
 # Batch differential‑expression analysis for multiple RNA‑seq
 # datasets using DESeq2.
@@ -120,7 +118,7 @@ for (i in seq_len(nrow(study_df))) {
   metadata <- metadata[match(common_ids, metadata$geo_accession), ]
   expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
-  # Build the condition factor 
+  # Build the condition factor
   metadata <- metadata %>%
     mutate(condition = dplyr::case_when(
       CLASSIFICATION == "disease without treatment" ~ "disease",
@@ -273,7 +271,7 @@ for (i in seq_len(nrow(study_df))) {
   }
 
   message(
-    " Saved ", nrow(up_df), " up‑regulated and ",
+    "Saved ", nrow(up_df), " up‑regulated and ",
     nrow(dn_df), " down‑regulated genes"
   )
 
