@@ -1,4 +1,4 @@
-# Integrative Transcriptome-Based Drug Repurposing in Tuberculosis
+# Integrative transcriptome-based drug repurposing in tuberculosis
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -48,7 +48,7 @@ See [`scripts/README.md`](scripts/README.md) for a full table of scripts and the
 ### Requirements
 
 - R 4.4.2 with Bioconductor 3.20
-- Python 3 (for `scripts/00_cleanup_expression_data.ipynb`)
+- Python 3 (for [baseline analysis](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/figures/figureS9))
 
 ### Setup
 
@@ -61,9 +61,39 @@ renv::restore()
 ```
 
 ### Running the pipeline
+### 1. Generate disease signatures via differential expression analysis
+#### 1.1 Microarray
+```
+Rscript scripts/00_multids_microarray_DEwithlimma.R <metadata_file.tsv> <padj_cutoff>
+```
+Arguments:
+- `meta_class_file.tsv`  : Tab‑separated file listing all datasets: `./data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv`.
 
-Scripts are designed to be run sequentially (steps 00 → 05). Each main script accepts command-line arguments; defaults are provided for the RNAseq/LINCS analysis path. Example:
+  Mandatory columns:
+  - `series_id`       (GEO study identifier)
+  - `geo_accession`   (GEO sample identifier )
+  - `SIGNATURE_NAME`  (name of signature containing unique sample conditions)
+  - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
+  - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
+- `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
+#### 1.2 RNAseq
+```
+Rscript scripts/00_multids_RNAseq_DESeq2.R <metadata_file.tsv> <padj_cutoff>
+```
+Arguments:
+- `meta_class_file.tsv`  : Tab‑separated file listing all datasets: `./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv`.
+
+  Mandatory columns:
+  - `series_id`       (GEO study identifier)
+  - `geo_accession`   (GEO sample identifier )
+  - `SIGNATURE_NAME`  (name of signature containing unique sample conditions)
+  - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
+  - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
+- `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
+
+### 2. Prioritize drug candidates using multiple connectivity scores
+Example run for quantifying candidate drugs reversing RNAseq TB signatures using CMAP 2.0 methods (i.e., LINCS):
 ```bash
 Rscript scripts/02_drugrep_get_prediction.R \
   data/signatures/RNASeq_TB_signature_run_info.tsv \
@@ -71,6 +101,20 @@ Rscript scripts/02_drugrep_get_prediction.R \
   LINCS LINCS \
   results/RNAseq/LINCS
 ```
+Arguments:
+- `sig_metadata_path` – Path to the RNA-seq signature metadata file (default: data/signatures/RNASeq_TB_signature_run_info.tsv).
+- `sig_data_path` – Directory containing RNA-seq signature data files (default: data/signatures/RNAseq).
+- `drugdb_name` – Drug perturbation database to use. Options: LINCS, CMAP (default: LINCS).
+- `score_method` – Method used to compute signature similarity scores. Options: LINCS, CMAP, Cor_spearman, Cor_pearson (default: LINCS).
+- `output_dir` – Directory where output results will be saved (default: results/RNAseq/LINCS).
+
+
+### 3. Summarize drug predictions
+
+
+
+### 4.
+Additional downstream analyses and figure generation can be reproduced using the Quarto (.qmd) notebooks provided in the `vignettes/` directory.
 
 ---
 
