@@ -7,7 +7,7 @@ Preprocessed transcriptomic datasets were retrieved from ARCHS4 and their respec
 
 ## Data curation and preprocessing
 
-### [S1.0_getDiseases-ling.ipynb](S1.0_getDiseases-ling.ipynb)
+### [Stage1.0_getDiseases-ling.ipynb](Stage1.0_getDiseases-ling.ipynb)
 
 Querying ARCHS4 for disease-specific transcriptomic datasets and retrieving metadata from GEO.
 
@@ -20,18 +20,18 @@ Querying ARCHS4 for disease-specific transcriptomic datasets and retrieving meta
 - manually identifying relevant samples for for the differential expression analysis,
   - see [data/labeling/TB_currationdoc.tsv](../data/labeling/TB_curationdoc.tsv) for specifc details of justification for inclusion/exclusion of samples
 
-### [S1.1_CheckLabeling.ipynb](S1.1_CheckLabeling.ipynb)
+### [Stage1.1_CheckLabeling.ipynb](Stage1.1_CheckLabeling.ipynb)
 
 Verifying the accuracy of manual labeling of samples based on metadata and curated lists.
 
 - standardizes the cell and tissues sources in the geo metadata
 
-### [S1.2_cleanup_expression_data.ipynb](S1.2_cleanup_expression_data.ipynb)
+### [Stage1.2_cleanup_expression_data.ipynb](Stage1.2_cleanup_expression_data.ipynb)
 
 - please unzip the microarray raw expression files 1 and 2 and place them in a folder named `microarray_data_forDE/rawexpression`
 - Ensures that of the samples in the GEO metadata are present in the Archs4 expression data
 
-### [S1.3_CriteriaCheck.ipynb](S1.3_CriteriaCheck.ipynb)
+### [Stage1.3_CriteriaCheck.ipynb](Stage1.3_CriteriaCheck.ipynb)
 
 Checking metadata criteria for DESEQ.
 
