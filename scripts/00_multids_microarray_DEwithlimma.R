@@ -2,6 +2,8 @@
 # using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
 # ref (design matrix): https://rpubs.com/ge600/limma
 # ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
+# last modified: 11/16/25 - KS modified LT's edits
+# author: Kewalin Samart
 
 suppressPackageStartupMessages({
   library(limma)
@@ -14,10 +16,9 @@ suppressPackageStartupMessages({
   library(org.Hs.eg.db)
 })
 
-# 0.  Parse command‑line arguments
+# Parse command‑line arguments
 args <- commandArgs(TRUE)
 
-# --- Check for args ---
 if (length(args) < 2) {
   stop("
   Usage:
@@ -28,20 +29,19 @@ if (length(args) < 2) {
   ")
 }
 
-######### ------------ Example arguments ------------#########
+# Example arguments
 # args[1] <- here("data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv")
 # args[2] <- 0.05
 
 # read in argument file
 meta_class_file_path <- args[1]
 padj_cutoff <- ifelse(length(args) >= 2, as.numeric(args[2]), 0.05) # default 0.05
-# note: read.delim() converts "Entrez ID" (space) to "Entrez.ID" (period) via check.names=TRUE
 lincs_genes <- read.delim(here("data/metadata/LINCSGeneSpaceSub.txt"), sep = "\t")
 
 signature_boolean <- list()
 platform_list <- list()
 
-# 1.  Read the batch table
+# Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
 study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
 signature_boolean <- logical(nrow(study_df))
@@ -66,7 +66,6 @@ for (i in 1:nrow(study_df)) {
   colnames(expr_mat) <- trimws(toupper(colnames(expr_mat)))
   meta_class_df$series_id <- trimws(toupper(meta_class_df$series_id))
 
-  # ---- 3.1b  Pull in the classification column from args_df ----
   # Filter for *both* series_id AND the current_signature
   class_df <- meta_class_df %>%
     filter(series_id == tag, SIGNATURE_NAME == current_signature) %>% # filter for samples by signature
@@ -75,7 +74,7 @@ for (i in 1:nrow(study_df)) {
   # here we need a column for condition so that we can focus on case and control in the next step
   class_df <- dplyr::select(class_df, geo_accession, platform_id, CLASSIFICATION) # using the classification column here
 
-  # ---- 3.2  Attach classification and ensure matched GSMs ----
+  # Attach classification and ensure matched GSMs
   # Keep only GSMs present in *both* metadata and matrix
   common_ids_infected <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment", ]$geo_accession, colnames(expr_mat))
   common_ids_control <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment", ]$geo_accession, colnames(expr_mat))
@@ -94,7 +93,7 @@ for (i in 1:nrow(study_df)) {
   class_df <- class_df[match(common_ids, class_df$geo_accession), ]
   expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
-  # ---- 3.3  Build the condition factor (now classification exists!) ----
+  # Build the condition factor
   # get infected/control sample indices
   inf_indices <- which(trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment")
   control_indices <- which(trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment")
@@ -182,11 +181,11 @@ for (i in 1:nrow(study_df)) {
   # remove NA logFC
   res_df <- res_df[!is.na(res_df$log2FoldChange), ]
 
-  # ---- 3.6  Landmark genes filter ----
+  # Landmark genes filter
   landmark_genes <- as.character(lincs_genes[lincs_genes$Type == "landmark", ]$Entrez.ID)
   sig_df <- dplyr::filter(res_df, GeneID %in% landmark_genes)
 
-  # ---- 3.7  Significance filter ----
+  # Significance filter
   sig_df <- dplyr::filter(sig_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
 
   if (nrow(sig_df) == 0) {
@@ -195,7 +194,7 @@ for (i in 1:nrow(study_df)) {
     next
   }
 
-  # ---- 3.8  Split Up / Down ----
+  # Split Up / Down
   up_df <- dplyr::filter(sig_df, log2FoldChange > 0)
   dn_df <- dplyr::filter(sig_df, log2FoldChange < 0)
 
@@ -217,7 +216,7 @@ for (i in 1:nrow(study_df)) {
   today <- format(Sys.Date(), "%Y%m%d")
   base_fname <- study_df$SIGNATURE_NAME[i]
 
-  # Create output directories (added this for safety)
+  # Write outputs
   dir.create(here("data/DE_results/microarray"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/DE_results/microarray/up"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
   dir.create(here("data/DE_results/microarray/dn"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
@@ -266,7 +265,7 @@ for (i in 1:nrow(study_df)) {
   }
 
   message(
-    "  ✔  Saved ", nrow(up_df), " up‑regulated and ",
+    " Saved ", nrow(up_df), " up‑regulated and ",
     nrow(dn_df), " down‑regulated genes"
   )
 
@@ -275,7 +274,7 @@ for (i in 1:nrow(study_df)) {
   }
 }
 
-# 4.  Run summary
+# Get summary
 study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
