@@ -1,0 +1,261 @@
+from	to	type
+ACTC1	UBC	target-target
+APOB	UBC	target-target
+CDC25C	UBC	target-target
+CDC25C	ORC5	target-target
+CDC25C	CDK1	target-target
+CDC25C	CDK2	target-target
+CDC25C	CHEK1	target-target
+CDC25C	CCNB1	target-target
+DFFB	UBC	target-target
+DNMT3B	HDAC1	target-target
+DNMT3B	UBC	target-target
+FDFT1	UBC	target-target
+FDFT1	UBB	target-target
+FLT1	CTNNB1	target-target
+FOXO3	CREBBP	target-target
+FOXO3	TP53	target-target
+FOXO3	AKT1	target-target
+FOXO3	EP300	target-target
+FOXO3	UBC	target-target
+FOXO3	ESR1	target-target
+FOXO3	SMAD4	target-target
+FOXO3	SKP2	target-target
+GABPA	EP300	target-target
+GABPA	UBC	target-target
+HMGCR	UBC	target-target
+HSF1	HSP90AA1	target-target
+KRT19	UBC	target-target
+PLD1	UBC	target-target
+PLD2	UBC	target-target
+RIPK1	UBC	target-target
+RIPK1	HSP90AA1	target-target
+S100A10	UBC	target-target
+SLC2A3	UBC	target-target
+SMAD2	SMAD4	target-target
+SMAD2	TP53	target-target
+SMAD2	CREBBP	target-target
+SMAD2	EP300	target-target
+SMAD2	ESR1	target-target
+SMAD2	HDAC1	target-target
+SMAD2	CTNNB1	target-target
+SMAD2	UBC	target-target
+SREBF1	CREBBP	target-target
+SREBF1	UBC	target-target
+SREBF1	EP300	target-target
+TEAD1	UBC	target-target
+TSC22D3	RAF1	target-target
+UBR1	UBC	target-target
+ZNF423	SMAD4	target-target
+dexamethasone	IER3	drug-dpgene
+dexamethasone	TSC22D3	drug-dpgene
+dexamethasone	IGFBP3	drug-dpgene
+dexamethasone	MUC1	drug-dpgene
+dopamine	RBM34	drug-dpgene
+dopamine	HMOX1	drug-dpgene
+dopamine	SUV39H1	drug-dpgene
+dopamine	STUB1	drug-dpgene
+quercetin	SIRT3	drug-dpgene
+quercetin	LAMA3	drug-dpgene
+quercetin	MVP	drug-dpgene
+quercetin	ATP6V1D	drug-dpgene
+curcumin	ABHD4	drug-dpgene
+curcumin	AKR7A2	drug-dpgene
+curcumin	CDC45	drug-dpgene
+curcumin	HMOX1	drug-dpgene
+resveratrol	CDC20	drug-dpgene
+resveratrol	TIPARP	drug-dpgene
+resveratrol	TIMELESS	drug-dpgene
+resveratrol	CDKN1A	drug-dpgene
+lovastatin	CDC25A	drug-dpgene
+lovastatin	CDKN1A	drug-dpgene
+lovastatin	TSC22D3	drug-dpgene
+lovastatin	CCDC86	drug-dpgene
+axitinib	HERC6	drug-dpgene
+axitinib	PCNA	drug-dpgene
+axitinib	UGDH	drug-dpgene
+axitinib	CHP1	drug-dpgene
+tamoxifen	ITGAE	drug-dpgene
+tamoxifen	PRSS23	drug-dpgene
+tamoxifen	INSIG1	drug-dpgene
+tamoxifen	HMGCS1	drug-dpgene
+simvastatin	CDC25A	drug-dpgene
+simvastatin	CCDC86	drug-dpgene
+simvastatin	TSC22D3	drug-dpgene
+simvastatin	HMGCR	drug-dpgene
+lisuride	IKBKE	drug-dpgene
+lisuride	SRC	drug-dpgene
+lisuride	VAV3	drug-dpgene
+lisuride	TNFRSF21	drug-dpgene
+chlorprothixene	DLD	drug-dpgene
+chlorprothixene	INSIG1	drug-dpgene
+chlorprothixene	GNAS	drug-dpgene
+chlorprothixene	HMGCS1	drug-dpgene
+gemfibrozil	CYCS	drug-dpgene
+gemfibrozil	MAP7	drug-dpgene
+gemfibrozil	GMNN	drug-dpgene
+gemfibrozil	ST3GAL5	drug-dpgene
+fluvastatin	RHOA	drug-dpgene
+fluvastatin	TPM1	drug-dpgene
+fluvastatin	PCNA	drug-dpgene
+fluvastatin	TSC22D3	drug-dpgene
+triclosan	DDIT4	drug-dpgene
+triclosan	ITGAE	drug-dpgene
+triclosan	CDC25A	drug-dpgene
+triclosan	HMOX1	drug-dpgene
+dexamethasone	ACTC1	drug-target
+dopamine	ADRA2A	drug-target
+quercetin	APOB	drug-target
+curcumin	CAMK2A	drug-target
+quercetin	CD34	drug-target
+quercetin	CDC25C	drug-target
+resveratrol	CEL	drug-target
+dexamethasone	CHKA	drug-target
+dexamethasone	CRISPLD2	drug-target
+curcumin	DFFB	drug-target
+curcumin	DNMT3B	drug-target
+dexamethasone	FABP1	drug-target
+lovastatin	FDFT1	drug-target
+axitinib	FLT1	drug-target
+tamoxifen	FMO1	drug-target
+resveratrol	FOXO3	drug-target
+quercetin	GABPA	drug-target
+resveratrol	GDF15	drug-target
+dopamine	GFER	drug-target
+curcumin	HSD17B3	drug-target
+quercetin	HSF1	drug-target
+lisuride	HTR1A	drug-target
+chlorprothixene	HTR2B	drug-target
+curcumin	IAPP	drug-target
+simvastatin	ICMT	drug-target
+dexamethasone	KRT19	drug-target
+gemfibrozil	LEP	drug-target
+fluvastatin	LIPC	drug-target
+tamoxifen	LRMDA	drug-target
+quercetin	MBP	drug-target
+dexamethasone	MT1F	drug-target
+axitinib	OR2B11	drug-target
+axitinib	PDGFB	drug-target
+resveratrol	PECAM1	drug-target
+tamoxifen	PIP	drug-target
+quercetin	PKN1	drug-target
+quercetin	PKN3	drug-target
+tamoxifen	PLD1	drug-target
+tamoxifen	PLD2	drug-target
+simvastatin	PON1	drug-target
+quercetin	PON1	drug-target
+resveratrol	RIPK1	drug-target
+tamoxifen	RRAS2	drug-target
+triclosan	RXRA	drug-target
+dexamethasone	S100A10	drug-target
+simvastatin	SCAP	drug-target
+dexamethasone	SDS	drug-target
+fluvastatin	SLC15A1	drug-target
+resveratrol	SLC2A3	drug-target
+curcumin	SMAD2	drug-target
+fluvastatin	SREBF1	drug-target
+dexamethasone	TEAD1	drug-target
+tamoxifen	TFF3	drug-target
+curcumin	THBD	drug-target
+dexamethasone	UBR1	drug-target
+tamoxifen	ZNF423	drug-target
+simvastatin	ZNF542P	drug-target
+dexamethasone	negative regulation of cytokine secretion	drug-pathway
+dexamethasone	regulation of cytokine production involved in inflammatory response	drug-pathway
+dexamethasone	regulation of cytokinesis	drug-pathway
+dexamethasone	cytokine production involved in inflammatory response	drug-pathway
+dopamine	positive regulation of cytokinesis	drug-pathway
+dopamine	regulation of cytokinesis	drug-pathway
+quercetin	regulation of cytokine biosynthetic process	drug-pathway
+quercetin	myeloid leukocyte cytokine production	drug-pathway
+curcumin	cytokine production involved in inflammatory response	drug-pathway
+curcumin	regulation of cytokine production involved in inflammatory response	drug-pathway
+curcumin	negative regulation of response to cytokine stimulus	drug-pathway
+curcumin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+resveratrol	negative regulation of cytokine secretion	drug-pathway
+resveratrol	regulation of cytokine secretion involved in immune response	drug-pathway
+resveratrol	cytokine secretion involved in immune response	drug-pathway
+resveratrol	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+resveratrol	negative regulation of response to cytokine stimulus	drug-pathway
+resveratrol	negative regulation of cytokine secretion involved in immune response	drug-pathway
+resveratrol	negative regulation of cytokine production involved in immune response	drug-pathway
+resveratrol	myeloid leukocyte cytokine production	drug-pathway
+lovastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+lovastatin	cytokinetic process	drug-pathway
+lovastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+lovastatin	cytokine secretion involved in immune response	drug-pathway
+lovastatin	positive regulation of cytokinesis	drug-pathway
+lovastatin	negative regulation of response to cytokine stimulus	drug-pathway
+lovastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+lovastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+lovastatin	mitotic cytokinetic process	drug-pathway
+lovastatin	mitotic cytokinesis	drug-pathway
+lovastatin	cytoskeleton-dependent cytokinesis	drug-pathway
+lovastatin	negative regulation of cytokine secretion	drug-pathway
+lovastatin	regulation of cytokinesis	drug-pathway
+axitinib	myeloid leukocyte cytokine production	drug-pathway
+axitinib	positive regulation of cytokinesis	drug-pathway
+axitinib	mast cell cytokine production	drug-pathway
+axitinib	regulation of cytokinesis	drug-pathway
+axitinib	dendritic cell cytokine production	drug-pathway
+tamoxifen	positive regulation of T-helper 2 cell cytokine production	drug-pathway
+tamoxifen	regulation of cytokinesis	drug-pathway
+tamoxifen	positive regulation of cytokinesis	drug-pathway
+simvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+simvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+simvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+simvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+simvastatin	negative regulation of response to cytokine stimulus	drug-pathway
+simvastatin	cytokine secretion involved in immune response	drug-pathway
+simvastatin	negative regulation of cytokine secretion	drug-pathway
+lisuride	positive regulation of cytokinesis	drug-pathway
+lisuride	regulation of cytokinesis	drug-pathway
+chlorprothixene	positive regulation of cytokinesis	drug-pathway
+chlorprothixene	regulation of cytokinesis	drug-pathway
+gemfibrozil	negative regulation of cytokine production involved in immune response	drug-pathway
+gemfibrozil	positive regulation of cytokine biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+gemfibrozil	negative regulation of response to cytokine stimulus	drug-pathway
+gemfibrozil	regulation of cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	negative regulation of cytokine secretion involved in immune response	drug-pathway
+gemfibrozil	regulation of cytokine biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of cytokine secretion	drug-pathway
+fluvastatin	regulation of cytokine secretion involved in immune response	drug-pathway
+fluvastatin	negative regulation of cytokine production involved in immune response	drug-pathway
+fluvastatin	negative regulation of response to cytokine stimulus	drug-pathway
+fluvastatin	mitotic cytokinetic process	drug-pathway
+fluvastatin	cytoskeleton-dependent cytokinesis	drug-pathway
+fluvastatin	negative regulation of cytokine secretion	drug-pathway
+fluvastatin	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+fluvastatin	negative regulation of cytokine secretion involved in immune response	drug-pathway
+fluvastatin	positive regulation of cytokinesis	drug-pathway
+fluvastatin	cytokine secretion involved in immune response	drug-pathway
+fluvastatin	cytokinetic process	drug-pathway
+fluvastatin	regulation of cytokinesis	drug-pathway
+fluvastatin	mitotic cytokinesis	drug-pathway
+triclosan	negative regulation of cytokine-mediated signaling pathway	drug-pathway
+triclosan	negative regulation of response to cytokine stimulus	drug-pathway
+dexamethasone	Glucocorticoid receptor agonist	drug-moa
+dexamethasone	Glucocorticoid receptor modulator	drug-moa
+dexamethasone	Cytochrome P450 inhibitor	drug-moa
+dexamethasone	Corticosteroid agonist	drug-moa
+dopamine	Dopamine receptor agonist	drug-moa
+quercetin	Polar auxin transport inhibitor	drug-moa
+curcumin	Histone acetyltransferase inhibitor	drug-moa
+curcumin	Cyclooxygenase inhibitor	drug-moa
+curcumin	NFkB pathway inhibitor	drug-moa
+curcumin	Lipoxygenase inhibitor	drug-moa
+resveratrol	Cytochrome P450 inhibitor	drug-moa
+resveratrol	SIRT activator	drug-moa
+lovastatin	HMGCR inhibitor	drug-moa
+axitinib	PDGFR receptor inhibitor	drug-moa
+axitinib	VEGFR inhibitor	drug-moa
+tamoxifen	Selective estrogen receptor modulator (SERM)	drug-moa
+tamoxifen	Estrogen receptor antagonist	drug-moa
+simvastatin	HMGCR inhibitor	drug-moa
+lisuride	Dopamine receptor agonist	drug-moa
+chlorprothixene	Dopamine receptor antagonist	drug-moa
+gemfibrozil	Lipoprotein lipase activator	drug-moa
+fluvastatin	HMGCR inhibitor	drug-moa
+triclosan	Enoyl-[acyl-carrier-protein] reductase [NADH] inhibitor	drug-moa
