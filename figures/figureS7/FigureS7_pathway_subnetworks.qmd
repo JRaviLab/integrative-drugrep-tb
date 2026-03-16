@@ -94,7 +94,7 @@ node_type_df_ <- rbind(TB_genes_df, drug_perturbed_genes_df_wperturbed)
 write_tsv(node_type_df_, file = here("figures/figure4/node_types_with_perturbed_genes.tsv"))
 ```
 
-#### Create and save node/edge data for figure S6
+#### Create and save node/edge data for figure S7
 ```{r obtain node data}
 node_data <- get_drugtarget_NetworkNodeData(drug_names = final_drugs,
                                drug_genes_df = drug_genes_df,
