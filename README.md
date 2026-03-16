@@ -61,8 +61,8 @@ renv::restore()
 ```
 
 ### Running the pipeline
-### 1. Generate disease signatures via differential expression analysis
-#### 1.1 Microarray
+### 1. Generate and aggregate individual disease signatures
+#### 1.1 Microarray individual disease signatures
 ```
 Rscript scripts/00_multids_microarray_DEwithlimma.R \
   data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv \
@@ -79,7 +79,7 @@ Arguments:
   - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
-#### 1.2 RNAseq
+#### 1.2 RNAseq individual disease signatures
 ```
 Rscript scripts/00_multids_RNAseq_DESeq2.R \
   data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv \
@@ -96,11 +96,17 @@ Arguments:
   - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
+#### 1.3 Compute aggregated signatures
+Aggregated signatures can be computed by running the Quarto (.qmd) notebook below
+```
+vignette/01_compute_aggregated_signatures.qmd
+```
+
 ### 2. Prioritize drug candidates using multiple connectivity scores
 Drug candidates are prioritized by computing connectivity scores between disease signatures and drug perturbation signatures.
 
 Below is an example command to quantify candidate drugs predicted to reverse RNA-seq TB disease signatures using the CMAP 2.0 methods (i.e., LINCS).
-```bash
+```
 Rscript scripts/02_drugrep_get_prediction.R \
   data/signatures/RNASeq_TB_signature_run_info.tsv \
   data/signatures/RNAseq \
@@ -134,7 +140,7 @@ vignette/05_high_confidence_drug_prediction.qmd
 ```  
 
 **NOTES:** 
-- Additional downstream analyses (e.g., pathway and baseline analyses) can be reproduced using the Quarto (.qmd) notebooks provided in the `vignettes/` directory.
+- Additional downstream analyses (e.g., pathway and baseline analyses) can be reproduced using the .qmd notebooks provided in the `vignettes/` directory.
 - All figures can be reproduced using the .qmd notebooks provided in the `figures/` directory.
 
 ---
