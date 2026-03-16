@@ -1,4 +1,4 @@
-# multids_RNAseq_DEwithDESeq2.R
+# 00_multids_RNAseq_DEwithDESeq2.R
 # ------------------------------------------------------------
 # Batch differential‑expression analysis for multiple RNA‑seq
 # datasets using DESeq2.
@@ -12,11 +12,9 @@
 #     disease_without_treatment  vs  healthy_control_without_treatment
 # with unique sample conditions
 #
-# Required R packages: DESeq2, readr, dplyr, AnnotationDbi, org.Hs.eg.db
-#
 # --------------------------------------------------------------------
 # Usage:
-#   Rscript multids_RNAseq_DEwithDESeq2.R <args_file.tsv> [padj_cutoff]
+#   Rscript 00_multids_RNAseq_DEwithDESeq2.R <args_file.tsv> [padj_cutoff]
 #
 #   meta_class_file.tsv  : Tab‑separated file listing all datasets.
 #                    Mandatory columns:
