@@ -105,7 +105,7 @@ vignette/01_compute_aggregated_signatures.qmd
 ### 2. Prioritize drug candidates using multiple connectivity scores
 Drug candidates are prioritized by computing connectivity scores between disease signatures and drug perturbation signatures.
 
-Below is an example command to quantify candidate drugs predicted to reverse RNA-seq TB disease signatures using the CMAP 2.0 methods (i.e., LINCS).
+Below is an example command to quantify candidate drugs predicted to reverse RNA-seq individual TB signatures using the CMAP 2.0 methods (i.e., LINCS).
 ```
 Rscript scripts/02_drugrep_get_prediction.R \
   data/signatures/RNASeq_TB_signature_run_info.tsv \
@@ -119,6 +119,11 @@ Arguments:
 - `drugdb_name` Drug perturbation database to use. Options: LINCS, CMAP (default: `LINCS`).
 - `score_method` Method used to compute signature similarity scores. Options: `LINCS`, `CMAP`, `Cor_spearman`, `Cor_pearson` (default: `LINCS`).
 - `output_dir` Directory where output results will be saved (default: `results/RNAseq/LINCS`).
+
+**Note:** Drug prioritization examples by method for both individual and **aggregated signatures** can be reproduced by running the following notebook.
+```
+vignette/02_signatureSearch_connectivity_score_functions.qmd
+```
 
 ### 3. Summarize drug predictions
 
