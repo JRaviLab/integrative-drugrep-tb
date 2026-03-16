@@ -4,7 +4,6 @@ Primary codebase for the integrative TB drug repurposing pipeline. Scripts are n
 
 | Script | Type | Purpose |
 |--------|------|---------|
-| `00_cleanup_expression_data.ipynb` | Python | Preprocess and clean raw expression matrices |
 | `00_multids_microarray_DEwithlimma.R` | R | Differential expression across microarray datasets (limma) |
 | `00_multids_RNAseq_DEwithDESeq2.R` | R | Differential expression across RNA-seq datasets (DESeq2) |
 | `00_background_genes_PA_functions.R` | R | Background gene sets for pathway analysis (GO, KEGG, LINCS) |
