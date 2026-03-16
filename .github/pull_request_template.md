@@ -4,7 +4,7 @@ _referenced with modifications from [pycytominer](https://github.com/cytomining/
 # Description
 
 <!--
-Thank you so much for your contribution to <NewPackage>!
+Thank you so much for your contribution to integrative-drugrep-tb!
 
 Please _succinctly_ summarize your proposed change.
 Namely, consider addressing the following questions:

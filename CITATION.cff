@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: article
+title: "Integrative transcriptome-based drug repurposing in tuberculosis"
+authors:
+  - family-names: Samart
+    given-names: Kewalin
+    orcid: "https://orcid.org/0000-0003-3134-8846"
+  - family-names: Thang
+    given-names: Ling
+    orcid: "https://orcid.org/0009-0008-3983-093X"
+  - family-names: Buskirk
+    given-names: Landon
+    orcid: "https://orcid.org/0009-0006-9994-5419"
+  - family-names: Tonielli
+    given-names: Amy
+    orcid: "https://orcid.org/0009-0007-5034-2059"
+  - family-names: Krishnan
+    given-names: Arjun
+    orcid: "https://orcid.org/0000-0002-7980-4110"
+    alias: "co-corresponding author"
+  - family-names: Ravi
+    given-names: Janani
+    orcid: "https://orcid.org/0000-0001-7443-925X"
+    alias: "co-corresponding author"
+doi: 10.1101/2025.06.02.657296
+url: "https://doi.org/10.1101/2025.06.02.657296"
+repository-code: "https://github.com/JRaviLab/integrative-drugrep-tb"
+license: MIT
+license-url: "https://github.com/JRaviLab/integrative-drugrep-tb/blob/main/LICENSE"
