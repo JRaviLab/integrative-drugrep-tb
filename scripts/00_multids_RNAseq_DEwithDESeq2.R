@@ -1,4 +1,6 @@
 # multids_RNAseq_DEwithDESeq2.R
+# last modified: 11/16/25 - KS modified LT's edits
+# author: Kewalin Samart
 # ------------------------------------------------------------
 # Batch differential‑expression analysis for multiple RNA‑seq
 # datasets using DESeq2.
@@ -37,9 +39,8 @@ suppressPackageStartupMessages({
   library(here)
 })
 
-# --------------------------------------------------------------------
-# 0.  Parse command‑line arguments
-# --------------------------------------------------------------------
+
+# Parse command‑line arguments
 argv <- commandArgs(trailingOnly = TRUE)
 
 if (length(argv) < 1) {
@@ -51,15 +52,14 @@ if (length(argv) < 1) {
   ")
 }
 
-######### ------------ Example arguments ------------#########
-
+# Example arguments
 # argv[1] <- "./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv"
 # argv[2] <- 0.05
 
 meta_class_file_path <- argv[1]
 padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
-# 1.  Read the batch table
+# Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
 study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
 signature_boolean <- logical(nrow(study_df))
@@ -68,7 +68,7 @@ dn_genes_num <- integer(nrow(study_df))
 control_n <- integer(nrow(study_df))
 disease_n <- integer(nrow(study_df))
 
-# 2.  Helper to coerce expression table to integer matrix
+# Helper to coerce expression table to integer matrix
 make_expression_matrix <- function(tbl) {
   rn <- tbl[[1]]
   mat <- as.matrix(tbl[-1])
@@ -81,7 +81,8 @@ make_expression_matrix <- function(tbl) {
 landmark_genes_df <- read_tsv(here("data/metadata/LINCSGeneSpaceSub.txt"))
 landmark_genes <- as.character(landmark_genes_df[landmark_genes_df$Type == "landmark", ]$`Entrez ID`)
 
-# 3.  Main loop
+
+# Main loop
 for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
 
@@ -92,7 +93,8 @@ for (i in seq_len(nrow(study_df))) {
   current_signature <- study_df$SIGNATURE_NAME[i]
   message("  Study: ", tag, " | Signature: ", current_signature)
 
-  # ---- 3.1  Load inputs ----
+
+  # Load inputs
   # filter metadata for *both* study AND signature
   metadata <- meta_class_df %>%
     filter(series_id == tag, SIGNATURE_NAME == current_signature) %>% # filters samples by signature
@@ -103,7 +105,7 @@ for (i in seq_len(nrow(study_df))) {
 
   # Standardise GSM IDs: trim whitespace and set to upper‑case
   colnames(expr_mat) <- trimws(toupper(colnames(expr_mat)))
-  # 3.2  Attach classification and ensure matched GSMs
+  # Attach classification and ensure matched GSMs
   # Keep only GSMs present in *both* metadata and matrix
   # This line is now correct because 'metadata' is the filtered subset
   common_ids <- intersect(metadata$geo_accession, colnames(expr_mat))
@@ -118,7 +120,7 @@ for (i in seq_len(nrow(study_df))) {
   metadata <- metadata[match(common_ids, metadata$geo_accession), ]
   expr_mat <- expr_mat[, common_ids, drop = FALSE]
 
-  # 3.3  Build the condition factor (now classification exists!)
+  # Build the condition factor 
   metadata <- metadata %>%
     mutate(condition = dplyr::case_when(
       CLASSIFICATION == "disease without treatment" ~ "disease",
@@ -159,7 +161,8 @@ for (i in seq_len(nrow(study_df))) {
   # Drop duplicated gene names, keeping the first occurrence
   expr_mat <- expr_mat[!duplicated(rownames(expr_mat)), ]
 
-  # ---- 3.4  Differential expression ----
+
+  # Differential expression
   dds <- DESeq2::DESeqDataSetFromMatrix(
     countData = expr_mat,
     colData   = metadata,
@@ -172,7 +175,7 @@ for (i in seq_len(nrow(study_df))) {
     tibble::rownames_to_column(var = "ENSEMBL") %>%
     arrange(padj)
 
-  # ---- 3.5  Annotate with Entrez & Ensembl IDs ----
+  # Annotate with Entrez & Ensembl IDs
   res_df <- res_df %>%
     dplyr::mutate(
       EntrezID = AnnotationDbi::mapIds(org.Hs.eg.db,
@@ -196,10 +199,10 @@ for (i in seq_len(nrow(study_df))) {
   # rename to uniform column names
   colnames(res_df) <- c("Ensembl", "baseMean", "log2FoldChange", "lfcSE", "stat", "P.Value", "adj.P.Val", "GeneID", "Symbol")
 
-  # ---- 3.6  Landmark genes filter ----
+  # Landmark genes filter
   sig_df <- dplyr::filter(res_df, GeneID %in% landmark_genes)
 
-  # ---- 3.7  Significance filter ----
+  # Significance filter
   sig_df <- dplyr::filter(sig_df, !is.na(adj.P.Val) & adj.P.Val < padj_cutoff)
 
   if (nrow(sig_df) == 0) {
@@ -208,7 +211,7 @@ for (i in seq_len(nrow(study_df))) {
     next
   }
 
-  # ---- 3.8  Split Up / Down ----
+  # Split Up / Down
   up_df <- dplyr::filter(sig_df, log2FoldChange > 0)
   dn_df <- dplyr::filter(sig_df, log2FoldChange < 0)
 
@@ -220,7 +223,7 @@ for (i in seq_len(nrow(study_df))) {
     dn_genes_num[i] <- nrow(dn_df)
   }
 
-  # ---- 3.9  Write outputs ----
+  # Write outputs
   dir.create(here("data/DE_results/RNAseq"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/DE_results/RNAseq/up"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
   dir.create(here("data/DE_results/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE) # for pathway analyses
@@ -270,7 +273,7 @@ for (i in seq_len(nrow(study_df))) {
   }
 
   message(
-    "  ✔  Saved ", nrow(up_df), " up‑regulated and ",
+    " Saved ", nrow(up_df), " up‑regulated and ",
     nrow(dn_df), " down‑regulated genes"
   )
 
@@ -279,7 +282,7 @@ for (i in seq_len(nrow(study_df))) {
   }
 }
 
-# 4.  Run summary
+# Get summary
 study_df$signature <- as.integer(signature_boolean)
 study_df$up_genes_num <- as.integer(up_genes_num)
 study_df$dn_genes_num <- as.integer(dn_genes_num)
