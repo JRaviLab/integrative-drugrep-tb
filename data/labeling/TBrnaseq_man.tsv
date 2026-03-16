@@ -387,24 +387,24 @@ GSE256184	GSM8087254	Disease without treatment	primary_sample	HepG2	CELL_LINE_HE
 GSE256184	GSM8087253	Disease without treatment	primary_sample	HepG2	CELL_LINE_HEPG2	48hr
 GSE256184	GSM8087255	Disease without treatment	primary_sample	HepG2	CELL_LINE_HEPG2	48hr
 GSE256184	GSM8087256	Disease without treatment	primary_sample	HepG2	CELL_LINE_HEPG2	48hr
-GSE64179	GSM1565955	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565956	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565957	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565958	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565959	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565960	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565961	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565962	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565963	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565964	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565965	Disease without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64179	GSM1565966	Healthy Control without treatment	blood_sample	Dendritic cells (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1565997	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1565998	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1565999	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1566000	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1566001	Disease without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
-GSE64182	GSM1566002	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (DCs)	MONOCYTES_GENERAL
+GSE64179	GSM1565955	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565956	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565957	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565958	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565959	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565960	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565961	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565962	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565963	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565964	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565965	Disease without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64179	GSM1565966	Healthy Control without treatment	blood_sample	Dendritic cells (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1565997	Disease without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1565998	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1565999	Disease without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1566000	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1566001	Disease without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
+GSE64182	GSM1566002	Healthy Control without treatment	blood_sample	Monocyte-derived dendritic (dendritic_cells)	MONOCYTES_GENERAL
 GSE121049	GSM3425229	Healthy Control without treatment	blood_sample	blood	MACROPHAGES_GENERAL
 GSE121049	GSM3425232	Disease without treatment	blood_sample	blood	MACROPHAGES_GENERAL
 GSE121049	GSM3425235	Healthy Control without treatment	blood_sample	blood	MACROPHAGES_GENERAL
