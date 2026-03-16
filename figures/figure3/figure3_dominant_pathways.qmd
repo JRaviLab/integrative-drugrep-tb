@@ -213,7 +213,7 @@ sq_dev_df <- sq_dev_df %>%
     ),
     direction = factor(
       direction,
-      levels = c("Upregulated", "Downregulated")
+      levels = c("Upregulated", "Downregulated") 
     )
   )
 
