@@ -8,7 +8,7 @@ This repository contains the analysis code and processed data for the study:
 >
 > \* co-corresponding authors
 
-We integrate transcriptomic signatures from multiple TB microarray and RNA-seq datasets with drug–gene connectivity databases (CMap, LINCS) to identify and prioritize drug repurposing candidates for tuberculosis.
+We integrate transcriptomic signatures from multiple TB microarray and RNA-seq datasets with various disease-drug connectivity scores to identify and prioritize drug repurposing candidates for tuberculosis.
 
 ---
 
@@ -32,9 +32,9 @@ The analysis follows a five-step pipeline:
 
 | Step | Scripts | Description |
 |------|---------|-------------|
-| **00** | `00_multids_microarray_DEwithlimma.R`, `00_multids_RNAseq_DEwithDESeq2.R`, `00_cleanup_expression_data.ipynb` | Differential expression analysis across TB datasets |
+| **00** | `00_multids_microarray_DEwithlimma.R`, `00_multids_RNAseq_DEwithDESeq2.R` | Differential expression analysis across TB datasets |
 | **01** | `01_signature_aggregation_functions.R`, `01_signature_landmark_prep_functions.R` | Aggregate DE signatures; filter to L1000 landmark genes |
-| **02** | `02_drugrep_get_prediction.R`, `02_signatureSearch_connectivity_scores_functions.R` | Score drug candidates via CMap 1.0, LINCS, and correlation methods |
+| **02** | `02_drugrep_get_prediction.R`, `02_signatureSearch_connectivity_scores_functions.R` | Score drug candidates via CMAP 1.0, CMAP 2.0 (LINCS), and correlation methods |
 | **03** | `03_summarize_drugs_methodswise_functions.R` | Summarize and compare predictions across scoring methods |
 | **04** | `04_*_RankAggregation_*.R` | Aggregate drug rankings across methods and datasets |
 | **05** | `05_high_confidence_drug_prediction.R`, `05_build_drugtarget_network_functions.R` | Identify high-confidence candidates and build drug–target networks |
@@ -64,10 +64,12 @@ renv::restore()
 ### 1. Generate disease signatures via differential expression analysis
 #### 1.1 Microarray
 ```
-Rscript scripts/00_multids_microarray_DEwithlimma.R <metadata_file.tsv> <padj_cutoff>
+Rscript scripts/00_multids_microarray_DEwithlimma.R \
+  data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv \
+  0.05
 ```
 Arguments:
-- `meta_class_file.tsv`  : Tab‑separated file listing all datasets: `./data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv`.
+- `meta_class_file.tsv`  : Tab‑separated file listing all datasets (default `data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv`).
 
   Mandatory columns:
   - `series_id`       (GEO study identifier)
@@ -79,10 +81,12 @@ Arguments:
 
 #### 1.2 RNAseq
 ```
-Rscript scripts/00_multids_RNAseq_DESeq2.R <metadata_file.tsv> <padj_cutoff>
+Rscript scripts/00_multids_RNAseq_DESeq2.R \
+  data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv \
+  0.05
 ```
 Arguments:
-- `meta_class_file.tsv`  : Tab‑separated file listing all datasets: `./data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv`.
+- `meta_class_file.tsv`  : Tab‑separated file listing all datasets (default `data/RNAseq_data_forDE/clean_TB_sample_metadata_classification.tsv`).
 
   Mandatory columns:
   - `series_id`       (GEO study identifier)
@@ -93,7 +97,9 @@ Arguments:
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
 ### 2. Prioritize drug candidates using multiple connectivity scores
-Example run for quantifying candidate drugs reversing RNAseq TB signatures using CMAP 2.0 methods (i.e., LINCS):
+Drug candidates are prioritized by computing connectivity scores between disease signatures and drug perturbation signatures.
+
+Below is an example command to quantify candidate drugs predicted to reverse RNA-seq TB disease signatures using the CMAP 2.0 methods (i.e., LINCS).
 ```bash
 Rscript scripts/02_drugrep_get_prediction.R \
   data/signatures/RNASeq_TB_signature_run_info.tsv \
@@ -102,19 +108,28 @@ Rscript scripts/02_drugrep_get_prediction.R \
   results/RNAseq/LINCS
 ```
 Arguments:
-- `sig_metadata_path` – Path to the RNA-seq signature metadata file (default: data/signatures/RNASeq_TB_signature_run_info.tsv).
-- `sig_data_path` – Directory containing RNA-seq signature data files (default: data/signatures/RNAseq).
-- `drugdb_name` – Drug perturbation database to use. Options: LINCS, CMAP (default: LINCS).
-- `score_method` – Method used to compute signature similarity scores. Options: LINCS, CMAP, Cor_spearman, Cor_pearson (default: LINCS).
-- `output_dir` – Directory where output results will be saved (default: results/RNAseq/LINCS).
-
+- `sig_metadata_path` Path to the RNA-seq signature metadata file (default: `data/signatures/RNASeq_TB_signature_run_info.tsv`).
+- `sig_data_path` Directory containing RNA-seq signature data files (default: `data/signatures/RNAseq`).
+- `drugdb_name` Drug perturbation database to use. Options: LINCS, CMAP (default: `LINCS`).
+- `score_method` Method used to compute signature similarity scores. Options: `LINCS`, `CMAP`, `Cor_spearman`, `Cor_pearson` (default: `LINCS`).
+- `output_dir` Directory where output results will be saved (default: `results/RNAseq/LINCS`).
 
 ### 3. Summarize drug predictions
 
+Drug predictions from different connectivity scoring methods are aggregated and summarized using the following analysis notebooks:
 
+#### 3.1 Prioritize predicted drug candidates based on their consistency of reversal across methods
+`vignette/03_summarize_drugs_methodswise_functions.qmd`  
 
-### 4.
-Additional downstream analyses and figure generation can be reproduced using the Quarto (.qmd) notebooks provided in the `vignettes/` directory.
+#### 3.2 Integrate drug rankings across multiple methods using partial rank aggregation
+`vignette/04_partial_rank_aggregation.qmd`  
+
+#### 3.3 Identify high-confidence drug candidates based on aggregated rankings.
+`vignette/05_high_confidence_drug_prediction.qmd`  
+
+**NOTES:** 
+- Additional downstream analyses (e.g., pathway and baseline analyses) can be reproduced using the Quarto (.qmd) notebooks provided in the `vignettes/` directory.
+- All figures can be reproduced using the .qmd notebooks provided in the `figures/` directory.
 
 ---
 
