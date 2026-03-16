@@ -45,7 +45,7 @@ aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, directi
 ```
 
 ##### Getting up/dn tissue-specific microarray/RNAseq signatures 
-##### Note: Both microarray and RNAseq only have >1 blood signtures; not enough lung RNAseq signatures for aggregation
+##### Note: Both microarray and RNAseq only have >1 blood signatures; not enough lung RNAseq signatures for aggregation
 ```{r}
 # set up parameters
 technologies = c("microarray", "RNAseq")

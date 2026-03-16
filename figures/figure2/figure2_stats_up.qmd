@@ -251,7 +251,7 @@ top_combined_df_tissue <- bind_rows(
 gt_top_bottom_tissue <- top_combined_df_tissue %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top upregulated GO terms more enriched in circulating or other") %>%
+  tab_header(title = "Top upregulated GO terms enriched in circulating or other") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched in",
@@ -351,7 +351,7 @@ top_combined_df_microarray_rnaseq <- bind_rows(
 gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top upregulated GO terms more enriched in microarray or RNAseq") %>%
+  tab_header(title = "Top upregulated GO terms enriched in microarray or RNAseq") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
@@ -450,7 +450,7 @@ top_combined_df_microarray_rnaseq <- bind_rows(
 gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top upregulated GO terms more enriched in primary or cell line signatures") %>%
+  tab_header(title = "Top upregulated GO terms enriched in primary or cell line signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched In",
@@ -560,7 +560,7 @@ top_combined_df_sig <- bind_rows(
 gt_top_bottom_sig <- top_combined_df_sig %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top Upregulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
+  tab_header(title = "Top upregulated GO terms enriched in individual or aggregated signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched in",

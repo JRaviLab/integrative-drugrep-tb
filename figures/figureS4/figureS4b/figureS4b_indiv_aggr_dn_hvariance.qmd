@@ -431,7 +431,7 @@ heatmap_sig_dn_go <- Heatmap(
     title_gp = gpar(fontsize = 25),
     labels_gp = gpar(fontsize = 25)
   ),
-  column_title = "Individual dnregulated \n microarray & RNASeq TB signatures",
+  column_title = "Individual downregulated \n microarray & RNASeq TB signatures",
   column_title_gp = gpar(fontsize = 25),
   row_title = "Enriched GO \n biological processes",
   row_title_gp = gpar(fontsize = 25),

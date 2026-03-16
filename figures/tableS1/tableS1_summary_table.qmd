@@ -35,7 +35,7 @@ my_gt_table <- summary_df %>%
   ) %>%
   gt(groupname_col = "technology") %>%
   tab_header(
-    title = "TB Signature Metadata",
+    title = "TB signature metadata",
     subtitle = "Grouped by technology"
   ) %>%
   cols_label(

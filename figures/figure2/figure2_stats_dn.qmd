@@ -530,7 +530,7 @@ top10_negative_sig <- sig_MW_results %>% filter(p_adj < 0.05) %>% filter(median_
 gt_top10_positive_sig <- top10_positive_sig %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top 10 dnregulated GO terms enriched in individual signatures") %>%
+  tab_header(title = "Top 10 downregulated GO terms enriched in individual signatures") %>%
   cols_label(
     GO_term = "GO Term",
     median_diff = "Median difference (individual - aggregated)",
@@ -559,7 +559,7 @@ top_combined_df_sig <- bind_rows(
 gt_top_bottom_sig <- top_combined_df_sig %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
-  tab_header(title = "Top dnregulated GO Terms More Enriched in Individual or Aggregated Signatures") %>%
+  tab_header(title = "Top downregulated GO terms more enriched in individual or aggregated signatures") %>%
   cols_label(
     GO_term = "GO Term",
     Enriched_in = "Enriched in",

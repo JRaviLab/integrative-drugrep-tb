@@ -8,7 +8,7 @@ source(here("scripts/00_background_genes_PA_functions.R"))
 source(here("scripts/01_signature_aggregation_functions.R"))
 ```
 
-### Testing each sigle function
+### Testing each single function
 ##### Initialize arguments
 ```{r}
 # example argument

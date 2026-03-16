@@ -8,7 +8,7 @@ This script processes individual and aggregated drug prediction results to ident
 5. Merge individual and aggregated results `get_high_confidence_predictions()`
 6. Calculate combined z-scores for high-confidence predictions `get_high_confidence_predictions()`
 
-## High Confidence Drug Predictions
+## High confidence drug predictions
 
 ```{r setup}
 library(here)
@@ -69,7 +69,7 @@ head(agg_results_sorted, 5)
 
 ```
 
-##### Get High Confidence Drug Predictions
+##### Get high confidence drug predictions
 ```{r Get combined and high confidence predictions}
 combined_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[1]]
 high_confidence_predictions <- get_high_confidence_predictions(indiv_results, agg_results)[[2]]
