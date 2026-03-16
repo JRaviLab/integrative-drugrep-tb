@@ -11,5 +11,3 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
-data/RNAseq_data_forDE/
-data/microarray_data_forDE/
