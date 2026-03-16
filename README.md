@@ -119,13 +119,19 @@ Arguments:
 Drug predictions from different connectivity scoring methods are aggregated and summarized using the following analysis notebooks:
 
 #### 3.1 Prioritize predicted drug candidates based on their consistency of reversal across methods
-`vignette/03_summarize_drugs_methodswise_functions.qmd`  
+```
+vignette/03_summarize_drugs_methodswise_functions.qmd
+```  
 
 #### 3.2 Integrate drug rankings across multiple methods using partial rank aggregation
-`vignette/04_partial_rank_aggregation.qmd`  
+```
+vignette/04_partial_rank_aggregation.qmd
+```  
 
 #### 3.3 Identify high-confidence drug candidates based on aggregated rankings.
-`vignette/05_high_confidence_drug_prediction.qmd`  
+```
+vignette/05_high_confidence_drug_prediction.qmd
+```  
 
 **NOTES:** 
 - Additional downstream analyses (e.g., pathway and baseline analyses) can be reproduced using the Quarto (.qmd) notebooks provided in the `vignettes/` directory.
