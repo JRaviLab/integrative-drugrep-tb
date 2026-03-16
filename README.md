@@ -120,7 +120,7 @@ Arguments:
 - `score_method` Method used to compute signature similarity scores. Options: `LINCS`, `CMAP`, `Cor_spearman`, `Cor_pearson` (default: `LINCS`).
 - `output_dir` Directory where output results will be saved (default: `results/RNAseq/LINCS`).
 
-**Note:** Drug prioritization examples by method for both individual and **aggregated signatures** can be reproduced by running the following notebook.
+**Note:** Drug prioritization by methods for **aggregated signatures** can be reproduced by running the following notebook.
 ```
 vignette/02_signatureSearch_connectivity_score_functions.qmd
 ```
