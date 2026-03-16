@@ -22,10 +22,10 @@ args <- commandArgs(TRUE)
 if (length(args) < 2) {
   stop("
   Usage:
-    Rscript microarray_DE_with_limma.R <metadata_file.tsv> <padj_cutoff>
+    Rscript 00_multids_microarray_DEwithlimma.R <metadata_file.tsv> <padj_cutoff>
 
   Example:
-    Rscript microarray_DE_with_limma.R data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
+    Rscript 00_multids_microarray_DEwithlimma.R data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
   ")
 }
 
