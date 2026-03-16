@@ -26,7 +26,7 @@ Verifying the accuracy of manual labeling of samples based on metadata and curat
 
 - standardizes the cell and tissues sources in the geo metadata
 
-### [Stage1.2_cleanup_expression_data.ipynb](Stage1.2_cleanup_expression_data.ipynb)
+### [S1.2_cleanup_expression_data.ipynb](S1.2_cleanup_expression_data.ipynb)
 
 - please unzip the microarray raw expression files 1 and 2 and place them in a folder named `microarray_data_forDE/rawexpression`
 - Ensures that of the samples in the GEO metadata are present in the Archs4 expression data
