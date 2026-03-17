@@ -47,7 +47,7 @@ bg_from_data <- function(metadata_path, data_path, direction, extension = ".tsv"
   #' @description Collect union of genes across all datasets (background genes)
   #' @param metadata_path Path to metadata file listing datasets
   #' @param data_path Path to DE result tables or signatures
-  #' @param direction Path to DE result tables or signatures
+  #' @param direction options: "up", "dn"
   #' @param extension String like "_up.tsv", "_dn.tsv" (optional)
   #' @return Character vector of unique genes across datasets
 
@@ -75,11 +75,12 @@ get_bg_genes <- function(bg_source, metadata_path = NULL, data_path = NULL, linc
   #' @description get background genes by the given data source name
   #' @param bg_source a string indicating the name of database: "GO", "KEGG", "LINCS"
   #' @param metadata_path path to metadata file describing DE results/signatures details
-  #' @example "./data/metadata/"
+  #' @example "data/signatures/RNAseq_TB_signature_run_info.tsv"
   #' @param data_path path to DE data table/ signatures
-  #' @example "./data/uniformly_processed/microarray/DEresults/", "./data/uniformly_processed/microarray/signatures/dn/"
+  #' @example "data/DE_results/RNAseq", "data/DE_results/microarray"
   #' @param lincs_genetype a string or a list of strings indicating one or more types of LINCS gene: (i) landmark (by default) (ii) inferred (iii) best inferred (iv) not inferred (v) reference
   #' @param extension a string indicating file extension e.g., "_up.tsv", "_dn.tsv"
+  #' @param direction_input_data options: "up", "dn"
   #' @returns bg_genes background genes (all genes present in the source database)
   if (bg_source == "LINCS") {
     if (is.null(lincs_genetype)) {
@@ -121,7 +122,8 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   #' @param data_path_microarray: path to DE results for microarray
   #' @param direction: "up" or "dn"
   #' @param GO_genes_vector: vector of GO-annotated gene IDs
-
+  #' @param combine: "intersect", "union"
+  
   extension_rnaseq <- paste0("_", direction, ".tsv")
   extension_microarray <- paste0("_", direction, ".tsv")
 
