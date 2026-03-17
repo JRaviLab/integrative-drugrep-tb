@@ -16,12 +16,13 @@ We integrate transcriptomic signatures from multiple TB microarray and RNA-seq d
 
 ```
 integrative-drugrep-tb/
-├── scripts/        # R and Python analysis scripts (numbered by step)
-├── vignette/       # Quarto documents with worked examples for each step
-├── figures/        # Code and outputs for manuscript figures (figure1–5, figureS1–S9)
-├── data/           # Input data: DE results, signatures, and metadata
-├── results/        # Pipeline outputs: connectivity scores and drug rankings
-└── renv.lock       # R package lockfile for reproducibility
+├── scripts/         # R and Python analysis scripts (numbered by step)
+├── vignette/        # Quarto documents with worked examples for each step
+├── figures/         # Code and outputs for manuscript figures (figure1–5, figureS1–S9)
+├── data/            # Input data: DE results, signatures, and metadata
+├── DataCuration/    # Notebooks for preprocessing, cleaning, and harmonizing disease data and metadata
+├── results/         # Pipeline outputs: connectivity scores and drug rankings
+└── renv.lock        # R package lockfile for reproducibility
 ```
 
 ---
