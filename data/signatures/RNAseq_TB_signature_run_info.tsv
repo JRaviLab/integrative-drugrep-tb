@@ -18,9 +18,9 @@ GSE112483	GSE112483_MTB_control_lung_epi	lung	primary	data/RNAseq_data_forDE/exp
 GSE132283	GSE132283_MTB_control_2h_blood_macrophage	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE132283.tsv	1	170	54	3	3
 GSE132283	GSE132283_MTB_control_48h_blood_macrophage	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE132283.tsv	1	336	243	3	3
 GSE143627	GSE143627_MTB_control_blood_PBMC_macrophage	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE143627.tsv	1	102	83	3	3
-GSE148731	GSE148731_MTB_4h_blood_CD14plus_monocyte_derived_macrophages_MF1	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	50	7	3	3
-GSE148731	GSE148731_MTB_24h_blood_CD14plus_monocyte_derived_macrophages_MF2	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	286	219	4	3
-GSE148731	GSE148731_MTB_24h_blood_CD14plus_monocyte_derived_macrophages_MF1	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	212	147	3	3
+GSE148731	GSE148731_MTB_control_4h_blood_CD14plus_monocyte_derived_macrophages_MF1	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	50	7	3	3
+GSE148731	GSE148731_MTB_control_24h_blood_CD14plus_monocyte_derived_macrophages_MF2	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	286	219	4	3
+GSE148731	GSE148731_MTB_control_24h_blood_CD14plus_monocyte_derived_macrophages_MF1	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148731.tsv	1	212	147	3	3
 GSE174566	GSE174566_MTB_control_blood_PBMC	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE174566.tsv	1	209	95	18	18
 GSE193777	GSE193777_MTB_control_blood	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE193777.tsv	1	215	108	36	10
 GSE223863	GSE223863_MTB_control_2h_BALF_alveolar_macrophage	other	primary	data/RNAseq_data_forDE/expression_matrices/GSE223863.tsv	0	0	0	4	7
