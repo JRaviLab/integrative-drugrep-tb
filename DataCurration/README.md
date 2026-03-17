@@ -18,7 +18,7 @@ Querying ARCHS4 for disease-specific transcriptomic datasets and retrieving meta
 - querying Gene Expression Omnibus (GEO) for the metadata,
   - see [get_metadata_GEO.R](get_metadata_GEO.R) and [get_expression_data_ARCHS4.R](get_expression_data_ARCHS4.R) for retrieval script
 - manually identifying relevant samples for for the differential expression analysis,
-  - see [data/labeling/TB_currationdoc.tsv](../data/labeling/TB_curationdoc.tsv) for specifc details of justification for inclusion/exclusion of samples
+  - see [data/labeling/TB_currationdoc.tsv](https://github.com/JRaviLab/integrative-drugrep-tb/blob/main/data/labeling/TB_currationdoc.tsv) for specifc details of justification for inclusion/exclusion of samples
 
 ### [Stage1.1_CheckLabeling.ipynb](Stage1.1_CheckLabeling.ipynb)
 
