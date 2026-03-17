@@ -10,7 +10,7 @@ Primary codebase for the integrative TB drug repurposing pipeline. Scripts are n
 | `00_get_crossSigs_enrichedGO.R` | R | GO enrichment across aggregated signatures |
 | `01_signature_aggregation_functions.R` | R | Aggregate DE signatures across datasets; compute membership/Jaccard matrices |
 | `01_signature_landmark_prep_functions.R` | R | Filter signatures to L1000 landmark genes |
-| `02_drugrep_get_prediction.R` | R | **Main runner** — query signatures against drug databases to get connectivity scores |
+| `02_drugrep_get_prediction_indiv.R`, `02_drugrep_get_prediction_aggr.R` | R | **Main runners** — query signatures against drug databases to get connectivity scores |
 | `02_signatureSearch_connectivity_scores_functions.R` | R | CMap 1.0, LINCS, and correlation-based scoring functions |
 | `03_summarize_drugs_methodswise_functions.R` | R | Summarize and compare drug predictions across scoring methods |
 | `04_data_generation_RankAggregation_functions.R` | R | Prepare drug lists for rank aggregation |
