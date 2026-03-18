@@ -17,7 +17,7 @@ output_dir        <- ifelse(length(args) >= 5, args[5], "results/RNAseq/LINCS")
 # read in metadata file
 data_to_run <- read.delim(here(sig_metadata_path), sep = "\t")
 data_to_run <- data_to_run[which(data_to_run$signature == 1), ]
-print(paste0("Number of signtures to aggregate: ", dim(data_to_run)[1]))
+print(paste0("Number of signatures to aggregate: ", dim(data_to_run)[1]))
 
 # set up drug database
 if (drugdb_name == "CMAP") {
