@@ -1,4 +1,4 @@
-series_id	SIGNATURE_NAME	SIGNATURE_NAME_full	tissue_category	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples
+series_id	SIGNATURE_NAME	SIGNATURE_FULL_NAME	tissue_category	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples
 GSE84076	GSE84076_s10_d9	GSE84076_MTB_control_blood	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE84076.tsv	1	20	8	4	6
 GSE148171	GSE148171_s14_d11	GSE148171_MTB_control_blood_PBMC	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE148171.tsv	1	176	52	4	5
 GSE198557	GSE198557_s16_d13	GSE198557_MTB_control_blood_PBMC	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE198557.tsv	1	156	48	6	6
