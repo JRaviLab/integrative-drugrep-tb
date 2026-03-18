@@ -27,7 +27,7 @@ GSE223863	NA	GSE223863_MTB_control_2h_BALF_alveolar_macrophage	other	primary	dat
 GSE223863	NA	GSE223863_MTB_control_24h_BALF_alveolar_macrophage	other	primary	data/RNAseq_data_forDE/expression_matrices/GSE223863.tsv	0	0	0	5	4
 GSE223863	NA	GSE223863_MTB_control_72h_BALF_alveolar_macrophage	other	primary	data/RNAseq_data_forDE/expression_matrices/GSE223863.tsv	0	0	0	4	4
 GSE256184	GSE256184_s26_d22	GSE256184_MTB_control_0h_HEPG2	other	cell line	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	167	124	4	4
-GSE256184	GSE256184_s27_d22	GSE256184_MTB_4control_48h_HEPG2_HepG2	other	cell line	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	410	277	4	4
+GSE256184	GSE256184_s27_d22	GSE256184_MTB_control_48h_HEPG2	other	cell line	data/RNAseq_data_forDE/expression_matrices/GSE256184.tsv	1	410	277	4	4
 GSE64179	GSE64179_s18_d15	GSE64179_MTB_control_blood_dendritic_cell	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE64179.tsv	1	271	243	6	6
 GSE64182	GSE64182_s19_d16	GSE64182_MTB_control_blood_dendritic_cell	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE64182.tsv	1	235	88	3	3
 GSE121049	NA	GSE121049_MTB_control_blood_blood	circulating	primary	data/RNAseq_data_forDE/expression_matrices/GSE121049.tsv	0	0	0	3	3
