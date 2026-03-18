@@ -82,7 +82,11 @@ compute_membership_matrix <- function(metadata_path,
     print(paste0("iteration ", i))
 
     # set full variables
-    signature_name <- data_to_run$SIGNATURE_NAME[i]
+    if(grepl("DE_results", data_path)){
+      signature_name <- data_to_run$SIGNATURE_FULL_NAME[i]
+    }else{
+      signature_name <- data_to_run$SIGNATURE_NAME[i]
+    }
     signature_filename <- paste0(signature_name, "_", direction, ".tsv")
     print(paste0("reading in up and dn genes: ", signature_filename))
     signature_path <- paste0(data_path, "/", direction, "/", signature_filename)
@@ -205,8 +209,11 @@ compute_jaccard_matrix <- function(metadata_path,
   # loop to get gene sets for each dataset
   for (i in 1:(nrow(data_to_run))) {
     # get accession no. and file name for reading in gene signatures
-    signature_name <- data_to_run$SIGNATURE_NAME[i]
-
+    if(grepl("DE_results", data_path)){
+      signature_name <- data_to_run$SIGNATURE_FULL_NAME[i]
+    }else{
+      signature_name <- data_to_run$SIGNATURE_NAME[i]
+    }
     signature_filename <- paste0(signature_name, "_", direction, ".tsv")
 
     signature_path <- paste0(data_path, "/", direction, "/", signature_filename)
