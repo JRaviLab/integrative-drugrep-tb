@@ -1,13 +1,7 @@
 ```{r setup, include=FALSE}
-library(ComplexHeatmap)
-library(colorRamp2)
-library(clusterProfiler)
-library(DOSE)
+library(gt)
 library(readr)
-library(gridExtra)
-library(grid)
-library(tibble)
-library(tidyr)
+library(dplyr)
 library(here)
 ```
 
@@ -17,10 +11,6 @@ summary_df
 ```
 
 ```{r gt table}
-library(gt)
-library(readr)
-library(dplyr)
-
 summary_df$technology <- factor(
   summary_df$technology,
   levels = c("microarray", "RNAseq")
@@ -29,8 +19,7 @@ summary_df$technology <- factor(
 my_gt_table <- summary_df %>%
   arrange(technology) %>%      # now uses your custom order
   dplyr::select(
-    number, dataset_signature_ID, SIGNATURE_NAME, series_id, tb_status,
-    sample_origin, tissue_category, tissue_cell_type, technology,
+    number, dataset_signature_ID, SIGNATURE_NAME, tb_status, source, cell_name, sample_origin, tissue_category, technology,
     up_genes_num, dn_genes_num, control_samples, disease_samples
   ) %>%
   gt(groupname_col = "technology") %>%
@@ -41,12 +30,12 @@ my_gt_table <- summary_df %>%
   cols_label(
     number = "No.",
     dataset_signature_ID = "Dataset-signature ID",
-    SIGNATURE_NAME = "Signature",
-    series_id = "Study",
+    SIGNATURE_NAME = "Signature name",
     tb_status = "TB Status",
+    source = "Source",
+    cell_name = "Cell name",
     tissue_category = "Tissue origin",
     sample_origin = "Origin type",
-    tissue_cell_type = "Cell/tissue type",
     technology = "Technology",
     up_genes_num = "Upregulated genes",
     dn_genes_num = "Downregulated genes",
