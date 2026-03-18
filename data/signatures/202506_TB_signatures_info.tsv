@@ -29,3 +29,4 @@ GSE256184	GSE256184_s27_d22	GSE256184_MTB_control_0h_HEPG2_HepG2	NA	MTB	0h	other
 GSE165708	GSE165708_s28_d23	GSE165708_MTB_control_BAL_bronchoalveolar_lavage	NA	MTB	NA	other	BAL_bronchoalveolar_lavage	primary	data/RNAseq_data_forDE/expression_matrices/GSE165708.tsv	1.0	23	2	16	16.0	RNAseq	BALF	alveolar system	s28	28	d23	s28_d23
 NA	microarray_aggregated_signature	microarray_aggregated_signature	NA	NA	NA	NA	NA	NA	NA	NA	1	98	98	NA	NA	microarray	s29	29	d24	s29_d24	NA
 NA	RNAseq_aggregated_signature	RNAseq_aggregated_signature	NA	NA	NA	NA	NA	NA	NA	NA	1	98	98	NA	NA	RNAseq	s30	30	d24	s30_d24	NA
+ 

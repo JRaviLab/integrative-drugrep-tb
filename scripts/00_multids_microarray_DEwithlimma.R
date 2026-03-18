@@ -1,9 +1,31 @@
-# script to perform differential gene expression on processed microarray data matrices
-# using limma package: https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf
-# ref (design matrix): https://rpubs.com/ge600/limma
-# ref (microarray DE analysis on 2 groups): https://alexslemonade.github.io/refinebio-examples/02-microarray/differential-expression_microarray_01_2-groups.html
-# last modified: 11/16/25 - KS modified LT's edits
-# author: Kewalin Samart
+# 00_multids_microarray_DEwithlimma.R
+# ------------------------------------------------------------
+# Batch differential‑expression analysis for multiple microarray
+# datasets using limma.
+#
+# The per‑dataset *metadata* already contains a cleaned
+# classification column with exactly two possible values:
+#   1) healthy control without treatment
+#   2) disease without treatment
+#
+# The contrast within a study:
+#     disease_without_treatment  vs  healthy_control_without_treatment
+# with unique sample conditions
+#
+# --------------------------------------------------------------------
+# Usage:
+#   Rscript 00_multids_microarray_DEwithlimma.R <args_file.tsv> [padj_cutoff]
+#
+#   meta_class_file.tsv  : Tab‑separated file listing all datasets.
+#                    Mandatory columns:
+#                       series_id       (GEO study identifier)
+#                       geo_accession   (GEO sample identifier )
+#                       SIGNATURE_NAME  (name of signature containing unique sample conditions)
+#                       EXPRMAT_PATH    (path to raw‑count matrix TSV)
+#                       CLASSIFICATION  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
+#   padj_cutoff    : Adjusted‑p significance threshold (default 0.05)
+# --------------------------------------------------------------------
+
 
 suppressPackageStartupMessages({
   library(limma)
@@ -22,10 +44,10 @@ args <- commandArgs(TRUE)
 if (length(args) < 2) {
   stop("
   Usage:
-    Rscript microarray_DE_with_limma.R <metadata_file.tsv> <padj_cutoff>
+    Rscript 00_multids_microarray_DEwithlimma.R <metadata_file.tsv> <padj_cutoff>
 
   Example:
-    Rscript microarray_DE_with_limma.R data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
+    Rscript 00_multids_microarray_DEwithlimma.R data/microarray_data_forDE/clean_TB_sample_metadata_classification.tsv 0.05
   ")
 }
 

@@ -1,0 +1,78 @@
+type	GSE_ID	status	reason	classification_process
+RNA_SEQ	GSE100897	DROP	DOES NOT MEET DESEQ Criteria (not enough samples per time point)	na
+RNA_SEQ	GSE102272	DROP	DOES NOT MEET DESEQ Criteria (4 samples total)	na
+RNA_SEQ	GSE102677	DROP	Stimulated Samples, ambiguous study	na
+RNA_SEQ	GSE102678	DROP	Complimentary to GSE102677 - contains non RNA-seq samples	na
+RNA_SEQ	GSE103147	DROP	1650 samples (longitudinal TB study) - HOLD OUT DATA	na
+RNA_SEQ	GSE107646	DROP	Single Cell Study	na
+RNA_SEQ	GSE110564	DROP	DOES NOT MEET DESEQ Criteria (5 samples total in the Expression data)	na
+RNA_SEQ	GSE112482	PRESENT	Sufficient information in GEO and Archs4	Source consistent throughout study, even samples are infected with MTB (see archs4 metadata), odd samples are uninfected
+RNA_SEQ	GSE112483	PRESENT	Sufficient information in GEO and Archs4	similar annotation to previous study even samples diseased, odd are healthy. Tissue is from the lung (generalized)
+RNA_SEQ	GSE116405	DROP	Only contains one classification type	na
+RNA_SEQ	GSE116412	DROP	Complimentary to GSE116405 - contains non RNA-seq samples	na
+RNA_SEQ	GSE121049	PRESENT	Sufficient information in GEO and Archs4	alternating disease vs control samples, left out samples treated with CS-NC and CS-NC-tri
+RNA_SEQ	GSE131415	DROP	AMTB (TRPM8 antagonist) Study	na
+RNA_SEQ	GSE131590	DROP	Only contains one classification type	na
+RNA_SEQ	GSE132048	DROP	Single Cell Herpes Study (TB40/E-5)	na
+RNA_SEQ	GSE132283	PRESENT	Sufficient information in GEO and Archs4 (removed RP1-deleted Mtb mutant samples)	infected and uninfected alternates - see GEO metadata, tissue detailed in 'Source' in GEO, ARCHs4 verifies infected samples
+RNA_SEQ	GSE138398	DROP	DOES NOT MEET DESEQ Criteria (2 diseased samples)	selected samples that were treated with MTB for disease, samples treated with media control
+RNA_SEQ	GSE141656	PRESENT	Sufficient information in GEO and Archs4 (remove samples with β-glucan (BG))	 selected samples that were treated with MTB for disease, samples treated with media control
+RNA_SEQ	GSE143627	PRESENT	sample infection status known	see title for infection status and all samples untreated
+RNA_SEQ	GSE143731	PRESENT	Sufficient information in GEO and Archs4	selected only untreated samples infected labeled as treated with MTB, uninfected labeled as untreated
+RNA_SEQ	GSE148171	PRESENT	Sufficient information in GEO and Archs4	sample 58-62 tagged as active TB patients, sample 63-66 tagged as active TB patients, and PBMC in 'Sample_Title' in GEO
+RNA_SEQ	GSE148731	PRESENT	Partially sufficient information in GEO and Archs4	3 infected and 3 uninfected samples alternating (see ncbi.nlm.nih.gov), tissue is consistent throughout study; GSM4478022, GSM4478023, GSM4478024, GSM4478025, GSM4478026 were dropped due to insufficient control samples for GSE148731_MTB_4h_blood_CD14plus_monocyte_derived_macrophages_MF2 contrast.
+RNA_SEQ	GSE152218	DROP	Only contains one classification type	na
+RNA_SEQ	GSE158767	DROP	Only contains one classification type	na
+RNA_SEQ	GSE162725	DROP	Stimulated Samples, ambiguous study	na
+RNA_SEQ	GSE164287	PRESENT	Sufficient information in GEO and Archs4	4 uninfected donors, 4 infected donors. infection described as MTB strain H37Rv at MOI of 10 for 48 hours
+RNA_SEQ	GSE165708	PRESENT	Sufficient information in GEO and Archs4	alternating healthy samples that were either challenged or unchallenged with MTB 
+RNA_SEQ	GSE165709	DROP	Complimentary to GSE165708 - contains non RNA-seq samples	na
+RNA_SEQ	GSE174566	PRESENT	Sufficient information in GEO and Archs4	odd samples are healthy even ones are diseased (diseased samples confirmed by archs4) see GEO for consistent source
+RNA_SEQ	GSE180480	DROP	Colorectal Cancer Study (MTB cells names)	na
+RNA_SEQ	GSE183912	PRESENT	Sufficient information in GEO and Archs4	samples were either infected or uninfected with mtb
+RNA_SEQ	GSE190024	DROP	Only contains one classification type	na
+RNA_SEQ	GSE193777	PRESENT	Sufficent information in GEO and Archs4	classification confirmed by archs4 (active v HH), tissue confirmed by GEO
+RNA_SEQ	GSE194017	DROP	Only contains one classification type	na
+RNA_SEQ	GSE198557	PRESENT	Sufficent information in GEO and Archs4	'Source' detailed as PBMC, 'Sample_Title' details infection status TB vs Healthy
+RNA_SEQ	GSE199403	DROP	Stimulated Samples, ambiguous study	na
+RNA_SEQ	GSE207214	DROP	Stimulated Samples, ambiguous study	na
+RNA_SEQ	GSE211974	PRESENT	Sufficient information in GEO and Archs4 (excluding knockout and overexpression)	THP1 cells were either infected or uninfected with MTB
+RNA_SEQ	GSE211977	DROP	Complimentary to GSE211974 - contains non RNA-seq samples	na
+RNA_SEQ	GSE216503	DROP	DOES NOT MEET DESEQ Criteria (5 samples total)	na
+RNA_SEQ	GSE223863	PRESENT	Sufficent information in GEO and Archs4	classification supported by GEO 'Sample_Title', tissue consistent throughout study
+RNA_SEQ	GSE236154	DROP	"They are all likely latent TB if QFT positive"	na
+RNA_SEQ	GSE236156	PRESENT	Sufficient information in GEO and Archs4	alternating disease vs media treatment for each sample
+RNA_SEQ	GSE256184	PRESENT	Sufficient information in GEO and Archs4	GEO 'Sample_Title' for classification context - UNINFECTED vs INFECTED - TISSUE also documented in GEO, supported by archs4
+RNA_SEQ	GSE64179	PRESENT	Sufficient information in GEO and Archs4	alternating disease and healthy samples, diseased samples infected with MTB 
+RNA_SEQ	GSE64182	PRESENT	Sufficient information in GEO and Archs4	alternating disease and healthy samples, diseased samples infected with MTB 
+RNA_SEQ	GSE64183	DROP	Complimentary to GSE64182 AND GSE64179 - contains non RNA-seq samples	na
+RNA_SEQ	GSE84076	PRESENT	Sufficient information in GEO and Archs4	selected only active TB samples for disease and control Unvaccinated for healthy
+RNA_SEQ	GSE94907	DROP	DOES NOT MEET DESEQ Criteria (4 samples total)	NA
+MICRO_ARR	GSE19491	PRESENT	MERGED into GSE19491 (superset of other two), all BCG Negative	selected from non 
+MICRO_ARR	GSE16250	PRESENT	HC and Disease samples exposed to MTB H37Ra	classified based on exposure to H37Ra
+MICRO_ARR	GSE18794	PRESENT	Selected control samples and TMB treated samples	incubated in medium (control) vs incubated in 10μg/ml Cpn60.1 (mtb)
+MICRO_ARR	GSE39939	MERGED	MERGED into GSE39941 (superset)	NA
+MICRO_ARR	GSE39940	MERGED	MERGED into GSE39941 (superset)	NA
+MICRO_ARR	GSE39941	DROP	DROPPED HIVpos and HIVneg samples - KS DrugRep (Commit a6b0550)	NA
+MICRO_ARR	GSE42834	PRESENT	Samples disease state stated	characteristics_ch1 describes disease state, selected from 'control' vs 'TB'
+MICRO_ARR	GSE34151	PRESENT	Infection status stated in characteristics_ch1.2	samples alternating from 'non-infected' and 'MTB-infected'
+MICRO_ARR	GSE40553	DROP	Only contains one classification type	NA
+MICRO_ARR	GSE83456	PRESENT	disease state in characteristics_ch1.3	selected from samples with disease state: EPTB, PTB, HC (healthy control)
+MICRO_ARR	GSE102459	DROP	infection status unknown, all samples BCG Vaccinated	NA
+MICRO_ARR	GSE31348	DROP	Only contains one classification type	NA
+MICRO_ARR	GSE58411	DROP	All samples have TB	NA
+MICRO_ARR	GSE42830	PRESENT	Selected control vs TB samples	disease state for samples listed in characteristics_ch1.2
+MICRO_ARR	GSE67589	DROP	Stimulated Samples, ambiguous study	NA
+MICRO_ARR	GSE19439	MERGED	MERGED into GSE19491  (superset of other two), all BCG Negative	selected from non 
+MICRO_ARR	GSE29628	DROP	Only contains one classification type	NA
+MICRO_ARR	GSE19435	MERGED	MERGED into GSE19491 (superset of other two), all BCG Negative	selected from non 
+MICRO_ARR	GSE63548	PRESENT	4 healthy samples 22 disease	characteristics_ch1.1 contains disease status: 'healthy' vs 'Lymph Node Tuberculosis'
+MICRO_ARR	GSE11199	DROP	Stimulated samples, NO healthy control	NA
+MICRO_ARR	GSE139871	PRESENT	4 true healthy vs 20 TB samples	classification supported by 'title' and characteristics_ch1.2
+MICRO_ARR	GSE36238	DROP	Only contains one classification type	NA
+MICRO_ARR	GSE48237	DROP	stimulated samples, ambiguous study	NA
+MICRO_ARR	GSE57028	DROP	only two samples available in the expression matrix - KS DrugRep (Commit 319233d) 	NA
+MICRO_ARR	GSE119143	PRESENT	'title' details infection status	'TB patient' vs 'Healthy Individual' , supported by source_name_ch1 and characteristics_ch1
+MICRO_ARR	GSE70200	DROP	Infection status in relation to MTB unclear	NA
+MICRO_ARR	GSE26305	DROP	insufficient samples in one or both classifications	NA
+MICRO_ARR	GSE45386	DROP	insufficient samples in one or both classifications	NA

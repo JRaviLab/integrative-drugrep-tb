@@ -29,7 +29,7 @@ compute_membership_matrix <- function(metadata_path,
                                       save_result = TRUE) {
   #' @description Given a set of signatures and source name for background genes, this function compyte a membership matrix based on the set of background genes of choice
   #' @param metadata_path metadata of the input signatures
-  #' @param data_path path to signature data e.g., "../data/microarray_TBsignatures"
+  #' @param data_path path to signature data e.g., "data/signatures/microarray"
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
   #' @param bg_source name of the source for background genes to use: "LINCS", "KEGG", "GO", "input data"
   #' @param output_dir path to the output directory
@@ -169,9 +169,9 @@ compute_jaccard_matrix <- function(metadata_path,
                                    save_result = TRUE) {
   #' @description This function computes a jaccard similarity matrix of a given set of signatures
   #' @param data_to_run metadata of the input signatures
-  #' @param data_path e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
+  #' @param data_path e.g., "data/signatures/microarray"
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
-  #' @param output_dir e.g., "/data/scratch/samartk/drugrep_tb/data/uniformly_processed/microarray/signatures/up/"
+  #' @param output_dir e.g., "data/signatures/microarray/aggregated_signatures"
   #' @returns mat resulting jaccard similarity matrix
 
   # load libraries
@@ -307,7 +307,7 @@ aggregate_signatures <- function(gene_membership_matrix,
   #' @param jaccard_matrix jaccard similarity matrix returned by compute_jaccard_matrix(...)
   #' @param output_dir path to the output directory
   #' @param direction a string indicating a regulation direction: "up", "dn", "full" (up+dn)
-  #' @param threshold a threshold for selecting a set of significantly aggregated genes; set to 0.9 by default meaning the selected genes are present in at least 40% of the signatures
+  #' @param threshold a threshold for selecting a set of significantly aggregated genes; set to 0.9 by default meaning the selected genes are present in at least 90% of the signatures
   #' @returns selected_genes_df final aggregated signature: a list of genes and their aggregated gene scores
 
   # compute average jaccard scores across signatures
