@@ -1,4 +1,4 @@
-series_id	SIGNATURE_NAME	SIGNATURE_FULL_NAME	tissue_category	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples
+series_id	signature_name	signature_full_name	tissue_category	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples
 GSE16250	GSE16250_GPL570_s3_d2	GSE16250_GPL570_MTB_control_blood_PBMC	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3
 GSE18794	NA	GSE18794_GPL6244_MTB_Cpn60.1_control_2h_blood_monocytes	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE18794.tsv	0	0	0	6	3
 GSE19491	NA	GSE19491_GPL6947_PTB_control_blood_whole_blood	circulating	primary	data/microarray_data_forDE/expression_matrices/GSE19491.tsv	0	2	0	3	13
