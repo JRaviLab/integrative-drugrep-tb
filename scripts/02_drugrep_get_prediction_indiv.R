@@ -17,7 +17,7 @@ output_dir        <- ifelse(length(args) >= 5, args[5], "results/RNAseq/LINCS")
 # read in metadata file
 data_to_run <- read.delim(here(sig_metadata_path), sep = "\t")
 data_to_run <- data_to_run[which(data_to_run$signature == 1), ]
-print(paste0("Number of signtures to aggregate: ", dim(data_to_run)[1]))
+print(paste0("Number of signatures to aggregate: ", dim(data_to_run)[1]))
 
 # set up drug database
 if (drugdb_name == "CMAP") {
@@ -34,7 +34,7 @@ for (i in 1:nrow(data_to_run)) {
   print(paste0("iteration ", i))
   print(paste0("Method: ", score_method))
   # get info from the metadata file
-  file_name <- data_to_run$SIGNATURE_NAME[i]
+  file_name <- data_to_run$signature_name[i]
   print(paste0("Quantifying drug candidates for ", file_name))
 
   if (score_method %in% c("LINCS", "CMAP")) {

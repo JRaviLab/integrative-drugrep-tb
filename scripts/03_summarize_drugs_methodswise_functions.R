@@ -2,7 +2,7 @@
 
 get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   #' @description this function obtains all the drug results prioritized by a connectivity scores for a set of individual signatures
-  #' @param data_to_run a data detail table containing SIGNATURE_NAME column corresponding to signature file names to read in
+  #' @param data_to_run a data detail table containing signature_name column corresponding to signature file names to read in
   #' @param drug_res_path a path to the drug results (start with a first-level folder name inside the project repository)
   #' @param score_method a string indicating a method category: "CMAP", "LINCS", "Cor"
   #' @param score a string indicating a connectivity score name: "CMAP", "WCS", "NCS", "Tau", "Cor_pearson", "Cor_spearman"
@@ -10,7 +10,7 @@ get_drug_results <- function(data_to_run, drug_res_path, score_method, score) {
   require(stringr)
 
   for (i in 1:nrow(data_to_run)) {
-    filename <- data_to_run$SIGNATURE_NAME[i]
+    filename <- data_to_run$signature_name[i]
 
     # Use score_method as file prefix for LINCS scores (WCS, NCS, Tau), else use score
     file_prefix <- if (score_method == "LINCS") "LINCS" else score

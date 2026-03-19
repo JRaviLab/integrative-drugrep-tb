@@ -19,7 +19,7 @@ up_pathway_df = read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up
 pathways = up_pathway_df$Description
 
 # microarray upregulated signatures
-microarray_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "microarray" &                                                                               summary_df$signature_ID != "aggregated_microarray"]]
+microarray_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$signature_name[summary_df$technology == "microarray" &                                                                               summary_df$signature_ID != "aggregated_microarray"]]
 # get pathways (row names) that are enriched (cell != 0) in at least 90% of the signatures in the following matrix
 up_micro_mat <- as.matrix(up_pathway_df[, microarray_cols, drop = FALSE])
 row.names(up_micro_mat) = pathways
@@ -31,7 +31,7 @@ prop_nonzero <- rowMeans(up_micro_mat != 0, na.rm = TRUE)
 up_micro_dominant_pathways <- rownames(up_micro_mat)[prop_nonzero >= 0.9]
           
 # microarray upregulated signatures          
-rnaseq_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "RNAseq" & 
+rnaseq_cols <- colnames(up_pathway_df)[colnames(up_pathway_df) %in% summary_df$signature_name[summary_df$technology == "RNAseq" & 
                                                                                 summary_df$signature_ID != "aggregated_RNAseq"]]
 # get pathways (row names) that are enriched (cell != 0) in at least 90% of the signatures in the following matrix
 up_rnaseq_mat <- as.matrix(up_pathway_df[, rnaseq_cols, drop = FALSE])

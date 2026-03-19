@@ -1,10 +1,10 @@
-GSE_ID	GSM_ID	CLASSIFICATION	SAMPLE_TYPE	CELL	TISSUE_CELL TYPE	TB_TYPE	TIMEPOINT
-GSE16250	GSM409134	disease without treatment	PRIMARY_SAMPLE	PMBC	BLOOD	MTB
-GSE16250	GSM409135	disease without treatment	PRIMARY_SAMPLE	PMBC	BLOOD	MTB
-GSE16250	GSM409136	disease without treatment	PRIMARY_SAMPLE	PMBC	BLOOD	MTB
-GSE16250	GSM409137	healthy control without treatment	PRIMARY_SAMPLE	PMBC	BLOOD
-GSE16250	GSM409138	healthy control without treatment	PRIMARY_SAMPLE	PMBC	BLOOD
-GSE16250	GSM409139	healthy control without treatment	PRIMARY_SAMPLE	PMBC	BLOOD
+gse_id	gsm_id	classification	sample_type	cell	tissue_cell	tb_type	timepoint
+GSE16250	GSM409134	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
+GSE16250	GSM409135	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
+GSE16250	GSM409136	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
+GSE16250	GSM409137	healthy control without treatment	PRIMARY_SAMPLE	PBMC	BLOOD
+GSE16250	GSM409138	healthy control without treatment	PRIMARY_SAMPLE	PBMC	BLOOD
+GSE16250	GSM409139	healthy control without treatment	PRIMARY_SAMPLE	PBMC	BLOOD
 GSE18794	GSM466277	healthy control without treatment	PRIMARY_SAMPLE	MONOCYTES	BLOOD		2HR
 GSE18794	GSM466278	healthy control without treatment	PRIMARY_SAMPLE	MONOCYTES	BLOOD		2HR
 GSE18794	GSM466279	healthy control without treatment	PRIMARY_SAMPLE	MONOCYTES	BLOOD		2HR
@@ -223,265 +223,265 @@ GSE31348	GSM777470	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_1
 GSE31348	GSM777471	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_2
 GSE31348	GSM777472	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_4
 GSE31348	GSM777473	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_26
-GSE34151	GSM842924	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842925	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842926	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842927	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842928	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842929	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842930	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842931	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842932	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842933	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842934	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842935	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842936	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842937	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842938	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842939	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842940	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842941	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842942	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842943	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842944	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842945	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842946	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842947	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842948	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842949	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842950	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842951	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842952	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842953	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842954	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842955	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842956	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842957	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842958	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842959	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842960	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842961	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842962	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842963	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842964	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842965	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842966	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842967	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842968	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842969	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842970	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842971	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842972	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842973	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842974	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842975	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842976	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842977	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842978	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842979	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842980	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842981	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842982	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842983	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842984	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842985	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842986	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842987	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842988	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842989	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842990	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842991	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842992	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842993	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842994	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842995	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842996	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842997	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842998	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM842999	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843000	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843001	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843002	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843003	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843004	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843005	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843006	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843007	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843008	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843009	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843010	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843011	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843012	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843013	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843014	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843015	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843016	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843017	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843018	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843019	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843020	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843021	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843022	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843023	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843024	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843025	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843026	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843027	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843028	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843029	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843030	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843031	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843032	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843033	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843034	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843035	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843036	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843037	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843038	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843039	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843040	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843041	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843042	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843043	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843044	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843045	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843046	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843047	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843048	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843049	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843050	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843051	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843052	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843053	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843054	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843055	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843056	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843057	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843058	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843059	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843060	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843061	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843062	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843063	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843064	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843065	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843066	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843067	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843068	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843069	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843070	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843071	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843072	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843073	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843074	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843075	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843076	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843077	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843078	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843079	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843080	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843081	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843082	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843083	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843084	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843085	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843086	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843087	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843088	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843089	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843090	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843091	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843092	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843093	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843094	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843095	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843096	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843097	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843098	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843099	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843100	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843101	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843102	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843103	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843104	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843105	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843106	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843107	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843108	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843109	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843110	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843111	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843112	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843113	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843114	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843115	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843116	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843117	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843118	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843119	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843120	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843121	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843122	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843123	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843124	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843125	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843126	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843127	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843128	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843129	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843130	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843131	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843132	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843133	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843134	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843135	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843136	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843137	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843138	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843139	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843140	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843141	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843142	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843143	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843144	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843145	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843146	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843147	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843148	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843149	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843150	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843151	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843152	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843153	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843154	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843155	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843156	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843157	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843158	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843159	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843160	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843161	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843162	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843163	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843164	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843165	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843166	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843167	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843168	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843169	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843170	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843171	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843172	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843173	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843174	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843175	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843176	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843177	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843178	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843179	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843180	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843181	healthy control without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
-GSE34151	GSM843182	disease without treatment	PRIMARY_SAMPLE	DCs	BLOOD	MTB
+GSE34151	GSM842924	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842925	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842926	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842927	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842928	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842929	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842930	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842931	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842932	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842933	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842934	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842935	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842936	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842937	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842938	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842939	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842940	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842941	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842942	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842943	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842944	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842945	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842946	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842947	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842948	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842949	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842950	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842951	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842952	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842953	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842954	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842955	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842956	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842957	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842958	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842959	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842960	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842961	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842962	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842963	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842964	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842965	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842966	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842967	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842968	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842969	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842970	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842971	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842972	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842973	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842974	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842975	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842976	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842977	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842978	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842979	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842980	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842981	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842982	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842983	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842984	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842985	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842986	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842987	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842988	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842989	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842990	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842991	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842992	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842993	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842994	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842995	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842996	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842997	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842998	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM842999	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843000	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843001	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843002	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843003	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843004	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843005	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843006	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843007	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843008	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843009	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843010	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843011	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843012	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843013	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843014	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843015	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843016	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843017	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843018	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843019	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843020	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843021	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843022	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843023	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843024	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843025	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843026	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843027	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843028	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843029	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843030	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843031	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843032	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843033	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843034	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843035	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843036	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843037	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843038	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843039	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843040	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843041	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843042	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843043	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843044	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843045	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843046	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843047	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843048	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843049	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843050	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843051	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843052	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843053	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843054	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843055	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843056	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843057	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843058	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843059	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843060	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843061	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843062	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843063	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843064	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843065	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843066	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843067	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843068	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843069	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843070	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843071	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843072	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843073	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843074	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843075	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843076	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843077	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843078	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843079	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843080	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843081	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843082	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843083	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843084	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843085	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843086	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843087	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843088	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843089	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843090	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843091	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843092	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843093	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843094	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843095	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843096	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843097	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843098	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843099	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843100	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843101	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843102	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843103	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843104	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843105	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843106	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843107	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843108	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843109	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843110	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843111	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843112	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843113	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843114	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843115	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843116	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843117	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843118	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843119	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843120	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843121	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843122	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843123	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843124	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843125	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843126	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843127	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843128	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843129	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843130	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843131	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843132	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843133	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843134	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843135	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843136	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843137	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843138	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843139	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843140	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843141	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843142	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843143	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843144	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843145	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843146	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843147	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843148	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843149	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843150	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843151	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843152	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843153	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843154	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843155	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843156	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843157	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843158	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843159	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843160	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843161	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843162	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843163	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843164	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843165	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843166	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843167	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843168	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843169	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843170	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843171	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843172	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843173	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843174	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843175	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843176	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843177	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843178	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843179	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843180	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843181	healthy control without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
+GSE34151	GSM843182	disease without treatment	PRIMARY_SAMPLE	dendritic_cells	BLOOD	MTB
 GSE36238	GSM884938	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_0
 GSE36238	GSM884939	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_26
 GSE36238	GSM884940	disease without treatment	PRIMARY_SAMPLE		BLOOD	MTB	Week_0

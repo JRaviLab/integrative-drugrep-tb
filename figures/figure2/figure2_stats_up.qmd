@@ -36,14 +36,14 @@ summary_df
 ```{r microarray up pathway}
 marray_GO_mat_up = get_GO_testStat_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
 colnames(marray_GO_mat_up) <- gsub(".tsv", "", colnames(marray_GO_mat_up))
-cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME))
+cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$signature_name))
 marray_GO_mat_up <- marray_GO_mat_up[, cols_to_keep_marray]
 ```
 
 ```{r RNAseq up pathway}
 rnaseq_GO_mat_up = get_GO_testStat_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
 colnames(rnaseq_GO_mat_up) <- gsub(".tsv", "", colnames(rnaseq_GO_mat_up))
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$SIGNATURE_NAME))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$signature_name))
 rnaseq_GO_mat_up <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
 ```
 
@@ -95,7 +95,7 @@ go_mat_filtered <- go_mat %>%
 colnames(go_mat_filtered) <- gsub("_up$", "", colnames(go_mat_filtered))
 
 # keep only columns present in the summary
-common_sigs <- intersect(colnames(go_mat_filtered), summary_df$SIGNATURE_NAME)
+common_sigs <- intersect(colnames(go_mat_filtered), summary_df$signature_name)
 go_mat_filtered <- go_mat_filtered[, common_sigs]
 ```
 
@@ -163,14 +163,14 @@ Mann_Whitney_test <- function(values, group1, group2, group_vec) {
 
 ```{r circulating vs. other}
 summary_df_tissue = summary_df %>% filter(!is.na(signature), !is.na(tissue_category)) %>%
-            dplyr::select(SIGNATURE_NAME, tissue_category)
+            dplyr::select(signature_name, tissue_category)
 circulating_num = length(summary_df$tissue_category[summary_df_tissue$tissue_category == "circulating"])
 other_num = length(summary_df$tissue_category[summary_df_tissue$tissue_category == "other"])
 
 # build group vector
 group_vec_tissue <- summary_df_tissue %>%
-  filter(SIGNATURE_NAME %in% common_sigs) %>%
-  distinct(SIGNATURE_NAME, tissue_category) %>%
+  filter(signature_name %in% common_sigs) %>%
+  distinct(signature_name, tissue_category) %>%
   deframe()
 
 tissue_median_diffs_df <- apply(
@@ -268,11 +268,11 @@ gtsave(gt_top_bottom_tissue, here("figures/figure2/up_allvals_variance_circulati
 
 ```{r microarray vs. RNASeq}
 summary_df_tech = summary_df %>% filter(!is.na(signature), !is.na(technology)) %>%
-            dplyr::select(SIGNATURE_NAME, technology)
+            dplyr::select(signature_name, technology)
 # build group vector
 group_vec_technology <- summary_df_tech %>%
-  filter(SIGNATURE_NAME %in% common_sigs) %>%
-  distinct(SIGNATURE_NAME, technology) %>%
+  filter(signature_name %in% common_sigs) %>%
+  distinct(signature_name, technology) %>%
   deframe()
 
 technology_median_diffs_df <- apply(
@@ -367,11 +367,11 @@ gtsave(gt_top_bottom_tech, here("figures/figure2/up_allvals_variance_microarray_
 
 ```{r cell line vs. primary}
 summary_df_origin = summary_df %>% filter(!is.na(signature), !is.na(technology)) %>%
-            dplyr::select(SIGNATURE_NAME, sample_origin)
+            dplyr::select(signature_name, sample_origin)
 # build group vector
 group_vec_origin <- summary_df_origin %>%
-  filter(SIGNATURE_NAME %in% common_sigs) %>%
-  distinct(SIGNATURE_NAME, sample_origin) %>%
+  filter(signature_name %in% common_sigs) %>%
+  distinct(signature_name, sample_origin) %>%
   deframe()
 
 origin_median_diffs_df <- apply(
@@ -467,8 +467,8 @@ gtsave(gt_top_bottom_origin, here("figures/figure2/up_allvals_variance_primary_c
 #### NOT ENOUGH POWER FOR a MW test
 ```{r platform aggregated vs individual signatures}
 # Separate the group with signatures that partially match "aggregated"
-group_1_sigs <- summary_df %>% filter(grepl("aggregated", SIGNATURE_NAME)) %>% pull(SIGNATURE_NAME)
-group_2_sigs <- summary_df %>% filter(!grepl("aggregated", SIGNATURE_NAME)) %>% pull(SIGNATURE_NAME)
+group_1_sigs <- summary_df %>% filter(grepl("aggregated", signature_name)) %>% pull(signature_name)
+group_2_sigs <- summary_df %>% filter(!grepl("aggregated", signature_name)) %>% pull(signature_name)
 
 colnames(go_mat) <- gsub("up_", "", colnames(go_mat))
 
@@ -479,9 +479,9 @@ go_mat_filtered <- go_mat %>%
 
 # Build group vector
 group_vec_sig <- summary_df %>%
-  filter(SIGNATURE_NAME %in% colnames(go_mat_filtered)) %>%
-  distinct(SIGNATURE_NAME) %>%
-  mutate(group = ifelse(SIGNATURE_NAME %in% group_1_sigs, "aggregated signatures", "individual signatures")) %>%
+  filter(signature_name %in% colnames(go_mat_filtered)) %>%
+  distinct(signature_name) %>%
+  mutate(group = ifelse(signature_name %in% group_1_sigs, "aggregated signatures", "individual signatures")) %>%
   deframe()
 
 sig_median_diffs_df <- apply(

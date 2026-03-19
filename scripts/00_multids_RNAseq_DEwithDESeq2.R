@@ -20,9 +20,9 @@
 #                    Mandatory columns:
 #                       series_id       (GEO study identifier)
 #                       geo_accession   (GEO sample identifier )
-#                       SIGNATURE_NAME  (name of signature containing unique sample conditions)
-#                       EXPRMAT_PATH    (path to raw‑count matrix TSV)
-#                       CLASSIFICATION  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
+#                       signature_full_name  (name of signature containing unique sample conditions)
+#                       exprmat_path    (path to raw‑count matrix TSV)
+#                       classification  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
 #   padj_cutoff    : Adjusted‑p significance threshold (default 0.05)
 # --------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ padj_cutoff <- ifelse(length(argv) >= 2, as.numeric(argv[2]), 0.05)
 
 # Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
-study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
+study_df <- meta_class_df %>% dplyr::distinct(series_id, signature_full_name, exprmat_path)
 signature_boolean <- logical(nrow(study_df))
 up_genes_num <- integer(nrow(study_df))
 dn_genes_num <- integer(nrow(study_df))
@@ -83,17 +83,17 @@ for (i in seq_len(nrow(study_df))) {
   message("\n== Dataset ", i, " / ", nrow(study_df), " ==")
 
   tag <- study_df$series_id[i]
-  expr_path <- study_df$EXPRMAT_PATH[i]
+  expr_path <- study_df$exprmat_path[i]
 
   # get the current signature for this loop iteration
-  current_signature <- study_df$SIGNATURE_NAME[i]
+  current_signature <- study_df$signature_full_name[i]
   message("  Study: ", tag, " | Signature: ", current_signature)
 
 
   # Load inputs
   # filter metadata for *both* study AND signature
   metadata <- meta_class_df %>%
-    filter(series_id == tag, SIGNATURE_NAME == current_signature) %>% # filters samples by signature
+    filter(series_id == tag, signature_full_name == current_signature) %>% # filters samples by signature
     mutate(geo_accession = trimws(toupper(geo_accession))) # Standardize IDs
 
   expr_tbl <- read_tsv(here(expr_path), show_col_types = FALSE)
@@ -119,8 +119,8 @@ for (i in seq_len(nrow(study_df))) {
   # Build the condition factor
   metadata <- metadata %>%
     mutate(condition = dplyr::case_when(
-      CLASSIFICATION == "disease without treatment" ~ "disease",
-      CLASSIFICATION == "healthy control without treatment" ~ "control",
+      classification == "disease without treatment" ~ "disease",
+      classification == "healthy control without treatment" ~ "control",
       TRUE ~ NA_character_
     )) %>%
     filter(!is.na(condition)) %>%
@@ -227,7 +227,7 @@ for (i in seq_len(nrow(study_df))) {
   dir.create(here("data/signatures/RNAseq/dn"), recursive = TRUE, showWarnings = FALSE)
   dir.create(here("data/signatures/RNAseq/full"), recursive = TRUE, showWarnings = FALSE)
 
-  base_fname <- study_df$SIGNATURE_NAME[i]
+  base_fname <- study_df$signature_full_name[i]
   if (nrow(res_df) > 0) {
     readr::write_tsv(
       res_df %>%

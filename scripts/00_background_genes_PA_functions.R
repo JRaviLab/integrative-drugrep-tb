@@ -57,7 +57,11 @@ bg_from_data <- function(metadata_path, data_path, direction, extension = ".tsv"
   data_to_run <- data_to_run[data_to_run$signature == 1, ]
 
   for (i in seq_len(nrow(data_to_run))) {
-    file_name <- data_to_run$SIGNATURE_NAME[i]
+    if(grepl("DE_results", data_path)){
+      file_name <- data_to_run$signature_full_name[i]
+    }else{
+      file_name <- data_to_run$signature_name[i]
+    }
     file_path <- paste0(data_path, "/", direction, "/", file_name, extension)
     print(file_path)
 
@@ -123,7 +127,7 @@ get_combined_bg_genes <- function(metadata_path_rnaseq, data_path_rnaseq,
   #' @param direction: "up" or "dn"
   #' @param GO_genes_vector: vector of GO-annotated gene IDs
   #' @param combine: "intersect", "union"
-  
+
   extension_rnaseq <- paste0("_", direction, ".tsv")
   extension_microarray <- paste0("_", direction, ".tsv")
 

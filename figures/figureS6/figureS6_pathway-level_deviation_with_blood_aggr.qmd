@@ -13,14 +13,14 @@ process_file <- function(filepath, direction_label, summary_path) {
   summary_df <- read_tsv(here(summary_path))
   
   # define microarray and RNAseq individual signature columns
-  microarray_cols <- colnames(df)[colnames(df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "microarray" & 
+  microarray_cols <- colnames(df)[colnames(df) %in% summary_df$signature_name[summary_df$technology == "microarray" & 
                                                                                 summary_df$signature_ID != "aggregated_microarray"]]
-  microarray_blood_cols <- colnames(df)[colnames(df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "microarray" & 
+  microarray_blood_cols <- colnames(df)[colnames(df) %in% summary_df$signature_name[summary_df$technology == "microarray" & 
                                                                                 summary_df$signature_ID != "aggregated_microarray" &
                                                                                 summary_df$tissue_category == "circulating"]]
-  rnaseq_cols <- colnames(df)[colnames(df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "RNAseq" & 
+  rnaseq_cols <- colnames(df)[colnames(df) %in% summary_df$signature_name[summary_df$technology == "RNAseq" & 
                                                                                 summary_df$signature_ID != "aggregated_RNAseq"]]
-  rnaseq_blood_cols <- colnames(df)[colnames(df) %in% summary_df$SIGNATURE_NAME[summary_df$technology == "RNAseq" & 
+  rnaseq_blood_cols <- colnames(df)[colnames(df) %in% summary_df$signature_name[summary_df$technology == "RNAseq" & 
                                                                                 summary_df$signature_ID != "aggregated_RNAseq" &
                                                                                 summary_df$tissue_category == "circulating"]]
 

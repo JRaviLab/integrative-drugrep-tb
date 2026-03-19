@@ -24,13 +24,13 @@ sorted_annotation_table <- annotation_table %>%
 
 extra_rows <- tibble::tibble(
   series_id        = c(NA_character_, NA_character_),
-  SIGNATURE_NAME   = c("microarray_aggregated_signature",
+  signature_name   = c("microarray_aggregated_signature",
                        "RNAseq_aggregated_signature"),
   tb_status        = c(NA_character_, NA_character_),
   tissue_category  = c(NA_character_, NA_character_),
   tissue_cell_type = c(NA_character_, NA_character_),
   sample_origin    = c(NA_character_, NA_character_),
-  EXPRMAT_PATH     = c(NA_character_, NA_character_),
+  exprmat_path     = c(NA_character_, NA_character_),
   signature        = c(1, 1),
   up_genes_num     = c(98, 98),
   dn_genes_num     = c(98, 98),

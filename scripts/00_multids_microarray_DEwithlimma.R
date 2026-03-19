@@ -20,9 +20,9 @@
 #                    Mandatory columns:
 #                       series_id       (GEO study identifier)
 #                       geo_accession   (GEO sample identifier )
-#                       SIGNATURE_NAME  (name of signature containing unique sample conditions)
-#                       EXPRMAT_PATH    (path to raw‑count matrix TSV)
-#                       CLASSIFICATION  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
+#                       signature_full_name  (name of signature containing unique sample conditions)
+#                       exprmat_path    (path to raw‑count matrix TSV)
+#                       classification  (labels:  disease_without_treatment  or  healthy_control_without_treatment)
 #   padj_cutoff    : Adjusted‑p significance threshold (default 0.05)
 # --------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ platform_list <- list()
 
 # Read the batch table
 meta_class_df <- read_tsv(meta_class_file_path, show_col_types = FALSE)
-study_df <- meta_class_df %>% dplyr::distinct(series_id, SIGNATURE_NAME, EXPRMAT_PATH)
+study_df <- meta_class_df %>% dplyr::distinct(series_id, signature_full_name, exprmat_path)
 signature_boolean <- logical(nrow(study_df))
 up_genes_num <- integer(nrow(study_df))
 dn_genes_num <- integer(nrow(study_df))
@@ -76,12 +76,12 @@ for (i in 1:nrow(study_df)) {
   # define tag i.e., study id
   tag <- study_df$series_id[i]
 
-  # get the current SIGNATURE_NAME for this loop iteration
-  current_signature <- study_df$SIGNATURE_NAME[i]
+  # get the current signature_full_name for this loop iteration
+  current_signature <- study_df$signature_full_name[i]
   message("\n== Processing: ", tag, " | Signature: ", current_signature, " ==")
 
   # read in expression matrix
-  exprmat_path <- paste0(study_df$EXPRMAT_PATH[i])
+  exprmat_path <- paste0(study_df$exprmat_path[i])
   expr_mat <- read.delim(here(exprmat_path), sep = "\t")
 
   # standardise GSM IDs: trim whitespace and set to upper‑case
@@ -90,16 +90,16 @@ for (i in 1:nrow(study_df)) {
 
   # Filter for *both* series_id AND the current_signature
   class_df <- meta_class_df %>%
-    filter(series_id == tag, SIGNATURE_NAME == current_signature) %>% # filter for samples by signature
+    filter(series_id == tag, signature_full_name == current_signature) %>% # filter for samples by signature
     mutate(geo_accession = trimws(toupper(geo_accession))) # normalise case/space
 
   # here we need a column for condition so that we can focus on case and control in the next step
-  class_df <- dplyr::select(class_df, geo_accession, platform_id, CLASSIFICATION) # using the classification column here
+  class_df <- dplyr::select(class_df, geo_accession, platform_id, classification) # using the classification column here
 
   # Attach classification and ensure matched GSMs
   # Keep only GSMs present in *both* metadata and matrix
-  common_ids_infected <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment", ]$geo_accession, colnames(expr_mat))
-  common_ids_control <- intersect(class_df[trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment", ]$geo_accession, colnames(expr_mat))
+  common_ids_infected <- intersect(class_df[trimws(tolower(class_df$classification)) == "disease without treatment", ]$geo_accession, colnames(expr_mat))
+  common_ids_control <- intersect(class_df[trimws(tolower(class_df$classification)) == "healthy control without treatment", ]$geo_accession, colnames(expr_mat))
   # Record sample counts (even if insufficient)
   control_n[i] <- length(common_ids_control)
   disease_n[i] <- length(common_ids_infected)
@@ -117,8 +117,8 @@ for (i in 1:nrow(study_df)) {
 
   # Build the condition factor
   # get infected/control sample indices
-  inf_indices <- which(trimws(tolower(class_df$CLASSIFICATION)) == "disease without treatment")
-  control_indices <- which(trimws(tolower(class_df$CLASSIFICATION)) == "healthy control without treatment")
+  inf_indices <- which(trimws(tolower(class_df$classification)) == "disease without treatment")
+  control_indices <- which(trimws(tolower(class_df$classification)) == "healthy control without treatment")
 
   # Create classification labels
   conditions <- c()
@@ -126,7 +126,7 @@ for (i in 1:nrow(study_df)) {
   conditions[control_indices] <- "control"
 
   # Create a factor for group assignment
-  class_df$CLASSIFICATION <- factor(conditions, levels = c("infected", "control"))
+  class_df$classification <- factor(conditions, levels = c("infected", "control"))
 
   # Platform batch info
   platform_ids <- unique(class_df$platform_id)
@@ -138,16 +138,16 @@ for (i in 1:nrow(study_df)) {
     # Ensure platform_id is a factor
     class_df$platform_id <- factor(class_df$platform_id)
 
-    # Use CLASSIFICATION and platform_id to build design matrix
-    design_mat <- model.matrix(~ 0 + CLASSIFICATION + platform_id, data = class_df)
+    # Use classification and platform_id to build design matrix
+    design_mat <- model.matrix(~ 0 + classification + platform_id, data = class_df)
   } else {
-    design_mat <- model.matrix(~ 0 + CLASSIFICATION, data = class_df)
+    design_mat <- model.matrix(~ 0 + classification, data = class_df)
     print("no batch effect caused by GSE or platform")
   }
 
   # Rename classification columns only
-  group_levels <- levels(class_df$CLASSIFICATION)
-  group_cols <- grep("^CLASSIFICATION", colnames(design_mat))
+  group_levels <- levels(class_df$classification)
+  group_cols <- grep("^classification", colnames(design_mat))
   colnames(design_mat)[group_cols] <- tolower(group_levels)
 
   ## perform differential gene expression analysis
@@ -236,7 +236,7 @@ for (i in 1:nrow(study_df)) {
 
   # save the signatures
   today <- format(Sys.Date(), "%Y%m%d")
-  base_fname <- study_df$SIGNATURE_NAME[i]
+  base_fname <- study_df$signature_full_name[i]
 
   # Write outputs
   dir.create(here("data/DE_results/microarray"), recursive = TRUE, showWarnings = FALSE)

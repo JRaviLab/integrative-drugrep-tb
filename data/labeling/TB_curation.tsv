@@ -1,4 +1,4 @@
-type	GSE_ID	status	reason	classification_process
+type	gse_id	status	reason	classification_process
 RNA_SEQ	GSE100897	DROP	DOES NOT MEET DESEQ Criteria (not enough samples per time point)	na
 RNA_SEQ	GSE102272	DROP	DOES NOT MEET DESEQ Criteria (4 samples total)	na
 RNA_SEQ	GSE102677	DROP	Stimulated Samples, ambiguous study	na
@@ -31,18 +31,18 @@ RNA_SEQ	GSE174566	PRESENT	Sufficient information in GEO and Archs4	odd samples a
 RNA_SEQ	GSE180480	DROP	Colorectal Cancer Study (MTB cells names)	na
 RNA_SEQ	GSE183912	PRESENT	Sufficient information in GEO and Archs4	samples were either infected or uninfected with mtb
 RNA_SEQ	GSE190024	DROP	Only contains one classification type	na
-RNA_SEQ	GSE193777	PRESENT	Sufficent information in GEO and Archs4	classification confirmed by archs4 (active v HH), tissue confirmed by GEO
+RNA_SEQ	GSE193777	PRESENT	Sufficient information in GEO and Archs4	classification confirmed by archs4 (active v HH), tissue confirmed by GEO
 RNA_SEQ	GSE194017	DROP	Only contains one classification type	na
-RNA_SEQ	GSE198557	PRESENT	Sufficent information in GEO and Archs4	'Source' detailed as PBMC, 'Sample_Title' details infection status TB vs Healthy
+RNA_SEQ	GSE198557	PRESENT	Sufficient information in GEO and Archs4	'Source' detailed as PBMC, 'Sample_Title' details infection status TB vs Healthy
 RNA_SEQ	GSE199403	DROP	Stimulated Samples, ambiguous study	na
 RNA_SEQ	GSE207214	DROP	Stimulated Samples, ambiguous study	na
 RNA_SEQ	GSE211974	PRESENT	Sufficient information in GEO and Archs4 (excluding knockout and overexpression)	THP1 cells were either infected or uninfected with MTB
 RNA_SEQ	GSE211977	DROP	Complimentary to GSE211974 - contains non RNA-seq samples	na
 RNA_SEQ	GSE216503	DROP	DOES NOT MEET DESEQ Criteria (5 samples total)	na
-RNA_SEQ	GSE223863	PRESENT	Sufficent information in GEO and Archs4	classification supported by GEO 'Sample_Title', tissue consistent throughout study
+RNA_SEQ	GSE223863	PRESENT	Sufficient information in GEO and Archs4	classification supported by GEO 'Sample_Title', tissue consistent throughout study
 RNA_SEQ	GSE236154	DROP	"They are all likely latent TB if QFT positive"	na
 RNA_SEQ	GSE236156	PRESENT	Sufficient information in GEO and Archs4	alternating disease vs media treatment for each sample
-RNA_SEQ	GSE256184	PRESENT	Sufficient information in GEO and Archs4	GEO 'Sample_Title' for classification context - UNINFECTED vs INFECTED - TISSUE also documented in GEO, supported by archs4
+RNA_SEQ	GSE256184	PRESENT	Sufficient information in GEO and Archs4	GEO 'Sample_Title' for classification context - UNINFECTED vs INFECTED - tissue also documented in GEO, supported by archs4
 RNA_SEQ	GSE64179	PRESENT	Sufficient information in GEO and Archs4	alternating disease and healthy samples, diseased samples infected with MTB 
 RNA_SEQ	GSE64182	PRESENT	Sufficient information in GEO and Archs4	alternating disease and healthy samples, diseased samples infected with MTB 
 RNA_SEQ	GSE64183	DROP	Complimentary to GSE64182 AND GSE64179 - contains non RNA-seq samples	na
