@@ -93,13 +93,13 @@ pdf(here("figures/figureS6/FigureS6_origin_squared_deviation.pdf"),
 p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Technology)) +
   geom_violin(trim = FALSE, alpha = 0.4) +
   geom_boxplot(width = 0.1, outlier.shape = NA, alpha = 0.7) +
-  scale_y_log10(labels = scales::comma_format()) +
+  scale_y_log10(labels = scales::label_scientific(digits = 2)) +
   geom_text(
     data = up_labels,
     aes(
       x = Technology,
       y = 10^(log10_SquaredDeviation),
-      label = format(10^(log10_SquaredDeviation), scientific = TRUE, digits = 3)
+      label = sprintf("%.2e", 10^(log10_SquaredDeviation))
     ),
     hjust = -0.2,
     vjust = -1,
@@ -129,13 +129,13 @@ p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Tec
 p_down <- ggplot(down_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Technology)) +
   geom_violin(trim = FALSE, alpha = 0.4) +
   geom_boxplot(width = 0.1, outlier.shape = NA, alpha = 0.7) +
-  scale_y_log10(labels = scales::comma_format()) +
+  scale_y_log10(labels = scales::label_scientific(digits = 2)) +
   geom_text(
     data = down_labels,
     aes(
       x = Technology,
       y = 10^(log10_SquaredDeviation),
-      label = format(10^(log10_SquaredDeviation), scientific = TRUE, digits = 3)
+      label = sprintf("%.2e", 10^(log10_SquaredDeviation))
     ),
     hjust = -0.2,
     vjust = -1,
