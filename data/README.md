@@ -20,7 +20,7 @@ The summary of disease signatures used in this study is provided in [**Table S1*
 
 ### Microarray signatures
 
-| No. | ID | Signature Name | TB Status | Tissue Origin | Cell Type | Origin Type | Dataset Type | Upregulated Genes | Downregulated Genes | Control Samples | Disease Samples |
+| No. | ID | Signature name | TB status | Tissue origin | Cell type | Origin type | Dataset type | Upregulated genes | Downregulated genes | Control samples | Disease samples |
 |-----|----|---------------|----------|--------------|----------|-------------|--------------|------------------|--------------------|----------------|----------------|
 | 1 | s1_d1 | GSE83456_GPL10558_s1_d1 | PTB | Blood | Whole blood | Primary | Circulating | 54 | 91 | 31 | 45 |
 | 2 | s2_d1 | GSE83456_GPL10558_s2_d1 | EPTB | Blood | Whole blood | Primary | Circulating | 44 | 38 | 30 | 47 |
@@ -34,7 +34,7 @@ The summary of disease signatures used in this study is provided in [**Table S1*
 
 ### RNA-seq signatures
 
-| No. | ID | Signature Name | TB Status | Tissue Origin | Cell Type | Origin Type | Dataset Type | Upregulated Genes | Downregulated Genes | Control Samples | Disease Samples |
+| No. | ID | Signature name | TB status | Tissue origin | Cell type | Origin type | Dataset type | Upregulated genes | Downregulated genes | Control samples | Disease samples |
 |-----|----|---------------|----------|--------------|----------|-------------|--------------|------------------|--------------------|----------------|----------------|
 | 7 | s7_d6 | GSE211974_s7_d6 | MTB | THP1 | Macrophage | Cell line | Circulating | 67 | 46 | 3 | 3 |
 | 8 | s8_d7 | GSE141656_s8_d7 | MTB | Blood | Whole blood | Primary | Circulating | 267 | 157 | 3 | 3 |
