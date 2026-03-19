@@ -306,5 +306,5 @@ mw_gt_table <- mw_table %>%
     everything() ~ px(150)
   )
 # Save the table as HTML
-gtsave(mw_gt_table, here("figures/table3/tableS5_signature_summary_table.html"))
+gtsave(mw_gt_table, here("figures/figure3/tableS5_stats_dominant_pathways.html"))
 ```
