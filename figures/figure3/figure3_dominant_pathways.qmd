@@ -5,6 +5,9 @@ library(clusterProfiler)
 library(GOSemSim)
 library(tidyverse)
 library(here)
+library(dplyr)
+library(rstatix)
+library(gt)
 ```
 
 ```{r}
@@ -209,7 +212,7 @@ sq_dev_df <- sq_dev_df %>%
   mutate(
     direction = recode(
       direction,
-      "Downregulated" = "Down-regulated"
+      "Downregulated" = "Downregulated"
     ),
     direction = factor(
       direction,
@@ -247,4 +250,61 @@ ggplot(
   )
 
 dev.off()
+```
+```{r table S5}
+mw_table <- sq_dev_df %>%
+  group_by(direction, technology) %>%
+  wilcox_test(deviation_score ~ enrichment) %>%
+  adjust_pvalue(method = "BH") %>%   
+  add_significance("p.adj") %>%
+  select(direction, technology, 
+         group1, group2, 
+         n1, n2, 
+         statistic, p, p.adj, p.adj.signif)
+
+mw_table
+```
+
+```{r}
+mw_table$technology <- factor(
+  mw_table$technology,
+  levels = c("Microarray", "RNAseq")
+)
+
+
+mw_gt_table <- mw_table %>%
+  arrange(technology) %>%
+  mutate(
+    comparison = paste0(group1, " vs ", group2),
+    p = signif(p, 3),
+    p.adj = signif(p.adj, 3)
+  ) %>%
+  select(
+    Direction = direction,
+    Technology = technology,
+    `Dominant pathways (≥90% enriched)` = n1,
+    `Non-dominant pathways (<90% enriched)` = n2,
+    Statistic = statistic,
+    `p-value` = p,
+    `Adjusted p-value` = p.adj,
+    #Significance = p.adj.signif
+  ) %>%
+  gt(groupname_col = "Technology") %>%
+  tab_header(
+    title = "Dominant pathways exhibit statistically lower deviation across technologies",
+    subtitle = "Mann-Whitney tests comparing ≥90% vs. <90% enriched pathways"
+  ) %>%
+  cols_align(
+    align = "center",
+    everything()
+  ) %>%
+  fmt_scientific(
+    columns = c(Statistic,`p-value`, `Adjusted p-value`),
+    decimals = 2
+  ) %>%
+  cols_width(
+    everything() ~ px(150)
+  )
+# Save the table as HTML
+gtsave(mw_gt_table, here("figures/table3/tableS5_signature_summary_table.html"))
 ```
