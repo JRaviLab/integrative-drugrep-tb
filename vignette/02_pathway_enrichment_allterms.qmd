@@ -248,7 +248,7 @@ for (technology in technologies) {
       print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
       itr <- itr + 1
       
-      signature_name = data_to_read$SIGNATURE_NAME[i]
+      signature_name = data_to_read$signature_name[i]
       file = paste0(signature_name,"_",direction,".tsv")
       genes_df <- read_tsv(file.path(dirname_read, file))
       # only use differentially expressed genes with adjusted p-val < 0.05

@@ -58,9 +58,9 @@ bg_from_data <- function(metadata_path, data_path, direction, extension = ".tsv"
 
   for (i in seq_len(nrow(data_to_run))) {
     if(grepl("DE_results", data_path)){
-      file_name <- data_to_run$SIGNATURE_FULL_NAME[i]
+      file_name <- data_to_run$signature_full_name[i]
     }else{
-      file_name <- data_to_run$SIGNATURE_NAME[i]
+      file_name <- data_to_run$signature_name[i]
     }
     file_path <- paste0(data_path, "/", direction, "/", file_name, extension)
     print(file_path)

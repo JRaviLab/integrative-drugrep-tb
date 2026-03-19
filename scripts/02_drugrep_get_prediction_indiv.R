@@ -34,7 +34,7 @@ for (i in 1:nrow(data_to_run)) {
   print(paste0("iteration ", i))
   print(paste0("Method: ", score_method))
   # get info from the metadata file
-  file_name <- data_to_run$SIGNATURE_NAME[i]
+  file_name <- data_to_run$signature_name[i]
   print(paste0("Quantifying drug candidates for ", file_name))
 
   if (score_method %in% c("LINCS", "CMAP")) {

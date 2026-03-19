@@ -24,7 +24,7 @@ sorted_annotation_table <- annotation_table %>%
 
 extra_rows <- tibble::tibble(
   series_id        = c(NA_character_, NA_character_),
-  SIGNATURE_NAME   = c("microarray_aggregated_signature",
+  signature_name   = c("microarray_aggregated_signature",
                        "RNAseq_aggregated_signature"),
   tb_status        = c(NA_character_, NA_character_),
   tissue_category  = c(NA_character_, NA_character_),

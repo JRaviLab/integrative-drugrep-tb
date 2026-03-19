@@ -16,7 +16,7 @@ library(networkD3)
 
 df_unique <- all_signatures_info %>%
   mutate(
-    signature = SIGNATURE_NAME,
+    signature = signature_name,
     experimental_platform = experimental_platform,
     time_point = time_point,
     tissue_cell_type = tissue_cell_type,

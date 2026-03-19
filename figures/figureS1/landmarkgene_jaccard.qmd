@@ -9,24 +9,24 @@ library(ComplexHeatmap)
 summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 
 # read in up TB signatures
-microarray_up_signatures <- summary_df$SIGNATURE_NAME[
+microarray_up_signatures <- summary_df$signature_name[
   summary_df$technology == "microarray" & 
-  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+  !grepl("aggregated", summary_df$signature_name)
 ]
 
-microarray_dn_signatures <- summary_df$SIGNATURE_NAME[
+microarray_dn_signatures <- summary_df$signature_name[
   summary_df$technology == "microarray" & 
-  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+  !grepl("aggregated", summary_df$signature_name)
 ]
   
-rnaseq_up_signatures <- summary_df$SIGNATURE_NAME[
+rnaseq_up_signatures <- summary_df$signature_name[
   summary_df$technology == "RNAseq" & 
-  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+  !grepl("aggregated", summary_df$signature_name)
 ]
 
-rnaseq_dn_signatures <- summary_df$SIGNATURE_NAME[
+rnaseq_dn_signatures <- summary_df$signature_name[
   summary_df$technology == "RNAseq" & 
-  !grepl("aggregated", summary_df$SIGNATURE_NAME)
+  !grepl("aggregated", summary_df$signature_name)
 ]
 
 # read in landmark genes
@@ -175,7 +175,7 @@ tb_colors <- c(
 )
 
 # Prepare metadata/matrix
-meta_df <- summary_df[!grepl("aggregated", summary_df$SIGNATURE_NAME),] %>%
+meta_df <- summary_df[!grepl("aggregated", summary_df$signature_name),] %>%
   mutate(
     tissue_short = recode(tissue_cell_type, !!!tissue_map)
   )
@@ -252,10 +252,10 @@ library(circlize)
 annotation_table <- meta_df
 viz_mat_up <- up_gene_jaccard_matrix
 
-common_ids <- intersect(rownames(viz_mat_up), annotation_table[["SIGNATURE_NAME"]])
-annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+common_ids <- intersect(rownames(viz_mat_up), annotation_table[["signature_name"]])
+annotation_subset <- annotation_table[annotation_table[["signature_name"]] %in% common_ids, ]
 annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
-sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+sorted_ids <- annotation_sorted[["signature_name"]]
 viz_mat_up <- viz_mat_up[sorted_ids, sorted_ids]
 
 colnames(viz_mat_up) <- annotation_sorted$dataset_signature_ID
@@ -312,10 +312,10 @@ library(circlize)
 annotation_table <- meta_df
 viz_mat_dn <- dn_gene_jaccard_matrix
 
-common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["SIGNATURE_NAME"]])
-annotation_subset <- annotation_table[annotation_table[["SIGNATURE_NAME"]] %in% common_ids, ]
+common_ids <- intersect(rownames(viz_mat_dn), annotation_table[["signature_name"]])
+annotation_subset <- annotation_table[annotation_table[["signature_name"]] %in% common_ids, ]
 annotation_sorted <- annotation_subset[order(annotation_subset[["number"]]), ]
-sorted_ids <- annotation_sorted[["SIGNATURE_NAME"]]
+sorted_ids <- annotation_sorted[["signature_name"]]
 viz_mat_dn <- viz_mat_dn[sorted_ids, sorted_ids]
 
 colnames(viz_mat_dn) <- annotation_sorted$dataset_signature_ID
