@@ -75,7 +75,7 @@ Arguments:
   Mandatory columns:
   - `series_id`       (GEO study identifier)
   - `geo_accession`   (GEO sample identifier )
-  - `SIGNATURE_NAME`  (name of signature containing unique sample conditions)
+  - `SIGNATURE_FULL_NAME`  (name of signature containing unique sample conditions)
   - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
   - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
@@ -92,7 +92,7 @@ Arguments:
   Mandatory columns:
   - `series_id`       (GEO study identifier)
   - `geo_accession`   (GEO sample identifier )
-  - `SIGNATURE_NAME`  (name of signature containing unique sample conditions)
+  - `SIGNATURE_FULL_NAME`  (name of signature containing unique sample conditions)
   - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
   - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
