@@ -76,8 +76,8 @@ Arguments:
   - `series_id`       (GEO study identifier)
   - `geo_accession`   (GEO sample identifier )
   - `signature_full_name`  (name of signature containing unique sample conditions)
-  - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
-  - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
+  - `exprmat_path`    (path to raw‑count matrix TSV)
+  - `classification`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
 #### 1.2 RNAseq individual disease signatures
@@ -93,8 +93,8 @@ Arguments:
   - `series_id`       (GEO study identifier)
   - `geo_accession`   (GEO sample identifier )
   - `signature_full_name`  (name of signature containing unique sample conditions)
-  - `EXPRMAT_PATH`    (path to raw‑count matrix TSV)
-  - `CLASSIFICATION`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
+  - `exprmat_path`    (path to raw‑count matrix TSV)
+  - `classification`  (labels:  `disease_without_treatment`  or  `healthy_control_without_treatment`)
 - `padj_cutoff`    : Adjusted‑p significance threshold (default 0.05)
 
 #### 1.3 Compute aggregated signatures

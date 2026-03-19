@@ -1,4 +1,4 @@
-series_id	signature_name	tb_status	tissue_category	tissue_cell_type	sample_origin	EXPRMAT_PATH	signature	up_genes_num	dn_genes_num	control_samples	disease_samples	technology	signature_ID	number	dataset_ID	dataset_signature_ID
+series_id	signature_name	tb_status	tissue_category	tissue_cell_type	sample_origin	exprmat_path	signature	up_genes_num	dn_genes_num	control_samples	disease_samples	technology	signature_ID	number	dataset_ID	dataset_signature_ID
 GSE83456	GSE83456_GPL10558_s2_d1	EPTB	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	44	38	30	47	microarray	s1	1	d1	s1_d1
 GSE83456	GSE83456_GPL10558_s1_d1	PTB	circulating	blood	primary	data/microarray_data_forDE/expression_matrices/GSE83456.tsv	1	54	91	31	45	microarray	s2	2	d1	s2_d1
 GSE16250	GSE16250_GPL570_s3_d2	MTB	circulating	blood_PBMC	primary	data/microarray_data_forDE/expression_matrices/GSE16250.tsv	1	56	13	3	3	microarray	s3	3	d2	s3_d2

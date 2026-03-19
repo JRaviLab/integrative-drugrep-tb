@@ -1,4 +1,4 @@
-type	GSE_ID	status	reason	classification_process
+type	gse_id	status	reason	classification_process
 RNA_SEQ	GSE100897	DROP	DOES NOT MEET DESEQ Criteria (not enough samples per time point)	na
 RNA_SEQ	GSE102272	DROP	DOES NOT MEET DESEQ Criteria (4 samples total)	na
 RNA_SEQ	GSE102677	DROP	Stimulated Samples, ambiguous study	na

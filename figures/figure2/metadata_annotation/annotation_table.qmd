@@ -30,7 +30,7 @@ extra_rows <- tibble::tibble(
   tissue_category  = c(NA_character_, NA_character_),
   tissue_cell_type = c(NA_character_, NA_character_),
   sample_origin    = c(NA_character_, NA_character_),
-  EXPRMAT_PATH     = c(NA_character_, NA_character_),
+  exprmat_path     = c(NA_character_, NA_character_),
   signature        = c(1, 1),
   up_genes_num     = c(98, 98),
   dn_genes_num     = c(98, 98),

@@ -1,4 +1,4 @@
-GSE_ID	GSM_ID	CLASSIFICATION	SAMPLE_TYPE	CELL	TISSUE_CELL TYPE	TB_TYPE	TIMEPOINT
+gse_id	gsm_id	classification	sample_type	cell	tissue_cell TYPE	tb_type	timepoint
 GSE16250	GSM409134	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
 GSE16250	GSM409135	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
 GSE16250	GSM409136	disease without treatment	PRIMARY_SAMPLE	PBMC	BLOOD	MTB
