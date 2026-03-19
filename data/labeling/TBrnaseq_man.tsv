@@ -1,4 +1,4 @@
-gse_id	gsm_id	classification	sample_type	cell_SOURCE	tissue_SOURCE	CONTEXT
+gse_id	gsm_id	classification	sample_type	cell_source	tissue_source	context
 GSE84076	GSM2226808	Healthy Control without treatment	blood_sample	whole blood	WHOLE_BLOOD
 GSE84076	GSM2226809	Disease without treatment	blood_sample	whole blood	WHOLE_BLOOD
 GSE84076	GSM2226817	Disease without treatment	blood_sample	whole blood	WHOLE_BLOOD
