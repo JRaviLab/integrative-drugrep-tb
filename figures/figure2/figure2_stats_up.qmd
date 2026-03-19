@@ -253,7 +253,7 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   gt() %>%
   tab_header(title = "Top upregulated GO terms enriched in circulating or other") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     Enriched_in = "Enriched in",
     median_diff = "Median difference (circulating - other)",
     p_value = "Raw p-value",
@@ -324,7 +324,7 @@ gt_top10_positive_tech <- top10_positive_tech %>%
   gt() %>%
   tab_header(title = "Top 10 GO terms enriched in microarray") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (microarray - RNAseq)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -335,7 +335,7 @@ gt_top10_negative_tech <- top10_negative_tech %>%
   gt() %>%
   tab_header(title = "Top 10 GO terms enriched in RNAseq") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (microarray - RNAseq)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -353,8 +353,8 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   gt() %>%
   tab_header(title = "Top upregulated GO terms enriched in microarray or RNAseq") %>%
   cols_label(
-    GO_term = "GO Term",
-    Enriched_in = "Enriched In",
+    GO_term = "GO term",
+    Enriched_in = "Enriched in",
     median_diff = "Median difference (microarray - RNAseq)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -423,7 +423,7 @@ gt_top10_positive_origin <- top10_positive_origin %>%
   gt() %>%
   tab_header(title = "Top 10 GO terms enriched in primary") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -434,7 +434,7 @@ gt_top10_negative_origin <- top10_negative_origin %>%
   gt() %>%
   tab_header(title = "Top 10 GO terms enriched in cell line") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -452,8 +452,8 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   gt() %>%
   tab_header(title = "Top upregulated GO terms enriched in primary or cell line signatures") %>%
   cols_label(
-    GO_term = "GO Term",
-    Enriched_in = "Enriched In",
+    GO_term = "GO term",
+    Enriched_in = "Enriched in",
     median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -533,7 +533,7 @@ gt_top10_positive_sig <- top10_positive_sig %>%
   gt() %>%
   tab_header(title = "Top 10 upregulated GO terms enriched in individual signatures") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (individual - aggregated)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -544,7 +544,7 @@ gt_top10_negative_sig <- top10_negative_sig %>%
   gt() %>%
   tab_header(title = "Top 10 GO terms enriched in aggregated signatures") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     median_diff = "Median difference (individual - aggregated)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -562,7 +562,7 @@ gt_top_bottom_sig <- top_combined_df_sig %>%
   gt() %>%
   tab_header(title = "Top upregulated GO terms enriched in individual or aggregated signatures") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     Enriched_in = "Enriched in",
     median_diff = "Median difference (individual - aggregated)",
     p_value = "Raw p-value",

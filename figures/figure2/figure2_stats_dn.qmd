@@ -120,7 +120,6 @@ calculate_median_diff <- function(values, group1, group2, group_vec) {
 }
 
 # Mann-Whitney test
-# Mann-Whitney test
 Mann_Whitney_test <- function(values, group1, group2, group_vec) {
   group_1_vals <- as.numeric(values[names(group_vec[group_vec == group1])])
   group_2_vals <- as.numeric(values[names(group_vec[group_vec == group2])])
@@ -207,7 +206,7 @@ tissue_MW_results$norm_auroc <- (2 * tissue_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(tissue_MW_results, here("figures/figure2/figure2c/dn_allvals_circulating_other_MW.tsv"))
+write_tsv(tissue_MW_results, here("figures/figure2/dn_allvals_circulating_other_MW.tsv"))
 ```
 
 ```{r differentiating terms in gt format}
@@ -252,7 +251,7 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   gt() %>%
   tab_header(title = "Top downregulated GO terms more enriched in circulating or other") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     Enriched_in = "Enriched in",
     median_diff = "Median difference (circulating - other)",
     p_value = "Raw p-value",
@@ -261,7 +260,7 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tissue, here("figures/figure2/figure2c/dn_allvals_variance_circulating_other_signiGO_terms.html"))
+gtsave(gt_top_bottom_tissue, here("figures/figure2/dn_allvals_variance_circulating_other_signiGO_terms.html"))
 
 ```
 
@@ -309,7 +308,7 @@ technology_MW_results$norm_auroc <- (2 * technology_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(technology_MW_results, here("figures/figure2/figure2c/dn_allvals_microarray_rnaseq_MW.tsv"))
+write_tsv(technology_MW_results, here("figures/figure2/dn_allvals_microarray_rnaseq_MW.tsv"))
 ```
 
 ```{r}
@@ -352,7 +351,7 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   gt() %>%
   tab_header(title = "Top downregulated GO terms more enriched in microarray or RNAseq") %>%
   cols_label(
-    GO_term = "GO Term",
+    GO_term = "GO term",
     Enriched_in = "Enriched In",
     median_diff = "Median difference (microarray - RNAseq)",
     p_value = "Raw p-value",
@@ -361,7 +360,7 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tech, here("figures/figure2/figure2c/dn_allvals_variance_microarray_rnaseq_signiGO_terms.html"))
+gtsave(gt_top_bottom_tech, here("figures/figure2/dn_allvals_variance_microarray_rnaseq_signiGO_terms.html"))
 ```
 
 ```{r cell line vs. primary}
@@ -408,7 +407,7 @@ origin_MW_results$norm_auroc <- (2 * origin_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(origin_MW_results, here("figures/figure2/figure2c/dn_allvals_primary_cellline_MW.tsv"))
+write_tsv(origin_MW_results, here("figures/figure2/dn_allvals_primary_cellline_MW.tsv"))
 ```
 
 ```{r}
@@ -451,8 +450,8 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   gt() %>%
   tab_header(title = "Top downregulated GO terms more enriched in primary or cell line signatures") %>%
   cols_label(
-    GO_term = "GO Term",
-    Enriched_in = "Enriched In",
+    GO_term = "GO term",
+    Enriched_in = "Enriched in",
     median_diff = "Median difference (primary - cell line)",
     p_value = "Raw p-value",
     p_adj = "Adjusted p-value"
@@ -460,7 +459,7 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_origin, here("figures/figure2/figure2c/dn_allvals_variance_primary_cellline_signiGO_terms.html"))
+gtsave(gt_top_bottom_origin, here("figures/figure2/dn_allvals_variance_primary_cellline_signiGO_terms.html"))
 ```
 
 #### NOT ENOUGH POWER FOR a MW test
