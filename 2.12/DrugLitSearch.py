@@ -17,8 +17,8 @@ Entrez.api_key = configparser.get('DEFAULT', 'api_key', fallback=None)
 MAX_RESULTS_PER_DRUG = 1000
 
 # Base query terms for PubMed
-DISEASE_TERMS = "Mycobacterium tuberculosis"
-HDT_TERMS = '"host-directed therapy" OR "HDT"'
+DISEASE_TERMS = '"Mycobacterium tuberculosis" OR "tuberculosis" OR "TB"'
+HDT_TERMS = '"host-directed therapy" OR "HDT" OR "adjunctive therapy" OR "adjunctive therapeutic" OR "host-targeting therapies"'
 
 # lit search class
 class LiteratureSearcher:
@@ -187,9 +187,9 @@ def format_evidence_for_tsv(summaries):
 if __name__ == "__main__":
     # hard coded for now
     try:
-        drug_pred_results = pd.read_csv("../integrative-drugrep-tb/launch.csv")
+        drug_pred_results = pd.read_csv("drug_list.csv")
     
-        drug_names = drug_pred_results['pert_iname'].unique()
+        drug_names = drug_pred_results['drug_name'].unique()
 
     except FileNotFoundError:
         print("Error: Input file not found. Please check the path.")
@@ -217,10 +217,10 @@ if __name__ == "__main__":
     df_for_tsv = final_df.copy()
     df_for_tsv['literature_evidence'] = df_for_tsv['literature_evidence'].apply(format_evidence_for_tsv)
     
-    output_path_tsv = "results/drug_predictions_with_literature1.tsv"
+    output_path_tsv = "results/drug_predictions_with_literature.tsv"
     df_for_tsv.to_csv(output_path_tsv, sep="\t", index=False)
     print(f"\n✅ Literature search complete. Human-readable output saved to: {output_path_tsv}")
 
-    output_path_json = "results/drug_predictions_with_literature1.json"
+    output_path_json = "results/drug_predictions_with_literature.json"
     final_df.to_json(output_path_json, orient="records", indent=4)
     print(f"✅ Structured JSON output saved to: {output_path_json}")
