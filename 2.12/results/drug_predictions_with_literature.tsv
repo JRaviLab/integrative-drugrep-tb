@@ -1200,7 +1200,7 @@ treprostinil	Direct (TB)	6	['40769405', '40115838', '35593434', '33251412', '213
     Authors: Kurzyna M, Zylkowska J, Fijalkowska A, Florczyk M, Wieteska M, Kacprzak A, Burakowski J, Szturmowicz M, Wawrzynska L, Torbicki A
     PMID: 19006024 | DOI: "
 nabumetone	No Results	0	[]	No evidence found
-verapamil	Direct (HDT)	7	['37983978', '37577511', '30602521', '28933298', '27468130', '26226503', '23805786']	"[1] A Dose-Finding Study to Guide Use of Verapamil as an Adjunctive Therapy in Tuberculosis.
+verapamil	Direct (HDT)	8	['37983978', '37577511', '30602521', '28933298', '27468130', '26226503', '26073420', '23805786']	"[1] A Dose-Finding Study to Guide Use of Verapamil as an Adjunctive Therapy in Tuberculosis.
     Authors: Padmapriyadarsini C, Szumowski JD, Akbar N, Shanmugasundaram P, Jain A, Bathragiri M, Pattnaik M, Turuk J, Karunaianantham R, Balakrishnan S, Pati S, Kumar AKH, Rathore MK, Raja J, Naidu KR, Horn J, Whitworth L, Sewell R, Ramakrishnan L, Swaminathan S, Edelstein PH
     PMID: 37983978 | DOI: 10.1002/cpt.3108
 
@@ -1224,10 +1224,18 @@ verapamil	Direct (HDT)	7	['37983978', '37577511', '30602521', '28933298', '27468
     Authors: Srikrishna G, Gupta S, Dooley KE, Bishai WR
     PMID: 26226503 | DOI: 10.2217/FMB.15.56
 
-[7] Acceleration of tuberculosis treatment by adjunctive therapy with verapamil as an efflux inhibitor.
+[7] Exploring the potential of adjunct therapy in tuberculosis.
+    Authors: Rayasam GV, Balganesh TS
+    PMID: 26073420 | DOI: S0165-6147(15)00095-4
+
+[8] Acceleration of tuberculosis treatment by adjunctive therapy with verapamil as an efflux inhibitor.
     Authors: Gupta S, Tyagi S, Almeida DV, Maiga MC, Ammerman NC, Bishai WR
     PMID: 23805786 | DOI: 10.1164/rccm.201304-0650OC"
-sorafenib	Direct (HDT)	1	['38367430']	"[1] The first-in-class pyrazole-based dual InhA-VEGFR inhibitors towards integrated antitubercular host-directed therapy.
+sorafenib	Direct (HDT)	2	['41586623', '38367430']	"[1] The antimycobacterial and healing effect of sorafenib through pro-apoptotic and immunomodulatory activities.
+    Authors: Rajmani RS, Rani N, Surolia A
+    PMID: 41586623 | DOI: 10.1128/spectrum.01657-25
+
+[2] The first-in-class pyrazole-based dual InhA-VEGFR inhibitors towards integrated antitubercular host-directed therapy.
     Authors: Shaaban MM, Teleb M, Ragab HM, Singh M, Elwakil BH, A Heikal L, Sriram D, Mahran MA
     PMID: 38367430 | DOI: S0045-2068(24)00084-1"
 yohimbine	Direct (TB)	4	['31762077', '31124421', '7227277', '7206378']	"[1] Extraction and UHPLC-DAD detection of undeclared substances in market-available dietary supplements and slimming products in Eastern region, Saudi Arabia: An application of principal component analysis.
@@ -1245,7 +1253,7 @@ yohimbine	Direct (TB)	4	['31762077', '31124421', '7227277', '7206378']	"[1] Extr
 [4] Effects of tricyclic antidepressants on tetrabenazine-induced depletion of brain monoamines in rats. 1. Norepinephrine.
     Authors: Yoshizaki T, Tonda K
     PMID: 7206378 | DOI: 10.1254/jjp.30.721"
-thalidomide	Direct (HDT)	3	['41180005', '41123477', '34500217']	"[1] Thalidomide as an Adjunctive Therapy for HIV-Tuberculosis-Associated Immune Reconstitution Inflammatory Syndrome: A Case Series.
+thalidomide	Direct (HDT)	4	['41180005', '41123477', '34500217', '28884751']	"[1] Thalidomide as an Adjunctive Therapy for HIV-Tuberculosis-Associated Immune Reconstitution Inflammatory Syndrome: A Case Series.
     Authors: Lee-Jones S, Rebe K, Marais S, Meintjes G, Parker A, van der Plas H
     PMID: 41180005 | DOI: 10.1093/ofid/ofaf617
 
@@ -1255,7 +1263,11 @@ thalidomide	Direct (HDT)	3	['41180005', '41123477', '34500217']	"[1] Thalidomide
 
 [3] The use of thalidomide to treat children with tuberculosis meningitis: A review.
     Authors: van Toorn R, Zaharie SD, Seddon JA, van der Kuip M, Marceline van Furth A, Schoeman JF, Solomons RS
-    PMID: 34500217 | DOI: S1472-9792(21)00075-5"
+    PMID: 34500217 | DOI: S1472-9792(21)00075-5
+
+[4] Tuberculous meningitis.
+    Authors: Wilkinson RJ, Rohlwink U, Misra UK, van Crevel R, Mai NTH, Dooley KE, Caws M, Figaji A, Savic R, Solomons R, Thwaites GE
+    PMID: 28884751 | DOI: 10.1038/nrneurol.2017.120"
 chlorphenamine	No Results	0	[]	No evidence found
 temozolomide	Direct (TB)	19	['41513767', '40945116', '40136348', '38837102', '38598710', '35833850', '34844599', '32957327', '32140889', '30459364', '29681511', '29202103', '26208964', '24552317', '23861829', '22915053', '18974931', '15014015', '12735982']	"[1] Evaluation of methods to increase the expression of cytokine-induced killer cell chemoattractant cytokines in pancreatic cancer.
     Authors: Bunuales M, Inoges S, Lopez-Diaz de Cerio A, Hervas-Stubbs S, Rodriguez J, Gonzalez-Aparicio M, Jauregui P, Hernandez-Alcoceba R
@@ -2839,11 +2851,15 @@ nimodipine	Direct (TB)	6	['41332394', '40453484', '35617724', '32138631', '20444
 [6] Effect of calcium channel blockers on stress-induced visceral, endocrinological and immune responses.
     Authors: Mediratta PK, Sharma KK, Chowdhury SG
     PMID: 23105255 | DOI: 10.1007/BF02883742"
-valproic-acid	Direct (HDT)	2	['29501835', '27468130']	"[1] Evaluation of the efficacy of valproic acid and suberoylanilide hydroxamic acid (vorinostat) in enhancing the effects of first-line tuberculosis drugs against intracellular Mycobacterium tuberculosis.
+valproic-acid	Direct (HDT)	3	['32090863', '29501835', '27468130']	"[1] Potential role of adjuvant drugs on efficacy of first line oral antitubercular therapy: Drug repurposing.
+    Authors: Mishra R, Krishan S, Siddiqui AN, Kapur P, Khayyam KU, Sharma M
+    PMID: 32090863 | DOI: S1472-9792(19)30128-3
+
+[2] Evaluation of the efficacy of valproic acid and suberoylanilide hydroxamic acid (vorinostat) in enhancing the effects of first-line tuberculosis drugs against intracellular Mycobacterium tuberculosis.
     Authors: Rao M, Valentini D, Zumla A, Maeurer M
     PMID: 29501835 | DOI: S1201-9712(18)30057-2
 
-[2] Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.
+[3] Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.
     Authors: Juarez E, Carranza C, Sanchez G, Gonzalez M, Chavez J, Sarabia C, Torres M, Sada E
     PMID: 27468130 | DOI: 10.1165/rcmb.2015-0383OC"
 betamethasone	Direct (TB)	21	['39362330', '38092418', '38064397', '36990615', '36919396', '36088631', '33131530', '30278434', '29407556', '22791970', '1315569', '3592139', '3718864', '4018307', '51284', '14227798', '14173214', '14141054', '14189730', '14105629', '14017961']	"[1] Multi-omics and bioinformatics for the investigation of therapeutic mechanism of roucongrong pill against postmenopausal osteoporosis.
@@ -3071,7 +3087,7 @@ ephedrine	Direct (TB)	9	['39253243', '32148136', '11495487', '368765', '14144216
 tianeptine	Direct (TB)	1	['33197939']	"[1] Alterations in BDNF Protein Concentrations in the Hippocampus do not Explain the Pro-Neurogenic Effect of Citalopram on Adult Neurogenesis.
     Authors: Petermann M, Kronenberg G, Mosienko V, Bader M, Alenina N, Hellweg R, Klempin F
     PMID: 33197939 | DOI: 10.1055/a-1291-8079"
-fluvastatin	Direct (HDT)	3	['40501823', '38534380', '31605489']	"[1] Integrative transcriptome-based drug repurposing in tuberculosis.
+fluvastatin	Direct (HDT)	4	['40501823', '38534380', '32872158', '31605489']	"[1] Integrative transcriptome-based drug repurposing in tuberculosis.
     Authors: Samart K, Buskirk L, Tonielli A, Krishnan A, Ravi J
     PMID: 40501823 | DOI: 2025.06.02.657296
 
@@ -3079,7 +3095,11 @@ fluvastatin	Direct (HDT)	3	['40501823', '38534380', '31605489']	"[1] Integrative
     Authors: Montero-Vega MT, Matilla J, Bazan E, Reimers D, De Andres-Martin A, Gonzalo-Gobernado R, Correa C, Urbano F, Gomez-Coronado D
     PMID: 38534380 | DOI: 10.3390/cells13060536
 
-[3] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+[3] Novel Treatments against Mycobacterium tuberculosis Based on Drug Repurposing.
+    Authors: Mourenza A, Gil JA, Mateos LM, Letek M
+    PMID: 32872158 | DOI: 10.3390/antibiotics9090550
+
+[4] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
     Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
     PMID: 31605489 | DOI: 10.1093/infdis/jiz517"
 nitrendipine	Direct (TB)	1	['2309889']	"[1] Cell swelling increases intracellular free [Ca] in cultured toad bladder cells.
@@ -3269,7 +3289,7 @@ podophyllotoxin	Direct (TB)	2	['38644473', '23871911']	"[1] PROTAC EZH2 degrader
 [2] Synthesis and antiprotozoal activities of benzyl phenyl ether diamidine derivatives.
     Authors: Patrick DA, Bakunov SA, Bakunova SM, Jones SK, Wenzler T, Barszcz T, Kumar A, Boykin DW, Werbovetz KA, Brun R, Tidwell RR
     PMID: 23871911 | DOI: S0223-5234(13)00401-7"
-everolimus	Direct (HDT)	8	['41563248', '37998388', '36671372', '35120127', '34062056', '33966361', '32610643', '29441052']	"[1] mTORC1 inhibitors rapamycin and everolimus as host-directed therapy for tuberculosis.
+everolimus	Direct (HDT)	11	['41563248', '37998388', '36671372', '35120127', '34473918', '34062056', '33966361', '33740465', '32610643', '30754665', '29441052']	"[1] mTORC1 inhibitors rapamycin and everolimus as host-directed therapy for tuberculosis.
     Authors: van den Biggelaar RHGA, Ottenhoff THM
     PMID: 41563248 | DOI: 10.1128/iai.00544-25
 
@@ -3285,19 +3305,31 @@ everolimus	Direct (HDT)	8	['41563248', '37998388', '36671372', '35120127', '3406
     Authors: Wallis RS, Ginindza S, Beattie T, Arjun N, Likoti M, Sebe M, Edward VA, Rassool M, Ahmed K, Fielding K, Ahidjo BA, Vangu MDT, Churchyard G
     PMID: 35120127 | DOI: 10.1371/journal.pone.0252097
 
-[5] Everolimus-induced effector mechanism in macrophages and survivability of Erdman, CDC1551 and HN878 strains of Mycobacterium tuberculosis infection.
+[5] 3D host cell and pathogen-based bioassay development for testing anti-tuberculosis (TB) drug response and modeling immunodeficiency.
+    Authors: Mukundan S, Bhatt R, Lucas J, Tereyek M, Chang TL, Subbian S, Parekkadan B
+    PMID: 34473918 | DOI: 10.1515/bmc-2021-0013
+
+[6] Everolimus-induced effector mechanism in macrophages and survivability of Erdman, CDC1551 and HN878 strains of Mycobacterium tuberculosis infection.
     Authors: Cao R, To K, Kachour N, Beever A, Owens J, Sathananthan A, Singh P, Kolloli A, Subbian S, Venketaraman V
     PMID: 34062056 | DOI: 10.1515/bmc-2021-0006
 
-[6] The Effects of Oral Liposomal Glutathione and In Vitro Everolimus in Altering the Immune Responses against Mycobacterium bovis BCG Strain in Individuals with Type 2 Diabetes.
+[7] The Effects of Oral Liposomal Glutathione and In Vitro Everolimus in Altering the Immune Responses against Mycobacterium bovis BCG Strain in Individuals with Type 2 Diabetes.
     Authors: To K, Cao R, Yegiazaryan A, Owens J, Sasaninia K, Vaughn C, Singh M, Truong E, Sathananthan A, Venketaraman V
     PMID: 33966361 | DOI: 10.1515/bmc-2021-0003
 
-[7] Antimycobacterial Effects of Everolimus in a Human Granuloma Model.
+[8] Adjunctive host-directed therapies for pulmonary tuberculosis: a prospective, open-label, phase 2, randomised controlled trial.
+    Authors: Wallis RS, Ginindza S, Beattie T, Arjun N, Likoti M, Edward VA, Rassool M, Ahmed K, Fielding K, Ahidjo BA, Vangu MDT, Churchyard G
+    PMID: 33740465 | DOI: S2213-2600(20)30448-3
+
+[9] Antimycobacterial Effects of Everolimus in a Human Granuloma Model.
     Authors: Ashley D, Hernandez J, Cao R, To K, Yegiazaryan A, Abrahem R, Nguyen T, Owens J, Lambros M, Subbian S, Venketaraman V
     PMID: 32610643 | DOI: 10.3390/jcm9072043
 
-[8] Harnessing the mTOR Pathway for Tuberculosis Treatment.
+[10] Investigating the Role of Everolimus in mTOR Inhibition and Autophagy Promotion as a Potential Host-Directed Therapeutic Target in Mycobacterium tuberculosis Infection.
+    Authors: Cerni S, Shafer D, To K, Venketaraman V
+    PMID: 30754665 | DOI: 10.3390/jcm8020232
+
+[11] Harnessing the mTOR Pathway for Tuberculosis Treatment.
     Authors: Singh P, Subbian S
     PMID: 29441052 | DOI: 10.3389/fmicb.2018.00070"
 triflupromazine	Direct (TB)	4	['27156615', '22850215', '17188865', '7622803']	"[1] Neuroleptic drugs in the treatment of tuberculosis: Minimal inhibitory concentrations of different phenothiazines against Mycobacterium tuberculosis.
@@ -6810,21 +6842,9 @@ primidone	Direct (TB)	5	['11158730', '3331152', '782836', '812007', '4117275']	"
 [5] Antinuclear antibodies in patients on anticonvulsant therapy.
     Authors: Alarcon-Segovia D, Fishbein E, Reyes PA, Dies H, Shwadsky S
     PMID: 4117275 | DOI: "
-clemastine	Direct (TB)	4	['37068912', '34512339', '30693866', '29255743']	"[1] Promyelinating drugs promote functional recovery in an autism spectrum disorder mouse model of Pitt-Hopkins syndrome.
-    Authors: Bohlen JF, Cleary CM, Das D, Sripathy SR, Sadowski N, Shim G, Kenney RF, Buchler IP, Banerji T, Scanlan TS, Mulkey DK, Maher BJ
-    PMID: 37068912 | DOI: 10.1093/brain/awad057
-
-[2] Clemastine Fumarate Attenuates Myocardial Ischemia Reperfusion Injury Through Inhibition of Mast Cell Degranulation.
-    Authors: Meng S, Sun X, Juan Z, Wang M, Wang R, Sun L, Li Y, Xin A, Li S, Li Y
-    PMID: 34512339 | DOI: 10.3389/fphar.2021.704852
-
-[3] Potentiation of P2RX7 as a host-directed strategy for control of mycobacterial infection.
+clemastine	Direct (HDT)	1	['30693866']	"[1] Potentiation of P2RX7 as a host-directed strategy for control of mycobacterial infection.
     Authors: Matty MA, Knudsen DR, Walton EM, Beerman RW, Cronan MR, Pyle CJ, Hernandez RE, Tobin DM
-    PMID: 30693866 | DOI: 10.7554/eLife.39123
-
-[4] Infliximab-Induced Lupus: A Case Report.
-    Authors: Magno Pereira V, Andrade C, Figueira R, Faria G, Jasmins L
-    PMID: 29255743 | DOI: 10.1159/000450877"
+    PMID: 30693866 | DOI: 10.7554/eLife.39123"
 mexiletine	Direct (TB)	4	['36557159', '25754058', '11723275', '2635353']	"[1] Molecular Modeling of Cardiac Sodium Channel with Mexiletine.
     Authors: Zhorov BS
     PMID: 36557159 | DOI: 10.3390/membranes12121252
@@ -6847,7 +6867,7 @@ masitinib	Direct (TB)	2	['40443664', '20209107']	"[1] The role of microglia in m
 [2] Masitinib combined with standard gemcitabine chemotherapy: in vitro and in vivo studies in human pancreatic tumour cell lines and ectopic mouse model.
     Authors: Humbert M, Casteran N, Letard S, Hanssens K, Iovanna J, Finetti P, Bertucci F, Bader T, Mansfield CD, Moussy A, Hermine O, Dubreuil P
     PMID: 20209107 | DOI: 10.1371/journal.pone.0009430"
-dexamethasone	Direct (HDT)	11	['41675892', '41123477', '41068481', '40791718', '39911285', '38858618', '37819954', '30737374', '23280493', '16288367', '8527075']	"[1] Corticosteroids as adjunctive therapy in acute meningitis: a narrative review.
+dexamethasone	Direct (HDT)	13	['41675892', '41123477', '41068481', '40791718', '39911285', '38858618', '37819954', '33299795', '30737374', '28173836', '23280493', '16288367', '8527075']	"[1] Corticosteroids as adjunctive therapy in acute meningitis: a narrative review.
     Authors: Ullah N, Khan K, Haseeb A, Ahmad Z, Abbas SH, Samad M, Safdar S, Qayyum SN, Khan R, Noori S
     PMID: 41675892 | DOI: 10.1097/MS9.0000000000004620
 
@@ -6875,19 +6895,27 @@ dexamethasone	Direct (HDT)	11	['41675892', '41123477', '41068481', '40791718', '
     Authors: Donovan J, Bang ND, Imran D, Nghia HDT, Burhan E, Huong DTT, Hiep NTT, Ngoc LHB, Thanh DV, Thanh NT, Wardhani ALS, Maharani K, Gasmara CP, Hanh NHH, Oanh PKN, Estiasari R, Thu DDA, Kusumaningrum A, Dung LT, Giang DC, Ha DTM, Lan NH, Chau NVV, Nguyet NTM, Geskus RB, Thuong NTT, Kestelyn E, Hamers RL, Phu NH, Thwaites GE
     PMID: 37819954 | DOI: 10.1056/NEJMoa2216218
 
-[8] Corticosteroids inhibit Mycobacterium tuberculosis-induced necrotic host cell death by abrogating mitochondrial membrane permeability transition.
+[8] Severe paradoxical reaction in tuberculous meningitis.
+    Authors: Donovan J, Thanh NT, Thwaites GE, Phu NH
+    PMID: 33299795 | DOI: 10.1016/j.idcr.2020.e01009
+
+[9] Corticosteroids inhibit Mycobacterium tuberculosis-induced necrotic host cell death by abrogating mitochondrial membrane permeability transition.
     Authors: Grab J, Suarez I, van Gumpel E, Winter S, Schreiber F, Esser A, Holscher C, Fritsch M, Herb M, Schramm M, Wachsmuth L, Pallasch C, Pasparakis M, Kashkar H, Rybniker J
     PMID: 30737374 | DOI: 10.1038/s41467-019-08405-9
 
-[9] Microglial activation of the NLRP3 inflammasome by the priming signals derived from macrophages infected with mycobacteria.
+[10] Complex regulation of neutrophil-derived MMP-9 secretion in central nervous system tuberculosis.
+    Authors: Ong CW, Pabisiak PJ, Brilha S, Singh P, Roncaroli F, Elkington PT, Friedland JS
+    PMID: 28173836 | DOI: 10.1186/s12974-017-0801-1
+
+[11] Microglial activation of the NLRP3 inflammasome by the priming signals derived from macrophages infected with mycobacteria.
     Authors: Lee HM, Kang J, Lee SJ, Jo EK
     PMID: 23280493 | DOI: 10.1002/glia.22448
 
-[10] Mycobacterium tuberculosis-induced cytokine and chemokine expression by human microglia and astrocytes: effects of dexamethasone.
+[12] Mycobacterium tuberculosis-induced cytokine and chemokine expression by human microglia and astrocytes: effects of dexamethasone.
     Authors: Rock RB, Hu S, Gekker G, Sheng WS, May B, Kapur V, Peterson PK
     PMID: 16288367 | DOI: 10.1086/498165
 
-[11] Steroids do not enhance the risk of developing tuberculosis or other AIDS-related diseases in HIV-infected patients treated for Pneumocystis carinii pneumonia.
+[13] Steroids do not enhance the risk of developing tuberculosis or other AIDS-related diseases in HIV-infected patients treated for Pneumocystis carinii pneumonia.
     Authors: Martos A, Podzamczer D, Martinez-Lacasa J, Rufi G, Santin M, Gudiol F
     PMID: 8527075 | DOI: 10.1097/00002030-199509000-00008"
 chlorpromazine	Direct (HDT)	1	['39335008']	"[1] Innovative Strategies in Drug Repurposing to Tackle Intracellular Bacterial Pathogens.

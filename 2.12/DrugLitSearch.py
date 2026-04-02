@@ -18,7 +18,7 @@ MAX_RESULTS_PER_DRUG = 1000
 
 # Base query terms for PubMed
 DISEASE_TERMS = '"Mycobacterium tuberculosis" OR "tuberculosis" OR "TB"'
-HDT_TERMS = '"host-directed therapy" OR "HDT" OR "adjunctive therapy" OR "adjunctive therapeutic" OR "host-targeting therapies"'
+HDT_TERMS = '"host-directed therapy" OR "host-directed therapies" OR "host-directed drug" OR "host-directed drugs" OR "HDT" OR "adjunctive therapy" OR "adjunctive therapies" OR "adjunctive therapeutic" OR "adjunctive therapeutics" OR "host-targeting therapy" OR "host-targeting therapies"'
 
 # lit search class
 class LiteratureSearcher:

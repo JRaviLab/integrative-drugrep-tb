@@ -2368,7 +2368,7 @@
     {
         "drug_name":"verapamil",
         "search_type":"Direct (HDT)",
-        "studies_found":7,
+        "studies_found":8,
         "pmid":[
             "37983978",
             "37577511",
@@ -2376,6 +2376,7 @@
             "28933298",
             "27468130",
             "26226503",
+            "26073420",
             "23805786"
         ],
         "literature_evidence":[
@@ -2416,6 +2417,12 @@
                 "doi":"10.2217\/FMB.15.56"
             },
             {
+                "title":"Exploring the potential of adjunct therapy in tuberculosis.",
+                "authors":"Rayasam GV, Balganesh TS",
+                "pmid":"26073420",
+                "doi":"S0165-6147(15)00095-4"
+            },
+            {
                 "title":"Acceleration of tuberculosis treatment by adjunctive therapy with verapamil as an efflux inhibitor.",
                 "authors":"Gupta S, Tyagi S, Almeida DV, Maiga MC, Ammerman NC, Bishai WR",
                 "pmid":"23805786",
@@ -2426,11 +2433,18 @@
     {
         "drug_name":"sorafenib",
         "search_type":"Direct (HDT)",
-        "studies_found":1,
+        "studies_found":2,
         "pmid":[
+            "41586623",
             "38367430"
         ],
         "literature_evidence":[
+            {
+                "title":"The antimycobacterial and healing effect of sorafenib through pro-apoptotic and immunomodulatory activities.",
+                "authors":"Rajmani RS, Rani N, Surolia A",
+                "pmid":"41586623",
+                "doi":"10.1128\/spectrum.01657-25"
+            },
             {
                 "title":"The first-in-class pyrazole-based dual InhA-VEGFR inhibitors towards integrated antitubercular host-directed therapy.",
                 "authors":"Shaaban MM, Teleb M, Ragab HM, Singh M, Elwakil BH, A Heikal L, Sriram D, Mahran MA",
@@ -2479,11 +2493,12 @@
     {
         "drug_name":"thalidomide",
         "search_type":"Direct (HDT)",
-        "studies_found":3,
+        "studies_found":4,
         "pmid":[
             "41180005",
             "41123477",
-            "34500217"
+            "34500217",
+            "28884751"
         ],
         "literature_evidence":[
             {
@@ -2503,6 +2518,12 @@
                 "authors":"van Toorn R, Zaharie SD, Seddon JA, van der Kuip M, Marceline van Furth A, Schoeman JF, Solomons RS",
                 "pmid":"34500217",
                 "doi":"S1472-9792(21)00075-5"
+            },
+            {
+                "title":"Tuberculous meningitis.",
+                "authors":"Wilkinson RJ, Rohlwink U, Misra UK, van Crevel R, Mai NTH, Dooley KE, Caws M, Figaji A, Savic R, Solomons R, Thwaites GE",
+                "pmid":"28884751",
+                "doi":"10.1038\/nrneurol.2017.120"
             }
         ]
     },
@@ -5396,12 +5417,19 @@
     {
         "drug_name":"valproic-acid",
         "search_type":"Direct (HDT)",
-        "studies_found":2,
+        "studies_found":3,
         "pmid":[
+            "32090863",
             "29501835",
             "27468130"
         ],
         "literature_evidence":[
+            {
+                "title":"Potential role of adjuvant drugs on efficacy of first line oral antitubercular therapy: Drug repurposing.",
+                "authors":"Mishra R, Krishan S, Siddiqui AN, Kapur P, Khayyam KU, Sharma M",
+                "pmid":"32090863",
+                "doi":"S1472-9792(19)30128-3"
+            },
             {
                 "title":"Evaluation of the efficacy of valproic acid and suberoylanilide hydroxamic acid (vorinostat) in enhancing the effects of first-line tuberculosis drugs against intracellular Mycobacterium tuberculosis.",
                 "authors":"Rao M, Valentini D, Zumla A, Maeurer M",
@@ -5968,10 +5996,11 @@
     {
         "drug_name":"fluvastatin",
         "search_type":"Direct (HDT)",
-        "studies_found":3,
+        "studies_found":4,
         "pmid":[
             "40501823",
             "38534380",
+            "32872158",
             "31605489"
         ],
         "literature_evidence":[
@@ -5986,6 +6015,12 @@
                 "authors":"Montero-Vega MT, Matilla J, Bazan E, Reimers D, De Andres-Martin A, Gonzalo-Gobernado R, Correa C, Urbano F, Gomez-Coronado D",
                 "pmid":"38534380",
                 "doi":"10.3390\/cells13060536"
+            },
+            {
+                "title":"Novel Treatments against Mycobacterium tuberculosis Based on Drug Repurposing.",
+                "authors":"Mourenza A, Gil JA, Mateos LM, Letek M",
+                "pmid":"32872158",
+                "doi":"10.3390\/antibiotics9090550"
             },
             {
                 "title":"Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.",
@@ -6399,15 +6434,18 @@
     {
         "drug_name":"everolimus",
         "search_type":"Direct (HDT)",
-        "studies_found":8,
+        "studies_found":11,
         "pmid":[
             "41563248",
             "37998388",
             "36671372",
             "35120127",
+            "34473918",
             "34062056",
             "33966361",
+            "33740465",
             "32610643",
+            "30754665",
             "29441052"
         ],
         "literature_evidence":[
@@ -6436,6 +6474,12 @@
                 "doi":"10.1371\/journal.pone.0252097"
             },
             {
+                "title":"3D host cell and pathogen-based bioassay development for testing anti-tuberculosis (TB) drug response and modeling immunodeficiency.",
+                "authors":"Mukundan S, Bhatt R, Lucas J, Tereyek M, Chang TL, Subbian S, Parekkadan B",
+                "pmid":"34473918",
+                "doi":"10.1515\/bmc-2021-0013"
+            },
+            {
                 "title":"Everolimus-induced effector mechanism in macrophages and survivability of Erdman, CDC1551 and HN878 strains of Mycobacterium tuberculosis infection.",
                 "authors":"Cao R, To K, Kachour N, Beever A, Owens J, Sathananthan A, Singh P, Kolloli A, Subbian S, Venketaraman V",
                 "pmid":"34062056",
@@ -6448,10 +6492,22 @@
                 "doi":"10.1515\/bmc-2021-0003"
             },
             {
+                "title":"Adjunctive host-directed therapies for pulmonary tuberculosis: a prospective, open-label, phase 2, randomised controlled trial.",
+                "authors":"Wallis RS, Ginindza S, Beattie T, Arjun N, Likoti M, Edward VA, Rassool M, Ahmed K, Fielding K, Ahidjo BA, Vangu MDT, Churchyard G",
+                "pmid":"33740465",
+                "doi":"S2213-2600(20)30448-3"
+            },
+            {
                 "title":"Antimycobacterial Effects of Everolimus in a Human Granuloma Model.",
                 "authors":"Ashley D, Hernandez J, Cao R, To K, Yegiazaryan A, Abrahem R, Nguyen T, Owens J, Lambros M, Subbian S, Venketaraman V",
                 "pmid":"32610643",
                 "doi":"10.3390\/jcm9072043"
+            },
+            {
+                "title":"Investigating the Role of Everolimus in mTOR Inhibition and Autophagy Promotion as a Potential Host-Directed Therapeutic Target in Mycobacterium tuberculosis Infection.",
+                "authors":"Cerni S, Shafer D, To K, Venketaraman V",
+                "pmid":"30754665",
+                "doi":"10.3390\/jcm8020232"
             },
             {
                 "title":"Harnessing the mTOR Pathway for Tuberculosis Treatment.",
@@ -12896,38 +12952,17 @@
     },
     {
         "drug_name":"clemastine",
-        "search_type":"Direct (TB)",
-        "studies_found":4,
+        "search_type":"Direct (HDT)",
+        "studies_found":1,
         "pmid":[
-            "37068912",
-            "34512339",
-            "30693866",
-            "29255743"
+            "30693866"
         ],
         "literature_evidence":[
-            {
-                "title":"Promyelinating drugs promote functional recovery in an autism spectrum disorder mouse model of Pitt-Hopkins syndrome.",
-                "authors":"Bohlen JF, Cleary CM, Das D, Sripathy SR, Sadowski N, Shim G, Kenney RF, Buchler IP, Banerji T, Scanlan TS, Mulkey DK, Maher BJ",
-                "pmid":"37068912",
-                "doi":"10.1093\/brain\/awad057"
-            },
-            {
-                "title":"Clemastine Fumarate Attenuates Myocardial Ischemia Reperfusion Injury Through Inhibition of Mast Cell Degranulation.",
-                "authors":"Meng S, Sun X, Juan Z, Wang M, Wang R, Sun L, Li Y, Xin A, Li S, Li Y",
-                "pmid":"34512339",
-                "doi":"10.3389\/fphar.2021.704852"
-            },
             {
                 "title":"Potentiation of P2RX7 as a host-directed strategy for control of mycobacterial infection.",
                 "authors":"Matty MA, Knudsen DR, Walton EM, Beerman RW, Cronan MR, Pyle CJ, Hernandez RE, Tobin DM",
                 "pmid":"30693866",
                 "doi":"10.7554\/eLife.39123"
-            },
-            {
-                "title":"Infliximab-Induced Lupus: A Case Report.",
-                "authors":"Magno Pereira V, Andrade C, Figueira R, Faria G, Jasmins L",
-                "pmid":"29255743",
-                "doi":"10.1159\/000450877"
             }
         ]
     },
@@ -12994,7 +13029,7 @@
     {
         "drug_name":"dexamethasone",
         "search_type":"Direct (HDT)",
-        "studies_found":11,
+        "studies_found":13,
         "pmid":[
             "41675892",
             "41123477",
@@ -13003,7 +13038,9 @@
             "39911285",
             "38858618",
             "37819954",
+            "33299795",
             "30737374",
+            "28173836",
             "23280493",
             "16288367",
             "8527075"
@@ -13052,10 +13089,22 @@
                 "doi":"10.1056\/NEJMoa2216218"
             },
             {
+                "title":"Severe paradoxical reaction in tuberculous meningitis.",
+                "authors":"Donovan J, Thanh NT, Thwaites GE, Phu NH",
+                "pmid":"33299795",
+                "doi":"10.1016\/j.idcr.2020.e01009"
+            },
+            {
                 "title":"Corticosteroids inhibit Mycobacterium tuberculosis-induced necrotic host cell death by abrogating mitochondrial membrane permeability transition.",
                 "authors":"Grab J, Suarez I, van Gumpel E, Winter S, Schreiber F, Esser A, Holscher C, Fritsch M, Herb M, Schramm M, Wachsmuth L, Pallasch C, Pasparakis M, Kashkar H, Rybniker J",
                 "pmid":"30737374",
                 "doi":"10.1038\/s41467-019-08405-9"
+            },
+            {
+                "title":"Complex regulation of neutrophil-derived MMP-9 secretion in central nervous system tuberculosis.",
+                "authors":"Ong CW, Pabisiak PJ, Brilha S, Singh P, Roncaroli F, Elkington PT, Friedland JS",
+                "pmid":"28173836",
+                "doi":"10.1186\/s12974-017-0801-1"
             },
             {
                 "title":"Microglial activation of the NLRP3 inflammasome by the priming signals derived from macrophages infected with mycobacteria.",
