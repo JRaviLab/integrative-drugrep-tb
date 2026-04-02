@@ -1,0 +1,1861 @@
+drug_name	search_type	studies_found	pmid	literature_evidence
+vemurafenib	Direct (TB)	1	['27742535']	"[1] Targeting tuberculosis using structure-guided fragment-based drug design.
+    Authors: Mendes V, Blundell TL
+    PMID: 27742535 | DOI: S1359-6446(16)30379-8"
+temsirolimus	No Results	0	[]	No evidence found
+fostamatinib	No Results	0	[]	No evidence found
+perphenazine	No Results	0	[]	No evidence found
+vorinostat	Direct (HDT)	1	['29501835']	"[1] Evaluation of the efficacy of valproic acid and suberoylanilide hydroxamic acid (vorinostat) in enhancing the effects of first-line tuberculosis drugs against intracellular Mycobacterium tuberculosis.
+    Authors: Rao M, Valentini D, Zumla A, Maeurer M
+    PMID: 29501835 | DOI: S1201-9712(18)30057-2"
+panobinostat	No Results	0	[]	No evidence found
+lovastatin	Direct (HDT)	1	['39832798']	"[1] Host-Directed Therapy with Inhalable Lovastatin Microspheres for Matrix Metalloproteinase Inhibition in Tuberculosis.
+    Authors: Jhilta A, Jadhav K, Sharma R, Singh R, Negi S, Sharma N, Singh AK, Verma RK
+    PMID: 39832798 | DOI: 10.1021/acsabm.4c01723"
+sertraline	Direct (HDT)	1	['36629405']	"[1] The antidepressant sertraline provides a novel host directed therapy module for augmenting TB therapy.
+    Authors: Shankaran D, Singh A, Dawa S, Arumugam P, Gandotra S, Rao V
+    PMID: 36629405 | DOI: 10.7554/eLife.64834"
+itraconazole	Direct (TB)	32	['40038591', '39636397', '38716005', '38116435', '37665236', '37573054', '37275907', '37226871', '37145297', '36345027', '35865451', '35429465', '34853253', '33212470', '32652975', '27959839', '26838686', '26768370', '23834282', '21330747', '20845683', '16823702', '16696387', '14742211', '12693002', '11974898', '11248033', '7547111', '7655496', '8068512', '8207276', '1755556']	"[1] Primary cutaneous mixed infection with Cryptococcus uniguttulatus and Mycobacterium tuberculosis.
+    Authors: Shao Y, Song Y, Xue R, Li R, Yu J
+    PMID: 40038591 | DOI: 10.1186/s12879-025-10667-2
+
+[2] Successful treatment of chronic pulmonary aspergillosis in a patient with early pulmonary tuberculosis and COVID-19: a case report.
+    Authors: Bertucci AA, Volpe-Chaves CE, Mendo DM, Andrade UV, Lacerda MLGG, Venturini J, Saad BAA, Oliveira CTF, Oliveira SMDVL, Paniago AMM
+    PMID: 39636397 | DOI: 10.5826/mrm.2024.989
+
+[3] A Case of Recurrent Sputum-Positive Pulmonary Tuberculosis Presenting With Pulmonary Mycetoma.
+    Authors: Gaikwad A, Wagh P, Sarkar S, Khare M
+    PMID: 38716005 | DOI: 10.7759/cureus.57757
+
+[4] Repurposing Azoles to Resolve Serotogenic Toxicity Associated with Linezolid to Combat Multidrug-Resistant Tuberculosis.
+    Authors: Girase RT, Ahmad I, Oh JM, Kim H, Mathew B, Vagolu SK, Tonjum T, Desai NC, Sriram D, Kumari J, Patel HM
+    PMID: 38116435 | DOI: 10.1021/acsmedchemlett.3c00406
+
+[5] Oral candidiasis in patients with kidney transplantation in Iran: prevalence and antifungal susceptibility pattern.
+    Authors: Ghadimi F, Rodrigues CF, Mohammadi SR, Roudbary M, Dos Santos AL, Aslani P, Nikoomanesh F
+    PMID: 37665236 | DOI: 10.2217/fmb-2022-0179
+
+[6] Intergenic spacer (IGS-1) region sequence-based identification, genotypic analysis, and antifungal susceptibility of clinical Trichosporon species.
+    Authors: Parashar A, Rastogi V, Prakash H, Pandey A, Rudramurthy SM
+    PMID: 37573054 | DOI: S0255-0857(23)00106-8
+
+[7] Genetically confirmed chronic granulomatous disease in a Kenyan child: case report.
+    Authors: Marangu-Boore D, Kambuni F, Onyinkwa M, Ramprakash S, C P R, Eley B, Bhattad S
+    PMID: 37275907 | DOI: 10.3389/fimmu.2023.1172848
+
+[8] Apophysomyces variabilis as an emerging pathogen in Mainland China.
+    Authors: Li XY, Wang SJ, Huang GM, Zheng DY, Al-Odaini N, Pan KS, Zheng YQ, Cao CW
+    PMID: 37226871 | DOI: 10.1111/myc.13605
+
+[9] New methylene blue-mediated photodynamic inactivation of multidrug-resistant Fonsecaea nubica infected chromoblastomycosis in vitro.
+    Authors: Zheng M, Zhou X, Pang J, Yang Z, Zou Y, Zhang L, Xu Y, Yin R
+    PMID: 37145297 | DOI: 10.1007/s42770-023-00974-8
+
+[10] Fungal esophagitis associated with tuberculous pericarditis in an human immunodeficiency virus-positive patient: a case report.
+    Authors: Silva GM, de Sousa BR, Torres KB, Neves RP, de Melo HRL, de Lima-Neto RG
+    PMID: 36345027 | DOI: 10.1186/s13256-022-03561-x
+
+[11] Chronic cavitary pulmonary aspergillosis in an immunocompetent child.
+    Authors: Davies AA, Adegbite IA, Akintan PE, Ibrahim UO, Adekoya AO, Oladele RO
+    PMID: 35865451 | DOI: 10.1016/j.mmcr.2022.07.001
+
+[12] Efficacy of 12-months oral itraconazole versus 6-months oral itraconazole to prevent relapses of chronic pulmonary aspergillosis: an open-label, randomised controlled trial in India.
+    Authors: Sehgal IS, Dhooria S, Muthu V, Prasad KT, Aggarwal AN, Chakrabarti A, Choudhary H, Garg M, Agarwal R
+    PMID: 35429465 | DOI: S1473-3099(22)00057-3
+
+[13] Ubiquitous Distribution of Azole-Resistant Aspergillus fumigatus- Related Species in Outdoor Environments in Japan.
+    Authors: Watanabe K, Yaguchi T, Hirose D
+    PMID: 34853253 | DOI: 10.3314/mmj.21-00014
+
+[14] High frequency of azole resistant Candida spp. colonization among presumptive multidrug resistant tuberculosis (MDR-TB) patients.
+    Authors: Darma S, Ambara A, Aman AT, Annisa L, Nurrokhman, Nuryastuti T, Wibawa T
+    PMID: 33212470 | DOI: 10.1371/journal.pone.0242542
+
+[15] A young male with chronic nonproductive cough diagnosed with blastomycosis in China: a case report.
+    Authors: Wang N, Luo Z, Deng S, Li Q
+    PMID: 32652975 | DOI: 10.1186/s12890-020-01225-4
+
+[16] [Disseminated histoplasmosis in patients with AIDS. Buenos Aires, 2009-2014].
+    Authors: Lopez Daneri AG, Arechavala A, Iovannitti CA, Mujica MT
+    PMID: 27959839 | DOI: 
+
+[17] A novel inhibition ELISA for the detection and monitoring of Penicillium marneffei antigen in human serum.
+    Authors: Prakit K, Nosanchuk JD, Pruksaphon K, Vanittanakom N, Youngchim S
+    PMID: 26838686 | DOI: 10.1007/s10096-016-2583-2
+
+[18] cyp51A-based mechanism of azole resistance in Aspergillus fumigatus: Illustration by a new 3D Structural Model of Aspergillus fumigatus CYP51A protein.
+    Authors: Liu M, Zheng N, Li D, Zheng H, Zhang L, Ge H, Liu W
+    PMID: 26768370 | DOI: 10.1093/mmy/myv102
+
+[19] Clinical characteristics and treatment outcomes of chronic pulmonary aspergillosis.
+    Authors: Jhun BW, Jeon K, Eom JS, Lee JH, Suh GY, Kwon OJ, Koh WJ
+    PMID: 23834282 | DOI: 10.3109/13693786.2013.806826
+
+[20] A rare etiology of cauda equina syndrome.
+    Authors: Batra S, Arora S, Meshram H, Khanna G, Grover SB, Sharma VK
+    PMID: 21330747 | DOI: 10.3855/jidc.1001
+
+[21] [Review of pulmonary Mycobacterium xenopi infection cases: 11 cases of our own and 18 other cases reported in Japan].
+    Authors: Matsui Y, Tamura A, Nagayama N, Akashi S, Araki K, Kimura H, Shimada M, Suzuki J, Kashizaki F, Kawashima M, Ariga H, Suzuki J, Ohshima N, Masuda K, Matsui H, Teramoto S, Yamane A, Nagai H, Akagawa S, Toyota E, Shouji S, Nakajima Y
+    PMID: 20845683 | DOI: 
+
+[22] [Severe colitis due to Histoplasma capsulatum in an AIDS patient].
+    Authors: Buhk T, Stellbrink HJ, Albrecht H, Sobottka I
+    PMID: 16823702 | DOI: 10.1055/s-2006-926645
+
+[23] A 12-case series of Penicillium marneffei pneumonia.
+    Authors: Deesomchok A, Tanprawate S
+    PMID: 16696387 | DOI: 
+
+[24] Three-dimensional models of wild-type and mutated forms of cytochrome P450 14alpha-sterol demethylases from Aspergillus fumigatus and Candida albicans provide insights into posaconazole binding.
+    Authors: Xiao L, Madison V, Chau AS, Loebenberg D, Palermo RE, McNicholas PM
+    PMID: 14742211 | DOI: 10.1128/AAC.48.2.568-574.2004
+
+[25] [Pulmonary cryptococcosis combined with pulmonary tuberculosis].
+    Authors: Kishi K, Homma S, Kurosaki A, Kawabata M, Tsuboi E, Narui K, Nakatani T, Kono T, Motoi N, Tanimoto H, Nakata K
+    PMID: 12693002 | DOI: 
+
+[26] [A case of pulmonary infection induced by both Aspergillus sp. and Mycobacterium tuberculosis during corticosteroid therapy].
+    Authors: Kobashi Y, Okimoto N, Matsushima T, Hara Y
+    PMID: 11974898 | DOI: 
+
+[27] Crystal structure of cytochrome P450 14alpha -sterol demethylase (CYP51) from Mycobacterium tuberculosis in complex with azole inhibitors.
+    Authors: Podust LM, Poulos TL, Waterman MR
+    PMID: 11248033 | DOI: 10.1073/pnas.061562898
+
+[28] Mycobacterial and fungal infections of bone and joints.
+    Authors: Meier JL, Beekmann SE
+    PMID: 7547111 | DOI: 10.1097/00002281-199507000-00011
+
+[29] Penicillium marneffei infection in a patient with SLE.
+    Authors: Lo CY, Chan DT, Yuen KY, Li FK, Cheng KP
+    PMID: 7655496 | DOI: 10.1177/096120339500400313
+
+[30] Mycobacterial and fungal infections of bone and joints.
+    Authors: Meier JL
+    PMID: 8068512 | DOI: 10.1097/00002281-199407000-00010
+
+[31] Opportunistic infection in AIDS.
+    Authors: Sengupta D, Lal S, Shrinivas
+    PMID: 8207276 | DOI: 
+
+[32] [Cerebral aspergillosis in immunocompromised patients].
+    Authors: Preckel MP, Mercatello A, Tognet E, Devaux Y, Archimbaud E, Fiere D, Moskovtchenko JF
+    PMID: 1755556 | DOI: 10.1016/S0750-7658(05)80850-0"
+simvastatin	Direct (HDT)	3	['31616387', '31605489', '27632901']	"[1] Simvastatin Enhances the Immune Response Against Mycobacterium tuberculosis.
+    Authors: Guerra-De-Blas PDC, Bobadilla-Del-Valle M, Sada-Ovalle I, Estrada-Garcia I, Torres-Gonzalez P, Lopez-Saavedra A, Guzman-Beltran S, Ponce-de-Leon A, Sifuentes-Osornio J
+    PMID: 31616387 | DOI: 10.3389/fmicb.2019.02097
+
+[2] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+    Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
+    PMID: 31605489 | DOI: 10.1093/infdis/jiz517
+
+[3] Topical Simvastatin as Host-Directed Therapy against Severity of Cutaneous Leishmaniasis in Mice.
+    Authors: Parihar SP, Hartley MA, Hurdayal R, Guler R, Brombacher F
+    PMID: 27632901 | DOI: 10.1038/srep33458"
+dasatinib	Direct (HDT)	1	['40631209']	"[1] Elimination of senescent cells with senolytic host-directed therapy reduces tuberculosis progression in mice.
+    Authors: Shee S, Martinez-Martinez YB, Koleske B, Yabaji S, Kobzik L, Kramnik I, Bishai W
+    PMID: 40631209 | DOI: 2025.03.28.645957"
+rosuvastatin	No Results	0	[]	No evidence found
+raloxifene	Direct (TB)	1	['38170746']	"[1] Polyphosphate kinase-1 regulates bacterial and host metabolic pathways involved in pathogenesis of Mycobacterium tuberculosis.
+    Authors: Chugh S, Tiwari P, Suri C, Gupta SK, Singh P, Bouzeyen R, Kidwai S, Srivastava M, Rameshwaram NR, Kumar Y, Asthana S, Singh R
+    PMID: 38170746 | DOI: 10.1073/pnas.2309664121"
+atorvastatin	Direct (HDT)	2	['40677706', '31605489']	"[1] Immunomodulatory effects of atorvastatin on peripheral blood mononuclear cells infected with Mycobacterium tuberculosis.
+    Authors: Sabeel S, Motaung B, Ozturk M, Mafu TS, Wilkinson RJ, Thienemann F, Guler R
+    PMID: 40677706 | DOI: 10.3389/fimmu.2025.1597534
+
+[2] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+    Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
+    PMID: 31605489 | DOI: 10.1093/infdis/jiz517"
+brompheniramine	No Results	0	[]	No evidence found
+tivozanib	No Results	0	[]	No evidence found
+diclofenac	Direct (TB)	14	['40264668', '40114595', '36097681', '35864917', '19399540', '17644321', '17139836', '16412646', '16259721', '15882435', '15462188', '9925533', '9293712', '3117715']	"[1] Anti-inflammatory drugs as potential antimicrobial agents: a review.
+    Authors: Okpala OE, Rondevaldova J, Kokoska L
+    PMID: 40264668 | DOI: 10.3389/fphar.2025.1557333
+
+[2] Synergistic anti-inflammatory and anti-tb effects of Au-Pt-Cu nanofluids: experimental and computational insights.
+    Authors: Dubey A, Kumar M, Alanazi AM, Tufail A, Bagul AD
+    PMID: 40114595 | DOI: 10.1080/17568919.2025.2478818
+
+[3] Designing coordination polymers as multi-drug-self-delivery systems for tuberculosis and cancer therapy: in vitro viability and in vivo toxicity assessment.
+    Authors: Biswas P, Datta HK, Dastidar P
+    PMID: 36097681 | DOI: 10.1039/d2bm00752e
+
+[4] Seropositive Neuromyelitis Optica in a Case of Undiagnosed Ankylosing Spondylitis: A Neuro-Rheumatological Conundrum.
+    Authors: Ghosh Md R, Roy D, Leon-Ruiz M, Das S, Dubey S, Benito-Leon J
+    PMID: 35864917 | DOI: 10.5339/qmj.2022.29
+
+[5] The anti-inflammatory non-antibiotic helper compound diclofenac: an antibacterial drug target.
+    Authors: Mazumdar K, Dastidar SG, Park JH, Dutta NK
+    PMID: 19399540 | DOI: 10.1007/s10096-009-0739-z
+
+[6] Activity of diclofenac used alone and in combination with streptomycin against Mycobacterium tuberculosis in mice.
+    Authors: Dutta NK, Mazumdar K, Dastidar SG, Park JH
+    PMID: 17644321 | DOI: 10.1016/j.ijantimicag.2007.04.016
+
+[7] [Efficiency of anti-inflammatory therapy for experimental tuberculosis in genetically tuberculosis-sensitive mice].
+    Authors: Kondrat'eva TK, Rubakova EI, Evstifeev VV, Sosunov VV, Petrovskaia SN, Kondrat'eva AV, Apt AS
+    PMID: 17139836 | DOI: 
+
+[8] Synthesis, in vitro and in vivo antimycobacterial activities of diclofenac acid hydrazones and amides.
+    Authors: Sriram D, Yogeeswari P, Devakaram RV
+    PMID: 16412646 | DOI: 10.1016/j.bmc.2005.12.042
+
+[9] The modulation of intra-articular inflammation, cartilage matrix and bone loss in mono-articular arthritis induced by heat-killed Mycobacterium tuberculosis.
+    Authors: Seed MP, Gardner CR
+    PMID: 16259721 | DOI: 10.1163/156856005774382607
+
+[10] Treatment of experimental arthritis with M2000, a novel designed non-steroidal anti-inflammatory drug.
+    Authors: Mirshafiey A, Cuzzocrea S, Rehm B, Mazzon E, Saadat F, Sotoude M
+    PMID: 15882435 | DOI: 10.1111/j.1365-3083.2005.01594.x
+
+[11] In vitro and in vivo antimycobacterial activity of antiinflammatory drug, diclofenac sodium.
+    Authors: Dutta NK, Kumar KA, Mazumdar K, Dastidar SG
+    PMID: 15462188 | DOI: 
+
+[12] Therapeutic effects of benzoxazinorifamycin KRM-1648 administered alone or in combination with a half-sized secretory leukocyte protease inhibitor or the nonsteroidal anti-inflammatory drug diclofenac sodium against Mycobacterium avium complex infection in mice.
+    Authors: Sano C, Shimizu T, Sato K, Kawauchi H, Kawahara S, Tomioka H
+    PMID: 9925533 | DOI: 10.1128/AAC.43.2.360
+
+[13] [In vivo activities of benzoxazinorifamycin KRM-1648, clarithromycin, and levofloxacin, or combination of KRM-1648 with diclofenac sodium against Mycobacterium avium infection induced in mice].
+    Authors: Akaki T, Sato K, Shimizu T, Tomioka H, Kawahara S
+    PMID: 9293712 | DOI: 
+
+[14] The ex vivo measurement of malondialdehyde and chemiluminescence as possible indices for anti-inflammatory drug evaluation.
+    Authors: Dowling EJ, Symons AM, Jasani MK
+    PMID: 3117715 | DOI: "
+naltrexone	No Results	0	[]	No evidence found
+sirolimus	Direct (TB)	4	['41854047', '38008448', '21440756', '19298241']	"[1] Sirolimus Therapy in Generalized Lymphatic Anomaly With Tuberculosis: A Case Report.
+    Authors: Singhal KK, Mandal P, Singh V, Singh S, Abbey P, Yadav V, Yadav PS
+    PMID: 41854047 | DOI: 10.1002/ppul.71571
+
+[2] Lymphangioleiomyomatosis Showing the Development of Mycobacterium abscessus subsp. massiliense Infection during Sirolimus Therapy.
+    Authors: Yanagisawa A, Takimoto T, Kurahara Y, Tsuyuguchi K, Yoshida S, Hirose M, Inoue Y, Arai T
+    PMID: 38008448 | DOI: 10.2169/internalmedicine.2847-23
+
+[3] Diagnostic utility of flexible bronchoscopy in recipients of solid organ transplants.
+    Authors: Kupeli E, Akcay S, Ulubay G, Ozyurek BA, Ozdemirel TS, Haberal M
+    PMID: 21440756 | DOI: 10.1016/j.transproceed.2011.01.015
+
+[4] Lung cavitation due to Mycobacterium xenopi in a renal transplant recipient.
+    Authors: Martin-Penagos L, Rodrigo E, Ruiz JC, Aguero J, Fernandez-Mazarrasa C, Martinez L, Pinera C, Arias M
+    PMID: 19298241 | DOI: 10.1111/j.1399-3062.2009.00376.x"
+ketotifen	No Results	0	[]	No evidence found
+tamoxifen	Direct (HDT)	4	['40483737', '39335008', '36475748', '32269154']	"[1] Host-Directed Therapeutic for the treatment of Mycobacterium tuberculosis.
+    Authors: Mahajan P, Gor HR, Jadhav S, Joshi M, Nema V
+    PMID: 40483737 | DOI: S0944-5013(25)00212-5
+
+[2] Innovative Strategies in Drug Repurposing to Tackle Intracellular Bacterial Pathogens.
+    Authors: Lorente-Torres B, Llano-Verdeja J, Castanera P, Ferrero HA, Fernandez-Martinez S, Javadimarand F, Mateos LM, Letek M, Mourenza A
+    PMID: 39335008 | DOI: 10.3390/antibiotics13090834
+
+[3] Repurposing Tamoxifen as Potential Host-Directed Therapeutic for Tuberculosis.
+    Authors: Boland R, Heemskerk MT, Forn-Cuni G, Korbee CJ, Walburg KV, Esselink JJ, Carvalho Dos Santos C, de Waal AM, van der Hoeven DCM, van der Sar E, de Ries AS, Xie J, Spaink HP, van der Vaart M, Haks MC, Meijer AH, Ottenhoff THM
+    PMID: 36475748 | DOI: 10.1128/mbio.03024-22
+
+[4] Bazedoxifene Suppresses Intracellular Mycobacterium tuberculosis Growth by Enhancing Autophagy.
+    Authors: Ouyang Q, Zhang K, Lin D, Feng CG, Cai Y, Chen X
+    PMID: 32269154 | DOI: 10.1128/mSphere.00124-20"
+chloroquine	Direct (TB)	59	['38702649', '38367280', '37269671', '36657084', '36359313', '36122509', '35589021', '35452849', '34074211', '34004588', '32943400', '32861176', '31723039', '31301563', '31243942', '29653033', '28713884', '28506804', '28274307', '27371835', '26900659', '26670413', '26421992', '24958216', '24690183', '24598838', '24373723', '24341638', '24152387', '24034147', '23880069', '23454512', '23452544', '22015320', '21937493', '21376591', '20674375', '20214650', '18996179', '17189694', '17057093', '16011736', '15501751', '12139444', '12117907', '11891084', '11741250', '10508253', '9516385', '9423845', '9124832', '7949074', '1902198', '1901694', '2127346', '2453466', '3132396', '3036374', '98333']	"[1] Repurposing of anti-malarial drugs for the treatment of tuberculosis: realistic strategy or fanciful dead end?
+    Authors: Hanscheid T, Del Portal Luyten CR, Hermans SM, Grobusch MP
+    PMID: 38702649 | DOI: 10.1186/s12936-024-04967-2
+
+[2] High Target Homology Does Not Guarantee Inhibition: Aminothiazoles Emerge as Inhibitors of Plasmodium falciparum.
+    Authors: Johannsen S, Gierse RM, Kruger A, Edwards RL, Nanna V, Fontana A, Zhu D, Masini T, de Carvalho LP, Poizat M, Kieftenbelt B, Hodge DM, Alvarez S, Bunt D, Lacour A, Shams A, Meissner KA, de Souza EE, Droge M, van Vliet B, den Hartog J, Hutter MC, Held J, Odom John AR, Wrenger C, Hirsch AKH
+    PMID: 38367280 | DOI: 10.1021/acsinfecdis.3c00670
+
+[3] Tetrahydrobenzo[h]quinoline derivatives as a novel chemotype for dual antileishmanial-antimalarial activity graced with antitubercular activity: Design, synthesis and biological evaluation.
+    Authors: Ibrahim TM, Abada G, Dammann M, Maklad RM, Eldehna WM, Salem R, Abdelaziz MM, El-Domany RA, Bekhit AA, Beockler FM
+    PMID: 37269671 | DOI: S0223-5234(23)00500-7
+
+[4] Discovery and Mechanistic Analysis of Structurally Diverse Inhibitors of Acetyltransferase Eis among FDA-Approved Drugs.
+    Authors: Pang AH, Green KD, Punetha A, Thamban Chandrika N, Howard KC, Garneau-Tsodikova S, Tsodikov OV
+    PMID: 36657084 | DOI: 10.1021/acs.biochem.2c00658
+
+[5] MmpL3 Inhibition as a Promising Approach to Develop Novel Therapies against Tuberculosis: A Spotlight on SQ109, Clinical Studies, and Patents Literature.
+    Authors: Imran M, Arora MK, Chaudhary A, Khan SA, Kamal M, Alshammari MM, Alharbi RM, Althomali NA, Alzimam IM, Alshammari AA, Alharbi BH, Alshengeti A, Alsaleh AA, Alqahtani SA, Rabaan AA
+    PMID: 36359313 | DOI: 10.3390/biomedicines10112793
+
+[6] An insight into the discovery, clinical studies, compositions, and patents of macozinone: A drug targeting the DprE1 enzyme of Mycobacterium tuberculosis.
+    Authors: Imran M, Khan SA, Asdaq SMB, Almehmadi M, Abdulaziz O, Kamal M, Alshammari MK, Alsubaihi LI, Hussain KH, Alharbi AS, Alzahrani AK
+    PMID: 36122509 | DOI: S1876-0341(22)00232-5
+
+[7] Antiplasmodial and antimycobacterial activities of crude and lead-like enhanced extracts from Namibian medicinal plants.
+    Authors: Raidron C, Jordaan A, Seldon R, Warner DF, de Kock C, Taylor D, Louw S, Sunassee S, Hans RH
+    PMID: 35589021 | DOI: S0378-8741(22)00428-7
+
+[8] Infectious agents breaking the immunological tolerance: The holy grail in rheumatoid arthritis reconsidered.
+    Authors: Gremese E, Tolusso B, Bruno D, Alivernini S, Ferraccioli G
+    PMID: 35452849 | DOI: S1568-9972(22)00072-6
+
+[9] Epigenetic reader BRD4 supports mycobacterial pathogenesis by co-modulating host lipophagy and angiogenesis.
+    Authors: Mukherjee T, Bhatt B, Prakhar P, Lohia GK, Rajmani RS, Balaji KN
+    PMID: 34074211 | DOI: 10.1080/15548627.2021.1936355
+
+[10] Effects of tafenoquine against active, dormant and resistant Mycobacterium tuberculosis.
+    Authors: Sidronio MGS, Castelo Branco APOT, Abbadi BL, Macchi F, Silveira MD, Lock GA, Costa TD, de Araujo DM, Cibulski S, Bizarro CV, Machado P, Basso LA, Rodrigues-Junior VS
+    PMID: 34004588 | DOI: S1472-9792(21)00039-1
+
+[11] Phagosome-regulated mTOR signalling during sarcoidosis granuloma biogenesis.
+    Authors: Crouser ED, Locke LW, Julian MW, Bicer S, Sadee W, White P, Schlesinger LS
+    PMID: 32943400 | DOI: 2002695
+
+[12] Antimicrobial evaluation of neutral and cationic iridium(III) and rhodium(III) aminoquinoline-benzimidazole hybrid complexes.
+    Authors: Baartzes N, Jordaan A, Warner DF, Combrinck J, Taylor D, Chibale K, Smith GS
+    PMID: 32861176 | DOI: S0223-5234(20)30666-8
+
+[13] Targeting redox heterogeneity to counteract drug tolerance in replicating Mycobacterium tuberculosis.
+    Authors: Mishra R, Kohli S, Malhotra N, Bandyopadhyay P, Mehta M, Munshi M, Adiga V, Ahuja VK, Shandil RK, Rajmani RS, Seshasayee ASN, Singh A
+    PMID: 31723039 | DOI: 10.1126/scitranslmed.aaw6635
+
+[14] Bioisosteric ferrocenyl aminoquinoline-benzimidazole hybrids: Antimicrobial evaluation and mechanistic insights.
+    Authors: Baartzes N, Stringer T, Seldon R, Warner DF, Taylor D, Wittlin S, Chibale K, Smith GS
+    PMID: 31301563 | DOI: S0223-5234(19)30596-3
+
+[15] Optimization of the autophagy measurement in a human cell line and primary cells by flow cytometry.
+    Authors: Alonzi T, Petruccioli E, Vanini V, Fimia GM, Goletti D
+    PMID: 31243942 | DOI: 10.4081/ejh.2019.3044
+
+[16] Organometallic Conjugates of the Drug Sulfadoxine for Combatting Antimicrobial Resistance.
+    Authors: Chellan P, Avery VM, Duffy S, Triccas JA, Nagalingam G, Tam C, Cheng LW, Liu J, Land KM, Clarkson GJ, Romero-Canelon I, Sadler PJ
+    PMID: 29653033 | DOI: 10.1002/chem.201801090
+
+[17] Antimicrobial activity of organometallic isonicotinyl and pyrazinyl ferrocenyl-derived complexes.
+    Authors: Stringer T, Seldon R, Liu N, Warner DF, Tam C, Cheng LW, Land KM, Smith PJ, Chibale K, Smith GS
+    PMID: 28713884 | DOI: 10.1039/c7dt01952a
+
+[18] Chloroquine enhances the antimycobacterial activity of isoniazid and pyrazinamide by reversing inflammation-induced macrophage efflux.
+    Authors: Matt U, Selchow P, Dal Molin M, Strommer S, Sharif O, Schilcher K, Andreoni F, Stenzinger A, Zinkernagel AS, Zeitlinger M, Sander P, Nemeth J
+    PMID: 28506804 | DOI: S0924-8579(17)30151-6
+
+[19] [ESAT-6 inhibits autophagy in macrophages and promotes the growth of BCG].
+    Authors: Xu X, Zhao R, Zhang R, Wu J, Hu D, Xing Y, Ni S, Tie B
+    PMID: 28274307 | DOI: 
+
+[20] [Secretory acid phosphatase of Mycobacterium tuberculosis inhibits the autophagy of murine macrophages].
+    Authors: Hu D, Wang W, Zhao R, Xu X, Xing Y, Xu C, Zhang R, Wu J
+    PMID: 27371835 | DOI: 
+
+[21] Novel morpholinoquinoline nucleus clubbed with pyrazoline scaffolds: Synthesis, antibacterial, antitubercular and antimalarial activities.
+    Authors: Karad SC, Purohit VB, Thakor P, Thakkar VR, Raval DK
+    PMID: 26900659 | DOI: S0223-5234(16)30086-1
+
+[22] Biologically Active Acetylenic Amino Alcohol and N-Hydroxylated 1,2,3,4-Tetrahydro-beta-carboline Constituents of the New Zealand Ascidian Pseudodistoma opacum.
+    Authors: Wang J, Pearce AN, Chan ST, Taylor RB, Page MJ, Valentin A, Bourguet-Kondracki ML, Dalton JP, Wiles S, Copp BR
+    PMID: 26670413 | DOI: 10.1021/acs.jnatprod.5b00770
+
+[23] Synthesis and preliminary biological evaluation of a small library of hybrid compounds based on Ugi isocyanide multicomponent reactions with a marine natural product scaffold.
+    Authors: Aviles E, Prudhomme J, Le Roch KG, Franzblau SG, Chandrasena K, Mayer AM, Rodriguez AD
+    PMID: 26421992 | DOI: S0960-894X(15)30070-6
+
+[24] Medicinal chemistry discoveries among 1,3,5-triazines: recent advances (2000-2013) as antimicrobial, anti-TB, anti-HIV and antimalarials.
+    Authors: Patel RV, Keum YS, Park SW
+    PMID: 24958216 | DOI: 10.2174/1389557514666140622205904
+
+[25] Polyclonal activation of naive T cells by urease deficient-recombinant BCG that produced protein complex composed of heat shock protein 70, CysO and major membrane protein-II.
+    Authors: Tsukamoto Y, Maeda Y, Tamura T, Mukai T, Makino M
+    PMID: 24690183 | DOI: 10.1186/1471-2334-14-179
+
+[26] Gold complexes as antimicrobial agents: an overview of different biological activities in relation to the oxidation state of the gold ion and the ligand structure.
+    Authors: Glisic BD, Djuran MI
+    PMID: 24598838 | DOI: 10.1039/c4dt00022f
+
+[27] Synthesis and biological evaluation of 2-aminothiazole derivatives as antimycobacterial and antiplasmodial agents.
+    Authors: Mjambili F, Njoroge M, Naran K, De Kock C, Smith PJ, Mizrahi V, Warner D, Chibale K
+    PMID: 24373723 | DOI: S0960-894X(13)01394-2
+
+[28] 7-chloroquinoline-isatin conjugates: antimalarial, antitubercular, and cytotoxic evaluation.
+    Authors: Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Forge D, Kumar V
+    PMID: 24341638 | DOI: 10.1111/cbdd.12273
+
+[29] Efficient activation of human T cells of both CD4 and CD8 subsets by urease-deficient recombinant Mycobacterium bovis BCG that produced a heat shock protein 70-M. tuberculosis-derived major membrane protein II fusion protein.
+    Authors: Mukai T, Tsukamoto Y, Maeda Y, Tamura T, Makino M
+    PMID: 24152387 | DOI: 10.1128/CVI.00564-13
+
+[30] 4-Aminoquinoline-beta-lactam conjugates: synthesis, antimalarial, and antitubercular evaluation.
+    Authors: Raj R, Biot C, Carrere-Kremer S, Kremer L, Guerardel Y, Gut J, Rosenthal PJ, Kumar V
+    PMID: 24034147 | DOI: 10.1111/cbdd.12225
+
+[31] Hypoxia inducible NOD2 interacts with 3-O-sulfogalactoceramide and regulates vesicular homeostasis.
+    Authors: Nabatov AA, Hatzis P, Rouschop KM, van Diest P, Vooijs M
+    PMID: 23880069 | DOI: S0304-4165(13)00320-6
+
+[32] Synthesis and biological evaluation of a new class of 4-aminoquinoline-rhodanine hybrid as potent anti-infective agents.
+    Authors: Chauhan K, Sharma M, Saxena J, Singh SV, Trivedi P, Srivastava K, Puri SK, Saxena JK, Chaturvedi V, Chauhan PM
+    PMID: 23454512 | DOI: S0223-5234(13)00045-7
+
+[33] Vitamin D-dependent cathelicidin inhibits Mycobacterium marinum infection in human monocytic cells.
+    Authors: Sato E, Imafuku S, Ishii K, Itoh R, Chou B, Soejima T, Nakayama J, Hiromatsu K
+    PMID: 23452544 | DOI: S0923-1811(13)00040-6
+
+[34] Ajuga remota Benth.: from ethnopharmacology to phytomedical perspective in the treatment of malaria.
+    Authors: Cocquyt K, Cos P, Herdewijn P, Maes L, Van den Steen PE, Laekeman G
+    PMID: 22015320 | DOI: 10.1016/j.phymed.2011.08.063
+
+[35] Harmonine, a defence compound from the harlequin ladybird, inhibits mycobacterial growth and demonstrates multi-stage antimalarial activity.
+    Authors: Rohrich CR, Ngwa CJ, Wiesner J, Schmidtberg H, Degenkolb T, Kollewe C, Fischer R, Pradel G, Vilcinskas A
+    PMID: 21937493 | DOI: 10.1098/rsbl.2011.0760
+
+[36] Novel thiolactone-isatin hybrids as potential antimalarial and antitubercular agents.
+    Authors: Hans RH, Wiid IJ, van Helden PD, Wan B, Franzblau SG, Gut J, Rosenthal PJ, Chibale K
+    PMID: 21376591 | DOI: 10.1016/j.bmcl.2011.02.008
+
+[37] Design, synthesis, and in vitro antiprotozoal, antimycobacterial activities of N-2-[(7-chloroquinolin-4-yl)amino]ethylureas.
+    Authors: Nava-Zuazo C, Estrada-Soto S, Guerrero-Alvarez J, Leon-Rivera I, Molina-Salinas GM, Said-Fernandez S, Chan-Bacab MJ, Cedillo-Rivera R, Moo-Puc R, Miron-Lopez G, Navarrete-Vazquez G
+    PMID: 20674375 | DOI: 10.1016/j.bmc.2010.07.008
+
+[38] Toward the virtual screening of potential drugs in the homology modeled NAD+ dependent DNA ligase from Mycobacterium tuberculosis.
+    Authors: Singh V, Somvanshi P
+    PMID: 20214650 | DOI: 10.2174/092986610790225950
+
+[39] The bioactivity of novel furanoterpenoids isolated from Siphonochilus aethiopicus.
+    Authors: Lategan CA, Campbell WE, Seaman T, Smith PJ
+    PMID: 18996179 | DOI: 10.1016/j.jep.2008.10.007
+
+[40] Synthesis and biological evaluation of thiazolidine-2-one 1,1-dioxide as inhibitors of Escherichia coli beta-ketoacyl-ACP-synthase III (FabH).
+    Authors: Alhamadsheh MM, Waters NC, Huddler DP, Kreishman-Deitrick M, Florova G, Reynolds KA
+    PMID: 17189694 | DOI: 10.1016/j.bmcl.2006.11.067
+
+[41] Immunostimulatory activity of recombinant Mycobacterium bovis BCG that secretes major membrane protein II of Mycobacterium leprae.
+    Authors: Makino M, Maeda Y, Inagaki K
+    PMID: 17057093 | DOI: 10.1128/IAI.00878-06
+
+[42] Efficiency of combined methotrexate/chloroquine therapy in adjuvant-induced arthritis.
+    Authors: Silva MA, Ishii-Iwamoto EL, Bracht A, Caparroz-Assef SM, Kimura E, Cuman RK, Bersani-Amado CA
+    PMID: 16011736 | DOI: 10.1111/j.1472-8206.2005.00346.x
+
+[43] Recognition of mycobacterial antigens delivered by genetically detoxified Bordetella pertussis adenylate cyclase by T cells from cattle with bovine tuberculosis.
+    Authors: Vordermeier HM, Simsova M, Wilkinson KA, Wilkinson RJ, Hewinson RG, Sebo P, Leclerc C
+    PMID: 15501751 | DOI: 10.1128/IAI.72.11.6255-6261.2004
+
+[44] Mixed steroidal 1,2,4,5-tetraoxanes: antimalarial and antimycobacterial activity.
+    Authors: Solaja BA, Terzic N, Pocsfalvi G, Gerena L, Tinant B, Opsenica D, Milhous WK
+    PMID: 12139444 | DOI: 10.1021/jm020891g
+
+[45] Phosphoantigen presentation by macrophages to mycobacterium tuberculosis--reactive Vgamma9Vdelta2+ T cells: modulation by chloroquine.
+    Authors: Rojas RE, Torres M, Fournie JJ, Harding CV, Boom WH
+    PMID: 12117907 | DOI: 10.1128/IAI.70.8.4019-4027.2002
+
+[46] Screening of African medicinal plants for antimicrobial and enzyme inhibitory activity.
+    Authors: Tshibangu JN, Chifundera K, Kaminsky R, Wright AD, Konig GM
+    PMID: 11891084 | DOI: 10.1016/s0378-8741(01)00409-3
+
+[47] Effect of chloroquine on phagolysosomal fusion in cultured guinea pig alveolar macrophages: implications in drug delivery.
+    Authors: Bhat M, Hickey AJ
+    PMID: 11741250 | DOI: 10.1208/ps020434
+
+[48] Enhancement of the T cell response to a mycobacterial peptide by conjugation to synthetic branched polypeptide.
+    Authors: Wilkinson KA, Hudecz F, Vordermeier HM, Ivanyi J, Wilkinson RJ
+    PMID: 10508253 | DOI: 10.1002/(SICI)1521-4141(199909)29:09<2788::AID-IMMU2788>3.0.CO;2-4
+
+[49] Major histocompatibility complex class II-dependent antigen presentation by human intestinal endothelial cells.
+    Authors: Haraldsen G, Sollid LM, Bakke O, Farstad IN, Kvale D, Molberg, Norstein J, Stang E, Brandtzaeg P
+    PMID: 9516385 | DOI: 10.1016/s0016-5085(98)70578-5
+
+[50] Processing of Mycobacterium tuberculosis bacilli by human monocytes for CD4+ alphabeta and gammadelta T cells: role of particulate antigen.
+    Authors: Balaji KN, Boom WH
+    PMID: 9423845 | DOI: 10.1128/IAI.66.1.98-106.1998
+
+[51] Lymphocyte proliferative response and subset profiles during extended periods of chloroquine or primaquine prophylaxis.
+    Authors: Fryauff DJ, Richards AL, Baird JK, Richie TL, Mouzin E, Tjitra E, Sutamihardja MA, Ratiwayanto S, Hadiputranto H, Larasati RP, Pudjoprawoto N, Subianto B, Hoffman SL
+    PMID: 9124832 | DOI: 10.1128/AAC.40.12.2737
+
+[52] Chloroquine does not enhance the activity of clarithromycin against multiplication of Mycobacterium avium within human macrophages.
+    Authors: Lazard T, Perronne C, Truffot-Pernot C, Grosset J, Vilde JL, Pocidalo JJ
+    PMID: 7949074 | DOI: 10.1016/0962-8479(94)90133-3
+
+[53] Evidence that vesicles containing living, virulent Mycobacterium tuberculosis or Mycobacterium avium in cultured human macrophages are not acidic.
+    Authors: Crowle AJ, Dahl R, Ross E, May MH
+    PMID: 1902198 | DOI: 10.1128/iai.59.5.1823-1831.1991
+
+[54] Killing of intracellular Mycobacterium tuberculosis by receptor-mediated drug delivery.
+    Authors: Majumdar S, Basu SK
+    PMID: 1901694 | DOI: 10.1128/AAC.35.1.135
+
+[55] Inhibition of tubercle bacilli in cultured human macrophages by chloroquine used alone and in combination with streptomycin, isoniazid, pyrazinamide, and two metabolites of vitamin D3.
+    Authors: Crowle AJ, May MH
+    PMID: 2127346 | DOI: 10.1128/AAC.34.11.2217
+
+[56] Attempts to characterize the mechanisms involved in mycobacterial growth inhibition by gamma-interferon-activated bone marrow macrophages.
+    Authors: Flesch IE, Kaufmann SH
+    PMID: 2453466 | DOI: 10.1128/iai.56.6.1464-1469.1988
+
+[57] The processing and presentation of mycobacterial antigens by human monocytes.
+    Authors: Bhardwaj V, Colston MJ
+    PMID: 3132396 | DOI: 10.1002/eji.1830180506
+
+[58] Epstein-Barr virus-transformed B cells process and present Mycobacterium tuberculosis particulate antigens to T-cell clones.
+    Authors: Lombardi G, del Gallo F, Vismara D, Piccolella E, de Martino C, Garzelli C, Puglisi C, Colizzi V
+    PMID: 3036374 | DOI: 10.1016/0008-8749(87)90237-1
+
+[59] Manipulations of the phagosome-lysosome fusion response in cultured macrophages. Enhancement of fusion by chloroquine and other amines.
+    Authors: Hart PD, Young MR
+    PMID: 98333 | DOI: 10.1016/0014-4827(78)90516-5"
+methoxsalen	No Results	0	[]	No evidence found
+treprostinil	No Results	0	[]	No evidence found
+nabumetone	No Results	0	[]	No evidence found
+verapamil	Direct (TB)	98	['41906540', '41700548', '41303606', '40887591', '40697410', '40244664', '39676255', '39446300', '38664815', '38572960', '38360998', '38047702', '38032920', '37983978', '37945121', '37883448', '37577511', '37453496', '37079382', '37067206', '36763530', '36718107', '36584486', '36448553', '35570540', '35527462', '35317616', '34981940', '33927718', '33294223', '32553016', '31560814', '31430699', '31339194', '31073401', '31052403', '30851617', '30648892', '30602521', '30529931', '30475855', '29987154', '29579201', '29510519', '29463541', '29098993', '29038265', '28668684', '28584158', '28416541', '28162983', '27737555', '27468130', '27261264', '27211826', '27185800', '26980498', '26919135', '26907951', '26808409', '26643325', '26303802', '26207741', '26073420', '25972842', '25887373', '25690361', '25689777', '25331694', '25297690', '25010492', '24940805', '24894561', '24583350', '24532601', '24126586', '23805786', '23242857', '23165464', '22314527', '22024828', '21871582', '21623040', '21512166', '21376383', '21332993', '20979796', '20716818', '18430720', '18396785', '17218448', '17002061', '15273144', '12183232', '12057006', '11181364', '10080959', '7908516']	"[1] Dual-Peptide Nanoplatform: Mesoporous Silica Nanoparticles Functionalized With a Cell-Penetrating Peptide and Loaded With Rationally Designed Antimicrobial Peptides for Tuberculosis Therapy.
+    Authors: Carnero Canales CS, Roque-Borda CA, Negri ACC, Delgado OR, Catarin Nunes LO, Resende FA, Barud H, Santos-Filho NA, Garrido SS, Oliveira KC, de Medeiros AI, Sabio RM, Pavan FR
+    PMID: 41906540 | DOI: 10.1002/adhm.202504285
+
+[2] Role of efflux pump inhibitors in enhancing the effect of bedaquiline on M. tuberculosis.
+    Authors: Yildirim K
+    PMID: 41700548 | DOI: 10.1080/17460913.2026.2633085
+
+[3] Verapamil Suppresses the Development of Resistance Against Anti-Tuberculosis Drugs in Mycobacteria.
+    Authors: Liu K, Buitenhek E, Kuijl CP, Mulla Y, Luirink J, Bald D
+    PMID: 41303606 | DOI: 10.3390/ijms262211124
+
+[4] Efflux pumps positively contribute to rifampin resistance in rpoB mutant Mycobacterium tuberculosis.
+    Authors: Meng F, Chen Y, Wei Z, Liu Z, Lai X, Lei J, Wu L, Deng L, Wang Q, Yang Y, Li H, Xie B, Gong L, Niu Q, Gao J, Wang N, Hu J
+    PMID: 40887591 | DOI: 10.1186/s12941-025-00816-5
+
+[5] A potent phenylalkylamine disrupts mycobacterial membrane bioenergetics and augments bactericidal activity of bedaquiline.
+    Authors: Phua ZY, Li M, Ali A, Cheong CCS, Goh KJ, Seto MYK, Ng ASY, Sarathy JP, Goh BC, Go ML, Chui WK, Dick T, Lam Y
+    PMID: 40697410 | DOI: 10.1016/j.isci.2025.112915
+
+[6] Verapamil and its metabolite norverapamil inhibit the Mycobacterium tuberculosis MmpS5L5 efflux pump to increase bedaquiline activity.
+    Authors: Fountain AJ, Waller NJE, Cheung CY, Jowsey W, Chrisp MT, Troll M, Edelstein PH, Cook GM, McNeil MB, Ramakrishnan L
+    PMID: 40244664 | DOI: 10.1073/pnas.2426827122
+
+[7] Thymol as Biofilm and Efflux Pump Inhibitor: A Dual-Action Approach to Combat Mycobacterium tuberculosis.
+    Authors: Shankar Das B, Sarangi A, Pahuja I, Singh V, Ojha S, Giri S, Bhaskar A, Bhattacharya D
+    PMID: 39676255 | DOI: 10.1002/cbf.70030
+
+[8] Molecular Indicator for Distinguishing Multi-drug-Resistant Tuberculosis from Drug Sensitivity Tuberculosis and Potential Medications for Treatment.
+    Authors: Song S, Gan D, Wu D, Li T, Zhang S, Lu Y, Jin G
+    PMID: 39446300 | DOI: 10.1007/s12033-024-01299-z
+
+[9] The importance of heteroresistance and efflux pumps in bedaquiline-resistant Mycobacterium tuberculosis isolates from Iran.
+    Authors: Madadi-Goli N, Ahmadi K, Kamakoli MK, Azizi M, Khanipour S, Dizaji SP, Nasehi M, Siadat SD, Fateh A, Vaziri F
+    PMID: 38664815 | DOI: 10.1186/s12941-024-00694-3
+
+[10] Efflux pump effects on levofloxacin resistance in Mycobacterium abscessus.
+    Authors: Teng T, Chen S, Huo F, Jia J, Zhao L, Jiang G, Wang F, Chu N, Huang H
+    PMID: 38572960 | DOI: 10.1128/aac.01348-23
+
+[11] Phytocompounds as potential inhibitors of mycobacterial multidrug efflux pump Rv1258c: an in silico approach.
+    Authors: Biswas SS, Roy JD
+    PMID: 38360998 | DOI: 10.1186/s13568-024-01673-9
+
+[12] Overexpression of efflux pump genes is one of the mechanisms causing drug resistance in Mycobacterium tuberculosis.
+    Authors: Long Y, Wang B, Xie T, Luo R, Tang J, Deng J, Wang C
+    PMID: 38047702 | DOI: 10.1128/spectrum.02510-23
+
+[13] Interactive effect of oral anti-hyperglycaemic or anti-hypertensive drugs on the inhibitory and bactericidal activity of first line anti-TB drugs against M. tuberculosis.
+    Authors: Trivedi P, Chaturvedi V
+    PMID: 38032920 | DOI: 10.1371/journal.pone.0292397
+
+[14] A Dose-Finding Study to Guide Use of Verapamil as an Adjunctive Therapy in Tuberculosis.
+    Authors: Padmapriyadarsini C, Szumowski JD, Akbar N, Shanmugasundaram P, Jain A, Bathragiri M, Pattnaik M, Turuk J, Karunaianantham R, Balakrishnan S, Pati S, Kumar AKH, Rathore MK, Raja J, Naidu KR, Horn J, Whitworth L, Sewell R, Ramakrishnan L, Swaminathan S, Edelstein PH
+    PMID: 37983978 | DOI: 10.1002/cpt.3108
+
+[15] Investigation of efflux pump genes in isoniazid resistant Mycobacterium tuberculosis isolates.
+    Authors: Kaya H, Ersoy L, Ulger M, Bozok T, Aslan G
+    PMID: 37945121 | DOI: S0255-0857(23)00144-5
+
+[16] Antimicrobial drug resistant features of Mycobacterium tuberculosis associated with treatment failure.
+    Authors: Mushtaq F, Raza SM, Ahmad A, Aslam H, Adeel A, Saleem S, Ahmad I
+    PMID: 37883448 | DOI: 10.1371/journal.pone.0293194
+
+[17] A dose-finding study to guide use of verapamil as an adjunctive therapy in tuberculosis.
+    Authors: Padmapriyadarsini C, Szumowski JD, Akbar N, Shanmugasundaram P, Jain A, Bathragiri M, Pattnaik M, Turuk J, Karunaianantham R, Balakrishnan S, Pati S, Agibothu Kupparam HK, Rathore MK, Raja J, Naidu KR, Horn J, Whitworth L, Sewell R, Ramakrishnan L, Swaminathan S, Edelstein PH
+    PMID: 37577511 | DOI: 2023.07.28.23293316
+
+[18] The potential role of drug transporters and amikacin modifying enzymes in M. avium.
+    Authors: Schildkraut JA, Coolen JPM, Ruesen C, van den Heuvel JJMW, Acena LE, Wertheim HFL, Jansen RS, Koenderink JB, Te Brake LHM, van Ingen J
+    PMID: 37453496 | DOI: S2213-7165(23)00111-X
+
+[19] Mycobacterium tuberculosis Gene Expression Associated With Fluoroquinolone Resistance and Efflux Pump Inhibition.
+    Authors: van der Heijden YF, Maruri F, Blackman A, Morrison R, Guo Y, Sterling TR
+    PMID: 37079382 | DOI: 10.1093/infdis/jiad112
+
+[20] [Investigation of Efflux Pump Genes in Resistant Mycobacterium tuberculosis Complex Clinical Isolates Exposed to First Line Antituberculosis Drugs and Verapamil Combination].
+    Authors: Ozgur D, Ersoy L, Ulger M, Tezcan Ulger S, Aslan G
+    PMID: 37067206 | DOI: 10.5578/mb.20239916
+
+[21] The human proton pump inhibitors inhibit Mycobacterium tuberculosis rifampicin efflux and macrophage-induced rifampicin tolerance.
+    Authors: Lake MA, Adams KN, Nie F, Fowler E, Verma AK, Dei S, Teodori E, Sherman DR, Edelstein PH, Spring DR, Troll M, Ramakrishnan L
+    PMID: 36763530 | DOI: 10.1073/pnas.2215512120
+
+[22] Efflux pump effects on Mycobacterium tuberculosis drug resistance.
+    Authors: Valiyeva G, Durupinar B, Coban AY
+    PMID: 36718107 | DOI: 10.1080/1120009X.2023.2173857
+
+[23] Mab2780c, a TetV-like efflux pump, confers high-level spectinomycin resistance in mycobacterium abscessus.
+    Authors: Hurst-Hess KR, Phelps GA, Wilt LA, Lee RE, Ghosh P
+    PMID: 36584486 | DOI: S1472-9792(22)00132-9
+
+[24] Elucidating the function of hypothetical PE_PGRS45 protein of Mycobacterium tuberculosis as an oxido-reductase: a potential target for drug repurposing for the treatment of tuberculosis.
+    Authors: Medha, Joshi H, Sharma S, Sharma M
+    PMID: 36448553 | DOI: 10.1080/07391102.2022.2151514
+
+[25] Verapamil Regulates the Macrophage Immunity to Mycobacterium tuberculosis through NF-kappaB Signaling.
+    Authors: Gong W, Cui R, Song L, Yang Y, Zhang J, Liang Y, Bai X, Wang J, Wang L, Wu X, Zhao W
+    PMID: 35570540 | DOI: 10.2174/1566524022666220513092244
+
+[26] [Effects of four efflux pump inhibitors on the activities of clarithromycin against Mycobacterium abscessus].
+    Authors: Teng TL, Shang YY, Huang HR, Chu NH, Chen ST
+    PMID: 35527462 | DOI: 10.3760/cma.j.cn112147-20210923-00669
+
+[27] Rescue of susceptibility to second-line drugs in resistant clinical isolates of Mycobacterium tuberculosis.
+    Authors: Maringolo-Ribeiro C, Grecco JA, Bellato DL, Almeida AL, Baldin VP, Caleffi-Ferracioli KR, Pavan FR
+    PMID: 35317616 | DOI: 10.2217/fmb-2021-0215
+
+[28] Mycobactin Analogues with Excellent Pharmacokinetic Profile Demonstrate Potent Antitubercular Specific Activity and Exceptional Efflux Pump Inhibition.
+    Authors: Shyam M, Verma H, Bhattacharje G, Mukherjee P, Singh S, Kamilya S, Jalani P, Das S, Dasgupta A, Mondal A, Das AK, Singh A, Brucoli F, Bagneris C, Dickman R, Basavanakatti VN, Naresh Babu P, Sankaran V, Dev A, Sinha BN, Bhakta S, Jayaprakash V
+    PMID: 34981940 | DOI: 10.1021/acs.jmedchem.1c01349
+
+[29] Repurposing Immunomodulatory Drugs to Combat Tuberculosis.
+    Authors: Fatima S, Bhaskar A, Dwivedi VP
+    PMID: 33927718 | DOI: 10.3389/fimmu.2021.645485
+
+[30] Ion Transport Modulators as Antimycobacterial Agents.
+    Authors: Mitini-Nkhoma SC, Fernando N, Ishaka GKD, Handunnetti SM, Pathirana SL
+    PMID: 33294223 | DOI: 10.1155/2020/3767915
+
+[31] Isoniazid and verapamil modulatory activity and efflux pump gene expression in Mycobacterium tuberculosis.
+    Authors: de Souza JVP, Murase LS, Caleffi-Ferracioli KR, Palomo CT, de Lima Scodro RB, Siqueira VLD, Pavan FR, Cardoso RF
+    PMID: 32553016 | DOI: 10.5588/ijtld.19.0458
+
+[32] Exploration of 5-(5-nitrothiophen-2-yl)-4,5-dihydro-1H-pyrazoles as selective, multitargeted antimycobacterial agents.
+    Authors: Agre N, Khambete M, Maitra A, Gupta A, Munshi T, Bhakta S, Degani M
+    PMID: 31560814 | DOI: 10.1111/cbdd.13624
+
+[33] In silico and in vitro evaluation of tetrahydropyridine compounds as efflux inhibitors in Mycobacterium abscessus.
+    Authors: Ramis IB, Vianna JS, Silva Junior L, von Groll A, Ramos DF, Lobo MM, Zanatta N, Viveiros M, Silva PEAD
+    PMID: 31430699 | DOI: S1472-9792(19)30065-4
+
+[34] Synthesis and mycobacterial evaluation of 5-substituted-6-acetyl-2-amino-7-methyl-5,8-dihydropyrido-[2,3-d]pyrimidin-4(3H)-one derivatives.
+    Authors: Agre N, Degani M, Gupta A, Bhakta S, Ray MK
+    PMID: 31339194 | DOI: 10.1002/ardp.201900068
+
+[35] Scrutinizing the drug resistance mechanism of multi- and extensively-drug resistant Mycobacterium tuberculosis: mutations versus efflux pumps.
+    Authors: Ghajavand H, Kargarpour Kamakoli M, Khanipour S, Pourazar Dizaji S, Masoumi M, Rahimi Jamnani F, Fateh A, Yaseri M, Siadat SD, Vaziri F
+    PMID: 31073401 | DOI: 10.1186/s13756-019-0516-4
+
+[36] Sodium Hyaluronate Nanocomposite Respirable Microparticles to Tackle Antibiotic Resistance with Potential Application in Treatment of Mycobacterial Pulmonary Infections.
+    Authors: Rossi I, Buttini F, Sonvico F, Affaticati F, Martinelli F, Annunziato G, Machado D, Viveiros M, Pieroni M, Bettini R
+    PMID: 31052403 | DOI: 10.3390/pharmaceutics11050203
+
+[37] Assessment of preclinical drug interactions of bedaquiline by a highly sensitive LC-ESI-MS/MS based bioanalytical method.
+    Authors: Kotwal P, Magotra A, Dogra A, Sharma S, Gour A, Bhatt S, Wazir P, Singh PP, Singh G, Nandi U
+    PMID: 30851617 | DOI: S1570-0232(18)31469-7
+
+[38] Modulatory effects of verapamil in rifampicin activity against Mycobacterium tuberculosis.
+    Authors: Caleffi-Ferracioli KR, Cardoso RF, de Souza JV, Murase LS, Canezin PH, Scodro RB, Ld Siqueira V, Pavan FR
+    PMID: 30648892 | DOI: 10.2217/fmb-2018-0277
+
+[39] High Prevalence of Bedaquiline Resistance in Treatment-Naive Tuberculosis Patients and Verapamil Effectiveness.
+    Authors: Ghajavand H, Kargarpour Kamakoli M, Khanipour S, Pourazar Dizaji S, Masoumi M, Rahimi Jamnani F, Fateh A, Siadat SD, Vaziri F
+    PMID: 30602521 | DOI: 10.1128/AAC.02530-18
+
+[40] Molecular modelling and competitive inhibition of a Mycobacterium tuberculosis multidrug-resistance efflux pump.
+    Authors: Scaini JLR, Camargo AD, Seus VR, von Groll A, Werhli AV, da Silva PEA, Machado KDS
+    PMID: 30529931 | DOI: S1093-3263(18)30411-X
+
+[41] Molecular modelling and simulation studies of the Mycobacterium tuberculosis multidrug efflux pump protein Rv1258c.
+    Authors: Cloete R, Kapp E, Joubert J, Christoffels A, Malan SF
+    PMID: 30475855 | DOI: 10.1371/journal.pone.0207605
+
+[42] Assessment of the Additional Value of Verapamil to a Moxifloxacin and Linezolid Combination Regimen in a Murine Tuberculosis Model.
+    Authors: Pieterman ED, Te Brake LHM, de Knegt GJ, van der Meijden A, Alffenaar JC, Bax HI, Aarnoutse RE, de Steenwinkel JEM
+    PMID: 29987154 | DOI: 10.1128/AAC.01354-18
+
+[43] Intramacrophage Mycobacterium tuberculosis efflux pump gene regulation after rifampicin and verapamil exposure.
+    Authors: Canezin PH, Caleffi-Ferracioli KR, Scodro RBL, Siqueira VLD, Pavan FR, Barros ILE, Cardoso RF
+    PMID: 29579201 | DOI: 10.1093/jac/dky091
+
+[44] Efflux Activity Differentially Modulates the Levels of Isoniazid and Rifampicin Resistance among Multidrug Resistant and Monoresistant Mycobacterium tuberculosis Strains.
+    Authors: Machado D, Perdigao J, Portugal I, Pieroni M, Silva PA, Couto I, Viveiros M
+    PMID: 29510519 | DOI: 10.3390/antibiotics7010018
+
+[45] Verapamil Targets Membrane Energetics in Mycobacterium tuberculosis.
+    Authors: Chen C, Gardete S, Jansen RS, Shetty A, Dick T, Rhee KY, Dartois V
+    PMID: 29463541 | DOI: 10.1128/AAC.02107-17
+
+[46] Effect of efflux pump inhibitors on the susceptibility of Mycobacterium tuberculosis to isoniazid.
+    Authors: Jaiswal I, Jain A, Verma SK, Singh P, Kant S, Singh M
+    PMID: 29098993 | DOI: 10.4103/0970-2113.217567
+
+[47] Verapamil Increases the Bioavailability and Efficacy of Bedaquiline but Not Clofazimine in a Murine Model of Tuberculosis.
+    Authors: Xu J, Tasneen R, Peloquin CA, Almeida DV, Li SY, Barnes-Boyle K, Lu Y, Nuermberger E
+    PMID: 29038265 | DOI: 10.1128/AAC.01692-17
+
+[48] High incidence of fluoroquinolone resistance and effect of efflux pump inhibitors on moxifloxacin resistance among Mycobacterium tuberculosis isolates causing urinary tract infection in Taiwan.
+    Authors: Chien JY, Yu CJ, Hsueh PR
+    PMID: 28668684 | DOI: S0924-8579(17)30207-8
+
+[49] Identification of Novel Efflux Proteins Rv0191, Rv3756c, Rv3008, and Rv1667c Involved in Pyrazinamide Resistance in Mycobacterium tuberculosis.
+    Authors: Zhang Y, Zhang J, Cui P, Zhang Y, Zhang W
+    PMID: 28584158 | DOI: 10.1128/AAC.00940-17
+
+[50] Efflux Attenuates the Antibacterial Activity of Q203 in Mycobacterium tuberculosis.
+    Authors: Jang J, Kim R, Woo M, Jeong J, Park DE, Kim G, Delorme V
+    PMID: 28416541 | DOI: 10.1128/AAC.02637-16
+
+[51] Activity of moxifloxacin and linezolid against Mycobacterium tuberculosis in combination with potentiator drugs verapamil, timcodar, colistin and SQ109.
+    Authors: de Knegt GJ, van der Meijden A, de Vogel CP, Aarnoutse RE, de Steenwinkel JE
+    PMID: 28162983 | DOI: S0924-8579(17)30029-8
+
+[52] Design, Synthesis, and Evaluation of Novel Hybrid Efflux Pump Inhibitors for Use against Mycobacterium tuberculosis.
+    Authors: Kumar M, Singh K, Naran K, Hamzabegovic F, Hoft DF, Warner DF, Ruminski P, Abate G, Chibale K
+    PMID: 27737555 | DOI: 10.1021/acsinfecdis.6b00111
+
+[53] Loperamide Restricts Intracellular Growth of Mycobacterium tuberculosis in Lung Macrophages.
+    Authors: Juarez E, Carranza C, Sanchez G, Gonzalez M, Chavez J, Sarabia C, Torres M, Sada E
+    PMID: 27468130 | DOI: 10.1165/rcmb.2015-0383OC
+
+[54] A novel resistance mutation in eccC5 of the ESX-5 secretion system confers ofloxacin resistance in Mycobacterium tuberculosis.
+    Authors: Eilertson B, Maruri F, Blackman A, Guo Y, Herrera M, van der Heijden Y, Shyr Y, Sterling TR
+    PMID: 27261264 | DOI: 10.1093/jac/dkw168
+
+[55] Development of efflux pump inhibitors in antituberculosis therapy.
+    Authors: Song L, Wu X
+    PMID: 27211826 | DOI: S0924-8579(16)30073-5
+
+[56] Mutations in pepQ Confer Low-Level Resistance to Bedaquiline and Clofazimine in Mycobacterium tuberculosis.
+    Authors: Almeida D, Ioerger T, Tyagi S, Li SY, Mdluli K, Andries K, Grosset J, Sacchettini J, Nuermberger E
+    PMID: 27185800 | DOI: 10.1128/AAC.00753-16
+
+[57] Morphological changes and differentially expressed efflux pump genes in Mycobacterium tuberculosis exposed to a rifampicin and verapamil combination.
+    Authors: Caleffi-Ferracioli KR, Amaral RC, Demitto FO, Maltempe FG, Canezin PH, Scodro RB, Nakamura CV, Leite CQ, Siqueira VL, Cardoso RF
+    PMID: 26980498 | DOI: S1472-9792(14)20606-8
+
+[58] Ion Channel Blockers as Antimicrobial Agents, Efflux Inhibitors, and Enhancers of Macrophage Killing Activity against Drug Resistant Mycobacterium tuberculosis.
+    Authors: Machado D, Pires D, Perdigao J, Couto I, Portugal I, Martins M, Amaral L, Anes E, Viveiros M
+    PMID: 26919135 | DOI: 10.1371/journal.pone.0149326
+
+[59] Design and Synthesis of 1-((1,5-Bis(4-chlorophenyl)-2-methyl-1H-pyrrol-3-yl)methyl)-4-methylpiperazine (BM212) and N-Adamantan-2-yl-N'-((E)-3,7-dimethylocta-2,6-dienyl)ethane-1,2-diamine (SQ109) Pyrrole Hybrid Derivatives: Discovery of Potent Antitubercular Agents Effective against Multidrug-Resistant Mycobacteria.
+    Authors: Bhakta S, Scalacci N, Maitra A, Brown AK, Dasugari S, Evangelopoulos D, McHugh TD, Mortazavi PN, Twist A, Petricci E, Manetti F, Castagnolo D
+    PMID: 26907951 | DOI: 10.1021/acs.jmedchem.6b00031
+
+[60] In Vitro Evaluation of Inhalable Verapamil-Rifapentine Particles for Tuberculosis Therapy.
+    Authors: Parumasivam T, Chan JG, Pang A, Quan DH, Triccas JA, Britton WJ, Chan HK
+    PMID: 26808409 | DOI: 10.1021/acs.molpharmaceut.5b00833
+
+[61] New Verapamil Analogs Inhibit Intracellular Mycobacteria without Affecting the Functions of Mycobacterium-Specific T Cells.
+    Authors: Abate G, Ruminiski PG, Kumar M, Singh K, Hamzabegovic F, Hoft DF, Eickhoff CS, Selimovic A, Campbell M, Chibale K
+    PMID: 26643325 | DOI: 10.1128/AAC.01567-15
+
+[62] Mutation of Rv2887, a marR-like gene, confers Mycobacterium tuberculosis resistance to an imidazopyridine-based agent.
+    Authors: Winglee K, Lun S, Pieroni M, Kozikowski A, Bishai W
+    PMID: 26303802 | DOI: 10.1128/AAC.01341-15
+
+[63] Correction: In Vitro Activity of Rifampicin and Verapamil Combination in Multidrug-Resistant Mycobacterium tuberculosis.
+    Authors: Demitto Fde O, do Amaral RC, Maltempe FG, Siqueira VL, Scodro RB, Lopes MA, Caleffi-Ferracioli KR, Canezin PH, Cardoso RF
+    PMID: 26207741 | DOI: 10.1371/journal.pone.0133343
+
+[64] Exploring the potential of adjunct therapy in tuberculosis.
+    Authors: Rayasam GV, Balganesh TS
+    PMID: 26073420 | DOI: S0165-6147(15)00095-4
+
+[65] Enhancement of antibiotic activity by efflux inhibitors against multidrug resistant Mycobacterium tuberculosis clinical isolates from Brazil.
+    Authors: Coelho T, Machado D, Couto I, Maschmann R, Ramos D, von Groll A, Rossetti ML, Silva PA, Viveiros M
+    PMID: 25972842 | DOI: 10.3389/fmicb.2015.00330
+
+[66] Tetrandrine reverses drug resistance in isoniazid and ethambutol dual drug-resistant Mycobacterium tuberculosis clinical isolates.
+    Authors: Zhang Z, Yan J, Xu K, Ji Z, Li L
+    PMID: 25887373 | DOI: 10.1186/s12879-015-0905-0
+
+[67] Study of efflux pump gene expression in rifampicin-monoresistant Mycobacterium tuberculosis clinical isolates.
+    Authors: Li G, Zhang J, Guo Q, Wei J, Jiang Y, Zhao X, Zhao LL, Liu Z, Lu J, Wan K
+    PMID: 25690361 | DOI: 10.1038/ja.2015.9
+
+[68] In vitro activity of rifampicin and verapamil combination in multidrug-resistant mycobacterium tuberculosis.
+    Authors: Demitto Fde O, do Amaral RC, Maltempe FG, Siqueira VL, Scodro RB, Lopes MA, Caleffi-Ferracioli KR, Canezin PH, Cardoso RF
+    PMID: 25689777 | DOI: 10.1371/journal.pone.0116545
+
+[69] Verapamil increases the bactericidal activity of bedaquiline against Mycobacterium tuberculosis in a mouse model.
+    Authors: Gupta S, Tyagi S, Bishai WR
+    PMID: 25331694 | DOI: 10.1128/AAC.04019-14
+
+[70] Docking analysis insights quercetin can be a non-antibiotic adjuvant by inhibiting Mmr drug efflux pump in Mycobacterium sp. and its homologue EmrE in Escherichia coli.
+    Authors: Suriyanarayanan B, Sarojini Santhosh R
+    PMID: 25297690 | DOI: 10.1080/07391102.2014.974211
+
+[71] Acquired resistance of Mycobacterium tuberculosis to bedaquiline.
+    Authors: Andries K, Villellas C, Coeck N, Thys K, Gevers T, Vranckx L, Lounis N, de Jong BC, Koul A
+    PMID: 25010492 | DOI: 10.1371/journal.pone.0102135
+
+[72] Ofloxacin resistance in Mycobacterium tuberculosis is associated with efflux pump activity independent of resistance pattern and genotype.
+    Authors: Sun Z, Xu Y, Sun Y, Liu Y, Zhang X, Huang H, Li C
+    PMID: 24940805 | DOI: 10.1089/mdr.2013.0171
+
+[73] Synthesis of new verapamil analogues and their evaluation in combination with rifampicin against Mycobacterium tuberculosis and molecular docking studies in the binding site of efflux protein Rv1258c.
+    Authors: Singh K, Kumar M, Pavadai E, Naran K, Warner DF, Ruminski PG, Chibale K
+    PMID: 24894561 | DOI: S0960-894X(14)00522-8
+
+[74] Development of antimycobacterial tetrahydrothieno[2,3-c]pyridine-3-carboxamides and hexahydrocycloocta[b]thiophene-3-carboxamides: Molecular modification from known antimycobacterial lead.
+    Authors: Nallangi R, Samala G, Sridevi JP, Yogeeswari P, Sriram D
+    PMID: 24583350 | DOI: S0223-5234(14)00148-2
+
+[75] Verapamil, and its metabolite norverapamil, inhibit macrophage-induced, bacterial efflux pump-mediated tolerance to multiple anti-tubercular drugs.
+    Authors: Adams KN, Szumowski JD, Ramakrishnan L
+    PMID: 24532601 | DOI: 10.1093/infdis/jiu095
+
+[76] Efflux inhibition with verapamil potentiates bedaquiline in Mycobacterium tuberculosis.
+    Authors: Gupta S, Cohen KA, Winglee K, Maiga M, Diarra B, Bishai WR
+    PMID: 24126586 | DOI: 10.1128/AAC.01462-13
+
+[77] Acceleration of tuberculosis treatment by adjunctive therapy with verapamil as an efflux inhibitor.
+    Authors: Gupta S, Tyagi S, Almeida DV, Maiga MC, Ammerman NC, Bishai WR
+    PMID: 23805786 | DOI: 10.1164/rccm.201304-0650OC
+
+[78] Antimicrobial efflux pumps and Mycobacterium tuberculosis drug tolerance: evolutionary considerations.
+    Authors: Szumowski JD, Adams KN, Edelstein PH, Ramakrishnan L
+    PMID: 23242857 | DOI: 10.1007/82_2012_300
+
+[79] Role of the Mmr efflux pump in drug resistance in Mycobacterium tuberculosis.
+    Authors: Rodrigues L, Villellas C, Bailo R, Viveiros M, Ainsa JA
+    PMID: 23165464 | DOI: 10.1128/AAC.01482-12
+
+[80] Efflux pumps of Mycobacterium tuberculosis play a significant role in antituberculosis activity of potential drug candidates.
+    Authors: Balganesh M, Dinesh N, Sharma S, Kuruppath S, Nair AV, Sharma U
+    PMID: 22314527 | DOI: 10.1128/AAC.06003-11
+
+[81] MmpL3 is the cellular target of the antitubercular pyrrole derivative BM212.
+    Authors: La Rosa V, Poce G, Canseco JO, Buroni S, Pasca MR, Biava M, Raju RM, Porretta GC, Alfonso S, Battilocchio C, Javid B, Sorrentino F, Ioerger TR, Sacchettini JC, Manetti F, Botta M, De Logu A, Rubin EJ, De Rossi E
+    PMID: 22024828 | DOI: 10.1128/AAC.05270-11
+
+[82] Contribution of efflux activity to isoniazid resistance in the Mycobacterium tuberculosis complex.
+    Authors: Rodrigues L, Machado D, Couto I, Amaral L, Viveiros M
+    PMID: 21871582 | DOI: 10.1016/j.meegid.2011.08.009
+
+[83] Effect of efflux pump inhibitors on drug susceptibility of ofloxacin resistant Mycobacterium tuberculosis isolates.
+    Authors: Singh M, Jadaun GP, Ramdas, Srivastava K, Chauhan V, Mishra R, Gupta K, Nair S, Chauhan DS, Sharma VD, Venkatesan K, Katoch VM
+    PMID: 21623040 | DOI: 
+
+[84] Rifampicin reduces susceptibility to ofloxacin in rifampicin-resistant Mycobacterium tuberculosis through efflux.
+    Authors: Louw GE, Warren RM, Gey van Pittius NC, Leon R, Jimenez A, Hernandez-Pando R, McEvoy CR, Grobbelaar M, Murray M, van Helden PD, Victor TC
+    PMID: 21512166 | DOI: 10.1164/rccm.201011-1924OC
+
+[85] Drug tolerance in replicating mycobacteria mediated by a macrophage-induced efflux mechanism.
+    Authors: Adams KN, Takaki K, Connolly LE, Wiedenhoft H, Winglee K, Humbert O, Edelstein PH, Cosma CL, Ramakrishnan L
+    PMID: 21376383 | DOI: 10.1016/j.cell.2011.02.022
+
+[86] Ethidium bromide transport across Mycobacterium smegmatis cell-wall: correlation with antibiotic resistance.
+    Authors: Rodrigues L, Ramos J, Couto I, Amaral L, Viveiros M
+    PMID: 21332993 | DOI: 10.1186/1471-2180-11-35
+
+[87] [The effects of gene mutation related to drug resistance and drug efflux pump in extensively drug-resistant tuberculosis clinical isolates].
+    Authors: Cui ZL, Wang XL, Wang J, Lu JM, Hu ZY
+    PMID: 20979796 | DOI: 
+
+[88] jefA (Rv2459), a drug efflux gene in Mycobacterium tuberculosis confers resistance to isoniazid & ethambutol.
+    Authors: Gupta AK, Reddy VP, Lavania M, Chauhan DS, Venkatesan K, Sharma VD, Tyagi AK, Katoch VM
+    PMID: 20716818 | DOI: 
+
+[89] Plant phenolic compounds as ethidium bromide efflux inhibitors in Mycobacterium smegmatis.
+    Authors: Lechner D, Gibbons S, Bucar F
+    PMID: 18430720 | DOI: 10.1093/jac/dkn178
+
+[90] Inhibitors of Ca2+ and K+ transport enhance intracellular killing of M. tuberculosis by non-killing macrophages.
+    Authors: Martins M, Viveiros M, Amaral L
+    PMID: 18396785 | DOI: 
+
+[91] Enhanced killing of intracellular multidrug-resistant Mycobacterium tuberculosis by compounds that affect the activity of efflux pumps.
+    Authors: Amaral L, Martins M, Viveiros M
+    PMID: 17218448 | DOI: 10.1093/jac/dkl500
+
+[92] [In vitro development of rifampicin resistance in the epithelial cells].
+    Authors: Erokhina MV, Aleksandrova EA
+    PMID: 17002061 | DOI: 
+
+[93] Rv2686c-Rv2687c-Rv2688c, an ABC fluoroquinolone efflux pump in Mycobacterium tuberculosis.
+    Authors: Pasca MR, Guglierame P, Arcesi F, Bellinzoni M, De Rossi E, Riccardi G
+    PMID: 15273144 | DOI: 10.1128/AAC.48.8.3175-3178.2004
+
+[94] Isoniazid-induced transient high-level resistance in Mycobacterium tuberculosis.
+    Authors: Viveiros M, Portugal I, Bettencourt R, Victor TC, Jordaan AM, Leandro C, Ordway D, Amaral L
+    PMID: 12183232 | DOI: 10.1128/AAC.46.9.2804-2810.2002
+
+[95] Overexpression and functional characterization of an ABC (ATP-binding cassette) transporter encoded by the genes drrA and drrB of Mycobacterium tuberculosis.
+    Authors: Choudhuri BS, Bhakta S, Barik R, Basu J, Kundu M, Chakrabarti P
+    PMID: 12057006 | DOI: 10.1042/BJ20020615
+
+[96] Characterization of P55, a multidrug efflux pump in Mycobacterium bovis and Mycobacterium tuberculosis.
+    Authors: Silva PE, Bigi F, Santangelo MP, Romano MI, Martin C, Cataldi A, Ainsa JA
+    PMID: 11181364 | DOI: 10.1128/AAC.45.3.800-804.2001
+
+[97] Isoniazid accumulation in Mycobacterium smegmatis is modulated by proton motive force-driven and ATP-dependent extrusion systems.
+    Authors: Choudhuri BS, Sen S, Chakrabarti P
+    PMID: 10080959 | DOI: 10.1006/bbrc.1999.0357
+
+[98] Mycobacterium tuberculosis induces expression of P-glycoprotein in promonocytic U1 cells chronically infected with HIV type 1.
+    Authors: Gollapudi S, Reddy M, Gangadharam P, Tsuruo T, Gupta S
+    PMID: 7908516 | DOI: 10.1006/bbrc.1994.1355"
+sorafenib	Direct (HDT)	1	['38367430']	"[1] The first-in-class pyrazole-based dual InhA-VEGFR inhibitors towards integrated antitubercular host-directed therapy.
+    Authors: Shaaban MM, Teleb M, Ragab HM, Singh M, Elwakil BH, A Heikal L, Sriram D, Mahran MA
+    PMID: 38367430 | DOI: S0045-2068(24)00084-1"
+yohimbine	No Results	0	[]	No evidence found
+thalidomide	Direct (HDT)	1	['41123477']	"[1] Updates in the clinical management of tuberculous meningitis.
+    Authors: Garg RK
+    PMID: 41123477 | DOI: 10.1080/14787210.2025.2579210"
+chlorphenamine	No Results	0	[]	No evidence found
+temozolomide	Direct (TB)	1	['41513767']	"[1] Evaluation of methods to increase the expression of cytokine-induced killer cell chemoattractant cytokines in pancreatic cancer.
+    Authors: Bunuales M, Inoges S, Lopez-Diaz de Cerio A, Hervas-Stubbs S, Rodriguez J, Gonzalez-Aparicio M, Jauregui P, Hernandez-Alcoceba R
+    PMID: 41513767 | DOI: 10.1038/s41434-025-00590-1"
+dopamine	Direct (TB)	17	['40142374', '39402358', '38139199', '36778873', '34976083', '29322836', '29062328', '28218329', '25072757', '24569630', '23623256', '21304945', '19901083', '17687515', '17407813', '10051631', '3122324']	"[1] Cryptococcus neoformans: Brain Preference, Gender Bias, and Interactions with Mycobacterium tuberculosis and Toxoplasma gondii in HIV-Positive Patients.
+    Authors: Moroti R, Hristea A, Neagu G, Penescu I, Florea D, Tiliscan C, Benea SN
+    PMID: 40142374 | DOI: 10.3390/microorganisms13030481
+
+[2] Exploration of vanoxerine analogues as antibacterial agents.
+    Authors: Kingdon ADH, Adcock HV, Kasimati EM, Craven P, van Schaik W, Cox LR, Besra GS
+    PMID: 39402358 | DOI: 10.1038/s41429-024-00781-9
+
+[3] Epinephrine Stimulates Mycobacterium tuberculosis Growth and Biofilm Formation.
+    Authors: Lei Y, Rahman K, Cao X, Yang B, Zhou W, Reheman A, Cai L, Wang Y, Tyagi R, Wang Z, Chen X, Cao G
+    PMID: 38139199 | DOI: 10.3390/ijms242417370
+
+[4] Vanoxerine kills mycobacteria through membrane depolarization and efflux inhibition.
+    Authors: Kingdon ADH, Meosa-John AR, Batt SM, Besra GS
+    PMID: 36778873 | DOI: 10.3389/fmicb.2023.1112491
+
+[5] Gene Expression and In Vitro Pharmacogenetic Studies of Dopamine and Serotonin Gene Receptors in Tuberculosis.
+    Authors: Sheikhpour M, Shokrgozar MA, Biglari A, Pornour M, Abdolrahimi F, Poorazar Dizaji S, Khanipour S, Masoumi M, Ebrahimzadeh N, Abolfathi H
+    PMID: 34976083 | DOI: 
+
+[6] Activation studies with amines and amino acids of the beta-carbonic anhydrase encoded by the Rv3273 gene from the pathogenic bacterium Mycobacterium tuberculosis.
+    Authors: Angeli A, Del Prete S, Osman SM, Alasmary FAS, AlOthman Z, Donald WA, Capasso C, Supuran CT
+    PMID: 29322836 | DOI: 10.1080/14756366.2017.1422250
+
+[7] Effect of smoking on acute phase reactants, stress hormone responses and vitamin C in pulmonary tuberculosis.
+    Authors: Opolot JO, Theron AJ, MacPhail P, Feldman C, Anderson R
+    PMID: 29062328 | DOI: 10.4314/ahs.v17i2.7
+
+[8] Dopamine-assisted fixation of drug-loaded polymeric multilayers to osteoarticular implants for tuberculosis therapy.
+    Authors: Li D, Li L, Ma Y, Zhuang Y, Li D, Shen H, Wang X, Yang F, Ma Y, Wu D
+    PMID: 28218329 | DOI: 10.1039/c7bm00042a
+
+[9] Simplified severe sepsis protocol: a randomized controlled trial of modified early goal-directed therapy in Zambia.
+    Authors: Andrews B, Muchemwa L, Kelly P, Lakhi S, Heimburger DC, Bernard GR
+    PMID: 25072757 | DOI: 10.1097/CCM.0000000000000541
+
+[10] Novel non-neuroleptic phenothiazines inhibit Mycobacterium tuberculosis replication.
+    Authors: Salie S, Hsu NJ, Semenya D, Jardine A, Jacobs M
+    PMID: 24569630 | DOI: 10.1093/jac/dku036
+
+[11] Synthesis and carbonic anhydrase inhibitory properties of sulfamides structurally related to dopamine.
+    Authors: Aksu K, Nar M, Tanc M, Vullo D, Gulcin I, Goksu S, Tumer F, Supuran CT
+    PMID: 23623256 | DOI: S0968-0896(13)00299-X
+
+[12] BCG vaccine-induced neuroprotection in a mouse model of Parkinson's disease.
+    Authors: Yong J, Lacan G, Dang H, Hsieh T, Middleton B, Wasserfall C, Tian J, Melega WP, Kaufman DL
+    PMID: 21304945 | DOI: 10.1371/journal.pone.0016610
+
+[13] Two loci control tuberculin skin test reactivity in an area hyperendemic for tuberculosis.
+    Authors: Cobat A, Gallant CJ, Simkin L, Black GF, Stanley K, Hughes J, Doherty TM, Hanekom WA, Eley B, Jais JP, Boland-Auge A, van Helden P, Casanova JL, Abel L, Hoal EG, Schurr E, Alcais A
+    PMID: 19901083 | DOI: 10.1084/jem.20090892
+
+[14] MPTP-induced central dopamine depletion exacerbates experimental autoimmune encephalomyelitis (EAE) in C57BL mice.
+    Authors: Balkowiec-Iskra E, Kurkowska-Jastrzebska I, Joniec I, Ciesielska A, Muszynska A, Przybylkowski A, Czlonkowska A, Czlonkowski A
+    PMID: 17687515 | DOI: 10.1007/s00011-007-6128-0
+
+[15] Synthesis and antitubercular activity of phenothiazines with reduced binding to dopamine and serotonin receptors.
+    Authors: Madrid PB, Polgar WE, Toll L, Tanga MJ
+    PMID: 17407813 | DOI: 10.1016/j.bmcl.2007.03.064
+
+[16] Dopamine beta-hydroxylase deficiency impairs cellular immunity.
+    Authors: Alaniz RC, Thomas SA, Perez-Melgosa M, Mueller K, Farr AG, Palmiter RD, Wilson CB
+    PMID: 10051631 | DOI: 10.1073/pnas.96.5.2274
+
+[17] Suppression of macrophage activation and T-lymphocyte function in hypoprolactinemic mice.
+    Authors: Bernton EW, Meltzer MS, Holaday JW
+    PMID: 3122324 | DOI: 10.1126/science.3122324"
+tubocurarine	No Results	0	[]	No evidence found
+estradiol	Direct (TB)	14	['41649994', '40455886', '38408402', '36463716', '35425995', '35281036', '35011319', '31842775', '25994226', '18589008', '17635794', '16890403', '11298130', '9066692']	"[1] Sex hormone profiles and associated factors among adult tuberculosis patients at Gondar town, northwest Ethiopia: A comparative cross-sectional study.
+    Authors: Gebrie E, Baynes HW, Mengistie BA, Kassie T, Kassahun Z, Birhanu A, Zayede A, Chane E
+    PMID: 41649994 | DOI: 10.1371/journal.pone.0340631
+
+[2] Impact of Puberty on Immune Responses to Mycobacterium tuberculosis in South African Adolescents.
+    Authors: Kleynhans L, Maasdorp E, Snyders CI, Seddon JA
+    PMID: 40455886 | DOI: 10.1093/infdis/jiaf293
+
+[3] Steroid immune responsive gene regulation in Mycobacterium tuberculosis infection in vitro.
+    Authors: Borborema MEA, Miranda DEO, de Lucena TMC, de Lorena VMB, Rabello MCDS, de Azevedo Silva J
+    PMID: 38408402 | DOI: S1472-9792(24)00023-4
+
+[4] Immunoendocrine abnormalities in the female reproductive system, and lung steroidogenesis during experimental pulmonary tuberculosis.
+    Authors: Ramos Robles B, Valdez RA, Hernandez Almaraz M, Castaneda Mayorga SR, Mata Espinosa D, Barrios Payan J, Hernandez Pando R, Romano MC
+    PMID: 36463716 | DOI: S1472-9792(22)00111-1
+
+[5] Estradiol inhibits autophagy of Mycobacterium tuberculosis‑infected 16HBE cells and controls the proliferation of intracellular Mycobacterium tuberculosis.
+    Authors: Gan Y, Hu Q, Li A, Gu L, Guo S
+    PMID: 35425995 | DOI: 196
+
+[6] Alteration of Endocrine Hormones and Antibody Responses in Different Spectrum of Tuberculosis Disease.
+    Authors: Tsegaye Y, Admassu W, Edao A, Kinde S, Gentu M, Negash M, Wondmagegn T, Gize A, Zewdie M, Bobosha K, Wassie L
+    PMID: 35281036 | DOI: 10.3389/fimmu.2022.849321
+
+[7] Purification, Characterization, and Structural Studies of a Sulfatase from Pedobacter yulinensis.
+    Authors: Schlachter CR, O'Malley A, Grimes LL, Tomashek JJ, Chruszcz M, Lee LA
+    PMID: 35011319 | DOI: 10.3390/molecules27010087
+
+[8] Low serum estradiol levels are related to Mycobacterium avium complex lung disease: a cross-sectional study.
+    Authors: Uwamino Y, Nishimura T, Sato Y, Tamizu E, Asakura T, Uno S, Mori M, Fujiwara H, Ishii M, Kawabe H, Murata M, Hasegawa N
+    PMID: 31842775 | DOI: 10.1186/s12879-019-4668-x
+
+[9] Mycobacterium smegmatis synthesizes in vitro androgens and estrogens from different steroid precursors.
+    Authors: Dlugovitzky DG, Fontela MS, Martinel Lamas DJ, Valdez RA, Romano MC
+    PMID: 25994226 | DOI: 10.1139/cjm-2015-0025
+
+[10] Crystal structure of Mycobacterium tuberculosis Rv0760c at 1.50 A resolution, a structural homolog of Delta(5)-3-ketosteroid isomerase.
+    Authors: Cherney MM, Garen CR, James MN
+    PMID: 18589008 | DOI: 10.1016/j.bbapap.2008.05.012
+
+[11] The immuno-endocrine component in the pathogenesis of tuberculosis.
+    Authors: Bottasso O, Bay ML, Besedovsky H, del Rey A
+    PMID: 17635794 | DOI: 10.1111/j.1365-3083.2007.01962.x
+
+[12] Endocrine and cytokine responses in humans with pulmonary tuberculosis.
+    Authors: Rey AD, Mahuad CV, Bozza VV, Bogue C, Farroni MA, Bay ML, Bottasso OA, Besedovsky HO
+    PMID: 16890403 | DOI: 10.1016/j.bbi.2006.06.005
+
+[13] Effect of oestrogen on Mycobacterium avium complex pulmonary infection in mice.
+    Authors: Tsuyuguchi K, Suzuki K, Matsumoto H, Tanaka E, Amitani R, Kuze F
+    PMID: 11298130 | DOI: 10.1046/j.1365-2249.2001.01474.x
+
+[14] Activity of a mycobacterial antineoplastic glycan against human breast cancer.
+    Authors: Donmez C, Groves MJ
+    PMID: 9066692 | DOI: "
+triamterene	No Results	0	[]	No evidence found
+olanzapine	No Results	0	[]	No evidence found
+tolazamide	No Results	0	[]	No evidence found
+forskolin	Direct (TB)	3	['22823429', '19223474', '15196937']	"[1] TGF-beta neutralization abrogates the inhibited DHEA production mediated by factors released from M. tuberculosis-stimulated PBMC.
+    Authors: D'Attilio L, Bozza VV, Santucci N, Bongiovanni B, Didoli G, Radcliffe S, Besedovsky H, del Rey A, Bottasso O, Bay ML
+    PMID: 22823429 | DOI: 10.1111/j.1749-6632.2012.06644.x
+
+[2] Cholera toxin and Escherichia coli heat-labile enterotoxin, but not their nontoxic counterparts, improve the antigen-presenting cell function of human B lymphocytes.
+    Authors: Negri DR, Pinto D, Vendetti S, Patrizio M, Sanchez M, Riccomi A, Ruggiero P, Del Giudice G, De Magistris MT
+    PMID: 19223474 | DOI: 10.1128/IAI.01559-08
+
+[3] Functional chimeras between the catalytic domains of the mycobacterial adenylyl cyclase Rv1625c and a Paramecium guanylyl cyclase.
+    Authors: Linder JU, Castro LI, Guo YL, Schultz JE
+    PMID: 15196937 | DOI: 10.1016/j.febslet.2004.05.025"
+imiquimod	Direct (TB)	10	['41108940', '41051521', '36808986', '36099123', '33630761', '32979762', '32765474', '32481601', '23162757', '22934262']	"[1] Diagnostic value of five Mycobacterium tuberculosis dormant highly expressed antigens in latent infections and immunogenicity assessment of a novel subunit vaccine PB2-DIMQ.
+    Authors: Zhong Q, Wang X, Xu Y, Wang R, Zhou M, Liu X
+    PMID: 41108940 | DOI: S1472-9792(25)00093-9
+
+[2] A BCG-boosting subunit vaccine RS2/DMI induces Th1-polarized immunity by targeting RD6 and secretory antigens of Mycobacterium tuberculosis.
+    Authors: Wang X, Zhong Q, Xu Y, Liu X
+    PMID: 41051521 | DOI: 10.1007/s00203-025-04481-2
+
+[3] Long-Term Immunogenicity and In Vitro Prophylactic Protective Efficacy of M. tuberculosis Fusion Protein DR2 Combined with Liposomal Adjuvant DIMQ as a Boosting Vaccine for BCG.
+    Authors: Mao LR, Du JP, Wang XC, Xu LF, Zhang YP, Sun QS, Shi ZL, Xing YR, Su YX, Wang SJ, Wang J, Ma JL, Zhang JY
+    PMID: 36808986 | DOI: 10.1021/acsinfecdis.2c00570
+
+[4] A Mouse Model for Tuberculosis Combined With Inhalable Imiquimod-PLGA Nanocomposite Particles Based on Macrophage Phenotype.
+    Authors: Nii T, Takizawa S, Akita T, Yamashita C, Takeuchi I, Makino K
+    PMID: 36099123 | DOI: 10.21873/invivo.12942
+
+[5] Chronic HIV infection induces transcriptional and functional reprogramming of innate immune cells.
+    Authors: van der Heijden WA, Van de Wijer L, Keramati F, Trypsteen W, Rutsaert S, Horst RT, Jaeger M, Koenen HJ, Stunnenberg HG, Joosten I, Verweij PE, van Lunzen J, Dinarello CA, Joosten LA, Vandekerckhove L, Netea MG, van der Ven AJ, de Mast Q
+    PMID: 33630761 | DOI: 145928
+
+[6] Human and murine memory gammadelta T cells: Evidence for acquired immune memory in bacterial and viral infections and autoimmunity.
+    Authors: Comeau K, Paradis P, Schiffrin EL
+    PMID: 32979762 | DOI: S0008-8749(20)30377-4
+
+[7] TLR7 Stimulation With Imiquimod Induces Selective Autophagy and Controls Mycobacterium tuberculosis Growth in Mouse Macrophages.
+    Authors: Lee HJ, Kang SJ, Woo Y, Hahn TW, Ko HJ, Jung YJ
+    PMID: 32765474 | DOI: 10.3389/fmicb.2020.01684
+
+[8] Design of Polymeric Nanocapsules for Intranasal Vaccination against Mycobacterium Tuberculosis: Influence of the Polymeric Shell and Antigen Positioning.
+    Authors: Diego-Gonzalez L, Crecente-Campo J, Paul MJ, Singh M, Reljic R, Alonso MJ, Gonzalez-Fernandez A, Simon-Vazquez R
+    PMID: 32481601 | DOI: 10.3390/pharmaceutics12060489
+
+[9] Trial watch: FDA-approved Toll-like receptor agonists for cancer therapy.
+    Authors: Vacchelli E, Galluzzi L, Eggermont A, Fridman WH, Galon J, Sautes-Fridman C, Tartour E, Zitvogel L, Kroemer G
+    PMID: 23162757 | DOI: 10.4161/onci.20931
+
+[10] Trial Watch: Experimental Toll-like receptor agonists for cancer therapy.
+    Authors: Galluzzi L, Vacchelli E, Eggermont A, Fridman WH, Galon J, Sautes-Fridman C, Tartour E, Zitvogel L, Kroemer G
+    PMID: 22934262 | DOI: 10.4161/onci.20696"
+nimodipine	Direct (TB)	1	['35617724']	"[1] A multidrug efflux protein in Mycobacterium tuberculosis; tap as a potential drug target for drug repurposing.
+    Authors: Dwivedi M, Mukhopadhyay S, Yadav S, Dubey KD
+    PMID: 35617724 | DOI: S0010-4825(22)00399-7"
+valproic-acid	Direct (HDT)	1	['29501835']	"[1] Evaluation of the efficacy of valproic acid and suberoylanilide hydroxamic acid (vorinostat) in enhancing the effects of first-line tuberculosis drugs against intracellular Mycobacterium tuberculosis.
+    Authors: Rao M, Valentini D, Zumla A, Maeurer M
+    PMID: 29501835 | DOI: S1201-9712(18)30057-2"
+betamethasone	Direct (TB)	1	['38064397']	"[1] Undiagnosed tuberculosis associated with hemophagocytic lymphohistiocytosis due to improper use of corticosteroid.
+    Authors: Allahverdi Nazhand H, Sabeti S, Javandoust Gharehbagh F, Nalini R, Babamahmoodi A, Marahemi M, Mahmoudi Chalmiani E, Lotfollahi L, Alavi Darazam I
+    PMID: 38064397 | DOI: 10.3855/jidc.17303"
+ubenimex	No Results	0	[]	No evidence found
+betahistine	No Results	0	[]	No evidence found
+nicergoline	No Results	0	[]	No evidence found
+resveratrol	Direct (HDT)	1	['32835604']	"[1] Sirtuin 3 is essential for host defense against Mycobacterium abscessus infection through regulation of mitochondrial homeostasis.
+    Authors: Kim YJ, Lee SH, Jeon SM, Silwal P, Seo JY, Hanh BTB, Park JW, Whang J, Lee MJ, Heo JY, Kim SH, Kim JM, Song GY, Jang J, Jo EK
+    PMID: 32835604 | DOI: 10.1080/21505594.2020.1809961"
+thiotepa	No Results	0	[]	No evidence found
+topotecan	No Results	0	[]	No evidence found
+phenazopyridine	No Results	0	[]	No evidence found
+papaverine	No Results	0	[]	No evidence found
+dilazep	No Results	0	[]	No evidence found
+azaperone	No Results	0	[]	No evidence found
+disopyramide	No Results	0	[]	No evidence found
+equol	No Results	0	[]	No evidence found
+ephedrine	Direct (TB)	1	['14171373']	"[1] THE TOXICITY FOR MICE OF SALINE EXTRACT OF TUBERCLE BACILLI.
+    Authors: YOSHIMURA M, OKANO T, KABURAKI T, ITO R
+    PMID: 14171373 | DOI: "
+tianeptine	No Results	0	[]	No evidence found
+fluvastatin	Direct (HDT)	2	['38534380', '31605489']	"[1] Fluvastatin Converts Human Macrophages into Foam Cells with Increased Inflammatory Response to Inactivated Mycobacterium tuberculosis H37Ra.
+    Authors: Montero-Vega MT, Matilla J, Bazan E, Reimers D, De Andres-Martin A, Gonzalo-Gobernado R, Correa C, Urbano F, Gomez-Coronado D
+    PMID: 38534380 | DOI: 10.3390/cells13060536
+
+[2] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+    Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
+    PMID: 31605489 | DOI: 10.1093/infdis/jiz517"
+nitrendipine	No Results	0	[]	No evidence found
+crizotinib	No Results	0	[]	No evidence found
+etoposide	Direct (TB)	16	['40575568', '40062127', '38162574', '38064397', '37525038', '35597674', '32370734', '31230590', '30466088', '24127015', '21741130', '17997372', '15262533', '12729056', '9866982', '2555615']	"[1] Investigation of the relationship between chronic hepatitis B and tuberculosis using bioinformatics and systems biology approaches.
+    Authors: He J, Zhou X, Zhang D, Cai Y, Pan H, Huang T, He F
+    PMID: 40575568 | DOI: 10.3389/fmed.2025.1519216
+
+[2] A Perplexing Case Highlighting the Diagnostic Conundrum of Miliary Tuberculosis Mimicking Sarcoidosis and Progressing Into Hemophagocytic Lymphohistiocytosis.
+    Authors: Li W, Mann P, De La Hoz I, Constantakos A, Gordon D, Everett G, Maharam E
+    PMID: 40062127 | DOI: 10.7759/cureus.78636
+
+[3] Discovering common pathogenetic processes between COVID-19 and tuberculosis by bioinformatics and system biology approach.
+    Authors: Huang T, He J, Zhou X, Pan H, He F, Du A, Yu B, Jiang N, Li X, Yuan K, Wang Z
+    PMID: 38162574 | DOI: 10.3389/fcimb.2023.1280223
+
+[4] Undiagnosed tuberculosis associated with hemophagocytic lymphohistiocytosis due to improper use of corticosteroid.
+    Authors: Allahverdi Nazhand H, Sabeti S, Javandoust Gharehbagh F, Nalini R, Babamahmoodi A, Marahemi M, Mahmoudi Chalmiani E, Lotfollahi L, Alavi Darazam I
+    PMID: 38064397 | DOI: 10.3855/jidc.17303
+
+[5] Screening of Phyllanthus niruri Root Phytoconstituents for Antibacterial, Antifungal, Anticancer, and Antiviral Activities by Molecular Docking Studies.
+    Authors: Alekhya KP, Manisha P, Tejaswini A, Nageswari P, Swathi K
+    PMID: 37525038 | DOI: 10.1007/978-3-031-31978-5_11
+
+[6] Hemophagocytic Lymphohistiocytosis Secondary to Tuberculosis After Liver Transplantation: A Case Report.
+    Authors: Ferreira GSA, Moreira ML, Watanabe ALC, Trevizoli NC, Murta MCB, Figueira AVF, Caja GON, Ferreira CA, Jorge FMF, Couto CF
+    PMID: 35597674 | DOI: S0041-1345(22)00311-6
+
+[7] Successful treatment of mycobacterial infection associated hemophagocytic lymphohistiocytosis with etoposide and anti-tuberculous therapy: a case report.
+    Authors: Wang YH, Ba JH, Shi XW, Wu BQ
+    PMID: 32370734 | DOI: 10.1186/s12879-020-05016-4
+
+[8] Epilepsia partialis continua complicated by disseminated tuberculosis and hemophagocytic lymphohistiocytosis: a case report.
+    Authors: Mbizvo GK, Lentell IC, Leen C, Roddie H, Derry CP, Duncan SE, Rannikmae K
+    PMID: 31230590 | DOI: 10.1186/s13256-019-2092-x
+
+[9] Small-Cell Lung Cancer Comorbid with Pulmonary Mycobacterium avium Infection: A Case Report.
+    Authors: Yamasaki M, Funaishi K, Saito N, Sakamoto KI, Ishiyama S, Kawamoto K, Matsumoto Y, Matsumoto N, Taniwaki M, Ohashi N, Hattori N
+    PMID: 30466088 | DOI: 10.1159/000494504
+
+[10] Hemophagocytic lymphohistiocytosis: critical reappraisal of a potentially under-recognized condition.
+    Authors: Padhi S, Varghese RG, Ramdas A, Phansalkar MD, Sarangi R
+    PMID: 24127015 | DOI: 10.1007/s11684-013-0292-0
+
+[11] 3-Aryl-2-[1H-benzotriazol-1-yl]acrylonitriles: a novel class of potent tubulin inhibitors.
+    Authors: Carta A, Briguglio I, Piras S, Boatto G, La Colla P, Loddo R, Tolomeo M, Grimaudo S, Di Cristina A, Pipitone RM, Laurini E, Paneni MS, Posocco P, Fermeglia M, Pricl S
+    PMID: 21741130 | DOI: 10.1016/j.ejmech.2011.06.018
+
+[12] Chylous ascites secondary to B-cell non Hodgkin's lymphoma in a patient with the acquired immune deficiency syndrome (AIDS).
+    Authors: Foschi D, Rizzi A, Corsi F, Trabucchi E, Corbellino M
+    PMID: 17997372 | DOI: 10.1016/j.dld.2007.05.019
+
+[13] Synthesis and antiproliferative activity of 3-aryl-2-[1H(2H)-benzotriazol-1(2)-yl]acrylonitriles variously substituted: Part 4.
+    Authors: Carta A, Palomba M, Boatto G, Busonera B, Murreddu M, Loddo R
+    PMID: 15262533 | DOI: 10.1016/j.farmac.2004.03.004
+
+[14] Mycobacterium avium complex-associated hemophagocytic syndrome in systemic lupus erythematosus patient: report of one case.
+    Authors: Yang WK, Fu LS, Lan JL, Shen GH, Chou G, Tseng CF, Chi CS
+    PMID: 12729056 | DOI: 10.1191/0961203303lu326cr
+
+[15] [Hemophagocytic syndrome associated with tuberculosis and mycoplasma infection in two patients].
+    Authors: Oyaizu H, Yosimura C, Wakayama T, Okamoto K, Imanaka M, Kubo Y, Nisizaka Y, Oda Y
+    PMID: 9866982 | DOI: 
+
+[16] [A case of pulmonary tuberculosis in a long-term survivor with small cell carcinoma of the lung].
+    Authors: Ino M, Fujita J, Bungo M, Yamaji Y, Futami H, Hata Y, Nakamura H, Shiotani T, Irino S
+    PMID: 2555615 | DOI: "
+ingenol	No Results	0	[]	No evidence found
+mycophenolic-acid	Direct (TB)	3	['40252936', '29699922', '26036516']	"[1] A new target for drug repositioning: CEBPalpha elicits LL-37 expression in a vitamin D-independent manner promoting Mtb clearance.
+    Authors: Jacobo-Delgado YM, Rodriguez-Carlos A, Santos-Mena A, Gonzalez-Muniz OE, Felix-Arellano C, Navarro-Tovar G, Rivas-Santiago B
+    PMID: 40252936 | DOI: S0882-4010(25)00311-0
+
+[2] Hit discovery of Mycobacterium tuberculosis inosine 5'-monophosphate dehydrogenase, GuaB2, inhibitors.
+    Authors: Sahu NU, Singh V, Ferraris DM, Rizzi M, Kharkar PS
+    PMID: 29699922 | DOI: S0960-894X(18)30357-3
+
+[3] A rare paracoccidioidomycosis diagnosis in a kidney transplant receptor: case report.
+    Authors: Pontes AM, Borborema J, Correia CR, de Almeida WL, Maciel RF
+    PMID: 26036516 | DOI: S0041-1345(15)00234-1"
+fluspirilene	Direct (HDT)	1	['34608194']	"[1] Repurposing diphenylbutylpiperidine-class antipsychotic drugs for host-directed therapy of Mycobacterium tuberculosis and Salmonella enterica infections.
+    Authors: Heemskerk MT, Korbee CJ, Esselink JJ, Dos Santos CC, van Veen S, Gordijn IF, Vrieling F, Walburg KV, Engele CG, Dijkman K, Wilson L, Verreck FAW, Ottenhoff THM, Haks MC
+    PMID: 34608194 | DOI: 10.1038/s41598-021-98980-z"
+podophyllotoxin	No Results	0	[]	No evidence found
+everolimus	Direct (HDT)	6	['41563248', '37998388', '36671372', '34062056', '32610643', '29441052']	"[1] mTORC1 inhibitors rapamycin and everolimus as host-directed therapy for tuberculosis.
+    Authors: van den Biggelaar RHGA, Ottenhoff THM
+    PMID: 41563248 | DOI: 10.1128/iai.00544-25
+
+[2] Effects of Everolimus in Modulating the Host Immune Responses against Mycobacterium tuberculosis Infection.
+    Authors: Raien A, Davis S, Zhang M, Zitser D, Lin M, Pitcher G, Bhalodia K, Subbian S, Venketaraman V
+    PMID: 37998388 | DOI: 10.3390/cells12222653
+
+[3] Evaluation of Everolimus Activity against Mycobacterium tuberculosis Using In Vitro Models of Infection.
+    Authors: Bianco DM, De Maio F, Santarelli G, Palucci I, Salustri A, Bianchetti G, Maulucci G, Citterio F, Sanguinetti M, Tamburrini E, Sali M, Delogu G
+    PMID: 36671372 | DOI: 10.3390/antibiotics12010171
+
+[4] Everolimus-induced effector mechanism in macrophages and survivability of Erdman, CDC1551 and HN878 strains of Mycobacterium tuberculosis infection.
+    Authors: Cao R, To K, Kachour N, Beever A, Owens J, Sathananthan A, Singh P, Kolloli A, Subbian S, Venketaraman V
+    PMID: 34062056 | DOI: 10.1515/bmc-2021-0006
+
+[5] Antimycobacterial Effects of Everolimus in a Human Granuloma Model.
+    Authors: Ashley D, Hernandez J, Cao R, To K, Yegiazaryan A, Abrahem R, Nguyen T, Owens J, Lambros M, Subbian S, Venketaraman V
+    PMID: 32610643 | DOI: 10.3390/jcm9072043
+
+[6] Harnessing the mTOR Pathway for Tuberculosis Treatment.
+    Authors: Singh P, Subbian S
+    PMID: 29441052 | DOI: 10.3389/fmicb.2018.00070"
+triflupromazine	Direct (TB)	4	['27156615', '22850215', '17188865', '7622803']	"[1] Neuroleptic drugs in the treatment of tuberculosis: Minimal inhibitory concentrations of different phenothiazines against Mycobacterium tuberculosis.
+    Authors: Vesenbeckh S, Krieger D, Bettermann G, Schonfeld N, Bauer TT, Russmann H, Mauch H
+    PMID: 27156615 | DOI: S1472-9792(15)30292-4
+
+[2] Structural requirements for the antitubercular quaternized triflupromazine pharmacophore.
+    Authors: Kunciw DL, Liechty JJ, Mitchell MO, Wan B, Franzblau SG
+    PMID: 22850215 | DOI: 10.1016/j.bmcl.2012.06.095
+
+[3] Synthesis and antitubercular activity of quaternized promazine and promethazine derivatives.
+    Authors: Bate AB, Kalin JH, Fooksman EM, Amorose EL, Price CM, Williams HM, Rodig MJ, Mitchell MO, Cho SH, Wang Y, Franzblau SG
+    PMID: 17188865 | DOI: 10.1016/j.bmcl.2006.11.091
+
+[4] Structure-antitubercular activity relationship of phenothiazine-type calmodulin antagonists.
+    Authors: Ratnakar P, Rao SP, Sriramarao P, Murthy PS
+    PMID: 7622803 | DOI: 10.1097/00004850-199503000-00005"
+chlorprothixene	No Results	0	[]	No evidence found
+trifluoperazine	Direct (HDT)	1	['40020517']	"[1] Phenothiazines boost host control of Mycobacterium avium infection in primary human macrophages.
+    Authors: Kilinc G, Ottenhoff THM, Saris A
+    PMID: 40020517 | DOI: S0753-3322(25)00135-0"
+doxorubicin	Direct (TB)	19	['41523414', '40961457', '39320471', '35513013', '33030198', '32945360', '31238181', '30230585', '28994740', '27591998', '25248725', '24379196', '24004110', '23797692', '23267008', '21507635', '19793773', '17997372', '12057006']	"[1] Non-Hodgkin Lymphoma and Tuberculosis Coexisting in the Same Cervical Lymph Node: A Case Report.
+    Authors: Taha A, Alzhrani S, Aljafari N, Aljadani BA, Al-Rashdi A, Almuntashiri AA, Alkhalifah KM, Bahshwan W
+    PMID: 41523414 | DOI: 10.7759/cureus.98957
+
+[2] A New Saponin From Tridax procumbens L.: In Vitro and In Silico Studies Reveal Broad Spectrum of Bioactivities.
+    Authors: Ingole VV, Katade SR, Mhaske PC, Shaikh SB
+    PMID: 40961457 | DOI: 10.1002/cbdv.202501842
+
+[3] Interstitial lung disease presents with varying characteristics in patients with non-Hodgkin lymphoma undergoing rituximab-containing therapies.
+    Authors: Zou W, Zhang J, Li Y, Zhang Z, Yang R, Yan Y, Zhu W, Ma F, Jiang P, Wang Y, Zhang X, Chen J
+    PMID: 39320471 | DOI: 10.1007/s00277-024-06013-2
+
+[4] Aptamer-conjugated carbon-based nanomaterials for cancer and bacteria theranostics: A review.
+    Authors: Sargazi S, Er S, Mobashar A, Gelen SS, Rahdar A, Ebrahimi N, Hosseinikhah SM, Bilal M, Kyzas GZ
+    PMID: 35513013 | DOI: S0009-2797(22)00169-7
+
+[5] Structure-based drug repurposing to inhibit the DNA gyrase of Mycobacterium tuberculosis.
+    Authors: Gl B, Rajput R, Gupta M, Dahiya P, Thakur JK, Bhatnagar R, Grover A
+    PMID: 33030198 | DOI: 10.1042/BCJ20200462
+
+[6] Design, synthesis and biomedical evaluation of mostotrin, a new water soluble tryptanthrin derivative.
+    Authors: Popov A, Klimovich A, Styshova O, Moskovkina T, Shchekotikhin A, Grammatikova N, Dezhenkova L, Kaluzhny D, Deriabin P, Gerasimenko A, Udovenko A, Stonik V
+    PMID: 32945360 | DOI: 10.3892/ijmm.2020.4693
+
+[7] Antibacterial activity of 3,3'-dihydroxycurcumin (DHC) is associated with membrane perturbation.
+    Authors: Polaquini CR, Morao LG, Nazare AC, Torrezan GS, Dilarri G, Cavalca LB, Campos DL, Silva IC, Pereira JA, Scheffers DJ, Duque C, Pavan FR, Ferreira H, Regasini LO
+    PMID: 31238181 | DOI: S0045-2068(19)30486-9
+
+[8] Identification and validation of l-asparaginase as a potential metabolic target against Mycobacterium tuberculosis.
+    Authors: Kataria A, Singh J, Kundu B
+    PMID: 30230585 | DOI: 10.1002/jcb.27169
+
+[9] Antibacterial and Antitubercular Activities of Cinnamylideneacetophenones.
+    Authors: Polaquini CR, Torrezan GS, Santos VR, Nazare AC, Campos DL, Almeida LA, Silva IC, Ferreira H, Pavan FR, Duque C, Regasini LO
+    PMID: 28994740 | DOI: 10.3390/molecules22101685
+
+[10] Synthesis and evaluation of copper(II) complexes with isoniazid-derived hydrazones as anticancer and antitubercular agents.
+    Authors: Firmino GS, de Souza MV, Pessoa C, Lourenco MC, Resende JA, Lessa JA
+    PMID: 27591998 | DOI: 10.1007/s10534-016-9968-7
+
+[11] Antimycobacterial activity of DNA intercalator inhibitors of Mycobacterium tuberculosis primase DnaG.
+    Authors: Gajadeera C, Willby MJ, Green KD, Shaul P, Fridman M, Garneau-Tsodikova S, Posey JE, Tsodikov OV
+    PMID: 25248725 | DOI: 10.1038/ja.2014.131
+
+[12] Evaluation of DNA primase DnaG as a potential target for antibiotics.
+    Authors: Kuron A, Korycka-Machala M, Brzostek A, Nowosielski M, Doherty A, Dziadek B, Dziadek J
+    PMID: 24379196 | DOI: 10.1128/AAC.01721-13
+
+[13] Discovery of inhibitors of Bacillus anthracis primase DnaG.
+    Authors: Biswas T, Green KD, Garneau-Tsodikova S, Tsodikov OV
+    PMID: 24004110 | DOI: 10.1021/bi4011286
+
+[14] Treatment outcomes in AIDS-related diffuse large B-cell lymphoma in the setting roll out of combination antiretroviral therapy in South Africa.
+    Authors: de Witt P, Maartens DJ, Uldrick TS, Sissolak G
+    PMID: 23797692 | DOI: 10.1097/QAI.0b013e3182a03e9b
+
+[15] A novel non-radioactive primase-pyrophosphatase activity assay and its application to the discovery of inhibitors of Mycobacterium tuberculosis primase DnaG.
+    Authors: Biswas T, Resto-Roldan E, Sawyer SK, Artsimovitch I, Tsodikov OV
+    PMID: 23267008 | DOI: 10.1093/nar/gks1292
+
+[16] Synthesis, structure-activity relationship of novel substituted 4H-chromen-1,2,3,4-tetrahydropyrimidine-5-carboxylates as potential anti-mycobacterial and anticancer agents.
+    Authors: Raju BC, Rao RN, Suman P, Yogeeswari P, Sriram D, Shaik TB, Kalivendi SV
+    PMID: 21507635 | DOI: 10.1016/j.bmcl.2011.03.079
+
+[17] The biocontaminants and complexity of damp indoor spaces: more than what meets the eyes.
+    Authors: Thrasher JD, Crawley S
+    PMID: 19793773 | DOI: 10.1177/0748233709348386
+
+[18] Chylous ascites secondary to B-cell non Hodgkin's lymphoma in a patient with the acquired immune deficiency syndrome (AIDS).
+    Authors: Foschi D, Rizzi A, Corsi F, Trabucchi E, Corbellino M
+    PMID: 17997372 | DOI: 10.1016/j.dld.2007.05.019
+
+[19] Overexpression and functional characterization of an ABC (ATP-binding cassette) transporter encoded by the genes drrA and drrB of Mycobacterium tuberculosis.
+    Authors: Choudhuri BS, Bhakta S, Barik R, Basu J, Kundu M, Chakrabarti P
+    PMID: 12057006 | DOI: 10.1042/BJ20020615"
+homatropine	No Results	0	[]	No evidence found
+citalopram	Direct (TB)	1	['40151469']	"[1] Decreased citalopram concentration caused by enzyme induction effect of rifampin: a case report.
+    Authors: Liu J, Li J, Zheng R, Zhang R
+    PMID: 40151469 | DOI: 10.1177/20451253251328582"
+bumetanide	No Results	0	[]	No evidence found
+meclofenamic-acid	Direct (TB)	1	['19237201']	"[1] Organotin meclofenamic complexes: Synthesis, crystal structures and antiproliferative activity of the first complexes of meclofenamic acid - novel anti-tuberculosis agents.
+    Authors: Kovala-Demertzi D, Dokorou V, Primikiri A, Vargas R, Silvestru C, Russo U, Demertzis MA
+    PMID: 19237201 | DOI: 10.1016/j.jinorgbio.2009.01.014"
+valsartan	Direct (TB)	1	['38032920']	"[1] Interactive effect of oral anti-hyperglycaemic or anti-hypertensive drugs on the inhibitory and bactericidal activity of first line anti-TB drugs against M. tuberculosis.
+    Authors: Trivedi P, Chaturvedi V
+    PMID: 38032920 | DOI: 10.1371/journal.pone.0292397"
+flunarizine	Direct (HDT)	1	['34533236']	"[1] Flunarizine suppresses Mycobacterium tuberculosis growth via calmodulin-dependent phagosome maturation.
+    Authors: Mo S, Liu X, Zhang K, Wang W, Cai Y, Ouyang Q, Zhu C, Lin D, Wan H, Li D, Wen Z, Chen X
+    PMID: 34533236 | DOI: 10.1002/JLB.4A0221-119RR"
+clofibric-acid	No Results	0	[]	No evidence found
+meptazinol	No Results	0	[]	No evidence found
+irinotecan	Direct (TB)	2	['41513767', '15221608']	"[1] Evaluation of methods to increase the expression of cytokine-induced killer cell chemoattractant cytokines in pancreatic cancer.
+    Authors: Bunuales M, Inoges S, Lopez-Diaz de Cerio A, Hervas-Stubbs S, Rodriguez J, Gonzalez-Aparicio M, Jauregui P, Hernandez-Alcoceba R
+    PMID: 41513767 | DOI: 10.1038/s41434-025-00590-1
+
+[2] Potential interactions between irinotecan and rifampin in a patient with small-cell lung cancer.
+    Authors: Yonemori K, Takeda Y, Toyota E, Kobayashi N, Kudo K
+    PMID: 15221608 | DOI: 10.1007/s10147-004-0394-4"
+quercetin	Direct (HDT)	1	['40631209']	"[1] Elimination of senescent cells with senolytic host-directed therapy reduces tuberculosis progression in mice.
+    Authors: Shee S, Martinez-Martinez YB, Koleske B, Yabaji S, Kobzik L, Kramnik I, Bishai W
+    PMID: 40631209 | DOI: 2025.03.28.645957"
+phenoxybenzamine	Direct (TB)	1	['20810423']	"[1] Targeting the chromosome partitioning protein ParA in tuberculosis drug discovery.
+    Authors: Nisa S, Blokpoel MC, Robertson BD, Tyndall JD, Lun S, Bishai WR, O'Toole R
+    PMID: 20810423 | DOI: 10.1093/jac/dkq311"
+nilutamide	No Results	0	[]	No evidence found
+diltiazem	Direct (TB)	1	['12010345']	"[1] Erythema nodosum associated with reactivation tuberculous lymphadenitis (scrofula).
+    Authors: Gupta SN, Flaherty JP, Shaw JC
+    PMID: 12010345 | DOI: 10.1046/j.1365-4362.2002.01390.x"
+piperidolate	No Results	0	[]	No evidence found
+nadolol	No Results	0	[]	No evidence found
+hesperidin	Direct (TB)	2	['39659199', '30124375']	"[1] Phytocompounds hesperidin, rebaudioside a and rutin as drug leads for the treatment of tuberculosis targeting mycobacterial phosphoribosyl pyrophosphate synthetase.
+    Authors: Manthattil Vysyan S, Suraj Prasanna M, Jayanandan A, Gangadharan AK, Chittalakkottu S
+    PMID: 39659199 | DOI: 10.1080/07391102.2024.2438363
+
+[2] Hesperidin methyl chalcone alleviates spinal tuberculosis in New Zealand white rabbits by suppressing immune responses.
+    Authors: Zhao Y, Jiao Y, Wang L
+    PMID: 30124375 | DOI: 10.1080/10790268.2018.1507805"
+miglitol	No Results	0	[]	No evidence found
+cortisone	Direct (TB)	45	['40918248', '38138266', '33866550', '32265833', '21330452', '11405535', '7581275', '7767104', '104930', '409870', '828616', '803535', '5159672', '5104899', '4994882', '4987092', '4299758', '4175391', '4957010', '5323038', '4959737', '4955156', '14237168', '14145223', '14208678', '14094532', '19867219', '13631848', '13550387', '13548546', '13509057', '13533011', '13483257', '13460187', '13460186', '13446380', '13454470', '13421431', '13371246', '13385028', '14392698', '14365078', '13148540', '13013201', '14938508']	"[1] Orthopnea as a trigger for a diagnostic cascade of multiple infectious diseases.
+    Authors: Bauer M, Hildebrandt A
+    PMID: 40918248 | DOI: 10.1016/j.idcr.2025.e02350
+
+[2] Neuro-Behcet's Disease Onset in the Context of Tuberculous Meningoencephalitis: A Case Report.
+    Authors: Antonescu F, Butnariu I, Antonescu-Ghelmez D, Tuta S, Voinescu BA, Manea MC, Bucur AI, Chelmambet AS, Moraru A
+    PMID: 38138266 | DOI: 10.3390/medicina59122163
+
+[3] 16alpha-Bromoepiandrosterone as a new candidate for experimental diabetes-tuberculosis co-morbidity treatment.
+    Authors: Lopez-Torres MO, Marquina-Castillo B, Ramos-Espinosa O, Mata-Espinosa D, Barrios-Payan JA, Baay-Guzman G, Yepez SH, Bini E, Torre-Villalvazo I, Torres N, Tovar A, Chamberlin W, Ge Y, Carranza A, Hernandez-Pando R
+    PMID: 33866550 | DOI: 10.1111/cei.13603
+
+[4] Evidence for a More Disrupted Immune-Endocrine Relation and Cortisol Immunologic Influences in the Context of Tuberculosis and Type 2 Diabetes Comorbidity.
+    Authors: Fernandez RDV, Diaz A, Bongiovanni B, Gallucci G, Bertola D, Gardenez W, Lioi S, Bertolin Y, Galliano R, Bay ML, Bottasso O, D'Attilio L
+    PMID: 32265833 | DOI: 10.3389/fendo.2020.00126
+
+[5] Treatment of tuberculosis with rifamycin-containing regimens in immune-deficient mice.
+    Authors: Zhang M, Li SY, Rosenthal IM, Almeida DV, Ahmad Z, Converse PJ, Peloquin CA, Nuermberger EL, Grosset JH
+    PMID: 21330452 | DOI: 10.1164/rccm.201012-1949OC
+
+[6] M. tuberculosis: immunology and vaccination.
+    Authors: Rook GA, Seah G, Ustianowski A
+    PMID: 11405535 | DOI: 10.1183/09031936.01.17305370
+
+[7] Modification of delayed-type hypersensitivity reactions by muramyldipeptide in guinea pigs.
+    Authors: Nagao S, Kawabata Y, Kitano M, Suzuki K, Nishikawa T, Takada H
+    PMID: 7581275 | DOI: 10.1111/j.1574-695X.1995.tb00121.x
+
+[8] Reprimun--an antibiotic with large spectrum and immunomodulatory properties.
+    Authors: Paunescu E
+    PMID: 7767104 | DOI: 
+
+[9] The effect of cortisone on the accumulation, activation, and necrosis of macrophages in tuberculous lesions.
+    Authors: McCue RE, Dannenberg AM Jr, Higuchi S, Sugimoto M
+    PMID: 104930 | DOI: 10.1007/BF00910737
+
+[10] Effects of cortisone-treatment on experimental mouse infection with pathogenic and saprophytic Mycobacteria.
+    Authors: Kondo E, Kanai K
+    PMID: 409870 | DOI: 10.7883/yoken1952.30.209
+
+[11] Immune responses in experimental tuberculosis: effect of cortisone treatment.
+    Authors: Venkataraman M, Kumar R, Bhuyan UN, Malaviya AN, Mohapatra LN
+    PMID: 828616 | DOI: 
+
+[12] Immunosuppressive effects of glucocorticosteroids: differential effects of acute vs chronic administration on cell-mediated immunity.
+    Authors: Balow JE, Hurley DL, Fauci AS
+    PMID: 803535 | DOI: 
+
+[13] Tuberculin sensitivity in tuberculosis.
+    Authors: Scadding JG
+    PMID: 5159672 | DOI: 10.1136/pgmj.47.553.694
+
+[14] The influence of thymic and bursal lymphoid systems in avian tuberculosis.
+    Authors: Cheville NF, Richards WD
+    PMID: 5104899 | DOI: 
+
+[15] [Durable character of the sterilization of experimental tuberculosis in mice by rifampicin-isoniazid association: cortisone test].
+    Authors: Grumbach F, Canetti G, Le Lirzin M
+    PMID: 4994882 | DOI: 
+
+[16] Cellular basis of cortisone-induced host susceptibility to tuberculosis.
+    Authors: Hsu HS
+    PMID: 4987092 | DOI: 10.1164/arrd.1969.100.5.677
+
+[17] Biochemical study on the host response to tuberculous infection. IV. Influences of isoniazid, streptomycin, nicotinamide, and cortisone.
+    Authors: Toida I, Ando F, Yamamoto S
+    PMID: 4299758 | DOI: 10.1164/arrd.1968.98.3.424
+
+[18] [Effects of cortisone on some biological indices in experimental tuberculosis in rabbits].
+    Authors: Venkov I
+    PMID: 4175391 | DOI: 
+
+[19] Microbial persistence. I. The capacity of tubercle bacilli to survive sterilization in mouse tissues.
+    Authors: McCune RM, Feldmann FM, Lambert HP, McDermott W
+    PMID: 4957010 | DOI: 10.1084/jem.123.3.445
+
+[20] [Effect of combined administration of cortisone and endoxan on BCG infection in the guinea pig and on the immunity acquired from it].
+    Authors: Norpoth K, Deppe HD, Wolf M
+    PMID: 5323038 | DOI: 
+
+[21] [On the effect of cortisone and hydrazide on phagocytosis of the tubercle bacillus in vivo on guinea pigs].
+    Authors: Zukowska H
+    PMID: 4959737 | DOI: 
+
+[22] [On the expectations of success in one-time high dosage cortisone injections in the diagnosis of tuberculosis in animal experiments].
+    Authors: Norpoth K, Deppe HD
+    PMID: 4955156 | DOI: 
+
+[23] [EFFECT ON BCG OF PASSAGE IN SUSCEPTIBLE HOSTS].
+    Authors: LEMONDE P, BENOIT JC
+    PMID: 14237168 | DOI: 
+
+[24] THE ROLE OF MYCOBACTERIOPHAGES AND OF CORTISONE IN EXPERIMENTAL TUBERCULOSIS AND SARCOIDOSIS.
+    Authors: MANKIEWICZ E, BELAND J
+    PMID: 14145223 | DOI: 10.1164/arrd.1964.89.5.707
+
+[25] [THE ALTERATION OF CORTISONE DEGRADATION IN THE RAT LIVER BY ISONICOTINIC ACID HYDRAZIDE AND KILLED TUBERCLE BACTERIA].
+    Authors: MAYER G, DIRSCHERL W
+    PMID: 14208678 | DOI: 
+
+[26] [NATURAL RESISTANCE AND MYCOBACTERIUM TUBERCULOSIS PHAGOCYTOSIS AND THEIR ALTERATION BY CORTISONE].
+    Authors: SPIESS H
+    PMID: 14094532 | DOI: 
+
+[27] EFFECTS OF BACTERIAL ENDOTOXINS ON METABOLISM : V. THE HYPERREACTIVITY OF MICE INFECTED WITH MYCOBACTERIUM TUBERCULOSIS, STRAIN BCG.
+    Authors: Berry LJ, Smythe DS, Kolbye SM
+    PMID: 19867219 | DOI: 10.1084/jem.116.6.897
+
+[28] [The effect of cortisone on the intracellular growth of tubercle bacilli studies by the use of tissue culture].
+    Authors: IWAI K
+    PMID: 13631848 | DOI: 
+
+[29] [Studies on the effects of various drugs on Koch's phenomenon after BCG inoculations. II. Effects of quercetin & cortisone].
+    Authors: YOSHINO T
+    PMID: 13550387 | DOI: 
+
+[30] [The effect of cortisone on the experimental infection of guinea pigs with isoniazid-resistant Mycobacterium tuberculosis].
+    Authors: GIALDRONI-GRASSI G, GRASSI C, LEIDI F, PERNA G
+    PMID: 13548546 | DOI: 
+
+[31] The possibile role of humoral factors in the enhanced growth of tubercle bacilli in rabbits given cortisone.
+    Authors: TSUJI S, HEKI S, ITO K, OSHIMA S, TAKEOKA A
+    PMID: 13509057 | DOI: 10.1164/artpd.1958.77.3.529
+
+[32] Studies on the development of inflammatory lesions. II. Influence of cortisone and methylandrostendiol on the tissue reactions caused by dead tubercle bacilli.
+    Authors: AMATSU M
+    PMID: 13533011 | DOI: 
+
+[33] [Histological studies on the effects of cortisone on the increase of M. tuberculosis of the human variation on the chorioallantois of goose embryos].
+    Authors: ANGELA GC, RAPELLINI M, GRILLONE W
+    PMID: 13483257 | DOI: 
+
+[34] The influence of corticotrophin and cortisone with antituberculous drugs on population of Mycobacterium tuberculosis in tissues of mice.
+    Authors: BATTEN JC, McCUNE RM Jr
+    PMID: 13460187 | DOI: 
+
+[35] The influence of corticotrophin and certain corticosteroids on populations of Mycobacterium tuberculosis in tissues of mice.
+    Authors: BATTEN JC, McCUNE RM Jr
+    PMID: 13460186 | DOI: 
+
+[36] The effect of cortisone on the multiplication of M. tuberculosis in normal and immune mice.
+    Authors: ROBSON JM, SULLIVAN FM
+    PMID: 13446380 | DOI: 10.1111/j.1476-5381.1957.tb00127.x
+
+[37] [Action of cortisone on the tuberculostatic complex in vitro].
+    Authors: POPPER M, LORIAN V
+    PMID: 13454470 | DOI: 
+
+[38] [Effect of cortisone and ACTH on experimental tuberculosis in guinea pigs vaccinated with BCG and Petragnani's anatuberculin].
+    Authors: RAGAZZINI F, LA CAUZA C
+    PMID: 13421431 | DOI: 
+
+[39] [Effects of cortisone and prednisone on the tuberculin reaction in guinea pigs infected with Koch bacilli].
+    Authors: BARTOLOZZI G
+    PMID: 13371246 | DOI: 
+
+[40] The influence of cortisone on the disposal of heat-killed tubercle bacilli by the sensitised guinea-pig.
+    Authors: PAGEL W, TREIP CS
+    PMID: 13385028 | DOI: 10.1159/000228310
+
+[41] [The effect of cortisone in guinea pigs infected with BCG of Vole bacillus].
+    Authors: OKADA H, FUWA H, KATO T
+    PMID: 14392698 | DOI: 
+
+[42] [Effect of cortisone combined with hyaluronidase on experimental infection in the guinea pig induced by BCG].
+    Authors: RODRIGUES F, SOUSA Pde C, FONSECA F
+    PMID: 14365078 | DOI: 
+
+[43] The effect of hormonal preparations on the survival of mice injected intravenously with virulent, attenuated, and avirulent Mycobacteria.
+    Authors: YOUMANS GP, YOUMANS AS
+    PMID: 13148540 | DOI: 10.1164/art.1954.69.5.790
+
+[44] [Effects of desoxycorticosterone and cortisone on the resistivity of toxins of mycobacterium tuberculosis].
+    Authors: TONUTTI E, FETZER S
+    PMID: 13013201 | DOI: 
+
+[45] The emergence of pseudotuberculosis in rats given cortisone.
+    Authors: LeMAISTRE C, TOMPSETT R
+    PMID: 14938508 | DOI: 10.1084/jem.95.4.393"
+methysergide	No Results	0	[]	No evidence found
+piretanide	No Results	0	[]	No evidence found
+oxybuprocaine	No Results	0	[]	No evidence found
+tamibarotene	No Results	0	[]	No evidence found
+warfarin	Direct (TB)	9	['37931910', '37113941', '33604067', '31270993', '26423615', '26266181', '25888831', '21441035', '20018758']	"[1] Novel Drug-Drug Interaction of Potential Rifabutin-Induced Edoxaban Failure: A Case Report.
+    Authors: Lanier C, Fuller M, Reece BA
+    PMID: 37931910 | DOI: 10.1177/08971900231213702
+
+[2] An Indonesian male with HIV/AIDS, pulmonary tuberculosis, and deep vein thrombosis: a case report and literature review.
+    Authors: Dini DRR, Rusli M
+    PMID: 37113941 | DOI: 10.1097/MS9.0000000000000324
+
+[3] A trio of infectious diseases and pulmonary embolism: A developing world's reality.
+    Authors: Pillay S, Magula N
+    PMID: 33604067 | DOI: 10.4102/sajhivmed.v22i1.1192
+
+[4] Thromboembolism in Mycobacterium tuberculosis Infection: Analysis and Literature Review.
+    Authors: Ha H, Kim KH, Park JH, Lee JK, Heo EY, Kim JS, Kim DK, Choi IS, Chung HS, Lim HJ
+    PMID: 31270993 | DOI: 10.3947/ic.2019.51.2.142
+
+[5] Peritoneal tuberculosis presenting with portal vein thrombosis and transudative Ascites - a diagnostic dilemma: case report.
+    Authors: Wariyapperuma UM, Jayasundera CI
+    PMID: 26423615 | DOI: 10.1186/s12879-015-1122-6
+
+[6] Tuberculosis and Acute Deep Vein Thrombosis in a Paediatric Case.
+    Authors: Sangani J, Mukherjee S, Biswas S, Chaudhuri T, Ghosh G
+    PMID: 26266181 | DOI: 10.7860/JCDR/2015/11809.6078
+
+[7] A rare complication of pulmonary tuberculosis: a case report.
+    Authors: Kumarihamy KW, Ralapanawa DM, Jayalath WA
+    PMID: 25888831 | DOI: 10.1186/s13104-015-0990-6
+
+[8] Simultaneous binding of anti-tuberculosis and anti-thrombosis drugs to a human transporter protein: a FRET study.
+    Authors: Rajdev P, Mondol T, Makhal A, Pal SK
+    PMID: 21441035 | DOI: 10.1016/j.jphotobiol.2011.02.023
+
+[9] Inhibition of bacterial disulfide bond formation by the anticoagulant warfarin.
+    Authors: Dutton RJ, Wayman A, Wei JR, Rubin EJ, Beckwith J, Boyd D
+    PMID: 20018758 | DOI: 10.1073/pnas.0912952107"
+primidone	No Results	0	[]	No evidence found
+clemastine	Direct (TB)	1	['30693866']	"[1] Potentiation of P2RX7 as a host-directed strategy for control of mycobacterial infection.
+    Authors: Matty MA, Knudsen DR, Walton EM, Beerman RW, Cronan MR, Pyle CJ, Hernandez RE, Tobin DM
+    PMID: 30693866 | DOI: 10.7554/eLife.39123"
+mexiletine	No Results	0	[]	No evidence found
+masitinib	No Results	0	[]	No evidence found
+dexamethasone	Direct (HDT)	3	['41123477', '41068481', '30737374']	"[1] Updates in the clinical management of tuberculous meningitis.
+    Authors: Garg RK
+    PMID: 41123477 | DOI: 10.1080/14787210.2025.2579210
+
+[2] Dexamethasone inhibits Mycobacterium tuberculosis-induced glycolysis but preserves antimicrobial function in primary human macrophages.
+    Authors: Thong L, Sandby Thomas O, O Gallchobhair O, Duffin E, Yennemadi AS, Leisching G, Murphy DM, Nadarajan P, O'Connell F, O'Sullivan MP, Basdeo SA, Cox DJ, Keane J
+    PMID: 41068481 | DOI: 10.1038/s41598-025-20188-2
+
+[3] Corticosteroids inhibit Mycobacterium tuberculosis-induced necrotic host cell death by abrogating mitochondrial membrane permeability transition.
+    Authors: Grab J, Suarez I, van Gumpel E, Winter S, Schreiber F, Esser A, Holscher C, Fritsch M, Herb M, Schramm M, Wachsmuth L, Pallasch C, Pasparakis M, Kashkar H, Rybniker J
+    PMID: 30737374 | DOI: 10.1038/s41467-019-08405-9"
+chlorpromazine	Direct (HDT)	1	['39335008']	"[1] Innovative Strategies in Drug Repurposing to Tackle Intracellular Bacterial Pathogens.
+    Authors: Lorente-Torres B, Llano-Verdeja J, Castanera P, Ferrero HA, Fernandez-Martinez S, Javadimarand F, Mateos LM, Letek M, Mourenza A
+    PMID: 39335008 | DOI: 10.3390/antibiotics13090834"
+midostaurin	No Results	0	[]	No evidence found
+dosulepin	No Results	0	[]	No evidence found
+mestranol	No Results	0	[]	No evidence found
+carbinoxamine	No Results	0	[]	No evidence found
+curcumin	Direct (HDT)	1	['37583694']	"[1] Macrophage targeted polymeric curcumin nanoparticles limit intracellular survival of Mycobacterium tuberculosis through induction of autophagy and augment anti-TB activity of isoniazid in RAW 264.7 macrophages.
+    Authors: Gupta PK, Jahagirdar P, Tripathi D, Devarajan PV, Kulkarni S
+    PMID: 37583694 | DOI: 10.3389/fimmu.2023.1233630"
+fluoxetine	Direct (TB)	4	['35688860', '34976083', '28052847', '24586159']	"[1] An effective nano drug delivery and combination therapy for the treatment of Tuberculosis.
+    Authors: Sheikhpour M, Delorme V, Kasaeian A, Amiri V, Masoumi M, Sadeghinia M, Ebrahimzadeh N, Maleki M, Pourazar S
+    PMID: 35688860 | DOI: 10.1038/s41598-022-13682-4
+
+[2] Gene Expression and In Vitro Pharmacogenetic Studies of Dopamine and Serotonin Gene Receptors in Tuberculosis.
+    Authors: Sheikhpour M, Shokrgozar MA, Biglari A, Pornour M, Abdolrahimi F, Poorazar Dizaji S, Khanipour S, Masoumi M, Ebrahimzadeh N, Abolfathi H
+    PMID: 34976083 | DOI: 
+
+[3] Subcellular Partitioning and Intramacrophage Selectivity of Antimicrobial Compounds against Mycobacterium tuberculosis.
+    Authors: Schump MD, Fox DM, Bertozzi CR, Riley LW
+    PMID: 28052847 | DOI: 10.1128/AAC.01639-16
+
+[4] Identification of host-targeted small molecules that restrict intracellular Mycobacterium tuberculosis growth.
+    Authors: Stanley SA, Barczak AK, Silvis MR, Luo SS, Sogi K, Vokes M, Bray MA, Carpenter AE, Moore CB, Siddiqi N, Rubin EJ, Hung DT
+    PMID: 24586159 | DOI: 10.1371/journal.ppat.1003946"
+albendazole	Direct (TB)	7	['40060957', '38166664', '30755949', '19727350', '16371154', '11207651', '10642037']	"[1] Treatment of a rare and severe infection of central nervous system by Angiostrongylus cantonensis: A case report.
+    Authors: Zhao JH, Li WJ, Jiao J, Wang MX, Zhang XM, Yin JY, Hu WZ, Song Q, Liu J
+    PMID: 40060957 | DOI: 10.4329/wjr.v17.i2.105059
+
+[2] The co-infection of pulmonary hydatid cyst, lophomoniasis and tuberculosis in a patient with resistant respiratory symptoms; a case report study.
+    Authors: Jalayeri MHT, Sharifi Far RA, Lashkarbolouk N, Mazandarani M
+    PMID: 38166664 | DOI: 10.1186/s12879-023-08907-4
+
+[3] Going Round in Circles with a Multisystemic Disease: A Unique Case of Parasitic Aortitis.
+    Authors: Antunes ML, Cabral G, Tavares R, Noronha C, Araujo J
+    PMID: 30755949 | DOI: 10.12890/2017_000601
+
+[4] Pulmonary hydatid cyst in a pregnant patient causing acute respiratory failure.
+    Authors: Hijazi MH, Al-Ansari MA
+    PMID: 19727350 | DOI: 10.4103/1817-1737.32234
+
+[5] A randomised controlled trial of the effects of albendazole in pregnancy on maternal responses to mycobacterial antigens and infant responses to Bacille Calmette-Guerin (BCG) immunisation [ISRCTN32849447].
+    Authors: Elliott AM, Namujju PB, Mawa PA, Quigley MA, Nampijja M, Nkurunziza PM, Belisle JT, Muwanga M, Whitworth JA
+    PMID: 16371154 | DOI: 10.1186/1471-2334-5-115
+
+[6] Effect of deworming on human T cell responses to mycobacterial antigens in helminth-exposed individuals before and after bacille Calmette-Guerin (BCG) vaccination.
+    Authors: Elias D, Wolday D, Akuffo H, Petros B, Bronner U, Britton S
+    PMID: 11207651 | DOI: 10.1046/j.1365-2249.2001.01446.x
+
+[7] Single-enhancing CT lesions in Indian patients with seizures: a review.
+    Authors: Kumar Garg R, Kumar Singh M, Misra S
+    PMID: 10642037 | DOI: 10.1016/s0920-1211(99)00092-3"
+paclitaxel	Direct (TB)	4	['41797739', '41513767', '41053048', '11962510']	"[1] Primary Pericardial Angiosarcoma Demonstrating Initial Response Followed by Progression on First-Line Chemotherapy: A Case Report.
+    Authors: Thakur UK, Subedi A, Joshi R, Dhanchha S, Yadav S, Pangyani B, Acharya A, Kc P, Shrestha S, Prasai G, Adhikari A, Jha AK, Pandit S, Sapkota S
+    PMID: 41797739 | DOI: 10.1002/ccr3.72131
+
+[2] Evaluation of methods to increase the expression of cytokine-induced killer cell chemoattractant cytokines in pancreatic cancer.
+    Authors: Bunuales M, Inoges S, Lopez-Diaz de Cerio A, Hervas-Stubbs S, Rodriguez J, Gonzalez-Aparicio M, Jauregui P, Hernandez-Alcoceba R
+    PMID: 41513767 | DOI: 10.1038/s41434-025-00590-1
+
+[3] Mycobacterium tuberculosis-specific T cells restrain anti-cancer drug-induced neutrophilic lung inflammation in tuberculosis.
+    Authors: Kwon KW, Kang TG, Lee JB, Choi E, Kim H, Park MC, Choi S, Kim K, Kim HW, Jeong SJ, Kim HR, Shin SJ, Ha SJ
+    PMID: 41053048 | DOI: 10.1038/s41467-025-63930-0
+
+[4] Identification of a novel steroid derivative, NSC12983, as a paclitaxel-like tubulin assembly promoter by 3-D virtual screening.
+    Authors: Wu JH, Batist G, Zamir LO
+    PMID: 11962510 | DOI: "
+vincristine	Direct (TB)	8	['41854047', '41744002', '41523414', '39320471', '37900802', '31096509', '27530021', '23797692']	"[1] Sirolimus Therapy in Generalized Lymphatic Anomaly With Tuberculosis: A Case Report.
+    Authors: Singhal KK, Mandal P, Singh V, Singh S, Abbey P, Yadav V, Yadav PS
+    PMID: 41854047 | DOI: 10.1002/ppul.71571
+
+[2] Multidrug-Resistant Anal and Perianal Tuberculosis: A Case Report From the Pneumo-Phthisiology Department of Conakry University Hospital, Guinea.
+    Authors: Diallo OH, Camara MH, Diallo BD, Bah TM, Camara ONN, Camara A, Camara LM
+    PMID: 41744002 | DOI: 10.1155/crpu/3497569
+
+[3] Non-Hodgkin Lymphoma and Tuberculosis Coexisting in the Same Cervical Lymph Node: A Case Report.
+    Authors: Taha A, Alzhrani S, Aljafari N, Aljadani BA, Al-Rashdi A, Almuntashiri AA, Alkhalifah KM, Bahshwan W
+    PMID: 41523414 | DOI: 10.7759/cureus.98957
+
+[4] Interstitial lung disease presents with varying characteristics in patients with non-Hodgkin lymphoma undergoing rituximab-containing therapies.
+    Authors: Zou W, Zhang J, Li Y, Zhang Z, Yang R, Yan Y, Zhu W, Ma F, Jiang P, Wang Y, Zhang X, Chen J
+    PMID: 39320471 | DOI: 10.1007/s00277-024-06013-2
+
+[5] Miliary Tuberculosis during R-MPV Therapy in an Elderly Patient with Primary Central Nerve System Lymphoma: A Case Report.
+    Authors: Take Y, Shirahata M, Sakai J, Kubota Y, Suzuki T, Adachi JI, Maesaki S, Mishima K, Nishikawa R
+    PMID: 37900802 | DOI: 10.1159/000530711
+
+[6] Cervical langerhans cell histiocytosis mimicking cervical tuberculosis: A Case report.
+    Authors: Rao J, Rao Y, Wang C, Cai Y, Cao G
+    PMID: 31096509 | DOI: 10.1097/MD.0000000000015690
+
+[7] [REACTIVATION OF TUBERCULOSIS PRESENTING WITH EMPYEMA DUE TO ANTICANCER CHEMOTHERAPY FOR DIFFUSE LARGE B CELL LYMPHOMA].
+    Authors: Yuba T, Hatsuse M, Kodama M, Uda S, Yoshimura A, Kurisu N
+    PMID: 27530021 | DOI: 
+
+[8] Treatment outcomes in AIDS-related diffuse large B-cell lymphoma in the setting roll out of combination antiretroviral therapy in South Africa.
+    Authors: de Witt P, Maartens DJ, Uldrick TS, Sissolak G
+    PMID: 23797692 | DOI: 10.1097/QAI.0b013e3182a03e9b"
+oxibendazole	No Results	0	[]	No evidence found
+vinblastine	No Results	0	[]	No evidence found
+bepridil	No Results	0	[]	No evidence found
+danazol	No Results	0	[]	No evidence found
+carbetocin	No Results	0	[]	No evidence found
+clozapine	Direct (TB)	1	['17346280']	"[1] Histamine H4 receptor agonists have more activities than H4 agonism in antigen-specific human T-cell responses.
+    Authors: Sugata Y, Okano M, Fujiwara T, Matsumoto R, Hattori H, Yamamoto M, Nishibori M, Nishizaki K
+    PMID: 17346280 | DOI: 10.1111/j.1365-2567.2007.02574.x"
+ketoprofen	Direct (TB)	2	['36439353', '26763139']	"[1] Effect of a recent parenteral dexamethasone and ketoprofen administration on the immunological diagnosis of tuberculosis in goats.
+    Authors: Ortega J, de Juan L, Sevilla IA, Garrido JM, Roy A, Velasco C, Romero B, Dominguez M, Perez de Val B, Nebot C, Saez-Llorente JL, Alvarez J, Bezos J
+    PMID: 36439353 | DOI: 10.3389/fvets.2022.1042428
+
+[2] Analgesic Effect of the Newly Developed S(+)-Flurbiprofen Plaster on Inflammatory Pain in a Rat Adjuvant-Induced Arthritis Model.
+    Authors: Sugimoto M, Toda Y, Hori M, Mitani A, Ichihara T, Sekine S, Hirose T, Endo H, Futaki N, Kaku S, Otsuka N, Matsumoto H
+    PMID: 26763139 | DOI: 10.1002/ddr.21288"
+phentolamine	No Results	0	[]	No evidence found
+naftopidil	No Results	0	[]	No evidence found
+pirenzepine	No Results	0	[]	No evidence found
+fludroxycortide	No Results	0	[]	No evidence found
+clomifene	No Results	0	[]	No evidence found
+pinacidil	No Results	0	[]	No evidence found
+raltitrexed	Direct (TB)	1	['38489355']	"[1] Redirecting raltitrexed from cancer cell thymidylate synthase to Mycobacterium tuberculosis phosphopantetheinyl transferase.
+    Authors: Singh A, Ottavi S, Krieger I, Planck K, Perkowski A, Kaneko T, Davis AM, Suh C, Zhang D, Goullieux L, Alex A, Roubert C, Gardner M, Preston M, Smith DM, Ling Y, Roberts J, Cautain B, Upton A, Cooper CB, Serbina N, Tanvir Z, Mosior J, Ouerfelli O, Yang G, Gold BS, Rhee KY, Sacchettini JC, Fotouhi N, Aube J, Nathan C
+    PMID: 38489355 | DOI: 10.1126/sciadv.adj6406"
+menadione	Direct (TB)	18	['40573194', '37295353', '36187967', '34536516', '33010635', '29943427', '29465985', '27718364', '24318724', '23240649', '21129420', '17097323', '16950824', '15644891', '15342574', '9755177', '8806780', '8900541']	"[1] Design, Synthesis, and In Vitro Evaluation of 4-(Arylchalcogenyl)methyl)-1H-1,2,3-triazol-1-yl-menadione: Exploring Their Potential Against Tuberculosis.
+    Authors: Santos NLB, Gomes LS, Ribeiro RCB, Carvalho AS, Lourenco MCS, Marins LM, Valle SP, Doring TH, Andricopulo AD, Oliveira AS, Ferreira VF, da Silva FC, Forezi LDSM, Nascimento V
+    PMID: 40573194 | DOI: 10.3390/ph18060797
+
+[2] The impact of genotype on the phenotype of Mycobacterium tuberculosis DeltasufR mutants.
+    Authors: Willemse D, Baatjies L, Dippenaar A, Warren RM, Williams MJ
+    PMID: 37295353 | DOI: S1472-9792(23)00058-6
+
+[3] The AhR ligand phthiocol and vitamin K analogs as Pseudomonas aeruginosa quorum sensing inhibitors.
+    Authors: Jia T, Liu D, Bi X, Li M, Cai Z, Fu J, Liu Z, Wu P, Ke X, Jia A, Zhang G, Li G, Yang L
+    PMID: 36187967 | DOI: 10.3389/fmicb.2022.896687
+
+[4] Antimycobacterial activity of acetone extract and isolated metabolites from folklore medicinal lichen Usnea laevis Nyl. against drug-sensitive and multidrug-resistant tuberculosis strains.
+    Authors: Tatipamula VB, Annam SSP
+    PMID: 34536516 | DOI: S0378-8741(21)00870-9
+
+[5] Anti-tubercular profile of new selenium-menadione conjugates against Mycobacterium tuberculosis H37Rv (ATCC 27294) strain and multidrug-resistant clinical isolates.
+    Authors: Ribeiro RCB, de Marins DB, Di Leo I, da Silva Gomes L, de Moraes MG, Abbadi BL, Villela AD, da Silva WF, da Silva LCRP, Machado P, Bizarro CV, Basso LA, Cristina de Moraes M, Ferreira VF, da Silva FC, Nascimento V
+    PMID: 33010635 | DOI: S0223-5234(20)30831-X
+
+[6] Synthesis and biological evaluation of some new tricyclic pyrrolo[3,2-e]tetrazolo[1,5-c]pyrimidine derivatives as potential antitubercular agents.
+    Authors: Patil Y, Shingare R, Choudhari A, Borkute R, Sarkar D, Madje BR
+    PMID: 29943427 | DOI: 10.1002/ardp.201800040
+
+[7] Identification of a Mycothiol-Dependent Nitroreductase from Mycobacterium tuberculosis.
+    Authors: Negri A, Javidnia P, Mu R, Zhang X, Vendome J, Gold B, Roberts J, Barman D, Ioerger T, Sacchettini JC, Jiang X, Burns-Huang K, Warrier T, Ling Y, Warren JD, Oren DA, Beuming T, Wang H, Wu J, Li H, Rhee KY, Nathan CF, Liu G, Somersan-Karakaya S
+    PMID: 29465985 | DOI: 10.1021/acsinfecdis.7b00111
+
+[8] Uptake and metabolism of fluorescent steroids by mycobacterial cells.
+    Authors: Faletrov Y, Brzostek A, Plocinska R, Dziadek J, Rudaya E, Edimecheva I, Shkumatov V
+    PMID: 27718364 | DOI: S0039-128X(16)30153-2
+
+[9] Antitubercular and antibacterial activity of quinonoid natural products against multi-drug resistant clinical isolates.
+    Authors: Dey D, Ray R, Hazra B
+    PMID: 24318724 | DOI: 10.1002/ptr.5090
+
+[10] A novel F(420) -dependent anti-oxidant mechanism protects Mycobacterium tuberculosis against oxidative stress and bactericidal agents.
+    Authors: Gurumurthy M, Rao M, Mukherjee T, Rao SP, Boshoff HI, Dick T, Barry CE 3rd, Manjunatha UH
+    PMID: 23240649 | DOI: 10.1111/mmi.12127
+
+[11] A novel screening method based on menadione mediated rapid reduction of tetrazolium salt for testing of anti-mycobacterial agents.
+    Authors: Singh U, Akhtar S, Mishra A, Sarkar D
+    PMID: 21129420 | DOI: 10.1016/j.mimet.2010.11.013
+
+[12] Rv3303c of Mycobacterium tuberculosis protects tubercle bacilli against oxidative stress in vivo and contributes to virulence in mice.
+    Authors: Akhtar P, Srivastava S, Srivastava A, Srivastava M, Srivastava BS, Srivastava R
+    PMID: 17097323 | DOI: 10.1016/j.micinf.2006.09.004
+
+[13] Effects of weak acids, UV and proton motive force inhibitors on pyrazinamide activity against Mycobacterium tuberculosis in vitro.
+    Authors: Wade MM, Zhang Y
+    PMID: 16950824 | DOI: 10.1093/jac/dkl358
+
+[14] Co-induction of methyltransferase Rv0560c by naphthoquinones and fibric acids suggests attenuation of isoprenoid quinone action in Mycobacterium tuberculosis.
+    Authors: Garbe TR
+    PMID: 15644891 | DOI: 10.1139/w04-067
+
+[15] Targeted mutagenesis of the Mycobacterium smegmatis mca gene, encoding a mycothiol-dependent detoxification protein.
+    Authors: Rawat M, Uppal M, Newton G, Steffek M, Fahey RC, Av-Gay Y
+    PMID: 15342574 | DOI: 10.1128/JB.186.18.6050-6058.2004
+
+[16] sigmaR, an RNA polymerase sigma factor that modulates expression of the thioredoxin system in response to oxidative stress in Streptomyces coelicolor A3(2).
+    Authors: Paget MS, Kang JG, Roe JH, Buttner MJ
+    PMID: 9755177 | DOI: 10.1093/emboj/17.19.5776
+
+[17] Superoxide production by the mycobacterial and pseudomonad quinoid pigments phthiocol and pyocyanine in human lung cells.
+    Authors: Gardner PR
+    PMID: 8806780 | DOI: 10.1006/abbi.1996.0390
+
+[18] Response of Mycobacterium tuberculosis to reactive oxygen and nitrogen intermediates.
+    Authors: Garbe TR, Hibler NS, Deretic V
+    PMID: 8900541 | DOI: "
+mycophenolate-mofetil	Direct (TB)	18	['41050453', '39866980', '39624561', '37950309', '37142508', '35864917', '35221432', '32133689', '31155204', '30533472', '30401393', '30237973', '29707591', '21770854', '21605027', '20374352', '12974789', '10692297']	"[1] Articular flare-up of systemic scleroderma revealing a rare form of tuberculosis of the shoulder and extensor tendons: a case report and literature review.
+    Authors: Zouaki H, Laatiris H, Taoubane L, Mejjad A, Toufik H, Elouardi N, Bezza A
+    PMID: 41050453 | DOI: 001023.v3
+
+[2] Granulomatous Tubulointerstitial Nephritis as a Rare Cause of Allograft Failure: A Case Report.
+    Authors: Yeboah EK, Yang Y, Nnaji O, Roche-Recinos A, Saggi S
+    PMID: 39866980 | DOI: 10.7759/cureus.76353
+
+[3] Atypical Mycobacterium Skin Infection in a Heart Transplant Patient.
+    Authors: Calkins D, Cabrera Cancio MR, Mayer CA, Mackie B
+    PMID: 39624561 | DOI: 10.7759/cureus.72887
+
+[4] Tuberculosis among children and adolescents with rheumatic diseases - case series.
+    Authors: Lima LM, Fonseca AR, Sant'Anna CC, Parente AAAI, Aurilio RB, Sant'Anna MFBP
+    PMID: 37950309 | DOI: 10.1186/s12969-023-00918-4
+
+[5] Cutaneous Tuberculosis in Heart Transplant.
+    Authors: Lino R, Amorim S, Silva C, Neves N, Araujo P, Pinto R, Pinheiro-Torres J, Pinho P, Macedo F, Santos L
+    PMID: 37142508 | DOI: S0041-1345(23)00210-5
+
+[6] Seropositive Neuromyelitis Optica in a Case of Undiagnosed Ankylosing Spondylitis: A Neuro-Rheumatological Conundrum.
+    Authors: Ghosh Md R, Roy D, Leon-Ruiz M, Das S, Dubey S, Benito-Leon J
+    PMID: 35864917 | DOI: 10.5339/qmj.2022.29
+
+[7] Disseminated tuberculosis with macrophage activation syndrome in a child with lupus nephritis.
+    Authors: Janarthanan M, Antony T, Mohan R, Premkumar S, Pasupathy U
+    PMID: 35221432 | DOI: 10.24911/SJP.106-1614333951
+
+[8] Disseminated tuberculosis presenting as medium-vessel vasculitis in an immunocompromised host.
+    Authors: Wang JY, Brown RA, Pugliese S, Kwong BY, Novoa RA
+    PMID: 32133689 | DOI: 10.1111/cup.13678
+
+[9] A Rare Manifestation of Tuberculosis in a Renal Transplant Patient: A Case Report.
+    Authors: Coelho ID, Romaozinho C, Teixeira AC, Rodrigues L, Ferreira E, Santos L, Macario F, Alves R, Figueiredo A
+    PMID: 31155204 | DOI: S0041-1345(19)30441-5
+
+[10] Long-lasting cutaneous tuberculosis owing to Mycobacterium bovis masquerading as sarcoidosis.
+    Authors: Dequidt L, Dousset L, Pham-Ledard A, Doutre MS, Beylot-Barry M
+    PMID: 30533472 | DOI: 10.1016/j.jdcr.2018.07.020
+
+[11] Management of De Novo Mycobacterial Infection After Lung Transplantation Without Rifampicin: Case Series of a Single Institution.
+    Authors: Suzuki H, Matsuda Y, Noda M, Oishi H, Watanabe T, Sado T, Yamada M, Tamada T, Okada Y
+    PMID: 30401393 | DOI: S0041-1345(18)30391-9
+
+[12] Miliary tuberculosis mimicking systemic lupus erythematosus flare.
+    Authors: Elzein F, Elzein A, Mohammed N, Alswailem R
+    PMID: 30237973 | DOI: 10.1016/j.rmcr.2018.09.005
+
+[13] Miliary Tuberculosis Presenting With Meningitis in a Patient Treated With Mycophenolate for Lupus Nephritis: Challenges in Diagnosis and Review of the Literature.
+    Authors: Macauley P, Rapp M, Park S, Lamikanra O, Sharma P, Marcelin M, Sharma K
+    PMID: 29707591 | DOI: 10.1177/2324709618770226
+
+[14] Tuberculosis in renal transplant recipients.
+    Authors: Ersan S, Celik A, Atila K, Aykut Sifil A, Cavdar C, Soylu A, Bora S, Gulay H, Camsari T
+    PMID: 21770854 | DOI: 10.3109/0886022X.2011.599095
+
+[15] Meningoencephalitis with Aspergillus and mycobacterium tuberculosis in a renal transplant recipient.
+    Authors: Petramfar P, Yousefian M, Ashraf MH, Davarpanah MA, Rahmati H
+    PMID: 21605027 | DOI: 
+
+[16] Central nervous system infections in Filipino patients with systemic lupus erythematosus.
+    Authors: Vargas PJ, King G, Navarra SV
+    PMID: 20374352 | DOI: 10.1111/j.1756-185X.2009.01416.x
+
+[17] Risk factors for Pneumocystis carinii pneumonia in kidney transplant recipients: a case-control study.
+    Authors: Radisic M, Lattes R, Chapman JF, del Carmen Rial M, Guardia O, Seu F, Gutierrez P, Goldberg J, Casadei DH
+    PMID: 12974789 | DOI: 10.1034/j.1399-3062.2003.00018.x
+
+[18] Reactivation of tuberculosis after conversion from azathioprine to mycophenolate mofetil 16 years after renal transplantation.
+    Authors: Waiser J, Schotschel R, Budde K, Neumayer HH
+    PMID: 10692297 | DOI: 10.1016/s0272-6386(00)70224-1"
+cabergoline	No Results	0	[]	No evidence found
+cimetidine	Direct (TB)	3	['16476565', '12832854', '1962630']	"[1] The role of histamine in the intracellular survival of Mycobacterium bovis BCG.
+    Authors: Megyeri K, Buzas K, Miczak A, Buzas E, Kovacs L, Seprenyi G, Falus A, Mandi Y
+    PMID: 16476565 | DOI: 10.1016/j.micinf.2005.10.022
+
+[2] The histamine H2-receptor antagonist, cimetidine, inhibits the articular osteopenia in rats with adjuvant-induced arthritis by suppressing the osteoclast differentiation induced by histamine.
+    Authors: Yamaura K, Yonekawa T, Nakamura T, Yano S, Ueno K
+    PMID: 12832854 | DOI: 10.1254/jphs.92.43
+
+[3] Primary gastric tuberculosis presenting as pyloric outlet obstruction.
+    Authors: Tromba JL, Inglese R, Rieders B, Todaro R
+    PMID: 1962630 | DOI: "
+ibudilast	No Results	0	[]	No evidence found
