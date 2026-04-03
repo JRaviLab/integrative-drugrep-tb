@@ -1,0 +1,338 @@
+
+```{r}
+library(readr)
+library(here)
+```
+
+```{r}
+labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
+# HDT_label = 1 for Direct (HDT) matches.
+# exception: "fostaminitib" is manually labeled as 1 due to a drug name typo
+# in the literature (misspelled drug name in abstract prevented detection)
+# https://doi.org/10.3390/antibiotics9090550
+labels$HDT_label <- ifelse(
+  labels$search_type == "Direct (HDT)" | labels$drug_name %in% c("fostamatinib"),
+  1, 0
+)
+```
+
+```{r}
+method_lists <- list(
+  CMAP_microarray = CMAP_indivSig_TB_microarray$ranked_pert[1:20],
+  CMAP_RNAseq     = CMAP_indivSig_TB_RNAseq$ranked_pert[1:20], # add aggr microarray and aggr RNAseq
+
+  Pearson_microarray = Cor_pearson_indivSig_TB_microarray$ranked_pert[1:20],
+  Pearson_RNAseq     = Cor_pearson_indivSig_TB_RNAseq$ranked_pert[1:20],
+
+  Spearman_microarray = Cor_spearman_indivSig_TB_microarray$ranked_pert[1:20],
+  Spearman_RNAseq     = Cor_spearman_indivSig_TB_RNAseq$ranked_pert[1:20],
+
+  NCS_microarray = NCS_indivSig_TB_microarray$ranked_pert[1:20],
+  NCS_RNAseq     = NCS_indivSig_TB_RNAseq$ranked_pert[1:20],
+
+  Tau_microarray = Tau_indivSig_TB_microarray$ranked_pert[1:20],
+  Tau_RNAseq     = Tau_indivSig_TB_RNAseq$ranked_pert[1:20],
+
+  WCS_microarray = WCS_indivSig_TB_microarray$ranked_pert[1:20],
+  WCS_RNAseq     = WCS_indivSig_TB_RNAseq$ranked_pert[1:20]
+)
+
+integrative_pred = read_tsv(here("results/final_high_confidence_drug_predictions.tsv"))
+integrative_pred_list <- integrative_pred$drug_name[1:20]
+
+method_lists$Integrative <- integrative_pred_list
+```
+
+```{r}
+# collect all predicted drugs (top 20 single-score lists + integrative)
+all_predicted_drugs <- unique(unlist(method_lists))
+
+# restrict labels to evaluated drugs only
+labels_eval <- all_predicted_drugs[all_predicted_drugs %in% labels$drug_name]
+all_labeled <- all(all_predicted_drugs %in% labels$drug_name)
+
+print(paste0(
+  "Do all predicted drugs have labels? ",
+  all_labeled
+))
+
+missing_drugs <- setdiff(all_predicted_drugs, labels$drug_name)
+
+print(missing_drugs)
+
+# count positives in evaluated set
+num_pos <- sum(labels[labels$drug_name %in% labels_eval,]$HDT_label, na.rm = TRUE)
+print(paste0("Size of evaluated set: ", length(labels[labels$drug_name %in% labels_eval,]$HDT_label)))
+print(paste0("Number of positives in evaluated set: ", num_pos))
+
+```
+
+```{r}
+compute_metrics <- function(drug_list, positives, K) {
+  drug_list <- tolower(drug_list)
+  
+  topk <- drug_list[1:K]
+  
+  hits <- sum(topk %in% positives)
+  
+  precision <- hits / K
+  recall <- hits / length(positives)
+  
+  c(Precision = precision, Recall = recall)
+}
+```
+
+```{r}
+labels$drug_name <- tolower(labels$drug_name)
+positives <- labels$drug_name[labels$HDT_label == 1]
+
+```
+
+```{r}
+library(dplyr)
+
+rank_df <- lapply(names(method_lists), function(method) {
+  
+  drugs <- tolower(method_lists[[method]])
+  
+  data.frame(
+    Method = method,
+    drug_name = drugs,
+    Rank = seq_along(drugs)
+  )
+}) %>%
+  bind_rows()
+
+# Keep only known positives
+rank_df <- rank_df %>%
+  filter(drug_name %in% positives)
+rank_df$Score <- gsub("_.*", "", rank_df$Method)
+
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# order Score by median rank (lower = better)
+rank_df <- rank_df %>%
+  mutate(Score = gsub("_.*", "", Method)) %>%
+  group_by(Score) %>%
+  mutate(median_rank = median(Rank, na.rm = TRUE)) %>%
+  ungroup()
+
+rank_df$Score <- reorder(rank_df$Score, rank_df$median_rank)
+
+ggplot(rank_df, aes(x = Score, y = Rank)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_y_reverse() +  # rank 1 at top
+  coord_flip() +       # flip axes
+  theme_minimal() +
+  labs(
+    title = "Distribution of ranks for known drugs in the top 20 predictions across methods",
+    x = "Method",
+    y = "Rank (Top = 1)"
+  ) +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+rank_df <- rank_df %>%
+  mutate(
+    Score = gsub("_.*", "", Method),
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq",
+                      ifelse(grepl("microarray", Method), "Microarray", "Integrative")),
+    Method_full = ifelse(DataType == "Integrative",
+                         "Integrative",
+                         paste(Score, DataType, sep = "_"))
+  )
+rank_df <- rank_df %>%
+  group_by(Method_full) %>%
+  mutate(median_rank = median(Rank, na.rm = TRUE)) %>%
+  ungroup()
+
+rank_df$Method_full <- reorder(rank_df$Method_full, rank_df$median_rank)
+```
+
+```{r}
+ggplot(rank_df, aes(x = Method_full, y = Rank, fill = Score)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_manual(values = score_colors) +  
+  scale_y_reverse() +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Distribution of ranks for known drugs in the top 20 drugs across methods and technologies",
+    x = "Method",
+    y = "Rank (Top = 1)"
+  ) +
+  theme(legend.position = "none")
+```
+
+```{r}
+Ks <- c(5, 10, 15, 20)
+
+results <- lapply(Ks, function(k) {
+  res <- lapply(method_lists, function(dl) {
+    compute_metrics(dl, positives, K = k)
+  })
+  
+  df <- as.data.frame(do.call(rbind, res))
+  df$Method <- names(method_lists)
+  df$K <- k
+  df
+})
+
+results_df <- do.call(rbind, results)
+```
+
+
+```{r}
+library(ggplot2)
+library(RColorBrewer)
+
+results_df$DataType <- ifelse(grepl("RNAseq", results_df$Method),
+                             "RNAseq", "Microarray")
+
+results_df$Score <- gsub("_.*", "", results_df$Method)
+
+scores <- unique(results_df$Score)
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(
+    brewer.pal(length(scores), "Dark2"),
+    scores
+  )
+)
+
+
+# Flag Integrative methods
+results_df$IsIntegrative <- grepl("Integrative", results_df$Method)
+
+ggplot(results_df, aes(x = K, y = Precision,
+                       group = Method)) +
+  geom_line(aes(color = Score), linewidth = 1, alpha = 0.7) +
+  geom_point(aes(
+    shape = ifelse(IsIntegrative, "Integrative", DataType),
+    color = ifelse(IsIntegrative, "Integrative", Score)
+  ), size = 3) +
+  scale_color_manual(values = c(
+    "Integrative" = "black",
+    setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+             unique(results_df$Score))
+  )) +
+  scale_shape_manual(values = c(
+    "Integrative" = 15,   # square
+    "RNA-seq" = 16,       # circle
+    "Microarray" = 17     # triangle
+  )) +
+  theme_minimal() +
+  labs(
+    title = "Precision@K across method-technology combinations",
+    x = "K",
+    y = "Precision",
+    color = "Score",
+    shape = "Data type"
+  )
+```
+```{r}
+library(dplyr)
+
+results_df_plot <- results_df %>%
+  bind_rows(
+    results_df %>%
+      filter(grepl("Integrative", Method)) %>%
+      mutate(DataType = "RNAseq")
+  )
+
+ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
+  
+  # Non-integrative methods (faded)
+  geom_line(
+    data = subset(results_df_plot, !grepl("Integrative", Method)),
+    aes(color = Score),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !grepl("Integrative", Method)),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  # Integrative (highlighted)
+  geom_line(
+    data = subset(results_df_plot, grepl("Integrative", Method)),
+    aes(color = Score),
+    linewidth = 1.5,
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, grepl("Integrative", Method)),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_wrap(~ DataType) +
+  scale_color_manual(values = score_colors) +
+  theme_minimal() +
+  labs(
+    title = "Precision@K across methods by technology",
+    x = "K",
+    y = "Precision",
+    color = "Score"
+  )
+
+```
+
+```{r}
+library(dplyr)
+
+ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_color_manual(values = score_colors) +
+  theme_minimal() +
+  labs(
+    title = "Average precision@K across microarray and RNAseq",
+    x = "K",
+    y = "Average Precision",
+    color = "Score"
+  )
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(results_df, aes(x = K, y = Recall,
+                       group = Method)) +
+  geom_line(aes(color = Score), linewidth = 1, alpha = 0.7) +
+  geom_point(aes(
+    shape = ifelse(IsIntegrative, "Integrative", DataType),
+    color = ifelse(IsIntegrative, "Integrative", Score)
+  ), size = 3) +
+  scale_color_manual(values = c(
+    "Integrative" = "black",
+    setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+             unique(results_df$Score))
+  )) +
+  scale_shape_manual(values = c(
+    "Integrative" = 15,   # square
+    "RNAseq" = 16,       # circle
+    "Microarray" = 17     # triangle
+  )) +
+  theme_minimal() +
+  labs(
+    title = "Recall@K across methods",
+    x = "K",
+    y = "Recall",
+    color = "Score",
+    shape = "Data type"
+  )
+```
+
