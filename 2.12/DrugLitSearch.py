@@ -187,9 +187,9 @@ def format_evidence_for_tsv(summaries):
 if __name__ == "__main__":
     # hard coded for now
     try:
-        drug_pred_results = pd.read_csv("drug_list.csv")
+        drug_pred_results = pd.read_csv("../integrative-drugrep-tb/2.12/launch.csv")
     
-        drug_names = drug_pred_results['drug_name'].unique()
+        drug_names = drug_pred_results['pert_iname'].unique()
 
     except FileNotFoundError:
         print("Error: Input file not found. Please check the path.")
@@ -217,10 +217,10 @@ if __name__ == "__main__":
     df_for_tsv = final_df.copy()
     df_for_tsv['literature_evidence'] = df_for_tsv['literature_evidence'].apply(format_evidence_for_tsv)
     
-    output_path_tsv = "results/drug_predictions_with_literature.tsv"
+    output_path_tsv = "../integrative-drugrep-tb/2.12/results/launched_drug_with_literature.tsv"
     df_for_tsv.to_csv(output_path_tsv, sep="\t", index=False)
-    print(f"\n✅ Literature search complete. Human-readable output saved to: {output_path_tsv}")
+    print(f"\nLiterature search complete. Human-readable output saved to: {output_path_tsv}")
 
-    output_path_json = "results/drug_predictions_with_literature.json"
+    output_path_json = "../integrative-drugrep-tb/2.12/results/launched_drug_with_literature.json"
     final_df.to_json(output_path_json, orient="records", indent=4)
-    print(f"✅ Structured JSON output saved to: {output_path_json}")
+    print(f"Structured JSON output saved to: {output_path_json}")
