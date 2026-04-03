@@ -1,3 +1,8 @@
+# Evaluation against drugs with TB HDT evidence in the literature
+# Pubmed search on all FDA-approved drugs performed on April 2nd, 2026 by Ling Thang
+# This notebook contains step-by-step evaluation of the top 20 drugs predicted using (i) our integrative approach, (2) the six connectivity methods across microarray/RNAseq individual signatures and aggregated signatures
+# Last modified: 04/03/26
+# Kewalin Samart
 
 ```{r}
 library(readr)
@@ -17,24 +22,60 @@ labels$HDT_label <- ifelse(
 ```
 
 ```{r}
+# read in RNAseq indiv signatures predictions by method
+CMAP_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/CMAP_indivSig_TB_RNAseq.rds"))
+Cor_pearson_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Cor_pearson_indivSig_TB_RNAseq.rds"))
+Cor_spearman_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Cor_spearman_indivSig_TB_RNAseq.rds"))
+NCS_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/NCS_indivSig_TB_RNAseq.rds"))
+Tau_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Tau_indivSig_TB_RNAseq.rds"))
+WCS_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/WCS_indivSig_TB_RNAseq.rds"))
+
+# read in microarray indiv signatures predictions by method
+CMAP_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/CMAP_indivSig_TB_microarray.rds"))
+Cor_pearson_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Cor_pearson_indivSig_TB_microarray.rds"))
+Cor_spearman_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Cor_spearman_indivSig_TB_microarray.rds"))
+NCS_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/NCS_indivSig_TB_microarray.rds"))
+Tau_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Tau_indivSig_TB_microarray.rds"))
+WCS_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/WCS_indivSig_TB_microarray.rds"))
+
+# read in RNAseq aggregated signatures predictions by method
+allscores_aggrSig_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_RNAseq_list.rds"))
+
+# read in microarray aggregated signatures predictions by method
+allscores_aggrSig_microarray <- readRDS(here("results/microarray/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_microarray_list.rds"))
+```
+
+```{r}
 method_lists <- list(
   CMAP_microarray = CMAP_indivSig_TB_microarray$ranked_pert[1:20],
-  CMAP_RNAseq     = CMAP_indivSig_TB_RNAseq$ranked_pert[1:20], # add aggr microarray and aggr RNAseq
+  CMAP_RNAseq     = CMAP_indivSig_TB_RNAseq$ranked_pert[1:20],
+  CMAP_microarray_aggr = allscores_aggrSig_microarray$CMAP[1:20],
+  CMAP_RNAseq_aggr = allscores_aggrSig_RNAseq$CMAP[1:20],
 
   Pearson_microarray = Cor_pearson_indivSig_TB_microarray$ranked_pert[1:20],
   Pearson_RNAseq     = Cor_pearson_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Pearson_microarray_aggr = allscores_aggrSig_microarray$Cor_pearson[1:20],
+  Pearson_RNAseq_aggr = allscores_aggrSig_RNAseq$Cor_pearson[1:20],
 
   Spearman_microarray = Cor_spearman_indivSig_TB_microarray$ranked_pert[1:20],
   Spearman_RNAseq     = Cor_spearman_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Spearman_microarray_aggr = allscores_aggrSig_microarray$Cor_spearman[1:20],
+  Spearman_RNAseq_aggr = allscores_aggrSig_RNAseq$Cor_spearman[1:20],
 
   NCS_microarray = NCS_indivSig_TB_microarray$ranked_pert[1:20],
   NCS_RNAseq     = NCS_indivSig_TB_RNAseq$ranked_pert[1:20],
+  NCS_microarray_aggr = allscores_aggrSig_microarray$NCS[1:20],
+  NCS_RNAseq_aggr = allscores_aggrSig_RNAseq$NCS[1:20],
 
   Tau_microarray = Tau_indivSig_TB_microarray$ranked_pert[1:20],
   Tau_RNAseq     = Tau_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Tau_microarray_aggr = allscores_aggrSig_microarray$Tau[1:20],
+  Tau_RNAseq_aggr = allscores_aggrSig_RNAseq$Tau[1:20],
 
   WCS_microarray = WCS_indivSig_TB_microarray$ranked_pert[1:20],
-  WCS_RNAseq     = WCS_indivSig_TB_RNAseq$ranked_pert[1:20]
+  WCS_RNAseq     = WCS_indivSig_TB_RNAseq$ranked_pert[1:20],
+  WCS_microarray_aggr = allscores_aggrSig_microarray$WCS[1:20],
+  WCS_RNAseq_aggr = allscores_aggrSig_RNAseq$WCS[1:20]
 )
 
 integrative_pred = read_tsv(here("results/final_high_confidence_drug_predictions.tsv"))
@@ -58,12 +99,13 @@ print(paste0(
 
 missing_drugs <- setdiff(all_predicted_drugs, labels$drug_name)
 
-print(missing_drugs)
+print(paste0("Missing label for:", missing_drugs))
 
 # count positives in evaluated set
 num_pos <- sum(labels[labels$drug_name %in% labels_eval,]$HDT_label, na.rm = TRUE)
-print(paste0("Size of evaluated set: ", length(labels[labels$drug_name %in% labels_eval,]$HDT_label)))
-print(paste0("Number of positives in evaluated set: ", num_pos))
+print(paste0("Size of evaluated set (top 20 predictions from each list): ", length(labels[labels$drug_name %in% labels_eval,]$HDT_label)))
+print(paste0("Number of positives in evaluated set (among top 20 predictions from each list): ", num_pos))
+print(paste0("Number of all positives: ", sum(labels$HDT_label)))
 
 ```
 
@@ -98,12 +140,15 @@ rank_df <- lapply(names(method_lists), function(method) {
   data.frame(
     Method = method,
     drug_name = drugs,
-    Rank = seq_along(drugs)
+    Rank = seq_along(drugs),
+    signature_type = ifelse(grepl("aggr", method, ignore.case = TRUE),
+                            "Aggregated signatures",
+                            "Individual signatures")
   )
 }) %>%
   bind_rows()
 
-# Keep only known positives
+# keep only known positives
 rank_df <- rank_df %>%
   filter(drug_name %in% positives)
 rank_df$Score <- gsub("_.*", "", rank_df$Method)
@@ -134,8 +179,148 @@ ggplot(rank_df, aes(x = Score, y = Rank)) +
     y = "Rank (Top = 1)"
   ) +
   theme(legend.position = "none")
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+rank_df_expanded <- rank_df %>%
+  mutate(signature_type = ifelse(Method == "Integrative", signature_type, signature_type)) %>%
+  # add "All" panel for Integrative
+  bind_rows(
+    rank_df %>%
+      filter(Method == "Integrative") %>%
+      mutate(signature_type = "All (Integrative)")
+  )
+
+# reorder signature_type by median rank (ascending)
+rank_df_expanded <- rank_df_expanded %>%
+  mutate(signature_type = factor(signature_type, 
+                                 levels = names(sort(tapply(Rank, signature_type, median)))))
+
+ggplot(rank_df_expanded, aes(x = signature_type, y = Rank, fill = signature_type)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +    
+  scale_y_reverse() +   # rank 1 at top
+  coord_flip() +        # horizontal boxes
+  theme_minimal() +
+  labs(
+    title = "Distribution of ranks for known drugs in \n the top 20 predictions by signature type",
+    x = "Signature type",
+    y = "Rank (Top = 1)"
+  ) +
+  theme(legend.position = "none")
+```
+
+```{r}
+library(dplyr)
+
+rank_df_plot <- rank_df %>%
+  bind_rows(
+    rank_df %>%
+      filter(Score == "Integrative") %>%
+      mutate(DataType = "RNAseq"),
+    rank_df %>%
+      filter(Score == "Integrative") %>%
+      mutate(DataType = "Microarray")
+  )
+
+library(dplyr)
+library(tidyr)
+
+# extract Integrative rows
+integrative_rows <- rank_df %>%
+  filter(Score == "Integrative") %>%
+  select(-DataType) %>%   # remove the existing DataType column
+  crossing(DataType = c("RNAseq", "Microarray"))
+
+# combine with the rest (excluding original Integrative)
+rank_df_plot <- rank_df %>%
+  filter(Score != "Integrative") %>%
+  bind_rows(integrative_rows)
+
+ggplot(rank_df_plot, aes(
+  x = Score,
+  y = Rank,
+  fill = signature_type,
+  alpha = Score == "Integrative"  # TRUE/FALSE
+)) +
+  geom_boxplot(color = "black") +
+  scale_y_reverse() +
+  coord_flip() +
+  facet_wrap(~DataType) +
+  theme_minimal() +
+  scale_fill_manual(
+    values = c(
+      "Aggregated signatures" = "#0072B2",
+      "Individual signatures" = "#D55E00"
+    )
+  ) +
+  scale_alpha_manual(
+    values = c(`TRUE` = 0, `FALSE` = 0.8),  # Integrative vs others
+    guide = "none"  
+  ) +
+  labs(
+    title = "Distribution of ranks for known drugs in the top 20 predictions across methods",
+    x = "Method",
+    y = "Rank (Top = 1)",
+    fill = "Signature Type"
+  ) +
+  theme(
+    legend.position = "right",
+    strip.text = element_text(face = "bold")
+  )
 
 ```
+```{r}
+# set the order of methods
+rank_df_plot$Score <- factor(rank_df_plot$Score,
+                             levels = rev(c("CMAP", "WCS", "NCS", "Tau", "Pearson", "Spearman", "Integrative")))
+
+# calculate median rank for Integrative
+median_integrative <- rank_df_plot %>%
+  filter(Score == "Integrative") %>%
+  summarise(med = median(Rank)) %>%
+  pull(med)
+
+# Plot
+ggplot(rank_df_plot, aes(
+  x = Score,
+  y = Rank,
+  fill = signature_type,
+  alpha = Score == "Integrative"  # TRUE/FALSE
+)) +
+  geom_boxplot(color = "black") +
+  # ddd horizontal line at median of Integrative (vertical after flip)
+  geom_hline(yintercept = median_integrative, linetype = "dashed", color = "red", size = 0.5) +
+  scale_y_reverse() +
+  coord_flip() +
+  facet_wrap(~DataType) +
+  theme_minimal() +
+  scale_fill_manual(
+    values = c(
+      "Aggregated signatures" = "#0072B2",
+      "Individual signatures" = "#D55E00"
+    )
+  ) +
+  scale_alpha_manual(
+    values = c(`TRUE` = 0, `FALSE` = 0.8),  # Integrative vs others
+    guide = "none"  # hide alpha legend
+  ) +
+  labs(
+    title = "Distribution of ranks for known drugs in the top 20 predictions across methods",
+    x = "Method",
+    y = "Rank (Top = 1)",
+    fill = "Signature Type"
+  ) +
+  theme(
+    legend.position = "right",
+    strip.text = element_text(face = "bold")
+  )
+
+```
+
+
 
 ```{r}
 rank_df <- rank_df %>%
@@ -156,18 +341,30 @@ rank_df$Method_full <- reorder(rank_df$Method_full, rank_df$median_rank)
 ```
 
 ```{r}
-ggplot(rank_df, aes(x = Method_full, y = Rank, fill = Score)) +
-  geom_boxplot(alpha = 0.7) +
-  scale_fill_manual(values = score_colors) +  
+library(ggplot2)
+library(dplyr)
+
+rank_df <- rank_df %>%
+  mutate(fill_color = ifelse(Method == "Integrative", "black",
+                             ifelse(signature_type == "Aggregated signatures", "#1f77b4",
+                                    "#ff7f0e")))
+
+ggplot(rank_df, aes(x = Method_full, y = Rank, fill = fill_color)) +
+  geom_boxplot(
+    alpha = 0.7,
+    position = position_dodge(width = 0.8),
+    outlier.shape = NA
+  ) +
+  scale_fill_identity() +  
   scale_y_reverse() +
   coord_flip() +
   theme_minimal() +
   labs(
-    title = "Distribution of ranks for known drugs in the top 20 drugs across methods and technologies",
+    title = "Distribution of ranks for known drugs \n by method-signature-type",
     x = "Method",
     y = "Rank (Top = 1)"
   ) +
-  theme(legend.position = "none")
+  theme(legend.position = "right")
 ```
 
 ```{r}
@@ -187,46 +384,48 @@ results <- lapply(Ks, function(k) {
 results_df <- do.call(rbind, results)
 ```
 
-
 ```{r}
+library(dplyr)
 library(ggplot2)
 library(RColorBrewer)
 
-results_df$DataType <- ifelse(grepl("RNAseq", results_df$Method),
-                             "RNAseq", "Microarray")
+results_df$DataType <- ifelse(grepl("RNAseq", results_df$Method), "RNAseq", "Microarray")
+
+# add signature_type column
+results_df <- results_df %>%
+  mutate(signature_type = case_when(
+    grepl("ggr", Method) ~ "Aggregated signature",
+    grepl("Integrative", Method) ~ "Integrative",
+    TRUE ~ "Individual signature"
+  ))
 
 results_df$Score <- gsub("_.*", "", results_df$Method)
 
-scores <- unique(results_df$Score)
+results_df$IsIntegrative <- grepl("Integrative", results_df$Method)
 
 score_colors <- c(
   "Integrative" = "black",
-  setNames(
-    brewer.pal(length(scores), "Dark2"),
-    scores
-  )
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
 )
 
-
-# Flag Integrative methods
-results_df$IsIntegrative <- grepl("Integrative", results_df$Method)
-
-ggplot(results_df, aes(x = K, y = Precision,
-                       group = Method)) +
-  geom_line(aes(color = Score), linewidth = 1, alpha = 0.7) +
+# Plot
+ggplot(results_df, aes(x = K, y = Precision, group = Method)) +
+  geom_line(aes(color = Score, linetype = signature_type), linewidth = 1, alpha = 0.7) +
   geom_point(aes(
     shape = ifelse(IsIntegrative, "Integrative", DataType),
     color = ifelse(IsIntegrative, "Integrative", Score)
   ), size = 3) +
-  scale_color_manual(values = c(
-    "Integrative" = "black",
-    setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
-             unique(results_df$Score))
-  )) +
+  scale_color_manual(values = score_colors) +
   scale_shape_manual(values = c(
     "Integrative" = 15,   # square
-    "RNA-seq" = 16,       # circle
+    "RNAseq" = 16,        # circle
     "Microarray" = 17     # triangle
+  )) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid",
+    "Integrative" = "solid"
   )) +
   theme_minimal() +
   labs(
@@ -234,9 +433,11 @@ ggplot(results_df, aes(x = K, y = Precision,
     x = "K",
     y = "Precision",
     color = "Score",
-    shape = "Data type"
+    shape = "Data type",
+    linetype = "Signature type"
   )
 ```
+
 ```{r}
 library(dplyr)
 
@@ -249,7 +450,6 @@ results_df_plot <- results_df %>%
 
 ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
   
-  # Non-integrative methods (faded)
   geom_line(
     data = subset(results_df_plot, !grepl("Integrative", Method)),
     aes(color = Score),
@@ -263,7 +463,6 @@ ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
     alpha = 0.5
   ) +
   
-  # Integrative (highlighted)
   geom_line(
     data = subset(results_df_plot, grepl("Integrative", Method)),
     aes(color = Score),
@@ -291,48 +490,443 @@ ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
 
 ```{r}
 library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
 
-ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
-  geom_line(linewidth = 1.2) +
-  geom_point(size = 3) +
+# add signature_type
+results_df <- results_df %>%
+  mutate(
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq", "Microarray"),
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Integrative",
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method),
+    IsIntegrative = grepl("Integrative", Method)
+  )
+
+results_df_plot <- results_df %>%
+  bind_rows(
+    results_df %>%
+      filter(IsIntegrative) %>%
+      mutate(DataType = "RNAseq")
+  )
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+
+ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
+  
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1.5,
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_wrap(~ DataType) +
+  
   scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid",
+    "Integrative" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Precision@K across methods by technology",
+    x = "K",
+    y = "Precision",
+    color = "Score",
+    linetype = "Signature Type"
+  )
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(tidyr)
+
+# add signature_type and IsIntegrative
+results_df <- results_df %>%
+  mutate(
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq", "Microarray"),
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as solid
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method),
+    IsIntegrative = grepl("Integrative", Method)
+  )
+
+# duplicate Integrative rows into all facets without adding a new facet row
+integrative_rows <- results_df %>%
+  filter(IsIntegrative) %>%
+  select(-DataType, -signature_type) %>%  # remove to avoid duplication errors
+  crossing(
+    DataType = c("RNAseq", "Microarray"),
+    signature_type = c("Aggregated signature", "Individual signature") # Integrative appears in both facets
+  )
+
+results_df_plot <- bind_rows(results_df, integrative_rows)
+
+# Define colors
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+# Plot
+ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
+  
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    linewidth = 1.5,
+    linetype = "solid",
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_grid(signature_type ~ DataType) +
+  
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Precision@K across methods by technology and signature type",
+    x = "K",
+    y = "Precision",
+    color = "Score",
+    linetype = "Signature Type"
+  ) +
+  theme(
+    strip.text = element_text(face = "bold")
+  )
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+
+# ensure signature_type exists
+results_df <- results_df %>%
+  mutate(
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as Aggregated
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method)
+  )
+
+# compute average Precision@K by Score, signature_type, and K
+avg_df <- results_df %>%
+  group_by(Score, signature_type, K) %>%
+  summarise(AveragePrecision = mean(Precision, na.rm = TRUE), .groups = "drop")
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+# Plot
+ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
+  geom_line(
+    aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    linewidth = 1.2
+  ) +
+  geom_point(
+    aes(alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    size = 3
+  ) +
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  scale_alpha_identity() +   # use the alpha values as is
   theme_minimal() +
   labs(
     title = "Average precision@K across microarray and RNAseq",
     x = "K",
-    y = "Average Precision",
-    color = "Score"
+    y = "Average precision",
+    color = "Score",
+    linetype = "Signature type"
   )
 ```
 
 
 ```{r}
-library(ggplot2)
-
-ggplot(results_df, aes(x = K, y = Recall,
-                       group = Method)) +
-  geom_line(aes(color = Score), linewidth = 1, alpha = 0.7) +
+# Plot recall
+ggplot(results_df, aes(x = K, y = Recall, group = Method)) +
+  geom_line(aes(color = Score, linetype = signature_type), linewidth = 1, alpha = 0.7) +
   geom_point(aes(
     shape = ifelse(IsIntegrative, "Integrative", DataType),
     color = ifelse(IsIntegrative, "Integrative", Score)
   ), size = 3) +
-  scale_color_manual(values = c(
-    "Integrative" = "black",
-    setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
-             unique(results_df$Score))
-  )) +
+  scale_color_manual(values = score_colors) +
   scale_shape_manual(values = c(
     "Integrative" = 15,   # square
-    "RNAseq" = 16,       # circle
+    "RNAseq" = 16,        # circle
     "Microarray" = 17     # triangle
+  )) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid",
+    "Integrative" = "solid"
   )) +
   theme_minimal() +
   labs(
-    title = "Recall@K across methods",
+    title = "Recall@K across method-technology combinations",
     x = "K",
     y = "Recall",
     color = "Score",
-    shape = "Data type"
+    shape = "Data type",
+    linetype = "Signature type"
   )
 ```
 
+```{r}
+# Plot recall
+ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
+  
+  # non-Integrative (faded, linetype by signature_type)
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1.5,
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_wrap(~ DataType) +
+  
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid",
+    "Integrative" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Recall@K across methods by technology",
+    x = "K",
+    y = "Recall",
+    color = "Score",
+    linetype = "Signature Type"
+  )
+
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(tidyr)
+
+# add signature_type and IsIntegrative
+results_df <- results_df %>%
+  mutate(
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq", "Microarray"),
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as solid
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method),
+    IsIntegrative = grepl("Integrative", Method)
+  )
+
+# duplicate Integrative rows into all facets without adding a new facet row
+integrative_rows <- results_df %>%
+  filter(IsIntegrative) %>%
+  select(-DataType, -signature_type) %>%  # remove to avoid duplication errors
+  crossing(
+    DataType = c("RNAseq", "Microarray"),
+    signature_type = c("Aggregated signature", "Individual signature") # Integrative appears in both facets
+  )
+
+results_df_plot <- bind_rows(results_df, integrative_rows)
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
+  
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    linewidth = 1.5,
+    linetype = "solid",
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_grid(signature_type ~ DataType) +
+  
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Recall@K across methods by technology and signature type",
+    x = "K",
+    y = "Recall",
+    color = "Score",
+    linetype = "Signature type"
+  ) +
+  theme(
+    strip.text = element_text(face = "bold")
+  )
+
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+
+# ensure signature_type exists
+results_df <- results_df %>%
+  mutate(
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as Aggregated
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method)
+  )
+
+# compute average Precision@K by Score, signature_type, and K
+avg_df_recall <- results_df %>%
+  group_by(Score, signature_type, K) %>%
+  summarise(AverageRecall = mean(Recall, na.rm = TRUE), .groups = "drop")
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+# Plot
+ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
+  geom_line(
+    aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    linewidth = 1.2
+  ) +
+  geom_point(
+    aes(alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    size = 3
+  ) +
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  scale_alpha_identity() +   
+  theme_minimal() +
+  labs(
+    title = "Average recall@K across microarray and RNAseq",
+    x = "K",
+    y = "Average recall",
+    color = "Score",
+    linetype = "Signature type"
+  )
+
+```
