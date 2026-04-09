@@ -125,7 +125,7 @@ cat("Unique launched drugs:", length(unique(drug_rep_filtered$pert_iname)), "\n"
 
 # LINCS filtering for specific condition: 24 h and 10 µM
 lincs <- read_delim(
-  here("data/metadata/GSE92742_Broad_LINCS_sig_info.txt"),
+  here("data/metadata/GSE92742_Broad_LINCS_sig_info.txt"), # (not on github) download from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE92742
   delim = "\t"
 )
 
