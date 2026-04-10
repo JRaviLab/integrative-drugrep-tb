@@ -1,0 +1,263 @@
+from	to	type
+APOB	UBC	target-target
+CDC25C	CDK1	target-target
+CDC25C	CCNB1	target-target
+CDC25C	CHEK1	target-target
+CDC25C	CDK2	target-target
+CDC25C	ORC5	target-target
+CDC25C	UBC	target-target
+DFFB	UBC	target-target
+DNMT3B	UBC	target-target
+DNMT3B	HDAC1	target-target
+FDFT1	UBB	target-target
+FDFT1	UBC	target-target
+FOXO3	TP53	target-target
+FOXO3	EP300	target-target
+FOXO3	SKP2	target-target
+FOXO3	SMAD4	target-target
+FOXO3	UBC	target-target
+FOXO3	CREBBP	target-target
+FOXO3	ESR1	target-target
+GABPA	UBC	target-target
+GABPA	EP300	target-target
+HMGCR	UBC	target-target
+HNF1A	CREBBP	target-target
+HNF1A	EP300	target-target
+PLD1	UBC	target-target
+PLD2	UBC	target-target
+RIPK1	UBC	target-target
+SLC2A3	UBC	target-target
+SMAD2	TP53	target-target
+SMAD2	SMAD4	target-target
+SMAD2	HDAC1	target-target
+SMAD2	EP300	target-target
+SMAD2	ESR1	target-target
+SMAD2	UBC	target-target
+SMAD2	CREBBP	target-target
+SREBF1	EP300	target-target
+SREBF1	UBC	target-target
+SREBF1	CREBBP	target-target
+USP24	UBC	target-target
+ZNF423	SMAD4	target-target
+dopamine	RBM34	drug-dpgene
+dopamine	HMOX1	drug-dpgene
+dopamine	SUV39H1	drug-dpgene
+dopamine	STUB1	drug-dpgene
+quercetin	LAMA3	drug-dpgene
+quercetin	ATP6V1D	drug-dpgene
+quercetin	MVP	drug-dpgene
+quercetin	SIRT3	drug-dpgene
+curcumin	CDC45	drug-dpgene
+curcumin	ABHD4	drug-dpgene
+curcumin	HMOX1	drug-dpgene
+curcumin	AKR7A2	drug-dpgene
+resveratrol	CDC20	drug-dpgene
+resveratrol	CDKN1A	drug-dpgene
+resveratrol	TIMELESS	drug-dpgene
+resveratrol	TIPARP	drug-dpgene
+rosuvastatin	TPM1	drug-dpgene
+rosuvastatin	RHOA	drug-dpgene
+rosuvastatin	CSRP1	drug-dpgene
+rosuvastatin	TSC22D3	drug-dpgene
+lovastatin	TSC22D3	drug-dpgene
+lovastatin	CDKN1A	drug-dpgene
+lovastatin	CDC25A	drug-dpgene
+lovastatin	CCDC86	drug-dpgene
+tamoxifen	ITGAE	drug-dpgene
+tamoxifen	PRSS23	drug-dpgene
+tamoxifen	HMGCS1	drug-dpgene
+tamoxifen	INSIG1	drug-dpgene
+simvastatin	CCDC86	drug-dpgene
+simvastatin	HMGCR	drug-dpgene
+simvastatin	TSC22D3	drug-dpgene
+simvastatin	CDC25A	drug-dpgene
+gemfibrozil	ST3GAL5	drug-dpgene
+gemfibrozil	GMNN	drug-dpgene
+gemfibrozil	MAP7	drug-dpgene
+gemfibrozil	CYCS	drug-dpgene
+fluvastatin	PCNA	drug-dpgene
+fluvastatin	RHOA	drug-dpgene
+fluvastatin	TSC22D3	drug-dpgene
+fluvastatin	TPM1	drug-dpgene
+triclosan	CDC25A	drug-dpgene
+triclosan	HMOX1	drug-dpgene
+triclosan	DDIT4	drug-dpgene
+triclosan	ITGAE	drug-dpgene
+dopamine	ADRA2A	drug-target
+quercetin	APOB	drug-target
+curcumin	CAMK2A	drug-target
+quercetin	CD34	drug-target
+quercetin	CDC25C	drug-target
+resveratrol	CEL	drug-target
+rosuvastatin	COQ2	drug-target
+curcumin	DFFB	drug-target
+curcumin	DNMT3B	drug-target
+lovastatin	FDFT1	drug-target
+tamoxifen	FMO1	drug-target
+rosuvastatin	FOXA3	drug-target
+resveratrol	FOXO3	drug-target
+quercetin	GABPA	drug-target
+resveratrol	GDF15	drug-target
+dopamine	GFER	drug-target
+rosuvastatin	HNF1A	drug-target
+curcumin	HSD17B3	drug-target
+quercetin	HSF1	drug-target
+curcumin	IAPP	drug-target
+simvastatin	ICMT	drug-target
+gemfibrozil	LEP	drug-target
+fluvastatin	LIPC	drug-target
+rosuvastatin	LPA	drug-target
+tamoxifen	LRMDA	drug-target
+quercetin	MBP	drug-target
+resveratrol	PECAM1	drug-target
+tamoxifen	PIP	drug-target
+quercetin	PKN1	drug-target
+quercetin	PKN3	drug-target
+tamoxifen	PLD1	drug-target
+tamoxifen	PLD2	drug-target
+quercetin	PON1	drug-target
+simvastatin	PON1	drug-target
+resveratrol	RIPK1	drug-target
+tamoxifen	RRAS2	drug-target
+triclosan	RXRA	drug-target
+simvastatin	SCAP	drug-target
+rosuvastatin	SCAP	drug-target
+fluvastatin	SLC15A1	drug-target
+resveratrol	SLC2A3	drug-target
+curcumin	SMAD2	drug-target
+fluvastatin	SREBF1	drug-target
+tamoxifen	TFF3	drug-target
+curcumin	THBD	drug-target
+rosuvastatin	USP24	drug-target
+tamoxifen	ZNF423	drug-target
+simvastatin	ZNF542P	drug-target
+dopamine	negative regulation of cholesterol metabolic process	drug-pathway
+dopamine	negative regulation of cholesterol biosynthetic process	drug-pathway
+quercetin	positive regulation of cholesterol efflux	drug-pathway
+quercetin	cholesterol efflux	drug-pathway
+quercetin	regulation of cholesterol transport	drug-pathway
+quercetin	regulation of cholesterol efflux	drug-pathway
+quercetin	positive regulation of cholesterol transport	drug-pathway
+curcumin	regulation of cholesterol storage	drug-pathway
+curcumin	cholesterol storage	drug-pathway
+curcumin	regulation of cholesterol transport	drug-pathway
+curcumin	negative regulation of cholesterol storage	drug-pathway
+curcumin	regulation of cholesterol transporter activity	drug-pathway
+resveratrol	regulation of cholesterol transport	drug-pathway
+resveratrol	positive regulation of cholesterol esterification	drug-pathway
+resveratrol	reverse cholesterol transport	drug-pathway
+resveratrol	positive regulation of cholesterol efflux	drug-pathway
+resveratrol	regulation of cholesterol storage	drug-pathway
+resveratrol	cholesterol storage	drug-pathway
+resveratrol	regulation of cholesterol efflux	drug-pathway
+resveratrol	regulation of intestinal cholesterol absorption	drug-pathway
+resveratrol	positive regulation of cholesterol transport	drug-pathway
+resveratrol	cholesterol esterification	drug-pathway
+resveratrol	regulation of cholesterol transporter activity	drug-pathway
+resveratrol	negative regulation of cholesterol storage	drug-pathway
+resveratrol	cholesterol import	drug-pathway
+resveratrol	regulation of cholesterol esterification	drug-pathway
+resveratrol	cholesterol efflux	drug-pathway
+resveratrol	intestinal cholesterol absorption	drug-pathway
+rosuvastatin	positive regulation of cholesterol storage	drug-pathway
+rosuvastatin	cholesterol storage	drug-pathway
+rosuvastatin	cholesterol efflux	drug-pathway
+rosuvastatin	regulation of cholesterol storage	drug-pathway
+lovastatin	cholesterol efflux	drug-pathway
+lovastatin	cholesterol esterification	drug-pathway
+lovastatin	regulation of cholesterol esterification	drug-pathway
+lovastatin	reverse cholesterol transport	drug-pathway
+lovastatin	cholesterol storage	drug-pathway
+lovastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+lovastatin	positive regulation of cholesterol storage	drug-pathway
+lovastatin	regulation of cholesterol transport	drug-pathway
+lovastatin	regulation of cholesterol storage	drug-pathway
+lovastatin	regulation of intestinal cholesterol absorption	drug-pathway
+lovastatin	cholesterol import	drug-pathway
+lovastatin	intestinal cholesterol absorption	drug-pathway
+lovastatin	positive regulation of cholesterol esterification	drug-pathway
+lovastatin	intracellular cholesterol transport	drug-pathway
+tamoxifen	cholesterol biosynthetic process via lathosterol	drug-pathway
+tamoxifen	cholesterol biosynthetic process via desmosterol	drug-pathway
+tamoxifen	cholesterol efflux	drug-pathway
+simvastatin	intracellular cholesterol transport	drug-pathway
+simvastatin	regulation of cholesterol efflux	drug-pathway
+simvastatin	regulation of cholesterol transport	drug-pathway
+simvastatin	reverse cholesterol transport	drug-pathway
+simvastatin	positive regulation of cholesterol transport	drug-pathway
+simvastatin	regulation of cholesterol esterification	drug-pathway
+simvastatin	cholesterol import	drug-pathway
+simvastatin	cholesterol efflux	drug-pathway
+simvastatin	cholesterol catabolic process	drug-pathway
+simvastatin	positive regulation of cholesterol esterification	drug-pathway
+simvastatin	negative regulation of cholesterol metabolic process	drug-pathway
+simvastatin	negative regulation of cholesterol biosynthetic process	drug-pathway
+simvastatin	regulation of intestinal cholesterol absorption	drug-pathway
+simvastatin	cholesterol esterification	drug-pathway
+simvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+simvastatin	positive regulation of cholesterol efflux	drug-pathway
+simvastatin	intestinal cholesterol absorption	drug-pathway
+gemfibrozil	cholesterol catabolic process	drug-pathway
+gemfibrozil	intestinal cholesterol absorption	drug-pathway
+gemfibrozil	cholesterol efflux	drug-pathway
+gemfibrozil	cholesterol import	drug-pathway
+gemfibrozil	positive regulation of cholesterol efflux	drug-pathway
+gemfibrozil	negative regulation of cholesterol import	drug-pathway
+gemfibrozil	regulation of cholesterol esterification	drug-pathway
+gemfibrozil	cholesterol storage	drug-pathway
+gemfibrozil	regulation of intestinal cholesterol absorption	drug-pathway
+gemfibrozil	positive regulation of cholesterol esterification	drug-pathway
+gemfibrozil	negative regulation of cholesterol transporter activity	drug-pathway
+gemfibrozil	regulation of cholesterol efflux	drug-pathway
+gemfibrozil	positive regulation of cholesterol transport	drug-pathway
+gemfibrozil	negative regulation of cholesterol biosynthetic process	drug-pathway
+gemfibrozil	negative regulation of cholesterol metabolic process	drug-pathway
+gemfibrozil	positive regulation of cholesterol storage	drug-pathway
+gemfibrozil	negative regulation of cholesterol storage	drug-pathway
+gemfibrozil	reverse cholesterol transport	drug-pathway
+gemfibrozil	regulation of cholesterol storage	drug-pathway
+gemfibrozil	cholesterol esterification	drug-pathway
+gemfibrozil	regulation of cholesterol import	drug-pathway
+gemfibrozil	regulation of cholesterol transporter activity	drug-pathway
+gemfibrozil	regulation of cholesterol transport	drug-pathway
+fluvastatin	intracellular cholesterol transport	drug-pathway
+fluvastatin	positive regulation of cholesterol transport	drug-pathway
+fluvastatin	reverse cholesterol transport	drug-pathway
+fluvastatin	intestinal cholesterol absorption	drug-pathway
+fluvastatin	cholesterol efflux	drug-pathway
+fluvastatin	regulation of cholesterol efflux	drug-pathway
+fluvastatin	cholesterol esterification	drug-pathway
+fluvastatin	regulation of cholesterol transport	drug-pathway
+fluvastatin	receptor-mediated endocytosis involved in cholesterol transport	drug-pathway
+fluvastatin	positive regulation of cholesterol efflux	drug-pathway
+fluvastatin	negative regulation of cholesterol biosynthetic process	drug-pathway
+fluvastatin	negative regulation of cholesterol metabolic process	drug-pathway
+fluvastatin	regulation of intestinal cholesterol absorption	drug-pathway
+fluvastatin	cholesterol catabolic process	drug-pathway
+fluvastatin	positive regulation of cholesterol storage	drug-pathway
+fluvastatin	cholesterol storage	drug-pathway
+fluvastatin	positive regulation of cholesterol esterification	drug-pathway
+fluvastatin	cholesterol import	drug-pathway
+fluvastatin	regulation of cholesterol esterification	drug-pathway
+fluvastatin	regulation of cholesterol storage	drug-pathway
+triclosan	negative regulation of cholesterol storage	drug-pathway
+triclosan	regulation of cholesterol transport	drug-pathway
+triclosan	regulation of cholesterol storage	drug-pathway
+triclosan	regulation of cholesterol transporter activity	drug-pathway
+triclosan	cholesterol storage	drug-pathway
+dopamine	Dopamine receptor agonist	drug-moa
+quercetin	Polar auxin transport inhibitor	drug-moa
+curcumin	Cyclooxygenase inhibitor	drug-moa
+curcumin	Lipoxygenase inhibitor	drug-moa
+curcumin	NFkB pathway inhibitor	drug-moa
+curcumin	Histone acetyltransferase inhibitor	drug-moa
+resveratrol	SIRT activator	drug-moa
+resveratrol	Cytochrome P450 inhibitor	drug-moa
+rosuvastatin	HMGCR inhibitor	drug-moa
+lovastatin	HMGCR inhibitor	drug-moa
+tamoxifen	Selective estrogen receptor modulator (SERM)	drug-moa
+tamoxifen	Estrogen receptor antagonist	drug-moa
+simvastatin	HMGCR inhibitor	drug-moa
+gemfibrozil	Lipoprotein lipase activator	drug-moa
+fluvastatin	HMGCR inhibitor	drug-moa
+triclosan	Enoyl-[acyl-carrier-protein] reductase [NADH] inhibitor	drug-moa
