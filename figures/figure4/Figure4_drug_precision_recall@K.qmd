@@ -1,0 +1,577 @@
+# Evaluation od predicted drugs against drugs supported by TB HDT literature evidence
+# Pubmed search on all FDA-approved drugs was performed on April 2nd, 2026 by Ling Thang
+# This notebook contains step-by-step evaluation of the top 20 drugs predicted using (i) our integrative approach, (2) the six connectivity methods across microarray/RNAseq individual signatures and aggregated signatures
+# Last modified: 04/10/26
+# Kewalin Samart
+
+```{r load libraries}
+library(readr)
+library(here)
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(tidyr)
+```
+
+```{r read in HDT positive labels}
+labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
+# HDT_label = 1 for Direct (HDT) matches.
+# exception: "fostaminitib" is manually labeled as 1 due to a drug name typo
+# in the literature (misspelled drug name in abstract prevented detection)
+# https://doi.org/10.3390/antibiotics9090550
+labels$HDT_label <- ifelse(
+  labels$search_type == "Direct (HDT)" | labels$drug_name %in% c("fostamatinib"),
+  1, 0
+)
+```
+
+```{r read in all predictions for evaluation}
+# read in RNAseq indiv signatures predictions by method
+CMAP_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/CMAP_indivSig_TB_RNAseq.rds"))
+Cor_pearson_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Cor_pearson_indivSig_TB_RNAseq.rds"))
+Cor_spearman_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Cor_spearman_indivSig_TB_RNAseq.rds"))
+NCS_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/NCS_indivSig_TB_RNAseq.rds"))
+Tau_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/Tau_indivSig_TB_RNAseq.rds"))
+WCS_indivSig_TB_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/WCS_indivSig_TB_RNAseq.rds"))
+
+# read in microarray indiv signatures predictions by method
+CMAP_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/CMAP_indivSig_TB_microarray.rds"))
+Cor_pearson_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Cor_pearson_indivSig_TB_microarray.rds"))
+Cor_spearman_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Cor_spearman_indivSig_TB_microarray.rds"))
+NCS_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/NCS_indivSig_TB_microarray.rds"))
+Tau_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/Tau_indivSig_TB_microarray.rds"))
+WCS_indivSig_TB_microarray <- readRDS(here("results/microarray/04_rank_aggregation/WCS_indivSig_TB_microarray.rds"))
+
+# read in RNAseq aggregated signatures predictions by method
+allscores_aggrSig_RNAseq <- readRDS(here("results/RNAseq/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_RNAseq_list.rds"))
+
+# read in microarray aggregated signatures predictions by method
+allscores_aggrSig_microarray <- readRDS(here("results/microarray/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_microarray_list.rds"))
+```
+
+```{r select only the top 20 drugs for precision and recall calculations}
+method_lists <- list(
+  CMAP_microarray = CMAP_indivSig_TB_microarray$ranked_pert[1:20],
+  CMAP_RNAseq     = CMAP_indivSig_TB_RNAseq$ranked_pert[1:20],
+  CMAP_microarray_aggr = allscores_aggrSig_microarray$CMAP[1:20],
+  CMAP_RNAseq_aggr = allscores_aggrSig_RNAseq$CMAP[1:20],
+
+  Pearson_microarray = Cor_pearson_indivSig_TB_microarray$ranked_pert[1:20],
+  Pearson_RNAseq     = Cor_pearson_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Pearson_microarray_aggr = allscores_aggrSig_microarray$Cor_pearson[1:20],
+  Pearson_RNAseq_aggr = allscores_aggrSig_RNAseq$Cor_pearson[1:20],
+
+  Spearman_microarray = Cor_spearman_indivSig_TB_microarray$ranked_pert[1:20],
+  Spearman_RNAseq     = Cor_spearman_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Spearman_microarray_aggr = allscores_aggrSig_microarray$Cor_spearman[1:20],
+  Spearman_RNAseq_aggr = allscores_aggrSig_RNAseq$Cor_spearman[1:20],
+
+  NCS_microarray = NCS_indivSig_TB_microarray$ranked_pert[1:20],
+  NCS_RNAseq     = NCS_indivSig_TB_RNAseq$ranked_pert[1:20],
+  NCS_microarray_aggr = allscores_aggrSig_microarray$NCS[1:20],
+  NCS_RNAseq_aggr = allscores_aggrSig_RNAseq$NCS[1:20],
+
+  Tau_microarray = Tau_indivSig_TB_microarray$ranked_pert[1:20],
+  Tau_RNAseq     = Tau_indivSig_TB_RNAseq$ranked_pert[1:20],
+  Tau_microarray_aggr = allscores_aggrSig_microarray$Tau[1:20],
+  Tau_RNAseq_aggr = allscores_aggrSig_RNAseq$Tau[1:20],
+
+  WCS_microarray = WCS_indivSig_TB_microarray$ranked_pert[1:20],
+  WCS_RNAseq     = WCS_indivSig_TB_RNAseq$ranked_pert[1:20],
+  WCS_microarray_aggr = allscores_aggrSig_microarray$WCS[1:20],
+  WCS_RNAseq_aggr = allscores_aggrSig_RNAseq$WCS[1:20]
+)
+
+integrative_pred = read_tsv(here("results/final_high_confidence_drug_predictions.tsv"), show_col_types = FALSE)
+integrative_pred_list <- integrative_pred$drug_name[1:20]
+
+method_lists$Integrative <- integrative_pred_list
+```
+
+```{r related statistics of predicted drugs and the labels}
+all_predicted_drugs <- unique(unlist(method_lists))
+labels_eval <- all_predicted_drugs[all_predicted_drugs %in% labels$drug_name]
+all_labeled <- all(all_predicted_drugs %in% labels$drug_name)
+
+cat("Total unique predicted drugs:", length(all_predicted_drugs), "\n")
+cat("All predicted drugs have labels:", all_labeled, "\n")
+
+missing_drugs <- setdiff(all_predicted_drugs, labels$drug_name)
+cat("Number of drugs missing labels:", length(missing_drugs), "\n")
+if (length(missing_drugs) > 0) {
+  cat("Missing drugs:\n")
+  print(missing_drugs)
+}
+
+evaluated_labels <- labels[labels$drug_name %in% labels_eval, ]
+num_pos <- sum(evaluated_labels$HDT_label, na.rm = TRUE)
+total_eval <- nrow(evaluated_labels)
+total_pos_all <- sum(labels$HDT_label, na.rm = TRUE)
+
+cat("Size of evaluated set:", total_eval, "\n")
+cat("Positives in evaluated set:", num_pos, "\n")
+cat("Total positives in labeled dataset of all FDA-approved drugs from drug repurposing hub:", total_pos_all, "\n")
+
+# drug metadata for FDA-approved labels
+drug_rep <- read_csv(
+  here("data/metadata/repurposing_drugs_20200324.csv"),
+  show_col_types = FALSE,
+  skip = 9
+)
+
+drug_rep_filtered <- drug_rep %>%
+  select(pert_iname, clinical_phase) %>%
+  filter(clinical_phase == "Launched") %>%
+  mutate(pert_iname = tolower(pert_iname))
+
+cat("Launched drugs (rows):", nrow(drug_rep_filtered), "\n")
+cat("Unique launched drugs:", length(unique(drug_rep_filtered$pert_iname)), "\n")
+
+# LINCS filtering for specific condition: 24 h and 10 µM
+lincs <- read_delim(
+  here("data/metadata/GSE92742_Broad_LINCS_sig_info.txt"), # (not on github) download from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE92742
+  delim = "\t",
+  show_col_types = FALSE
+)
+
+lincs_filtered <- lincs %>%
+  filter(
+    pert_itime == "24 h",
+    pert_idose == "10 µM"
+  ) %>%
+  mutate(pert_iname = tolower(pert_iname))
+
+cat("Filtered LINCS profiles:", nrow(lincs_filtered), "\n")
+cat("Unique LINCS drugs:", length(unique(lincs_filtered$pert_iname)), "\n")
+
+# overlap between LINCS and FDA-approved drugs
+overlap <- intersect(
+  unique(lincs_filtered$pert_iname),
+  unique(drug_rep_filtered$pert_iname)
+)
+
+cat("Number of overlapping drugs:", length(overlap), "\n")
+
+lincs_fda <- lincs_filtered[lincs_filtered$pert_iname %in% overlap, ]
+
+cat("LINCS profiles for overlapping drugs:", nrow(lincs_fda), "\n")
+cat("Unique overlapping drugs in LINCS:", length(unique(lincs_fda$pert_iname)), "\n")
+cat("Number of cell lines:", length(unique(lincs_fda$cell_id)), "\n")
+
+cat("Cell lines:\n")
+print(unique(lincs_fda$cell_id))
+
+labels = labels[labels$drug_name %in% overlap,]
+labels$drug_name <- tolower(labels$drug_name)
+positives <- labels$drug_name[labels$HDT_label == 1]
+cat("Number of positives in overlapping (LINCS + FDA-approved) set:", length(positives), "\n")
+```
+```{r prepare data and plotting rank distributions by score and signature type}
+# build ranking table
+rank_df <- lapply(names(method_lists), function(method) {
+  drugs <- tolower(method_lists[[method]])
+
+  data.frame(
+    Method = method,
+    drug_name = drugs,
+    Rank = seq_along(drugs),
+    signature_type = ifelse(
+      grepl("aggr", method, ignore.case = TRUE),
+      "Aggregated signatures",
+      "Individual signatures"
+    ),
+    stringsAsFactors = FALSE
+  )
+}) %>%
+  bind_rows()
+
+# keep only known positives
+rank_df <- rank_df %>%
+  filter(drug_name %in% tolower(positives)) %>%
+  mutate(
+    Score = gsub("_.*", "", Method),
+    DataType = case_when(
+      grepl("rnaseq", Method, ignore.case = TRUE) ~ "RNAseq",
+      grepl("microarray", Method, ignore.case = TRUE) ~ "Microarray",
+      Score == "Integrative" ~ NA_character_,
+      TRUE ~ NA_character_
+    )
+  )
+
+# order Score by median rank (lower = better)
+score_order <- rank_df %>%
+  group_by(Score) %>%
+  summarise(median_rank = median(Rank, na.rm = TRUE), .groups = "drop") %>%
+  arrange(median_rank) %>%
+  pull(Score)
+
+rank_df$Score <- factor(rank_df$Score, levels = score_order)
+
+# duplicate Integrative rows into both facets
+integrative_rows <- rank_df %>%
+  filter(as.character(Score) == "Integrative") %>%
+  select(-DataType) %>%
+  crossing(DataType = c("RNAseq", "Microarray"))
+
+# combine with all non-Integrative rows
+rank_df_plot <- rank_df %>%
+  filter(as.character(Score) != "Integrative") %>%
+  bind_rows(integrative_rows)
+
+# set plotting order manually if you want a specific order
+rank_df_plot$Score <- factor(
+  as.character(rank_df_plot$Score),
+  levels = rev(c("CMAP", "WCS", "NCS", "Tau", "Pearson", "Spearman", "Integrative"))
+)
+
+# calculate median rank for Integrative
+median_integrative <- rank_df_plot %>%
+  filter(Score == "Integrative") %>%
+  summarise(med = median(Rank, na.rm = TRUE)) %>%
+  pull(med)
+
+pdf(here("figures/figure4/figureS6_rank_distributions.pdf"), width = 10, height = 12)
+
+ggplot(
+  rank_df_plot,
+  aes(
+    x = Score,
+    y = Rank,
+    fill = signature_type,
+    alpha = Score == "Integrative"
+  )
+) +
+  geom_boxplot(color = "black") +
+  geom_hline(
+    yintercept = median_integrative,
+    linetype = "dashed",
+    color = "red",
+    linewidth = 0.5
+  ) +
+  scale_y_reverse() +
+  coord_flip() +
+  facet_wrap(~DataType) +
+  theme_minimal(base_size = 16) +
+  scale_fill_manual(
+    values = c(
+      "Aggregated signatures" = "#0072B2",
+      "Individual signatures" = "#D55E00"
+    )
+  ) +
+  scale_alpha_manual(
+    values = c(`TRUE` = 0, `FALSE` = 0.8),
+    guide = "none"
+  ) +
+  labs(
+    title = "Distribution of ranks for known drugs\nin the top 20 predictions across methods",
+    x = "Method",
+    y = "Rank (Top = 1)",
+    fill = "Signature Type"
+  ) +
+  theme(
+    legend.position = "right",
+    strip.text = element_text(face = "bold")
+  )
+
+dev.off()
+```
+
+```{r calculate precision @K}
+compute_metrics <- function(drug_list, positives, K) {
+  drug_list <- tolower(drug_list)
+  
+  topk <- drug_list[1:K]
+  
+  hits <- sum(topk %in% positives)
+  
+  precision <- hits / K
+  recall <- hits / length(positives)
+  
+  c(Precision = precision, Recall = recall)
+} 
+
+Ks <- c(5, 10, 15, 20)
+
+results <- lapply(Ks, function(k) {
+  res <- lapply(method_lists, function(dl) {
+    compute_metrics(dl, positives, K = k)
+  })
+  
+  df <- as.data.frame(do.call(rbind, res))
+  df$Method <- names(method_lists)
+  df$K <- k
+  df
+})
+
+results_df <- do.call(rbind, results)
+```
+
+```{r plot precision at K by technology and signature type}
+# add signature_type and IsIntegrative
+results_df <- results_df %>%
+  mutate(
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq", "Microarray"),
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as solid
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method),
+    IsIntegrative = grepl("Integrative", Method)
+  )
+
+# duplicate Integrative rows into all facets without adding a new facet row
+integrative_rows <- results_df %>%
+  filter(IsIntegrative) %>%
+  select(-DataType, -signature_type) %>%  # remove to avoid duplication errors
+  crossing(
+    DataType = c("RNAseq", "Microarray"),
+    signature_type = c("Aggregated signature", "Individual signature") # Integrative appears in both facets
+  )
+
+results_df_plot <- bind_rows(results_df, integrative_rows)
+
+# Define colors
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+pdf(here("figures/figure4/figure4a_precision@K_technology_signature.pdf"),
+    width = 8, height = 6)
+ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
+  
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    linewidth = 1.5,
+    linetype = "solid",
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_grid(signature_type ~ DataType) +
+  
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Precision@K across methods by technology and signature type",
+    x = "K",
+    y = "Precision",
+    color = "Score",
+    linetype = "Signature Type"
+  ) +
+  theme(
+    strip.text = element_text(face = "bold")
+  )
+dev.off()
+```
+
+```{r plot integrative precision @K against average precision @K across technologies of other methods}
+# ensure signature_type exists
+results_df <- results_df %>%
+  mutate(
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as Aggregated
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method)
+  )
+
+# compute average Precision@K by Score, signature_type, and K
+avg_df <- results_df %>%
+  group_by(Score, signature_type, K) %>%
+  summarise(AveragePrecision = mean(Precision, na.rm = TRUE), .groups = "drop")
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+pdf(here("figures/figure4/figure4c_average_precision@K_technology_signature.pdf"),
+    width = 7, height = 4)
+ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
+  geom_line(
+    aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    linewidth = 1.2
+  ) +
+  geom_point(
+    aes(alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    size = 3
+  ) +
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  scale_alpha_identity() +   
+  theme_minimal() +
+  labs(
+    title = "Average precision@K across microarray and RNAseq",
+    x = "K",
+    y = "Average precision",
+    color = "Score",
+    linetype = "Signature type"
+  )
+dev.off()
+```
+
+```{r plot recall at K by technology and signature type}
+# add signature_type and IsIntegrative
+results_df <- results_df %>%
+  mutate(
+    DataType = ifelse(grepl("RNAseq", Method), "RNAseq", "Microarray"),
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as solid
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method),
+    IsIntegrative = grepl("Integrative", Method)
+  )
+
+# duplicate Integrative rows into all facets without adding a new facet row
+integrative_rows <- results_df %>%
+  filter(IsIntegrative) %>%
+  select(-DataType, -signature_type) %>%  # remove to avoid duplication errors
+  crossing(
+    DataType = c("RNAseq", "Microarray"),
+    signature_type = c("Aggregated signature", "Individual signature") # Integrative appears in both facets
+  )
+
+results_df_plot <- bind_rows(results_df, integrative_rows)
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+pdf(here("figures/figure4/figure4b_recall@K_technology_signature.pdf"),
+    width = 8, height = 6)
+ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
+  
+  geom_line(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score, linetype = signature_type),
+    linewidth = 1,
+    alpha = 0.5
+  ) +
+  geom_point(
+    data = subset(results_df_plot, !IsIntegrative),
+    aes(color = Score),
+    size = 3,
+    alpha = 0.5
+  ) +
+  
+  geom_line(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    linewidth = 1.5,
+    linetype = "solid",
+    alpha = 1
+  ) +
+  geom_point(
+    data = subset(results_df_plot, IsIntegrative),
+    aes(color = Score),
+    size = 3.5,
+    alpha = 1
+  ) +
+  
+  facet_grid(signature_type ~ DataType) +
+  
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  
+  theme_minimal() +
+  labs(
+    title = "Recall@K across methods by technology and signature type",
+    x = "K",
+    y = "Recall",
+    color = "Score",
+    linetype = "Signature type"
+  ) +
+  theme(
+    strip.text = element_text(face = "bold")
+  )
+dev.off()
+```
+
+```{r plot integrative recall @K against average recall @K across technologies of other methods}
+# ensure signature_type exists
+results_df <- results_df %>%
+  mutate(
+    signature_type = case_when(
+      grepl("ggr", Method) ~ "Aggregated signature",
+      grepl("Integrative", Method) ~ "Aggregated signature", # Integrative treated as Aggregated
+      TRUE ~ "Individual signature"
+    ),
+    Score = gsub("_.*", "", Method)
+  )
+
+# compute average Precision@K by Score, signature_type, and K
+avg_df_recall <- results_df %>%
+  group_by(Score, signature_type, K) %>%
+  summarise(AverageRecall = mean(Recall, na.rm = TRUE), .groups = "drop")
+
+score_colors <- c(
+  "Integrative" = "black",
+  setNames(RColorBrewer::brewer.pal(length(unique(results_df$Score)), "Dark2"),
+           unique(results_df$Score))
+)
+
+pdf(here("figures/figure4/figure4d_average_recall@K_technology_signature.pdf"),
+    width = 7, height = 4)
+ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
+  geom_line(
+    aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    linewidth = 1.2
+  ) +
+  geom_point(
+    aes(alpha = ifelse(Score == "Integrative", 1, 0.5)),
+    size = 3
+  ) +
+  scale_color_manual(values = score_colors) +
+  scale_linetype_manual(values = c(
+    "Individual signature" = "dashed",
+    "Aggregated signature" = "solid"
+  )) +
+  scale_alpha_identity() +   
+  theme_minimal() +
+  labs(
+    title = "Average recall@K across microarray and RNAseq",
+    x = "K",
+    y = "Average recall",
+    color = "Score",
+    linetype = "Signature type"
+  )
+dev.off()
+```
