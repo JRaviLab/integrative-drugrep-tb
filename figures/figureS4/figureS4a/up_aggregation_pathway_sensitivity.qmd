@@ -1,0 +1,151 @@
+# Combine enrichment across individual signatures and aggregated signatures of different aggregation thresholds (upregulated)
+
+```{r setup, include=FALSE}
+library(ComplexHeatmap)
+library(clusterProfiler)
+library(GOSemSim)
+library(org.Hs.eg.db)
+library(circlize)
+library(grid)
+library(tidyverse)
+library(here)
+source(here("scripts/00_get_crossSigs_enrichedGO.R"))
+```
+
+```{r read in metadata tabel}
+summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+```
+
+```{r define indiv file paths}
+marray_path_up <- here("data/microarray_pathways/up")
+rnaseq_path_up <- here("data/RNAseq_pathways/up")
+```
+
+```{r define accessory variables/paths}
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
+suffix_sub <- "up.tsv"
+annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
+```
+
+```{r annotation}
+GO_annotation = get_GO_annotation(here(annotation_file))
+```
+
+```{r microarray and RNAseq up pathways}
+# get asinh matrix with all available pathways
+marray_GO_mat_up = get_GO_asinh_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+rnaseq_GO_mat_up = get_GO_asinh_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+```
+
+```{r get statistically significant metrics -- positions for asterisk}
+marray_qvalue_GO_mat_up = get_GO_qvalue_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+row.names(marray_qvalue_GO_mat_up) <- marray_qvalue_GO_mat_up$Description
+marray_decription <- marray_qvalue_GO_mat_up$Description
+marray_qvalue_GO_mat_up$Description <- NULL
+marray_signi_GO_mat_up <- as.data.frame(ifelse(marray_qvalue_GO_mat_up < 0.05, 1, 0))
+# exclude columns whose names contain "aggregated"
+cols_to_use <- grep("aggregated", names(marray_signi_GO_mat_up), invert = TRUE)
+# filter rows where the sum across the selected columns is > 0
+marray_signi_up <- row.names(
+  marray_signi_GO_mat_up[rowSums(marray_signi_GO_mat_up[, cols_to_use]) > 0, ]
+)
+
+rnaseq_qvalue_GO_mat_up = get_GO_qvalue_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+row.names(rnaseq_qvalue_GO_mat_up) <- rnaseq_qvalue_GO_mat_up$Description
+rnaseq_decription <- rnaseq_qvalue_GO_mat_up$Description
+rnaseq_qvalue_GO_mat_up$Description <- NULL
+rnaseq_signi_GO_mat_up <- as.data.frame(ifelse(rnaseq_qvalue_GO_mat_up < 0.05, 1, 0))
+# exclude columns whose names contain "aggregated"
+cols_to_use <- grep("aggregated", names(rnaseq_signi_GO_mat_up), invert = TRUE)
+# filter rows where the sum across the selected columns is > 0
+rnaseq_signi_up <- row.names(
+  rnaseq_signi_GO_mat_up[rowSums(rnaseq_signi_GO_mat_up[, cols_to_use]) > 0, ]
+)
+
+marray_rnaseq_signi_up = unique(c(marray_signi_up, rnaseq_signi_up))
+```
+
+```{r process all terms matrices}
+# aggregated thresholds
+agg_cols <- c(
+  "up_aggregated_signature_0.6",
+  "up_aggregated_signature_0.75",
+  "up_aggregated_signature_0.7",
+  "up_aggregated_signature_0.75",
+  "up_aggregated_signature_0.8",
+  "up_aggregated_signature_0.85",
+  "up_aggregated_signature_0.9",
+  "up_aggregated_signature_0.95"
+)
+
+# microarray
+cols_to_keep_marray <- intersect(
+  colnames(marray_GO_mat_up),
+  c("Description", summary_df$signature_name, agg_cols)
+)
+
+df1 <- marray_GO_mat_up[, cols_to_keep_marray]
+
+colnames(df1) <- gsub(
+  "up_aggregated_signature_",
+  "up_aggregated_microarray_",
+  colnames(df1)
+)
+
+colnames(df1) <- gsub("^up_", "", colnames(df1))
+
+
+# RNAseq
+cols_to_keep_rnaseq <- intersect(
+  colnames(rnaseq_GO_mat_up),
+  c("Description", summary_df$signature_name, agg_cols)
+)
+
+df2 <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
+
+colnames(df2) <- gsub(
+  "up_aggregated_signature_",
+  "up_aggregated_RNAseq_",
+  colnames(df2)
+)
+
+colnames(df2) <- gsub("^up_", "", colnames(df2))
+
+# reshape from wide to long
+long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
+long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
+
+# combine long formats and sum values where matching
+combined_long <- bind_rows(long1, long2) %>%
+  group_by(Description, Signature) %>%
+  summarise(
+  Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+  .groups = "drop"
+)
+
+# reshape back to wide format
+final_df_up <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+colnames(final_df_up) <- gsub("\\.", "-", colnames(final_df_up))
+
+# identify columns with "aggregated" in their names
+agg_cols <- grep("aggregated", names(final_df_up), value = TRUE)
+
+# identify columns that do not contain "aggregated"
+non_agg_cols <- setdiff(names(final_df_up), agg_cols)
+
+# reorder the dataframe
+final_df_up <- final_df_up[, c(non_agg_cols, agg_cols)]
+
+# identify columns
+desc_col <- grep("Description", names(final_df_up), value = TRUE)
+gpl_cols <- grep("GPL", names(final_df_up), value = TRUE)
+rnaseq_col <- grep("RNAseq", names(final_df_up), value = TRUE)
+other_cols <- setdiff(names(final_df_up), c(gpl_cols, rnaseq_col))
+
+# reorder dataframe
+final_df_up <- final_df_up[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
+final_df_up <- final_df_up[, !duplicated(colnames(final_df_up))]
+final_df_up <- final_df_up[, !grepl("HIV", colnames(final_df_up))]
+write_tsv(final_df_up, here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"))
+```
