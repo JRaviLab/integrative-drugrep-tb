@@ -9,7 +9,7 @@ library(dplyr)
 #library(rstatix)
 library(gt)
 ```
-```{r test}
+```{r microarray}
 # individual microarray signatures
 microarray_cols <- colnames(up_pathway_df)[
   colnames(up_pathway_df) %in%
@@ -48,6 +48,49 @@ rownames(up_micro_mat) <- pathways
 storage.mode(up_micro_mat) <- "numeric"
 
 ```
+
+```{r rnaseq}
+# individual rnaseq signatures
+microarray_cols <- colnames(up_pathway_df)[
+  colnames(up_pathway_df) %in%
+    summary_df$signature_name[
+      summary_df$technology == "RNAseq" &
+      summary_df$signature_ID != "aggregated_RNAseq"
+    ]
+]
+
+# use ONLY individual signatures to determine dominant pathways
+up_rnaseq_indiv_mat <- as.matrix(
+  up_pathway_df[, rnaseq_cols, drop = FALSE]
+)
+
+rownames(up_rnaseq_indiv_mat) <- pathways
+storage.mode(up_rnaseq_indiv_mat) <- "numeric"
+
+# proportion enriched across individual signatures
+prop_nonzero <- rowMeans(up_rnaseq_indiv_mat != 0, na.rm = TRUE)
+
+up_rnaseq_dominant_pathways <- rownames(up_rnaseq_indiv_mat)[
+  prop_nonzero >= 0.9
+]
+
+# now add the 0.9 aggregated signature for plotting
+rnaseq_cols_with_agg <- c(
+  microarray_cols,
+  "aggregated_RNAseq_0-9"
+)
+
+up_rnaseq_mat <- as.matrix(
+  up_pathway_df[, rnaseq_cols_with_agg, drop = FALSE]
+)
+
+rownames(up_rnaseq_mat) <- pathways
+storage.mode(up_rnaseq_mat) <- "numeric"
+
+```
+
+
+
 
 ```{r}
 summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv"
@@ -128,10 +171,10 @@ micro_prop <- rowMeans(up_micro_indiv != 0, na.rm = TRUE)
 micro_ge90 <- names(micro_prop[micro_prop >= 0.9])
 
 # add aggregated column ONLY for sq dev computation
-up_micro_mat <- cbind(
-  up_micro_indiv,
-  aggregated_microarray = up_pathway_df$aggregated_microarray
-)
+#up_micro_mat <- cbind(
+#  up_micro_indiv,
+#  aggregated_microarray = up_pathway_df$aggregated_microarray
+#)
 
 micro_sq_up <- compute_pathway_deviation(
   up_micro_mat,
@@ -155,13 +198,13 @@ storage.mode(up_rna_indiv) <- "numeric"
 rna_prop <- rowMeans(up_rna_indiv != 0, na.rm = TRUE)
 rna_ge90 <- names(rna_prop[rna_prop >= 0.9])
 
-up_rna_mat <- cbind(
-  up_rna_indiv,
-  aggregated_RNAseq = up_pathway_df$aggregated_RNAseq
-)
+#up_rna_mat <- cbind(
+#  up_rna_indiv,
+#  aggregated_RNAseq = up_pathway_df$aggregated_RNAseq
+#)
 
 rna_sq_up <- compute_pathway_deviation(
-  up_rna_mat,
+  up_rnaseq_mat,
   agg_col = "aggregated_RNAseq_0-9"
 ) %>%
   mutate(
