@@ -18,7 +18,7 @@ direction = "up"
 bg_source = "input data" # all genes across datasets
 extension = paste0("_",direction,".tsv")
 output_dir = here("data/DE_results/microarray/aggregated_DE_signatures")
-threshold_pct <- 0
+threshold_pct <- 0.9
 ```
 
 ##### Compute membership matrix
@@ -45,7 +45,7 @@ aggregate_signatures(gene_membership_matrix, jaccard_matrix, output_dir, directi
 technologies = c("microarray", "RNAseq")
 directions = c("up","dn")
 bg_source = "input data" # all genes across datasets
-threshold_pct <- 0
+threshold_pct <- 0.9
 
 for(technology in technologies){
   for(direction in directions){
