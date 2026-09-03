@@ -43,3 +43,233 @@ for(threshold in threshold_pct){
   }
 }
 ```
+
+```{r plot gene counts}
+library(tidyverse)
+library(here)
+
+technologies <- c(
+  "microarray",
+  "RNAseq"
+)
+
+directions <- c(
+  "up",
+  "dn"
+)
+
+threshold_pct <- c(0.95,0.90,0.85,0.80,0.75,0.70,0.65,0.60,0)
+
+format_threshold <- function(x) {
+  if_else(
+    x == 0,
+    "0",
+    format(
+      x,
+      scientific = FALSE,
+      trim = TRUE
+    )
+  )
+}
+
+read_aggregate_gene_count <- function(
+    technology,
+    direction,
+    threshold
+) {
+  threshold_text <- format_threshold(
+    threshold
+  )
+
+  aggregate_dir <- here(
+    "data",
+    "signatures",
+    technology,
+    "aggregated_signatures_sensitivity"
+  )
+
+  filename <- paste0(
+    direction,
+    "_aggregated_signature_",
+    threshold_text,
+    ".tsv"
+  )
+
+  file_path <- file.path(
+    aggregate_dir,
+    filename
+  )
+
+  if (!file.exists(file_path)) {
+    stop(
+      "Aggregated signature file not found: ",
+      file_path
+    )
+  }
+
+  signature_df <- read_tsv(
+    file_path,
+    show_col_types = FALSE
+  )
+
+  gene_count <- if (
+    "GeneID" %in% names(signature_df)
+  ) {
+    signature_df %>%
+      filter(!is.na(GeneID)) %>%
+      summarise(
+        n = n_distinct(GeneID)
+      ) %>%
+      pull(n)
+  } else {
+    nrow(signature_df)
+  }
+
+  tibble(
+    technology = technology,
+    direction = direction,
+    threshold_value = threshold,
+    threshold_label = paste0(
+      threshold * 100,
+      "%"
+    ),
+    gene_count = gene_count,
+    filename = filename,
+    file_path = file_path
+  )
+}
+
+gene_count_df <- crossing(
+  technology = technologies,
+  direction = directions,
+  threshold_value = threshold_pct
+) %>%
+  pmap_dfr(
+    function(
+        technology,
+        direction,
+        threshold_value
+    ) {
+      read_aggregate_gene_count(
+        technology = technology,
+        direction = direction,
+        threshold = threshold_value
+      )
+    }
+  ) %>%
+  mutate(
+    technology = recode(
+      technology,
+      microarray = "Microarray",
+      RNAseq = "RNA-seq"
+    ),
+    technology = factor(
+      technology,
+      levels = c(
+        "Microarray",
+        "RNA-seq"
+      )
+    ),
+    direction = recode(
+      direction,
+      up = "Upregulated",
+      dn = "Downregulated"
+    ),
+    direction = factor(
+      direction,
+      levels = c(
+        "Upregulated",
+        "Downregulated"
+      )
+    ),
+    threshold_label = factor(
+      threshold_label,
+      levels = paste0(
+        threshold_pct * 100,
+        "%"
+      )
+    )
+  ) %>%
+  arrange(
+    direction,
+    technology,
+    match(
+      threshold_value,
+      threshold_pct
+    )
+  )
+
+print(gene_count_df)
+```
+
+```{r save pdf}
+pdf(here("figures/figure3/Figure3_gene_counts_all_thresholds_.pdf"),width = 11,height = 6)
+
+gene_count_plot <- ggplot(
+  gene_count_df,
+  aes(
+    x = threshold_label,
+    y = gene_count,
+    color = direction,
+    group = direction
+  )
+) +
+  geom_line(
+    linewidth = 1
+  ) +
+  geom_point(
+    size = 2.5
+  ) +
+  geom_text(
+    aes(
+      label = scales::comma(gene_count)
+    ),
+    vjust = -0.7,
+    size = 3,
+    show.legend = FALSE
+  ) +
+  facet_grid(
+    rows = vars(direction),
+    cols = vars(technology),
+    scales = "free_y"
+  ) +
+  scale_color_manual(
+    values = c(
+      "Upregulated" = "#D55E00",
+      "Downregulated" = "#0072B2"
+    )
+  ) +
+  scale_y_continuous(
+    labels = scales::comma,
+    expand = expansion(
+      mult = c(0.05, 0.15)
+    )
+  ) +
+  labs(
+    x = "Aggregation percentile threshold",
+    y = "Number of genes",
+    color = "Gene group"
+  ) +
+  theme_bw(
+    base_size = 12
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(
+      color = "black"
+    ),
+    strip.text = element_text(
+      face = "bold",
+      size = 11
+    ),
+    strip.background = element_rect(
+      fill = "grey95",
+      color = NA
+    ),
+    legend.position = "top"
+  )
+
+print(gene_count_plot)
+
+dev.off()
+```
