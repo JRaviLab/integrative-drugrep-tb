@@ -1,539 +1,47 @@
-# Figure 3: Biology of dominant pathways and squared deviation of dominant vs. non-dominant pathways
+# Figure 3 sensitivity analysis: squared deviation of of dominant vs. non-dominant pathways in comparing their pathway enrichment values in aggregated signatures and median individual signatures 
 
 ```{r setup, include=FALSE}
-library(clusterProfiler)
-library(GOSemSim)
 library(tidyverse)
 library(here)
 library(dplyr)
-#library(rstatix)
 library(gt)
 ```
 
-```{r read in data}
-summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv"
-summary_df = read_tsv(here(summary_path)) 
-
-# read in upregulated microarray-RNAseq pathway matrix (data for figure S4a)
-up_pathway_df = read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"))
-pathways = up_pathway_df$Description
-```
-
-```{r upregulated microarray}
-# individual microarray signatures
-microarray_cols <- colnames(up_pathway_df)[
-  colnames(up_pathway_df) %in%
-    summary_df$signature_name[
-      summary_df$technology == "microarray" &
-      summary_df$signature_ID != "aggregated_microarray"
-    ]
-]
-
-# use ONLY individual signatures to determine dominant pathways
-up_micro_indiv_mat <- as.matrix(
-  up_pathway_df[, microarray_cols, drop = FALSE]
-)
-
-rownames(up_micro_indiv_mat) <- pathways
-storage.mode(up_micro_indiv_mat) <- "numeric"
-
-# proportion enriched across individual signatures
-prop_nonzero <- rowMeans(up_micro_indiv_mat != 0, na.rm = TRUE)
-
-up_micro_dominant_pathways <- rownames(up_micro_indiv_mat)[
-  prop_nonzero >= 0.9
-]
-
-# now add the 0.9 aggregated signature for plotting
-microarray_cols_with_agg <- c(
-  microarray_cols,
-  "aggregated_microarray_0-8"
-)
-
-up_micro_mat <- as.matrix(
-  up_pathway_df[, microarray_cols_with_agg, drop = FALSE]
-)
-
-rownames(up_micro_mat) <- pathways
-storage.mode(up_micro_mat) <- "numeric"
-
-```
-
-```{r rnaseq}
-# individual rnaseq signatures
-microarray_cols <- colnames(up_pathway_df)[
-  colnames(up_pathway_df) %in%
-    summary_df$signature_name[
-      summary_df$technology == "RNAseq" &
-      summary_df$signature_ID != "aggregated_RNAseq"
-    ]
-]
-
-# use ONLY individual signatures to determine dominant pathways
-up_rnaseq_indiv_mat <- as.matrix(
-  up_pathway_df[, rnaseq_cols, drop = FALSE]
-)
-
-rownames(up_rnaseq_indiv_mat) <- pathways
-storage.mode(up_rnaseq_indiv_mat) <- "numeric"
-
-# proportion enriched across individual signatures
-prop_nonzero <- rowMeans(up_rnaseq_indiv_mat != 0, na.rm = TRUE)
-
-up_rnaseq_dominant_pathways <- rownames(up_rnaseq_indiv_mat)[
-  prop_nonzero >= 0.9
-]
-
-# now add the 0.9 aggregated signature for plotting
-rnaseq_cols_with_agg <- c(
-  microarray_cols,
-  "aggregated_RNAseq_0-8"
-)
-
-up_rnaseq_mat <- as.matrix(
-  up_pathway_df[, rnaseq_cols_with_agg, drop = FALSE]
-)
-
-rownames(up_rnaseq_mat) <- pathways
-storage.mode(up_rnaseq_mat) <- "numeric"
-```
-
-```{r function to compute pathway deviation}
-compute_pathway_deviation <- function(mat, agg_col) {
-
-  # r_p^aggr : aggregated pathway ratios
-  r_aggr <- mat[, agg_col]
-
-  # r_{p,i} : individual pathway ratios
-  indiv_mat <- mat[, setdiff(colnames(mat), agg_col), drop = FALSE]
-
-  # number of individual signatures (n)
-  n <- ncol(indiv_mat)
-
-  tibble(
-    pathway = rownames(mat),
-
-    # med(r_p) across ALL individual signatures (zeros included)
-    median_individual = apply(
-      indiv_mat,
-      1,
-      function(x) median(x, na.rm = TRUE)
-    ),
-
-    # r_p^aggr
-    aggregated = r_aggr,
-
-    # D_p = (1 / n) * (r_p^aggr - med(r_p))^2
-    deviation_score = (1 / n) * (r_aggr - median_individual)^2
-  )
-}
-```
-
-```{r combine upregulated results from microarray and RNAseq}
-# Upregulated
-# matrix of individual microarray signatures
-up_micro_indiv <- as.matrix(up_pathway_df[, microarray_cols, drop = FALSE])
-rownames(up_micro_indiv) <- up_pathway_df$Description
-storage.mode(up_micro_indiv) <- "numeric"
-
-# proportion non-zero
-micro_prop <- rowMeans(up_micro_indiv != 0, na.rm = TRUE)
-micro_ge90 <- names(micro_prop[micro_prop >= 0.9])
-
-# add aggregated column ONLY for sq dev computation
-#up_micro_mat <- cbind(
-#  up_micro_indiv,
-#  aggregated_microarray = up_pathway_df$aggregated_microarray
-#)
-
-micro_sq_up <- compute_pathway_deviation(
-  up_micro_mat,
-  agg_col = "aggregated_microarray_0-8"
-) %>%
-  mutate(
-    technology = "Microarray",
-    enrichment = ifelse(
-      pathway %in% micro_ge90,
-      "Dominant\nGO:BP terms",
-      "Non-dominant\nGO:BP terms"
-    ),
-    direction = "Upregulated"
-  )
-
-# RNAseq
-up_rna_indiv <- as.matrix(up_pathway_df[, rnaseq_cols, drop = FALSE])
-rownames(up_rna_indiv) <- up_pathway_df$Description
-storage.mode(up_rna_indiv) <- "numeric"
-
-rna_prop <- rowMeans(up_rna_indiv != 0, na.rm = TRUE)
-rna_ge90 <- names(rna_prop[rna_prop >= 0.9])
-
-#up_rna_mat <- cbind(
-#  up_rna_indiv,
-#  aggregated_RNAseq = up_pathway_df$aggregated_RNAseq
-#)
-
-rna_sq_up <- compute_pathway_deviation(
-  up_rnaseq_mat,
-  agg_col = "aggregated_RNAseq_0-8"
-) %>%
-  mutate(
-    technology = "RNAseq",
-    enrichment = ifelse(
-      pathway %in% rna_ge90,
-      "Dominant\nGO:BP terms",
-      "Non-dominant\nGO:BP terms"
-    ),
-    direction = "Upregulated"
-  )
-
-sq_dev_up <- bind_rows(micro_sq_up, rna_sq_up)
-
-```
-
-```{r read in downregulated microarray-RNAseq pathway matrix (data for figure S4b)}
-dn_pathway_df = read_tsv(here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways_sensitivity.tsv"))
-pathways = dn_pathway_df$Description
-```
-
-```{r downregulated microarray}
-# individual rnaseq signatures
-microarray_cols <- colnames(dn_pathway_df)[
-  colnames(dn_pathway_df) %in%
-    summary_df$signature_name[
-      summary_df$technology == "microarray" &
-      summary_df$signature_ID != "aggregated_microarray"
-    ]
-]
-
-# use ONLY individual signatures to determine dominant pathways
-dn_micro_indiv_mat <- as.matrix(
-  dn_pathway_df[, microarray_cols, drop = FALSE]
-)
-
-rownames(dn_micro_indiv_mat) <- pathways
-storage.mode(dn_micro_indiv_mat) <- "numeric"
-
-# proportion enriched across individual signatures
-prop_nonzero <- rowMeans(dn_micro_indiv_mat != 0, na.rm = TRUE)
-
-dn_micro_dominant_pathways <- rownames(dn_micro_indiv_mat)[
-  prop_nonzero >= 0.9
-]
-
-# now add the 0.9 aggregated signature for plotting
-microarray_cols_with_agg <- c(
-  microarray_cols,
-  "aggregated_microarray_0-8"
-)
-
-dn_micro_mat <- as.matrix(
-  dn_pathway_df[, microarray_cols_with_agg, drop = FALSE]
-)
-
-rownames(dn_micro_mat) <- pathways
-storage.mode(dn_micro_mat) <- "numeric"
-
-```
-
-```{r downregulated RNAseq}
-# individual rnaseq signatures
-microarray_cols <- colnames(dn_pathway_df)[
-  colnames(dn_pathway_df) %in%
-    summary_df$signature_name[
-      summary_df$technology == "RNAseq" &
-      summary_df$signature_ID != "aggregated_RNAseq"
-    ]
-]
-
-# use ONLY individual signatures to determine dominant pathways
-dn_rnaseq_indiv_mat <- as.matrix(
-  dn_pathway_df[, rnaseq_cols, drop = FALSE]
-)
-
-rownames(dn_rnaseq_indiv_mat) <- pathways
-storage.mode(dn_rnaseq_indiv_mat) <- "numeric"
-
-# proportion enriched across individual signatures
-prop_nonzero <- rowMeans(dn_rnaseq_indiv_mat != 0, na.rm = TRUE)
-
-dn_rnaseq_dominant_pathways <- rownames(dn_rnaseq_indiv_mat)[
-  prop_nonzero >= 0.9
-]
-
-# now add the 0.9 aggregated signature for plotting
-rnaseq_cols_with_agg <- c(
-  microarray_cols,
-  "aggregated_RNAseq_0-8"
-)
-
-dn_rnaseq_mat <- as.matrix(
-  dn_pathway_df[, rnaseq_cols_with_agg, drop = FALSE]
-)
-
-rownames(dn_rnaseq_mat) <- pathways
-storage.mode(dn_rnaseq_mat) <- "numeric"
-```
-
-```{r combine downregulated results from microarray and RNAseq}
-# Downregulated
-# matrix of individual microarray signatures
-dn_micro_indiv <- as.matrix(dn_pathway_df[, microarray_cols, drop = FALSE])
-rownames(dn_micro_indiv) <- dn_pathway_df$Description
-storage.mode(dn_micro_indiv) <- "numeric"
-
-# proportion non-zero
-micro_prop <- rowMeans(dn_micro_indiv != 0, na.rm = TRUE)
-micro_ge90 <- names(micro_prop[micro_prop >= 0.9])
-
-# add aggregated column ONLY for sq dev computation
-#up_micro_mat <- cbind(
-#  up_micro_indiv,
-#  aggregated_microarray = up_pathway_df$aggregated_microarray
-#)
-
-micro_sq_dn <- compute_pathway_deviation(
-  dn_micro_mat,
-  agg_col = "aggregated_microarray_0-8"
-) %>%
-  mutate(
-    technology = "Microarray",
-    enrichment = ifelse(
-      pathway %in% micro_ge90,
-      "Dominant\nGO:BP terms",
-      "Non-dominant\nGO:BP terms"
-    ),
-    direction = "Downregulated"
-  )
-
-# RNAseq
-dn_rna_indiv <- as.matrix(dn_pathway_df[, rnaseq_cols, drop = FALSE])
-rownames(dn_rna_indiv) <- dn_pathway_df$Description
-storage.mode(dn_rna_indiv) <- "numeric"
-
-rna_prop <- rowMeans(dn_rna_indiv != 0, na.rm = TRUE)
-rna_ge90 <- names(rna_prop[rna_prop >= 0.9])
-
-#up_rna_mat <- cbind(
-#  up_rna_indiv,
-#  aggregated_RNAseq = up_pathway_df$aggregated_RNAseq
-#)
-
-rna_sq_dn <- compute_pathway_deviation(
-  dn_rnaseq_mat,
-  agg_col = "aggregated_RNAseq_0-8"
-) %>%
-  mutate(
-    technology = "RNAseq",
-    enrichment = ifelse(
-      pathway %in% rna_ge90,
-      "Dominant\nGO:BP terms",
-      "Non-dominant\nGO:BP terms"
-    ),
-    direction = "Downregulated"
-  )
-
-sq_dev_dn <- bind_rows(micro_sq_dn, rna_sq_dn)
-
-```
-
-```{r}
-sq_dev_df <- bind_rows(
-  sq_dev_up,
-  sq_dev_dn
-) %>%
-  # Remove pathways where both underlying values are zero
-  filter(
-    !is.na(aggregated),
-    !is.na(median_individual),
-    !(aggregated == 0 & median_individual == 0)
-  ) %>%
-  mutate(
-    direction = factor(
-      direction,
-      levels = c("Upregulated", "Downregulated")
-    )
-  )
-
-pdf(
-  here("figures/figure3/Figure3_squared_deviation_dominant_pathways_80pct.pdf"),
-  width = 6,
-  height = 8
-)
-
-ggplot(
-  sq_dev_df,
-  aes(
-    x = enrichment,
-    y = deviation_score,
-    fill = enrichment
-  )
-) +
-  geom_boxplot(alpha = 0.8) +
-  scale_y_log10(
-    breaks = 10^seq(-10, 0, by = 2),
-    labels = seq(-10, 0, by = 2)
-  ) +
-  facet_grid(
-    direction ~ technology,
-    scales = "free_y"
-  ) +
-  labs(
-    x = "Enrichment",
-    y = expression(log[10] * " squared deviation")
-  ) +
-  theme_bw(base_size = 14) +
-  theme(
-    panel.grid = element_blank(),
-    axis.line = element_line(color = "black"),
-    legend.position = "none",
-    strip.text = element_text(size = 14, face = "bold"),
-    strip.background = element_rect(fill = "grey95", color = NA)
-  )
-
-dev.off()
-```
-
-```{r}
-mw_table <- sq_dev_df %>%
-  # exclude pathways with no signal in either measurement
-  filter(
-    !is.na(aggregated),
-    !is.na(median_individual),
-    !(aggregated == 0 & median_individual == 0)
-  ) %>%
-  group_by(direction, technology) %>%
-  group_modify(~ {
-    
-    non_dominant <- .x$deviation_score[
-      .x$enrichment == "Non-dominant\nGO:BP terms"
-    ]
-    
-    dominant <- .x$deviation_score[
-      .x$enrichment == "Dominant\nGO:BP terms"
-    ]
-    
-    # remove missing deviation scores
-    non_dominant <- non_dominant[!is.na(non_dominant)]
-    dominant <- dominant[!is.na(dominant)]
-    
-    test <- wilcox.test(
-      x = non_dominant,
-      y = dominant,
-      alternative = "greater",  # H1: non-dominant > dominant
-      exact = FALSE
-    )
-    
-    tibble(
-      group1 = "Non-dominant",
-      group2 = "Dominant",
-      n1 = length(non_dominant),
-      n2 = length(dominant),
-      statistic = unname(test$statistic),
-      p = test$p.value
-    )
-  }) %>%
-  ungroup() %>%
-  mutate(
-    p.adj = p.adjust(p, method = "BH"),
-    significant = p.adj < 0.05
-  )
-
-mw_table
-```
-
-
-```{r}
-mw_table$technology <- factor(
-  mw_table$technology,
-  levels = c("Microarray", "RNAseq")
-)
-
-
-mw_gt_table <- mw_table %>%
-  arrange(technology) %>%
-  mutate(
-    comparison = paste0(group1, " vs ", group2),
-    p = signif(p, 3),
-    p.adj = signif(p.adj, 3)
-  ) %>%
-  select(
-    Direction = direction,
-    Technology = technology,
-    `Dominant pathways (≥90% enriched)` = n1,
-    `Non-dominant pathways (<90% enriched)` = n2,
-    Statistic = statistic,
-    `p-value` = p,
-    `Adjusted p-value` = p.adj,
-    #Significance = p.adj.signif
-  ) %>%
-  gt(groupname_col = "Technology") %>%
-  tab_header(
-    title = "Dominant pathways exhibit statistically lower deviation across technologies",
-    subtitle = "Mann-Whitney tests comparing ≥90% vs. <90% enriched pathways"
-  ) %>%
-  cols_align(
-    align = "center",
-    everything()
-  ) %>%
-  fmt_scientific(
-    columns = c(Statistic,`p-value`, `Adjusted p-value`),
-    decimals = 2
-  ) %>%
-  cols_width(
-    everything() ~ px(150)
-  )
-# Save the table as HTML
-gtsave(mw_gt_table, here("figures/figure3/tableS5_stats_dominant_pathways.html"))
-```
-
-
 ```{r all-thresholds-plot, message=FALSE, warning=FALSE}
-
-library(tidyverse)
-library(here)
-
-thresholds <- c(0.95,0.90,0.85,0.80,0.75,0.70,0.60)
+thresholds <- c(0.95,0.90,0.85,0.80,0.75,0.70,0.60,0)
 summary_df <- read_tsv(
   here("figures/figure2/metadata_annotation/annotation_table.tsv"),show_col_types = FALSE)
 
 up_pathway_df <- read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"),show_col_types = FALSE)
 dn_pathway_df <- read_tsv(here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways_sensitivity.tsv"),show_col_types = FALSE)
 
-get_available_thresholds <- function(
-    pathway_df,
-    direction_name
-) {
-  
+get_available_thresholds <- function(pathway_df, direction_name) {
   tibble(
     aggregate_col = colnames(pathway_df)
   ) %>%
     filter(
       str_detect(
         aggregate_col,
-        "^aggregated_(microarray|RNAseq)_0-[0-9]+$"
+        "^aggregated_(microarray|RNAseq)(_(0|0-[0-9]+))?$"
       )
     ) %>%
     mutate(
       technology = case_when(
-        str_detect(
-          aggregate_col,
-          "^aggregated_microarray_"
-        ) ~ "Microarray",
-        
-        str_detect(
-          aggregate_col,
-          "^aggregated_RNAseq_"
-        ) ~ "RNAseq"
+        str_detect(aggregate_col, "^aggregated_microarray") ~ "Microarray",
+        str_detect(aggregate_col, "^aggregated_RNAseq") ~ "RNAseq"
       ),
-      
-      # Convert 0-95 to 0.95, 0-9 to 0.90, etc.
-      threshold_value = aggregate_col %>%
-        str_extract("0-[0-9]+$") %>%
-        str_replace("-", ".") %>%
-        as.numeric() %>%
-        round(2),
-      
+      threshold_value = case_when(
+        # Unsuffixed or "_0" columns represent threshold zero
+        str_detect(
+          aggregate_col,
+          "^aggregated_(microarray|RNAseq)(_0)?$"
+        ) ~ 0,
+        TRUE ~ aggregate_col %>%
+          str_extract("0-[0-9]+$") %>%
+          str_replace("-", ".") %>%
+          as.numeric() %>%
+          round(2)
+      ),
       direction = direction_name
     )
 }
@@ -557,7 +65,6 @@ available_thresholds <- bind_rows(
     match(threshold_value, thresholds)
   )
 
-# Show the aggregate columns that will be used
 print(available_thresholds)
 
 expected_combinations <- crossing(
@@ -575,7 +82,7 @@ expected_combinations <- crossing(
 missing_combinations <- expected_combinations %>%
   anti_join(
     available_thresholds %>%
-      select(
+      dplyr::select(
         direction,
         technology,
         threshold_value
@@ -664,9 +171,9 @@ calculate_threshold_deviation <- function(
     technology = technology_name,
     direction = direction_name,
     threshold_value = threshold,
-    aggregate_col = aggregate_col,
+    aggregate_col = aggregate_col, 
     enrichment = if_else(
-      proportion_enriched >= threshold,
+      proportion_enriched >= 0.9, # pathways enriched in at least 90% of signatures
       "Dominant\nGO:BP terms",
       "Non-dominant\nGO:BP terms"
     )
@@ -758,9 +265,172 @@ plot_counts <- sq_dev_all_thresholds %>%
 
 print(plot_counts)
 ```
+```{r stats table}
+dominant_label <- "Dominant\nGO:BP terms"
+nondominant_label <- "Non-dominant\nGO:BP terms"
 
-```{r plot all thresholds}
-pdf(here("figures/figure3/Figure3_squared_deviation_all_thresholds.pdf"),width = 28,height = 8)
+stats_results <- sq_dev_all_thresholds %>%
+  filter(
+    is.finite(deviation_score),
+    !is.na(enrichment)
+  ) %>%
+  group_by(
+    direction,
+    technology,
+    threshold
+  ) %>%
+  group_modify(
+    ~ {
+      dominant_values <- .x %>%
+        filter(enrichment == dominant_label) %>%
+        pull(deviation_score)
+
+      nondominant_values <- .x %>%
+        filter(enrichment == nondominant_label) %>%
+        pull(deviation_score)
+
+      if (
+        length(dominant_values) > 0 &&
+        length(nondominant_values) > 0
+      ) {
+        test_result <- wilcox.test(
+          x = nondominant_values,
+          y = dominant_values,
+          alternative = "greater",
+          exact = FALSE
+        )
+
+        tibble(
+          n_dominant = length(dominant_values),
+          n_nondominant = length(nondominant_values),
+          median_dominant = median(
+            dominant_values,
+            na.rm = TRUE
+          ),
+          median_nondominant = median(
+            nondominant_values,
+            na.rm = TRUE
+          ),
+          statistic_W = unname(
+            test_result$statistic
+          ),
+          p_value = test_result$p.value
+        )
+      } else {
+        tibble(
+          n_dominant = length(dominant_values),
+          n_nondominant = length(nondominant_values),
+          median_dominant = if (
+            length(dominant_values) > 0
+          ) {
+            median(
+              dominant_values,
+              na.rm = TRUE
+            )
+          } else {
+            NA_real_
+          },
+          median_nondominant = if (
+            length(nondominant_values) > 0
+          ) {
+            median(
+              nondominant_values,
+              na.rm = TRUE
+            )
+          } else {
+            NA_real_
+          },
+          statistic_W = NA_real_,
+          p_value = NA_real_
+        )
+      }
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    p_adjusted_BH = p.adjust(
+      p_value,
+      method = "BH"
+    ),
+    significance = case_when(
+      is.na(p_adjusted_BH) ~ "Not tested",
+      p_adjusted_BH < 0.001 ~ "***",
+      p_adjusted_BH < 0.01 ~ "**",
+      p_adjusted_BH < 0.05 ~ "*",
+      TRUE ~ "ns"
+    )
+  )
+
+print(stats_results)
+```
+```{r gt table}
+stats_gt <- stats_results %>%
+  dplyr::select(
+    Direction = direction,
+    Technology = technology,
+    Threshold = threshold,
+    `N dominant` = n_dominant,
+    `N non-dominant` = n_nondominant,
+    `Median dominant` = median_dominant,
+    `Median non-dominant` = median_nondominant,
+    `Mann-Whitney U` = statistic_W,
+    `One-sided p-value` = p_value,
+    `BH-adjusted p-value` = p_adjusted_BH,
+    Significance = significance
+  ) %>%
+  gt(
+    groupname_col = "Direction"
+  ) %>%
+  tab_header(
+    title = md(
+      "**One-sided Mann–Whitney test results**"
+    ),
+    subtitle = md(
+      "Alternative hypothesis: non-dominant squared deviation > dominant squared deviation"
+    )
+  ) %>%
+  fmt_number(
+    columns = c(
+      `Median dominant`,
+      `Median non-dominant`
+    ),
+    decimals = 4
+  ) %>%
+  fmt_number(
+    columns = `Mann-Whitney U`,
+    decimals = 0,
+    use_seps = TRUE
+  ) %>%
+  fmt_scientific(
+    columns = c(
+      `One-sided p-value`,
+      `BH-adjusted p-value`
+    ),
+    decimals = 2
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_source_note(
+    source_note = md(
+      "P-values are from one-sided Wilcoxon rank-sum tests. BH adjustment accounts for testing across all per-threshold technology-gene-group pairs."
+    )
+  )
+gtsave(data = stats_gt,filename = here("figures/figure3/Figure3_MW_stats_sensitivity_results.html"))
+
+stats_gt
+```
+
+```{r plot all thesholds with stats}
+pdf(
+  here(
+    "figures/figure3/",
+    "Figure3_squared_deviation_all_thresholds.pdf"
+  ),
+  width = 28,
+  height = 8
+)
 
 ggplot(
   sq_dev_all_thresholds,
@@ -775,9 +445,24 @@ ggplot(
     outlier.size = 0.5,
     na.rm = TRUE
   ) +
+  geom_text(
+    data = stats_results,
+    aes(
+      x = 1.5,
+      y = Inf,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    vjust = 1.2,
+    size = 4,
+    fontface = "bold"
+  ) +
   scale_y_log10(
     breaks = 10^seq(-10, 0, by = 2),
-    labels = seq(-10, 0, by = 2)
+    labels = seq(-10, 0, by = 2),
+    expand = expansion(
+      mult = c(0.05, 0.20)
+    )
   ) +
   facet_grid(
     rows = vars(direction),
@@ -788,9 +473,18 @@ ggplot(
     x = "Enrichment",
     y = expression(
       log[10] * " squared deviation"
+    ),
+    caption = paste0(
+      "One-sided Mann\u2013Whitney test: ",
+      "non-dominant > dominant. ",
+      "BH-adjusted P values: ",
+      "*** P < 0.001; ** P < 0.01; ",
+      "* P < 0.05; ns P \u2265 0.05."
     )
   ) +
-  theme_bw(base_size = 11) +
+  theme_bw(
+    base_size = 11
+  ) +
   theme(
     panel.grid = element_blank(),
     axis.line = element_line(
@@ -808,9 +502,15 @@ ggplot(
     axis.text.x = element_text(
       angle = 45,
       hjust = 1
+    ),
+    plot.caption = element_text(
+      size = 9,
+      hjust = 0,
+      margin = margin(
+        t = 8
+      )
     )
   )
 
 dev.off()
-
 ```
