@@ -38,37 +38,10 @@ marray_GO_mat_dn = get_GO_asinh_matrix(marray_path_dn, pattern, prefix_sub, suff
 rnaseq_GO_mat_dn = get_GO_asinh_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
 ```
 
-```{r get statistically significant metrics -- positions for asterisk}
-marray_qvalue_GO_mat_dn = get_GO_qvalue_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
-row.names(marray_qvalue_GO_mat_dn) <- marray_qvalue_GO_mat_dn$Description
-marray_decription <- marray_qvalue_GO_mat_dn$Description
-marray_qvalue_GO_mat_dn$Description <- NULL
-marray_signi_GO_mat_dn <- as.data.frame(ifelse(marray_qvalue_GO_mat_dn < 0.05, 1, 0))
-# exclude columns whose names contain "aggregated"
-cols_to_use <- grep("aggregated", names(marray_signi_GO_mat_dn), invert = TRUE)
-# filter rows where the sum across the selected columns is > 0
-marray_signi_dn <- row.names(
-  marray_signi_GO_mat_dn[rowSums(marray_signi_GO_mat_dn[, cols_to_use]) > 0, ]
-)
-
-rnaseq_qvalue_GO_mat_dn = get_GO_qvalue_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
-row.names(rnaseq_qvalue_GO_mat_dn) <- rnaseq_qvalue_GO_mat_dn$Description
-rnaseq_decription <- rnaseq_qvalue_GO_mat_dn$Description
-rnaseq_qvalue_GO_mat_dn$Description <- NULL
-rnaseq_signi_GO_mat_dn <- as.data.frame(ifelse(rnaseq_qvalue_GO_mat_dn < 0.05, 1, 0))
-# exclude columns whose names contain "aggregated"
-cols_to_use <- grep("aggregated", names(rnaseq_signi_GO_mat_dn), invert = TRUE)
-# filter rows where the sum across the selected columns is > 0
-rnaseq_signi_dn <- row.names(
-  rnaseq_signi_GO_mat_dn[rowSums(rnaseq_signi_GO_mat_dn[, cols_to_use]) > 0, ]
-)
-
-marray_rnaseq_signi_dn = unique(c(marray_signi_dn, rnaseq_signi_dn))
-```
-
 ```{r process all terms matrices}
 # aggregated thresholds
 agg_cols <- c(
+  "dn_aggregated_signature_0",
   "dn_aggregated_signature_0.6",
   "dn_aggregated_signature_0.75",
   "dn_aggregated_signature_0.7",
