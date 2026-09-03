@@ -161,13 +161,13 @@ gene_count_df <- crossing(
     technology = recode(
       technology,
       microarray = "Microarray",
-      RNAseq = "RNA-seq"
+      RNAseq = "RNAseq"
     ),
     technology = factor(
       technology,
       levels = c(
         "Microarray",
-        "RNA-seq"
+        "RNAseq"
       )
     ),
     direction = recode(
@@ -270,6 +270,91 @@ gene_count_plot <- ggplot(
   )
 
 print(gene_count_plot)
+
+dev.off()
+```
+
+```{r all genes per threshold and technology}
+combined_gene_count_df <- gene_count_df %>%
+  group_by(
+    technology,
+    threshold_value,
+    threshold_label
+  ) %>%
+  summarise(
+    gene_count = sum(gene_count),
+    .groups = "drop"
+  )
+
+pdf(here("figures/figure3/Figure3_combined_up_dn_gene_counts.pdf"),
+  width = 11,
+  height = 5
+)
+
+combined_gene_count_plot <- ggplot(
+  combined_gene_count_df,
+  aes(
+    x = threshold_label,
+    y = gene_count,
+    color = technology,
+    group = technology
+  )
+) +
+  geom_line(
+    linewidth = 1
+  ) +
+  geom_point(
+    size = 3
+  ) +
+  geom_text(
+    aes(
+      label = scales::comma(gene_count)
+    ),
+    vjust = -0.7,
+    size = 3
+  ) +
+  facet_wrap(
+    vars(technology),
+    nrow = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(
+    values = c(
+      "Microarray" = "#0072B2",
+      "RNAseq" = "#D55E00"
+    )
+  ) +
+  scale_y_continuous(
+    labels = scales::comma,
+    expand = expansion(
+      mult = c(0.05, 0.15)
+    )
+  ) +
+  labs(
+    x = "Aggregation percentile threshold",
+    y = "Number of genes (up + down)",
+    color = "Technology"
+  ) +
+  theme_bw(
+    base_size = 12
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(
+      color = "black"
+    ),
+    strip.text = element_text(
+      face = "bold",
+      size = 12
+    ),
+    strip.background = element_rect(
+      fill = "grey95",
+      color = NA
+    ),
+    legend.position = "none"
+  )
+
+print(combined_gene_count_plot)
 
 dev.off()
 ```
