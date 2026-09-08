@@ -14,15 +14,57 @@ library(tidyr)
 ```
 
 ```{r read in HDT positive labels}
-labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
-# HDT_label = 1 for Direct (HDT) matches.
-# exception: "fostaminitib" is manually labeled as 1 due to a drug name typo
-# in the literature (misspelled drug name in abstract prevented detection)
+labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v2.tsv"),
+                   show_col_types = FALSE)
+
+# evidence levels are mutually exclusive, so a drug's primary record count is
+# the sum of the level columns
+labels <- labels %>%
+  mutate(
+    n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
+    n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
+    n_in_vivo = n_clinical_study + n_animal,
+
+    # label ladder, each rung is a subset of the one above it
+    L0_any      = unique_articles > 0,
+    L1_primary  = n_primary > 0,
+    L2_host     = n_host > 0,
+    L3_in_vivo  = n_in_vivo > 0,
+    L4_clinical = n_clinical_study > 0,
+
+    # HDT_any is the like-for-like analogue of the old "Direct (HDT)" label:
+    # the record was returned by the HDT-restricted pubmed query
+    HDT_any     = n_hdt > 0,
+    HDT_host    = n_hdt > 0 & n_host > 0
+  )
+
+# set one label definition per render, the rest of the notebook is unchanged
+LABEL_DEF <- "HDT_host"   # one of: L0_any L1_primary L2_host L3_in_vivo
+                         #         L4_clinical HDT_any HDT_host
+
+stopifnot(LABEL_DEF %in% names(labels))
+
+# fostamatinib was manually labeled positive because a misspelled drug name in
+# the abstract prevented detection
 # https://doi.org/10.3390/antibiotics9090550
+MANUAL_POSITIVES <- c("fostamatinib")
+
 labels$HDT_label <- ifelse(
-  labels$search_type == "Direct (HDT)" | labels$drug_name %in% c("fostamatinib"),
+  labels[[LABEL_DEF]] | labels$drug_name %in% MANUAL_POSITIVES,
   1, 0
 )
+
+cat("Label definition :", LABEL_DEF, "\n")
+cat("Positives         :", sum(labels$HDT_label), "of", nrow(labels), "drugs\n")
+
+# report whether the manual override still changes anything under this label
+override_needed <- labels$drug_name %in% MANUAL_POSITIVES & !labels[[LABEL_DEF]]
+cat("Manual overrides still active:",
+    paste(labels$drug_name[override_needed], collapse = ", "), "\n")
+
+# ladder counts, should be monotonically non-increasing
+print(colSums(labels[, c("L0_any", "L1_primary", "L2_host",
+                         "L3_in_vivo", "L4_clinical", "HDT_any", "HDT_host")]))
 ```
 
 ```{r read in all predictions for evaluation}
@@ -230,7 +272,9 @@ median_integrative <- rank_df_plot %>%
   summarise(med = median(Rank, na.rm = TRUE)) %>%
   pull(med)
 
-pdf(here("figures/figure4/figureS6_rank_distributions.pdf"), width = 10, height = 12)
+pdf(here("figures/figure4/",
+  paste0("figureS6_rank_distributions_", LABEL_DEF, ".pdf")), 
+  width = 10, height = 12)
 
 ggplot(
   rank_df_plot,
@@ -338,8 +382,11 @@ score_colors <- c(
            unique(results_df$Score))
 )
 
-pdf(here("figures/figure4/figure4a_precision@K_technology_signature.pdf"),
+
+pdf(here("figures/figure4/",
+  paste0("figure4a_precision@K_technology_signature_", LABEL_DEF, ".pdf")),
     width = 8, height = 6)
+
 ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
   
   geom_line(
@@ -414,8 +461,10 @@ score_colors <- c(
            unique(results_df$Score))
 )
 
-pdf(here("figures/figure4/figure4c_average_precision@K_technology_signature.pdf"),
+pdf(here("figures/figure4/",
+  paste0("figure4c_average_precision@K_technology_signature_", LABEL_DEF, ".pdf")),
     width = 7, height = 4)
+
 ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
   geom_line(
     aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
@@ -472,8 +521,10 @@ score_colors <- c(
   setNames(brewer.pal(length(unique(results_df$Score)), "Dark2"),
            unique(results_df$Score))
 )
-pdf(here("figures/figure4/figure4b_recall@K_technology_signature.pdf"),
+pdf(here("figures/figure4/",
+  paste0("figure4b_recall@K_technology_signature_", LABEL_DEF, ".pdf")),
     width = 8, height = 6)
+
 ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
   
   geom_line(
@@ -548,8 +599,10 @@ score_colors <- c(
            unique(results_df$Score))
 )
 
-pdf(here("figures/figure4/figure4d_average_recall@K_technology_signature.pdf"),
+pdf(here("figures/figure4/",
+  paste0("figure4d_average_recall@K_technology_signature_", LABEL_DEF, ".pdf")),
     width = 7, height = 4)
+
 ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
   geom_line(
     aes(linetype = signature_type, alpha = ifelse(Score == "Integrative", 1, 0.5)),
