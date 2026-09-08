@@ -14,7 +14,7 @@ library(tidyr)
 ```
 
 ```{r read in HDT positive labels}
-labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v2.tsv"),
+labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"),
                    show_col_types = FALSE)
 
 # evidence levels are mutually exclusive, so a drug's primary record count is
