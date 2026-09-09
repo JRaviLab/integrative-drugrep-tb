@@ -1,0 +1,516 @@
+# Figure 3 sensitivity analysis: squared deviation of of dominant vs. non-dominant pathways in comparing their pathway enrichment values in aggregated signatures and median individual signatures 
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(here)
+library(dplyr)
+library(gt)
+```
+
+```{r all-thresholds-plot, message=FALSE, warning=FALSE}
+thresholds <- c(0.95,0.90,0.85,0.80,0.75,0.70,0.60,0)
+summary_df <- read_tsv(
+  here("figures/figure2/metadata_annotation/annotation_table.tsv"),show_col_types = FALSE)
+
+up_pathway_df <- read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"),show_col_types = FALSE)
+dn_pathway_df <- read_tsv(here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways_sensitivity.tsv"),show_col_types = FALSE)
+
+get_available_thresholds <- function(pathway_df, direction_name) {
+  tibble(
+    aggregate_col = colnames(pathway_df)
+  ) %>%
+    filter(
+      str_detect(
+        aggregate_col,
+        "^aggregated_(microarray|RNAseq)(_(0|0-[0-9]+))?$"
+      )
+    ) %>%
+    mutate(
+      technology = case_when(
+        str_detect(aggregate_col, "^aggregated_microarray") ~ "Microarray",
+        str_detect(aggregate_col, "^aggregated_RNAseq") ~ "RNAseq"
+      ),
+      threshold_value = case_when(
+        # Unsuffixed or "_0" columns represent threshold zero
+        str_detect(
+          aggregate_col,
+          "^aggregated_(microarray|RNAseq)(_0)?$"
+        ) ~ 0,
+        TRUE ~ aggregate_col %>%
+          str_extract("0-[0-9]+$") %>%
+          str_replace("-", ".") %>%
+          as.numeric() %>%
+          round(2)
+      ),
+      direction = direction_name
+    )
+}
+
+available_thresholds <- bind_rows(
+  get_available_thresholds(
+    up_pathway_df,
+    "Upregulated"
+  ),
+  get_available_thresholds(
+    dn_pathway_df,
+    "Downregulated"
+  )
+) %>%
+  filter(
+    threshold_value %in% thresholds
+  ) %>%
+  arrange(
+    direction,
+    technology,
+    match(threshold_value, thresholds)
+  )
+
+print(available_thresholds)
+
+expected_combinations <- crossing(
+  direction = c(
+    "Upregulated",
+    "Downregulated"
+  ),
+  technology = c(
+    "Microarray",
+    "RNAseq"
+  ),
+  threshold_value = thresholds
+)
+
+missing_combinations <- expected_combinations %>%
+  anti_join(
+    available_thresholds %>%
+      dplyr::select(
+        direction,
+        technology,
+        threshold_value
+      ),
+    by = c(
+      "direction",
+      "technology",
+      "threshold_value"
+    )
+  )
+
+
+calculate_threshold_deviation <- function(
+    pathway_df,
+    direction_name,
+    technology_name,
+    threshold,
+    aggregate_col
+) {
+  
+  technology_key <- if_else(
+    technology_name == "Microarray",
+    "microarray",
+    "RNAseq"
+  )
+  
+  aggregate_signature_id <- if_else(
+    technology_name == "Microarray",
+    "aggregated_microarray",
+    "aggregated_RNAseq"
+  )
+  
+  individual_cols <- intersect(
+    colnames(pathway_df),
+    summary_df$signature_name[
+      summary_df$technology == technology_key &
+        summary_df$signature_ID != aggregate_signature_id
+    ]
+  )
+  
+  if (length(individual_cols) == 0) {
+    stop(
+      "No individual signatures found for ",
+      technology_name
+    )
+  }
+  
+  if (!aggregate_col %in% colnames(pathway_df)) {
+    stop(
+      "Aggregate column not found: ",
+      aggregate_col
+    )
+  }
+  
+  individual_mat <- as.matrix(
+    pathway_df[, individual_cols, drop = FALSE]
+  )
+  
+  storage.mode(individual_mat) <- "numeric"
+  
+  aggregated <- as.numeric(
+    pathway_df[[aggregate_col]]
+  )
+  
+  median_individual <- apply(
+    individual_mat,
+    1,
+    function(x) median(x, na.rm = TRUE)
+  )
+  
+  proportion_enriched <- rowMeans(
+    individual_mat != 0,
+    na.rm = TRUE
+  )
+  
+  n_signatures <- ncol(individual_mat)
+  
+  tibble(
+    pathway = pathway_df$Description,
+    median_individual = median_individual,
+    aggregated = aggregated,
+    proportion_enriched = proportion_enriched,
+    deviation_score =
+      (aggregated - median_individual)^2 /
+      n_signatures,
+    technology = technology_name,
+    direction = direction_name,
+    threshold_value = threshold,
+    aggregate_col = aggregate_col, 
+    enrichment = if_else(
+      proportion_enriched >= 0.9, # pathways enriched in at least 90% of signatures
+      "Dominant\nGO:BP terms",
+      "Non-dominant\nGO:BP terms"
+    )
+  )
+}
+
+sq_dev_all_thresholds <- available_thresholds %>%
+  pmap_dfr(
+    function(
+        aggregate_col,
+        technology,
+        threshold_value,
+        direction
+    ) {
+      
+      pathway_df <- if (
+        direction == "Upregulated"
+      ) {
+        up_pathway_df
+      } else {
+        dn_pathway_df
+      }
+      
+      calculate_threshold_deviation(
+        pathway_df = pathway_df,
+        direction_name = direction,
+        technology_name = technology,
+        threshold = threshold_value,
+        aggregate_col = aggregate_col
+      )
+    }
+  ) %>%
+  
+  filter(
+    !is.na(aggregated),
+    !is.na(median_individual),
+    !(
+      aggregated == 0 &
+        median_individual == 0
+    )
+  )
+
+threshold_levels <- paste0(
+  thresholds * 100,
+  "%"
+)
+
+sq_dev_all_thresholds <- sq_dev_all_thresholds %>%
+  mutate(
+    threshold = paste0(
+      threshold_value * 100,
+      "%"
+    ),
+    threshold = factor(
+      threshold,
+      levels = threshold_levels
+    ),
+    direction = factor(
+      direction,
+      levels = c(
+        "Upregulated",
+        "Downregulated"
+      )
+    ),
+    technology = factor(
+      technology,
+      levels = c(
+        "Microarray",
+        "RNAseq"
+      )
+    ),
+    enrichment = factor(
+      enrichment,
+      levels = c(
+        "Dominant\nGO:BP terms",
+        "Non-dominant\nGO:BP terms"
+      )
+    )
+  )
+
+plot_counts <- sq_dev_all_thresholds %>%
+  count(
+    direction,
+    technology,
+    threshold,
+    enrichment,
+    name = "n"
+  )
+
+print(plot_counts)
+```
+```{r stats table}
+dominant_label <- "Dominant\nGO:BP terms"
+nondominant_label <- "Non-dominant\nGO:BP terms"
+
+stats_results <- sq_dev_all_thresholds %>%
+  filter(
+    is.finite(deviation_score),
+    !is.na(enrichment)
+  ) %>%
+  group_by(
+    direction,
+    technology,
+    threshold
+  ) %>%
+  group_modify(
+    ~ {
+      dominant_values <- .x %>%
+        filter(enrichment == dominant_label) %>%
+        pull(deviation_score)
+
+      nondominant_values <- .x %>%
+        filter(enrichment == nondominant_label) %>%
+        pull(deviation_score)
+
+      if (
+        length(dominant_values) > 0 &&
+        length(nondominant_values) > 0
+      ) {
+        test_result <- wilcox.test(
+          x = nondominant_values,
+          y = dominant_values,
+          alternative = "greater",
+          exact = FALSE
+        )
+
+        tibble(
+          n_dominant = length(dominant_values),
+          n_nondominant = length(nondominant_values),
+          median_dominant = median(
+            dominant_values,
+            na.rm = TRUE
+          ),
+          median_nondominant = median(
+            nondominant_values,
+            na.rm = TRUE
+          ),
+          statistic_W = unname(
+            test_result$statistic
+          ),
+          p_value = test_result$p.value
+        )
+      } else {
+        tibble(
+          n_dominant = length(dominant_values),
+          n_nondominant = length(nondominant_values),
+          median_dominant = if (
+            length(dominant_values) > 0
+          ) {
+            median(
+              dominant_values,
+              na.rm = TRUE
+            )
+          } else {
+            NA_real_
+          },
+          median_nondominant = if (
+            length(nondominant_values) > 0
+          ) {
+            median(
+              nondominant_values,
+              na.rm = TRUE
+            )
+          } else {
+            NA_real_
+          },
+          statistic_W = NA_real_,
+          p_value = NA_real_
+        )
+      }
+    }
+  ) %>%
+  ungroup() %>%
+  mutate(
+    p_adjusted_BH = p.adjust(
+      p_value,
+      method = "BH"
+    ),
+    significance = case_when(
+      is.na(p_adjusted_BH) ~ "Not tested",
+      p_adjusted_BH < 0.001 ~ "***",
+      p_adjusted_BH < 0.01 ~ "**",
+      p_adjusted_BH < 0.05 ~ "*",
+      TRUE ~ "ns"
+    )
+  )
+
+print(stats_results)
+```
+```{r gt table}
+stats_gt <- stats_results %>%
+  dplyr::select(
+    Direction = direction,
+    Technology = technology,
+    Threshold = threshold,
+    `N dominant` = n_dominant,
+    `N non-dominant` = n_nondominant,
+    `Median dominant` = median_dominant,
+    `Median non-dominant` = median_nondominant,
+    `Mann-Whitney U` = statistic_W,
+    `One-sided p-value` = p_value,
+    `BH-adjusted p-value` = p_adjusted_BH,
+    Significance = significance
+  ) %>%
+  gt(
+    groupname_col = "Direction"
+  ) %>%
+  tab_header(
+    title = md(
+      "**One-sided Mann–Whitney test results**"
+    ),
+    subtitle = md(
+      "Alternative hypothesis: non-dominant squared deviation > dominant squared deviation"
+    )
+  ) %>%
+  fmt_number(
+    columns = c(
+      `Median dominant`,
+      `Median non-dominant`
+    ),
+    decimals = 4
+  ) %>%
+  fmt_number(
+    columns = `Mann-Whitney U`,
+    decimals = 0,
+    use_seps = TRUE
+  ) %>%
+  fmt_scientific(
+    columns = c(
+      `One-sided p-value`,
+      `BH-adjusted p-value`
+    ),
+    decimals = 2
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_source_note(
+    source_note = md(
+      "P-values are from one-sided Wilcoxon rank-sum tests. BH adjustment accounts for testing across all per-threshold technology-gene-group pairs."
+    )
+  )
+gtsave(data = stats_gt,filename = here("figures/figure3/Figure3_MW_stats_sensitivity_results.html"))
+
+stats_gt
+```
+
+```{r plot all thesholds with stats}
+pdf(
+  here(
+    "figures/figure3/",
+    "Figure3_squared_deviation_all_thresholds.pdf"
+  ),
+  width = 28,
+  height = 8
+)
+
+ggplot(
+  sq_dev_all_thresholds,
+  aes(
+    x = enrichment,
+    y = deviation_score,
+    fill = enrichment
+  )
+) +
+  geom_boxplot(
+    alpha = 0.8,
+    outlier.size = 0.5,
+    na.rm = TRUE
+  ) +
+  geom_text(
+    data = stats_results,
+    aes(
+      x = 1.5,
+      y = Inf,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    vjust = 1.2,
+    size = 4,
+    fontface = "bold"
+  ) +
+  scale_y_log10(
+    breaks = 10^seq(-10, 0, by = 2),
+    labels = seq(-10, 0, by = 2),
+    expand = expansion(
+      mult = c(0.05, 0.20)
+    )
+  ) +
+  facet_grid(
+    rows = vars(direction),
+    cols = vars(technology, threshold),
+    scales = "free_y"
+  ) +
+  labs(
+    x = "Enrichment",
+    y = expression(
+      log[10] * " squared deviation"
+    ),
+    caption = paste0(
+      "One-sided Mann\u2013Whitney test: ",
+      "non-dominant > dominant. ",
+      "BH-adjusted P values: ",
+      "*** P < 0.001; ** P < 0.01; ",
+      "* P < 0.05; ns P \u2265 0.05."
+    )
+  ) +
+  theme_bw(
+    base_size = 11
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(
+      color = "black"
+    ),
+    legend.position = "none",
+    strip.text = element_text(
+      size = 9,
+      face = "bold"
+    ),
+    strip.background = element_rect(
+      fill = "grey95",
+      color = NA
+    ),
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    ),
+    plot.caption = element_text(
+      size = 9,
+      hjust = 0,
+      margin = margin(
+        t = 8
+      )
+    )
+  )
+
+dev.off()
+```

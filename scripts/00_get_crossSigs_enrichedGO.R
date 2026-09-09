@@ -160,7 +160,7 @@ get_GOterms_cl <- function(pathway_df, sim_cutoff = NULL){
   GOids <- GOids_terms$GOID
   # calculate similarity matrix
   simMat <- GO_similarity(go_id = GOids, ont = 'BP', db = "org.Hs.eg.db",
-                          measure = "Sim_Relevance_2006")
+                          measure = "Resnik") # Sim_Relevance_2006
   if(!is.null(sim_cutoff)){
     if (!is.numeric(sim_cutoff) || length(sim_cutoff) != 1) {
       stop("sim_cutoff must be a single numeric value (e.g., 0.4)")

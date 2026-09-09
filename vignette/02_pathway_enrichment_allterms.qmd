@@ -248,7 +248,7 @@ for (technology in technologies) {
       print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
       itr <- itr + 1
       
-      signature_name = data_to_read$signature_name[i]
+      signature_name = data_to_read$signature_full_name[i]
       file = paste0(signature_name,"_",direction,".tsv")
       genes_df <- read_tsv(file.path(dirname_read, file))
       # only use differentially expressed genes with adjusted p-val < 0.05
@@ -282,7 +282,9 @@ for (technology in technologies) {
       print(unique(enrichGO_res_corrected$ID %in% go_terms$GO_ID))
         
       # save results
-      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+      signature_file_name = data_to_read$signature_name[i]
+      file_name = paste0(signature_file_name,"_",direction,".tsv")
+      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file_name)
       output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
 
       write_tsv(enrichGO_res_corrected, file = output_file)
