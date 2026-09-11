@@ -20,6 +20,7 @@ import configparser
 import json
 import os
 import re
+import sys
 from collections import Counter
 from datetime import datetime, timezone
 from typing import Iterable, Iterator
@@ -133,13 +134,16 @@ EVIDENCE_LEVELS = ("clinical_study", "human_subject", "animal", "in_vitro", "oth
 VERBOSE = False
 
 def log(message: str) -> None:
-    """Warnings and errors, always shown, safe to call under the progress bar"""
-    tqdm.write(message)
+    """
+    Warnings and errors, always shown, safe to call under the progress bar
+    """
+    tqdm.write(message, file=sys.stderr)
+
 
 def log_progress(message: str) -> None:
     """Routine per-drug chatter, shown only with --verbose"""
     if VERBOSE:
-        tqdm.write(message)
+        tqdm.write(message, file=sys.stderr)
 
 # classification
 
@@ -657,7 +661,8 @@ def main() -> None:
 
     n_cached = 0
     for drug in tqdm(drug_names, desc="Processing drugs",
-                     dynamic_ncols=True, leave=True):
+                     dynamic_ncols=True, leave=True,
+                     disable=not sys.stderr.isatty()):
         key = drug.lower()
         if key in cache:
             n_cached += 1
