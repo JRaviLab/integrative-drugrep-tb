@@ -21,6 +21,7 @@ import json
 import os
 import re
 from collections import Counter
+from datetime import datetime, timezone
 from typing import Iterable, Iterator
 
 import pandas as pd
@@ -107,6 +108,7 @@ ANIMAL_MH = frozenset({
 })
 
 # culture context headings only
+# E05.481 parents included so records indexed only at the parent are not missed
 IN_VITRO_MH = frozenset({
     "In Vitro Techniques", "Cell Culture Techniques", "Tissue Culture Techniques",
     "Cell Culture Techniques, Three Dimensional", "Primary Cell Culture",
@@ -466,29 +468,53 @@ class LiteratureSearcher:
 
 # jsonl, one completed drug query appended per line, so an interrupted run
 # resumes and a classification change can be re-applied without re-querying
-def load_cache(path: str) -> dict[str, dict]:
+def load_cache(path: str, max_age_days: float | None = 90) -> dict[str, dict]:
+    """
+    Read the jsonl cache
+
+    Entries older than max_age_days (90 days if None) are dropped so the drug is queried
+    again, the cache is keyed on drug name only and has no other way to
+    notice literature published since the entry was written.
+    """
     if not os.path.exists(path):
         return {}
-    cache, skipped = {}, 0
+    cache, skipped, expired = {}, 0, 0
+    now = datetime.now(timezone.utc)
     with open(path) as fh:
         for line in fh:
             try:
                 entry = json.loads(line)
-                if entry["version"] == CACHE_VERSION:
-                    cache[entry["key"]] = entry
-                else:
+                if entry["version"] != CACHE_VERSION:
                     skipped += 1
-            except (json.JSONDecodeError, KeyError):
+                    continue
+                if max_age_days is not None:
+                    age = (now - datetime.fromisoformat(entry["fetched_at"])).days
+                    if age > max_age_days:
+                        expired += 1
+                        continue
+                cache[entry["key"]] = entry
+            except (json.JSONDecodeError, KeyError, ValueError):
                 skipped += 1
     if skipped:
         print(f"  - ignored {skipped} stale or malformed cache lines")
+    if expired:
+        print(f"  - expired {expired} entries older than {max_age_days} days")
     return cache
+
+
+def cache_dates(cache: dict[str, dict]) -> str:
+    """Oldest and newest fetch date in the cache, the Methods query date"""
+    stamps = sorted(e["fetched_at"][:10] for e in cache.values() if e.get("fetched_at"))
+    if not stamps:
+        return "unknown"
+    return stamps[0] if stamps[0] == stamps[-1] else f"{stamps[0]} to {stamps[-1]}"
 
 
 def append_cache(path: str, key: str, counts: dict,
                  summaries: list[dict]) -> None:
-    entry = {"version": CACHE_VERSION, "key": key, "counts": counts,
-             "summaries": summaries}
+    entry = {"version": CACHE_VERSION, "key": key,
+             "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+             "counts": counts, "summaries": summaries}
     with open(path, "a") as fh:
         fh.write(json.dumps(entry) + "\n")
 
@@ -549,6 +575,10 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Query cache (default: <input_stem>_query_cache.jsonl).")
     p.add_argument("--no-cache", action="store_true",
                    help="Ignore and do not write the query cache.")
+    p.add_argument("--refresh", action="store_true",
+                   help="Re-query every drug, ignoring cached results.")
+    p.add_argument("--max-age-days", metavar="N", type=float, default=None,
+                   help="Re-query drugs whose cached result is older than N days.")
     p.add_argument("--max-results", metavar="N", type=int,
                    default=MAX_RESULTS_PER_DRUG,
                    help=f"Records per drug (default: {MAX_RESULTS_PER_DRUG}).")
@@ -596,17 +626,25 @@ def main() -> None:
     print(f"Output TSV : {out_tsv}")
     print(f"Output JSON: {out_json}")
 
-    cache = load_cache(cache_path) if cache_path else {}
-    print(f"Cache      : {cache_path or 'disabled'} ({len(cache)} drugs)\n")
+    cache = {} if (args.refresh or not cache_path) else load_cache(cache_path,
+                                                                  args.max_age_days)
+    if args.refresh:
+        print("Cache      : bypassed (--refresh), every drug re-queried")
+    else:
+        dates = f", fetched {cache_dates(cache)}" if cache else ""
+        print(f"Cache      : {cache_path or 'disabled'} ({len(cache)} drugs{dates})")
+    print()
 
     searcher = LiteratureSearcher(Entrez.email, Entrez.api_key,
                                   args.article, args.max_results)
     rows: list[dict] = []
     records: dict[str, dict] = {}  # record id → classified record, deduped across drugs
 
+    n_cached = 0
     for drug in tqdm(drug_names, desc="Processing drugs"):
         key = drug.lower()
         if key in cache:
+            n_cached += 1
             counts, summaries = cache[key]["counts"], cache[key]["summaries"]
         else:
             counts, summaries = searcher.find_evidence(drug)
@@ -647,6 +685,12 @@ def main() -> None:
     with open(out_json, "w") as fh:
         json.dump(list(records.values()), fh, indent=4)
     print(f"       JSON → {out_json} ({len(records)} unique records)")
+
+    fresh = len(drug_names) - n_cached
+    print(f"\nQueried {fresh} drugs, reused {n_cached} cached results")
+    if fresh == 0:
+        print("  - no queries were issued, results reflect the cached fetch date, "
+              "use --refresh or --max-age-days to pick up new publications")
 
     print_summary(records)
 
