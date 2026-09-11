@@ -129,6 +129,18 @@ IN_VITRO_KW      = ("in vitro", "cell culture", "cultured cells", "cell line",
 # 'other' holds work unrelated to HDT evidence
 EVIDENCE_LEVELS = ("clinical_study", "human_subject", "animal", "in_vitro", "other")
 
+# logging
+VERBOSE = False
+
+def log(message: str) -> None:
+    """Warnings and errors, always shown, safe to call under the progress bar"""
+    tqdm.write(message)
+
+def log_progress(message: str) -> None:
+    """Routine per-drug chatter, shown only with --verbose"""
+    if VERBOSE:
+        tqdm.write(message)
+
 # classification
 
 def _as_text(value: object) -> str:
@@ -278,7 +290,7 @@ class LiteratureSearcher:
             handle.close()
             return int(record.get("Count", 0)), list(record.get("IdList", []))
         except Exception as e:
-            print(f"  - esearch failed on {db}: {e}")
+            log(f"  - esearch failed on {db}: {e}")
             return 0, []
 
     def _search_both(self, query: str) -> tuple[int, int, list[str]]:
@@ -303,7 +315,7 @@ class LiteratureSearcher:
 
         counts holds pubmed_hits, pmc_hits, unique_articles and truncated
         """
-        print(f"\nSearching for '{drug_name}'...")
+        log_progress(f"\nSearching for '{drug_name}'...")
 
         base = build_drug_query(drug_name)
         pm_count, pmc_count, ids = self._search_both(base)
@@ -315,12 +327,12 @@ class LiteratureSearcher:
         counts = {"pubmed_hits": pm_count, "pmc_hits": pmc_count,
                   "unique_articles": 0, "results_truncated": truncated}
         if not merged:
-            print("    → no results")
+            log_progress("    → no results")
             return counts, []
 
         cap = f", capped at {self.max_results}" if truncated else ""
         hits = f"{pm_count} PubMed" + (f" + {pmc_count} PMC" if self.search_pmc else "")
-        print(f"    → {hits} hits{cap}. Fetching...")
+        log_progress(f"    → {hits} hits{cap}. Fetching...")
 
         summaries, pmid_of_pmcid = self._fetch(merged)
 
@@ -336,8 +348,8 @@ class LiteratureSearcher:
             s["is_hdt"] = canonical_key(s["pmid"], s["pmc_id"]) in hdt_keys
 
         counts["unique_articles"] = len(summaries)
-        print(f"    → {len(summaries)} unique articles "
-              f"({sum(s['is_hdt'] for s in summaries)} HDT)")
+        log_progress(f"    → {len(summaries)} unique articles "
+                     f"({sum(s['is_hdt'] for s in summaries)} HDT)")
         return counts, summaries
 
     @staticmethod
@@ -385,7 +397,7 @@ class LiteratureSearcher:
                     pmid = record.get("PMID", "")
                     if " " in pmid:
                         # a missing separator merged consecutive records
-                        print(f"  - warning: merged record skipped ({pmid[:30]}...)")
+                        log(f"  - warning: merged record skipped ({pmid[:30]}...)")
                         continue
                     summaries.append({
                         "pmid":    pmid,
@@ -403,7 +415,7 @@ class LiteratureSearcher:
                     })
                 handle.close()
             except Exception as e:
-                print(f"  - efetch failed for batch of {len(batch)}: {e}")
+                log(f"  - efetch failed for batch of {len(batch)}: {e}")
         return summaries
 
     def _fetch_pmc(self, pmc_ids: list[str],
@@ -424,7 +436,7 @@ class LiteratureSearcher:
                 docsums += Entrez.read(handle)
                 handle.close()
             except Exception as e:
-                print(f"  - PMC esummary failed: {e}")
+                log(f"  - PMC esummary failed: {e}")
 
         # pmid_of_pmcid covers every resolvable hit, including twins already
         # fetched from PubMed, so HDT keys can be canonicalized later
@@ -468,13 +480,13 @@ class LiteratureSearcher:
 
 # jsonl, one completed drug query appended per line, so an interrupted run
 # resumes and a classification change can be re-applied without re-querying
-def load_cache(path: str, max_age_days: float | None = 90) -> dict[str, dict]:
+def load_cache(path: str, max_age_days: float | None = None) -> dict[str, dict]:
     """
     Read the jsonl cache
 
-    Entries older than max_age_days (90 days if None) are dropped so the drug is queried
+    Entries older than max_age_days are dropped so the drug is queried
     again, the cache is keyed on drug name only and has no other way to
-    notice literature published since the entry was written.
+    notice literature published since the entry was written
     """
     if not os.path.exists(path):
         return {}
@@ -501,14 +513,12 @@ def load_cache(path: str, max_age_days: float | None = 90) -> dict[str, dict]:
         print(f"  - expired {expired} entries older than {max_age_days} days")
     return cache
 
-
 def cache_dates(cache: dict[str, dict]) -> str:
     """Oldest and newest fetch date in the cache, the Methods query date"""
     stamps = sorted(e["fetched_at"][:10] for e in cache.values() if e.get("fetched_at"))
     if not stamps:
         return "unknown"
     return stamps[0] if stamps[0] == stamps[-1] else f"{stamps[0]} to {stamps[-1]}"
-
 
 def append_cache(path: str, key: str, counts: dict,
                  summaries: list[dict]) -> None:
@@ -575,6 +585,9 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Query cache (default: <input_stem>_query_cache.jsonl).")
     p.add_argument("--no-cache", action="store_true",
                    help="Ignore and do not write the query cache.")
+    p.add_argument("--verbose", "-v", action="store_true",
+                   help="Print per-drug search progress, otherwise only the "
+                        "progress bar, warnings and the final summary are shown.")
     p.add_argument("--refresh", action="store_true",
                    help="Re-query every drug, ignoring cached results.")
     p.add_argument("--max-age-days", metavar="N", type=float, default=None,
@@ -597,7 +610,9 @@ def read_drug_names(df: pd.DataFrame, column: str) -> list[str]:
 
 
 def main() -> None:
+    global VERBOSE
     args = build_parser().parse_args()
+    VERBOSE = args.verbose
 
     if not os.path.isfile(args.input):
         raise SystemExit(f"Error: input file not found: {args.input}")
@@ -641,10 +656,12 @@ def main() -> None:
     records: dict[str, dict] = {}  # record id → classified record, deduped across drugs
 
     n_cached = 0
-    for drug in tqdm(drug_names, desc="Processing drugs"):
+    for drug in tqdm(drug_names, desc="Processing drugs",
+                     dynamic_ncols=True, leave=True):
         key = drug.lower()
         if key in cache:
             n_cached += 1
+            log_progress(f"\nUsing cached result for '{drug}'")
             counts, summaries = cache[key]["counts"], cache[key]["summaries"]
         else:
             counts, summaries = searcher.find_evidence(drug)
