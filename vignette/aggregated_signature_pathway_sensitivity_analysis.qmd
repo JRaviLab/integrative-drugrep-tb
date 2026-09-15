@@ -69,14 +69,6 @@ godata <- clusterProfiler:::get_GO_data(
   ont = ont,
   keytype = "ENTREZID"
 )
-
-# load GO data (all genes from OrgDb)
-godata <- clusterProfiler:::get_GO_data(
-  OrgDb = org.Hs.eg.db,
-  ont = "BP",
-  keytype = "ENTREZID"
-)
-
 # filter gene sets to include only genes in universe
 go_list <- godata$PATHID2EXTID
 
