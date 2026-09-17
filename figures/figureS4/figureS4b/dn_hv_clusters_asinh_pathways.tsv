@@ -1,14 +1,14 @@
 terms	GOID	cluster	variance
-aerobic respiration	GO:0009060	1	0.32508786963378966
-oxidative phosphorylation	GO:0006119	1	0.3867657268424933
-proton motive force-driven mitochondrial ATP synthesis	GO:0042776	1	0.6138565349675474
-antigen processing and presentation of peptide antigen via MHC class II	GO:0002495	2	0.3288493814357597
-antigen processing and presentation of peptide or polysaccharide antigen via MHC class II	GO:0002504	2	0.3288493814357597
-cytoplasmic translation	GO:0002181	3	0.402960151472206
-microtubule depolymerization	GO:0007019	4	0.4675875033125062
-mitotic spindle assembly checkpoint signaling	GO:0007094	5	0.33742948961946184
-negative regulation of mitotic metaphase/anaphase transition	GO:0045841	5	0.3175776425883538
-regulation of mitotic cell cycle spindle assembly checkpoint	GO:0090266	5	0.3963567539730319
-positive regulation of DNA-directed DNA polymerase activity	GO:1900264	6	0.49978297785218995
-proton motive force-driven ATP synthesis	GO:0015986	7	0.5476283018639578
-ubiquinone biosynthetic process	GO:0006744	7	0.312994742955608
+aerobic respiration	GO:0009060	1	0.3283980447340967
+oxidative phosphorylation	GO:0006119	1	0.39043623040176983
+antigen processing and presentation of peptide antigen via MHC class II	GO:0002495	2	0.3322916076286464
+antigen processing and presentation of peptide or polysaccharide antigen via MHC class II	GO:0002504	2	0.3322916076286464
+ATP biosynthetic process	GO:0006754	3	0.4321605044530664
+proton motive force-driven ATP synthesis	GO:0015986	3	0.5523815032829179
+proton motive force-driven mitochondrial ATP synthesis	GO:0042776	3	0.6189916609045084
+cytoplasmic translation	GO:0002181	4	0.4068577658046793
+microtubule depolymerization	GO:0007019	5	0.4718580654625565
+mitotic spindle assembly checkpoint signaling	GO:0007094	5	0.3408946666401787
+positive regulation of mitotic cell cycle spindle assembly checkpoint	GO:0090267	5	0.6642579800155929
+regulation of mitotic cell cycle spindle assembly checkpoint	GO:0090266	5	0.4001258902393473
+positive regulation of DNA-directed DNA polymerase activity	GO:1900264	6	0.5044969643513704

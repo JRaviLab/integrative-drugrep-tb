@@ -245,7 +245,7 @@ tissue_map <- c(
   "blood_monocyte"                     = "monocyte",
   "blood_monocyte_derived_macrophages" = "MDMs",
   "blood_dendritic_cells"              = "dendritic cells",
-  "THP-1"                              = "THP1 macrophage",
+  "THP1"                              = "THP1 macrophage",
   "blood_macrophage"                  = "macrophage",  
   "blood"                              = "blood",
   "lymphnode"                          = "lymphnode",
@@ -378,6 +378,10 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
 colnames(viz_mat_up) <- summary_df$dataset_signature_ID
 
+cell_size <- unit(2, "cm")
+width  = ncol(viz_mat_up) * cell_size
+height = nrow(viz_mat_up) * cell_size
+
 heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   viz_mat_up,
   cell_fun = function(j, i, x, y, w, h, fill) {
@@ -413,8 +417,8 @@ heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   bottom_annotation = ha_bottom,
   row_names_gp = gpar(fontsize = 25),
   column_names_gp = gpar(fontsize = 25),
-  width = unit(55, "cm"),
-  height = unit(25, "cm")
+  width = width,
+  height = height
 )
 
 draw(heatmap_sig_up_go,
