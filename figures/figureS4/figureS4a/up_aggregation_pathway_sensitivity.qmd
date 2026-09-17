@@ -43,7 +43,7 @@ rnaseq_GO_mat_up = get_GO_asinh_matrix(rnaseq_path_up, pattern, prefix_sub, suff
 agg_cols <- c(
   "up_aggregated_signature_0",
   "up_aggregated_signature_0.6",
-  "up_aggregated_signature_0.75",
+  "up_aggregated_signature_0.65",
   "up_aggregated_signature_0.7",
   "up_aggregated_signature_0.75",
   "up_aggregated_signature_0.8",
