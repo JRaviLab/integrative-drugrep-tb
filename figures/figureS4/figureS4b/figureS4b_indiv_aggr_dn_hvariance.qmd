@@ -69,19 +69,19 @@ marray_rnaseq_signi_dn = unique(c(marray_signi_dn, rnaseq_signi_dn))
 
 ```{r process all terms matrices}
 cols_to_keep_marray <- intersect(colnames(marray_GO_mat_dn), c("Description", summary_df$signature_name,
-"dn_aggregated_signature"))
+"dn_aggregated_signature_0"))
 df1 <- marray_GO_mat_dn[, cols_to_keep_marray]
 colnames(df1) <- gsub(
-  pattern = "dn_aggregated_signature",
+  pattern = "dn_aggregated_signature_0",
   replacement = "dn_aggregated_microarray",
   x = colnames(df1)
 )
 colnames(df1) <- gsub("^dn_", "", colnames(df1))
 
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature_0"))
 df2 <- rnaseq_GO_mat_dn[, cols_to_keep_rnaseq]
 colnames(df2) <- gsub(
-  pattern = "dn_aggregated_signature",
+  pattern = "dn_aggregated_signature_0",
   replacement = "dn_aggregated_RNAseq",
   x = colnames(df2)
 )
@@ -141,20 +141,20 @@ write_tsv(final_df_dn, here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_p
 
 ```{r process significant matrices}
 marray_signi_GO_mat_dn$Description <- row.names(marray_signi_GO_mat_dn)
-cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature"))
+cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature_0"))
 df1 <- marray_signi_GO_mat_dn[, cols_to_keep_marray]
 colnames(df1) <- gsub(
-  pattern = "dn_aggregated_signature",
+  pattern = "dn_aggregated_signature_0",
   replacement = "dn_aggregated_microarray",
   x = colnames(df1)
 )
 colnames(df1) <- gsub("^dn_", "", colnames(df1))
 
 rnaseq_signi_GO_mat_dn$Description <- rownames(rnaseq_signi_GO_mat_dn)
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_dn), c("Description", summary_df$signature_name, "dn_aggregated_signature_0"))
 df2 <- rnaseq_signi_GO_mat_dn[, cols_to_keep_rnaseq]
 colnames(df2) <- gsub(
-  pattern = "dn_aggregated_signature",
+  pattern = "dn_aggregated_signature_0",
   replacement = "dn_aggregated_RNAseq",
   x = colnames(df2)
 )
