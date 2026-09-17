@@ -202,7 +202,7 @@ pathway_df <- data.frame(
 # add pathway_size column
 pathway_df$pathway_size <- sapply(pathway_df$pathway_genes, length)
 # only select pathways with minimum gene set size of 5 genes and maximum of 200 genes
-pathway_df <- pathway_df[pathway_df$pathway_size >= 5 | pathway_df$pathway_size <= 200, ]
+pathway_df <- pathway_df[pathway_df$pathway_size >= 5 & pathway_df$pathway_size <= 200, ]
 pathway_df  <- merge(pathway_df, go_terms, by.x = "ID", by.y = "GO_ID", all.x = TRUE)[c("Description","ID","pathway_genes","pathway_size")]
 ```
 
@@ -266,7 +266,6 @@ for (technology in technologies) {
       # only care about biological processes (BP)
       pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
       
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
       enrichGO_res <- calculate_asinh_enrichment(
         signature_gene_list = gene_list,
         bg_genes = bg_genes,
@@ -370,7 +369,6 @@ for(technology in technologies){
       # only care about biological processes (BP)
       pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
       
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
       enrichGO_res_originaggr <- calculate_asinh_enrichment(
         signature_gene_list = originaggr_gene_list,
         bg_genes = bg_genes,
