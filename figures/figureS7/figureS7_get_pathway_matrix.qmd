@@ -1,0 +1,185 @@
+```{r setup, include=FALSE}
+library(ComplexHeatmap)
+library(colorRamp2)
+library(clusterProfiler)
+library(DOSE)
+library(org.Hs.eg.db)
+library(readr)
+library(here)
+source(here("scripts/00_get_crossSigs_enrichedGO.R"))
+library(gridExtra)
+library(grid)
+library(tibble)
+library(tidyr)
+library(tidyverse)
+```
+
+### Up individual signatures
+```{r define indiv file paths}
+marray_path_up <- here("data/microarray_pathways/up")
+rnaseq_path_up <- here("data/RNAseq_pathways/up")
+```
+
+```{r define accessory variables/paths}
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
+suffix_sub <- ".tsv"
+annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
+```
+
+```{r microarray up pathway clusters}
+marray_GO_mat_up = get_GO_asinh_matrix(marray_path_up, pattern, prefix_sub, suffix_sub)
+GO_annotation = get_GO_annotation(here(annotation_file))
+```
+
+```{r RNAseq up pathway clusters}
+rnaseq_GO_mat_up = get_GO_asinh_matrix(rnaseq_path_up, pattern, prefix_sub, suffix_sub)
+GO_annotation = get_GO_annotation(here(annotation_file))
+```
+
+```{r}
+# microarray
+df1 <- marray_GO_mat_up
+df1 <- df1[, !grepl("aggregated", names(df1)) |
+             names(df1) %in% c("up_aggregated_signature_0",
+                               "up_circulating_aggregated_signature_0")]
+
+names(df1) <- gsub("up_aggregated_signature_0", "up_aggregated_microarray", names(df1))
+names(df1) <- gsub("up_circulating_aggregated_signature_0", "up_circulating_aggregated_microarray", names(df1))
+names(df1) <- gsub("_up|up_", "", names(df1))
+
+# RNAseq
+df2 <- rnaseq_GO_mat_up
+df2 <- df2[, !grepl("aggregated", names(df2)) |
+             names(df2) %in% c("up_aggregated_signature_0",
+                               "up_circulating_aggregated_signature_0")]
+
+names(df2) <- gsub("up_aggregated_signature_0", "up_aggregated_RNAseq", names(df2))
+names(df2) <- gsub("up_circulating_aggregated_signature_0", "up_circulating_aggregated_RNAseq", names(df2))
+names(df2) <- gsub("_up|up_", "", names(df2))
+
+long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
+long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
+
+combined_long <- bind_rows(long1, long2) %>%
+  group_by(Description, Signature) %>%
+  summarise(
+    Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+final_df_up <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+names(final_df_up) <- gsub("\\.", "-", names(final_df_up))
+
+desc_col <- "Description"
+gpl_cols <- grep("GPL", names(final_df_up), value = TRUE)
+
+agg_cols <- intersect(
+  c("aggregated_microarray",
+    "circulating_aggregated_microarray",
+    "aggregated_RNAseq",
+    "circulating_aggregated_RNAseq"),
+  names(final_df_up)
+)
+
+rnaseq_cols <- setdiff(grep("RNAseq", names(final_df_up), value = TRUE), agg_cols)
+other_cols <- setdiff(
+  names(final_df_up),
+  c(desc_col, gpl_cols, rnaseq_cols, agg_cols)
+)
+final_df_up <- final_df_up[, c(
+  desc_col,
+  gpl_cols,
+  other_cols,
+  agg_cols,
+  rnaseq_cols
+)]
+
+final_df_up <- final_df_up[, !duplicated(names(final_df_up))]
+write_tsv(final_df_up,here("figures/figureS5/marray_rnaseq_up_pathways_suppl.tsv"))
+```
+
+### Dn individual signatures
+```{r define indiv file paths}
+marray_path_dn <- here("data/microarray_pathways/dn")
+rnaseq_path_dn <- here("data/RNAseq_pathways/dn")
+```
+
+```{r define accessory variables/paths}
+pattern <- "allterms_GO_ORA_BGcorrected"
+prefix_sub <- "allterms_GO_ORA_BGcorrected"
+suffix_sub <- ".tsv"
+annotation_file='data/metadata/direct-annotations__Homo_sapiens__Entrez.tsv'
+```
+
+```{r microarray up pathway clusters}
+marray_GO_mat_dn = get_GO_asinh_matrix(marray_path_dn, pattern, prefix_sub, suffix_sub)
+GO_annotation = get_GO_annotation(here(annotation_file))
+```
+
+```{r RNAseq up pathway clusters}
+rnaseq_GO_mat_dn = get_GO_asinh_matrix(rnaseq_path_dn, pattern, prefix_sub, suffix_sub)
+GO_annotation = get_GO_annotation(here(annotation_file))
+```
+
+```{r}
+# microarray
+df1 <- marray_GO_mat_dn
+df1 <- df1[, !grepl("aggregated", names(df1)) |
+             names(df1) %in% c("dn_aggregated_signature_0",
+                               "dn_circulating_aggregated_signature_0")]
+
+names(df1) <- gsub("dn_aggregated_signature_0", "dn_aggregated_microarray", names(df1))
+names(df1) <- gsub("dn_circulating_aggregated_signature_0", "dn_circulating_aggregated_microarray", names(df1))
+names(df1) <- gsub("_dn|dn_", "", names(df1))
+
+# RNAseq
+df2 <- rnaseq_GO_mat_dn
+df2 <- df2[, !grepl("aggregated", names(df2)) |
+             names(df2) %in% c("dn_aggregated_signature_0",
+                               "dn_circulating_aggregated_signature_0")]
+
+names(df2) <- gsub("dn_aggregated_signature_0", "dn_aggregated_RNAseq", names(df2))
+names(df2) <- gsub("dn_circulating_aggregated_signature_0", "dn_circulating_aggregated_RNAseq", names(df2))
+names(df2) <- gsub("_dn|dn_", "", names(df2))
+
+long1 <- pivot_longer(df1, -Description, names_to = "Signature", values_to = "Value")
+long2 <- pivot_longer(df2, -Description, names_to = "Signature", values_to = "Value")
+
+combined_long <- bind_rows(long1, long2) %>%
+  group_by(Description, Signature) %>%
+  summarise(
+    Value = if (all(is.na(Value))) NA_real_ else max(Value, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+final_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
+names(final_df_dn) <- gsub("\\.", "-", names(final_df_dn))
+
+desc_col <- "Description"
+gpl_cols <- grep("GPL", names(final_df_dn), value = TRUE)
+
+agg_cols <- intersect(
+  c("aggregated_microarray",
+    "circulating_aggregated_microarray",
+    "aggregated_RNAseq",
+    "circulating_aggregated_RNAseq"),
+  names(final_df_dn)
+)
+
+rnaseq_cols <- setdiff(grep("RNAseq", names(final_df_dn), value = TRUE), agg_cols)
+other_cols <- setdiff(
+  names(final_df_dn),
+  c(desc_col, gpl_cols, rnaseq_cols, agg_cols)
+)
+final_df_dn <- final_df_dn[, c(
+  desc_col,
+  gpl_cols,
+  other_cols,
+  agg_cols,
+  rnaseq_cols
+)]
+
+final_df_dn <- final_df_dn[, !duplicated(names(final_df_dn))]
+write_tsv(final_df_dn,here("figures/figureS5/marray_rnaseq_dn_pathways_suppl.tsv"))
+```

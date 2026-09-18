@@ -322,9 +322,9 @@ aggregate_signatures <- function(gene_membership_matrix,
   jaccard_mean_vec <- colMeans(jaccard_matrix)
 
   ### (specified disease gene DE score matrix) x (mean jaccard vector/sum(mean jaccard vector))
-  aggregated_gene_sig <- as.data.frame(gene_membership_mat %*% (jaccard_mean_vec / sum(jaccard_mean_vec)))
+  aggregated_gene_sig <- as.data.frame(gene_membership_matrix %*% (jaccard_mean_vec / sum(jaccard_mean_vec)))
   colnames(aggregated_gene_sig)[1] <- "aggregated_GeneScores"
-  aggregated_gene_sig$GeneID <- row.names(gene_membership_df)
+  aggregated_gene_sig$GeneID <- row.names(gene_membership_matrix)
 
   # calculate threshold from the threshold_pct
   threshold <- quantile(abs(aggregated_gene_sig$aggregated_GeneScores), probs = threshold_pct)
@@ -332,8 +332,8 @@ aggregate_signatures <- function(gene_membership_matrix,
   selected_genes_df <- aggregated_gene_sig[abs(aggregated_gene_sig$aggregated_GeneScores) > threshold, ]
 
   if (save_result) {
-    saveRDS(selected_genes_df, file = paste0(output_dir, "/", direction, "_aggregated_signature.rds"))
-    write_tsv(selected_genes_df, file = paste0(output_dir, "/", direction, "_aggregated_signature.tsv"))
+    saveRDS(selected_genes_df, file = paste0(output_dir, "/", direction, "_aggregated_signature_",threshold_pct,".rds"))
+    write_tsv(selected_genes_df, file = paste0(output_dir, "/", direction, "_aggregated_signature_",threshold_pct,".tsv"))
     print(paste0("The final aggregated signature was saved at ", output_dir))
   }
 
