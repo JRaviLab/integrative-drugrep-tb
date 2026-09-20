@@ -76,13 +76,18 @@ godata <- clusterProfiler:::get_GO_data(
 )
 
 # filter gene sets to include only genes in universe
-go_list <- godata$PATHID2EXTID
+go_list <- godata@gsid2gene
 
 # build data frame of term descriptions
+go_list_split <- split(as.character(go_list$gene), as.character(go_list$gsid))
+go_ids <- names(go_list_split)
+# safe descriptions (missing keys become NA -> "")
+descs <- Term(GOTERM[go_ids])
+descs[is.na(descs)] <- ""
 go_terms <- data.frame(
-  GO_ID = names(go_list),
-  Description = Term(GOTERM[names(go_list)]),
-  GeneSetSize = sapply(go_list, function(x) length(unique(intersect(x, bg_genes)))),
+  GO_ID       = go_ids,
+  Description = descs,
+  GeneSetSize = vapply(go_list_split, function(x) length(unique(intersect(x, bg_genes))), integer(1)),
   stringsAsFactors = FALSE
 )
 ```
