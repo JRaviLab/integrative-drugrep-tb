@@ -96,7 +96,7 @@ final_df_up <- final_df_up[, c(
 )]
 
 final_df_up <- final_df_up[, !duplicated(names(final_df_up))]
-write_tsv(final_df_up,here("figures/figureS5/marray_rnaseq_up_pathways_suppl.tsv"))
+write_tsv(final_df_up,here("figures/figureS7/marray_rnaseq_up_pathways_suppl.tsv"))
 ```
 
 ### Dn individual signatures
@@ -181,5 +181,5 @@ final_df_dn <- final_df_dn[, c(
 )]
 
 final_df_dn <- final_df_dn[, !duplicated(names(final_df_dn))]
-write_tsv(final_df_dn,here("figures/figureS5/marray_rnaseq_dn_pathways_suppl.tsv"))
+write_tsv(final_df_dn,here("figures/figureS7/marray_rnaseq_dn_pathways_suppl.tsv"))
 ```
