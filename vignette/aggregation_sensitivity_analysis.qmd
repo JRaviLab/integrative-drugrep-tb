@@ -202,8 +202,8 @@ gene_count_df <- crossing(
 print(gene_count_df)
 ```
 
-```{r save pdf}
-pdf(here("figures/figure3/Figure3_gene_counts_all_thresholds_.pdf"),width = 11,height = 6)
+```{r up- and downregulated gene counts across thresholds}
+pdf(here("figures/figure3/Figure3_gene_counts_all_thresholds.pdf"),width = 11,height = 6)
 
 gene_count_plot <- ggplot(
   gene_count_df,
@@ -225,7 +225,7 @@ gene_count_plot <- ggplot(
       label = scales::comma(gene_count)
     ),
     vjust = -0.7,
-    size = 3,
+    size = 5,
     show.legend = FALSE
   ) +
   facet_grid(
@@ -235,8 +235,8 @@ gene_count_plot <- ggplot(
   ) +
   scale_color_manual(
     values = c(
-      "Upregulated" = "#D55E00",
-      "Downregulated" = "#0072B2"
+      "Upregulated" = "#0072B2",
+      "Downregulated" = "#D55E00"
     )
   ) +
   scale_y_continuous(
@@ -258,13 +258,33 @@ gene_count_plot <- ggplot(
     axis.line = element_line(
       color = "black"
     ),
+    axis.title.x = element_text(
+      size = 18,
+      margin = margin(t = 12)
+    ),
+    axis.title.y = element_text(
+      size = 18,
+      margin = margin(r = 12)
+    ),
+    axis.text.x = element_text(
+      size = 15
+    ),
+    axis.text.y = element_text(
+      size = 15
+    ),
     strip.text = element_text(
       face = "bold",
-      size = 11
+      size = 15
     ),
     strip.background = element_rect(
       fill = "grey95",
       color = NA
+    ),
+    legend.title = element_text(
+      size = 15
+    ),
+    legend.text = element_text(
+      size = 15
     ),
     legend.position = "top"
   )
@@ -296,33 +316,28 @@ combined_gene_count_plot <- ggplot(
   aes(
     x = threshold_label,
     y = gene_count,
-    color = technology,
     group = technology
   )
 ) +
   geom_line(
-    linewidth = 1
+    linewidth = 1,
+    color = "black"
   ) +
   geom_point(
-    size = 3
+    size = 3,
+    color = "black"
   ) +
   geom_text(
     aes(
       label = scales::comma(gene_count)
     ),
     vjust = -0.7,
-    size = 3
+    size = 5
   ) +
   facet_wrap(
     vars(technology),
     nrow = 1,
     scales = "free_y"
-  ) +
-  scale_color_manual(
-    values = c(
-      "Microarray" = "#0072B2",
-      "RNAseq" = "#D55E00"
-    )
   ) +
   scale_y_continuous(
     labels = scales::comma,
@@ -343,15 +358,35 @@ combined_gene_count_plot <- ggplot(
     axis.line = element_line(
       color = "black"
     ),
+    axis.title.x = element_text(
+      size = 18,
+      margin = margin(t = 12)
+    ),
+    axis.title.y = element_text(
+      size = 18,
+      margin = margin(r = 12)
+    ),
+    axis.text.x = element_text(
+      size = 15
+    ),
+    axis.text.y = element_text(
+      size = 15
+    ),
     strip.text = element_text(
       face = "bold",
-      size = 12
+      size = 15
     ),
     strip.background = element_rect(
       fill = "grey95",
       color = NA
     ),
-    legend.position = "none"
+    legend.title = element_text(
+      size = 15
+    ),
+    legend.text = element_text(
+      size = 15
+    ),
+    legend.position = "top"
   )
 
 print(combined_gene_count_plot)
