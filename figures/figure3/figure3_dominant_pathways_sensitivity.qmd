@@ -363,6 +363,7 @@ stats_results <- sq_dev_all_thresholds %>%
 
 print(stats_results)
 ```
+
 ```{r gt table}
 stats_gt <- stats_results %>%
   dplyr::select(
@@ -422,18 +423,24 @@ gtsave(data = stats_gt,filename = here("figures/figure3/Figure3_MW_stats_sensiti
 stats_gt
 ```
 
-```{r plot all thesholds with stats}
-pdf(
-  here(
-    "figures/figure3/",
-    "Figure3_squared_deviation_all_thresholds.pdf"
-  ),
-  width = 28,
-  height = 8
-)
+```{r upregulated | plot distribution of deviation across all thresholds with stats}
+threshold_levels <- c("0%", "60%", "65%","70%", "75%", "80%","85%", "90%", "95%")
+technology_levels <- unique(sq_dev_all_thresholds$technology)
+sq_dev_all_thresholds_plot <- sq_dev_all_thresholds %>%
+  filter(direction == "Upregulated") %>%
+  mutate(threshold = factor(as.character(threshold),levels = threshold_levels),
+    technology = factor(technology,levels = technology_levels)) %>%
+  filter(!is.na(threshold))
 
-ggplot(
-  sq_dev_all_thresholds,
+stats_results_plot <- stats_results %>%
+  filter(direction == "Upregulated") %>%
+  mutate(threshold = factor(as.character(threshold),levels = threshold_levels),
+    technology = factor(technology,levels = technology_levels)) %>%
+  filter(!is.na(threshold))
+
+pdf(here("figures/figure3/Figure3_squared_deviation_all_thresholds_up.pdf"),width = 12,height = 18)
+
+ggplot(sq_dev_all_thresholds_plot,
   aes(
     x = enrichment,
     y = deviation_score,
@@ -445,28 +452,31 @@ ggplot(
     outlier.size = 0.5,
     na.rm = TRUE
   ) +
+
   geom_text(
-    data = stats_results,
+    data = stats_results_plot,
     aes(
       x = 1.5,
       y = Inf,
       label = significance
     ),
     inherit.aes = FALSE,
-    vjust = 1.2,
-    size = 4,
+    vjust = 1.5,
+    size = 6,
     fontface = "bold"
   ) +
+
   scale_y_log10(
-    breaks = 10^seq(-10, 0, by = 2),
-    labels = seq(-10, 0, by = 2),
-    expand = expansion(
-      mult = c(0.05, 0.20)
-    )
-  ) +
-  facet_grid(
-    rows = vars(direction),
-    cols = vars(technology, threshold),
+    breaks = 10^seq(-10,0,by = 2),
+    labels = seq(-10,0,by = 2),
+    expand = expansion(mult = c(0.05,0.20))) +
+  # 9 thresholds = 3 x 3 block per technology
+  facet_wrap(
+    vars(
+      technology,
+      threshold
+    ),
+    ncol = 3,
     scales = "free_y"
   ) +
   labs(
@@ -475,42 +485,185 @@ ggplot(
       log[10] * " squared deviation"
     ),
     caption = paste0(
-      "One-sided Mann\u2013Whitney test: ",
-      "non-dominant > dominant. ",
+      "One-sided Mann–Whitney test: ",
+      "non-dominant > dominant. \n",
       "BH-adjusted P values: ",
       "*** P < 0.001; ** P < 0.01; ",
-      "* P < 0.05; ns P \u2265 0.05."
+      "* P < 0.05; ns P ≥ 0.05."
     )
   ) +
   theme_bw(
     base_size = 11
   ) +
   theme(
+    axis.title.x = element_text(size = 18,margin = margin(t = 15)),
+    axis.title.y = element_text(size = 18),
     panel.grid = element_blank(),
-    axis.line = element_line(
-      color = "black"
-    ),
+    axis.line = element_line(color = "black"),
     legend.position = "none",
-    strip.text = element_text(
-      size = 9,
-      face = "bold"
+    strip.text = element_text(size = 12,face = "bold"),
+    strip.background = element_rect(fill = "grey95",color = NA),
+    axis.text.x = element_text(size=15,angle = 0,hjust = 0.5),
+    axis.text.y = element_text(size=15,angle = 0,hjust = 0.5),
+    plot.caption = element_text(size = 15,hjust = 0, vjust=0,margin = margin(t = 8)))
+
+dev.off()
+```
+
+```{r downregulated | plot distribution of deviation across all thresholds with stats}
+threshold_levels <- c("0%", "60%", "65%","70%", "75%", "80%","85%", "90%", "95%")
+technology_levels <- unique(sq_dev_all_thresholds$technology)
+sq_dev_all_thresholds_plot <- sq_dev_all_thresholds %>%
+  filter(direction == "Downregulated") %>%
+  mutate(threshold = factor(as.character(threshold),levels = threshold_levels),
+    technology = factor(technology,levels = technology_levels)) %>%
+  filter(!is.na(threshold))
+
+stats_results_plot <- stats_results %>%
+  filter(direction == "Downregulated") %>%
+  mutate(threshold = factor(as.character(threshold),levels = threshold_levels),
+    technology = factor(technology,levels = technology_levels)) %>%
+  filter(!is.na(threshold))
+
+pdf(here("figures/figure3/Figure3_squared_deviation_all_thresholds_dn.pdf"),width = 12,height = 18)
+
+ggplot(sq_dev_all_thresholds_plot,
+  aes(
+    x = enrichment,
+    y = deviation_score,
+    fill = enrichment
+  )
+) +
+  geom_boxplot(
+    alpha = 0.8,
+    outlier.size = 0.5,
+    na.rm = TRUE
+  ) +
+
+  geom_text(
+    data = stats_results_plot,
+    aes(
+      x = 1.5,
+      y = Inf,
+      label = significance
     ),
-    strip.background = element_rect(
-      fill = "grey95",
-      color = NA
+    inherit.aes = FALSE,
+    vjust = 1.5,
+    size = 6,
+    fontface = "bold"
+  ) +
+
+  scale_y_log10(
+    breaks = 10^seq(-10,0,by = 2),
+    labels = seq(-10,0,by = 2),
+    expand = expansion(mult = c(0.05,0.20))) +
+  # 9 thresholds = 3 x 3 block per technology
+  facet_wrap(
+    vars(
+      technology,
+      threshold
     ),
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 1
+    ncol = 3,
+    scales = "free_y"
+  ) +
+  labs(
+    x = "Enrichment",
+    y = expression(
+      log[10] * " squared deviation"
     ),
-    plot.caption = element_text(
-      size = 9,
-      hjust = 0,
-      margin = margin(
-        t = 8
-      )
+    caption = paste0(
+      "One-sided Mann–Whitney test: ",
+      "non-dominant > dominant. ",
+      "BH-adjusted P values: \n",
+      "*** P < 0.001; ** P < 0.01; ",
+      "* P < 0.05; ns P ≥ 0.05."
     )
+  ) +
+  theme_bw(
+    base_size = 11
+  ) +
+  theme(
+    axis.title.x = element_text(size = 18,margin = margin(t = 15)),
+    axis.title.y = element_text(size = 18),
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black"),
+    legend.position = "none",
+    strip.text = element_text(size = 12,face = "bold"),
+    strip.background = element_rect(fill = "grey95",color = NA),
+    axis.text.x = element_text(size=15,angle = 0,hjust = 0.5),
+    axis.text.y = element_text(size=15,angle = 0,hjust = 0.5),
+    plot.caption = element_text(size = 15,hjust = 0, vjust=0,margin = margin(t = 8)))
+
+dev.off()
+```
+
+```{r up- and downregulated | plot stability across thresholds}
+stability_plot <- sq_dev_all_thresholds %>%
+  mutate(threshold_num = threshold_value * 100) %>%
+  group_by(technology,direction,threshold_num,enrichment) %>%
+  summarise(
+    median_dev = median(deviation_score,na.rm = TRUE),
+    q25 = quantile(deviation_score,0.25,na.rm = TRUE),
+    q75 = quantile(deviation_score,0.75,na.rm = TRUE),
+    .groups = "drop"
   )
 
+pdf(here("figures/figure3/Figure3_squared_deviation_stability_up_dn.pdf"),width = 14,height = 10)
+
+ggplot(
+  stability_plot,
+  aes(
+    x = threshold_num,
+    y = median_dev,
+    color = enrichment,
+    group = enrichment
+  )
+) +
+  # IQR
+  geom_ribbon(
+    aes(ymin = q25,ymax = q75,fill = enrichment),
+    alpha = 0.15,
+    color = NA
+  ) +
+  # median trend
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_y_log10(
+    breaks = 10^seq(-10,0,by = 2),
+    labels = seq(-10,0,by = 2)) +
+  scale_x_continuous(
+    breaks = c(
+      0, 60, 65,
+      70, 75, 80,
+      85, 90, 95
+    ),
+    labels = function(x) paste0(x, "%")
+  ) +
+  facet_grid(
+    rows = vars(direction),
+    cols = vars(technology),
+    scales = "free_y"
+  ) +
+  labs(
+    x = "Threshold",
+    y = expression(log[10] * " squared deviation"),
+    color = "Enrichment",
+    fill = "Enrichment"
+  ) +
+  theme_bw(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    strip.background = element_rect(fill = "grey95",color = NA),
+    axis.title.x = element_text(size = 18,margin = margin(t = 15)),
+    axis.title.y = element_text(size = 18,margin = margin(r = 12)),
+    axis.text.x = element_text(size = 18,angle = 45,hjust = 1,vjust = 1),
+    axis.text.y = element_text(size = 18),
+    strip.text = element_text(size = 18,face = "bold"),
+    legend.title = element_text(size = 18),
+    legend.text = element_text(size = 15),
+    legend.position = "bottom"
+)
 dev.off()
 ```
