@@ -25,9 +25,10 @@ from collections import Counter
 from datetime import datetime, timezone
 from typing import Iterable, Iterator
 
-import pandas as pd
 from Bio import Entrez, Medline
 from tqdm import tqdm
+
+import pandas as pd
 
 # config
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -60,6 +61,8 @@ HDT_TERMS = (
     '"host-directed therapy"[Title/Abstract] OR '
     '"host-directed therapies"[Title/Abstract] OR '
     '"host-directed drug"[Title/Abstract] OR '
+    '"Host-directed therapeutic"[Title/Abstract] OR '
+    '"Host-directed therapeutics"[Title/Abstract] OR '
     '"host-directed drugs"[Title/Abstract] OR '
     '"adjunctive therapy"[Title/Abstract] OR '
     '"adjunctive therapies"[Title/Abstract] OR '
@@ -192,11 +195,17 @@ def _level_from_mesh(pts: set[str], mesh: set[str]) -> str:
 def _level_from_text(record: dict) -> str:
     """Lower-confidence fallback for records with no MeSH indexing"""
     text = _record_text(record)
-    if _matches(text, HUMAN_SUBJECT_KW):
+    
+    human = _matches(text, HUMAN_SUBJECT_KW)
+    animal = _matches(text, ANIMAL_KW)
+    in_vitro = _matches(text, IN_VITRO_KW)
+
+    # matching logic
+    if human and not animal and not in_vitro:
         return "human_subject"
-    if _matches(text, ANIMAL_KW) and not _matches(text, IN_VITRO_KW):
+    if animal and not human and not in_vitro:
         return "animal"
-    if _matches(text, IN_VITRO_KW):
+    if in_vitro and not human and not animal:
         return "in_vitro"
     return "other"
 
@@ -555,10 +564,12 @@ def print_summary(records: dict[str, dict]) -> None:
     """Corpus level distribution, the numbers to quote in Methods"""
     if not records:
         return
+    # reviews excluded before counting, same rule as summarize_drug
     total   = len(records)
-    levels  = Counter(r["evidence_level"] for r in records.values())
-    reviews = sum(r["is_review"] for r in records.values())
-    unindexed = sum(not r["mesh_indexed"] for r in records.values())
+    primary = [r for r in records.values() if not r["is_review"]]
+    levels  = Counter(r["evidence_level"] for r in primary)
+    reviews = total - len(primary)
+    unindexed = sum(not r["mesh_indexed"] for r in primary)
 
     print(f"\nClassified {total} unique records")
     for lvl in EVIDENCE_LEVELS:
