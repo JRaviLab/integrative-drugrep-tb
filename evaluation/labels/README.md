@@ -39,12 +39,12 @@ Done. TSV  → evaluation/labels/launched_drug_with_literature.tsv
 
 Queried 2427 drugs, reused 0 cached results
 
-Classified 32330 unique records
-  1683   clinical_study
-  12130  human_subject
-  3472   animal
-  1271   in_vitro
-  13774  other
-  2672   reviews (counted separately)
-  4929   records (15.2%) had no MeSH indexing and were classified from text
+Classified 32368 unique records
+    1684  clinical_study
+   11383  human_subject
+    3056  animal
+    1201  in_vitro
+   12366  other
+    2678  reviews (counted separately)
+  4538 records (14.0%) had no MeSH indexing and were classified from text
 ```
