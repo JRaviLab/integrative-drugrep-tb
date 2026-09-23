@@ -230,7 +230,8 @@ col_fun <- colorRamp2(
 
 pdf(
   here("figures/figure6/Figure6_MOA_synergy_fraction_heatmap.pdf"),
-  width = 18, height = 18
+  width = 24,
+  height = 22
 )
 
 ht <- Heatmap(
@@ -238,23 +239,106 @@ ht <- Heatmap(
   name = "Fractional synergistic score\n(≥3/4 metrics)",
   col = col_fun,
   na_col = "grey95",
+
   cluster_rows = FALSE,
   cluster_columns = FALSE,
   row_order = row_ord,
   column_order = row_ord,
+
   row_labels = moa_labels[row_ord],
   column_labels = moa_labels[row_ord],
-  column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 9),
-  column_names_gp = gpar(fontsize = 9),
-  width  = unit(20, "cm"),
-  height = unit(20, "cm"),
-  heatmap_legend_param = list(
-    at = c(0, 0.5, 1),
-    labels = c("0 - Antagonism", "0.5 - Mixed", "1 - Synergy")
-  )
+
+  row_names_gp = gpar(fontsize = 20),
+  column_names_gp = gpar(fontsize = 20),
+
+  column_names_rot = 55,
+
+  width  = unit(35, "cm"),
+  height = unit(35, "cm"),
+
+  show_heatmap_legend = FALSE
 )
 
-draw(ht, heatmap_legend_side = "right")
+draw(
+  ht,
+  padding = unit(c(16, 16, 16, 16), "mm")
+)
+
 dev.off()
+```
+
+```{r}
+mat_plot <- moa_synergy_mat[row_ord, row_ord]
+labels_plot <- moa_labels[row_ord]
+
+# keep upper triangle
+mat_plot[lower.tri(mat_plot, diag = FALSE)] <- NA
+
+# self
+diag(mat_plot) <- -0.5
+
+col_fun <- colorRamp2(
+  c(-0.5, 0, 0.5, 1),
+  c("grey20", "#F4A259", "grey80", "#2F6DAA")
+)
+
+pdf(
+  here("figures/figure6/Figure6_MOA_synergy_fraction_heatmap_half.pdf"),
+  width = 27,
+  height = 15
+)
+
+ht <- Heatmap(
+  mat_plot,
+  name = "Fractional synergistic score\n(≥3/4 metrics)",
+  col = col_fun,
+  na_col = "white",
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  show_column_names = FALSE,
+  row_labels = labels_plot,
+  row_names_gp = gpar(fontsize = 20),
+  width = unit(35, "cm"),
+  height = unit(35, "cm"),
+
+  show_heatmap_legend = TRUE,
+
+  heatmap_legend_param = list(
+    at = c(-0.5, 0, 0.5, 1),
+    labels = c(
+      "Self",
+      "0 - Antagonism",
+      "0.5 - Mixed",
+      "1 - Synergy"
+    ),
+    title_gp = gpar(fontsize = 20),
+    labels_gp = gpar(fontsize = 20)
+  ),
+
+  rect_gp = gpar(col = NA)
+)
+
+draw(
+  ht,
+  heatmap_legend_side = "left",
+  padding = unit(c(12, 12, 12, 12), "mm")
+)
+
+decorate_heatmap_body("Fractional synergistic score\n(≥3/4 metrics)", {
+  n <- ncol(mat_plot)
+
+  for (j in seq_len(n)) {
+    grid.text(
+      labels_plot[j],
+      x = unit(j / n, "npc") - unit(1, "mm"),
+      y = unit(1 - j / n, "npc") - unit(1, "mm"),
+      just = c("right", "top"),
+      rot = 0,
+      gp = gpar(fontsize = 20)
+    )
+  }
+})
+
+dev.off()
+
 ```
