@@ -18,19 +18,19 @@ up_hv_pathway_pathways_df = as.data.frame(up_hv_pathway_pathways)
 ```
 
 ```{r read in stats results}
-up_circulating_other_MW = read_tsv(here("figures/figure2/figure2c/up_allvals_circulating_other_MW.tsv"))
+up_circulating_other_MW = read_tsv(here("figures/figure2/up_allvals_circulating_other_MW.tsv"))
 colnames(up_circulating_other_MW) = gsub("norm_auroc", "circulating-other", colnames(up_circulating_other_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_hv_pathway_pathways_df, up_circulating_other_MW[c("GO_term","circulating-other")], 
       by.x="up_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_microarray_rnaseq_MW = read_tsv(here("figures/figure2/figure2c/up_allvals_microarray_rnaseq_MW.tsv"))
+up_microarray_rnaseq_MW = read_tsv(here("figures/figure2/up_allvals_microarray_rnaseq_MW.tsv"))
 colnames(up_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(up_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
       by.x="up_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-up_primary_cellline_MW = read_tsv(here("figures/figure2/figure2c/up_allvals_primary_cellline_MW.tsv"))
+up_primary_cellline_MW = read_tsv(here("figures/figure2/up_allvals_primary_cellline_MW.tsv"))
 colnames(up_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(up_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 up_norm_auroc_df = merge(up_norm_auroc_df, up_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="up_hv_pathway_pathways", 
@@ -49,19 +49,19 @@ dn_hv_pathway_pathways_df = as.data.frame(dn_hv_pathway_pathways)
 ```
 
 ```{r read in stats results}
-dn_circulating_other_MW = read_tsv(here("figures/figure2/figure2c/dn_allvals_circulating_other_MW.tsv"))
+dn_circulating_other_MW = read_tsv(here("figures/figure2/dn_allvals_circulating_other_MW.tsv"))
 colnames(dn_circulating_other_MW) = gsub("norm_auroc", "circulating-other", colnames(dn_circulating_other_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_hv_pathway_pathways_df, dn_circulating_other_MW[c("GO_term","circulating-other")], 
       by.x="dn_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_microarray_rnaseq_MW = read_tsv(here("figures/figure2/figure2c/dn_allvals_microarray_rnaseq_MW.tsv"))
+dn_microarray_rnaseq_MW = read_tsv(here("figures/figure2/dn_allvals_microarray_rnaseq_MW.tsv"))
 colnames(dn_microarray_rnaseq_MW) = gsub("norm_auroc", "microarray-rnaseq", colnames(dn_microarray_rnaseq_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_microarray_rnaseq_MW[c("GO_term","microarray-rnaseq")], 
       by.x="dn_hv_pathway_pathways", 
       by.y="GO_term", all.x=TRUE)
 
-dn_primary_cellline_MW = read_tsv(here("figures/figure2/figure2c/dn_allvals_primary_cellline_MW.tsv"))
+dn_primary_cellline_MW = read_tsv(here("figures/figure2/dn_allvals_primary_cellline_MW.tsv"))
 colnames(dn_primary_cellline_MW) = gsub("norm_auroc", "primary-cellline", colnames(dn_primary_cellline_MW), ignore.case = FALSE, fixed = FALSE)
 dn_norm_auroc_df = merge(dn_norm_auroc_df, dn_primary_cellline_MW[c("GO_term","primary-cellline")], 
       by.x="dn_hv_pathway_pathways", 
@@ -78,41 +78,43 @@ storage.mode(dn_norm_auroc_mat) <- "numeric"
 ```
 
 ```{r plot together}
-# color scale: clamp to data range to avoid outlier washout
-lims <- range(dn_norm_auroc_mat, finite = TRUE)
-col_fun <- colorRamp2(c(-1, 0, 1), c("darkblue", "white", "darkred"))
+library(ComplexHeatmap)
+library(circlize)
+library(grid)
 
-# make sure columns (contrasts) are in the same order
+col_fun <- colorRamp2(c(-1, 0, 1), c("darkblue", "white", "darkred"))
 common_cols <- intersect(colnames(up_norm_auroc_mat), colnames(dn_norm_auroc_mat))
-common_cols <- common_cols[order(common_cols)]  # or your preferred order
+common_cols <- sort(common_cols)
 
 up_mat <- up_norm_auroc_mat[, common_cols, drop = FALSE]
 dn_mat <- dn_norm_auroc_mat[, common_cols, drop = FALSE]
 
-pdf(here("figures/figure2/figure2c/Figure2c_allvals_up_dn_hvariance_pathway_by_contrasts.pdf"),
-    width = 40, height = 40)
+cell_size <- unit(3, "cm")
+pdf(here("figures/figure2/Figure2_allvals_up_dn_hvariance_pathway_by_contrasts.pdf"),
+    width = 50, height = 35)
 
 plot_up <- Heatmap(
   up_mat,
-  name = "normalized AUROC",   # <- same name so legend is shared
+  name = "normalized AUROC",
   col = col_fun,
   na_col = "lightgrey",
-  cluster_rows = FALSE, cluster_columns = FALSE,
-  width = unit(8, "cm"),
-  height = unit(40, "cm"),
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  width = ncol(up_mat) * cell_size,
+  height = nrow(up_mat) * cell_size,
   column_title = "Metadata comparison",
-  column_title_gp = gpar(fontsize = 30),
+  column_title_gp = gpar(fontsize = 40),
   row_title = "Highly variable cluster \n representative upregulated GO:BP terms",
-  row_title_gp = gpar(fontsize = 30),
+  row_title_gp = gpar(fontsize = 40),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(up_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 30),
-  column_names_gp = gpar(fontsize = 30),
-  heatmap_legend_param = list(   # legend defined once
+  row_names_gp = gpar(fontsize = 40),
+  column_names_gp = gpar(fontsize = 40),
+  heatmap_legend_param = list(
     title = "normalized AUROC",
-    title_gp = gpar(fontsize = 30),
-    labels_gp = gpar(fontsize = 30),
+    title_gp = gpar(fontsize = 40),
+    labels_gp = gpar(fontsize = 40),
     at = c(-1, -0.5, 0, 0.5, 1),
     labels = c("-1", "-0.5", "0", "0.5", "1")
   )
@@ -120,24 +122,29 @@ plot_up <- Heatmap(
 
 plot_dn <- Heatmap(
   dn_mat,
-  name = "normalized AUROC",   
+  name = "normalized AUROC",
   col = col_fun,
   na_col = "lightgrey",
-  cluster_rows = FALSE, cluster_columns = FALSE,
-  width = unit(8, "cm"),
-  height = unit(20, "cm"),
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  width = ncol(dn_mat) * cell_size,
+  height = nrow(dn_mat) * cell_size,
   row_title = "Highly variable cluster \n representative downregulated GO:BP terms",
-  row_title_gp = gpar(fontsize = 30),
+  row_title_gp = gpar(fontsize = 40),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(dn_mat),
-  column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 30),
-  column_names_gp = gpar(fontsize = 30)
+  column_names_rot = 90,
+  row_names_gp = gpar(fontsize = 40),
+  column_names_gp = gpar(fontsize = 40)
 )
 
-# stack vertically so columns align
 ht_list <- plot_up %v% plot_dn
-draw(ht_list, heatmap_legend_side = "left", merge_legends = TRUE)
+
+draw(
+  ht_list,
+  heatmap_legend_side = "left",
+  merge_legends = TRUE
+)
 
 dev.off()
 ```
