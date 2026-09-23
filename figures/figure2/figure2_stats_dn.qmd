@@ -1,8 +1,5 @@
 ```{r setup, include=FALSE}
 library(here)
-library(ComplexHeatmap)
-library(clusterProfiler)
-library(DOSE)
 library(readr)
 source(here("scripts/00_get_crossSigs_enrichedGO.R"))
 library(gridExtra)
@@ -303,7 +300,15 @@ technology_MW_results <- technology_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(technology_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-technology_MW_results$auroc <- technology_MW_results$statistic / (circulating_num * other_num)
+
+microarray_num <- sum(group_vec_technology == "microarray")
+rnaseq_num <- sum(group_vec_technology == "RNAseq")
+
+technology_MW_results$auroc <-
+  technology_MW_results$statistic / (microarray_num * rnaseq_num)
+
+technology_MW_results$norm_auroc <-
+  (2 * technology_MW_results$auroc) - 1
 technology_MW_results$norm_auroc <- (2 * technology_MW_results$auroc) - 1
 ```
 
@@ -364,13 +369,19 @@ gtsave(gt_top_bottom_tech, here("figures/figure2/dn_allvals_variance_microarray_
 ```
 
 ```{r cell line vs. primary}
-summary_df_origin = summary_df %>% filter(!is.na(signature), !is.na(technology)) %>%
-            dplyr::select(signature_name, sample_origin)
+summary_df_origin <- summary_df %>% 
+  filter(!is.na(signature), !is.na(sample_origin)) %>%
+  dplyr::select(signature_name, sample_origin)
+
 # build group vector
 group_vec_origin <- summary_df_origin %>%
   filter(signature_name %in% common_sigs) %>%
   distinct(signature_name, sample_origin) %>%
   deframe()
+
+# numbers actually included in this comparison
+primary_num <- sum(group_vec_origin == "primary")
+cellline_num <- sum(group_vec_origin == "cell line")
 
 origin_median_diffs_df <- apply(
   go_mat_filtered,
@@ -381,20 +392,24 @@ origin_median_diffs_df <- apply(
   group_vec = group_vec_origin
 )
 
-origin_median_diffs_df <- data.frame(GO_term = rownames(go_mat_filtered), median_diff = origin_median_diffs_df)
+origin_median_diffs_df <- data.frame(
+  GO_term = rownames(go_mat_filtered),
+  median_diff = origin_median_diffs_df
+)
 
 # Mann-Whitney test
 origin_MW_test <- do.call(
   rbind,
   lapply(seq_len(nrow(go_mat_filtered)), function(i) {
     Mann_Whitney_test(
-      values    = go_mat_filtered[i, ],
-      group1    = "primary",
-      group2    = "cell line",
+      values = go_mat_filtered[i, ],
+      group1 = "primary",
+      group2 = "cell line",
       group_vec = group_vec_origin
     )
   })
 )
+
 rownames(origin_MW_test) <- rownames(go_mat_filtered)
 origin_MW_test$GO_term <- rownames(go_mat_filtered)
 
@@ -402,7 +417,10 @@ origin_MW_results <- origin_MW_test %>%
   mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
   left_join(origin_median_diffs_df, by = "GO_term") %>%
   dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-origin_MW_results$auroc <- origin_MW_results$statistic / (circulating_num * other_num)
+
+origin_MW_results$auroc <-
+  origin_MW_results$statistic / (primary_num * cellline_num)
+
 origin_MW_results$norm_auroc <- (2 * origin_MW_results$auroc) - 1
 ```
 

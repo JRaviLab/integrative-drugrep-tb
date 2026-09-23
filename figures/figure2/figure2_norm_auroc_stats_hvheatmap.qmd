@@ -91,7 +91,7 @@ dn_mat <- dn_norm_auroc_mat[, common_cols, drop = FALSE]
 
 cell_size <- unit(3, "cm")
 pdf(here("figures/figure2/Figure2_allvals_up_dn_hvariance_pathway_by_contrasts.pdf"),
-    width = 40, height = 40)
+    width = 45, height = 40)
 
 plot_up <- Heatmap(
   up_mat,
@@ -103,18 +103,18 @@ plot_up <- Heatmap(
   width = ncol(up_mat) * cell_size,
   height = nrow(up_mat) * cell_size,
   column_title = "Metadata comparison",
-  column_title_gp = gpar(fontsize = 30),
+  column_title_gp = gpar(fontsize = 35),
   row_title = "Highly variable cluster \n representative upregulated GO:BP terms",
-  row_title_gp = gpar(fontsize = 30),
+  row_title_gp = gpar(fontsize = 35),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(up_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 30),
-  column_names_gp = gpar(fontsize = 30),
+  row_names_gp = gpar(fontsize = 35),
+  column_names_gp = gpar(fontsize = 35),
   heatmap_legend_param = list(
     title = "normalized AUROC",
-    title_gp = gpar(fontsize = 30),
-    labels_gp = gpar(fontsize = 30),
+    title_gp = gpar(fontsize = 35),
+    labels_gp = gpar(fontsize = 35),
     at = c(-1, -0.5, 0, 0.5, 1),
     labels = c("-1", "-0.5", "0", "0.5", "1")
   )
@@ -130,12 +130,12 @@ plot_dn <- Heatmap(
   width = ncol(dn_mat) * cell_size,
   height = nrow(dn_mat) * cell_size,
   row_title = "Highly variable cluster \n representative downregulated GO:BP terms",
-  row_title_gp = gpar(fontsize = 30),
+  row_title_gp = gpar(fontsize = 35),
   rect_gp = gpar(col = "grey"),
   row_order = rownames(dn_mat),
   column_names_rot = 45,
-  row_names_gp = gpar(fontsize = 30),
-  column_names_gp = gpar(fontsize = 30)
+  row_names_gp = gpar(fontsize = 35),
+  column_names_gp = gpar(fontsize = 40)
 )
 
 ht_list <- plot_up %v% plot_dn
