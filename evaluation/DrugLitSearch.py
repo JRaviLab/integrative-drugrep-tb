@@ -570,11 +570,13 @@ def print_summary(records: dict[str, dict]) -> None:
     levels  = Counter(r["evidence_level"] for r in primary)
     reviews = total - len(primary)
     unindexed = sum(not r["mesh_indexed"] for r in primary)
+    hdt = sum(r["is_hdt"] for r in primary)
 
     print(f"\nClassified {total} unique records")
     for lvl in EVIDENCE_LEVELS:
         print(f"  {levels[lvl]:6d}  {lvl}")
     print(f"  {reviews:6d}  reviews (counted separately)")
+    print(f"  {hdt} positive records (non review HDT)")
     print(f"  {unindexed} records ({unindexed / total:.1%}) had no MeSH indexing "
           f"and were classified from text")
 
