@@ -46,5 +46,6 @@ Classified 32368 unique records
     1201  in_vitro
    12366  other
     2678  reviews (counted separately)
+    377   positive records (non review HDT)
   4538 records (14.0%) had no MeSH indexing and were classified from text
 ```
