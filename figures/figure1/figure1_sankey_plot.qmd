@@ -9,6 +9,7 @@ library(dplyr)
 
 ```{r read in signature info}
 all_signatures_info = read_tsv(here("data/signatures/202506_TB_signatures_info.tsv"))
+all_signatures_info <- head(all_signatures_info, -2) # exclude aggregated signatures
 ```
 
 ```{r Sankey diagram}
@@ -109,9 +110,9 @@ sankey <- sankeyNetwork(
   Target = "target_id",
   Value = "value",
   NodeID = "label",
-  fontSize = 38,
+  fontSize = 65,
   nodeWidth = 30,
-  nodePadding = 15,
+  nodePadding = 60,
   sinksRight = TRUE
 )
 ```
@@ -119,14 +120,31 @@ sankey <- sankeyNetwork(
 ```{r save output}
 library(htmlwidgets)
 library(webshot2)
+library(png)
+library(grid)
 
-saveWidget(sankey, "figure1a_sankey_plot.html", selfcontained = TRUE)
+saveWidget(sankey,"figure1a_sankey_plot.html",selfcontained = TRUE)
 
 webshot(
   "figure1a_sankey_plot.html",
-  "figure1a_sankey_plot.pdf",
-  zoom = 5,
-  vwidth = 2600,
-  vheight = 1200
+  "figure1a_sankey_plot.png",
+  vwidth = 4090,
+  vheight = 2000,
+  zoom = 2,
+  delay = 1
 )
+
+img <- readPNG("figure1a_sankey_plot.png")
+
+pdf("figure1a_sankey_plot.pdf",width = 14,height = 7)
+
+grid.newpage()
+grid.raster(
+  img,
+  width = unit(1, "npc"),
+  height = unit(1, "npc"),
+  interpolate = TRUE
+)
+
+dev.off()
 ```
