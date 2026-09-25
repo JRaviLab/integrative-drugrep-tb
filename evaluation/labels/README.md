@@ -1,10 +1,11 @@
 ## info on last run
 
-> last ran : September 11, 2026
+> last ran : September 25, 2026
 >
 > ran by : Ling._.T
 >
-> command used python3 evaluation/DrugLitSearch.py evaluation/launched_drugs.tsv drug_name \
+> command used : 
+> python3 evaluation/DrugLitSearch.py evaluation/launched_drugs.tsv drug_name \
 >  --article \
 >  --refresh \
 >  --verbose \
@@ -32,20 +33,20 @@ Output TSV : evaluation/labels/launched_drug_with_literature.tsv
 Output JSON: evaluation/labels/launched_drug_with_literature.json
 Cache      : bypassed (--refresh), every drug re-queried
 
-Processing drugs: 100%|██████████| 2427/2427 [1:02:11<00:00,  1.54s/it]
 
 Done. TSV  → evaluation/labels/launched_drug_with_literature.tsv
-       JSON → evaluation/labels/launched_drug_with_literature.json (32330 unique records)
+       JSON → evaluation/labels/launched_drug_with_literature.json (32392 unique records)
 
 Queried 2427 drugs, reused 0 cached results
 
-Classified 32368 unique records
-    1684  clinical_study
-   11383  human_subject
+Classified 32392 unique records
+    1686  clinical_study
+   11388  human_subject
     3056  animal
     1201  in_vitro
-   12366  other
-    2678  reviews (counted separately)
-    377   positive records (non review HDT)
-  4538 records (14.0%) had no MeSH indexing and were classified from text
+   12378  other
+    2683  reviews (counted separately)
+  292 positive records (non review HDT)
+  4556 records (14.1%) had no MeSH indexing and were classified from text
+
 ```
