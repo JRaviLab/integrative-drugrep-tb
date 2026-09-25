@@ -1,0 +1,179 @@
+# Comparison of literature search versions
+# v1 = tiered free-text search
+# v2 = unified query with evidence stratification
+
+```{r setup and label construction}
+#| echo: true
+#| output: false
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+library(here)
+library(readr)
+
+v1 <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
+v2 <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v2.tsv"))
+
+LEVELS <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
+
+# join key, v1 and v2 may differ in capitalisation
+v1 <- v1 %>% mutate(drug = tolower(drug_name))
+v2 <- v2 %>% mutate(drug = tolower(drug_name))
+
+# v1 label: a drug was positive if the tiered search stopped at an HDT tier
+v1 <- v1 %>%
+  mutate(
+    v1_positive = search_type == "Direct (HDT)",
+    v1_any      = search_type != "No Results"
+  )
+
+# v2 labels
+v2 <- v2 %>%
+  mutate(
+    n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
+    n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
+    n_in_vivo = n_clinical_study + n_animal,
+
+    HDT_any      = n_hdt > 0,
+    HDT_host     = n_hdt > 0 & n_host > 0,
+    HDT_in_vivo  = n_hdt > 0 & n_in_vivo > 0,
+    HDT_clinical = n_hdt > 0 & n_clinical_study > 0,
+
+    L0_any      = unique_articles > 0,
+    L1_primary  = n_primary > 0,
+    L2_host     = n_host > 0,
+    L3_in_vivo  = n_in_vivo > 0,
+    L4_clinical = n_clinical_study > 0
+  )
+
+cmp <- inner_join(v1, v2, by = "drug", suffix = c("_v1", "_v2"))
+```
+
+```{r label counts}
+cat("drugs in v1        :", nrow(v1), "\n")
+cat("drugs in v2        :", nrow(v2), "\n")
+cat("drugs in both      :", nrow(cmp), "\n")
+cat("only in v1         :", length(setdiff(v1$drug, v2$drug)), "\n")
+cat("only in v2         :", length(setdiff(v2$drug, v1$drug)), "\n")
+```
+
+```{r retrieval comparison}
+retrieval <- cmp %>%
+  summarise(
+    `drugs with any result, v1` = sum(v1_any),
+    `drugs with any result, v2` = sum(L0_any),
+    `median records, v1`        = median(studies_found[v1_any]),
+    `median records, v2`        = median(unique_articles[L0_any]),
+    `total records, v2`         = sum(unique_articles),
+    `drugs truncated at cap`    = sum(results_truncated)
+  ) %>%
+  pivot_longer(everything(), names_to = "statistic", values_to = "value")
+
+print(retrieval, n = Inf)
+```
+
+```{r label agreement}
+agreement <- cmp %>%
+  count(v1_positive, HDT_host) %>%
+  mutate(status = case_when(
+    v1_positive &  HDT_host ~ "positive in both",
+    v1_positive & !HDT_host ~ "lost, positive only in v1",
+    !v1_positive & HDT_host ~ "gained, positive only in v2",
+    TRUE                    ~ "negative in both"
+  ))
+
+print(agreement)
+
+cat("\nv1 positives :", sum(cmp$v1_positive), "\n")
+cat("v2 positives :", sum(cmp$HDT_host), "\n")
+cat("net change   :", sum(cmp$HDT_host) - sum(cmp$v1_positive), "\n")
+
+# the drugs that changed status, name these in the response letter
+cat("\nlost (v1 positive, no host-directed evidence in v2):\n")
+print(cmp %>% filter(v1_positive, !HDT_host) %>%
+        select(drug, n_hdt, n_other, n_review, all_of(paste0("n_", LEVELS))))
+
+cat("\ngained (not positive in v1, HDT plus host evidence in v2):\n")
+print(cmp %>% filter(!v1_positive, HDT_host) %>%
+        select(drug, n_hdt, all_of(paste0("n_", LEVELS))) %>%
+        arrange(desc(n_hdt)), n = 30)
+```
+
+```{r what the v1 label was made of}
+cmp %>%
+  filter(v1_positive) %>%
+  count(highest_evidence_level) %>%
+  mutate(
+    highest_evidence_level = factor(highest_evidence_level,
+                                    levels = c(LEVELS, "none")),
+    pct = n / sum(n)
+  ) %>%
+  arrange(highest_evidence_level) %>%
+  print()
+
+cmp %>%
+  filter(v1_positive) %>%
+  count(highest_evidence_level) %>%
+  mutate(highest_evidence_level = factor(highest_evidence_level,
+                                         levels = rev(c(LEVELS, "none")))) %>%
+  ggplot(aes(x = n, y = highest_evidence_level)) +
+  geom_col(fill = "#4C72B0") +
+  labs(
+    title = "Strongest evidence level available for drugs labelled positive in v1",
+    x = "drugs",
+    y = "highest evidence level"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r evidence composition across the corpus}
+cmp %>%
+  slice_max(unique_articles, n = 25) %>%
+  select(drug, all_of(paste0("n_", LEVELS))) %>%
+  pivot_longer(-drug, names_to = "level", values_to = "records") %>%
+  mutate(level = factor(sub("^n_", "", level), levels = rev(LEVELS))) %>%
+  ggplot(aes(x = records, y = reorder(drug, records, sum), fill = level)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Blues", direction = -1) +
+  labs(
+    title = "Evidence composition of the 25 most represented drugs",
+    x = "records",
+    y = NULL,
+    fill = "evidence level"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r summary for the response letter}
+summary_tbl <- tibble(
+  statistic = c(
+    "drugs evaluated",
+    "positives, v1 label (Direct (HDT))",
+    "positives, HDT_any",
+    "positives, HDT_host",
+    "drugs losing the label under HDT_host",
+    "drugs gaining the label under HDT_host",
+    "records classified, v2",
+    "records at other (pathogen-directed), %",
+    "records flagged as review, %",
+    "records without MeSH indexing, %",
+    "drugs truncated at retrieval cap"
+  ),
+  value = c(
+    nrow(cmp),
+    sum(cmp$v1_positive),
+    sum(cmp$HDT_any),
+    sum(cmp$HDT_host),
+    sum(cmp$v1_positive & !cmp$HDT_host),
+    sum(!cmp$v1_positive & cmp$HDT_host),
+    sum(cmp$unique_articles),
+    round(100 * sum(cmp$n_other) / sum(cmp$n_primary), 1),
+    round(100 * sum(cmp$n_review) / (sum(cmp$n_primary) + sum(cmp$n_review)), 1),
+    round(100 * sum(cmp$n_not_indexed) / sum(cmp$n_primary), 1),
+    sum(cmp$results_truncated)
+  )
+)
+
+print(summary_tbl, n = Inf)
+```
