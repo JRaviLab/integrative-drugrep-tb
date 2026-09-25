@@ -2,6 +2,8 @@
 # v1 = tiered free-text search
 # v2 = unified query with evidence stratification
 
+this qmd is only relevant for PRs. After the PR has been approved, I would suggest deleting this qmd since it's contents are not relevant for the main branch.
+
 ```{r setup and label construction}
 #| echo: true
 #| output: false
@@ -12,10 +14,8 @@ library(scales)
 library(here)
 library(readr)
 
-v1 <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
-v2 <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v2.tsv"))
-
-LEVELS <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
+v1 <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v1.tsv")) # checked out from main 
+v2 <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
 
 # join key, v1 and v2 may differ in capitalisation
 v1 <- v1 %>% mutate(drug = tolower(drug_name))
@@ -34,9 +34,11 @@ v2 <- v2 %>%
     n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
     n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
     n_in_vivo = n_clinical_study + n_animal,
+    # human hosts only: animal and in vitro records are excluded
+    n_human   = n_clinical_study + n_human_subject,
 
     HDT_any      = n_hdt > 0,
-    HDT_host     = n_hdt > 0 & n_host > 0,
+    HDT_host     = n_hdt > 0 & n_human > 0,
     HDT_in_vivo  = n_hdt > 0 & n_in_vivo > 0,
     HDT_clinical = n_hdt > 0 & n_clinical_study > 0,
 
@@ -51,11 +53,15 @@ cmp <- inner_join(v1, v2, by = "drug", suffix = c("_v1", "_v2"))
 ```
 
 ```{r label counts}
-cat("drugs in v1        :", nrow(v1), "\n")
-cat("drugs in v2        :", nrow(v2), "\n")
-cat("drugs in both      :", nrow(cmp), "\n")
-cat("only in v1         :", length(setdiff(v1$drug, v2$drug)), "\n")
-cat("only in v2         :", length(setdiff(v2$drug, v1$drug)), "\n")
+cmp %>%
+  summarise(
+    `drugs in v1` = nrow(v1), # same set of drugs
+    `drugs in v2` = nrow(v2), # same set of drugs
+    `only in v1` = length(setdiff(v1$drug, v2$drug)),
+    `only in v2` = length(setdiff(v2$drug, v1$drug))
+  ) %>%
+  pivot_longer(everything(), names_to = "statistic", values_to = "value") %>%
+  print(n = Inf)
 ```
 
 ```{r retrieval comparison}
@@ -63,8 +69,7 @@ retrieval <- cmp %>%
   summarise(
     `drugs with any result, v1` = sum(v1_any),
     `drugs with any result, v2` = sum(L0_any),
-    `median records, v1`        = median(studies_found[v1_any]),
-    `median records, v2`        = median(unique_articles[L0_any]),
+    `total records, v1`         = sum(v1_positive),
     `total records, v2`         = sum(unique_articles),
     `drugs truncated at cap`    = sum(results_truncated)
   ) %>%
@@ -90,59 +95,14 @@ cat("v2 positives :", sum(cmp$HDT_host), "\n")
 cat("net change   :", sum(cmp$HDT_host) - sum(cmp$v1_positive), "\n")
 
 # the drugs that changed status, name these in the response letter
-cat("\nlost (v1 positive, no host-directed evidence in v2):\n")
+cat("\nlost (v1 positive, no human host evidence in v2):\n")
 print(cmp %>% filter(v1_positive, !HDT_host) %>%
-        select(drug, n_hdt, n_other, n_review, all_of(paste0("n_", LEVELS))))
+        select(drug, n_hdt, n_review, n_clinical_study:n_other))
 
-cat("\ngained (not positive in v1, HDT plus host evidence in v2):\n")
+cat("\ngained (not positive in v1, HDT plus human host evidence in v2):\n")
 print(cmp %>% filter(!v1_positive, HDT_host) %>%
-        select(drug, n_hdt, all_of(paste0("n_", LEVELS))) %>%
+        select(drug, n_hdt, n_clinical_study:n_other) %>%
         arrange(desc(n_hdt)), n = 30)
-```
-
-```{r what the v1 label was made of}
-cmp %>%
-  filter(v1_positive) %>%
-  count(highest_evidence_level) %>%
-  mutate(
-    highest_evidence_level = factor(highest_evidence_level,
-                                    levels = c(LEVELS, "none")),
-    pct = n / sum(n)
-  ) %>%
-  arrange(highest_evidence_level) %>%
-  print()
-
-cmp %>%
-  filter(v1_positive) %>%
-  count(highest_evidence_level) %>%
-  mutate(highest_evidence_level = factor(highest_evidence_level,
-                                         levels = rev(c(LEVELS, "none")))) %>%
-  ggplot(aes(x = n, y = highest_evidence_level)) +
-  geom_col(fill = "#4C72B0") +
-  labs(
-    title = "Strongest evidence level available for drugs labelled positive in v1",
-    x = "drugs",
-    y = "highest evidence level"
-  ) +
-  theme_minimal(base_size = 11)
-```
-
-```{r evidence composition across the corpus}
-cmp %>%
-  slice_max(unique_articles, n = 25) %>%
-  select(drug, all_of(paste0("n_", LEVELS))) %>%
-  pivot_longer(-drug, names_to = "level", values_to = "records") %>%
-  mutate(level = factor(sub("^n_", "", level), levels = rev(LEVELS))) %>%
-  ggplot(aes(x = records, y = reorder(drug, records, sum), fill = level)) +
-  geom_col() +
-  scale_fill_brewer(palette = "Blues", direction = -1) +
-  labs(
-    title = "Evidence composition of the 25 most represented drugs",
-    x = "records",
-    y = NULL,
-    fill = "evidence level"
-  ) +
-  theme_minimal(base_size = 11)
 ```
 
 ```{r summary for the response letter}
@@ -176,4 +136,143 @@ summary_tbl <- tibble(
 )
 
 print(summary_tbl, n = Inf)
+```
+
+```{r candidate literature definitions}
+# manually collected literature evidence for the candidate drugs
+# title_pattern is matched against the retrieved record titles
+candidates <- tribble(
+  ~drug,               ~evidence,               ~title_pattern,
+  "rosuvastatin",      "Cross_2023 [59]",       "Rosuvastatin adjunctive therapy",
+  "rosuvastatin",      "Cross_2024 [60]",       "PET-CT outcomes",
+  "fostamatinib",      "Mourenza_2020 [61]",    "Novel Treatments against Mycobacterium tuberculosis Based on Drug Repurposing",
+  "fluvastatin",       "Montero-Vega_2024 [62]", "Fluvastatin Converts Human Macrophages",
+  "tofacitinib",       "Maiga_2015 [63]",       "Efficacy of Adjunctive Tofacitinib",
+  "lovastatin",        "Jhilta_2025 [64]",      "Inhalable Lovastatin",
+  "atorvastatin",      "Adewole_2023 [65]",     "Atorvastatin accelerates",
+  "atorvastatin",      "Davuluri_2023 [66]",    "Atorvastatin Potentially Reduces",
+  "tamoxifen",         "Boland_2023 [32]",      "Repurposing Tamoxifen",
+  "vemurafenib",       "Mahon_Hafner_2015 [67]", "Immune Cell Regulatory Pathways Unexplored",
+  "raloxifene",        "Chugh_2023 [68]",       "Polyphosphate kinase-1 regulates",
+  "dasatinib",         "Wehrstedt_2018 [69]",   "tyrosine kinase inhibitor dasatinib reduces",
+  "sertraline",        "Shankaran_2023 [70]",   "antidepressant sertraline provides",
+  "ethinyl-estradiol", "No prior evidence",     NA,
+  "clonidine",         "No prior evidence",     NA,
+  "nabumetone",        "No prior evidence",     NA,
+  "ketotifen",         "No prior evidence",     NA,
+  "naltrexone",        "No prior evidence",     NA,
+  "chlorprothixene",   "No prior evidence",     NA,
+  "lapatinib",         "No prior evidence",     NA,
+  "forskolin",         "No prior evidence",     NA,
+  "mometasone",        "No prior evidence",     NA
+)
+
+# every candidate drug must exist in the label table
+stopifnot(all(candidates$drug %in% v2$drug))
+
+# article-level records, the JSON is the only place the cited papers can be looked up
+records <- jsonlite::fromJSON(
+  here("evaluation/labels/launched_drug_with_literature.json"),
+  simplifyVector = TRUE
+) %>%
+  as_tibble() %>%
+  select(pmid, title, is_hdt, evidence_level, is_review, drugs)
+```
+
+```{r candidate literature retrieval check}
+# were the manually collected papers retrieved, and retrieved for the right drug?
+# two separate failure modes:
+#   not in corpus    the paper was never returned by any drug query
+#   not linked       the paper is in the corpus but not attached to this candidate
+cited <- candidates %>%
+  filter(!is.na(title_pattern)) %>%
+  rowwise() %>%
+  mutate(
+    hit = list(
+      records %>%
+        # errata share the title of the paper they correct
+        filter(grepl(title_pattern, title, ignore.case = TRUE),
+               !grepl("^Erratum|^Correction", title)) %>%
+        slice_head(n = 1)
+    ),
+    in_corpus      = nrow(hit) > 0,
+    linked_to_drug = in_corpus && drug %in% hit$drugs[[1]],
+    pmid           = if (in_corpus) hit$pmid else NA_character_,
+    record_is_hdt  = if (in_corpus) hit$is_hdt else NA,
+    record_level   = if (in_corpus) hit$evidence_level else NA_character_,
+    record_review  = if (in_corpus) hit$is_review else NA
+  ) %>%
+  ungroup() %>%
+  select(drug, evidence, pmid, in_corpus, linked_to_drug,
+         record_is_hdt, record_level, record_review)
+
+print(cited, n = Inf)
+
+cat("\ncited papers                  :", nrow(cited), "\n")
+cat("in corpus                     :", sum(cited$in_corpus), "\n")
+cat("retrieved for the candidate   :", sum(cited$linked_to_drug), "\n")
+cat("...and flagged HDT            :", sum(cited$linked_to_drug & cited$record_is_hdt), "\n")
+
+cat("\nnot retrieved for the candidate drug:\n")
+print(cited %>% filter(!linked_to_drug) %>% select(drug, evidence, in_corpus))
+```
+
+```{r candidate drug level labels}
+# what label does each candidate end up with under v1 and v2
+cand_labels <- candidates %>%
+  group_by(drug) %>%
+  summarise(prior_evidence = any(!is.na(title_pattern)), .groups = "drop") %>%
+  left_join(
+    cmp %>% select(drug, v1_positive, unique_articles, n_hdt, n_human,
+                   highest_evidence_level, HDT_any, HDT_host, L2_host),
+    by = "drug"
+  ) %>%
+  arrange(desc(prior_evidence), desc(n_hdt))
+
+print(cand_labels, n = Inf)
+
+cand_labels %>%
+  group_by(prior_evidence) %>%
+  summarise(
+    drugs    = n(),
+    v1_pos   = sum(v1_positive),
+    HDT_any  = sum(HDT_any),
+    HDT_host = sum(HDT_host),
+    .groups = "drop"
+  ) %>%
+  print()
+
+cat("\nwith prior evidence but not labelled positive under HDT_host:\n")
+print(cand_labels %>% filter(prior_evidence, !HDT_host) %>%
+        select(drug, v1_positive, unique_articles, n_hdt, n_human))
+```
+
+```{r evidence composition of the candidate drugs}
+LEVEL_COLS <- names(select(v2, n_clinical_study:n_other))
+
+# candidate order from the manuscript table, by combined mean-rank z-score
+CANDIDATE_ORDER <- c(
+  "rosuvastatin", "fostamatinib", "fluvastatin", "tofacitinib", "lovastatin",
+  "ethinyl-estradiol", "atorvastatin", "clonidine", "nabumetone", "tamoxifen",
+  "ketotifen", "vemurafenib", "raloxifene", "naltrexone", "dasatinib",
+  "chlorprothixene", "lapatinib", "forskolin", "sertraline", "mometasone"
+)
+stopifnot(setequal(CANDIDATE_ORDER, candidates$drug))
+
+cmp %>%
+  filter(drug %in% candidates$drug) %>%
+  select(drug, all_of(LEVEL_COLS)) %>%
+  pivot_longer(-drug, names_to = "level", values_to = "records") %>%
+  mutate(level = factor(sub("^n_", "", level), levels = rev(sub("^n_", "", LEVEL_COLS)))) %>%
+  mutate(drug = factor(drug, levels = rev(CANDIDATE_ORDER))) %>%
+  ggplot(aes(x = records, y = drug, fill = level)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Blues", direction = -1) +
+  labs(
+    title = "Evidence composition of the candidate drugs",
+    x = "records",
+    y = NULL,
+    fill = "evidence level"
+  ) +
+  theme_minimal(base_size = 11)
 ```

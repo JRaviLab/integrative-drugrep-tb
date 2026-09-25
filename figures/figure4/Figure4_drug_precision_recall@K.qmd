@@ -24,6 +24,8 @@ labels <- labels %>%
     n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
     n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
     n_in_vivo = n_clinical_study + n_animal,
+    # human hosts only: clinical studies and human-subject records. Animal and
+    n_human   = n_clinical_study + n_human_subject,
 
     # label ladder, each rung is a subset of the one above it
     L0_any      = unique_articles > 0,
@@ -33,34 +35,34 @@ labels <- labels %>%
     L4_clinical = n_clinical_study > 0,
 
     # HDT_any is the like-for-like analogue of the old "Direct (HDT)" label:
-    # the record was returned by the HDT-restricted pubmed query
     HDT_any     = n_hdt > 0,
-    HDT_host    = n_hdt > 0 & n_host > 0
+    HDT_host    = n_hdt > 0 & n_host > 0,
+    HDT_human_host    = n_hdt > 0 & n_human > 0
   )
 
 # set one label definition per render, the rest of the notebook is unchanged
-LABEL_DEF <- "HDT_host"   # one of: L0_any L1_primary L2_host L3_in_vivo
-                         #         L4_clinical HDT_any HDT_host
+LABEL_DEF <- "HDT_any"   # one of: L0_any L1_primary L2_host L3_in_vivo
+                         #         L4_clinical HDT_any HDT_host HDT_human_host
 
 stopifnot(LABEL_DEF %in% names(labels))
 
-# fostamatinib was manually labeled positive because a misspelled drug name in
-# the abstract prevented detection
-# https://doi.org/10.3390/antibiotics9090550
-MANUAL_POSITIVES <- c("fostamatinib")
-
-labels$HDT_label <- ifelse(
-  labels[[LABEL_DEF]] | labels$drug_name %in% MANUAL_POSITIVES,
-  1, 0
+# plain-language description of the stratification class, used in figure subtitles
+LABEL_DESC <- c(
+  L0_any      = "any retrieved article",
+  L1_primary  = "primary (non-review) study",
+  L2_host     = "host-level evidence",
+  L3_in_vivo  = "in vivo evidence",
+  L4_clinical = "clinical study evidence",
+  HDT_any     = "any HDT query hit",
+  HDT_host   = "HDT query (all host)",
+  HDT_human_host    = "HDT query hit (human host)"
 )
+LABEL_SUBTITLE <- paste0("Positive label: ", LABEL_DESC[[LABEL_DEF]])
+
+labels$HDT_label <- as.integer(labels[[LABEL_DEF]])
 
 cat("Label definition :", LABEL_DEF, "\n")
 cat("Positives         :", sum(labels$HDT_label), "of", nrow(labels), "drugs\n")
-
-# report whether the manual override still changes anything under this label
-override_needed <- labels$drug_name %in% MANUAL_POSITIVES & !labels[[LABEL_DEF]]
-cat("Manual overrides still active:",
-    paste(labels$drug_name[override_needed], collapse = ", "), "\n")
 
 # ladder counts, should be monotonically non-increasing
 print(colSums(labels[, c("L0_any", "L1_primary", "L2_host",
@@ -295,7 +297,7 @@ ggplot(
   scale_y_reverse() +
   coord_flip() +
   facet_wrap(~DataType) +
-  theme_minimal(base_size = 16) +
+  theme_minimal(base_size = 20) +
   scale_fill_manual(
     values = c(
       "Aggregated signatures" = "#0072B2",
@@ -308,13 +310,17 @@ ggplot(
   ) +
   labs(
     title = "Distribution of ranks for known drugs\nin the top 20 predictions across methods",
+    subtitle = LABEL_SUBTITLE,
     x = "Method",
     y = "Rank (Top = 1)",
     fill = "Signature Type"
   ) +
   theme(
     legend.position = "right",
-    strip.text = element_text(face = "bold")
+    strip.text = element_text(face = "bold"),
+    # base_size scales the title with everything else, keep it at the old size
+    plot.title = element_text(size = 19),
+    plot.subtitle = element_text(size = 14)
   )
 
 dev.off()
@@ -424,16 +430,20 @@ ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
     "Aggregated signature" = "solid"
   )) +
   
-  theme_minimal() +
+  theme_minimal(base_size = 16) +
   labs(
     title = "Precision@K across methods by technology and signature type",
+    subtitle = LABEL_SUBTITLE,
     x = "K",
     y = "Precision",
     color = "Score",
     linetype = "Signature Type"
   ) +
   theme(
-    strip.text = element_text(face = "bold")
+    strip.text = element_text(face = "bold"),
+    # base_size scales the title with everything else, keep it at the old size
+    plot.title = element_text(size = 13),
+    plot.subtitle = element_text(size = 11)
   )
 dev.off()
 ```
@@ -483,6 +493,7 @@ ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
   theme_minimal() +
   labs(
     title = "Average precision@K across microarray and RNAseq",
+    subtitle = LABEL_SUBTITLE,
     x = "K",
     y = "Average precision",
     color = "Score",
@@ -565,6 +576,7 @@ ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
   theme_minimal() +
   labs(
     title = "Recall@K across methods by technology and signature type",
+    subtitle = LABEL_SUBTITLE,
     x = "K",
     y = "Recall",
     color = "Score",
@@ -621,6 +633,7 @@ ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
   theme_minimal() +
   labs(
     title = "Average recall@K across microarray and RNAseq",
+    subtitle = LABEL_SUBTITLE,
     x = "K",
     y = "Average recall",
     color = "Score",
