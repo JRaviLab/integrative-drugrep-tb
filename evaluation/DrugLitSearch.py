@@ -1,6 +1,6 @@
 # Literature searcher for BROAD's list of FDA approved drugs
 # original author : @LingT03
-# last modified : 09/03/2026
+# last modified : 09/24/2026
 # LLM usage note : 
 # The template was generated with the help of an LLM and then reviewed 
 # and modified to fit the project's needs by the author. Systematic code reviews were 
