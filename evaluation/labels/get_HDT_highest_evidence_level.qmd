@@ -1,0 +1,149 @@
+---
+title: "get_HDT_highest_evidence_level"
+format: html
+---
+
+```{r}
+library(dplyr)
+library(stringr)
+library(purrr)
+library(readr)
+library(tibble)
+library(here)
+
+df <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
+
+# extract highest HDT evidence + associated PMID(s)
+get_highest_HDT <- function(x) {
+  
+  if (is.na(x) || x == "") {
+    return(tibble(
+      highest_HDT_evidence = NA_character_,
+      highest_HDT_PMID = NA_character_
+    ))
+  }
+  
+  # split into individual numbered studies
+  studies <- str_split(x, "(?=\\[\\d+\\])")[[1]]
+  
+  # keep only studies explicitly tagged with HDT
+  hdt_studies <- studies[
+    str_detect(studies, "\\|\\s*HDT\\b")
+  ]
+  
+  if (length(hdt_studies) == 0) {
+    return(tibble(
+      highest_HDT_evidence = NA_character_,
+      highest_HDT_PMID = NA_character_
+    ))
+  }
+  
+  # extract evidence and PMID from each HDT-tagged study
+  evidence <- str_match(
+    hdt_studies,
+    "Evidence:\\s*([A-Za-z_]+)"
+  )[, 2]
+  
+  pmid <- str_match(
+    hdt_studies,
+    "PMID:\\s*([0-9]+)"
+  )[, 2]
+  
+  hdt_info <- tibble(
+    evidence = evidence,
+    pmid = pmid
+  ) %>%
+    filter(!is.na(evidence))
+  
+  if (nrow(hdt_info) == 0) {
+    return(tibble(
+      highest_HDT_evidence = NA_character_,
+      highest_HDT_PMID = NA_character_
+    ))
+  }
+  
+  # evidence hierarchy: highest -> lowest
+  priority <- c(
+    "clinical_study",
+    "human_subject",
+    "animal",
+    "in_vitro",
+    "other"
+  )
+  
+  highest <- priority[priority %in% hdt_info$evidence][1]
+  
+  if (is.na(highest)) {
+    return(tibble(
+      highest_HDT_evidence = NA_character_,
+      highest_HDT_PMID = NA_character_
+    ))
+  }
+  
+  # PMID(s) belonging specifically to the highest evidence level
+  highest_pmids <- hdt_info %>%
+    filter(evidence == highest) %>%
+    pull(pmid) %>%
+    na.omit() %>%
+    unique()
+  
+  tibble(
+    highest_HDT_evidence = highest,
+    highest_HDT_PMID = ifelse(
+      length(highest_pmids) > 0,
+      paste(highest_pmids, collapse = "; "),
+      NA_character_
+    )
+  )
+}
+
+results <- map_dfr(
+  df$literature_evidence,
+  get_highest_HDT
+)
+
+df <- bind_cols(df, results)
+
+df %>%
+  select(
+    highest_HDT_evidence,
+    highest_HDT_PMID,
+    everything()
+  )
+
+# Summary
+df %>%
+  count(highest_HDT_evidence, sort = TRUE)
+```
+
+```{r}
+drug_candidates <- c(
+  "rosuvastatin",
+  "fostamatinib",
+  "fluvastatin",
+  "tofacitinib",
+  "lovastatin",
+  "ethinyl-estradiol",
+  "atorvastatin",
+  "clonidine",
+  "nabumetone",
+  "tamoxifen",
+  "ketotifen",
+  "vemurafenib",
+  "raloxifene",
+  "naltrexone",
+  "dasatinib",
+  "chlorprothixene",
+  "lapatinib",
+  "forskolin",
+  "sertraline",
+  "mometasone"
+)
+
+# subset and preserve the order in drug_candidates
+df_subset <- df %>%
+  filter(tolower(drug_name) %in% tolower(drug_candidates)) %>%
+  arrange(match(tolower(drug_name), tolower(drug_candidates)))
+
+write_csv(df_subset,file=here("evaluation/labels/top20HDT_literature.csv"))
+```
