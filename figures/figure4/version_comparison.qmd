@@ -14,31 +14,29 @@ library(scales)
 library(here)
 library(readr)
 
-v1 <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v1.tsv")) # checked out from main 
+v1 <- read_tsv(here("evaluation/labels/launched_drug_with_literature_v1.tsv")) # checked out from main
 v2 <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
 
-# join key, v1 and v2 may differ in capitalisation
+# join key, capitalisation can differ between versions
 v1 <- v1 %>% mutate(drug = tolower(drug_name))
 v2 <- v2 %>% mutate(drug = tolower(drug_name))
 
-# v1 label: a drug was positive if the tiered search stopped at an HDT tier
+# v1 label: positive if the tiered search stopped at an HDT tier
 v1 <- v1 %>%
   mutate(
     v1_positive = search_type == "Direct (HDT)",
     v1_any      = search_type != "No Results"
   )
 
-# v2 labels
 v2 <- v2 %>%
   mutate(
     n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
     n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
     n_in_vivo = n_clinical_study + n_animal,
-    # human hosts only: animal and in vitro records are excluded
-    n_human   = n_clinical_study + n_human_subject,
+    n_human   = n_clinical_study + n_human_subject,  # human hosts only
 
     HDT_any      = n_hdt > 0,
-    HDT_host     = n_hdt > 0 & n_human > 0,
+    HDT_host     = n_hdt > 0 & n_human > 0,          # primary label
     HDT_in_vivo  = n_hdt > 0 & n_in_vivo > 0,
     HDT_clinical = n_hdt > 0 & n_clinical_study > 0,
 
@@ -94,7 +92,7 @@ cat("\nv1 positives :", sum(cmp$v1_positive), "\n")
 cat("v2 positives :", sum(cmp$HDT_host), "\n")
 cat("net change   :", sum(cmp$HDT_host) - sum(cmp$v1_positive), "\n")
 
-# the drugs that changed status, name these in the response letter
+# drugs that changed status, name these in the response letter
 cat("\nlost (v1 positive, no human host evidence in v2):\n")
 print(cmp %>% filter(v1_positive, !HDT_host) %>%
         select(drug, n_hdt, n_review, n_clinical_study:n_other))
@@ -139,8 +137,7 @@ print(summary_tbl, n = Inf)
 ```
 
 ```{r candidate literature definitions}
-# manually collected literature evidence for the candidate drugs
-# title_pattern is matched against the retrieved record titles
+# manually collected evidence for the candidate drugs, matched by title
 candidates <- tribble(
   ~drug,               ~evidence,               ~title_pattern,
   "rosuvastatin",      "Cross_2023 [59]",       "Rosuvastatin adjunctive therapy",
@@ -167,10 +164,9 @@ candidates <- tribble(
   "mometasone",        "No prior evidence",     NA
 )
 
-# every candidate drug must exist in the label table
 stopifnot(all(candidates$drug %in% v2$drug))
 
-# article-level records, the JSON is the only place the cited papers can be looked up
+# article-level records, JSON is the only place the cited papers can be looked up
 records <- jsonlite::fromJSON(
   here("evaluation/labels/launched_drug_with_literature.json"),
   simplifyVector = TRUE
@@ -180,19 +176,15 @@ records <- jsonlite::fromJSON(
 ```
 
 ```{r candidate literature retrieval check}
-# were the manually collected papers retrieved, and retrieved for the right drug?
-# two separate failure modes:
-#   not in corpus    the paper was never returned by any drug query
-#   not linked       the paper is in the corpus but not attached to this candidate
+# was each cited paper retrieved, and attached to the right drug?
 cited <- candidates %>%
   filter(!is.na(title_pattern)) %>%
   rowwise() %>%
   mutate(
     hit = list(
       records %>%
-        # errata share the title of the paper they correct
         filter(grepl(title_pattern, title, ignore.case = TRUE),
-               !grepl("^Erratum|^Correction", title)) %>%
+               !grepl("^Erratum|^Correction", title)) %>%  # errata share the original title
         slice_head(n = 1)
     ),
     in_corpus      = nrow(hit) > 0,
@@ -218,7 +210,6 @@ print(cited %>% filter(!linked_to_drug) %>% select(drug, evidence, in_corpus))
 ```
 
 ```{r candidate drug level labels}
-# what label does each candidate end up with under v1 and v2
 cand_labels <- candidates %>%
   group_by(drug) %>%
   summarise(prior_evidence = any(!is.na(title_pattern)), .groups = "drop") %>%
@@ -273,6 +264,101 @@ cmp %>%
     x = "records",
     y = NULL,
     fill = "evidence level"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r evidence category of the HDT positive records}
+# README's "positive records": HDT-restricted query hits, reviews excluded
+hdt_positive <- records %>%
+  filter(is_hdt, !is_review)
+
+stopifnot(nrow(hdt_positive) == 292)  # matches the README run log
+
+positive_drugs <- cmp %>% filter(HDT_any) %>% pull(drug)
+stopifnot(length(positive_drugs) > 0)
+
+LEVEL_ORDER <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
+
+hdt_positive_counts <- hdt_positive %>%
+  count(evidence_level, name = "n") %>%
+  mutate(
+    evidence_level = factor(evidence_level, levels = LEVEL_ORDER),
+    pct = n / sum(n)
+  )
+
+print(hdt_positive_counts %>% arrange(desc(n)))
+cat("\nHDT_any positive drugs:", length(positive_drugs), "\n")
+cat("HDT positive records   :", nrow(hdt_positive), "\n")
+
+# one-hue sequential ramp, validated colorblind-safe, strongest = darkest
+EVIDENCE_RAMP <- setNames(
+  c("#104281", "#1c5cab", "#2a78d6", "#5598e7", "#86b6ef"),
+  LEVEL_ORDER
+)
+
+ggplot(hdt_positive_counts, aes(x = evidence_level, y = n, fill = evidence_level)) +
+  geom_col() +
+  geom_text(aes(label = sprintf("%d (%.0f%%)", n, 100 * pct)), vjust = -0.4, size = 3.5) +
+  scale_fill_manual(values = EVIDENCE_RAMP, guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title = sprintf("Evidence category of the %d HDT positive records (reviews excluded)", nrow(hdt_positive)),
+    subtitle = sprintf("the literature behind the %d HDT_any positive drugs",
+                       length(positive_drugs)),
+    x = NULL,
+    y = "records"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r strongest HDT-tagged evidence per positive drug}
+# each positive drug counted once, by its own strongest HDT-tagged record
+# (not its whole bibliography)
+drug_hdt_level <- hdt_positive %>%
+  filter(lengths(drugs) > 0) %>%
+  select(drugs, evidence_level) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs)) %>%
+  filter(drug %in% positive_drugs) %>%
+  mutate(level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  summarise(strongest = LEVEL_ORDER[min(level_rank)], .groups = "drop")
+
+# n_hdt counts reviews too, so a drug can be positive on an HDT-tagged
+# review alone, with no primary HDT-tagged record
+missing_drugs <- setdiff(positive_drugs, drug_hdt_level$drug)
+if (length(missing_drugs) > 0) {
+  cat(length(missing_drugs), "positive drugs have only an HDT-tagged review, no primary HDT record:\n")
+  print(missing_drugs)
+}
+
+drug_evidence_counts <- tibble(strongest = c(LEVEL_ORDER, "HDT review only")) %>%
+  left_join(count(drug_hdt_level, strongest, name = "n"), by = "strongest") %>%
+  mutate(
+    n = ifelse(strongest == "HDT review only", length(missing_drugs), coalesce(n, 0L)),
+    strongest = factor(strongest, levels = c(LEVEL_ORDER, "HDT review only")),
+    pct = n / length(positive_drugs)
+  )
+
+print(drug_evidence_counts %>% arrange(desc(n)))
+cat("\nHDT_any positive drugs:", length(positive_drugs), "\n")
+cat("drugs classified       :", sum(drug_evidence_counts$n), "\n")
+
+# review-only sliver gets a neutral gray, it isn't an evidence level
+DRUG_EVIDENCE_RAMP <- c(EVIDENCE_RAMP, "HDT review only" = "#999999")
+
+ggplot(drug_evidence_counts, aes(x = strongest, y = n, fill = strongest)) +
+  geom_col() +
+  geom_text(aes(label = sprintf("%d (%.0f%%)", n, 100 * pct)), vjust = -0.4, size = 3.5) +
+  scale_fill_manual(values = DRUG_EVIDENCE_RAMP, guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title = sprintf("Strongest HDT-tagged evidence per positive drug (n = %d drugs)",
+                    length(positive_drugs)),
+    subtitle = "each HDT_any positive drug counted once, by its strongest own HDT-tagged record",
+    x = NULL,
+    y = "drugs"
   ) +
   theme_minimal(base_size = 11)
 ```
