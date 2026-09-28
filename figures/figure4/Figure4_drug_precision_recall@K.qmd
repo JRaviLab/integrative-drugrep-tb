@@ -1,7 +1,7 @@
 # Evaluation od predicted drugs against drugs supported by TB HDT literature evidence
-# Pubmed search on all FDA-approved drugs was performed on April 2nd, 2026 by Ling Thang
+# Pubmed search on all FDA-approved drugs was performed on September 25, 2026 by Ling Thang
 # This notebook contains step-by-step evaluation of the top 20 drugs predicted using (i) our integrative approach, (2) the six connectivity methods across microarray/RNAseq individual signatures and aggregated signatures
-# Last modified: 04/10/26
+# Last modified: 09/28/26; updated figures with new search results with evidence level stratification
 # Kewalin Samart
 
 ```{r load libraries}
@@ -11,62 +11,173 @@ library(dplyr)
 library(ggplot2)
 library(RColorBrewer)
 library(tidyr)
+library(purrr)
 ```
 
 ```{r read in HDT positive labels}
-labels <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"),
-                   show_col_types = FALSE)
+labels <- readr::read_tsv(
+  here::here("evaluation/labels/launched_drug_with_literature.tsv"),
+  show_col_types = FALSE
+)
 
-# evidence levels are mutually exclusive, so a drug's primary record count is
-# the sum of the level columns
+# get highest HDT evidence
+# hierarchy: clinical_study > human_subject > animal > in_vitro > other
+get_highest_HDT <- function(x) {
+  if (is.na(x) || stringr::str_trim(x) == "") {
+    return(NA_character_)
+  }
+  studies <- stringr::str_split(
+    x,
+    "(?=\\[\\d+\\])"
+  )[[1]]
+  # keep only studies explicitly tagged HDT
+  hdt_studies <- studies[stringr::str_detect(studies,"\\|\\s*HDT\\b")]
+
+  if (length(hdt_studies) == 0) {
+    return(NA_character_)
+  }
+
+  # extract evidence level
+  evidence <- stringr::str_match(hdt_studies,"Evidence:\\s*([A-Za-z_]+)")[, 2]
+  evidence <- evidence[!is.na(evidence)]
+
+  if (length(evidence) == 0) {
+    return(NA_character_)
+  }
+
+  # highest -> lowest
+  priority <- c("clinical_study","human_subject","animal","in_vitro","other")
+  highest <- priority[priority %in% evidence]
+
+  if (length(highest) == 0) {
+    return(NA_character_)
+  }
+
+  highest[1]
+}
+
+# apply to every drug
+labels$highest_HDT_evidence <- purrr::map_chr(
+  labels$literature_evidence,
+  get_highest_HDT
+)
+
+# define HDT labels
 labels <- labels %>%
-  mutate(
-    n_primary = n_clinical_study + n_human_subject + n_animal + n_in_vitro + n_other,
-    n_host    = n_clinical_study + n_human_subject + n_animal + n_in_vitro,
-    n_in_vivo = n_clinical_study + n_animal,
-    # human hosts only: clinical studies and human-subject records. Animal and
-    n_human   = n_clinical_study + n_human_subject,
+  dplyr::mutate(
 
-    # label ladder, each rung is a subset of the one above it
-    L0_any      = unique_articles > 0,
-    L1_primary  = n_primary > 0,
-    L2_host     = n_host > 0,
-    L3_in_vivo  = n_in_vivo > 0,
-    L4_clinical = n_clinical_study > 0,
+    HDT_any =
+      !is.na(highest_HDT_evidence),
 
-    # HDT_any is the like-for-like analogue of the old "Direct (HDT)" label:
-    HDT_any     = n_hdt > 0,
-    HDT_host    = n_hdt > 0 & n_host > 0,
-    HDT_human_host    = n_hdt > 0 & n_human > 0
+    HDT_clinical_study =
+      highest_HDT_evidence %in% "clinical_study",
+
+    HDT_human_subject =
+      highest_HDT_evidence %in% "human_subject",
+
+    HDT_animal =
+      highest_HDT_evidence %in% "animal",
+
+    HDT_in_vitro =
+      highest_HDT_evidence %in% "in_vitro",
+
+    HDT_other =
+      highest_HDT_evidence %in% "other"
   )
 
-# set one label definition per render, the rest of the notebook is unchanged
-LABEL_DEF <- "HDT_any"   # one of: L0_any L1_primary L2_host L3_in_vivo
-                         #         L4_clinical HDT_any HDT_host HDT_human_host
+# choose label definition
+# HDT_any
+# HDT_clinical_study
+# HDT_human_subject
+# HDT_animal
+# HDT_in_vitro
+# HDT_other
+LABEL_DEF <- "HDT_any"
 
-stopifnot(LABEL_DEF %in% names(labels))
-
-# plain-language description of the stratification class, used in figure subtitles
-LABEL_DESC <- c(
-  L0_any      = "any retrieved article",
-  L1_primary  = "primary (non-review) study",
-  L2_host     = "host-level evidence",
-  L3_in_vivo  = "in vivo evidence",
-  L4_clinical = "clinical study evidence",
-  HDT_any     = "any HDT query hit",
-  HDT_host   = "HDT query (all host)",
-  HDT_human_host    = "HDT query hit (human host)"
+VALID_LABELS <- c(
+  "HDT_any",
+  "HDT_clinical_study",
+  "HDT_human_subject",
+  "HDT_animal",
+  "HDT_in_vitro",
+  "HDT_other"
 )
-LABEL_SUBTITLE <- paste0("Positive label: ", LABEL_DESC[[LABEL_DEF]])
 
+stopifnot(LABEL_DEF %in% VALID_LABELS)
+
+LABEL_DESC <- c(
+  HDT_any = "any HDT evidence",
+  HDT_clinical_study = "highest HDT evidence is clinical study",
+  HDT_human_subject = "highest HDT evidence is human subject",
+  HDT_animal = "highest HDT evidence is animal",
+  HDT_in_vitro = "highest HDT evidence is in vitro",
+  HDT_other = "highest HDT evidence is other")
+
+LABEL_SUBTITLE <- paste0("Positive label: ",LABEL_DESC[[LABEL_DEF]])
+
+#  create final binary label to define positives
 labels$HDT_label <- as.integer(labels[[LABEL_DEF]])
 
 cat("Label definition :", LABEL_DEF, "\n")
-cat("Positives         :", sum(labels$HDT_label), "of", nrow(labels), "drugs\n")
+cat("Description      :", LABEL_DESC[[LABEL_DEF]], "\n")
+cat("Positives        :", sum(labels$HDT_label),"of",nrow(labels),"drugs\n")
 
-# ladder counts, should be monotonically non-increasing
-print(colSums(labels[, c("L0_any", "L1_primary", "L2_host",
-                         "L3_in_vivo", "L4_clinical", "HDT_any", "HDT_host")]))
+# highest evidence distribution
+cat("\nHighest HDT evidence distribution:\n")
+print(labels %>% dplyr::count(highest_HDT_evidence,sort = TRUE))
+
+# label counts
+cat("\nHDT label counts:\n")
+print(colSums(labels[, VALID_LABELS]))
+
+# for HDT_any == TRUE, exactly one evidence-specific category must be true.
+# for HDT_any == FALSE, all evidence-specific categories must be FALSE.
+labels <- labels %>%
+  dplyr::mutate(
+    n_HDT_highest_categories =
+      as.integer(HDT_clinical_study) +
+      as.integer(HDT_human_subject) +
+      as.integer(HDT_animal) +
+      as.integer(HDT_in_vitro) +
+      as.integer(HDT_other)
+  )
+
+# HDT drugs must have exactly one highest category
+stopifnot(all(labels$n_HDT_highest_categories[labels$HDT_any] == 1))
+# non-HDT drugs must have zero categories
+stopifnot(all(labels$n_HDT_highest_categories[!labels$HDT_any] == 0))
+cat("\nHighest HDT evidence sanity checks passed.\n")
+
+labels <- labels %>%
+  dplyr::select(
+    drug_name,
+    highest_HDT_evidence,
+    HDT_any,
+    HDT_label,
+    HDT_clinical_study,
+    HDT_human_subject,
+    HDT_animal,
+    HDT_in_vitro,
+    HDT_other,
+    dplyr::everything(),
+    -n_HDT_highest_categories
+  )
+
+print(
+  labels %>%
+    dplyr::select(
+      drug_name,
+      highest_HDT_evidence,
+      HDT_any,
+      HDT_label,
+      HDT_clinical_study,
+      HDT_human_subject,
+      HDT_animal,
+      HDT_in_vitro,
+      HDT_other
+    ),
+  n = 50
+)
 ```
 
 ```{r read in all predictions for evaluation}
@@ -210,6 +321,87 @@ labels$drug_name <- tolower(labels$drug_name)
 positives <- labels$drug_name[labels$HDT_label == 1]
 cat("Number of positives in overlapping (LINCS + FDA-approved) set:", length(positives), "\n")
 ```
+
+```{r}
+# evidence distribution among HDT-positive drugs
+# in the FDA-approved + LINCS overlap
+positive_evidence <- labels %>%
+  filter(HDT_label == 1) %>%
+  mutate(
+    highest_HDT_evidence = factor(
+      highest_HDT_evidence,
+      levels = c(
+        "clinical_study",
+        "human_subject",
+        "animal",
+        "in_vitro",
+        "other"
+      ),
+      labels = c(
+        "Clinical study",
+        "Human subject",
+        "Animal",
+        "In vitro",
+        "Other"
+      )
+    )
+  ) %>%
+  count(highest_HDT_evidence, name = "n_drugs", .drop = FALSE)
+
+print(positive_evidence)
+
+pdf(here("figures/figure4/",
+  paste0("figureS9_evidence_stratification", LABEL_DEF, ".pdf")), 
+  width = 8, height = 6)
+
+ggplot(
+  positive_evidence,
+  aes(
+    x = highest_HDT_evidence,
+    y = n_drugs
+  )
+) +
+  geom_col(
+    width = 0.7
+  ) +
+  geom_text(
+    aes(label = n_drugs),
+    vjust = -0.4,
+    size = 4
+  ) +
+  labs(
+    title = paste0("HDT evidence levels among positive ", length(positives)," drugs"),
+    subtitle = "FDA-approved drugs with LINCS profiles (24 h, 10 µM)",
+    x = "Highest HDT evidence level",
+    y = "Number of drugs"
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  theme_classic(base_size = 12) +
+  theme(
+    axis.text.x = element_text(
+      angle = 0,
+      hjust = 0.5,
+      vjust = 1
+    )
+  )
+
+dev.off()
+
+# testing if every positive drug appears exactly once in the evidence bar plot
+cat("FDA + LINCS drugs:", nrow(labels), "\n")
+cat("HDT-positive drugs:", sum(labels$HDT_label == 1), "\n")
+cat("Positive drug names:", length(positives), "\n")
+cat("Evidence-category total:", sum(positive_evidence$n_drugs), "\n")
+
+stopifnot(
+  sum(labels$HDT_label == 1) == length(positives),
+  sum(positive_evidence$n_drugs) == length(positives)
+)
+
+```
+
 ```{r prepare data and plotting rank distributions by score and signature type}
 # build ranking table
 rank_df <- lapply(names(method_lists), function(method) {
