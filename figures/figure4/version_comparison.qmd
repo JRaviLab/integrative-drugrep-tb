@@ -110,8 +110,8 @@ summary_tbl <- tibble(
     "positives, v1 label (Direct (HDT))",
     "positives, HDT_any",
     "positives, HDT_host",
-    "drugs losing the label under HDT_host",
-    "drugs gaining the label under HDT_host",
+    "drugs losing the label under HDT_any",
+    "drugs gaining the label under HDT_any",
     "records classified, v2",
     "records at other (pathogen-directed), %",
     "records flagged as review, %",
@@ -123,8 +123,8 @@ summary_tbl <- tibble(
     sum(cmp$v1_positive),
     sum(cmp$HDT_any),
     sum(cmp$HDT_host),
-    sum(cmp$v1_positive & !cmp$HDT_host),
-    sum(!cmp$v1_positive & cmp$HDT_host),
+    sum(cmp$v1_positive & !cmp$HDT_any),
+    sum(!cmp$v1_positive & cmp$HDT_any),
     sum(cmp$unique_articles),
     round(100 * sum(cmp$n_other) / sum(cmp$n_primary), 1),
     round(100 * sum(cmp$n_review) / (sum(cmp$n_primary) + sum(cmp$n_review)), 1),
@@ -137,6 +137,14 @@ print(summary_tbl, n = Inf)
 ```
 
 ```{r candidate literature definitions}
+# candidate order from the manuscript table, by combined mean-rank z-score
+CANDIDATE_ORDER <- c(
+  "rosuvastatin", "fostamatinib", "fluvastatin", "tofacitinib", "lovastatin",
+  "ethinyl-estradiol", "atorvastatin", "clonidine", "nabumetone", "tamoxifen",
+  "ketotifen", "vemurafenib", "raloxifene", "naltrexone", "dasatinib",
+  "chlorprothixene", "lapatinib", "forskolin", "sertraline", "mometasone"
+)
+
 # manually collected evidence for the candidate drugs, matched by title
 candidates <- tribble(
   ~drug,               ~evidence,               ~title_pattern,
@@ -218,7 +226,8 @@ cand_labels <- candidates %>%
                    highest_evidence_level, HDT_any, HDT_host, L2_host),
     by = "drug"
   ) %>%
-  arrange(desc(prior_evidence), desc(n_hdt))
+  arrange(desc(prior_evidence), desc(n_hdt)) |> 
+  arrange(match(drug, CANDIDATE_ORDER))
 
 print(cand_labels, n = Inf)
 
@@ -241,13 +250,6 @@ print(cand_labels %>% filter(prior_evidence, !HDT_host) %>%
 ```{r evidence composition of the candidate drugs}
 LEVEL_COLS <- names(select(v2, n_clinical_study:n_other))
 
-# candidate order from the manuscript table, by combined mean-rank z-score
-CANDIDATE_ORDER <- c(
-  "rosuvastatin", "fostamatinib", "fluvastatin", "tofacitinib", "lovastatin",
-  "ethinyl-estradiol", "atorvastatin", "clonidine", "nabumetone", "tamoxifen",
-  "ketotifen", "vemurafenib", "raloxifene", "naltrexone", "dasatinib",
-  "chlorprothixene", "lapatinib", "forskolin", "sertraline", "mometasone"
-)
 stopifnot(setequal(CANDIDATE_ORDER, candidates$drug))
 
 cmp %>%
@@ -361,4 +363,96 @@ ggplot(drug_evidence_counts, aes(x = strongest, y = n, fill = strongest)) +
     y = "drugs"
   ) +
   theme_minimal(base_size = 11)
+```
+
+```{r top 5 predictions per method}
+# same prediction sources as Figure4_drug_precision_recall@K.qmd; only the
+# top 5 of each are used here, so read straight to rank 5, not rank 20
+load_indiv <- function(tech, score) {
+  path <- sprintf("results/%s/04_rank_aggregation/%s_indivSig_TB_%s.rds", tech, score, tech)
+  readRDS(here(path))$ranked_pert[1:5]
+}
+
+aggr_RNAseq     <- readRDS(here("results/RNAseq/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_RNAseq_list.rds"))
+aggr_microarray <- readRDS(here("results/microarray/04_rank_aggregation/ranked_aggrSig_drugs_scores_neg_left_0.9_microarray_list.rds"))
+
+# method_lists name -> RDS object name, only where they differ
+score_rds <- c(CMAP = "CMAP", Pearson = "Cor_pearson", Spearman = "Cor_spearman",
+               NCS = "NCS", Tau = "Tau", WCS = "WCS")
+
+method_lists <- list()
+for (label in names(score_rds)) {
+  rds <- score_rds[[label]]
+  method_lists[[paste0(label, "_microarray")]]      <- load_indiv("microarray", rds)
+  method_lists[[paste0(label, "_RNAseq")]]           <- load_indiv("RNAseq", rds)
+  method_lists[[paste0(label, "_microarray_aggr")]]  <- aggr_microarray[[rds]][1:5]
+  method_lists[[paste0(label, "_RNAseq_aggr")]]      <- aggr_RNAseq[[rds]][1:5]
+}
+
+integrative_pred <- read_tsv(here("results/final_high_confidence_drug_predictions.tsv"), show_col_types = FALSE)
+method_lists$Integrative <- integrative_pred$drug_name[1:5]
+
+# one row per (method, rank)
+top5_by_method <- lapply(names(method_lists), function(m) {
+  tibble(method = m, rank = 1:5, drug_name = method_lists[[m]])
+}) %>%
+  bind_rows()
+```
+
+```{r HDT literature check for the top 5 predictions of each method}
+# strongest non-review HDT-tagged evidence per drug; not restricted to
+# positive_drugs so a top-5 drug with zero HDT evidence comes back NA
+# rather than being silently dropped
+highest_HDT <- records %>%
+  filter(is_hdt, !is_review, lengths(drugs) > 0) %>%
+  select(pmid, evidence_level, drugs) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs), level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  slice_min(level_rank, with_ties = TRUE) %>%
+  summarise(
+    highest_HDT_evidence = first(evidence_level),
+    highest_HDT_PMID = {
+      p <- sort(unique(pmid[pmid != ""]))
+      if (length(p) > 0) paste(p, collapse = "; ") else NA_character_
+    },
+    .groups = "drop"
+  )
+
+hdt_check_top5 <- top5_by_method %>%
+  mutate(drug = tolower(drug_name)) %>%
+  left_join(v2 %>% select(drug, n_hdt, n_review), by = "drug") %>%
+  left_join(highest_HDT, by = "drug") %>%
+  select(method, rank, drug_name, highest_HDT_evidence, highest_HDT_PMID, n_hdt, n_review)
+
+write_csv(hdt_check_top5, here("figures/figure4/top5_HDT_literature_by_method.csv"))
+
+# same drug can be top-5 for several methods; one row per unique drug for
+# the literature check itself, methods it appeared in kept for context
+hdt_check_top5_unique <- hdt_check_top5 %>%
+  group_by(drug_name) %>%
+  summarise(
+    n_methods = n(),
+    methods = paste(sort(unique(method)), collapse = "; "),
+    highest_HDT_evidence = first(highest_HDT_evidence),
+    highest_HDT_PMID = first(highest_HDT_PMID),
+    n_hdt = first(n_hdt),
+    n_review = first(n_review),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_methods), drug_name)
+
+write_csv(hdt_check_top5_unique, here("figures/figure4/top5_HDT_literature_unique.csv"))
+cat("unique drugs across all top-5 lists:", nrow(hdt_check_top5_unique), "\n")
+```
+
+```{r HDT-positive drugs outside the 20 Integrative candidates}
+# drugs with HDT evidence that other methods surface in their top 5, but
+# that Integrative's own top 20 never ranked highly enough to include
+non_candidate_hdt <- hdt_check_top5_unique %>%
+  filter(n_hdt > 0, !(drug_name %in% CANDIDATE_ORDER)) %>%
+  arrange(desc(n_hdt))
+
+write_csv(non_candidate_hdt, here("figures/figure4/top5_HDT_non_candidate_drugs.csv"))
+print(non_candidate_hdt, n = Inf)
 ```
