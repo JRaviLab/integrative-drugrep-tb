@@ -78,7 +78,7 @@ print(retrieval, n = Inf)
 
 ```{r label agreement}
 agreement <- cmp %>%
-  count(v1_positive, HDT_host) %>%
+  dplyr::count(v1_positive, HDT_host) %>%
   mutate(status = case_when(
     v1_positive &  HDT_host ~ "positive in both",
     v1_positive & !HDT_host ~ "lost, positive only in v1",
@@ -271,7 +271,7 @@ cmp %>%
 ```{r evidence category of the HDT positive records}
 # README's "positive records": HDT-restricted query hits, reviews excluded
 hdt_positive <- records %>%
-  filter(is_hdt, !is_review)
+  dplyr::filter(is_hdt, !is_review)
 
 stopifnot(nrow(hdt_positive) == 292)  # matches the README run log
 
@@ -281,7 +281,7 @@ stopifnot(length(positive_drugs) > 0)
 LEVEL_ORDER <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
 
 hdt_positive_counts <- hdt_positive %>%
-  count(evidence_level, name = "n") %>%
+  dplyr::count(evidence_level, name = "n") %>%
   mutate(
     evidence_level = factor(evidence_level, levels = LEVEL_ORDER),
     pct = n / sum(n)
@@ -334,7 +334,7 @@ if (length(missing_drugs) > 0) {
 }
 
 drug_evidence_counts <- tibble(strongest = c(LEVEL_ORDER, "HDT review only")) %>%
-  left_join(count(drug_hdt_level, strongest, name = "n"), by = "strongest") %>%
+  left_join(dplyr::count(drug_hdt_level, strongest, name = "n"), by = "strongest") %>%
   mutate(
     n = ifelse(strongest == "HDT review only", length(missing_drugs), coalesce(n, 0L)),
     strongest = factor(strongest, levels = c(LEVEL_ORDER, "HDT review only")),
