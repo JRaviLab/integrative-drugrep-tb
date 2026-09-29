@@ -590,7 +590,7 @@ score_colors <- c(
 
 pdf(here("figures/figure4/",
   paste0("figure4a_precision@K_technology_signature_", LABEL_DEF, ".pdf")),
-    width = 8, height = 6)
+    width = 10, height = 8)
 
 ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
   
@@ -639,10 +639,12 @@ ggplot(results_df_plot, aes(x = K, y = Precision, group = Method)) +
     linetype = "Signature Type"
   ) +
   theme(
-    strip.text = element_text(face = "bold"),
+    strip.text = element_text(size = 16, face = "bold"),
     # base_size scales the title with everything else, keep it at the old size
-    plot.title = element_text(size = 13),
-    plot.subtitle = element_text(size = 11)
+    plot.title = element_text(size = 16),
+    plot.subtitle = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
   )
 dev.off()
 ```
@@ -672,7 +674,7 @@ score_colors <- c(
 
 pdf(here("figures/figure4/",
   paste0("figure4c_average_precision@K_technology_signature_", LABEL_DEF, ".pdf")),
-    width = 7, height = 4)
+    width = 10, height = 6)
 
 ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
   geom_line(
@@ -689,7 +691,7 @@ ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
     "Aggregated signature" = "solid"
   )) +
   scale_alpha_identity() +   
-  theme_minimal() +
+  theme_minimal(base_size = 16) +
   labs(
     title = "Average precision@K across microarray and RNAseq",
     subtitle = LABEL_SUBTITLE,
@@ -697,6 +699,14 @@ ggplot(avg_df, aes(x = K, y = AveragePrecision, color = Score)) +
     y = "Average precision",
     color = "Score",
     linetype = "Signature type"
+  ) +
+  theme(
+    strip.text = element_text(size = 16, face = "bold"),
+    # base_size scales the title with everything else, keep it at the old size
+    plot.title = element_text(size = 16),
+    plot.subtitle = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
   )
 dev.off()
 ```
@@ -733,7 +743,7 @@ score_colors <- c(
 )
 pdf(here("figures/figure4/",
   paste0("figure4b_recall@K_technology_signature_", LABEL_DEF, ".pdf")),
-    width = 8, height = 6)
+    width = 10, height = 8)
 
 ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
   
@@ -772,7 +782,7 @@ ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
     "Aggregated signature" = "solid"
   )) +
   
-  theme_minimal() +
+  theme_minimal(base_size = 16) +
   labs(
     title = "Recall@K across methods by technology and signature type",
     subtitle = LABEL_SUBTITLE,
@@ -782,7 +792,12 @@ ggplot(results_df_plot, aes(x = K, y = Recall, group = Method)) +
     linetype = "Signature type"
   ) +
   theme(
-    strip.text = element_text(face = "bold")
+    strip.text = element_text(size = 16, face = "bold"),
+    # base_size scales the title with everything else, keep it at the old size
+    plot.title = element_text(size = 16),
+    plot.subtitle = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
   )
 dev.off()
 ```
@@ -812,7 +827,7 @@ score_colors <- c(
 
 pdf(here("figures/figure4/",
   paste0("figure4d_average_recall@K_technology_signature_", LABEL_DEF, ".pdf")),
-    width = 7, height = 4)
+    width = 10, height = 6)
 
 ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
   geom_line(
@@ -829,7 +844,7 @@ ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
     "Aggregated signature" = "solid"
   )) +
   scale_alpha_identity() +   
-  theme_minimal() +
+  theme_minimal(base_size = 16) +
   labs(
     title = "Average recall@K across microarray and RNAseq",
     subtitle = LABEL_SUBTITLE,
@@ -837,6 +852,14 @@ ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
     y = "Average recall",
     color = "Score",
     linetype = "Signature type"
+  ) +
+  theme(
+    strip.text = element_text(size = 16, face = "bold"),
+    # base_size scales the title with everything else, keep it at the old size
+    plot.title = element_text(size = 16),
+    plot.subtitle = element_text(size = 16),
+    axis.text.x = element_text(size = 16),
+    axis.text.y = element_text(size = 16),
   )
 dev.off()
 ```
