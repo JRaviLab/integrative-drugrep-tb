@@ -82,7 +82,11 @@ labels <- labels %>%
       highest_HDT_evidence %in% "in_vitro",
 
     HDT_other =
-      highest_HDT_evidence %in% "other"
+      highest_HDT_evidence %in% "other",
+    
+    HDT_not_other =
+      highest_HDT_evidence %in%
+        c("clinical_study", "human_subject", "animal", "in_vitro")
   )
 
 # choose label definition
@@ -92,7 +96,8 @@ labels <- labels %>%
 # HDT_animal
 # HDT_in_vitro
 # HDT_other
-LABEL_DEF <- "HDT_any"
+# HDT_not_other
+LABEL_DEF <- "HDT_not_other"
 
 VALID_LABELS <- c(
   "HDT_any",
@@ -100,7 +105,8 @@ VALID_LABELS <- c(
   "HDT_human_subject",
   "HDT_animal",
   "HDT_in_vitro",
-  "HDT_other"
+  "HDT_other",
+  "HDT_not_other"
 )
 
 stopifnot(LABEL_DEF %in% VALID_LABELS)
@@ -111,7 +117,8 @@ LABEL_DESC <- c(
   HDT_human_subject = "highest HDT evidence is human subject",
   HDT_animal = "highest HDT evidence is animal",
   HDT_in_vitro = "highest HDT evidence is in vitro",
-  HDT_other = "highest HDT evidence is other")
+  HDT_other = "highest HDT evidence is other",
+  HDT_not_other = "highest HDT evidence is clinical study or human subject or animal or in vitro")
 
 LABEL_SUBTITLE <- paste0("Positive label: ",LABEL_DESC[[LABEL_DEF]])
 
