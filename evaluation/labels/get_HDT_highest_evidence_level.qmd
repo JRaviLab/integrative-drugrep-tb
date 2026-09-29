@@ -5,115 +5,61 @@ format: html
 
 ```{r}
 library(dplyr)
-library(stringr)
-library(purrr)
+library(tidyr)
 library(readr)
 library(tibble)
 library(here)
 
 df <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
 
-# extract highest HDT evidence + associated PMID(s)
-get_highest_HDT <- function(x) {
-  
-  if (is.na(x) || x == "") {
-    return(tibble(
-      highest_HDT_evidence = NA_character_,
-      highest_HDT_PMID = NA_character_
-    ))
-  }
-  
-  # split into individual numbered studies
-  studies <- str_split(x, "(?=\\[\\d+\\])")[[1]]
-  
-  # keep only studies explicitly tagged with HDT
-  hdt_studies <- studies[
-    str_detect(studies, "\\|\\s*HDT\\b")
-  ]
-  
-  if (length(hdt_studies) == 0) {
-    return(tibble(
-      highest_HDT_evidence = NA_character_,
-      highest_HDT_PMID = NA_character_
-    ))
-  }
-  
-  # extract evidence and PMID from each HDT-tagged study
-  evidence <- str_match(
-    hdt_studies,
-    "Evidence:\\s*([A-Za-z_]+)"
-  )[, 2]
-  
-  pmid <- str_match(
-    hdt_studies,
-    "PMID:\\s*([0-9]+)"
-  )[, 2]
-  
-  hdt_info <- tibble(
-    evidence = evidence,
-    pmid = pmid
-  ) %>%
-    filter(!is.na(evidence))
-  
-  if (nrow(hdt_info) == 0) {
-    return(tibble(
-      highest_HDT_evidence = NA_character_,
-      highest_HDT_PMID = NA_character_
-    ))
-  }
-  
-  # evidence hierarchy: highest -> lowest
-  priority <- c(
-    "clinical_study",
-    "human_subject",
-    "animal",
-    "in_vitro",
-    "other"
-  )
-  
-  highest <- priority[priority %in% hdt_info$evidence][1]
-  
-  if (is.na(highest)) {
-    return(tibble(
-      highest_HDT_evidence = NA_character_,
-      highest_HDT_PMID = NA_character_
-    ))
-  }
-  
-  # PMID(s) belonging specifically to the highest evidence level
-  highest_pmids <- hdt_info %>%
-    filter(evidence == highest) %>%
-    pull(pmid) %>%
-    na.omit() %>%
-    unique()
-  
-  tibble(
-    highest_HDT_evidence = highest,
-    highest_HDT_PMID = ifelse(
-      length(highest_pmids) > 0,
-      paste(highest_pmids, collapse = "; "),
-      NA_character_
-    )
-  )
-}
+# article-level records: is_hdt/is_review/evidence_level aren't in the TSV text, only in the JSON 
+records <- jsonlite::fromJSON(
+  here("evaluation/labels/launched_drug_with_literature.json"),
+  simplifyVector = TRUE
+) %>%
+  as_tibble() %>%
+  select(pmid, evidence_level, is_hdt, is_review, drugs)
 
-results <- map_dfr(
-  df$literature_evidence,
-  get_highest_HDT
-)
+LEVEL_ORDER <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
 
-df <- bind_cols(df, results)
+# get strongest evidence level among its own HDT-tagged
+highest_HDT <- records %>%
+  filter(is_hdt, !is_review, lengths(drugs) > 0) %>%
+  select(pmid, evidence_level, drugs) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs), level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  slice_min(level_rank, with_ties = TRUE) %>%
+  summarise(
+    highest_HDT_evidence = first(evidence_level),
+    highest_HDT_PMID = {
+      p <- sort(unique(pmid[pmid != ""]))
+      if (length(p) > 0) paste(p, collapse = "; ") else NA_character_
+    },
+    .groups = "drop"
+  )
+
+df <- df %>%
+  mutate(drug = tolower(drug_name)) %>%
+  left_join(highest_HDT, by = "drug") %>%
+  select(-drug)
 
 df %>%
   select(
     highest_HDT_evidence,
     highest_HDT_PMID,
     everything()
-  )
+    )
+
+# drugs HDT-positive (n_hdt > 0)
+cat("HDT-positive drugs:", sum(df$n_hdt > 0), "\n")
+cat("  with primary HDT evidence:", sum(!is.na(df$highest_HDT_evidence)), "\n")
+cat("  review-only (no primary HDT record):",
+    sum(df$n_hdt > 0 & is.na(df$highest_HDT_evidence)), "\n")
 
 # Summary
 df %>%
-  count(highest_HDT_evidence, sort = TRUE)
+  dplyr::count(highest_HDT_evidence, sort = TRUE)
 ```
 
 ```{r}

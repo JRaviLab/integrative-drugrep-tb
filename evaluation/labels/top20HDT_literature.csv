@@ -47,7 +47,7 @@ fluvastatin,9,5,9,FALSE,0,1,3,0,4,1,2,4,human_subject,"['42549153', '40501823', 
 
 [9] Hydroxymethylglutaryl-coenzyme A reductase inhibition stimulates caspase-1 activity and Th1-cytokine release in peripheral blood mononuclear cells.
     Authors: Montero MT, Hernandez O, Suarez Y, Matilla J, Ferruelo AJ, Martinez-Botas J, Gomez-Coronado D, Lasuncion MA
-    PMID: 11164419 | DOI: 10.1016/s0021-9150(00)00417-2 | Evidence: other",animal,38534380; 31605489
+    PMID: 11164419 | DOI: 10.1016/s0021-9150(00)00417-2 | Evidence: other",animal,31605489; 38534380
 tofacitinib,77,36,78,FALSE,10,30,3,0,10,25,13,2,clinical_study,"['42719014', '42716780', '42601817', '42485112', '42226371', '41889655', '41640875', '41428330', '41084881', '40741562', '40698211', '40301186', '40044198', '39989306', '39920152', '39760118', '39695887', '39523495', '39318929', '39296687', '39014279', '38503473', '38347433', '38140794', '37941853', '37726491', '37656880', '39463878', '37436237', '37042600', '36670550', '36591263', '36401881', '36309409', '36308397', '35875997', '35596818', '35470598', '35194004', '35081280', '35065024', '34752607', '33930048', '33902098', '33640469', '33127856', '32552289', '32550671', '32478474', '32387584', '32167790', '32059920', '31562236', '30630365', '30075534', '29317823', '28754958', '28570568', '28145906', '28143815', '30695330', '26889727', '26870809', '26545940', '26545825', '26425693', '26425676', '26362745', '26318385', '25854805', '24821849', '24624736', '24401994', '24026258', '23515130', '22873531', '22474037', '']","[1] Biologic and targeted synthetic therapies in ankylosing spondylitis: a pharmacological review.
     Authors: Ameer OZ, Temsah R, Alsouss YO, Al-Amoudi R, Khanfar MA, Salman IM
     PMID: 42719014 | PMCID: PMC13553827 | DOI: 10.3389/fphar.2026.1865621 | Evidence: human_subject
@@ -358,7 +358,7 @@ tofacitinib,77,36,78,FALSE,10,30,3,0,10,25,13,2,clinical_study,"['42719014', '42
 
 [78] P10 Collapse, confusion and acute kidney injury presenting in the context of bullous skin disease in a young male patient.
     Authors: Nagra D, Baldwin C, Dick J, Galloway J, Connolly A, Wincup C
-    PMID:  | PMCID: PMC10532208 | DOI: 10.1093/rap/rkad070.031 | Evidence: other",animal,26425693; 26425676
+    PMID:  | PMCID: PMC10532208 | DOI: 10.1093/rap/rkad070.031 | Evidence: other",animal,26425676; 26425693
 lovastatin,5,2,5,FALSE,0,2,1,1,1,0,1,2,human_subject,"['41746593', '40501823', '39832798', '25421876', '19555197']","[1] Anti-mycobacterial, cytotoxic effects of Penicillium mallochii ethanol extract, and quantitative detection of its extrolites by lc-q-tof-ms/ms.
     Authors: Askun T, Canturk Z, Guner P
     PMID: 41746593 | PMCID: PMC12946561 | DOI: 10.1007/s42770-025-01847-y | Evidence: in_vitro
@@ -590,7 +590,7 @@ tamoxifen,19,10,19,FALSE,0,6,2,2,6,3,3,5,human_subject,"['41400398', '40501823',
 
 [19] Male breast disorders in Jordan. Disease patterns and management problems.
     Authors: Yaghan RJ, Bani-Hani KE
-    PMID: 15711658 | DOI:  | Evidence: human_subject",animal,40483737; 36475748
+    PMID: 15711658 | DOI:  | Evidence: human_subject",animal,36475748
 ketotifen,0,0,0,FALSE,0,0,0,0,0,0,0,0,none,[],No evidence found,NA,NA
 vemurafenib,1,0,1,FALSE,0,0,0,0,0,1,0,0,none,['27742535'],"[1] Targeting tuberculosis using structure-guided fragment-based drug design.
     Authors: Mendes V, Blundell TL
@@ -675,7 +675,7 @@ dasatinib,11,4,11,FALSE,0,5,2,1,1,2,2,2,human_subject,"['42098153', '40631209', 
 
 [11] Off-Target Effects of BCR-ABL and JAK2 Inhibitors.
     Authors: Green MR, Newton MD, Fancher KM
-    PMID: 24351780 | DOI: 10.1097/COC.0000000000000023 | Evidence: other",animal,42098153; 40631209
+    PMID: 24351780 | DOI: 10.1097/COC.0000000000000023 | Evidence: other",animal,40631209; 42098153
 chlorprothixene,2,0,2,FALSE,0,1,0,0,1,0,0,0,human_subject,"['3774792', '13900877']","[1] [Effectiveness of chlorprothixene in the combined treatment of pulmonary tuberculosis patients].
     Authors: Gunich LA, Vishnevskii BI, Volkon VM
     PMID: 3774792 | DOI:  | Evidence: human_subject
@@ -749,7 +749,7 @@ sertraline,10,8,11,FALSE,1,2,3,0,4,1,2,3,clinical_study,"['42461973', '42312175'
 
 [11] Rifampicin-Induced Panic Disorder in a 70-Year-Old Woman With Brucellosis: A Case Report.
     Authors: Adeoye S
-    PMID:  | PMCID: PMC12260711 | DOI: 10.1192/bjo.2025.10701 | Evidence: other",animal,42461973; 42312175; 36629405
+    PMID:  | PMCID: PMC12260711 | DOI: 10.1192/bjo.2025.10701 | Evidence: other",animal,36629405; 42312175; 42461973
 mometasone,2,0,2,FALSE,0,0,0,0,0,2,0,0,none,"['36123818', '28714745']","[1] Intranasal Olopatadine-Mometasone in the Treatment of Seasonal Allergic Rhinitis.
     Authors: Lim L, Lipari M, Kale-Pradhan P
     PMID: 36123818 | DOI: 10.1177/10600280221124230 | Evidence: human_subject
