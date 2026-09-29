@@ -212,7 +212,7 @@ sq_dev_all_thresholds <- available_thresholds %>%
     !is.na(median_individual),
     !(
       aggregated == 0 &
-        median_individual == 0
+        median_individual == 0 # only consider pathways with signals as indicated in Methods
     )
   )
 
@@ -665,5 +665,151 @@ ggplot(
     legend.text = element_text(size = 15),
     legend.position = "bottom"
 )
+dev.off()
+```
+
+```{r Figure 3: 0% threshold}
+# Figure 3 using only the 0% threshold from sensitivity analysis
+sq_dev_0 <- sq_dev_all_thresholds %>%
+  filter(threshold_value == 0) %>%
+  mutate(
+    direction = factor(
+      direction,
+      levels = c("Upregulated", "Downregulated")
+    ),
+    technology = factor(
+      technology,
+      levels = c("Microarray", "RNAseq")
+    ),
+    enrichment = factor(
+      enrichment,
+      levels = c(
+        "Dominant\nGO:BP terms",
+        "Non-dominant\nGO:BP terms"
+      )
+    )
+  )
+
+stats_0 <- stats_results %>%
+  filter(as.character(threshold) == "0%") %>%
+  mutate(
+    direction = factor(
+      direction,
+      levels = c("Upregulated", "Downregulated")
+    ),
+    technology = factor(
+      technology,
+      levels = c("Microarray", "RNAseq")
+    )
+  )
+
+sq_dev_0 %>%
+  count(
+    direction,
+    technology,
+    enrichment
+  ) %>%
+  print()
+
+stats_0 %>%
+  select(
+    direction,
+    technology,
+    n_dominant,
+    n_nondominant,
+    median_dominant,
+    median_nondominant,
+    p_value,
+    p_adjusted_BH,
+    significance
+  ) %>%
+  print()
+
+pdf(
+  here(
+    "figures/figure3/",
+    "Figure3_squared_deviation_dominant_pathways_0percent.pdf"
+  ),
+  width = 6,
+  height = 8
+)
+
+ggplot(
+  sq_dev_0,
+  aes(
+    x = enrichment,
+    y = deviation_score,
+    fill = enrichment
+  )
+) +
+
+  geom_boxplot(
+    alpha = 0.8,
+    outlier.size = 0.5,
+    na.rm = TRUE
+  ) +
+
+  # Significance from the sensitivity analysis itself
+  geom_text(
+    data = stats_0,
+    aes(
+      x = 1.5,
+      y = Inf,
+      label = significance
+    ),
+    inherit.aes = FALSE,
+    vjust = 1.5,
+    size = 5,
+    fontface = "bold"
+  ) +
+
+  scale_y_log10(
+    breaks = 10^seq(-10, 0, by = 2),
+    labels = seq(-10, 0, by = 2),
+    expand = expansion(
+      mult = c(0.05, 0.15)
+    )
+  ) +
+
+  facet_grid(
+    direction ~ technology,
+    scales = "free_y"
+  ) +
+
+  labs(
+    x = "Enrichment",
+    y = expression(
+      log[10] * " squared deviation"
+    )
+  ) +
+
+  theme_bw(base_size = 14) +
+
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(
+      color = "black"
+    ),
+    legend.position = "none",
+
+    strip.text = element_text(
+      size = 14,
+      face = "bold"
+    ),
+
+    strip.background = element_rect(
+      fill = "grey95",
+      color = NA
+    ),
+
+    axis.text.x = element_text(
+      size = 11
+    ),
+
+    axis.text.y = element_text(
+      size = 11
+    )
+  )
+
 dev.off()
 ```
