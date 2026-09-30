@@ -26,7 +26,7 @@
   --out-tsv evaluation/labels/launched_drug_with_literature.tsv \
   --out-json evaluation/labels/launched_drug_with_literature.json \
   2>&1 | tee evaluation/labels/run_$(date +%Y%m%d).log
-Drugs      : 2427
+Drugs      : 2427 (1174 overlaps with LINCS profiles)
 Database(s): PubMed + PMC
 NCBI key   : present
 Output TSV : evaluation/labels/launched_drug_with_literature.tsv
