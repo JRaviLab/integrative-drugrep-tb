@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso
 from rbo import RankingSimilarity as rbo_rank
 
+
 mpl.rcParams['font.family'] = 'Arial'
 
 # ///// Constants 
@@ -28,6 +29,7 @@ DRUG_TISSUE_NAME_MAP = {
     'haematopoietic and lymphoid tissue': 'haematopoietic\n& lymphoid',
     'central nervous system'            : 'central nervous\nsystem',
 }
+
 
 # ///// Data loading & preprocessing
 
@@ -58,6 +60,7 @@ def load_drug_data(path: str, time_filter: str = '24H') -> tuple[pd.DataFrame, p
 
     return drug_data, split
 
+
 def average_replicates(drug_data: pd.DataFrame, split_drug: pd.DataFrame) -> pd.DataFrame:
     """
     Average expression across technical replicates that share the same
@@ -78,6 +81,7 @@ def average_replicates(drug_data: pd.DataFrame, split_drug: pd.DataFrame) -> pd.
 
     return pd.DataFrame(averaged)
 
+
 def quantile_normalize(df: pd.DataFrame) -> pd.DataFrame:
     """Quantile-normalize all columns to the same distribution."""
     sorted_vals = np.sort(df.values, axis=0)
@@ -87,6 +91,7 @@ def quantile_normalize(df: pd.DataFrame) -> pd.DataFrame:
         ranks = np.searchsorted(np.sort(df[col]), df[col])
         result[col] = rank_means[ranks]
     return result
+
 
 def stouffer_aggregate(drug_data: pd.DataFrame) -> pd.DataFrame:
     """
@@ -118,6 +123,7 @@ def stouffer_aggregate(drug_data: pd.DataFrame) -> pd.DataFrame:
         )
 
     return aggregated
+
 
 def load_disease_data(
     rnaseq_dir: str,
@@ -188,6 +194,8 @@ def load_disease_data(
 
     return dis_qn.astype(float), tissue, cell
 
+
+
 # ///// Correlation computation
 
 def get_correlations(
@@ -248,6 +256,7 @@ def get_correlations(
 
     return output
 
+
 def compute_correlation_matrix(
     drug_data: pd.DataFrame,
     dis_data: pd.DataFrame,
@@ -276,6 +285,8 @@ def compute_correlation_matrix(
         )
     return results
 
+
+
 # ///// Tissue-level aggregation
 
 def build_tissue_groups(
@@ -294,15 +305,17 @@ def build_tissue_groups(
             groups[tissue].append(item)
     return dict(groups)
 
+
 def build_tissue_matrix(
     corr_matrix: pd.DataFrame,
     row_groups: dict[str, list],
     col_groups: dict[str, list],
     mask_diagonal: bool = False,
+    use_median: bool = True,
 ) -> pd.DataFrame:
     """
     Aggregate a sample-level correlation matrix into a tissue × tissue matrix
-    of median correlations.
+    of median (or mean) correlations.
 
     Parameters
     ----------
@@ -325,13 +338,14 @@ def build_tissue_matrix(
             if mask_diagonal and rt == ct:
                 np.fill_diagonal(sub.values, np.nan)
 
-            result.loc[rt, ct] = (
-                np.nanmedian(sub.values)
-                if np.isfinite(sub.values).any()
-                else np.nan
-            )
+            if use_median:
+                result.loc[rt, ct] = np.nanmedian(sub.values) if np.isfinite(sub.values).any() else np.nan
+            else:
+                result.loc[rt, ct] = np.nanmean(sub.values) if np.isfinite(sub.values).any() else np.nan
 
     return result
+
+
 
 # ///// Visualization
 
@@ -340,9 +354,11 @@ def safe_zscore(matrix: np.ndarray, axis: int) -> np.ndarray:
     std  = np.nanstd(matrix,  axis=axis, ddof=1, keepdims=True)
     return (matrix - mean) / std
 
+
 def combined_zscore(matrix: np.ndarray) -> np.ndarray:
     """Row + column z-scores averaged (scaled by √2)."""
     return (safe_zscore(matrix, axis=1) + safe_zscore(matrix, axis=0)) / np.sqrt(2)
+
 
 def make_axis_labels(
     tissues: list[str],
@@ -361,6 +377,7 @@ def make_axis_labels(
         count  = count_source[t] if count_source else len(groups[t])
         labels.append(f"{pretty} ({count})")
     return labels
+
 
 def plot_heatmap(
     matrix: np.ndarray,
@@ -417,6 +434,7 @@ def plot_heatmap(
     plt.tight_layout()
     plt.show()
 
+
 def plot_tissue_heatmaps(
     tissue_matrix: pd.DataFrame,
     xlabels: list[str],
@@ -424,22 +442,36 @@ def plot_tissue_heatmaps(
     title_prefix: str,
     xlabel: str,
     ylabel: str,
+    corr_type: str = 'pearson'
 ) -> None:
     """Plot both the raw median and z-scored heatmaps for a tissue matrix."""
     # Drop first row/col only for drug×drug (square) to remove the
     # lowest-count tissue; for rectangular matrices pass the full frame.
     mat = tissue_matrix.values.astype(float)
 
+    if corr_type == 'lasso':
+        corr_title = 'LASSO coefficients'
+        corr_subtitle = 'LASSO coef.'
+    elif corr_type == 'rbo':
+        corr_title = 'RBO scores'
+        corr_subtitle = 'RBO'
+    elif corr_type == 'spearman':
+        corr_title = 'Spearman correlation'
+        corr_subtitle = 'Spearman corr.'
+    else:
+        corr_title = 'Pearson correlation'
+        corr_subtitle = 'Pearson corr.'
+
     plot_heatmap(
         mat, xlabels, ylabels,
-        f'Median Pearson Correlation — {title_prefix}',
-        'Pearson Corr.',
+        f'Median {corr_title} — {title_prefix}',
+        corr_subtitle,
         xlabel=xlabel, ylabel=ylabel,
     )
     plot_heatmap(
         combined_zscore(mat), xlabels, ylabels,
-        f'Z-Score Median Pearson Correlation — {title_prefix}',
-        'Z-Score of Pearson Corr.',
+        f'Z-score median {corr_title} — {title_prefix}',
+        f'Z-score of {corr_subtitle}',
         xlabel=xlabel, ylabel=ylabel,
         cmap='RdBu_r', center_zero=True,
     )
