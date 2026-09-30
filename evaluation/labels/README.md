@@ -48,4 +48,5 @@ Classified 32392 unique records
     2683  reviews (counted separately)
   292 positive records (non review HDT)
   4556 records (14.1%) had no MeSH indexing and were classified from text
+
 ```
