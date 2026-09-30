@@ -1,0 +1,95 @@
+---
+title: "get_HDT_highest_evidence_level"
+format: html
+---
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+library(tibble)
+library(here)
+
+df <- read_tsv(here("evaluation/labels/launched_drug_with_literature.tsv"))
+
+# article-level records: is_hdt/is_review/evidence_level aren't in the TSV text, only in the JSON 
+records <- jsonlite::fromJSON(
+  here("evaluation/labels/launched_drug_with_literature.json"),
+  simplifyVector = TRUE
+) %>%
+  as_tibble() %>%
+  select(pmid, evidence_level, is_hdt, is_review, drugs)
+
+LEVEL_ORDER <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
+
+# get strongest evidence level among its own HDT-tagged
+highest_HDT <- records %>%
+  filter(is_hdt, !is_review, lengths(drugs) > 0) %>%
+  select(pmid, evidence_level, drugs) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs), level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  slice_min(level_rank, with_ties = TRUE) %>%
+  summarise(
+    highest_HDT_evidence = first(evidence_level),
+    highest_HDT_PMID = {
+      p <- sort(unique(pmid[pmid != ""]))
+      if (length(p) > 0) paste(p, collapse = "; ") else NA_character_
+    },
+    .groups = "drop"
+  )
+
+df <- df %>%
+  mutate(drug = tolower(drug_name)) %>%
+  left_join(highest_HDT, by = "drug") %>%
+  select(-drug)
+
+df %>%
+  select(
+    highest_HDT_evidence,
+    highest_HDT_PMID,
+    everything()
+    )
+
+# drugs HDT-positive (n_hdt > 0)
+cat("HDT-positive drugs:", sum(df$n_hdt > 0), "\n")
+cat("  with primary HDT evidence:", sum(!is.na(df$highest_HDT_evidence)), "\n")
+cat("  review-only (no primary HDT record):",
+    sum(df$n_hdt > 0 & is.na(df$highest_HDT_evidence)), "\n")
+
+# Summary
+df %>%
+  dplyr::count(highest_HDT_evidence, sort = TRUE)
+```
+
+```{r}
+drug_candidates <- c(
+  "rosuvastatin",
+  "fostamatinib",
+  "fluvastatin",
+  "tofacitinib",
+  "lovastatin",
+  "ethinyl-estradiol",
+  "atorvastatin",
+  "clonidine",
+  "nabumetone",
+  "tamoxifen",
+  "ketotifen",
+  "vemurafenib",
+  "raloxifene",
+  "naltrexone",
+  "dasatinib",
+  "chlorprothixene",
+  "lapatinib",
+  "forskolin",
+  "sertraline",
+  "mometasone"
+)
+
+# subset and preserve the order in drug_candidates
+df_subset <- df %>%
+  filter(tolower(drug_name) %in% tolower(drug_candidates)) %>%
+  arrange(match(tolower(drug_name), tolower(drug_candidates)))
+
+write_csv(df_subset,file=here("evaluation/labels/top20HDT_literature.csv"))
+```

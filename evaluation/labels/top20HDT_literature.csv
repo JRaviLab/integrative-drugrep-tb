@@ -1,0 +1,759 @@
+drug_name,pubmed_hits,pmc_hits,unique_articles,results_truncated,n_clinical_study,n_human_subject,n_animal,n_in_vitro,n_other,n_review,n_not_indexed,n_hdt,highest_evidence_level,pmid,literature_evidence,highest_HDT_evidence,highest_HDT_PMID
+rosuvastatin,3,1,3,FALSE,2,0,0,0,0,1,0,1,clinical_study,"['39622823', '36966799', '27631189']","[1] PET-CT outcomes from a randomised controlled trial of rosuvastatin as an adjunct to standard tuberculosis treatment.
+    Authors: Cross GB, Sari IP, Burkill SM, Yap CW, Nguyen H, Quyet D, Dalay VB, Gutierrez E, Balanag VM, Castillo RJ, Chang CC, Kelleher AD, O'Doherty J, Paton NI
+    PMID: 39622823 | PMCID: PMC11611914 | DOI: 10.1038/s41467-024-54419-3 | Evidence: clinical_study
+
+[2] Rosuvastatin adjunctive therapy for rifampicin-susceptible pulmonary tuberculosis: a phase 2b, randomised, open-label, multicentre trial.
+    Authors: Cross GB, Sari IP, Kityo C, Lu Q, Pokharkar Y, Moorakonda RB, Thi HN, Do Q, Dalay VB, Gutierrez E, Balanag VM, Castillo RJ, Mugerwa H, Fanusi F, Kwan P, Chew KL, Paton NI
+    PMID: 36966799 | DOI: 10.1016/S1473-3099(23)00067-1 | Evidence: clinical_study | HDT
+
+[3] Pharmacogenomics of Rosuvastatin: A Glocal (Global+Local) African Perspective and Expert Review on a Statin Drug.
+    Authors: Soko ND, Masimirembwa C, Dandara C
+    PMID: 27631189 | DOI: 10.1089/omi.2016.0114 | Evidence: other",clinical_study,36966799
+fostamatinib,1,0,1,FALSE,0,0,0,0,0,1,0,0,none,['23861534'],"[1] Inhibition of spleen tyrosine kinase in the treatment of rheumatoid arthritis.
+    Authors: Nijjar JS, Tindell A, McInnes IB, Siebert S
+    PMID: 23861534 | DOI: 10.1093/rheumatology/ket225 | Evidence: human_subject",NA,NA
+fluvastatin,9,5,9,FALSE,0,1,3,0,4,1,2,4,human_subject,"['42549153', '40501823', '38534380', '32872158', '31605489', '31109273', '19555197', '15470035', '11164419']","[1] Rifampin-induced fluvastatin toxicity: a case report and review of literature.
+    Authors: Farghali A, Mahmoud H, Salem M
+    PMID: 42549153 | PMCID: PMC13430968 | DOI: 10.1093/omcr/omag144 | Evidence: other
+
+[2] Integrative transcriptome-based drug repurposing in tuberculosis.
+    Authors: Samart K, Buskirk L, Tonielli A, Krishnan A, Ravi J
+    PMID: 40501823 | PMCID: PMC12157595 | DOI: 10.1101/2025.06.02.657296 | Evidence: other | HDT
+
+[3] Fluvastatin Converts Human Macrophages into Foam Cells with Increased Inflammatory Response to Inactivated Mycobacterium tuberculosis H37Ra.
+    Authors: Montero-Vega MT, Matilla J, Bazan E, Reimers D, De Andres-Martin A, Gonzalo-Gobernado R, Correa C, Urbano F, Gomez-Coronado D
+    PMID: 38534380 | PMCID: PMC10969755 | DOI: 10.3390/cells13060536 | Evidence: animal | HDT
+
+[4] Novel Treatments against Mycobacterium tuberculosis Based on Drug Repurposing.
+    Authors: Mourenza A, Gil JA, Mateos LM, Letek M
+    PMID: 32872158 | PMCID: PMC7557778 | DOI: 10.3390/antibiotics9090550 | Evidence: other | HDT
+
+[5] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+    Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
+    PMID: 31605489 | PMCID: PMC7325721 | DOI: 10.1093/infdis/jiz517 | Evidence: animal | HDT
+
+[6] Repurposing of Fluvastatin Against Candida albicans CYP450 Lanosterol 14 alpha-demethylase, a Target Enzyme for Antifungal Therapy: An In silico and In vitro Study.
+    Authors: Rana R, Sharma R, Kumar A
+    PMID: 31109273 | DOI: 10.2174/1566524019666190520094644 | Evidence: animal
+
+[7] Effect of HMG-CoA reductase inhibitors on activation of human gammadeltaT cells induced by Mycobacterium tuberculosis antigens.
+    Authors: Lu HZ, Li BQ
+    PMID: 19555197 | DOI: 10.1080/08923970902806505 | Evidence: human_subject
+
+[8] Geranylgeraniol regulates negatively caspase-1 autoprocessing: implication in the Th1 response against Mycobacterium tuberculosis.
+    Authors: Montero MT, Matilla J, Gomez-Mampaso E, Lasuncion MA
+    PMID: 15470035 | DOI: 10.4049/jimmunol.173.8.4936 | Evidence: other
+
+[9] Hydroxymethylglutaryl-coenzyme A reductase inhibition stimulates caspase-1 activity and Th1-cytokine release in peripheral blood mononuclear cells.
+    Authors: Montero MT, Hernandez O, Suarez Y, Matilla J, Ferruelo AJ, Martinez-Botas J, Gomez-Coronado D, Lasuncion MA
+    PMID: 11164419 | DOI: 10.1016/s0021-9150(00)00417-2 | Evidence: other",animal,31605489; 38534380
+tofacitinib,77,36,78,FALSE,10,30,3,0,10,25,13,2,clinical_study,"['42719014', '42716780', '42601817', '42485112', '42226371', '41889655', '41640875', '41428330', '41084881', '40741562', '40698211', '40301186', '40044198', '39989306', '39920152', '39760118', '39695887', '39523495', '39318929', '39296687', '39014279', '38503473', '38347433', '38140794', '37941853', '37726491', '37656880', '39463878', '37436237', '37042600', '36670550', '36591263', '36401881', '36309409', '36308397', '35875997', '35596818', '35470598', '35194004', '35081280', '35065024', '34752607', '33930048', '33902098', '33640469', '33127856', '32552289', '32550671', '32478474', '32387584', '32167790', '32059920', '31562236', '30630365', '30075534', '29317823', '28754958', '28570568', '28145906', '28143815', '30695330', '26889727', '26870809', '26545940', '26545825', '26425693', '26425676', '26362745', '26318385', '25854805', '24821849', '24624736', '24401994', '24026258', '23515130', '22873531', '22474037', '']","[1] Biologic and targeted synthetic therapies in ankylosing spondylitis: a pharmacological review.
+    Authors: Ameer OZ, Temsah R, Alsouss YO, Al-Amoudi R, Khanfar MA, Salman IM
+    PMID: 42719014 | PMCID: PMC13553827 | DOI: 10.3389/fphar.2026.1865621 | Evidence: human_subject
+
+[2] Tuberculosis during JAK inhibitor or TNF-alpha inhibitors therapy: a disproportionality analysis from WHO pharmacovigilance database.
+    Authors: Maitre T, Bihan K, Veziris N, Godet C, Parrot A, Djibre M, Lebrun Vignes B, Cadranel J
+    PMID: 42716780 | DOI: 10.1136/thorax-2025-223332 | Evidence: human_subject
+
+[3] Tofacitinib for Calcinosis Cutis Associated With Juvenile Dermatomyositis: An Open-Label Single-Arm Study.
+    Authors: Jain P, Mohan SL, Kaushik S, Deepak R, Mishra D, Khan MA, Gupta V, Naranje P, Ramanan AV, Lodha R, Jana M, Bagri NK
+    PMID: 42601817 | PMCID: PMC13476698 | DOI: 10.1002/acr2.90117 | Evidence: human_subject
+
+[4] Effectiveness of tofacitinib as rescue therapy in biological-naive patients with steroid-refractory acute severe ulcerative colitis: a multicentric retrospective analysis.
+    Authors: Giri S, Vizhi K, Angadi S, Afzalpurkar S, Khatana G, Kasturi S, Shah B, Sharma ZD, Sahu BK, Varghese J, Jena A, Kulkarni A, Bhat N, Bhrugumalla S, Kolaserry S, Pati GK, Nath P, Sahu MK, Anand AC
+    PMID: 42485112 | DOI: 10.1097/MEG.0000000000003254 | Evidence: human_subject
+
+[5] TB risk during treatment with biological agents and Janus kinase inhibitors: an umbrella review.
+    Authors: Alves RF, Hilario C, Ferreira NB, Cascais M, Ramos JP, Vieira M, Aguiar A, Duarte R
+    PMID: 42226371 | DOI: 10.5588/ijtld.25.0518 | Evidence: other
+
+[6] Incidence of active tuberculosis in Korean patients with rheumatoid arthritis: a comparison between tumor necrosis factor inhibitors and tofacitinib.
+    Authors: Kim JY, You SH, Sung YK, Jung SY, Cho SK
+    PMID: 41889655 | PMCID: PMC13014572 | DOI: 10.4078/jrd.2025.0091 | Evidence: human_subject
+
+[7] Latent tuberculosis screening for inflammatory bowel disease in tuberculosis endemic region remains porous and suboptimal: A multicentre study.
+    Authors: Jha DK, Prasad S, Valsan A, Mishra S, Nair P, Koshy AK, Singh S, Prasad AS, Shukla R, Ahamed R, Augustine P, Natarajan K, Peddi K, Kulkarni A, Bhatia S, Pachisia AV, Singh PK, Jena A, Gupta S, Jain S, Padmaprakash K, Kakadiya R, Kumar A, Shukla S, Dutta U, Hande V, Thareja S, Sharma V
+    PMID: 41640875 | PMCID: PMC12865397 | DOI: 10.3748/wjg.v32.i4.114897 | Evidence: clinical_study
+
+[8] Janus Kinase Inhibitors for Inflammatory Bowel Disease: Concise Questions and Answers on Their Use in Clinical Practice.
+    Authors: Gisbert JP, Chaparro M
+    PMID: 41428330 | DOI: 10.1093/ibd/izaf273 | Evidence: other
+
+[9] Long-Term Safety of Tofacitinib for Treatment of Moderate-to-Severe Ulcerative Colitis: Three Years of Korean National Data.
+    Authors: Song EM, Seo GH, Jung SH
+    PMID: 41084881 | PMCID: PMC12518759 | DOI: 10.3346/jkms.2025.40.e259 | Evidence: human_subject
+
+[10] Anti-MDA5 Antibody-Positive Dermatomyositis-Associated Interstitial Lung Disease With a False-Positive Tuberculosis-Targeted RNA Capture (TB-TRC) Result: A Multimodal Management.
+    Authors: Shibata M, Yanagihara T, Fujimoto M, Himuro N, Ito K, Hamada N, Ikeda T, Masutani K, Fujita M
+    PMID: 40741562 | PMCID: PMC12308046 | DOI: 10.7759/cureus.87004 | Evidence: other
+
+[11] Efficacy and Safety of Tofacitinib in the Management of Ankylosing Spondylitis: A Comprehensive Systematic Review.
+    Authors: Burhanuddin M, Chaudhry SA, Dhami A, Iqbal F, Shafiq S, Ullah S, Khalid A, Hassan MW, Bhatti MM, Siddique MU
+    PMID: 40698211 | PMCID: PMC12283175 | DOI: 10.7759/cureus.86556 | Evidence: human_subject
+
+[12] Comparison of the clinical efficacy and pharmacoeconomics of tofacitinib and adalimumab in Chinese patients with rheumatoid arthritis: An analysis based on propensity score matching.
+    Authors: Xu QY, Liu YQ, Tong WQ, Yin-Ruo YR, Xu SQ, Shuai ZW
+    PMID: 40301186 | PMCID: PMC12141396 | DOI: 10.1007/s10067-025-07431-x | Evidence: human_subject
+
+[13] Long-term safety and efficacy of anti-GM-CSF otilimab in patients with rheumatoid arthritis: long-term extension of three phase 3 randomised trials (contRAst X).
+    Authors: Weinblatt ME, Taylor PC, McInnes IB, Atsumi T, Strand V, Takeuchi T, Bracher M, Brooks D, Curtis P, Gupta A, Nijhawan R, O'Shea C, Rayner K, Saurigny D, Shelton C, Wang M, Wang R, Fleischmann RM
+    PMID: 40044198 | PMCID: PMC11883618 | DOI: 10.1136/bmjopen-2024-088869 | Evidence: clinical_study
+
+[14] Balancing Effective Treatments With Potential Threats: The Impact of Biologic Agent Use on Tuberculosis Development in Children With Chronic Inflammatory Disorders.
+    Authors: Telefon AH, Cil MK, Sonmez G, Turgut EA, Gulmez TK, Taskin DG, Garip S, Ekinci RMK, Celik U
+    PMID: 39989306 | DOI: 10.1111/1756-185X.70145 | Evidence: human_subject
+
+[15] Retrotrans-genomics identifies aberrant THE1B endogenous retrovirus fusion transcripts in the pathogenesis of sarcoidosis.
+    Authors: Funaguma S, Iida A, Saito Y, Tanboon J, De Los Reyes FV, Sonehara K, Goto YI, Okada Y, Hayashi S, Nishino I
+    PMID: 39920152 | PMCID: PMC11805910 | DOI: 10.1038/s41467-025-56567-6 | Evidence: human_subject
+
+[16] Tofacitinib-induced Hepatitis and Tuberculosis: A Case of Two Rare Adverse Events in a Single Patient.
+    Authors: Taori K, Kumar S, Pateriya M, Tmu N
+    PMID: 39760118 | PMCID: PMC11699257 | DOI: 10.1016/j.jceh.2024.102457 | Evidence: other
+
+[17] Integrated safety analysis of tofacitinib from Phase 2 and 3 trials of patients with ankylosing spondylitis.
+    Authors: Deodhar A, Akar S, Curtis JR, El-Zorkany B, Magrey M, Wang C, Wu J, Makgoeng SB, Vranic I, Menon S, Fleishaker DL, Diehl AM, Fallon L, Yndestad A, Landewe RBM
+    PMID: 39695887 | PMCID: PMC13488738 | DOI: 10.1186/s42358-024-00402-x | Evidence: human_subject
+
+[18] Safety outcomes of tocilizumab and tofacitinib treatment for rheumatoid arthritis: Target trial emulation.
+    Authors: Fang YF, Chang SH, Kuo CF, See LC
+    PMID: 39523495 | DOI: 10.1111/1756-185X.15406 | Evidence: human_subject
+
+[19] Real-World Experience With Janus Kinase Inhibitors in Immune-Mediated Diseases: Clinical Experience of a University Hospital.
+    Authors: Ramirez Huaranga MA, Calvo Pascual LA, Velasco Sanchez D, Martin de la Sierra Lopez L, Jimenez Rodriguez L, Lopez Menchero Mora A, Castro Corredor D, Gonzalez Penas M
+    PMID: 39318929 | PMCID: PMC11421408 | DOI: 10.7759/cureus.67729 | Evidence: human_subject
+
+[20] Real-World Efficacy and Safety of Oral Tofacitinib in Patients with Refractory Moderate to Severe Atopic Dermatitis: A Multicenter Retrospective Study.
+    Authors: Dhar S, De A, Sarda A, Godse K, Lahiri K
+    PMID: 39296687 | PMCID: PMC11407563 | DOI: 10.4103/ijd.ijd_843_22 | Evidence: human_subject
+
+[21] Biologics Versus JAK Inhibitors. Part II: Risk of Infections. A Narrative Review.
+    Authors: Mansilla-Polo M, Morgado-Carrasco D
+    PMID: 39014279 | PMCID: PMC11333430 | DOI: 10.1007/s13555-024-01203-2 | Evidence: human_subject
+
+[22] Efficacy and safety of pharmacological treatment of psoriatic arthritis: a systematic literature research informing the 2023 update of the EULAR recommendations for the management of psoriatic arthritis.
+    Authors: Kerschbaumer A, Smolen JS, Ferreira RJO, Bertheussen H, Baraliakos X, Aletaha D, McGonagle DG, van der Heijde D, McInnes IB, Esbensen BA, Winthrop KL, Boehncke WH, Schoones JW, Gossec L
+    PMID: 38503473 | PMCID: PMC11103324 | DOI: 10.1136/ard-2024-225534 | Evidence: human_subject
+
+[23] Tofacitinib use in ulcerative colitis: An expert consensus for day-to-day clinical practice.
+    Authors: Banerjee R, Sharma V, Patel R, Jena A, Pal P, Raghunathan N, Kumar A, Sood A, Puri AS, Goswami B, Desai D, Mekala D, Ramesh GN, Rao GV, Peddi K, Philip M, Tandon M, Bhatia S, Godbole S, Bhatia S, Ghoshal UC, Dutta U, Midha V, Prasad VGM, Reddy DN
+    PMID: 38347433 | DOI: 10.1007/s12664-023-01507-9 | Evidence: human_subject
+
+[24] A large pulmonary nodule in a rheumatoid arthritis patient treated with tofacitinib.
+    Authors: Her M, Park J, Lee SG
+    PMID: 38140794 | DOI: 10.1111/1756-185X.15013 | Evidence: human_subject
+
+[25] Successful Use of Tofacitinib in Refractory Takayasu Arteritis: A Case Series.
+    Authors: Mv P, Maikap D, Padhan P
+    PMID: 37941853 | PMCID: PMC10628870 | DOI: 10.31138/mjr.230929.su | Evidence: human_subject
+
+[26] Upfront tofacitinib in patients with biological-naive ulcerative colitis - An Indian multicentric experience.
+    Authors: Giri S, Bhrugumalla S, Kamuni A, Mishra D, Pati GK, Agrawal D, Verma G, Wagh R, Chauhan S, Ingle M, Chandnani S, Jain S, Rathi PM, Shukla A, Kale A
+    PMID: 37726491 | DOI: 10.1007/s12664-023-01434-9 | Evidence: human_subject
+
+[27] Tofacitinib Versus Oral Prednisolone for Induction of Remission in Moderately Active Ulcerative Colitis [ORCHID]: A Prospective, Open-Label, Randomized, Pilot Study.
+    Authors: Singh A, Midha V, Kaur K, Mahajan R, Singh D, Kaur R, Kohli A, Chawla A, Sood K, Bansal N, Sood A
+    PMID: 37656880 | DOI: 10.1093/ecco-jcc/jjad153 | Evidence: clinical_study
+
+[28] Sternoclavicular Joint Tubercular Abscess in a Patient with Spondyloarthritis on Tofacitinib: A Case Report.
+    Authors: Sunil BS, Padhan P, Maikap D
+    PMID: 39463878 | DOI: 10.31138/mjr.270823.sjt | Evidence: other
+
+[29] Tuberculosis in children and adolescents with rheumatic diseases using biologic agents: an integrative review.
+    Authors: Lima LM, Aurilio RB, Fonseca AR, Parente AAAI, Sant'Anna MFBP, Sant'Anna CC
+    PMID: 37436237 | PMCID: PMC10332438 | DOI: 10.1590/1984-0462/2024/42/2022084 | Evidence: human_subject
+
+[30] NEUROPROTECTIVE AND ANTIOXIDANT POTENTIAL OF MONTELUKAST-ACETYLCYSTEINE COMBINATION THERAPY FOR BRAIN PROTECTION IN PATIENTS WITH COVID-19 INDUCED PNEUMONIA.
+    Authors: Samsonia M, Kandelaki M, Baratashvili N, Gvaramia L
+    PMID: 37042600 | DOI:  | Evidence: clinical_study
+
+[31] Effectiveness and safety of generic tofacitinib in spondyloarthritis: A real-world retrospective analysis from India.
+    Authors: Phatak S, Khenat A, Malandkar M, Amin S
+    PMID: 36670550 | DOI: 10.1111/1756-185X.14570 | Evidence: human_subject
+
+[32] Case report: JAKi and TNFi dual therapy is a potential treatment strategy for difficult-to-treat rheumatoid arthritis.
+    Authors: Chen JW, Zhang WS, Lin CS, Xu Q
+    PMID: 36591263 | PMCID: PMC9794839 | DOI: 10.3389/fimmu.2022.1074329 | Evidence: human_subject
+
+[33] Safety and effectiveness of tofacitinib in Korean adult patients with rheumatoid arthritis: A post-marketing surveillance study.
+    Authors: Ju JH, Sung YK, Jo JY, Jeon JY, Yoo HJ, Lee EB
+    PMID: 36401881 | DOI: 10.1093/mr/roac136 | Evidence: clinical_study
+
+[34] Real-world Effectiveness and Safety of JAK Inhibitors in Rheumatoid Arthritis: A Single-centre Study.
+    Authors: Gonzalez Mazario R, Fragio Gil JJ, Ivorra Cortes J, Grau Garcia E, Canada Martinez AJ, Gonzalez Puig L, Negueroles Albuixech RM, Roman Ivorra JA
+    PMID: 36309409 | DOI: 10.1016/j.reumae.2021.08.004 | Evidence: human_subject
+
+[35] Incidence of opportunistic infections in patients with rheumatoid arthritis treated with different molecular-targeted drugs: A population-based retrospective cohort study.
+    Authors: Takabayashi K, Ando F, Ikeda K, Nakajima H, Hanaoka H, Suzuki T
+    PMID: 36308397 | DOI: 10.1093/mr/roac133 | Evidence: human_subject
+
+[36] Positioning of tofacitinib in treatment of ulcerative colitis: a global perspective.
+    Authors: Mishra S, Jena A, Kakadiya R, Sharma V, Ahuja V
+    PMID: 35875997 | DOI: 10.1080/17474124.2022.2106216 | Evidence: human_subject
+
+[37] Real-world evidence of the effectiveness and safety of generic tofacitinib in rheumatoid arthritis patients: a retrospective, single-centre analysis from Western India.
+    Authors: Phatak S, Khenat A, Malandkar M, Amin S
+    PMID: 35596818 | PMCID: PMC9123831 | DOI: 10.1007/s10067-022-06205-z | Evidence: human_subject
+
+[38] The Comparative Risk of Serious Adverse Events With Tofacitinib and TNF Inhibitors in Patients With Ulcerative Colitis: The Korean Experience as Revealed by a National Database.
+    Authors: Seo GH, Jung SH
+    PMID: 35470598 | PMCID: PMC9039199 | DOI: 10.3346/jkms.2022.37.e123 | Evidence: other
+
+[39] Risk of tuberculosis in patients with rheumatoid arthritis treated with biological and targeted drugs: meta-analysis of randomized clinical trials.
+    Authors: Ji X, Hu L, Wang Y, Man S, Liu X, Song C, Zhang J, Zhu J, Zhang J, Huang F
+    PMID: 35194004 | PMCID: PMC8869575 | DOI: 10.1097/CM9.0000000000001948 | Evidence: other
+
+[40] Cardiovascular and Cancer Risk with Tofacitinib in Rheumatoid Arthritis.
+    Authors: Ytterberg SR, Bhatt DL, Mikuls TR, Koch GG, Fleischmann R, Rivas JL, Germino R, Menon S, Sun Y, Wang C, Shapiro AB, Kanik KS, Connell CA
+    PMID: 35081280 | DOI: 10.1056/NEJMoa2109927 | Evidence: clinical_study
+
+[41] Phytochemicals targeting JAK/STAT pathway in the treatment of rheumatoid arthritis: Is there a future?
+    Authors: Kour G, Choudhary R, Anjum S, Bhagat A, Bajaj BK, Ahmed Z
+    PMID: 35065024 | DOI: 10.1016/j.bcp.2022.114929 | Evidence: human_subject
+
+[42] Disseminated Tuberculosis in a Patient Treated with Tofacitinib for Ulcerative Colitis.
+    Authors: Charpy F, Altwegg R, Debourdeau A
+    PMID: 34752607 | DOI: 10.1093/ecco-jcc/jjab200 | Evidence: other
+
+[43] Predictors of drug survival for biologic and targeted synthetic DMARDs in rheumatoid arthritis: Analysis from the TRA Clinical Electronic Registry.
+    Authors: Lin CT, Huang WN, Tsai WC, Chen JP, Hung WT, Hsieh TY, Chen HH, Hsieh CW, Lai KL, Tang KT, Tseng CW, Chen DY, Chen YH, Chen YM
+    PMID: 33930048 | PMCID: PMC8087098 | DOI: 10.1371/journal.pone.0250877 | Evidence: human_subject
+
+[44] The Risk of Infections Associated With JAK Inhibitors in Rheumatoid Arthritis: A Systematic Review and Network Meta-analysis.
+    Authors: Alves C, Penedones A, Mendes D, Marques FB
+    PMID: 33902098 | DOI: 10.1097/RHU.0000000000001749 | Evidence: other
+
+[45] Risk of infection associated with Janus Kinase (JAK) inhibitors and biological therapies in inflammatory intestinal disease and rheumatoid arthritis. Prevention strategies.
+    Authors: Calvet X, Carpio D, Rodriguez-Lago I, Garcia-Vicuna R, Barreiro-de-Acosta M, Juanola X, Aguas M, Castillo C, Gratacos J
+    PMID: 33640469 | DOI: 10.1016/j.gastrohep.2021.01.007 | Evidence: other
+
+[46] Long-term safety of tofacitinib up to 9.5 years: a comprehensive integrated analysis of the rheumatoid arthritis clinical development programme.
+    Authors: Cohen SB, Tanaka Y, Mariette X, Curtis JR, Lee EB, Nash P, Winthrop KL, Charles-Schoeman C, Wang L, Chen C, Kwok K, Biswas P, Shapiro A, Madsen A, Wollenhaupt J
+    PMID: 33127856 | PMCID: PMC7722371 | DOI: 10.1136/rmdopen-2020-001395 | Evidence: clinical_study
+
+[47] Systematic review on tuberculosis risk in patients with rheumatoid arthritis receiving inhibitors of Janus Kinases.
+    Authors: Cantini F, Blandizzi C, Niccoli L, Petrone L, Goletti D
+    PMID: 32552289 | DOI: 10.1080/14740338.2020.1774550 | Evidence: other
+
+[48] Biologic agents and small-molecule inhibitors in systemic autoimmune conditions: an update.
+    Authors: Prieto-Pena D, Dasgupta B
+    PMID: 32550671 | DOI: 10.20452/pamw.15438 | Evidence: other
+
+[49] Tofacitinib in the treatment of Indian patients with rheumatoid arthritis: A post hoc analysis of efficacy and safety in Phase 3 and long-term extension studies over 7 years.
+    Authors: Chopra A, Shobha V, Chandrashekara S, Veeravalli SCM, Sharma R, Rao UR, Pandya S, Wagh S, Kadel JK, Thorat AV, Adhav C, Santos Estrella P, Yu W, Kwok K, Wouters A
+    PMID: 32478474 | PMCID: PMC7496174 | DOI: 10.1111/1756-185X.13853 | Evidence: human_subject
+
+[50] Early discontinuation of tofacitinib in patients with rheumatoid arthritis co-treated with rifampin for latent tuberculosis.
+    Authors: Nam SH, Oh JS, Hong S, Shim TS, Lee CK, Yoo B, Kim YG
+    PMID: 32387584 | DOI: 10.1016/j.jbspin.2020.04.010 | Evidence: human_subject
+
+[51] Evolution of the inclusion/exclusion criteria and primary endpoints in pivotal trials of biologics and small oral molecules for the treatment of psoriasis.
+    Authors: Hsu SH, Tsai TF
+    PMID: 32167790 | DOI: 10.1080/17512433.2020.1743175 | Evidence: other
+
+[52] Predicting, Preventing, and Managing Treatment-Related Complications in Patients With Inflammatory Bowel Diseases.
+    Authors: Beaugerie L, Rahier JF, Kirchgesner J
+    PMID: 32059920 | DOI: 10.1016/j.cgh.2020.02.009 | Evidence: human_subject
+
+[53] British Society of Gastroenterology consensus guidelines on the management of inflammatory bowel disease in adults.
+    Authors: Lamb CA, Kennedy NA, Raine T, Hendy PA, Smith PJ, Limdi JK, Hayee B, Lomer MCE, Parkes GC, Selinger C, Barrett KJ, Davies RJ, Bennett C, Gittens S, Dunlop MG, Faiz O, Fraser A, Garrick V, Johnston PD, Parkes M, Sanderson J, Terry H, Gaya DR, Iqbal TH, Taylor SA, Smith M, Brookes M, Hansen R, Hawthorne AB
+    PMID: 31562236 | DOI: 10.1136/gutjnl-2019-318484 | Evidence: human_subject
+
+[54] Tuberculosis, hepatitis B and herpes zoster in tofacitinib-treated patients with rheumatoid arthritis.
+    Authors: Zhang Z, Deng W, Wu Q, Sun L
+    PMID: 30630365 | DOI: 10.2217/imt-2018-0113 | Evidence: animal
+
+[55] Tofacitinib, an oral Janus kinase inhibitor, in patients from Brazil with rheumatoid arthritis: Pooled efficacy and safety analyses.
+    Authors: Lomonte ABV, Radominski SC, Marcolino FMD, Brenol CV, Zerbini CAF, Garcia EG, Akylbekova EL, Rojo R, de Leon DP
+    PMID: 30075534 | PMCID: PMC6081087 | DOI: 10.1097/MD.0000000000011609 | Evidence: clinical_study
+
+[56] European perspective on the management of rheumatoid arthritis: clinical utility of tofacitinib.
+    Authors: Kawalec P, Sladowska K, Malinowska-Lipien I, Brzostek T, Kozka M
+    PMID: 29317823 | PMCID: PMC5743127 | DOI: 10.2147/TCRM.S138677 | Evidence: human_subject
+
+[57] A study on the risk of fungal infection with tofacitinib (CP-690550), a novel oral agent for rheumatoid arthritis.
+    Authors: Chen Y, Gong FY, Li ZJ, Gong Z, Zhou Z, Ma SY, Gao XM
+    PMID: 28754958 | PMCID: PMC5533717 | DOI: 10.1038/s41598-017-07261-1 | Evidence: human_subject
+
+[58] The risk of tuberculosis disease in rheumatoid arthritis patients on biologics and targeted therapy: A 15-year real world experience in Taiwan.
+    Authors: Lim CH, Chen HH, Chen YH, Chen DY, Huang WN, Tsai JJ, Hsieh TY, Hsieh CW, Hung WT, Lin CT, Lai KL, Tang KT, Tseng CW, Chen YM
+    PMID: 28570568 | PMCID: PMC5453436 | DOI: 10.1371/journal.pone.0178035 | Evidence: human_subject
+
+[59] Safety of Tofacitinib in the Treatment of Rheumatoid Arthritis in Latin America Compared With the Rest of the World Population.
+    Authors: Castaneda OM, Romero FJ, Salinas A, Citera G, Mysler E, Rillo O, Radominski SC, Cardiel MH, Jaller JJ, Alvarez-Moreno C, Ponce de Leon D, Castelli G, Garcia EG, Kwok K, Rojo R
+    PMID: 28145906 | DOI: 10.1097/RHU.0000000000000498 | Evidence: human_subject
+
+[60] Long-term safety of tofacitinib for the treatment of rheumatoid arthritis up to 8.5 years: integrated analysis of data from the global clinical trials.
+    Authors: Cohen SB, Tanaka Y, Mariette X, Curtis JR, Lee EB, Nash P, Winthrop KL, Charles-Schoeman C, Thirunavukkarasu K, DeMasi R, Geier J, Kwok K, Wang L, Riese R, Wollenhaupt J
+    PMID: 28143815 | PMCID: PMC5530353 | DOI: 10.1136/annrheumdis-2016-210457 | Evidence: human_subject
+
+[61] [Molecular Targeted Therapy and Laboratory Tests].
+    Authors: Koshiba M
+    PMID: 30695330 | DOI:  | Evidence: other
+
+[62] A review of clinical trials of biologic agents and small molecules for psoriasis in Asian subjects.
+    Authors: Tsai YC, Tsai TF
+    PMID: 26889727 | DOI:  | Evidence: other
+
+[63] Erratum to ""Efficacy of Adjunctive Tofacitinib Therapy in Mouse Models of Tuberculosis"" [EBioMedicine 2 (8), August 2015, 868-873].
+    Authors: Maiga M, Ahidjo BA, Maiga MC, Cheung L, Pelly S, Lun S, Bougoudogo F, Bishai WR
+    PMID: 26870809 | PMCID: PMC4740325 | DOI: 10.1016/j.ebiom.2015.10.019 | Evidence: other
+
+[64] 2015 American College of Rheumatology Guideline for the Treatment of Rheumatoid Arthritis.
+    Authors: Singh JA, Saag KG, Bridges SL Jr, Akl EA, Bannuru RR, Sullivan MC, Vaysbrot E, McNaughton C, Osani M, Shmerling RH, Curtis JR, Furst DE, Parks D, Kavanaugh A, O'Dell J, King C, Leong A, Matteson EL, Schousboe JT, Drevlow B, Ginsberg S, Grober J, St Clair EW, Tindall E, Miller AS, McAlindon T
+    PMID: 26545940 | DOI: 10.1002/art.39480 | Evidence: other
+
+[65] 2015 American College of Rheumatology Guideline for the Treatment of Rheumatoid Arthritis.
+    Authors: Singh JA, Saag KG, Bridges SL Jr, Akl EA, Bannuru RR, Sullivan MC, Vaysbrot E, McNaughton C, Osani M, Shmerling RH, Curtis JR, Furst DE, Parks D, Kavanaugh A, O'Dell J, King C, Leong A, Matteson EL, Schousboe JT, Drevlow B, Ginsberg S, Grober J, St Clair EW, Tindall E, Miller AS, McAlindon T
+    PMID: 26545825 | DOI: 10.1002/acr.22783 | Evidence: other
+
+[66] Efficacy of Adjunctive Tofacitinib Therapy in Mouse Models of Tuberculosis.
+    Authors: Maiga M, Ahidjo BA, Maiga MC, Cheung L, Pelly S, Lun S, Bougoudogo F, Bishai WR
+    PMID: 26425693 | PMCID: PMC4563140 | DOI: 10.1016/j.ebiom.2015.07.014 | Evidence: animal | HDT
+
+[67] Suppress for Success: A JAK Inhibitor for Adjunct Therapy of Tuberculosis.
+    Authors: Dorhoi A
+    PMID: 26425676 | DOI: 10.1016/j.ebiom.2015.08.010 | Evidence: animal | HDT
+
+[68] Risk of infection with biologic antirheumatic therapies in patients with rheumatoid arthritis.
+    Authors: Lahiri M, Dixon WG
+    PMID: 26362745 | DOI: 10.1016/j.berh.2015.05.009 | Evidence: other
+
+[69] Tuberculosis and other opportunistic infections in tofacitinib-treated patients with rheumatoid arthritis.
+    Authors: Winthrop KL, Park SH, Gul A, Cardiel MH, Gomez-Reino JJ, Tanaka Y, Kwok K, Lukic T, Mortensen E, Ponce de Leon D, Riese R, Valdez H
+    PMID: 26318385 | PMCID: PMC4893093 | DOI: 10.1136/annrheumdis-2015-207319 | Evidence: other
+
+[70] Screening and vaccinations in patients requiring systemic immunosuppression: an update for dermatologists.
+    Authors: Goyal A, Goyal K, Merola JF
+    PMID: 25854805 | DOI: 10.1007/s40257-015-0124-x | Evidence: other
+
+[71] Risk of tuberculosis in patients with chronic immune-mediated inflammatory diseases treated with biologics and tofacitinib: a systematic review and meta-analysis of randomized controlled trials and long-term extension studies.
+    Authors: Souto A, Maneiro JR, Salgado E, Carmona L, Gomez-Reino JJ
+    PMID: 24821849 | DOI: 10.1093/rheumatology/keu172 | Evidence: other
+
+[72] [A new therapeutical option for chronic inflammation in rheumatology: janus kinases inhibitors (JAK)].
+    Authors: Varisco PA, So A
+    PMID: 24624736 | DOI:  | Evidence: other
+
+[73] Safety of synthetic and biological DMARDs: a systematic literature review informing the 2013 update of the EULAR recommendations for management of rheumatoid arthritis.
+    Authors: Ramiro S, Gaujoux-Viala C, Nam JL, Smolen JS, Buch M, Gossec L, van der Heijde D, Winthrop K, Landewe R
+    PMID: 24401994 | DOI: 10.1136/annrheumdis-2013-204575 | Evidence: other
+
+[74] Tofacitinib in combination with nonbiologic disease-modifying antirheumatic drugs in patients with active rheumatoid arthritis: a randomized trial.
+    Authors: Kremer J, Li ZG, Hall S, Fleischmann R, Genovese M, Martin-Mola E, Isaacs JD, Gruben D, Wallenstein G, Krishnaswami S, Zwillich SH, Koncz T, Riese R, Bradley J
+    PMID: 24026258 | DOI: 10.7326/0003-4819-159-4-201308200-00006 | Evidence: clinical_study
+
+[75] The kinase inhibitor tofacitinib in patients with rheumatoid arthritis: latest findings and clinical potential.
+    Authors: Cutolo M
+    PMID: 23515130 | PMCID: PMC3582307 | DOI: 10.1177/1759720X12470753 | Evidence: human_subject
+
+[76] Tofacitinib or adalimumab versus placebo in rheumatoid arthritis.
+    Authors: van Vollenhoven RF, Fleischmann R, Cohen S, Lee EB, Garcia Meijide JA, Wagner S, Forejtova S, Zwillich SH, Gruben D, Koncz T, Wallenstein GV, Krishnaswami S, Bradley JD, Wilkinson B
+    PMID: 22873531 | DOI: 10.1056/NEJMoa1112072 | Evidence: clinical_study
+
+[77] Risk of tuberculosis reactivation with tofacitinib (CP-690550).
+    Authors: Maiga M, Lun S, Guo H, Winglee K, Ammerman NC, Bishai WR
+    PMID: 22474037 | PMCID: PMC3415851 | DOI: 10.1093/infdis/jis269 | Evidence: animal
+
+[78] P10 Collapse, confusion and acute kidney injury presenting in the context of bullous skin disease in a young male patient.
+    Authors: Nagra D, Baldwin C, Dick J, Galloway J, Connolly A, Wincup C
+    PMID:  | PMCID: PMC10532208 | DOI: 10.1093/rap/rkad070.031 | Evidence: other",animal,26425676; 26425693
+lovastatin,5,2,5,FALSE,0,2,1,1,1,0,1,2,human_subject,"['41746593', '40501823', '39832798', '25421876', '19555197']","[1] Anti-mycobacterial, cytotoxic effects of Penicillium mallochii ethanol extract, and quantitative detection of its extrolites by lc-q-tof-ms/ms.
+    Authors: Askun T, Canturk Z, Guner P
+    PMID: 41746593 | PMCID: PMC12946561 | DOI: 10.1007/s42770-025-01847-y | Evidence: in_vitro
+
+[2] Integrative transcriptome-based drug repurposing in tuberculosis.
+    Authors: Samart K, Buskirk L, Tonielli A, Krishnan A, Ravi J
+    PMID: 40501823 | PMCID: PMC12157595 | DOI: 10.1101/2025.06.02.657296 | Evidence: other | HDT
+
+[3] Host-Directed Therapy with Inhalable Lovastatin Microspheres for Matrix Metalloproteinase Inhibition in Tuberculosis.
+    Authors: Jhilta A, Jadhav K, Sharma R, Singh R, Negi S, Sharma N, Singh AK, Verma RK
+    PMID: 39832798 | DOI: 10.1021/acsabm.4c01723 | Evidence: animal | HDT
+
+[4] Correlation between use of simvastatin and lovastatin and female lung cancer risk: a nationwide case-control study.
+    Authors: Yang TY, Lin WM, Lin CL, Sung FC, Kao CH
+    PMID: 25421876 | DOI: 10.1111/ijcp.12598 | Evidence: human_subject
+
+[5] Effect of HMG-CoA reductase inhibitors on activation of human gammadeltaT cells induced by Mycobacterium tuberculosis antigens.
+    Authors: Lu HZ, Li BQ
+    PMID: 19555197 | DOI: 10.1080/08923970902806505 | Evidence: human_subject",animal,39832798
+ethinyl-estradiol,17,1,17,FALSE,3,7,1,0,4,2,0,0,clinical_study,"['41793065', '7803151', '3129933', '3331152', '6804162', '7428368', '7189454', '12260747', '1253597', '1124382', '1138226', '4423170', '4580141', '5151212', '5563240', '4977266', '13339347']","[1] Combined Oral Contraceptive Drug-Drug Interaction Study With Ganfeborole, a New Anti-Tuberculosis Agent.
+    Authors: Iavarone L, Lavezzi SM, Carcas AJ, Chaychenko T, Gabarro-Carrion R, Huertas AGLL, Gresham S, Marin-Candon A, Penman SL, Rolfe K, Tiberi S, Barros-Aguirre D, Borobia AM
+    PMID: 41793065 | PMCID: PMC12966810 | DOI: 10.1002/jcph.70161 | Evidence: clinical_study
+
+[2] Oral contraceptives and antibiotics: important considerations for dental practice.
+    Authors: Gibson J, McGowan DA
+    PMID: 7803151 | DOI: 10.1038/sj.bdj.4808631 | Evidence: other
+
+[3] Generalized peliosis hepatis and cirrhosis after long-term use of oral contraceptives.
+    Authors: van Erpecum KJ, Janssens AR, Kreuning J, Ruiter DJ, Kroon HM, Grond AJ
+    PMID: 3129933 | DOI:  | Evidence: human_subject
+
+[4] [Hormonal contraception and other drug treatments].
+    Authors: Haukkamaa M
+    PMID: 3331152 | DOI:  | Evidence: other
+
+[5] A randomized, double-blind study of two combined and two progestogen-only oral contraceptives.
+    Authors: Sheth A, Jain U, Sharma S, Adatia A, Patankar S, Andolsek L, Pretnar-Darovec A, Belsey MA, Hall PE, Parker RA, Ayeni S, Pinol A, Li Hoi Foo C
+    PMID: 6804162 | DOI: 10.1016/0010-7824(82)90047-6 | Evidence: clinical_study
+
+[6] A study of interaction of a low-dose combination oral contraceptive with anti-tubercular drugs.
+    Authors: Joshi JV, Joshi UM, Sankolli GM, Gupta K, Rao AP, Hazari K, Sheth UK, Saxena BN
+    PMID: 7428368 | DOI: 10.1016/0010-7824(80)90034-7 | Evidence: human_subject
+
+[7] The effect of rifampicin on the pharmacokinetics of ethynylestradiol in women.
+    Authors: Back DJ, Breckenridge AM, Crawford FE, Hall JM, MacIver M, Orme ML, Rowe PH, Smith E, Watts MJ
+    PMID: 7189454 | DOI: 10.1016/0010-7824(80)90125-0 | Evidence: human_subject
+
+[8] Rifampicin interference with oral contraceptives.
+    Authors: Bessot JC, Petitjean R, Vandevenne A, Rempp M, Burghard G
+    PMID: 12260747 | DOI:  | Evidence: other
+
+[9] Some immune responses of Gambian women taking the combined oral contraceptive pill.
+    Authors: Bray RS
+    PMID: 1253597 | DOI: 10.1016/s0010-7824(76)80028-5 | Evidence: other
+
+[10] [New aspects of tuberculosis therapy].
+    Authors: Haegi V
+    PMID: 1124382 | DOI:  | Evidence: other
+
+[11] [Letter: Oral contraception and rifampicin].
+    Authors: Piguet B, Muglioni JF, Chaline G
+    PMID: 1138226 | DOI:  | Evidence: human_subject
+
+[12] Amenorrhea following rifampin administration during oral contraceptive use.
+    Authors: Altschuler SL, Valenteen JW
+    PMID: 4423170 | DOI:  | Evidence: human_subject
+
+[13] [Effects of rifampicin on the menstrual cycle and on oestrogen excretion in patients taking oral contraceptives].
+    Authors: Nocke-Finck L, Breuer H, Reimers D
+    PMID: 4580141 | DOI: 10.1055/s-0028-1107071 | Evidence: clinical_study
+
+[14] [Rifampicin, pregnancy, hormonal contraception, menopause and aging].
+    Authors: Rocher G, Haour P, Viallier J, Bouvy F, Van Theemsche G
+    PMID: 5151212 | DOI:  | Evidence: human_subject
+
+[15] Lactation following lobectomy.
+    Authors: Crist T, Hendricks CH, Brenner WE
+    PMID: 5563240 | DOI: 10.1016/0002-9378(71)90266-3 | Evidence: human_subject
+
+[16] Effect of oral contraceptives on experimental demyelinating disease.
+    Authors: Arnason BG, Richman DP
+    PMID: 4977266 | DOI: 10.1001/archneur.1969.00480130117012 | Evidence: animal
+
+[17] Trypsin-desogen treatment of sputum for isolation of tubercle bacilli.
+    Authors: LIND A
+    PMID: 13339347 | DOI: 10.1111/j.1699-0463.1956.tb03373.x | Evidence: other",NA,NA
+atorvastatin,16,11,17,FALSE,2,4,3,2,5,1,5,3,clinical_study,"['42675497', '41709726', '40677706', '40501823', '38420591', '38042973', '38042968', '36855033', '36719189', '31605489', '28571806', '25332915', '25049257', '24250526', '21801201', '18974931', '']","[1] Delayed ischemic stroke ten days after aluminum phosphide ingestion in a previously healthy 21-year-old Ethiopian woman: a case report.
+    Authors: Oljira AM, Hunduma SS, Geleta DG, Gonfa RW, Barkesa DY, Bekele BA, Reda EN, Fininsa DW, Fissha AB, Yanore MT
+    PMID: 42675497 | PMCID: PMC13527987 | DOI: 10.1186/s13256-026-06403-2 | Evidence: human_subject
+
+[2] Retrieval Augmented Generation (RAG) for Evaluating Regulatory Compliance of Drug Information and Clinical Trial Protocols.
+    Authors: Waikar S, Bhat AG, Ramanathan M
+    PMID: 41709726 | PMCID: PMC12917324 | DOI: 10.1002/psp4.70201 | Evidence: other
+
+[3] Immunomodulatory effects of atorvastatin on peripheral blood mononuclear cells infected with Mycobacterium tuberculosis.
+    Authors: Sabeel S, Motaung B, Ozturk M, Mafu TS, Wilkinson RJ, Thienemann F, Guler R
+    PMID: 40677706 | PMCID: PMC12267233 | DOI: 10.3389/fimmu.2025.1597534 | Evidence: in_vitro | HDT
+
+[4] Integrative transcriptome-based drug repurposing in tuberculosis.
+    Authors: Samart K, Buskirk L, Tonielli A, Krishnan A, Ravi J
+    PMID: 40501823 | PMCID: PMC12157595 | DOI: 10.1101/2025.06.02.657296 | Evidence: other | HDT
+
+[5] Pathogenic mycobacterium upregulates cholesterol 25-hydroxylase to promote granuloma development via foam cell formation.
+    Authors: Zhou S, Zhang D, Li D, Wang H, Ding C, Song J, Huang W, Xia X, Zhou Z, Han S, Jin Z, Yan B, Gonzales J, Via LE, Zhang L, Wang D
+    PMID: 38420591 | PMCID: PMC10901098 | DOI: 10.1016/j.isci.2024.109204 | Evidence: animal
+
+[6] Atorvastatin to reduce bacillary load and attenuate lung damage in TB patients.
+    Authors: Araujo-Pereira M, Andrade BB
+    PMID: 38042973 | DOI: 10.5588/ijtld.23.0503 | Evidence: other
+
+[7] Atorvastatin improves sputum conversion and chest X-ray severity score.
+    Authors: Adewole OO, Omotoso BA, Ogunsina M, Aminu A, Ayoola O, Adedeji T, Awopeju OF, Sogaolu OM, Adewole TO, Odeyemi AO, Jiya E, Andero V, Ojo O, Toyin K, Akintomide AO, Erhabor GE
+    PMID: 38042968 | DOI: 10.5588/ijtld.23.0190 | Evidence: clinical_study
+
+[8] Atorvastatin accelerates Mycobacterium tuberculosis clearance in pulmonary TB: a randomised phase IIA trial.
+    Authors: Adewole OO, Omotoso BA, Ogunsina M, Aminu A, Odeyemi AO, Awopeju OF, Ayoola O, Adedeji T, Sogaolu OM, Adewole TO, Jiya E, Andero V, Obaseki D, Akintomide AO, Erhabor GE
+    PMID: 36855033 | DOI: 10.5588/ijtld.22.0548 | Evidence: clinical_study
+
+[9] Atorvastatin Potentially Reduces Mycobacterial Severity through Its Action on Lipoarabinomannan and Drug Permeability in Granulomas.
+    Authors: Davuluri KS, Singh AK, Singh AV, Chaudhary P, Raman SK, Kushwaha S, Singh SV, Chauhan DS
+    PMID: 36719189 | PMCID: PMC10100658 | DOI: 10.1128/spectrum.03197-22 | Evidence: human_subject
+
+[10] Adjunctive Host-Directed Therapy With Statins Improves Tuberculosis-Related Outcomes in Mice.
+    Authors: Dutta NK, Bruiners N, Zimmerman MD, Tan S, Dartois V, Gennaro ML, Karakousis PC
+    PMID: 31605489 | PMCID: PMC7325721 | DOI: 10.1093/infdis/jiz517 | Evidence: animal | HDT
+
+[11] Bioinformatics approach to prioritize known drugs towards repurposing for tuberculosis.
+    Authors: Brindha S, Vincent S, Velmurugan D, Ananthakrishnan D, Sundaramurthi JC, Gnanadoss JJ
+    PMID: 28571806 | DOI: 10.1016/j.mehy.2017.04.005 | Evidence: other
+
+[12] World health dilemmas: Orphan and rare diseases, orphan drugs and orphan patients.
+    Authors: Kontoghiorghe CN, Andreou N, Constantinou K, Kontoghiorghes GJ
+    PMID: 25332915 | PMCID: PMC4202455 | DOI: 10.5662/wjm.v4.i3.163 | Evidence: human_subject
+
+[13] Statins increase rifampin mycobactericidal effect.
+    Authors: Lobato LS, Rosa PS, Ferreira Jda S, Neumann Ada S, da Silva MG, do Nascimento DC, Soares CT, Pedrini SC, Oliveira DS, Monteiro CP, Pereira GM, Ribeiro-Alves M, Hacker MA, Moraes MO, Pessolani MC, Duarte RS, Lara FA
+    PMID: 25049257 | PMCID: PMC4187984 | DOI: 10.1128/AAC.01826-13 | Evidence: in_vitro
+
+[14] Methacoline Challenge test as an Evaluator of Response to Statins in Bronchial Hyperresponsiveness.
+    Authors: Malek Mohammad M, Fahimi F, Fakharian A, Karimi Gamishan M, Sistanizad M, Fayazi N, Khalilzadeh S
+    PMID: 24250526 | PMCID: PMC3813126 | DOI:  | Evidence: human_subject
+
+[15] Effects of simvastatin, atorvastatin, ezetimibe, and ezetimibe + simvastatin combination on the inflammatory process and on the liver metabolic changes of arthritic rats.
+    Authors: Bracht L, Barbosa CP, Caparroz-Assef SM, Cuman RK, Ishii-Iwamoto EL, Bracht A, Bersani-Amado CA
+    PMID: 21801201 | DOI: 10.1111/j.1472-8206.2011.00976.x | Evidence: animal
+
+[16] Tuberculosis in a patient on temozolomide: a case report.
+    Authors: de Paiva TF Jr, de Barros e Silva MJ, Rinck JA Jr, Fanelli MF, Gimenes DL
+    PMID: 18974931 | DOI: 10.1007/s11060-008-9724-0 | Evidence: human_subject
+
+[17] 25. Use of rituximab in refractory primary antiphospholipid syndrome with pulmonary and cerebral manifestations.
+    Authors: Khan A, Ansari G, Al-Koky H, Mahto A, Tahir H
+    PMID:  | PMCID: PMC6761442 | DOI: 10.1093/rap/rkz029.001 | Evidence: other",animal,31605489
+clonidine,1,1,1,FALSE,0,1,0,0,0,0,1,0,human_subject,['20831807'],"[1] Paroxysmal autonomic instability with dystonia in a patient with tuberculous meningitis: a case report.
+    Authors: Ramdhani NA, Sikma MA, Witkamp TD, Slooter AJ, de Lange DW
+    PMID: 20831807 | PMCID: PMC2944193 | DOI: 10.1186/1752-1947-4-304 | Evidence: human_subject",NA,NA
+nabumetone,0,0,0,FALSE,0,0,0,0,0,0,0,0,none,[],No evidence found,NA,NA
+tamoxifen,19,10,19,FALSE,0,6,2,2,6,3,3,5,human_subject,"['41400398', '40501823', '40483737', '39335008', '36475748', '33477744', '32814527', '32269154', '31080743', '29804151', '29635837', '25639719', '24971632', '24520056', '23653999', '20424525', '17559792', '16948834', '15711658']","[1] Tamoxifen inhibits histidine kinases of M. tuberculosis two-component signaling systems.
+    Authors: Garg A, Singh DP, Pandit M, Malhotra V, Saini DK
+    PMID: 41400398 | PMCID: PMC12889096 | DOI: 10.1128/spectrum.01880-25 | Evidence: other
+
+[2] Integrative transcriptome-based drug repurposing in tuberculosis.
+    Authors: Samart K, Buskirk L, Tonielli A, Krishnan A, Ravi J
+    PMID: 40501823 | PMCID: PMC12157595 | DOI: 10.1101/2025.06.02.657296 | Evidence: other | HDT
+
+[3] Host-Directed Therapeutic for the treatment of Mycobacterium tuberculosis.
+    Authors: Mahajan P, Gor HR, Jadhav S, Joshi M, Nema V
+    PMID: 40483737 | DOI: 10.1016/j.micres.2025.128253 | Evidence: animal | HDT
+
+[4] Innovative Strategies in Drug Repurposing to Tackle Intracellular Bacterial Pathogens.
+    Authors: Lorente-Torres B, Llano-Verdeja J, Castanera P, Ferrero HA, Fernandez-Martinez S, Javadimarand F, Mateos LM, Letek M, Mourenza A
+    PMID: 39335008 | PMCID: PMC11428606 | DOI: 10.3390/antibiotics13090834 | Evidence: other | HDT
+
+[5] Repurposing Tamoxifen as Potential Host-Directed Therapeutic for Tuberculosis.
+    Authors: Boland R, Heemskerk MT, Forn-Cuni G, Korbee CJ, Walburg KV, Esselink JJ, Carvalho Dos Santos C, de Waal AM, van der Hoeven DCM, van der Sar E, de Ries AS, Xie J, Spaink HP, van der Vaart M, Haks MC, Meijer AH, Ottenhoff THM
+    PMID: 36475748 | PMCID: PMC9973281 | DOI: 10.1128/mbio.03024-22 | Evidence: animal | HDT
+
+[6] Antimycobacterial, Cytotoxic, and Antioxidant Activities of Abietane Diterpenoids Isolated from Plectranthus madagascariensis.
+    Authors: Ndjoubi KO, Sharma R, Badmus JA, Jacobs A, Jordaan A, Marnewick J, Warner DF, Hussein AA
+    PMID: 33477744 | PMCID: PMC7832401 | DOI: 10.3390/plants10010175 | Evidence: other
+
+[7] Antimicrobial, Antitumor and Side Effects Assessment of a Newly Synthesized Tamoxifen Analog.
+    Authors: Abdmouleh F, El Arbi M, Saad HB, Jellali K, Ketata E, Amara IB, Pigeon P, Hassen HB, Top S, Jaouen G, Hammami R, Ali MB, Gupta GK
+    PMID: 32814527 | DOI: 10.2174/1568026620666200819145526 | Evidence: animal
+
+[8] Bazedoxifene Suppresses Intracellular Mycobacterium tuberculosis Growth by Enhancing Autophagy.
+    Authors: Ouyang Q, Zhang K, Lin D, Feng CG, Cai Y, Chen X
+    PMID: 32269154 | PMCID: PMC7142296 | DOI: 10.1128/mSphere.00124-20 | Evidence: in_vitro | HDT
+
+[9] Role of nanostructures in improvising oral medicine.
+    Authors: Ghosh S, Ghosh S, Sil PC
+    PMID: 31080743 | DOI: 10.1016/j.toxrep.2019.04.004 | Evidence: other
+
+[10] Synthesis and evaluation of antimicrobial, antitubercular and anticancer activities of 2-(1-benzoyl-1H-benzo[d]imidazol-2-ylthio)-N-substituted acetamides.
+    Authors: Yadav S, Lim SM, Ramasamy K, Vasudevan M, Shah SAA, Mathur A, Narasimhan B
+    PMID: 29804151 | PMCID: PMC5971037 | DOI: 10.1186/s13065-018-0432-3 | Evidence: other
+
+[11] Lethal fibrosing mediastinitis in a child possibly due to Mycobacterium tuberculosis.
+    Authors: Goussard P, Gie RP, Janson J
+    PMID: 29635837 | DOI: 10.1002/ppul.24012 | Evidence: human_subject
+
+[12] Anti-Mycobacterial Activity of Tamoxifen Against Drug-Resistant and Intra-Macrophage Mycobacterium tuberculosis.
+    Authors: Jang WS, Kim S, Podder B, Jyoti MA, Nam KW, Lee BE, Song HY
+    PMID: 25639719 | DOI: 10.4014/jmb.1412.12023 | Evidence: in_vitro
+
+[13] Pros and cons of the tuberculosis drugome approach--an empirical analysis.
+    Authors: Chen FC, Liao YC, Huang JM, Lin CH, Chen YY, Dou HY, Hsiung CA
+    PMID: 24971632 | PMCID: PMC4074101 | DOI: 10.1371/journal.pone.0100829 | Evidence: other
+
+[14] Estrogen receptor antagonists are anti-cryptococcal agents that directly bind EF hand proteins and synergize with fluconazole in vivo.
+    Authors: Butts A, Koselny K, Chabrier-Rosello Y, Semighini CP, Brown JC, Wang X, Annadurai S, DiDone L, Tabroff J, Childers WE Jr, Abou-Gharbia M, Wellington M, Cardenas ME, Madhani HD, Heitman J, Krysan DJ
+    PMID: 24520056 | PMCID: PMC3950514 | DOI: 10.1128/mBio.00765-13 | Evidence: other
+
+[15] [Encapsulating peritoneal sclerosis--case report].
+    Authors: Duric P, Majster Z, Popovic VS, Radovic VM, Dimkovic N
+    PMID: 23653999 | DOI: 10.2298/mpns1304185d | Evidence: human_subject
+
+[16] Differential diagnosis of lung nodules: breast cancer metastases and lung tuberculosis.
+    Authors: Endri M, Cartei G, Zustovich F, Serino FS, Fassina A
+    PMID: 20424525 | DOI:  | Evidence: human_subject
+
+[17] Adrenal tuberculosis after a pheochromocytoma: a misleading tumoral presentation.
+    Authors: Hieronimus S, Bernard JL, Chevallier P, Chevallier A, Chyderiotis G, Fenichel P, Landraud L
+    PMID: 17559792 | DOI: 10.1016/j.ando.2007.02.004 | Evidence: human_subject
+
+[18] Genital tuberculosis in a tamoxifen-treated postmenopausal woman with breast cancer and bloody vaginal discharge.
+    Authors: Neonakis I, Mantadakis E, Gitti Z, Mitrouska I, Manidakis LG, Maraki S, Samonis G
+    PMID: 16948834 | PMCID: PMC1570363 | DOI: 10.1186/1476-0711-5-20 | Evidence: human_subject
+
+[19] Male breast disorders in Jordan. Disease patterns and management problems.
+    Authors: Yaghan RJ, Bani-Hani KE
+    PMID: 15711658 | DOI:  | Evidence: human_subject",animal,36475748
+ketotifen,0,0,0,FALSE,0,0,0,0,0,0,0,0,none,[],No evidence found,NA,NA
+vemurafenib,1,0,1,FALSE,0,0,0,0,0,1,0,0,none,['27742535'],"[1] Targeting tuberculosis using structure-guided fragment-based drug design.
+    Authors: Mendes V, Blundell TL
+    PMID: 27742535 | DOI: 10.1016/j.drudis.2016.10.003 | Evidence: animal",NA,NA
+raloxifene,3,1,3,FALSE,0,0,1,0,1,1,0,0,animal,"['38170746', '28334925', '15577120']","[1] Polyphosphate kinase-1 regulates bacterial and host metabolic pathways involved in pathogenesis of Mycobacterium tuberculosis.
+    Authors: Chugh S, Tiwari P, Suri C, Gupta SK, Singh P, Bouzeyen R, Kidwai S, Srivastava M, Rameshwaram NR, Kumar Y, Asthana S, Singh R
+    PMID: 38170746 | PMCID: PMC10786269 | DOI: 10.1073/pnas.2309664121 | Evidence: animal
+
+[2] Simultaneous LC-MS-MS Determination of Lopinavir and Rifabutin in Human Plasma.
+    Authors: Jaiswal S, Sharma A, Shukla M, Lal J
+    PMID: 28334925 | DOI: 10.1093/chromsci/bmx016 | Evidence: other
+
+[3] Management of osteoporosis: the Indian perspective.
+    Authors: Handa R
+    PMID: 15577120 | DOI:  | Evidence: other",NA,NA
+naltrexone,7,5,7,FALSE,4,0,0,1,1,1,1,0,clinical_study,"['35202216', '23750742', '23490304', '22335183', '19930235', '8748073', '2519841']","[1] Implementing a Substance-Use Screening and Intervention Program for People Living with Rifampicin-Resistant Tuberculosis: Pragmatic Experience from Khayelitsha, South Africa.
+    Authors: Reuter A, Beko B, Memani B, Furin J, Daniels J, Rodriguez E, Reuter H, Weich L, Isaakidis P, von der Heyden E, Kock Y, Mohr-Holland E
+    PMID: 35202216 | PMCID: PMC8879094 | DOI: 10.3390/tropicalmed7020021 | Evidence: other
+
+[2] Training and fidelity monitoring of alcohol treatment interventions integrated into routine tuberculosis care in Tomsk, Russia: the IMPACT Effectiveness Trial.
+    Authors: Connery H, Greenfield S, Livchits V, McGrady L, Patrick N, Lastimoso CS, Heney JH, Nelson AK, Shields A, Stepanova YP, Petrova LY, Anastasov OV, Novoseltseva OI, Shin SS
+    PMID: 23750742 | PMCID: PMC4010131 | DOI: 10.3109/10826084.2013.793715 | Evidence: clinical_study
+
+[3] Effectiveness of alcohol treatment interventions integrated into routine tuberculosis care in Tomsk, Russia.
+    Authors: Shin S, Livchits V, Connery HS, Shields A, Yanov S, Yanova G, Fitzmaurice GM, Nelson AK, Greenfield SF
+    PMID: 23490304 | PMCID: PMC3710528 | DOI: 10.1111/add.12148 | Evidence: clinical_study
+
+[4] Implementing evidence-based alcohol interventions in a resource-limited setting: novel delivery strategies in Tomsk, Russia.
+    Authors: Shin SS, Livchits V, Nelson AK, Lastimoso CS, Yanova GV, Yanov SA, Mishustin SP, Connery HS, Greenfield SF
+    PMID: 22335183 | PMCID: PMC3318976 | DOI: 10.3109/10673229.2012.649121 | Evidence: clinical_study
+
+[5] Integrated Management of Physician-delivered Alcohol Care for Tuberculosis Patients: Design and Implementation.
+    Authors: Greenfield SF, Shields A, Connery HS, Livchits V, Yanov SA, Lastimoso CS, Strelis AK, Mishustin SP, Fitzmaurice G, Mathew TA, Shin S
+    PMID: 19930235 | PMCID: PMC2898509 | DOI: 10.1111/j.1530-0277.2009.01094.x | Evidence: clinical_study
+
+[6] Morphine stimulates phagocytosis of Mycobacterium tuberculosis by human microglial cells: involvement of a G protein-coupled opiate receptor.
+    Authors: Peterson PK, Gekker G, Hu S, Sheng WS, Molitor TW, Chao CC
+    PMID: 8748073 | DOI: 10.1016/0960-5428(95)00020-3 | Evidence: in_vitro
+
+[7] Acquired immunodeficiency syndrome: molecular biology and its therapeutic intervention (review).
+    Authors: Schulhafer EP, Verma RS
+    PMID: 2519841 | DOI:  | Evidence: other",NA,NA
+dasatinib,11,4,11,FALSE,0,5,2,1,1,2,2,2,human_subject,"['42098153', '40631209', '34099212', '32874590', '31246494', '30242834', '29454849', '29388066', '28199133', '25556390', '24351780']","[1] Elimination of senescent cells with senolytic drugs as adjunctive host-directed therapy reduces tuberculosis progression in mice.
+    Authors: Shee S, Martinez-Martinez YB, Koleske B, Shaku MT, Yabaji S, Kobzik L, Kramnik I, Bishai W
+    PMID: 42098153 | PMCID: PMC13357804 | DOI: 10.1038/s41467-026-72874-y | Evidence: animal | HDT
+
+[2] Elimination of senescent cells with senolytic host-directed therapy reduces tuberculosis progression in mice.
+    Authors: Shee S, Martinez-Martinez YB, Koleske B, Yabaji S, Kobzik L, Kramnik I, Bishai W
+    PMID: 40631209 | PMCID: PMC12236815 | DOI: 10.1101/2025.03.28.645957 | Evidence: animal | HDT
+
+[3] Case reports of chronic myeloid leukemia and tuberculosis: Is imatinib the link between the two?
+    Authors: Verma SP, Tripathi AK, Kumar N, Gupta SK
+    PMID: 34099212 | DOI: 10.1016/j.ijtb.2020.11.004 | Evidence: human_subject
+
+[4] Drug-induced interstitial lung disease associated with dasatinib coinciding with active tuberculosis.
+    Authors: Tani N, Kunimatsu Y, Sato I, Ogura Y, Hirose K, Takeda T
+    PMID: 32874590 | PMCID: PMC7450224 | DOI: 10.1002/rcr2.654 | Evidence: other
+
+[5] Pleural Diseases: Pleurodesis via Indwelling Pleural Catheter, Dasatinib-induced Pleural Effusion, and IL-27 in Tuberculosis Pleural Effusion.
+    Authors: Sagar AS, Dodge DL, Salahuddin M, Warner MT, Mak G, Faiz SA
+    PMID: 31246494 | PMCID: PMC6775873 | DOI: 10.1164/rccm.201810-2058RR | Evidence: human_subject
+
+[6] The tyrosine kinase inhibitor dasatinib reduces the growth of intracellular Mycobacterium tuberculosis despite impairing T-cell function.
+    Authors: Wehrstedt S, Kubis J, Zimmermann A, Bruns H, Mayer D, Grieshober M, Stenger S
+    PMID: 30242834 | DOI: 10.1002/eji.201847656 | Evidence: in_vitro
+
+[7] ESCMID Study Group for Infections in Compromised Hosts (ESGICH) Consensus Document on the safety of targeted and biological therapies: an infectious diseases perspective (Intracellular signaling pathways: tyrosine kinase and mTOR inhibitors).
+    Authors: Reinwald M, Silva JT, Mueller NJ, Fortun J, Garzoni C, de Fijter JW, Fernandez-Ruiz M, Grossi P, Aguado JM
+    PMID: 29454849 | DOI: 10.1016/j.cmi.2018.02.009 | Evidence: other
+
+[8] Infections in patients on BCR-ABL tyrosine kinase inhibitor therapy: cases and review of the literature.
+    Authors: Knoll BM, Seiter K
+    PMID: 29388066 | DOI: 10.1007/s15010-017-1105-1 | Evidence: human_subject
+
+[9] Endobronchial Lesions of Mycobacterium abscessus Infection in an Immunocompromised Patient.
+    Authors: Saeki K, Watanabe S, Waseda Y, Kasahara K
+    PMID: 28199133 | DOI: 10.1164/rccm.201610-1973IM | Evidence: human_subject
+
+[10] Diseases at the crossroads: chronic myelogenous leukemia and tuberculosis.
+    Authors: Bhatnagar V, Adelakun A, Kendall T, Holtzman N, Farshidpour M, Stevenson B, Chen Q, Emadi A
+    PMID: 25556390 | DOI:  | Evidence: human_subject
+
+[11] Off-Target Effects of BCR-ABL and JAK2 Inhibitors.
+    Authors: Green MR, Newton MD, Fancher KM
+    PMID: 24351780 | DOI: 10.1097/COC.0000000000000023 | Evidence: other",animal,40631209; 42098153
+chlorprothixene,2,0,2,FALSE,0,1,0,0,1,0,0,0,human_subject,"['3774792', '13900877']","[1] [Effectiveness of chlorprothixene in the combined treatment of pulmonary tuberculosis patients].
+    Authors: Gunich LA, Vishnevskii BI, Volkon VM
+    PMID: 3774792 | DOI:  | Evidence: human_subject
+
+[2] Thioridazine and chlorprothixene in the management of anxiety in tuberculous patients.
+    Authors: GOVER DM
+    PMID: 13900877 | DOI: 10.1164/arrd.1962.85.4.587 | Evidence: other",NA,NA
+lapatinib,0,0,0,FALSE,0,0,0,0,0,0,0,0,none,[],No evidence found,NA,NA
+forskolin,6,2,6,FALSE,0,1,4,1,0,0,0,0,human_subject,"['27867196', '26320689', '22823429', '19223474', '15196937', '2988646']","[1] Extracellular ADP facilitates monocyte recruitment in bacterial infection via ERK signaling.
+    Authors: Zhang X, Qin J, Zou J, Lv Z, Tan B, Shi J, Zhao Y, Ren H, Liu M, Qian M, Du B
+    PMID: 27867196 | PMCID: PMC5827171 | DOI: 10.1038/cmi.2016.56 | Evidence: animal
+
+[2] Gastroprotective effect of diligustilide isolated from roots of Ligusticum porteri coulter & rose (Apiaceae) on ethanol-induced lesions in rats.
+    Authors: Velazquez-Moyado JA, Martinez-Gonzalez A, Linares E, Bye R, Mata R, Navarrete A
+    PMID: 26320689 | DOI: 10.1016/j.jep.2015.08.030 | Evidence: animal
+
+[3] TGF-beta neutralization abrogates the inhibited DHEA production mediated by factors released from M. tuberculosis-stimulated PBMC.
+    Authors: D'Attilio L, Bozza VV, Santucci N, Bongiovanni B, Didoli G, Radcliffe S, Besedovsky H, del Rey A, Bottasso O, Bay ML
+    PMID: 22823429 | DOI: 10.1111/j.1749-6632.2012.06644.x | Evidence: human_subject
+
+[4] Cholera toxin and Escherichia coli heat-labile enterotoxin, but not their nontoxic counterparts, improve the antigen-presenting cell function of human B lymphocytes.
+    Authors: Negri DR, Pinto D, Vendetti S, Patrizio M, Sanchez M, Riccomi A, Ruggiero P, Del Giudice G, De Magistris MT
+    PMID: 19223474 | PMCID: PMC2681738 | DOI: 10.1128/IAI.01559-08 | Evidence: in_vitro
+
+[5] Functional chimeras between the catalytic domains of the mycobacterial adenylyl cyclase Rv1625c and a Paramecium guanylyl cyclase.
+    Authors: Linder JU, Castro LI, Guo YL, Schultz JE
+    PMID: 15196937 | DOI: 10.1016/j.febslet.2004.05.025 | Evidence: animal
+
+[6] [Changes in the properties of adenylate cyclase from guinea pig lungs in tuberculosis].
+    Authors: Bortnik MS, Skurat AV, Eshba IR, Bulargina TV, Severin ES
+    PMID: 2988646 | DOI:  | Evidence: animal",NA,NA
+sertraline,10,8,11,FALSE,1,2,3,0,4,1,2,3,clinical_study,"['42461973', '42312175', '41709726', '36629405', '30596708', '28766827', '28052847', '22068795', '15916450', '8968310', '']","[1] Inflammasome activation dictates the efficacy of antimycobacterial activity of frontline TB drugs.
+    Authors: Singh A, Bisht K, Maurya G, Yadav N, Nanda R, Rao V
+    PMID: 42461973 | PMCID: PMC13399518 | DOI: 10.1371/journal.ppat.1014384 | Evidence: animal | HDT
+
+[2] Sertraline Enhances Bacterial Control without Adversely Affecting the Pharmacodynamic-Pharmacokinetic Properties of Frontline Tuberculosis Drugs.
+    Authors: Bisht K, Yadav M, Madan M, Biswas L, Pradhan R, Taliyan R, Singh M, Verma AK, Rao V
+    PMID: 42312175 | PMCID: PMC13270366 | DOI: 10.1021/acsptsci.5c00581 | Evidence: animal | HDT
+
+[3] Retrieval Augmented Generation (RAG) for Evaluating Regulatory Compliance of Drug Information and Clinical Trial Protocols.
+    Authors: Waikar S, Bhat AG, Ramanathan M
+    PMID: 41709726 | PMCID: PMC12917324 | DOI: 10.1002/psp4.70201 | Evidence: other
+
+[4] The antidepressant sertraline provides a novel host directed therapy module for augmenting TB therapy.
+    Authors: Shankaran D, Singh A, Dawa S, Arumugam P, Gandotra S, Rao V
+    PMID: 36629405 | PMCID: PMC10159622 | DOI: 10.7554/eLife.64834 | Evidence: animal | HDT
+
+[5] Blood neutrophil counts in HIV-infected patients with cryptococcal meningitis: Association with mortality.
+    Authors: Musubire AK, Meya DB, Rhein J, Meintjes G, Bohjanen PR, Nuwagira E, Muzoora C, Boulware DR, Hullsiek KH
+    PMID: 30596708 | PMCID: PMC6312212 | DOI: 10.1371/journal.pone.0209337 | Evidence: clinical_study
+
+[6] Are fluconazole or sertraline dose adjustments necessary with concomitant rifampin?
+    Authors: Rajasingham R, Meya DB, Boulware DR
+    PMID: 28766827 | PMCID: PMC5794638 | DOI: 10.1111/hiv.12543 | Evidence: other
+
+[7] Subcellular Partitioning and Intramacrophage Selectivity of Antimicrobial Compounds against Mycobacterium tuberculosis.
+    Authors: Schump MD, Fox DM, Bertozzi CR, Riley LW
+    PMID: 28052847 | PMCID: PMC5328571 | DOI: 10.1128/AAC.01639-16 | Evidence: other
+
+[8] Erythrodermic psoriasis with regression after prophylaxis with isoniazid and antidepressant therapy: case report.
+    Authors: Redighieri IP, Maia Tde C, Nadal MA, Caliman TR, Ruiz Mde F, Petri V
+    PMID: 22068795 | DOI: 10.1590/s0365-05962011000700037 | Evidence: human_subject
+
+[9] Herb-drug interactions: a literature review.
+    Authors: Hu Z, Yang X, Ho PC, Chan SY, Heng PW, Chan E, Duan W, Koh HL, Zhou S
+    PMID: 15916450 | DOI: 10.2165/00003495-200565090-00005 | Evidence: animal
+
+[10] Coadministration of isoniazid and antidepressant drugs.
+    Authors: Malek-Ahmadi P, Chavez M, Contreras SA
+    PMID: 8968310 | DOI: 10.4088/jcp.v57n1109g | Evidence: human_subject
+
+[11] Rifampicin-Induced Panic Disorder in a 70-Year-Old Woman With Brucellosis: A Case Report.
+    Authors: Adeoye S
+    PMID:  | PMCID: PMC12260711 | DOI: 10.1192/bjo.2025.10701 | Evidence: other",animal,36629405; 42312175; 42461973
+mometasone,2,0,2,FALSE,0,0,0,0,0,2,0,0,none,"['36123818', '28714745']","[1] Intranasal Olopatadine-Mometasone in the Treatment of Seasonal Allergic Rhinitis.
+    Authors: Lim L, Lipari M, Kale-Pradhan P
+    PMID: 36123818 | DOI: 10.1177/10600280221124230 | Evidence: human_subject
+
+[2] Long-term use of inhaled corticosteroids and risk of upper respiratory tract infection in chronic obstructive pulmonary disease: a meta-analysis.
+    Authors: Yang M, Chen H, Zhang Y, Du Y, Xu Y, Jiang P, Xu Z
+    PMID: 28714745 | DOI: 10.1080/08958378.2017.1346006 | Evidence: other",NA,NA
