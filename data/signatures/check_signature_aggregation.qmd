@@ -1,0 +1,152 @@
+# Checking aggregation's intermediate and final outputs for sensitivity analysis and selecting aggregated genes for the drug repurposing steps
+#### Kewalin Samart
+#### 09/03/2026
+
+## check if column and row names in membership and Jaccard matrices match!
+### RNAseq
+```{r check if column and row names in membership and Jaccard matrices match!}
+library(readr)
+library(here)
+
+dirs <- c(
+  here("data/signatures/RNAseq/aggregated_signatures"),
+  here("data/signatures/RNAseq/aggregated_signatures_sensitivity")
+)
+
+directions <- c("up", "dn")
+
+results <- list()
+
+for (dir in dirs) {
+  for (direction in directions) {
+
+    # membership
+    membership <- read_tsv(
+      file.path(dir, paste0(direction, "_membership_mat.tsv")),
+      show_col_types = FALSE
+    )
+
+    # Jaccard
+    jaccard <- read_tsv(
+      file.path(dir, paste0(direction, "_jaccard_mat.tsv")),
+      show_col_types = FALSE
+    )
+
+    # signature names
+    membership_names <- names(membership)[-1]  # remove GeneID
+    jaccard_col_names <- names(jaccard)[-1]    # remove signature
+    jaccard_row_names <- jaccard[[1]]
+
+    # check
+    results[[paste(basename(dir), direction, sep = "_")]] <- data.frame(
+      directory = basename(dir),
+      direction = direction,
+      membership_vs_jaccard_cols =
+        identical(membership_names, jaccard_col_names),
+      membership_vs_jaccard_rows =
+        identical(membership_names, jaccard_row_names),
+      same_signature_set =
+        setequal(membership_names, jaccard_col_names)
+    )
+  }
+}
+
+do.call(rbind, results)
+```
+### microarray
+```{r}
+dirs <- c(
+  here("data/signatures/microarray/aggregated_signatures"),
+  here("data/signatures/microarray/aggregated_signatures_sensitivity")
+)
+
+directions <- c("up", "dn")
+
+results <- list()
+
+for (dir in dirs) {
+  for (direction in directions) {
+
+    # membership
+    membership <- read_tsv(
+      file.path(dir, paste0(direction, "_membership_mat.tsv")),
+      show_col_types = FALSE
+    )
+
+    # Jaccard
+    jaccard <- read_tsv(
+      file.path(dir, paste0(direction, "_jaccard_mat.tsv")),
+      show_col_types = FALSE
+    )
+
+    # signature names
+    membership_names <- names(membership)[-1]  # remove GeneID
+    jaccard_col_names <- names(jaccard)[-1]    # remove signature
+    jaccard_row_names <- jaccard[[1]]
+
+    # check
+    results[[paste(basename(dir), direction, sep = "_")]] <- data.frame(
+      directory = basename(dir),
+      direction = direction,
+      membership_vs_jaccard_cols =
+        identical(membership_names, jaccard_col_names),
+      membership_vs_jaccard_rows =
+        identical(membership_names, jaccard_row_names),
+      same_signature_set =
+        setequal(membership_names, jaccard_col_names)
+    )
+  }
+}
+
+do.call(rbind, results)
+```
+
+
+## check if the rerun for sensitivity analysis produces the same aggregated signatures
+```{r check if the rerun for sensitivity analysis produces the same aggregated signatures}
+library(here)
+library(readr)
+
+comparisons <- list(
+  microarray_dn = c(
+    "data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv",
+    "data/signatures/microarray/aggregated_signatures_sensitivity/dn_aggregated_signature_0.9.tsv"
+  ),
+  microarray_up = c(
+    "data/signatures/microarray/aggregated_signatures_sensitivity/up_aggregated_signature_0.9.tsv",
+    "data/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"
+  ),
+  RNAseq_dn = c(
+    "data/signatures/RNAseq/aggregated_signatures_sensitivity/dn_aggregated_signature_0.9.tsv",
+    "data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"
+  ),
+  RNAseq_up = c(
+    "data/signatures/RNAseq/aggregated_signatures_sensitivity/up_aggregated_signature_0.9.tsv",
+    "data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"
+  )
+)
+
+results <- lapply(names(comparisons), function(label) {
+  paths <- comparisons[[label]]
+
+  old_mem <- read_tsv(here(paths[1]), show_col_types = FALSE)
+  new_mem <- read_tsv(here(paths[2]), show_col_types = FALSE)
+
+  gene_id_equal <- old_mem$GeneID == new_mem$GeneID
+
+  result <- list(
+    comparison = label,
+    all_equal = all.equal(old_mem, new_mem),
+    gene_ids_identical = identical(old_mem$GeneID, new_mem$GeneID),
+    differing_gene_id_rows = which(is.na(gene_id_equal) | !gene_id_equal)
+  )
+
+  print(result)
+  result
+})
+
+names(results) <- names(comparisons)
+```
+
+
+

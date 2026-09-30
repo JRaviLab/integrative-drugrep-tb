@@ -68,12 +68,12 @@ marray_rnaseq_signi_up = unique(c(marray_signi_up, rnaseq_signi_up))
 
 ```{r process all terms matrices}
 cols_to_keep_marray <- intersect(colnames(marray_GO_mat_up), c("Description", summary_df$signature_name,
-"up_aggregated_signature"))
+"up_aggregated_signature_0"))
 df1 <- marray_GO_mat_up[, cols_to_keep_marray]
 colnames(df1)[ncol(df1)] <- "up_aggregated_microarray"
 colnames(df1) <- gsub("^up_", "", colnames(df1))
 
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature_0"))
 df2 <- rnaseq_GO_mat_up[, cols_to_keep_rnaseq]
 colnames(df2)[ncol(df2)] <- "up_aggregated_RNAseq"
 colnames(df2) <- gsub("^up_", "", colnames(df2))
@@ -118,13 +118,13 @@ write_tsv(final_df_up, here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_p
 
 ```{r process significant matrices}
 marray_signi_GO_mat_up$Description <- row.names(marray_signi_GO_mat_up)
-cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature"))
+cols_to_keep_marray <- intersect(colnames(marray_signi_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature_0"))
 df1 <- marray_signi_GO_mat_up[, cols_to_keep_marray]
 colnames(df1)[ncol(df1)-1] <- "up_aggregated_microarray"
 colnames(df1) <- gsub("^up_", "", colnames(df1))
 
 rnaseq_signi_GO_mat_up$Description <- rownames(rnaseq_signi_GO_mat_up)
-cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature"))
+cols_to_keep_rnaseq <- intersect(colnames(rnaseq_signi_GO_mat_up), c("Description", summary_df$signature_name, "up_aggregated_signature_0"))
 df2 <- rnaseq_signi_GO_mat_up[, cols_to_keep_rnaseq]
 colnames(df2)[ncol(df2)-1] <- "up_aggregated_RNAseq"
 colnames(df2) <- gsub("^up_", "", colnames(df2))
@@ -245,7 +245,7 @@ tissue_map <- c(
   "blood_monocyte"                     = "monocyte",
   "blood_monocyte_derived_macrophages" = "MDMs",
   "blood_dendritic_cells"              = "dendritic cells",
-  "THP-1"                              = "THP1 macrophage",
+  "THP1"                              = "THP1 macrophage",
   "blood_macrophage"                  = "macrophage",  
   "blood"                              = "blood",
   "lymphnode"                          = "lymphnode",
@@ -378,6 +378,10 @@ sig_mat_indiv_aggr_up_ordered_mat <- sig_mat_indiv_aggr_up_ordered %>%
 viz_mat_up <- sig_mat_indiv_aggr_up_ordered_mat
 colnames(viz_mat_up) <- summary_df$dataset_signature_ID
 
+cell_size <- unit(2, "cm")
+width  = ncol(viz_mat_up) * cell_size
+height = nrow(viz_mat_up) * cell_size
+
 heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   viz_mat_up,
   cell_fun = function(j, i, x, y, w, h, fill) {
@@ -413,8 +417,8 @@ heatmap_sig_up_go <- Heatmap( ## add astrisk: final_signi_df_up_variable
   bottom_annotation = ha_bottom,
   row_names_gp = gpar(fontsize = 25),
   column_names_gp = gpar(fontsize = 25),
-  width = unit(55, "cm"),
-  height = unit(25, "cm")
+  width = width,
+  height = height
 )
 
 draw(heatmap_sig_up_go,

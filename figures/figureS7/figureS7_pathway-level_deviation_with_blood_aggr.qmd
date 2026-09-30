@@ -52,10 +52,10 @@ process_file <- function(filepath, direction_label, summary_path) {
 
 ```{r Figure S7 plot}
 # process both up- and dn-regulated pathways files
-plot_df_up <- process_file(filepath = "figures/figureS5/marray_rnaseq_up_pathways_suppl.tsv", 
+plot_df_up <- process_file(filepath = "figures/figureS7/marray_rnaseq_up_pathways_suppl.tsv", 
                            direction_label = "Upregulated", 
                            summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv")
-plot_df_dn <- process_file(filepath = "figures/figureS5/marray_rnaseq_dn_pathways_suppl.tsv", 
+plot_df_dn <- process_file(filepath = "figures/figureS7/marray_rnaseq_dn_pathways_suppl.tsv", 
                            direction_label = "Downregulated",
                            summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv")
 
@@ -109,10 +109,9 @@ p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Tec
   ) +
   labs(
     title = "Upregulated",
-    y = "Squared Deviation",
-    x = "Technology/Tissue origin"
+    y = "Squared deviation",
+    x = "Technology/tissue origin"
   ) +
-  #scale_fill_viridis_d(option = "D") +  # for discrete color
   coord_cartesian(clip = "off") +
   theme_minimal() +
   theme(
@@ -146,7 +145,7 @@ p_down <- ggplot(down_df, aes(x = Technology, y = SquaredDeviation_fixed, fill =
   labs(
     title = "Downregulated",
     y = NULL,
-    x = "Technology/Tissue origin"
+    x = "Technology/tissue origin"
   ) +
   coord_cartesian(clip = "off") +
   theme_minimal() +

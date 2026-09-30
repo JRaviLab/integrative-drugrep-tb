@@ -3,7 +3,7 @@
 # these are done separately by technology-direction
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
-# aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
+# aggregated signatures: all genes present in individual signatures (adjusted p-val < 0.05; not just the landmark genes) with all the aggregated gene scores
 
 ##### Load libraries and sort scripts
 ```{r}
@@ -60,8 +60,6 @@ bg_genes <- union(bg_genes_combined_up, bg_genes_combined_dn)
 
 # parameters
 ont <- "BP"
-minGSSize <- 5
-maxGSSize <- 200
 
 # extract GO data as used by enrichGO()
 godata <- clusterProfiler:::get_GO_data(
@@ -78,13 +76,18 @@ godata <- clusterProfiler:::get_GO_data(
 )
 
 # filter gene sets to include only genes in universe
-go_list <- godata$PATHID2EXTID
+go_list <- godata@gsid2gene
 
 # build data frame of term descriptions
+go_list_split <- split(as.character(go_list$gene), as.character(go_list$gsid))
+go_ids <- names(go_list_split)
+# safe descriptions (missing keys become NA -> "")
+descs <- Term(GOTERM[go_ids])
+descs[is.na(descs)] <- ""
 go_terms <- data.frame(
-  GO_ID = names(go_list),
-  Description = Term(GOTERM[names(go_list)]),
-  GeneSetSize = sapply(go_list, function(x) length(unique(intersect(x, bg_genes)))),
+  GO_ID       = go_ids,
+  Description = descs,
+  GeneSetSize = vapply(go_list_split, function(x) length(unique(intersect(x, bg_genes))), integer(1)),
   stringsAsFactors = FALSE
 )
 ```
@@ -204,7 +207,7 @@ pathway_df <- data.frame(
 # add pathway_size column
 pathway_df$pathway_size <- sapply(pathway_df$pathway_genes, length)
 # only select pathways with minimum gene set size of 5 genes and maximum of 200 genes
-pathway_df <- pathway_df[pathway_df$pathway_size >= 5 | pathway_df$pathway_size <= 200, ]
+pathway_df <- pathway_df[pathway_df$pathway_size >= 5 & pathway_df$pathway_size <= 200, ]
 pathway_df  <- merge(pathway_df, go_terms, by.x = "ID", by.y = "GO_ID", all.x = TRUE)[c("Description","ID","pathway_genes","pathway_size")]
 ```
 
@@ -248,7 +251,7 @@ for (technology in technologies) {
       print(paste0("Running ", technology, " ", direction, " iteration: ", itr))
       itr <- itr + 1
       
-      signature_name = data_to_read$signature_name[i]
+      signature_name = data_to_read$signature_full_name[i]
       file = paste0(signature_name,"_",direction,".tsv")
       genes_df <- read_tsv(file.path(dirname_read, file))
       # only use differentially expressed genes with adjusted p-val < 0.05
@@ -268,7 +271,6 @@ for (technology in technologies) {
       # only care about biological processes (BP)
       pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
       
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
       enrichGO_res <- calculate_asinh_enrichment(
         signature_gene_list = gene_list,
         bg_genes = bg_genes,
@@ -282,7 +284,9 @@ for (technology in technologies) {
       print(unique(enrichGO_res_corrected$ID %in% go_terms$GO_ID))
         
       # save results
-      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file)
+      signature_file_name = data_to_read$signature_name[i]
+      file_name = paste0(signature_file_name,"_",direction,".tsv")
+      base_filename <- sub(paste0("\\.", direction, "\\.tsv$"), "", file_name)
       output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_", base_filename))
 
       write_tsv(enrichGO_res_corrected, file = output_file)
@@ -353,7 +357,7 @@ for(technology in technologies){
       if (!dir.exists(dirname)) {
         dir.create(dirname, recursive = TRUE)
       }
-      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature.tsv")))$GeneID)
+      originaggr_gene_list <- as.character(read_tsv(here(paste0("data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature_0.tsv")))$GeneID)
     
       # define background genes
       if(direction == "up"){
@@ -363,14 +367,13 @@ for(technology in technologies){
       }
         
       # run ORA
-      print(paste0("Getting enriched GO pathways for data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature.tsv"))
+      print(paste0("Getting enriched GO pathways for data/DE_results/",technology,"/",tissue_origin,"_aggregated_DE_signatures/",direction,"_aggregated_signature_0.tsv"))
 
       BP_terms <- go_terms$GO_ID
       
       # only care about biological processes (BP)
       pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
       
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
       enrichGO_res_originaggr <- calculate_asinh_enrichment(
         signature_gene_list = originaggr_gene_list,
         bg_genes = bg_genes,
@@ -384,7 +387,7 @@ for(technology in technologies){
       print(unique(enrichGO_res_originaggr_corrected$ID %in% go_terms$GO_ID))
         
       # save results
-      output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_",direction,"_",tissue_origin,"_aggregated_signature.tsv"))
+      output_file <- file.path(dirname, paste0("allterms_GO_ORA_BGcorrected_",direction,"_",tissue_origin,"_aggregated_signature_0.tsv"))
 
       write_tsv(enrichGO_res_originaggr_corrected, file = output_file)
     } 
