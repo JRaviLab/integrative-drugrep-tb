@@ -863,3 +863,201 @@ ggplot(avg_df_recall, aes(x = K, y = AverageRecall, color = Score)) +
   )
 dev.off()
 ```
+
+```{r evidence category of the HDT positive records}
+records <- jsonlite::fromJSON(
+  here("evaluation/labels/launched_drug_with_literature.json"),
+  simplifyVector = TRUE
+) %>%
+  as_tibble() %>%
+  select(pmid, title, is_hdt, evidence_level, is_review, drugs)
+
+# README's "positive records": HDT-restricted query hits, reviews excluded
+hdt_positive <- records %>%
+  dplyr::filter(is_hdt, !is_review)
+
+stopifnot(nrow(hdt_positive) == 292)  # matches the README run log
+
+# HDT_any across the whole corpus, matching version_comparison.qmd exactly -
+# deliberately NOT `positives` (this notebook's own positive set), which is
+# both narrower (HDT_not_other, set above) and restricted to the LINCS +
+# FDA-approved overlap; this plot is corpus-wide context, not tied to that
+# evaluation subset
+positive_drugs <- records %>%
+  filter(is_hdt, lengths(drugs) > 0) %>%
+  pull(drugs) %>%
+  unlist() %>%
+  tolower() %>%
+  unique()
+stopifnot(length(positive_drugs) > 0)
+
+LEVEL_ORDER <- c("clinical_study", "human_subject", "animal", "in_vitro", "other")
+
+hdt_positive_counts <- hdt_positive %>%
+  dplyr::count(evidence_level, name = "n") %>%
+  mutate(
+    evidence_level = factor(evidence_level, levels = LEVEL_ORDER),
+    pct = n / sum(n)
+  )
+
+print(hdt_positive_counts %>% arrange(desc(n)))
+cat("\nHDT_any positive drugs:", length(positive_drugs), "\n")
+cat("HDT positive records   :", nrow(hdt_positive), "\n")
+
+# one-hue sequential ramp, validated colorblind-safe, strongest = darkest
+EVIDENCE_RAMP <- setNames(
+  c("#104281", "#1c5cab", "#2a78d6", "#5598e7", "#86b6ef"),
+  LEVEL_ORDER
+)
+
+ggplot(hdt_positive_counts, aes(x = evidence_level, y = n, fill = evidence_level)) +
+  geom_col() +
+  geom_text(aes(label = sprintf("%d (%.0f%%)", n, 100 * pct)), vjust = -0.4, size = 3.5) +
+  scale_fill_manual(values = EVIDENCE_RAMP, guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title = sprintf("Evidence category of the %d HDT positive records (reviews excluded)", nrow(hdt_positive)),
+    subtitle = sprintf("the literature behind the %d HDT_any positive drugs",
+                       length(positive_drugs)),
+    x = NULL,
+    y = "records"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r strongest HDT-tagged evidence per positive drug}
+# each positive drug counted once, by its own strongest HDT-tagged record
+# (not its whole bibliography)
+drug_hdt_level <- hdt_positive %>%
+  filter(lengths(drugs) > 0) %>%
+  select(drugs, evidence_level) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs)) %>%
+  filter(drug %in% positive_drugs) %>%
+  mutate(level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  summarise(strongest = LEVEL_ORDER[min(level_rank)], .groups = "drop")
+
+# n_hdt counts reviews too, so a drug can be positive on an HDT-tagged
+# review alone, with no primary HDT-tagged record
+missing_drugs <- setdiff(positive_drugs, drug_hdt_level$drug)
+if (length(missing_drugs) > 0) {
+  cat(length(missing_drugs), "positive drugs have only an HDT-tagged review, no primary HDT record:\n")
+  print(missing_drugs)
+}
+
+drug_evidence_counts <- tibble(strongest = c(LEVEL_ORDER, "HDT review only")) %>%
+  left_join(dplyr::count(drug_hdt_level, strongest, name = "n"), by = "strongest") %>%
+  mutate(
+    n = ifelse(strongest == "HDT review only", length(missing_drugs), coalesce(n, 0L)),
+    strongest = factor(strongest, levels = c(LEVEL_ORDER, "HDT review only")),
+    pct = n / length(positive_drugs)
+  )
+
+print(drug_evidence_counts %>% arrange(desc(n)))
+cat("\nHDT_any positive drugs:", length(positive_drugs), "\n")
+cat("drugs classified       :", sum(drug_evidence_counts$n), "\n")
+
+# review-only sliver gets a neutral gray, it isn't an evidence level
+DRUG_EVIDENCE_RAMP <- c(EVIDENCE_RAMP, "HDT review only" = "#999999")
+
+ggplot(drug_evidence_counts, aes(x = strongest, y = n, fill = strongest)) +
+  geom_col() +
+  geom_text(aes(label = sprintf("%d (%.0f%%)", n, 100 * pct)), vjust = -0.4, size = 3.5) +
+  scale_fill_manual(values = DRUG_EVIDENCE_RAMP, guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    title = sprintf("Strongest HDT-tagged evidence per positive drug (n = %d drugs)",
+                    length(positive_drugs)),
+    subtitle = "each HDT_any positive drug counted once, by its strongest own HDT-tagged record",
+    x = NULL,
+    y = "drugs"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r top 5 predictions per method}
+# method_lists (top 20 per method) and integrative_pred_list already exist
+# from the "select only the top 20 drugs" chunk above; just take the first
+# 5 of each rather than re-reading every RDS file a second time
+method_lists_top5 <- lapply(method_lists, function(drugs) drugs[1:5])
+
+# one row per (method, rank)
+top5_by_method <- lapply(names(method_lists_top5), function(m) {
+  tibble(method = m, rank = 1:5, drug_name = method_lists_top5[[m]])
+}) %>%
+  bind_rows()
+```
+
+```{r HDT literature check for the top 5 predictions of each method}
+# strongest non-review HDT-tagged evidence per drug; not restricted to
+# positive_drugs so a top-5 drug with zero HDT evidence comes back NA
+# rather than being silently dropped
+highest_HDT <- records %>%
+  filter(is_hdt, !is_review, lengths(drugs) > 0) %>%
+  select(pmid, evidence_level, drugs) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs), level_rank = match(evidence_level, LEVEL_ORDER)) %>%
+  group_by(drug) %>%
+  slice_min(level_rank, with_ties = TRUE) %>%
+  summarise(
+    highest_HDT_evidence = first(evidence_level),
+    highest_HDT_PMID = {
+      p <- sort(unique(pmid[pmid != ""]))
+      if (length(p) > 0) paste(p, collapse = "; ") else NA_character_
+    },
+    .groups = "drop"
+  )
+
+# n_hdt/n_review per drug, derived straight from records (unfiltered, full
+# corpus) rather than `labels`, which has already been narrowed to the
+# LINCS + FDA overlap and would wrongly NA out top-5 drugs outside it
+hdt_counts <- records %>%
+  filter(lengths(drugs) > 0) %>%
+  select(is_hdt, is_review, drugs) %>%
+  unnest(drugs) %>%
+  mutate(drug = tolower(drugs)) %>%
+  group_by(drug) %>%
+  summarise(n_hdt = sum(is_hdt), n_review = sum(is_review), .groups = "drop")
+
+hdt_check_top5 <- top5_by_method %>%
+  mutate(drug = tolower(drug_name)) %>%
+  left_join(hdt_counts, by = "drug") %>%
+  mutate(n_hdt = coalesce(n_hdt, 0L), n_review = coalesce(n_review, 0L)) %>%
+  left_join(highest_HDT, by = "drug") %>%
+  select(method, rank, drug_name, highest_HDT_evidence, highest_HDT_PMID, n_hdt, n_review)
+
+write_csv(hdt_check_top5, here("figures/figure4/top5_HDT_literature_by_method.csv"))
+
+# same drug can be top-5 for several methods; one row per unique drug for
+# the literature check itself, methods it appeared in kept for context
+hdt_check_top5_unique <- hdt_check_top5 %>%
+  group_by(drug_name) %>%
+  summarise(
+    n_methods = n(),
+    methods = paste(sort(unique(method)), collapse = "; "),
+    highest_HDT_evidence = first(highest_HDT_evidence),
+    highest_HDT_PMID = first(highest_HDT_PMID),
+    n_hdt = first(n_hdt),
+    n_review = first(n_review),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_methods), drug_name)
+
+write_csv(hdt_check_top5_unique, here("figures/figure4/top5_HDT_literature_unique.csv"))
+cat("unique drugs across all top-5 lists:", nrow(hdt_check_top5_unique), "\n")
+```
+
+```{r HDT-positive drugs outside the 20 Integrative candidates}
+# drugs with HDT evidence that other methods surface in their top 5, but
+# that Integrative's own top 20 never ranked highly enough to include.
+# integrative_pred_list (from the "select only the top 20 drugs" chunk) is
+# the authoritative current top 20, so reuse it rather than a second,
+# hardcoded copy that could drift out of sync
+non_candidate_hdt <- hdt_check_top5_unique %>%
+  filter(n_hdt > 0, !(drug_name %in% tolower(integrative_pred_list))) %>%
+  arrange(desc(n_hdt))
+
+write_csv(non_candidate_hdt, here("figures/figure4/top5_HDT_non_candidate_drugs.csv"))
+print(non_candidate_hdt, n = Inf)
+```
