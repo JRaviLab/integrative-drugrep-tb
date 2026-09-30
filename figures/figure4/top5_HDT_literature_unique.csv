@@ -1,0 +1,64 @@
+drug_name,n_methods,methods,highest_HDT_evidence,highest_HDT_PMID,n_hdt,n_review
+fostamatinib,8,CMAP_RNAseq; CMAP_RNAseq_aggr; Integrative; NCS_RNAseq; Pearson_RNAseq; Pearson_RNAseq_aggr; Spearman_RNAseq; Spearman_RNAseq_aggr,NA,NA,0,1
+rosuvastatin,6,CMAP_RNAseq_aggr; Integrative; NCS_RNAseq; NCS_RNAseq_aggr; Pearson_RNAseq_aggr; WCS_RNAseq_aggr,clinical_study,36966799,1,1
+panobinostat,5,NCS_microarray; NCS_RNAseq; Tau_microarray; WCS_microarray; WCS_RNAseq,NA,NA,0,0
+fluvastatin,4,CMAP_RNAseq_aggr; Integrative; WCS_RNAseq; WCS_RNAseq_aggr,animal,31605489; 38534380,4,1
+ingenol,4,CMAP_microarray; CMAP_microarray_aggr; NCS_microarray; NCS_microarray_aggr,NA,NA,0,0
+mycophenolic-acid,4,CMAP_microarray; CMAP_microarray_aggr; NCS_microarray_aggr; WCS_microarray_aggr,NA,NA,0,3
+temsirolimus,4,CMAP_RNAseq; NCS_RNAseq; Tau_RNAseq; WCS_RNAseq,NA,NA,0,0
+tofacitinib,4,Integrative; NCS_RNAseq_aggr; Tau_RNAseq_aggr; WCS_RNAseq_aggr,animal,26425676; 26425693,2,25
+atorvastatin,3,NCS_RNAseq_aggr; Pearson_RNAseq_aggr; WCS_RNAseq_aggr,animal,31605489,3,1
+dasatinib,3,CMAP_RNAseq_aggr; Pearson_RNAseq_aggr; Spearman_RNAseq_aggr,animal,40631209; 42098153,2,2
+ethinyl-estradiol,3,CMAP_RNAseq_aggr; NCS_RNAseq_aggr; WCS_RNAseq_aggr,NA,NA,0,2
+irinotecan,3,NCS_microarray_aggr; Tau_microarray_aggr; WCS_microarray_aggr,NA,NA,0,1
+lovastatin,3,Integrative; NCS_RNAseq; WCS_RNAseq,animal,39832798,2,0
+raloxifene,3,NCS_microarray_aggr; Tau_microarray_aggr; WCS_microarray_aggr,NA,NA,0,1
+raltitrexed,3,NCS_microarray_aggr; Tau_microarray_aggr; WCS_microarray_aggr,NA,NA,0,0
+tamoxifen,3,Pearson_RNAseq; Spearman_RNAseq; WCS_RNAseq,animal,36475748,5,3
+vincristine,3,NCS_microarray; Tau_microarray; WCS_microarray,NA,NA,0,2
+vorinostat,3,CMAP_microarray_aggr; CMAP_RNAseq; Tau_microarray,in_vitro,29501835,1,1
+chloroquine,2,Pearson_RNAseq; Spearman_RNAseq,NA,NA,0,24
+clemastine,2,Tau_microarray; WCS_microarray,animal,30693866,1,0
+diltiazem,2,NCS_microarray; Tau_microarray,NA,NA,0,0
+flunarizine,2,Pearson_microarray; Spearman_microarray,other,34533236,1,0
+forskolin,2,Spearman_microarray; Tau_RNAseq,NA,NA,0,0
+nicergoline,2,Pearson_microarray_aggr; Spearman_microarray_aggr,NA,NA,0,0
+perphenazine,2,CMAP_microarray_aggr; CMAP_RNAseq,NA,NA,0,0
+ranitidine,2,Pearson_microarray_aggr; Spearman_microarray_aggr,NA,NA,0,0
+thalidomide,2,Spearman_RNAseq; Spearman_RNAseq_aggr,human_subject,41180005,5,31
+valsartan,2,Pearson_microarray; Spearman_microarray,NA,NA,0,0
+vemurafenib,2,CMAP_RNAseq; Tau_RNAseq,NA,NA,0,1
+NECA,1,Tau_RNAseq_aggr,NA,NA,0,0
+albendazole,1,NCS_RNAseq_aggr,NA,NA,0,5
+alprenolol,1,Tau_RNAseq_aggr,NA,NA,0,0
+amcinonide,1,Pearson_microarray_aggr,NA,NA,0,0
+amiodarone,1,WCS_microarray_aggr,animal,38916320,1,6
+atovaquone,1,Pearson_RNAseq_aggr,animal,40803230,1,5
+chenodeoxycholic-acid,1,Pearson_microarray_aggr,NA,NA,0,0
+clarithromycin,1,Tau_RNAseq_aggr,animal,41324151,5,94
+clofibric-acid,1,Pearson_microarray,NA,NA,0,0
+clomifene,1,WCS_microarray,NA,NA,0,0
+cortisone,1,CMAP_microarray_aggr,NA,NA,0,8
+coumarin,1,Spearman_microarray_aggr,other,40304517,1,8
+crizotinib,1,CMAP_microarray,NA,NA,0,1
+etoposide,1,CMAP_microarray,human_subject,33523540,1,1
+fludroxycortide,1,WCS_microarray,NA,NA,0,0
+fluspirilene,1,CMAP_microarray,in_vitro,34608194,1,0
+imiquimod,1,Spearman_microarray,NA,NA,0,1
+itraconazole,1,Spearman_microarray_aggr,human_subject,41534497,1,32
+meptazinol,1,Pearson_microarray,NA,NA,0,0
+methoxsalen,1,Pearson_RNAseq,NA,NA,0,0
+mometasone,1,Tau_RNAseq_aggr,NA,NA,0,2
+paclitaxel,1,NCS_microarray,NA,NA,0,2
+phenoxybenzamine,1,Spearman_microarray_aggr,NA,NA,0,0
+ramipril,1,Tau_microarray_aggr,NA,NA,0,0
+resveratrol,1,Pearson_microarray,NA,NA,1,7
+stiripentol,1,Spearman_RNAseq_aggr,NA,NA,0,0
+tamibarotene,1,Spearman_microarray,NA,NA,0,0
+temozolomide,1,Spearman_RNAseq,NA,NA,0,0
+timolol,1,Pearson_microarray_aggr,NA,NA,0,0
+tivozanib,1,Tau_RNAseq,NA,NA,0,0
+tolazoline,1,Tau_microarray_aggr,NA,NA,0,0
+topotecan,1,Tau_RNAseq,NA,NA,0,0
+treprostinil,1,Pearson_RNAseq,NA,NA,0,0
+verapamil,1,Spearman_RNAseq_aggr,clinical_study,37983978,8,8
