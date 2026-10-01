@@ -109,20 +109,20 @@ library(readr)
 
 comparisons <- list(
   microarray_dn = c(
-    "data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv",
+    "data/signatures/microarray/aggregated_signatures/dn_aggregated_signature_0.9.tsv",
     "data/signatures/microarray/aggregated_signatures_sensitivity/dn_aggregated_signature_0.9.tsv"
   ),
   microarray_up = c(
     "data/signatures/microarray/aggregated_signatures_sensitivity/up_aggregated_signature_0.9.tsv",
-    "data/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"
+    "data/signatures/microarray/aggregated_signatures/up_aggregated_signature_0.9.tsv"
   ),
   RNAseq_dn = c(
     "data/signatures/RNAseq/aggregated_signatures_sensitivity/dn_aggregated_signature_0.9.tsv",
-    "data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"
+    "data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature_0.9.tsv"
   ),
   RNAseq_up = c(
     "data/signatures/RNAseq/aggregated_signatures_sensitivity/up_aggregated_signature_0.9.tsv",
-    "data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"
+    "data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature_0.9.tsv"
   )
 )
 
