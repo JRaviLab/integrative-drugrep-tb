@@ -8,7 +8,7 @@ This repository contains the analysis code and processed data for the study:
 >
 > \* co-corresponding authors
 
-We integrate transcriptomic signatures from multiple TB microarray and RNA-seq datasets with various disease-drug connectivity scores to identify and prioritize drug repurposing candidates for tuberculosis.
+We integrate transcriptomic signatures from multiple TB microarray and RNAseq datasets with various disease-drug connectivity scores to identify and prioritize HDT candidates for tuberculosis.
 
 ---
 
@@ -19,7 +19,7 @@ integrative-drugrep-tb/
 ├── scripts/         # R and Python analysis scripts (numbered by step)
 ├── vignette/        # Quarto documents with worked examples for each step
 ├── evaluation/      # Pubmed scraper and outputs
-├── figures/         # Code and outputs for manuscript figures (figure1–6, figureS1-S10)
+├── figures/         # Code and outputs for manuscript figures (figure1–6, figureS1-S16)
 ├── data/            # Input data: DE results, signatures, and metadata
 ├── DataCuration/    # Notebooks for preprocessing, cleaning, and harmonizing disease data and metadata
 ├── results/         # Pipeline outputs: connectivity scores and drug rankings
@@ -49,8 +49,8 @@ See [`scripts/README.md`](scripts/README.md) for a full table of scripts and the
 
 ### Requirements
 
-- R 4.4.2 with Bioconductor 3.20
-- Python 3 (for [baseline analysis](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/figures/figureS9))
+- R 4.6.1 with Bioconductor 3.23
+- Python 3 (for [HDT literature evidence retreival](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/evaluation) and [baseline analysis](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/figures/figureS9)) 
 
 ### Setup
 
@@ -122,7 +122,7 @@ Drug candidates are prioritized by computing connectivity scores between disease
 
 #### 2.1 Get drug predictions for individual disease signatures
 
-An example command to quantify candidate drugs predicted to reverse RNA-seq **individual** TB signatures using the CMAP 2.0 methods (i.e., LINCS).
+An example command to quantify candidate drugs predicted to reverse RNAseq **individual** TB signatures using the CMAP 2.0 methods (i.e., LINCS).
 
 ```
 Rscript scripts/02_drugrep_get_prediction_indiv.R \
@@ -134,15 +134,15 @@ Rscript scripts/02_drugrep_get_prediction_indiv.R \
 
 Arguments:
 
-- `sig_metadata_path` Path to the RNA-seq signature metadata file (default: `data/signatures/RNASeq_TB_signature_run_info.tsv`).
-- `sig_data_path` Directory containing RNA-seq signature data files (default: `data/signatures/RNAseq`).
+- `sig_metadata_path` Path to the RNAseq signature metadata file (default: `data/signatures/RNASeq_TB_signature_run_info.tsv`).
+- `sig_data_path` Directory containing RNAseq signature data files (default: `data/signatures/RNAseq`).
 - `drugdb_name` Drug perturbation database to use. Options: LINCS, CMAP (default: `LINCS`).
 - `score_method` Method used to compute signature similarity scores. Options: `LINCS`, `CMAP`, `Cor_spearman`, `Cor_pearson` (default: `LINCS`).
 - `output_dir` Directory where output results will be saved (default: `results/RNAseq/LINCS`).
 
 #### 2.2 Get drug predictions for aggregated disease signatures
 
-An example command to quantify candidate drugs predicted to reverse RNA-seq **aggregated** TB signatures using the CMAP 2.0 methods (i.e., LINCS).
+An example command to quantify candidate drugs predicted to reverse RNAseq **aggregated** TB signatures using the CMAP 2.0 methods (i.e., LINCS).
 
 ```
 Rscript scripts/02_drugrep_get_prediction_aggr.R RNAseq LINCS LINCS
