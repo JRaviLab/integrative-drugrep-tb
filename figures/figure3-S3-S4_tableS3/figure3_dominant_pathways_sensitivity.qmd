@@ -418,7 +418,7 @@ stats_gt <- stats_results %>%
       "P-values are from one-sided Wilcoxon rank-sum tests. BH adjustment accounts for testing across all per-threshold technology-gene-group pairs."
     )
   )
-gtsave(data = stats_gt,filename = here("figures/figure3/Figure3_MW_stats_sensitivity_results.html"))
+gtsave(data = stats_gt,filename = here("figures/tableS3/tableS3_MW_stats_sensitivity_results.html"))
 
 stats_gt
 ```
@@ -438,7 +438,7 @@ stats_results_plot <- stats_results %>%
     technology = factor(technology,levels = technology_levels)) %>%
   filter(!is.na(threshold))
 
-pdf(here("figures/figure3/Figure3_squared_deviation_all_thresholds_up.pdf"),width = 12,height = 18)
+pdf(here("figures/figureS3/figureS3_squared_deviation_all_thresholds_up.pdf"),width = 12,height = 18)
 
 ggplot(sq_dev_all_thresholds_plot,
   aes(
@@ -525,7 +525,7 @@ stats_results_plot <- stats_results %>%
     technology = factor(technology,levels = technology_levels)) %>%
   filter(!is.na(threshold))
 
-pdf(here("figures/figure3/Figure3_squared_deviation_all_thresholds_dn.pdf"),width = 12,height = 18)
+pdf(here("figures/figureS3/figureS3_squared_deviation_all_thresholds_dn.pdf"),width = 12,height = 18)
 
 ggplot(sq_dev_all_thresholds_plot,
   aes(
@@ -608,7 +608,7 @@ stability_plot <- sq_dev_all_thresholds %>%
     .groups = "drop"
   )
 
-pdf(here("figures/figure3/Figure3_squared_deviation_stability_up_dn.pdf"),width = 14,height = 10)
+pdf(here("figures/figureS3/figureS3_squared_deviation_stability_up_dn.pdf"),width = 14,height = 10)
 
 ggplot(
   stability_plot,
@@ -728,7 +728,7 @@ stats_0 %>%
 pdf(
   here(
     "figures/figure3/",
-    "Figure3_squared_deviation_dominant_pathways_0percent.pdf"
+    "figure3_squared_deviation_dominant_pathways_0percent.pdf"
   ),
   width = 6,
   height = 8
