@@ -90,17 +90,19 @@ labels <- labels %>%
   )
 
 # choose label definition
-# HDT_any
-# HDT_clinical_study
-# HDT_human_subject
-# HDT_animal
-# HDT_in_vitro
-# HDT_other
-# HDT_not_other
+# HDT_any: this is to look at all detected positives 
+#          and plot figure S9: stratification of positive evidence.
+# HDT_clinical_study: only counts "clinical study" as positive.
+# HDT_human_subject: only counts "human subject" as positive.
+# HDT_animal: only counts "animal" as positive.
+# HDT_in_vitro: only counts "in vitro" as positive.
+# HDT_other: only counts "other" as positive.
+# HDT_not_other: counts all but "other" as positive (Figure 4).
+
 LABEL_DEF <- "HDT_not_other"
 
 VALID_LABELS <- c(
-  "HDT_any",
+  "HDT_any", 
   "HDT_clinical_study",
   "HDT_human_subject",
   "HDT_animal",
@@ -474,7 +476,7 @@ median_integrative <- rank_df_plot %>%
   pull(med)
 
 pdf(here("figures/figure4/",
-  paste0("figureS6_rank_distributions_", LABEL_DEF, ".pdf")), 
+  paste0("figureS8_rank_distributions_", LABEL_DEF, ".pdf")), 
   width = 10, height = 12)
 
 ggplot(
