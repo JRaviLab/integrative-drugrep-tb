@@ -1,11 +1,10 @@
-# Figure S4a: Enrichment of highly variable upregulated pathways in individual and aggregated TB signatures
+# Figure S6a: Enrichment of highly variable upregulated pathways in individual and aggregated TB signatures
 
 ```{r setup, include=FALSE}
 library(ComplexHeatmap)
 library(clusterProfiler)
 library(GOSemSim)
 library(org.Hs.eg.db)
-library(circlize)
 library(grid)
 library(tidyverse)
 library(here)

@@ -1,4 +1,4 @@
-# Obtain node and edge data for figure 4: disease-drug-target network
+# Obtain node and edge data for figure S11: MOA-specific disease-drug-target network
 
 ```{r load libraries and functions}
 library(readr)

@@ -1,4 +1,4 @@
-# Figure 2b: Enrichment of highly variable downregulated pathways in individual and aggregated TB signatures
+# Figure S6b: Enrichment of highly variable downregulated pathways in individual and aggregated TB signatures
 
 ```{r setup, include=FALSE}
 library(ComplexHeatmap)
