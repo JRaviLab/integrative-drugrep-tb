@@ -203,7 +203,7 @@ tissue_MW_results$norm_auroc <- (2 * tissue_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(tissue_MW_results, here("figures/figure2/dn_allvals_circulating_other_MW.tsv"))
+write_tsv(tissue_MW_results, here("figures/figure2_tableS4_S5/dn_allvals_circulating_other_MW.tsv"))
 ```
 
 ```{r differentiating terms in gt format}
@@ -257,7 +257,7 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tissue, here("figures/figure2/dn_allvals_variance_circulating_other_signiGO_terms.html"))
+gtsave(gt_top_bottom_tissue, here("figures/figure2_tableS4_S5/dn_allvals_variance_circulating_other_signiGO_terms.html"))
 
 ```
 
@@ -313,7 +313,7 @@ technology_MW_results$norm_auroc <- (2 * technology_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(technology_MW_results, here("figures/figure2/dn_allvals_microarray_rnaseq_MW.tsv"))
+write_tsv(technology_MW_results, here("figures/figure2_tableS4_S5/dn_allvals_microarray_rnaseq_MW.tsv"))
 ```
 
 ```{r}
@@ -365,7 +365,7 @@ gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_tech, here("figures/figure2/dn_allvals_variance_microarray_rnaseq_signiGO_terms.html"))
+gtsave(gt_top_bottom_tech, here("figures/figure2_tableS4_S5/dn_allvals_variance_microarray_rnaseq_signiGO_terms.html"))
 ```
 
 ```{r cell line vs. primary}
@@ -425,7 +425,7 @@ origin_MW_results$norm_auroc <- (2 * origin_MW_results$auroc) - 1
 ```
 
 ```{r}
-write_tsv(origin_MW_results, here("figures/figure2/dn_allvals_primary_cellline_MW.tsv"))
+write_tsv(origin_MW_results, here("figures/figure2_tableS4_S5/dn_allvals_primary_cellline_MW.tsv"))
 ```
 
 ```{r}
@@ -477,115 +477,5 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
 # Display combined table
-gtsave(gt_top_bottom_origin, here("figures/figure2/dn_allvals_variance_primary_cellline_signiGO_terms.html"))
-```
-
-#### NOT ENOUGH POWER FOR a MW test
-```{r platform aggregated vs individual signatures}
-# Separate the group with signatures that partially match "aggregated"
-group_1_sigs <- summary_df %>% filter(grepl("aggregated", signature_name)) %>% pull(signature_name)
-group_2_sigs <- summary_df %>% filter(!grepl("aggregated", signature_name)) %>% pull(signature_name)
-
-colnames(go_mat) <- gsub("dn_", "", colnames(go_mat))
-
-# Filter GO matrix
-go_mat_filtered <- go_mat %>%
-  column_to_rownames("Description") %>%
-  dplyr::select(intersect(colnames(go_mat), c(group_1_sigs, group_2_sigs)))
-
-# Build group vector
-group_vec_sig <- summary_df %>%
-  filter(signature_name %in% colnames(go_mat_filtered)) %>%
-  distinct(signature_name) %>%
-  mutate(group = ifelse(signature_name %in% group_1_sigs, "aggregated signatures", "individual signatures")) %>%
-  deframe()
-
-sig_median_diffs_df <- apply(
-  go_mat_filtered,
-  1,
-  calculate_median_diff, 
-  group1 = "individual signatures",  
-  group2 = "aggregated signatures",
-  group_vec = group_vec_sig
-)
-
-sig_median_diffs_df <- data.frame(GO_term = rownames(go_mat_filtered), median_diff = sig_median_diffs_df)
-
-# Mann-Whitney test
-sig_MW_test <- do.call(
-  rbind,
-  lapply(seq_len(nrow(go_mat_filtered)), function(i) {
-    Mann_Whitney_test(
-      values    = go_mat_filtered[i, ],
-      group1 = "individual signatures",  
-      group2 = "aggregated signatures",
-      group_vec = group_vec_sig
-    )
-  })
-)
-rownames(sig_MW_test) <- rownames(go_mat_filtered)
-sig_MW_test$GO_term <- rownames(go_mat_filtered)
-
-sig_MW_results <- sig_MW_test %>%
-  mutate(p_adj = p.adjust(p_value, method = "BH")) %>%
-  left_join(sig_median_diffs_df, by = "GO_term") %>%
-  dplyr::select(GO_term, median_diff, p_value, statistic, p_adj)
-sig_MW_results$auroc <- sig_MW_results$statistic / (circulating_num * other_num)
-sig_MW_results$norm_auroc <- (2 * sig_MW_results$auroc) - 1
-```
-
-```{r}
-write_tsv(sig_MW_results, here("figures/dn_indiv_aggr_MW.tsv"))
-```
-
-```{r}
-# Top 10 GO terms
-top10_positive_sig <- sig_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
-top10_negative_sig <- sig_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
-
-# Create gt tables
-gt_top10_positive_sig <- top10_positive_sig %>%
-  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
-  gt() %>%
-  tab_header(title = "Top 10 downregulated GO terms enriched in individual signatures") %>%
-  cols_label(
-    GO_term = "GO Term",
-    median_diff = "Median difference (individual - aggregated)",
-    p_value = "Raw p-value",
-    p_adj = "Adjusted p-value"
-  )
-
-gt_top10_negative_sig <- top10_negative_sig %>%
-  dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
-  gt() %>%
-  tab_header(title = "Top 10 GO terms enriched in aggregated signatures") %>%
-  cols_label(
-    GO_term = "GO Term",
-    median_diff = "Median difference (individual - aggregated)",
-    p_value = "Raw p-value",
-    p_adj = "Adjusted p-value"
-  )
-
-# Combine top 10 positive and negative as a single dataframe first
-top_combined_df_sig <- bind_rows(
-  top10_positive_sig %>% mutate(Enriched_in = "Individual Signatures"),
-  top10_negative_sig %>% mutate(Enriched_in = "Aggregated Signatures")
-)
-
-# Create one combined gt table
-gt_top_bottom_sig <- top_combined_df_sig %>%
-  dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
-  gt() %>%
-  tab_header(title = "Top downregulated GO terms more enriched in individual or aggregated signatures") %>%
-  cols_label(
-    GO_term = "GO Term",
-    Enriched_in = "Enriched in",
-    median_diff = "Median difference (individual - aggregated)",
-    p_value = "Raw p-value",
-    p_adj = "Adjusted p-value"
-  ) %>%
-  fmt_scientific(columns = c(median_diff, p_value, p_adj))
-
-# Display combined table
-gtsave(gt_top_bottom_sig, "dn_variance_indiv_aggr_signiGO_terms.html")
+gtsave(gt_top_bottom_origin, here("figures/figure2_tableS4_S5/dn_allvals_variance_primary_cellline_signiGO_terms.html"))
 ```

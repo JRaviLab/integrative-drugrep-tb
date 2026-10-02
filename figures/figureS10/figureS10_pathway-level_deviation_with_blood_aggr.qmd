@@ -1,4 +1,4 @@
-```{r Figure S7 function}
+```{r Figure S10 function}
 library(readr)
 library(here)
 library(dplyr)
@@ -50,14 +50,14 @@ process_file <- function(filepath, direction_label, summary_path) {
 }
 ```
 
-```{r Figure S7 plot}
+```{r Figure S10 plot}
 # process both up- and dn-regulated pathways files
-plot_df_up <- process_file(filepath = "figures/figureS7/marray_rnaseq_up_pathways_suppl.tsv", 
+plot_df_up <- process_file(filepath = "figures/figureS10/marray_rnaseq_up_pathways_suppl.tsv", 
                            direction_label = "Upregulated", 
-                           summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv")
-plot_df_dn <- process_file(filepath = "figures/figureS7/marray_rnaseq_dn_pathways_suppl.tsv", 
+                           summary_path = "figures/figure2_tableS4_S5/metadata_annotation/annotation_table.tsv")
+plot_df_dn <- process_file(filepath = "figures/figureS10/marray_rnaseq_dn_pathways_suppl.tsv", 
                            direction_label = "Downregulated",
-                           summary_path = "figures/figure2/metadata_annotation/annotation_table.tsv")
+                           summary_path = "figures/figure2_tableS4_S5/metadata_annotation/annotation_table.tsv")
 
 # combine both into one dataframe
 combined_plot_df <- bind_rows(plot_df_up, plot_df_dn) %>%
@@ -87,7 +87,7 @@ down_df <- subset(combined_plot_df, Direction == "Downregulated")
 up_labels <- subset(med_labels, Direction == "Upregulated")
 down_labels <- subset(med_labels, Direction == "Downregulated")
 
-pdf(here("figures/figureS7/FigureS7_origin_squared_deviation.pdf"),
+pdf(here("figures/figureS10/figureS10_origin_squared_deviation.pdf"),
     width = 15, height = 10)
 # Plot for Upregulated
 p_up <- ggplot(up_df, aes(x = Technology, y = SquaredDeviation_fixed, fill = Technology)) +

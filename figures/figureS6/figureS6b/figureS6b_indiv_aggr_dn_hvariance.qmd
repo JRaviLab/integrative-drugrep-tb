@@ -14,7 +14,7 @@ source(here("scripts/00_get_crossSigs_enrichedGO.R"))
 
 # add aggregated signatures to the signature info table
 ```{r read in metadata tabel}
-summary_df <- read.delim(here("figures/figure2/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
+summary_df <- read.delim(here("figures/figure2_tableS4_S5/metadata_annotation/annotation_table.tsv"), sep = "\t", stringsAsFactors = FALSE)
 ```
 
 ```{r define indiv file paths}
@@ -136,7 +136,7 @@ other_cols <- setdiff(names(final_df_dn), c(gpl_cols, rnaseq_col))
 final_df_dn <- final_df_dn[, c(desc_col, gpl_cols, other_cols, rnaseq_col)]
 final_df_dn <- final_df_dn[, !duplicated(colnames(final_df_dn))]
 final_df_dn <- final_df_dn[, !grepl("HIV", colnames(final_df_dn))]
-write_tsv(final_df_dn, here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv"))
+write_tsv(final_df_dn, here("figures/figureS6/figureS6b/marray_rnaseq_asinh_dn_pathways.tsv"))
 ```
 
 ```{r process significant matrices}
@@ -224,14 +224,14 @@ top_var_pathway_df = var_pathway_df[var_pathway_df$variance > variance_p70,]
 ```{r cluster the highly variable terms to reduce redundancy}
 # cluster GO terms based on their semantic similarities
 cl_GOids_terms = get_GOterms_cl(top_var_pathway_df)
-write_tsv(cl_GOids_terms, here("figures/figureS4/figureS4b/dn_hv_clusters_asinh_pathways.tsv"))
-cl_GOids_terms = read_tsv(here("figures/figureS4/figureS4b/dn_hv_clusters_asinh_pathways.tsv"))
+write_tsv(cl_GOids_terms, here("figures/figureS6/figureS6b/dn_hv_clusters_asinh_pathways.tsv"))
+cl_GOids_terms = read_tsv(here("figures/figureS6/figureS6b/dn_hv_clusters_asinh_pathways.tsv"))
 # select the term with highest variance from each defined cluster
 top_terms_per_cluster <- get_topN_GOterms_cl(cl_GOids_terms, N = 1)
 
 final_df_dn_variable = final_df_dn[final_df_dn$Description %in% top_terms_per_cluster$terms,]
 final_signi_df_dn_variable = final_signi_df_dn[final_signi_df_dn$Description %in% top_terms_per_cluster$terms,]
-write_tsv(final_df_dn_variable, here("figures/figureS4/figureS4b/dn_tophv_clusters_asinh_pathways.tsv"))
+write_tsv(final_df_dn_variable, here("figures/figureS6/figureS6b/dn_tophv_clusters_asinh_pathways.tsv"))
 ```
 
 ```{r convert GO matrix df to matrix format}
@@ -400,7 +400,7 @@ ha_bottom <- HeatmapAnnotation(
 ```
 
 ```{r plot heatmap and save}
-pdf(here("figures/figureS4/figureS4b/FigureS4b_dn_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
+pdf(here("figures/figureS6/figureS6b/figureS6b_dn_clustered_hvariance_asinh_GOterms_enrichment.pdf"), width = 60, height = 30)
 
 sig_mat_indiv_aggr_dn_ordered_mat <- sig_mat_indiv_aggr_dn_ordered %>%
   mutate(across(everything(), as.numeric)) %>%

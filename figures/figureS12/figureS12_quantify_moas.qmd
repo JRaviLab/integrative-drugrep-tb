@@ -8,11 +8,11 @@ library(dplyr)
 
 ```{r define moa_novel}
 # moa_novel
-moa_novel = read_tsv(here("figures/figureS9/novel_moa_counts_final_predictions.tsv"))
+moa_novel = read_tsv(here("figures/figureS12/novel_moa_counts_final_predictions.tsv"))
 ```
 
 ```{r plot moa novelty freq}
-pdf(here("figures/figureS9/FigureS9_moa_frequency.pdf"), width = 20, height = 15)
+pdf(here("figures/figureS12/figureS12_moa_frequency.pdf"), width = 20, height = 15)
 
 ggplot(moa_novel, aes(x = reorder(moa, -n_drugs), y = n_drugs, fill = factor(novel))) +
   geom_bar(stat = "identity") +

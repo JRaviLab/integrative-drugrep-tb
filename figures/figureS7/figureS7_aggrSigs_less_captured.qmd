@@ -1,4 +1,4 @@
-```{r Figure S5 function}
+```{r Figure S7 function}
 library(readr)
 library(here)
 library(dplyr)
@@ -34,10 +34,10 @@ process_file <- function(filepath, direction_label) {
 }
 ```
 
-```{r Figure S5 plot}
+```{r Figure S7 plot}
 # process both up- and dn-regulated pathways files
-plot_df_up <- process_file("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
-plot_df_dn <- process_file("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
+plot_df_up <- process_file("figures/figureS6/figureS6a/marray_rnaseq_asinh_up_pathways.tsv", "Upregulated")
+plot_df_dn <- process_file("figures/figureS6/figureS6b/marray_rnaseq_asinh_dn_pathways.tsv", "Downregulated")
 
 # combine both into one dataframe
 combined_plot_df <- bind_rows(plot_df_up, plot_df_dn) %>%
@@ -81,7 +81,7 @@ ggplot(combined_plot_df, aes(x = Technology, y = SquaredDeviation, fill = Techno
 
 ```
 
-```{r figure S5 data}
+```{r figure S7 data}
 library(dplyr)
 
 # choose how many lowest SD pathways you want to plot per group
@@ -105,7 +105,7 @@ print(dim(lowest_sd_paths_all))
 print(dim(lowest_sd_paths_all)[1]/dim(combined_plot_df)[1]*100) # percentage of pathways with zero squared deviation
 ```
 
-```{r figure S5 data}
+```{r figure S7 data}
 # choose how many highest SD pathways you want to plot per group
 top_n <- 10
 
@@ -116,10 +116,10 @@ highest_sd_paths <- combined_plot_df %>%
 
 ```
 
-```{r figure S5; plotting}
+```{r figure S7; plotting}
 library(ggplot2)
 
-pdf(here("figures/figureS5/FigureS5_squared_deviation_less_captured.pdf"),
+pdf(here("figures/figureS7/FigureS7_squared_deviation_less_captured.pdf"),
     width = 16, height = 8)  
 
 ggplot(highest_sd_paths, aes(x = reorder(Pathway, SquaredDeviation), y = SquaredDeviation, fill = Technology)) +

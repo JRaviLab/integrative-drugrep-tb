@@ -10,10 +10,10 @@ library(gt)
 ```{r all-thresholds-plot, message=FALSE, warning=FALSE}
 thresholds <- c(0.95,0.90,0.85,0.80,0.75,0.70,0.65,0.60,0)
 summary_df <- read_tsv(
-  here("figures/figure2/metadata_annotation/annotation_table.tsv"),show_col_types = FALSE)
+  here("figures/figure2_tableS4_S5/metadata_annotation/annotation_table.tsv"),show_col_types = FALSE)
 
-up_pathway_df <- read_tsv(here("figures/figureS4/figureS4a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"),show_col_types = FALSE)
-dn_pathway_df <- read_tsv(here("figures/figureS4/figureS4b/marray_rnaseq_asinh_dn_pathways_sensitivity.tsv"),show_col_types = FALSE)
+up_pathway_df <- read_tsv(here("figures/figureS6/figureS6a/marray_rnaseq_asinh_up_pathways_sensitivity.tsv"),show_col_types = FALSE)
+dn_pathway_df <- read_tsv(here("figures/figureS6/figureS6b/marray_rnaseq_asinh_dn_pathways_sensitivity.tsv"),show_col_types = FALSE)
 
 get_available_thresholds <- function(pathway_df, direction_name) {
   tibble(
@@ -418,7 +418,7 @@ stats_gt <- stats_results %>%
       "P-values are from one-sided Wilcoxon rank-sum tests. BH adjustment accounts for testing across all per-threshold technology-gene-group pairs."
     )
   )
-gtsave(data = stats_gt,filename = here("figures/tableS3/tableS3_MW_stats_sensitivity_results.html"))
+gtsave(data = stats_gt,filename = here("figures/figure3_S3_S4_tableS5/tableS5_MW_stats_sensitivity_results.html"))
 
 stats_gt
 ```
@@ -438,7 +438,7 @@ stats_results_plot <- stats_results %>%
     technology = factor(technology,levels = technology_levels)) %>%
   filter(!is.na(threshold))
 
-pdf(here("figures/figureS3/figureS3_squared_deviation_all_thresholds_up.pdf"),width = 12,height = 18)
+pdf(here("figures/figure3_S3_S4_tableS5/figureS3_squared_deviation_all_thresholds_up.pdf"),width = 12,height = 18)
 
 ggplot(sq_dev_all_thresholds_plot,
   aes(
@@ -525,7 +525,7 @@ stats_results_plot <- stats_results %>%
     technology = factor(technology,levels = technology_levels)) %>%
   filter(!is.na(threshold))
 
-pdf(here("figures/figureS3/figureS3_squared_deviation_all_thresholds_dn.pdf"),width = 12,height = 18)
+pdf(here("figures/figure3_S3_S4_tableS5/figureS3_squared_deviation_all_thresholds_dn.pdf"),width = 12,height = 18)
 
 ggplot(sq_dev_all_thresholds_plot,
   aes(
@@ -608,7 +608,7 @@ stability_plot <- sq_dev_all_thresholds %>%
     .groups = "drop"
   )
 
-pdf(here("figures/figureS3/figureS3_squared_deviation_stability_up_dn.pdf"),width = 14,height = 10)
+pdf(here("figures/figure3_S3_S4_tableS5/figureS3_squared_deviation_stability_up_dn.pdf"),width = 14,height = 10)
 
 ggplot(
   stability_plot,
