@@ -3,7 +3,7 @@
 # these are done separately by technology-direction
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
-# aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
+# aggregated signatures: all genes (not just the landmark genes) with different aggregation percentile thresholds of all the aggregated gene scores
 
 ##### Load libraries and sort scripts
 ```{r}
