@@ -61,6 +61,13 @@ combined_long <- bind_rows(long1, long2) %>%
   .groups = "drop"
 )
 
+# check if any missing pathway observations from the NA dropping
+# every unique pathway × signature combination is represented exactly once and has a non-NA value.
+sum(is.na(long1$Value)) # 0
+sum(is.na(long2$Value)) # 0
+sum(is.na(combined_long$Value)) # 0
+(length(unique(combined_long$Description)) * length(unique(combined_long$Signature)) == nrow(combined_long)) # TRUE
+
 # Reshape back to wide format
 final_df_dn <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
 colnames(final_df_dn) <- gsub("\\.", "-", colnames(final_df_dn))

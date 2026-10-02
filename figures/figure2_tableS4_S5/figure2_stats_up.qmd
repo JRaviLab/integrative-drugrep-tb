@@ -61,6 +61,13 @@ combined_long <- bind_rows(long1, long2) %>%
   .groups = "drop"
 )
 
+# check if any missing pathway observations from the NA dropping
+# every unique pathway × signature combination is represented exactly once and has a non-NA value.
+sum(is.na(long1$Value)) # 0
+sum(is.na(long2$Value)) # 0
+sum(is.na(combined_long$Value)) # 0
+(length(unique(combined_long$Description)) * length(unique(combined_long$Signature)) == nrow(combined_long)) # TRUE
+
 # Reshape back to wide format
 final_df_up <- pivot_wider(combined_long, names_from = Signature, values_from = Value)
 colnames(final_df_up) <- gsub("\\.", "-", colnames(final_df_up))
@@ -212,7 +219,6 @@ write_tsv(tissue_MW_results, here("figures/figure2_tableS4_S5/up_allvals_circula
 top10_positive_tissue <- tissue_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
 top10_negative_tissue <- tissue_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
-# Create gt tables
 gt_top10_positive_tissue <- top10_positive_tissue %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -243,7 +249,6 @@ top_combined_df_tissue <- bind_rows(
   top10_negative_tissue %>% mutate(Enriched_in = "Other")
 )
 
-# Create one combined gt table
 gt_top_bottom_tissue <- top_combined_df_tissue %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -257,7 +262,6 @@ gt_top_bottom_tissue <- top_combined_df_tissue %>%
   ) %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
-# Display combined table
 gtsave(gt_top_bottom_tissue, here("figures/figure2_tableS4_S5/up_allvals_variance_circulating_other_signiGO_terms.html"))
 
 ```
@@ -322,7 +326,6 @@ write_tsv(technology_MW_results, here("figures/figure2_tableS4_S5/up_allvals_mic
 top10_positive_tech <- technology_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
 top10_negative_tech <- technology_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
-# Create gt tables
 gt_top10_positive_tech <- top10_positive_tech %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -345,13 +348,12 @@ gt_top10_negative_tech <- top10_negative_tech %>%
     p_adj = "Adjusted p-value"
   )
 
-# Combine top 10 positive and negative as a single dataframe first
+# combine top 10 positive and negative as a single dataframe first
 top_combined_df_microarray_rnaseq <- bind_rows(
   top10_positive_tech %>% mutate(Enriched_in = "Microarray"),
   top10_negative_tech %>% mutate(Enriched_in = "RNAseq")
 )
 
-# Create one combined gt table
 gt_top_bottom_tech <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -426,7 +428,6 @@ write_tsv(origin_MW_results, here("figures/figure2_tableS4_S5/up_allvals_primary
 top10_positive_origin <- origin_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff > 0)  %>% arrange(desc(median_diff)) %>% dplyr::slice(1:10)
 top10_negative_origin <- origin_MW_results %>% filter(p_adj < 0.05) %>% filter(median_diff < 0) %>% arrange(median_diff) %>% dplyr::slice(1:10)
 
-# Create gt tables
 gt_top10_positive_origin <- top10_positive_origin %>%
   dplyr::select(GO_term, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -449,13 +450,12 @@ gt_top10_negative_origin <- top10_negative_origin %>%
     p_adj = "Adjusted p-value"
   )
 
-# Combine top 10 positive and negative as a single dataframe first
+# combine top 10 positive and negative as a single dataframe first
 top_combined_df_microarray_rnaseq <- bind_rows(
   top10_positive_origin %>% mutate(Enriched_in = "Primary"),
   top10_negative_origin %>% mutate(Enriched_in = "Cell line")
 )
 
-# Create one combined gt table
 gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   dplyr::select(GO_term, Enriched_in, median_diff, p_value, p_adj) %>%
   gt() %>%
@@ -469,6 +469,5 @@ gt_top_bottom_origin <- top_combined_df_microarray_rnaseq %>%
   ) %>%
   fmt_scientific(columns = c(median_diff, p_value, p_adj))
 
-# Display combined table
 gtsave(gt_top_bottom_origin, here("figures/figure2_tableS4_S5/up_allvals_variance_primary_cellline_signiGO_terms.html"))
 ```
