@@ -203,7 +203,7 @@ print(gene_count_df)
 ```
 
 ```{r up- and downregulated gene counts across thresholds}
-pdf(here("figures/figure3/Figure3_gene_counts_all_thresholds.pdf"),width = 11,height = 6)
+pdf(here("figures/figure3_S3_S4_tableS5/figureS4_gene_counts_all_thresholds.pdf"),width = 11,height = 6)
 
 gene_count_plot <- ggplot(
   gene_count_df,
@@ -306,7 +306,7 @@ combined_gene_count_df <- gene_count_df %>%
     .groups = "drop"
   )
 
-pdf(here("figures/figure3/Figure3_combined_up_dn_gene_counts.pdf"),
+pdf(here("figures/figure3_S3_S4_tableS5/figureS4_combined_up_dn_gene_counts.pdf"),
   width = 11,
   height = 5
 )

@@ -207,6 +207,7 @@ ht_tmp <- Heatmap(
 ht_tmp <- draw(ht_tmp)
 row_ord <- row_order(ht_tmp)
 ```
+
 ```{r extract synergy pairs}
 idx <- which(moa_synergy_mat == 1, arr.ind = TRUE)
 
@@ -229,7 +230,7 @@ col_fun <- colorRamp2(
 )
 
 pdf(
-  here("figures/figure6/Figure6_MOA_synergy_fraction_heatmap.pdf"),
+  here("figures/figure6/figure6_MOA_synergy_fraction_heatmap.pdf"),
   width = 24,
   height = 22
 )
@@ -283,7 +284,7 @@ col_fun <- colorRamp2(
 )
 
 pdf(
-  here("figures/figure6/Figure6_MOA_synergy_fraction_heatmap_half.pdf"),
+  here("figures/figure6/figure6_MOA_synergy_fraction_heatmap_half.pdf"),
   width = 27,
   height = 15
 )
