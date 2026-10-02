@@ -727,7 +727,7 @@ stats_0 %>%
 
 pdf(
   here(
-    "figures/figure3/",
+    "figures/figure3_S4_S4_tableS5/",
     "figure3_squared_deviation_dominant_pathways_0percent.pdf"
   ),
   width = 6,
