@@ -207,3 +207,7 @@ A `CITATION.cff` file is also provided for automated citation tools.
 ## License
 
 MIT © 2026 [JRaviLab](https://jravilab.github.io/) & [KrishnanLab](https://www.thekrishnanlab.org). See [LICENSE](LICENSE).
+
+## AI disclosure
+
+Claude Code (model: Sonnet) was used to check for filename and other minor inconsistencies across the repository; any other use of LLMs for generating code skeletons is cited within each script.
