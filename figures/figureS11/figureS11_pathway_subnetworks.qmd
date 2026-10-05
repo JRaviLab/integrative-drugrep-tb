@@ -8,11 +8,11 @@ source(here("scripts/05_build_drugtarget_network_functions.R"))
 ```
 
 ```{r get disease genes}
-microarray_up_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
-microarray_dn_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+microarray_up_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/up_aggregated_signature_0.9.tsv"), show_col_types = FALSE)$GeneID)
+microarray_dn_aggr_genes = as.character(read_tsv(here("data/signatures/microarray/aggregated_signatures/dn_aggregated_signature_0.9.tsv"), show_col_types = FALSE)$GeneID)
 
-rnaseq_up_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
-rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_up_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/up_aggregated_signature_0.9.tsv"), show_col_types = FALSE)$GeneID)
+rnaseq_dn_aggr_genes = as.character(read_tsv(here("data/signatures/RNAseq/aggregated_signatures/dn_aggregated_signature_0.9.tsv"), show_col_types = FALSE)$GeneID)
 
 up_aggr_genes = intersect(microarray_up_aggr_genes, rnaseq_up_aggr_genes)
 dn_aggr_genes = intersect(microarray_dn_aggr_genes, rnaseq_dn_aggr_genes)

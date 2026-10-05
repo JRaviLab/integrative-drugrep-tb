@@ -59,8 +59,8 @@ if (db_name == "CMAP") {
 }
 
 # load aggregated signatures
-up_sig_path <- file.path(sig_data_path, "up_aggregated_signature.tsv")
-dn_sig_path <- file.path(sig_data_path, "dn_aggregated_signature.tsv")
+up_sig_path <- file.path(sig_data_path, "up_aggregated_signature_0.9.tsv")
+dn_sig_path <- file.path(sig_data_path, "dn_aggregated_signature_0.9.tsv")
 
 if (!(file.exists(up_sig_path) && file.exists(dn_sig_path))) {
   stop("Aggregated signature files not found at: ", sig_data_path)
