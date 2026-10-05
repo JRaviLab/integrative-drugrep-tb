@@ -50,7 +50,7 @@ See [`scripts/README.md`](scripts/README.md) for a full table of scripts and the
 ### Requirements
 
 - R 4.6.1 with Bioconductor 3.23
-- Python 3 (for [HDT literature evidence retreival](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/evaluation) and [baseline analysis](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/figures/figureS9)) 
+- Python 3 (for [HDT literature evidence retreival](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/evaluation) and [baseline analysis](https://github.com/JRaviLab/integrative-drugrep-tb/tree/main/figures/figureS13_S14_S15_S16) 
 
 ### Setup
 
