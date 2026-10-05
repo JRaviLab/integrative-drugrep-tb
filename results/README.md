@@ -7,9 +7,9 @@ results/
 ├── microarray/
 │   ├── CMAP/          # CMap 1.0 connectivity scores per signature
 │   ├── LINCS/         # LINCS connectivity scores per signature
-│   ├── Cor_spearman/  # Spearman correlation scores per signature
-│   ├── Cor_pearson/   # Pearson correlation scores per signature
-│   └── RankAggregation/  # Aggregated drug rankings across methods
+│   ├── Cor/           # Spearman/Pearson correlation scores per signature
+│   ├── 03_methodwise/  # Individual drug rankings across methods based on consistency and aggregated signatures' drug rankings per method
+|   └── 04_rank_aggregation/ # Aggregated drug rankings across methods
 └── RNAseq/
     └── (same structure as microarray/)
 combined_drug_predictions.tsv        # merged predictions across platforms
