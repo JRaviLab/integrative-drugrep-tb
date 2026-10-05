@@ -3,7 +3,7 @@
 # these are done separately by technology-direction
 # the differentially expressed genes are passed to pathway analysis 
 # individual signatures: adjusted p-val < 0.05; not restricted to only the landmark genes
-# aggregated signatures: all genes (not just the landmark genes) with > 90% pct of all the aggregated gene scores
+# aggregated signatures: all genes (not just the landmark genes) with different aggregation percentile thresholds of all the aggregated gene scores
 
 ##### Load libraries and sort scripts
 ```{r}
@@ -235,7 +235,7 @@ for(threshold in threshold_list){
       # only care about biological processes (BP)
       pathway_df_BP <- pathway_df[pathway_df$ID %in% BP_terms,]
         
-      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL
+      # REPLACED MANUAL CALCULATION WITH FUNCTION CALL (function defined above)
       enrichGO_res_aggr <- calculate_asinh_enrichment(
         signature_gene_list = aggr_gene_list,
         bg_genes = bg_genes,
